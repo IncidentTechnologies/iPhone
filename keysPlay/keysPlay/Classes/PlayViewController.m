@@ -286,7 +286,7 @@ extern UserController * g_userController;
 {
     if(g_keysController.connected == NO){
         
-        NSLog(@"KEYS DISCONNECTED USE STANDALONE");
+        DLog(@"KEYS DISCONNECTED USE STANDALONE");
         
         isStandalone = YES;
         [self standaloneReady];
@@ -297,7 +297,7 @@ extern UserController * g_userController;
         
     }else{
         
-        NSLog(@"KEYS IS CONNECTED USE NORMAL");
+        DLog(@"KEYS IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
         
@@ -917,7 +917,7 @@ extern UserController * g_userController;
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     double mapWidth = [frameGenerator getFullscreenWidth] - 34;
     
-    NSLog(@"MapWidth is %f",mapWidth);
+    DLog(@"MapWidth is %f",mapWidth);
     
     for(int d = 0; d < [songMarkers count]; d++){
         
@@ -1431,7 +1431,7 @@ extern UserController * g_userController;
         
         //_metronomeTimer = [NSTimer scheduledTimerWithTimeInterval:(1.0/_songModel.m_beatsPerSecond) target:self selector:@selector(playMetronomeTick) userInfo:nil repeats:YES];
         
-        NSLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
+        DLog(@"Beat is %f",1.0/_songModel.m_beatsPerSecond);
     }
 }
 
@@ -1693,7 +1693,7 @@ extern UserController * g_userController;
     
     _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
     
-    NSLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
+    DLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
     // _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     // Create the xmp
@@ -1944,7 +1944,7 @@ extern UserController * g_userController;
 
 - (void)standaloneReady
 {
-    NSLog(@"Standalone ready");
+    DLog(@"Standalone ready");
     
     // Stop ourselves before we start so the connecting screen can display
     [self stopMainEventLoop];
@@ -1963,7 +1963,7 @@ extern UserController * g_userController;
 - (void)keysConnected
 {
     // Standalone -> Normal
-    NSLog(@"SongViewController: gTar has been connected");
+    DLog(@"SongViewController: gTar has been connected");
     
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
@@ -2004,7 +2004,7 @@ extern UserController * g_userController;
 {
     
     // Normal -> Standalone
-    NSLog(@"SongViewController: gTar has been disconnected");
+    DLog(@"SongViewController: gTar has been disconnected");
     
     //    [self backButtonClicked:nil];
     [_metronomeTimer invalidate];
@@ -2200,7 +2200,7 @@ extern UserController * g_userController;
 - (void)interFrameDelayExpired
 {
     
-    //    NSLog(@"Ending chord");
+    //    DLog(@"Ending chord");
     
     [_interFrameDelayTimer invalidate];
     
@@ -2332,7 +2332,7 @@ extern UserController * g_userController;
                     // This one is queues up, so don't play it
                     if ( _delayedChords[str-1] == fret )
                     {
-                        NSLog(@"Aborted delayed");
+                        DLog(@"Aborted delayed");
                         _delayedChords[str-1] = KEYS_GUITAR_NOTE_OFF;
                     }
                 }
@@ -2398,7 +2398,7 @@ extern UserController * g_userController;
     // The same string was plucked twice, change in direction
     if ( stringDelta == 0 )
     {
-        //        NSLog(@"Same note in a row");
+        //        DLog(@"Same note in a row");
         [self interFrameDelayExpired];
     }
     
@@ -2408,13 +2408,13 @@ extern UserController * g_userController;
         // We were going 'up'
         if ( _previousChordPluckDirection < 0 )
         {
-            //            NSLog(@"Changed direction: up->down");
+            //            DLog(@"Changed direction: up->down");
             [self interFrameDelayExpired];
         }
         else
         {
             // Save the direction and reset the timer
-            //            NSLog(@"Going down, reup the timer");
+            //            DLog(@"Going down, reup the timer");
             _previousChordPluckDirection = +1;
             [_interFrameDelayTimer invalidate];
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
@@ -2427,13 +2427,13 @@ extern UserController * g_userController;
         // We were going 'down'
         if ( _previousChordPluckDirection > 0 )
         {
-            //            NSLog(@"Changed direction: down->up");
+            //            DLog(@"Changed direction: down->up");
             [self interFrameDelayExpired];
         }
         else
         {
             // Save the direction and reset the timer
-            //            NSLog(@"Going up, reup the timer");
+            //            DLog(@"Going up, reup the timer");
             _previousChordPluckDirection = -1;
             [_interFrameDelayTimer invalidate];
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
@@ -2534,13 +2534,13 @@ extern UserController * g_userController;
 {
     if ( key == KEYS_KEY_MUTED )
     {
-        NSLog(@"Play View Controller Pluck Muted String");
+        DLog(@"Play View Controller Pluck Muted String");
         [g_soundMaster playMutedKey:key];
 //        [g_soundMaster PluckMutedString:key-1];
     }
     else
     {
-        NSLog(@"Play View Controller Pluck String");
+        DLog(@"Play View Controller Pluck String");
         [g_soundMaster playKey:key];
 //        [g_soundMaster PluckString:key-1 atFret:0];
     }
@@ -2551,7 +2551,7 @@ extern UserController * g_userController;
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame
 {
-   // NSLog(@"Song model enter frame");
+   // DLog(@"Song model enter frame");
     
     _currentFrame = frame;
     
@@ -2576,7 +2576,7 @@ extern UserController * g_userController;
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame
 {
-    // NSLog(@"Song model exit frame");
+    // DLog(@"Song model exit frame");
     
     // Miss all the remaining notes
     for(NSNote * n in frame.m_notesPending){
@@ -2704,7 +2704,7 @@ extern UserController * g_userController;
     
     double numSlices = [tempFrameHits count];
     
-    NSLog(@"TempFrameHits is %@ for %i frames",tempFrameHits,[tempFrameHits count]);
+    DLog(@"TempFrameHits is %@ for %i frames",tempFrameHits,[tempFrameHits count]);
     
     // Aggregate frame hits
     if(isPracticeMode){
@@ -2730,7 +2730,7 @@ extern UserController * g_userController;
         frameHits = tempFrameHits;
     }
     
-    NSLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
+    DLog(@"FrameHits is %@ for %i frames",frameHits,[frameHits count]);
     
     // Draw
     CGSize size = CGSizeMake(_heatMapView.frame.size.width,_heatMapView.frame.size.height);
@@ -2743,7 +2743,7 @@ extern UserController * g_userController;
     double slicesToFill = _heatMapView.frame.size.width / sliceWidth;
     double slicesToPrefill = slicesToFill * m_loopStart;
     
-    //NSLog(@"SliceWidth is %f from %f to %f for %i slices",sliceWidth, m_loopStart,m_loopEnd,[frameHits count]);
+    //DLog(@"SliceWidth is %f from %f to %f for %i slices",sliceWidth, m_loopStart,m_loopEnd,[frameHits count]);
     
     for(int f = 0; f < slicesToPrefill; f++){
         
@@ -2964,8 +2964,8 @@ extern UserController * g_userController;
         _refreshDisplay = YES;
     }
     
-    //NSLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
-    //NSLog(@"Current frame is %@",_currentFrame);
+    //DLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
+    //DLog(@"Current frame is %@",_currentFrame);
     
     // Determine whether to play the tapped string
     if(isStandalone && !_songIsPaused){
@@ -3024,7 +3024,7 @@ extern UserController * g_userController;
     double accuracy = [[frameWithKey objectForKey:@"Accuracy"] doubleValue];
     NSNoteFrame * tappedFrame = [frameWithKey objectForKey:@"Frame"];
     
-    NSLog(@"Play note for key? %i with accuracy %f",tappedKey,accuracy);
+    DLog(@"Play note for key? %i with accuracy %f",tappedKey,accuracy);
     
     [self playNoteForKey:tappedKey atFrame:tappedFrame withAccuracy:accuracy];
 
@@ -3051,7 +3051,7 @@ extern UserController * g_userController;
                     press.velocity = KeysMaxPressVelocity;
                     press.position = nn.m_key;
                     
-                    NSLog(@"Play key %i",nn.m_key);
+                    DLog(@"Play key %i",nn.m_key);
                     
                     [_displayController hitNote:nn withAccuracy:accuracy];
                     

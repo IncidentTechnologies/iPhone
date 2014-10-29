@@ -6,9 +6,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-#import "TestFlight.h"
-
 #import "KeysController.h"
 #import "KeysControllerInternal.h"
 //#import <gTarAppCore/Facebook.h>

@@ -28,7 +28,7 @@ extern FileController *g_fileController;
     if (self)
     {
         // Custom initialization
-        //NSLog(@"Alloc Session Modal VC SoundMaster");
+        //DLog(@"Alloc Session Modal VC SoundMaster");
         g_soundMaster = soundMaster;
         [g_soundMaster start];
         
@@ -155,7 +155,7 @@ extern FileController *g_fileController;
 
 - (IBAction)shortcutButtonClicked:(id)sender
 {
-    NSLog(@"Session Modal VC: shortcut button clicked");
+    DLog(@"Session Modal VC: shortcut button clicked");
     
     if( _instrumentViewController.loading == YES )
     {
@@ -190,7 +190,7 @@ extern FileController *g_fileController;
 #pragma mark - Sliding Instrument Selector delegate
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
-    NSLog(@"Session Modal VC: did select instrument %@",instrumentName);
+    DLog(@"Session Modal VC: did select instrument %@",instrumentName);
     [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 

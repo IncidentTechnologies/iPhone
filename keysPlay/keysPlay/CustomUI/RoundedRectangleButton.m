@@ -80,11 +80,11 @@
 
 //- (void)setFrame:(CGRect)frame
 //{
-//    NSLog(@"%f %f", frame.origin.x,frame.origin.y);
+//    DLog(@"%f %f", frame.origin.x,frame.origin.y);
 //    [m_backgroundView release];
 //    
 //    CGRect backgroundFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-//    NSLog(@"%f %f", backgroundFrame.origin.x, backgroundFrame.origin.y);
+//    DLog(@"%f %f", backgroundFrame.origin.x, backgroundFrame.origin.y);
 //    
 //    m_backgroundView = [[RoundedRectangleView alloc] initWithFrame:backgroundFrame];
 //    m_backgroundView.m_lineWidth = 1;

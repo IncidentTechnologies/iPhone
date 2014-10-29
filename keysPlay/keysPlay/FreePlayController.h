@@ -26,7 +26,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 #import "UIView+Keys.h"
 #import "Mixpanel.h"

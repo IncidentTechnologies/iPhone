@@ -535,7 +535,7 @@ unsigned char g_sensitivity[6];
             break;
     }
     
-    NSLog(@"CT button clicked row %d col %d", row, col);
+    DLog(@"CT button clicked row %d col %d", row, col);
     [g_keysController sendRequestPiezoCrossTalkMatrixRow:row Column:col];
     [NSThread sleepForTimeInterval:SCAN_INT];
     
@@ -557,7 +557,7 @@ unsigned char g_sensitivity[6];
         if((id)(m_pSensSettingsButtons[str]) == sender)
             break;
     
-    NSLog(@"Sens button clicked string %d", str);
+    DLog(@"Sens button clicked string %d", str);
     [g_keysController sendRequestPiezoSensitivityString:str];
     [NSThread sleepForTimeInterval:SCAN_INT];
     
@@ -570,7 +570,7 @@ unsigned char g_sensitivity[6];
 }
 
 - (IBAction)OnCommitFWClicked:(id)sender {
-    NSLog(@"Commit FW");
+    DLog(@"Commit FW");
     
     //if(g_keysController.m_delegate != self)
     //    g_keysController.m_delegate = self;
@@ -582,7 +582,7 @@ unsigned char g_sensitivity[6];
 }
 
 - (IBAction)OnResetFactoryClicked:(id)sender {
-    NSLog(@"Reset Userspace");
+    DLog(@"Reset Userspace");
     
     //if(g_keysController.m_delegate != self)
     //    g_keysController.m_delegate = self;

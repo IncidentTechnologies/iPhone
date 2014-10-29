@@ -66,11 +66,11 @@
         if(fProductPurchased)
         {
             [_purchasedProductIdentifiers addObject:productIdentifier];
-            NSLog(@"Previously purchased %@", productIdentifier);
+            DLog(@"Previously purchased %@", productIdentifier);
         }
         else
         {
-            NSLog(@"Not purchased %@", productIdentifier);
+            DLog(@"Not purchased %@", productIdentifier);
         }
     }
     
@@ -102,7 +102,7 @@
     NSArray *transactions = [[SKPaymentQueue defaultQueue] transactions];
     for(SKPaymentTransaction *transaction in transactions)
     {
-        NSLog(@"left over transaction %@ with state: %d", transaction.transactionIdentifier, transaction.transactionState);
+        DLog(@"left over transaction %@ with state: %d", transaction.transactionIdentifier, transaction.transactionState);
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }
     
@@ -114,12 +114,12 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    NSLog(@"Got product list from itunes");
+    DLog(@"Got product list from itunes");
     _productsRequest = NULL;                    // clear outstanding request
     
     m_productList = [response.products copy];
     for(SKProduct *skProduct in m_productList)
-        NSLog(@"Found product: %@ %@ %0.2f", skProduct.productIdentifier, skProduct.localizedTitle, skProduct.price.floatValue);
+        DLog(@"Found product: %@ %@ %0.2f", skProduct.productIdentifier, skProduct.localizedTitle, skProduct.price.floatValue);
     
     _completionHandler(YES, m_productList);
     _completionHandler = NULL;
@@ -127,7 +127,7 @@
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     
-    NSLog(@"Failed to load list of products from itunes: %@", [error description]);
+    DLog(@"Failed to load list of products from itunes: %@", [error description]);
     _productsRequest = nil;
     _completionHandler(NO, nil);
     _completionHandler = nil;
@@ -144,7 +144,7 @@
 {
     if ([m_productList count] == 0)
     {
-        NSLog(@"Cannot make InApp purchase, no products available");
+        DLog(@"Cannot make InApp purchase, no products available");
         return;
     }
     SKPayment *payment = [SKPayment paymentWithProduct:m_productList[0]];
@@ -154,7 +154,7 @@
 -(void)purchaseSongWithSong:(UserSong*)song target:(id)obj cbSel:(SEL)sel
 {
     if ([m_productList count] == 0) {
-        NSLog(@"Cannot make In-App purchase, no products available");
+        DLog(@"Cannot make In-App purchase, no products available");
         CloudResponse *cloudResponse = [[CloudResponse alloc] init];
         cloudResponse.m_status = CloudResponseStatusItunesServerError;
         [obj performSelector:sel withObject:cloudResponse];
@@ -162,7 +162,7 @@
     }
     
     SongPurchaseRequest *pSongRequest = [[SongPurchaseRequest alloc] initWithSong:song andTarget:obj andSelector:sel];
-    NSLog(@"Created song request with song id: %d", [[pSongRequest m_pSong] m_songId]);
+    DLog(@"Created song request with song id: %d", [[pSongRequest m_pSong] m_songId]);
     
     // If song is free
     if([song.m_cost floatValue] == 0) {
@@ -180,7 +180,7 @@
                 [[SKPaymentQueue defaultQueue] addPayment:skPayment];
             }
             @catch(NSException* ex) {
-                NSLog(@"Payment bug captured %@ %@", ex.name, ex.reason);
+                DLog(@"Payment bug captured %@ %@", ex.name, ex.reason);
             }
             
             return;
@@ -188,7 +188,7 @@
     }
     
     // Didn't find gtarsong in product list
-    NSLog(@"Couldn't find %@ in products list", kInAppPurchaseSongProductId);
+    DLog(@"Couldn't find %@ in products list", kInAppPurchaseSongProductId);
     [obj performSelector:sel withObject:NULL];
     return;
 }
@@ -224,17 +224,17 @@
 - (void)requestVerifyReceiptCallback:(CloudResponse*)cloudResponse
 {
     if ( cloudResponse.m_loggedIn == NO )
-        NSLog(@"Warn: User not logged in");
+        DLog(@"Warn: User not logged in");
     
     if (cloudResponse.m_status == CloudResponseStatusSuccess ) {
-        NSLog(@"IAP Verify receipt succeeded");
+        DLog(@"IAP Verify receipt succeeded");
         
         // Purchase a song
         [self purchasePendingSongOnServer];
     }
     else
     {
-        NSLog(@"Verify failed: %@", cloudResponse.m_statusText);
+        DLog(@"Verify failed: %@", cloudResponse.m_statusText);
         
         // Song purchase failed, remove pending purchase and let the cell know
         SongPurchaseRequest *pSongPurchaseRequest = [m_pendingSongPurchases objectAtIndex:([m_pendingSongPurchases count] - 1)];
@@ -275,7 +275,7 @@
     if([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseSongProductId])
         [self verifyTransaction:transaction];
     else {
-        NSLog(@"Warning: transaction for unsupported product %@", transaction.payment.productIdentifier);
+        DLog(@"Warning: transaction for unsupported product %@", transaction.payment.productIdentifier);
     }
 }
 
@@ -289,7 +289,7 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled) {
         // error!
-        NSLog(@"Error: Transaction failed with error code desc: %@ reason: %@", [transaction.error localizedDescription], [transaction.error localizedFailureReason]);
+        DLog(@"Error: Transaction failed with error code desc: %@ reason: %@", [transaction.error localizedDescription], [transaction.error localizedFailureReason]);
         [self finishTransaction:transaction wasSuccessful:NO];
     }
     else {
@@ -328,17 +328,17 @@
 -(void)purchasePendingSongOnServer
 {
     if(m_purchasedSongs == NULL) {
-        NSLog(@"Error: Purchased Songs is null");
+        DLog(@"Error: Purchased Songs is null");
         return;
     }
     
     if(m_pendingSongPurchases == NULL) {
-        NSLog(@"Error: pending song purchases is NULL");
+        DLog(@"Error: pending song purchases is NULL");
         return;
     }
     
     if([m_pendingSongPurchases count] == 0) {
-        NSLog(@"Error: No pending song purchases");
+        DLog(@"Error: No pending song purchases");
         return;
     }
     
@@ -365,7 +365,7 @@
     // because they can just repurchase without loosing anything.
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
-        NSLog(@"Purchase succeeded");
+        DLog(@"Purchase succeeded");
         
         for(SongPurchaseRequest *pSongPurchaseRequest in m_purchasedSongs) {
             if(pSongPurchaseRequest.m_pSong == cloudResponse.m_cloudRequest.m_userSong) {
@@ -378,7 +378,7 @@
     }
     else
     {
-        NSLog(@"Purchase failed: %@", cloudResponse.m_statusText);
+        DLog(@"Purchase failed: %@", cloudResponse.m_statusText);
         
         for(SongPurchaseRequest *pSongPurchaseRequest in m_purchasedSongs) {
             if(pSongPurchaseRequest.m_pSong == cloudResponse.m_cloudRequest.m_userSong) {

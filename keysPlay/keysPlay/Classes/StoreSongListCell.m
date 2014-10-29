@@ -82,11 +82,11 @@
 
 -(void)IAPSongPurchaseCallbackWithContext:(id)pContext
 {
-    NSLog(@"IAPSongPurchaseCallbackWithContext");
+    DLog(@"IAPSongPurchaseCallbackWithContext");
     
     if(pContext == NULL)
     {
-        NSLog(@"Song purchase failed");
+        DLog(@"Song purchase failed");
         [self resetButtonState];
         return;
     }
@@ -95,7 +95,7 @@
     switch(cloudResponse.m_status)
     {
         case CloudResponseStatusItunesServerError: {
-            NSLog(@"Song purchase failed");
+            DLog(@"Song purchase failed");
             [self resetButtonState];
             
             // Show failure message
@@ -109,7 +109,7 @@
         } break;
         
         case CloudResponseStatusFailure: {
-            NSLog(@"Song purchase failed");
+            DLog(@"Song purchase failed");
             
             [self resetButtonState];
             
@@ -124,7 +124,7 @@
         } break;
             
         case CloudResponseStatusSuccess: {
-            NSLog(@"Song purchase succeeded");
+            DLog(@"Song purchase succeeded");
             m_buyButtonState = BUY_BUTTON_PURCHASED;
             [_buyButtonView updateBuyButtonState:m_buyButtonState];
             
@@ -139,7 +139,7 @@
         } break;
             
         default: {
-            NSLog(@"Song purchase fail state: %d", cloudResponse.m_status);
+            DLog(@"Song purchase fail state: %d", cloudResponse.m_status);
             [self resetButtonState];
             
             // Show failure message

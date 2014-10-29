@@ -42,22 +42,22 @@ NSString * ODIN1(){
     mib[4] = NET_RT_IFLIST;
     
     if ((mib[5] = if_nametoindex("en0")) == 0) {
-        //NSLog(@"ODIN-1.1: if_nametoindex error");
+        //DLog(@"ODIN-1.1: if_nametoindex error");
         return nil;
     }
     
     if (sysctl(mib, 6, NULL, &len, NULL, 0) < 0) {
-        //NSLog(@"ODIN-1.1: sysctl 1 error");
+        //DLog(@"ODIN-1.1: sysctl 1 error");
         return nil;
     }
     
     if ((buf = (char *)malloc(len)) == NULL) {
-        //NSLog(@"ODIN-1.1: malloc error");
+        //DLog(@"ODIN-1.1: malloc error");
         return nil;
     }
     
     if (sysctl(mib, 6, buf, &len, NULL, 0) < 0) {
-        //NSLog(@"ODIN-1.1: sysctl 2 error");
+        //DLog(@"ODIN-1.1: sysctl 2 error");
         return nil;
     }
     
@@ -65,7 +65,7 @@ NSString * ODIN1(){
     sdl = (struct sockaddr_dl *)(ifm + 1);
     ptr = (unsigned char *)LLADDR(sdl);
     
-    //NSLog(@"MAC Address: %02X:%02X:%02X:%02X:%02X:%02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5));
+    //DLog(@"MAC Address: %02X:%02X:%02X:%02X:%02X:%02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5));
     
 // Step 2: Take the SHA-1 of the MAC address
     
@@ -87,7 +87,7 @@ NSString * ODIN1(){
 
     CFStringLowercase(string, CFLocaleGetSystem());
     
-    //NSLog(@"ODIN-1: %@", string);
+    //DLog(@"ODIN-1: %@", string);
     
     free(buf);
     

@@ -12,7 +12,7 @@
 #import "KeysController.h"
 #import "NSSongModel.h"
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 #import "UserSong.h"
 #import "NSSong.h"

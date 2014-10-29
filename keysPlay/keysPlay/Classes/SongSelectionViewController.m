@@ -57,7 +57,7 @@ extern KeysController *g_keysController;
     {
         // Custom initialization
         
-        NSLog(@"Alloc Song Selection VC SoundMaster");
+        DLog(@"Alloc Song Selection VC SoundMaster");
         g_soundMaster = soundMaster;
         [g_soundMaster start];
         
@@ -77,7 +77,7 @@ extern KeysController *g_keysController;
         }
         
         _userSongArray = userSongArray;
-        NSLog(@"Found %d cached songs",[_userSongArray count]);
+        DLog(@"Found %d cached songs",[_userSongArray count]);
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeAudioRoute:) name:@"AudioRouteChange" object:nil];
@@ -801,7 +801,7 @@ extern KeysController *g_keysController;
 - (void)searchForString:(NSString *)searchString
 {
     
-    NSLog(@"SearchString is %@",searchString);
+    DLog(@"SearchString is %@",searchString);
     
     NSMutableArray *searchResults = [[NSMutableArray alloc] init];
     
@@ -827,27 +827,27 @@ extern KeysController *g_keysController;
 #pragma mark - Sliding Instrument Selector delegate and other audio stuff
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
-    NSLog(@"Song Selection VC: did select instrument %@",instrumentName);
+    DLog(@"Song Selection VC: did select instrument %@",instrumentName);
     [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
 - (void)stopAudioEffects
 {
-    NSLog(@"Song Selection View Controller: stop audio effects");
+    DLog(@"Song Selection View Controller: stop audio effects");
     
     [_playerViewController stopAudioEffects];
 }
 
 -(NSInteger)getSelectedInstrumentIndex
 {
-    NSLog(@"Song Selection View Controller: get selected instrument index");
+    DLog(@"Song Selection View Controller: get selected instrument index");
     
     return [_playerViewController getSelectedInstrumentIndex];
 }
 
 -(NSArray *)getInstrumentList
 {
-    NSLog(@"Song Selection View Controller: get instrument list");
+    DLog(@"Song Selection View Controller: get instrument list");
     
     return [_playerViewController getInstrumentList];
 }

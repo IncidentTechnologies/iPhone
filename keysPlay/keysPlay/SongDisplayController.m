@@ -279,7 +279,7 @@
     }
     else
     {
-        //NSLog(@"Loaded %d", [m_noteModelDictionary count] );
+        //DLog(@"Loaded %d", [m_noteModelDictionary count] );
     }
     
     // nothing left to preload
@@ -325,14 +325,14 @@
 - (void)displayFrame:(NSNoteFrame*)frame
 {
     
-    //NSLog(@"Frame is %@",frame);
+    //DLog(@"Frame is %@",frame);
     
     NSMutableDictionary * standaloneNotesForStrings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                                        [NSNull null],[NSNumber numberWithInt:1],
                                                        [NSNull null],[NSNumber numberWithInt:2],
                                                        [NSNull null],[NSNumber numberWithInt:3], nil];
     
-    //NSLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
+    //DLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
     
     // Initialize fret count
     int countFrets[4];
@@ -386,10 +386,10 @@
             }
             
             if(skipNoteInFrame){
-                //NSLog(@"SKIPPING Note at %f, %f",center.x,center.y);
+                //DLog(@"SKIPPING Note at %f, %f",center.x,center.y);
                 continue;
             }else{
-                //NSLog(@"Note at %f, %f",center.x,center.y);
+                //DLog(@"Note at %f, %f",center.x,center.y);
                 [drawnNoteCentersForFrame addObject:[NSValue valueWithCGPoint:center]];
             }
         }
@@ -869,7 +869,7 @@
             
             float yForBeat = -1*[self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+1.1]; // Not sure why an added beat is needed here?
             
-            NSLog(@"Checking frame at %f on screen of %f",yForBeat,GL_SCREEN_HEIGHT);
+            DLog(@"Checking frame at %f on screen of %f",yForBeat,GL_SCREEN_HEIGHT);
             
             // what is renderer offset?
             //float marginoffset =  0.0; //GL_SEEK_LINE_Y?
@@ -877,11 +877,11 @@
             float noteMax = GL_SCREEN_HEIGHT - (noteCenter - GL_NOTE_HEIGHT/2.0 - touchBuffer);
             float noteMin = GL_SCREEN_HEIGHT - (noteCenter + GL_NOTE_HEIGHT/2.0 + touchBuffer);
             
-            NSLog(@"Touchpoint y is %f in note range %f to %f",touchPoint.y,noteMin,noteMax);
+            DLog(@"Touchpoint y is %f in note range %f to %f",touchPoint.y,noteMin,noteMax);
             
             if(touchPoint.y >= noteMin && touchPoint.y <= noteMax){
                 
-                NSLog(@"Setting as active frame");
+                DLog(@"Setting as active frame");
                 
                 activeFrame = frame;
                 break;
@@ -895,7 +895,7 @@
         
     }else{
         
-        NSLog(@"Found frame %@",activeFrame);
+        DLog(@"Found frame %@",activeFrame);
     }
     
 
@@ -915,7 +915,7 @@
         }
     }
     
-    NSLog(@"Using note %i with accuracy %f",maxAccuracyKey,maxAccuracy);
+    DLog(@"Using note %i with accuracy %f",maxAccuracyKey,maxAccuracy);
     
     // Determine key hit
     NSMutableDictionary * frameWithKey = [[NSMutableDictionary alloc] initWithObjectsAndKeys:activeFrame,@"Frame",[NSNumber numberWithInt:maxAccuracyKey],@"Key",[NSNumber numberWithFloat:maxAccuracy],@"Accuracy",nil];

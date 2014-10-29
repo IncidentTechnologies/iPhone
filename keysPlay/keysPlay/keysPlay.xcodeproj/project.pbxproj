@@ -1507,6 +1507,7 @@
 		28A0AAE50D9B0CCF005BE974 /* keysPlay_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysPlay_Prefix.pch; sourceTree = "<group>"; };
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D0BDE401A01684700593F2C /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
 		6D26A81618F3794300887E40 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D26A81818F3794900887E40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -2528,6 +2529,7 @@
 				1D3623250D0F684500981E51 /* keysPlayAppDelegate.m */,
 				EC7D887A1651CE86002E2F77 /* keysNavigationController.h */,
 				EC7D887B1651CE86002E2F77 /* keysNavigationController.m */,
+				6D0BDE401A01684700593F2C /* AppCore.h */,
 			);
 			name = AppDelegate;
 			path = ..;
@@ -5677,7 +5679,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5713,7 +5715,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -5725,8 +5727,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -5753,8 +5755,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
+				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5764,8 +5766,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kate Schnippering (RTA23J392S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kate Schnippering (RTA23J392S)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -5785,8 +5787,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "502D7AAC-11BB-4ED8-9D86-E21F059CF467";
+				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

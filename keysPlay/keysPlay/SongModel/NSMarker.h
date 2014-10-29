@@ -6,7 +6,7 @@
 //
 //
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 @class XmlDom;
 

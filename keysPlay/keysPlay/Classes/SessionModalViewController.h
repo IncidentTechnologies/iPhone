@@ -8,6 +8,7 @@
 
 #import "SlidingModalViewController.h"
 
+#import "AppCore.h"
 #import "PlayerViewController.h"
 #import "VolumeViewController.h"
 #import "SlidingInstrumentViewController.h"

@@ -8,7 +8,7 @@
 
 #import "NSSongCreator.h"
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 #import "NSSong.h"
 #import "NSMeasure.h"

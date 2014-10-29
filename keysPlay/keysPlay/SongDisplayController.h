@@ -10,7 +10,7 @@
 
 #import <gTarAppCore/DisplayController.h>
 #import <gTarAppCore/EAGLView.h>
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 #import "SongES1Renderer.h"
 

@@ -58,7 +58,7 @@
     
     instruments = [[NSArray alloc] initWithArray:[delegate getInstrumentList]];
     
-    NSLog(@"Instrument array is %@",instruments);
+    DLog(@"Instrument array is %@",instruments);
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -83,7 +83,7 @@
     
     //NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
     
-    //NSLog(@"Instrument index is %i",instrumentIndex);
+    //DLog(@"Instrument index is %i",instrumentIndex);
     
     [self.tableView reloadData];
     
@@ -99,7 +99,7 @@
     
     NSInteger instrumentIndex = [delegate getSelectedInstrumentIndex];
     
-    NSLog(@"Instrument index is %i",instrumentIndex);
+    DLog(@"Instrument index is %i",instrumentIndex);
     
     [self.tableView reloadData];
     
@@ -178,7 +178,7 @@
 
 - (void)samplerFinishedLoadingCB:(NSNumber*)result
 {
-    NSLog(@"Sampler finished loading CB");
+    DLog(@"Sampler finished loading CB");
     
     _isLoadingInstrument = NO;
     
@@ -198,7 +198,7 @@
 // then the first item will stop flickering and the newly selected item will flicker.
 - (void) waitForCell:(NSIndexPath *)indexPath
 {
-    NSLog(@"*** flicker selected item ***");
+    DLog(@"*** flicker selected item ***");
     
     UITableViewCell* cell = [_tableView cellForRowAtIndexPath:[_tableView indexPathForSelectedRow]];
     
@@ -260,7 +260,7 @@
         
     }else{
         
-        NSLog(@" *** attempted to select instrument not available in table");
+        DLog(@" *** attempted to select instrument not available in table");
         
     }
     

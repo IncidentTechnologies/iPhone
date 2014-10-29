@@ -98,7 +98,7 @@
 
 - (void)moveToneSliderToTone:(double)tone
 {
-    NSLog(@"Move tone slider to tone %f",tone);
+    DLog(@"Move tone slider to tone %f",tone);
     //[_toneSlider setValue:tone animated:NO];
 }
 
@@ -117,14 +117,14 @@
 
 - (void)setAudioSwitchToDefault
 {
-    NSLog(@"Set audio switch to default");
+    DLog(@"Set audio switch to default");
     [self.audioRouteSwitch setOn:NO];
     audioSwitchOn = NO;
 }
 
 - (void)setAudioSwitchToSpeaker
 {
-    NSLog(@"Set audio switch to speaker");
+    DLog(@"Set audio switch to speaker");
     [self.audioRouteSwitch setOn:YES];
     audioSwitchOn = YES;
 }
@@ -157,7 +157,7 @@
 - (void) didChangeAudioRoute:(NSNotification *) notification
 {
     
-    NSLog(@"Did change audio route *** ");
+    DLog(@"Did change audio route *** ");
     
     NSDictionary *data = [notification userInfo];
     BOOL routeIsSpeaker = [[data objectForKey:@"isRouteSpeaker"] boolValue];

@@ -80,7 +80,7 @@
     [self waitForInstrumentToLoad];
     
     if([_songPlaybackController.m_songModel.m_song.m_instrument length] > 0){
-        NSLog(@"Player View Select instrument %@",_songPlaybackController.m_songModel.m_song.m_instrument);
+        DLog(@"Player View Select instrument %@",_songPlaybackController.m_songModel.m_song.m_instrument);
         
         [_songPlaybackController didSelectInstrument:_songPlaybackController.m_songModel.m_song.m_instrument withSelector:@selector(finishedLoadingSamplePack:) andOwner:self];
     }
@@ -92,7 +92,7 @@
 {
     if ( _songPlaybackController == nil )
     {
-        NSLog(@"Player View Controller: init Song Playback");
+        DLog(@"Player View Controller: init Song Playback");
         _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
     }
 }
@@ -143,7 +143,7 @@
     [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
     [_playButton stopActivityIndicator];
     
-    NSLog(@"Finished loading sample pack");
+    DLog(@"Finished loading sample pack");
     
     [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
     
@@ -251,7 +251,7 @@
 
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
-    NSLog(@"Did select instrument callback");
+    DLog(@"Did select instrument callback");
     [_songPlaybackController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
@@ -276,11 +276,11 @@
 
 - (IBAction)playButtonClicked:(id)sender
 {
-    NSLog(@"Player VC: play button clicked");
+    DLog(@"Player VC: play button clicked");
     
     if ( _songPlaybackController.isPlaying == YES )
     {
-        NSLog(@"Playing, pause song");
+        DLog(@"Playing, pause song");
         
         //[_playButton setSelected:NO];
         
@@ -291,14 +291,14 @@
     else
     {
         
-        NSLog(@"Not playing, play");
+        DLog(@"Not playing, play");
         
         // Do this now because the AC might not be ready sooner
         @synchronized( self )
         {
             if ( _init == YES )
             {
-                NSLog(@"Successful play");
+                DLog(@"Successful play");
                 //[_playButton setSelected:YES];
                 [_playButton setImage:[UIImage imageNamed:@"PauseButtonVideo.png"] forState:UIControlStateNormal];
                 
@@ -335,7 +335,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Touches began Player View Controller");
+    DLog(@"Touches began Player View Controller");
     
     if ( _init == NO )
     {

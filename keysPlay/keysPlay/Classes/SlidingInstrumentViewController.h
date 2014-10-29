@@ -6,7 +6,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "AppCore.h"
 
 #import "SlidingViewController.h"
 #import "InstrumentTableViewController.h"

@@ -6,7 +6,7 @@
 //  Copyright 2011 IncidentTech. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppCore.h"
 
 @class XYInputView;
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 @class NSNote;
 

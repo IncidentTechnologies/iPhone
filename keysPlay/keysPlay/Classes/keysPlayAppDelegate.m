@@ -84,7 +84,7 @@ UserController * g_userController;
 #endif
         
 #if Debug_BUILD
-        NSLog(@"This is a debug build");
+        DLog(@"This is a debug build");
 #endif
         
     }
@@ -287,12 +287,12 @@ UserController * g_userController;
 - (void)delayedLoad
 {
     
-    NSLog(@"Begin delayed loading");
+    DLog(@"Begin delayed loading");
     
     // Create the audio controller -- this can take awhile
     // g_audioController = [[AudioController alloc] initWithAudioSource:SamplerSource AndInstrument:nil];
     
-    NSLog(@"Finished delayed loading");
+    DLog(@"Finished delayed loading");
     
     TitleNavigationController *titleController = (TitleNavigationController*)m_navigationController.visibleViewController;
     [titleController delayLoadingComplete];

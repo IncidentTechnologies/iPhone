@@ -96,7 +96,7 @@
 - (void)didLoadInstrument
 {
     //[g_audioController reset];
-    NSLog(@"TODO: reset audio controller");
+    DLog(@"TODO: reset audio controller");
     _loading = NO;
 }
 
@@ -107,13 +107,13 @@
 
 - (NSInteger)getSelectedInstrumentIndex
 {
-    NSLog(@"Sliding instrument selector get selected instrument index");
+    DLog(@"Sliding instrument selector get selected instrument index");
     return [delegate getSelectedInstrumentIndex];
 }
 
 - (NSArray *)getInstrumentList
 {
-    NSLog(@"Sliding instrument selector get instrument list");
+    DLog(@"Sliding instrument selector get instrument list");
     
     return [delegate getInstrumentList];
 }

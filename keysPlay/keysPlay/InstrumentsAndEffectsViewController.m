@@ -134,7 +134,7 @@
 {
     CGPoint normalizedPoint = [soundMaster getPointForEffectAtIndex:index];
     
-    NSLog(@"Setup jam pad with effect at index %i using %f %f", index,normalizedPoint.x,normalizedPoint.y);
+    DLog(@"Setup jam pad with effect at index %i using %f %f", index,normalizedPoint.x,normalizedPoint.y);
     
     [self.jamPad setNormalizedPosition:normalizedPoint];
     
@@ -150,7 +150,7 @@
 #pragma mark - EffectSelectionDelegate
 - (void)didSelectEffectAtIndex:(NSInteger)index
 {
-    NSLog(@"Did select effect at index %li",index);
+    DLog(@"Did select effect at index %li",index);
     self.selectedEffectIndex = index;
    
     if([self isEffectOnAtIndex:self.selectedEffectIndex]){
@@ -182,7 +182,7 @@
 #pragma mark - Instrument Selector delegate
 - (void)stopAudioEffects
 {
-    NSLog(@"InstrumentsAndEffectsViewController stopAudioEffects");
+    DLog(@"InstrumentsAndEffectsViewController stopAudioEffects");
     BOOL enableSlide = [soundMaster isSlideEnabled];
     
     [soundMaster stopAllEffects];

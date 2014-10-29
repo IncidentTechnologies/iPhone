@@ -269,7 +269,7 @@
         fret = stringFret.y;
         if (string < 0 || fret < 0)
         {
-            NSLog(@"touchedLED: Invalid fret & string. fret:%d string:%d", fret, string);
+            DLog(@"touchedLED: Invalid fret & string. fret:%d string:%d", fret, string);
             return;
         }
         
@@ -387,7 +387,7 @@
             break;
             
         default:
-            NSLog(@"Invalid LEDTouchArea: %d", _LEDTouchArea);
+            DLog(@"Invalid LEDTouchArea: %d", _LEDTouchArea);
             break;
     }
     

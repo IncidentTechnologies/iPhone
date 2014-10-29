@@ -1307,7 +1307,7 @@ extern UserController * g_userController;
         NSString * serialNumberUpper = [g_keysController GetSerialNumberUpper];
         NSString * serialNumberLower = [g_keysController GetSerialNumberLower];
         
-        NSLog(@"Register device serial number %@, %@",serialNumberLower, serialNumberLower);
+        DLog(@"Register device serial number %@, %@",serialNumberLower, serialNumberLower);
         
         [g_userController requestRegisterGtarSerialUpper:serialNumberUpper SerialLower:serialNumberLower andCallbackObj:self andCallbackSel:@selector(registerDeviceCallback)];
         
@@ -1317,7 +1317,7 @@ extern UserController * g_userController;
 
 - (void)registerDeviceCallback
 {
-    NSLog(@"Registered device on title view controller");
+    DLog(@"Registered device on title view controller");
 }
 
 - (BOOL)isDeviceRegistered
@@ -1333,7 +1333,7 @@ extern UserController * g_userController;
 
 - (void)receivedFirmwareMajorVersion:(int)majorVersion andMinorVersion:(int)minorVersion
 {
-    NSLog(@"Fetching firmware version: %d.%d", majorVersion, minorVersion);
+    DLog(@"Fetching firmware version: %d.%d", majorVersion, minorVersion);
     
     [g_cloudController requestCurrentFirmwareVersionCallbackObj:self andCallbackSel:@selector(receivedAvailableFirmwareVersion:)];
 }
@@ -1342,7 +1342,7 @@ extern UserController * g_userController;
 {
     NSString * msg = @"Firmware update succeeded";
     
-    NSLog(@"%@", msg);
+    DLog(@"%@", msg);
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
@@ -1370,7 +1370,7 @@ extern UserController * g_userController;
 {
     NSString * msg = @"Firmware update failed";
     
-    NSLog(@"%@", msg);
+    DLog(@"%@", msg);
     
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -1807,7 +1807,7 @@ extern UserController * g_userController;
     else
     {
         // Failed to get firmware, nothing more to worry about for now
-        NSLog(@"Failed to get available firmware version");
+        DLog(@"Failed to get available firmware version");
         
         [_settingsViewController noUpdates];
         
@@ -1843,7 +1843,7 @@ extern UserController * g_userController;
 
 - (void)firmwareDownloadFinished:(id)file
 {
-    NSLog(@"Downloaded firmware file");
+    DLog(@"Downloaded firmware file");
     
     NSMethodSignature *signature = [TitleNavigationController instanceMethodSignatureForSelector:@selector(beginUpdatingFirmware)];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -1904,7 +1904,7 @@ extern UserController * g_userController;
     // output some messages
     NSString * msg = [[NSString alloc] initWithFormat:@"Firmware updating"];
     
-    NSLog(@"%@", msg);
+    DLog(@"%@", msg);
     
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -1921,7 +1921,7 @@ extern UserController * g_userController;
         
         NSString * msg = [[NSString alloc] initWithFormat:@"Firmware is nil"];
         
-        NSLog(@"%@", msg);
+        DLog(@"%@", msg);
         
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -1950,14 +1950,14 @@ extern UserController * g_userController;
     // Double check it's actually passing data
     if ( ![firmware isKindOfClass:[NSString class]] && [g_keysController sendFirmwareUpdate:firmware] == YES )
     {
-        NSLog(@"Update begun");
+        DLog(@"Update begun");
     }
     else
     {
         
         NSString * msg = [[NSString alloc] initWithFormat:@"Update failed to start"];
         
-        NSLog(@"%@", msg);
+        DLog(@"%@", msg);
         
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         

@@ -8,7 +8,7 @@
 
 #import "KeysController.h"
 #import "RGBColor.h"
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 #import <UIKit/UIKit.h>
 
 extern KeysController * g_keysController;

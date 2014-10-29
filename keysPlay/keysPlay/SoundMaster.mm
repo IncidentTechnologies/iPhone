@@ -106,7 +106,7 @@
 
 - (BOOL)initAudio
 {
-    NSLog(@" **** Init Sound Master **** ");
+    DLog(@" **** Init Sound Master **** ");
     
     /*m_standardTuning = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],
                         [NSNumber numberWithInt:5],
@@ -125,7 +125,7 @@
     //root->ConnectInput(0, m_keysSamplerNode, 0);
     
     if(!m_instruments && ![self loadInstrumentArray]){
-        NSLog(@"Failed to load instrument array from instrument.plist");
+        DLog(@"Failed to load instrument array from instrument.plist");
         return false;
     }
     
@@ -161,7 +161,7 @@
 
 - (void)reset
 {
-    NSLog(@"Reset audio");
+    DLog(@"Reset audio");
     
     //[self stop];
     
@@ -172,7 +172,7 @@
 
 - (int)generateBank:(int)bank numSamples:(int)numSamples
 {
-    NSLog(@"Generate bank %i",bank);
+    DLog(@"Generate bank %i",bank);
     
     return m_keysSamplerNode->CreateNewBank(bank,numSamples);
     
@@ -180,7 +180,7 @@
 
 - (void)releaseBank:(int)bank
 {
-    NSLog(@"Release bank");
+    DLog(@"Release bank");
     
     m_keysSamplerNode->ReleaseBank(bank);
 }
@@ -188,14 +188,14 @@
 - (void)start
 {
     if(!isLoadingInstrument){
-        NSLog(@"Start");
+        DLog(@"Start");
         [audioController startAUGraph];
     }
 }
 
 - (void)stop
 {
-    NSLog(@"Stop");
+    DLog(@"Stop");
     
     // End all samples that might be playing
     if(m_keysSamplerNode != nil){
@@ -211,7 +211,7 @@
 
 - (void)releaseCompletely
 {
-    NSLog(@"Disconnect and release SoundMaster");
+    DLog(@"Disconnect and release SoundMaster");
     
     [self stop];
     
@@ -238,7 +238,7 @@
 #pragma mark - Routing
 - (void)routeToSpeaker
 {
-    NSLog(@"Route to speaker");
+    DLog(@"Route to speaker");
     
     [audioController RouteAudioToSpeaker];
     
@@ -246,7 +246,7 @@
 
 - (void)routeToDefault
 {
-    NSLog(@"Route to default");
+    DLog(@"Route to default");
     
     [audioController RouteAudioToDefault];
 }
@@ -261,7 +261,7 @@
 #pragma mark - Volume
 - (void) setChannelGain:(float)gain
 {
-    NSLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
+    DLog(@"Set channel gain to %f",gain*GAIN_MULTIPLIER);
     
     m_channelGain = gain * GAIN_MULTIPLIER;
     
@@ -278,7 +278,7 @@
 #pragma mark - Tone
 - (bool) SetBWCutoff:(double)cutoff
 {
-    NSLog(@"SoundMaster: set BW cutoff to %f",cutoff);
+    DLog(@"SoundMaster: set BW cutoff to %f",cutoff);
     
 #ifdef EFFECTS_AVAILABLE
     //m_butterworthNode->SetCutoff(cutoff);
@@ -324,7 +324,7 @@
 {
     
     if(index == currentInstrumentIndex){
-        NSLog(@"Instrument already loaded");
+        DLog(@"Instrument already loaded");
         
         // Callback
         if(sender != nil){
@@ -334,7 +334,7 @@
         
     }else if (index >= [m_instruments count] || index < 0){
         
-        NSLog(@"Attempting to access instrument index out of bounds");
+        DLog(@"Attempting to access instrument index out of bounds");
         
         // Callback
         if(sender != nil){
@@ -344,7 +344,7 @@
         
     }else{
         
-        NSLog(@"Release %i, set new to %i",currentInstrumentIndex,index);
+        DLog(@"Release %i, set new to %i",currentInstrumentIndex,index);
     }
     
     isLoadingInstrument = YES;
@@ -363,7 +363,7 @@
     // Generate a bank
     m_activeBankNode = [self generateBank:0 numSamples:numNotes];
     
-    NSLog(@"Load samples for instrument %i",index);
+    DLog(@"Load samples for instrument %i",index);
     
     // Reset active frets
     /*for(int i = 0; i < KEYS_NUM_STRINGS; i++){
@@ -400,7 +400,7 @@
             NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:currentInstrumentIndex ], @"instrumentIndex", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"InstrumentChanged" object:self userInfo:userInfo];
             
-            NSLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
+            DLog(@"Changed instrument to %@",[instrument objectForKey:@"Name"]);
             
             // End loading
             isLoadingInstrument = NO;
@@ -425,7 +425,7 @@
         
     }else{
         
-        NSLog(@"Cannot load samples for instrument %i",index);
+        DLog(@"Cannot load samples for instrument %i",index);
         
     }
 }
@@ -500,7 +500,7 @@
     NSDictionary *plistDict = (NSDictionary *) [NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListMutableContainersAndLeaves format:&format error:&error];
     
     if (!plistDict) {
-        NSLog(@"Error reading plist: %@", [error localizedDescription]);
+        DLog(@"Error reading plist: %@", [error localizedDescription]);
         return false;
     }
     
@@ -513,7 +513,7 @@
 
 - (void) didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
-    NSLog(@"SoundMaster didSelectInstrument %@",instrumentName);
+    DLog(@"SoundMaster didSelectInstrument %@",instrumentName);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
@@ -526,14 +526,14 @@
 - (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
     if(index < numInstruments){
-        NSLog(@"Selecting instrument at index %i",index);
+        DLog(@"Selecting instrument at index %i",index);
         
         [self stop];
         
         [self loadInstrument:index withSelector:cb andOwner:sender];
         
     }else{
-        NSLog(@"Attempting to select instrument with index %i out of range",index);
+        DLog(@"Attempting to select instrument with index %i out of range",index);
     }
 }
 
@@ -598,7 +598,7 @@
             // Get note index
             int noteIndex = [self noteIndexForKey:key];
             
-            NSLog(@"Note at index %i",noteIndex);
+            DLog(@"Note at index %i",noteIndex);
             
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[key] != nil){
@@ -643,7 +643,7 @@
         int pendingIndex = [self noteIndexForString:string andFret:highestFret];
         //int pendingIndex = [self noteIndexForString:string andFret:pendingFretOnString[string]];
         
-        NSLog(@"Note at index %i",noteIndex);
+        DLog(@"Note at index %i",noteIndex);
         
         if(pendingIndex > 0){
             
@@ -699,7 +699,7 @@
             
             int noteIndex = [self noteIndexForKey:key];
             
-            NSLog(@"Muted note at index %i",noteIndex);
+            DLog(@"Muted note at index %i",noteIndex);
             
             m_keysSamplerNode->TriggerMutedSample(m_activeBankNode,noteIndex);
         }
@@ -950,7 +950,7 @@
     
     if(isOn){
         
-        NSLog(@"Toggle effect off for %@",effectNode);
+        DLog(@"Toggle effect off for %@",effectNode);
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
@@ -978,7 +978,7 @@
         
     }else{
         
-        NSLog(@"Toggle effect on for %@ at %i",[effectNames objectAtIndex:index],index);
+        DLog(@"Toggle effect on for %@ at %i",[effectNames objectAtIndex:index],index);
         
         if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
             
@@ -1010,7 +1010,7 @@
 - (NSString *)getEffectNameAtIndex:(NSInteger)index
 {
     if(index >= numEffects){
-        NSLog(@"Trying to get effect index %i out of range",index);
+        DLog(@"Trying to get effect index %i out of range",index);
         index = numEffects-1;
     }
     
@@ -1031,7 +1031,7 @@
     
 #ifdef EFFECTS_AVAILABLE
     if(index >= numEffects){
-        NSLog(@"Trying to get effect index %i out of range",index);
+        DLog(@"Trying to get effect index %i out of range",index);
         index = numEffects-1;
     }
     
@@ -1052,10 +1052,10 @@
     float x = 0;
     float y = 0;
     
-    NSLog(@"Get point for effect %@",effectNode);
+    DLog(@"Get point for effect %@",effectNode);
     
     if(![self isEffectOnAtIndex:index]){
-        NSLog(@"Effect %@ not on",effectNode);
+        DLog(@"Effect %@ not on",effectNode);
         return CGPointMake(x,y);
     }
     
@@ -1115,7 +1115,7 @@
     float snew;
     
     if(![self isEffectOnAtIndex:index]){
-        NSLog(@"Effect %@ not on",effectNode);
+        DLog(@"Effect %@ not on",effectNode);
         return;
     }
     
@@ -1157,7 +1157,7 @@
     pnew = position.x*(pmax - pmin) + pmin;
     snew = position.y*(smax - smin) + smin;
     
-    NSLog(@"Update %@ to %f %f",effectNode,pnew,snew);
+    DLog(@"Update %@ to %f %f",effectNode,pnew,snew);
     
     if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)]){
         

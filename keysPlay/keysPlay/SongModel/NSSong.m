@@ -66,12 +66,12 @@
         
         dom = [headerDom getChildWithName:@"instrument"];
         self.m_instrument = [dom getTextFromChildWithName:@"name"];
-        NSLog(@"Using instrument: %@", m_instrument);
+        DLog(@"Using instrument: %@", m_instrument);
         
         // Ensure that instrument is not NULL
         if(m_instrument == NULL){
             
-            NSLog(@"Instrument is NULL using default, %@",DEFAULT_INSTRUMENT);
+            DLog(@"Instrument is NULL using default, %@",DEFAULT_INSTRUMENT);
             self.m_instrument = DEFAULT_INSTRUMENT;
             
         }

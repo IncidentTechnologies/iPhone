@@ -708,7 +708,7 @@ extern KeysController * g_keysController;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    NSLog(@"touches moved free play controller");
+    DLog(@"touches moved free play controller");
     
     // Only take action if the touch is inside a designated LED area
     if (LEDTouchNone != m_LEDTouchArea)
@@ -719,7 +719,7 @@ extern KeysController * g_keysController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touches ended free play controller");
+    DLog(@"touches ended free play controller");
     
     // Check that last touchBegan was inside an LED touch area
     if (LEDTouchNone != m_LEDTouchArea)
@@ -758,7 +758,7 @@ extern KeysController * g_keysController;
         fret = stringFret.y;
         if (string < 0 || fret < 0)
         {
-            NSLog(@"touchedLED: Invalid fret & string. fret:%d string:%d", fret, string);
+            DLog(@"touchedLED: Invalid fret & string. fret:%d string:%d", fret, string);
             return;
         }
         
@@ -878,7 +878,7 @@ extern KeysController * g_keysController;
             break;
             
         default:
-            NSLog(@"Invalid LEDTouchArea: %d", m_LEDTouchArea);
+            DLog(@"Invalid LEDTouchArea: %d", m_LEDTouchArea);
             break;
     }
     

@@ -411,7 +411,7 @@
 
     if ( m_frameTimer != nil )
     {
-        NSLog(@"Begin new timer, invalidate old %@", m_frameTimer);
+        DLog(@"Begin new timer, invalidate old %@", m_frameTimer);
         [m_frameTimer invalidate];
     }
     
@@ -422,7 +422,7 @@
 - (void)frameExpired
 {
     
-    NSLog(@"Frame timer expired!");
+    DLog(@"Frame timer expired!");
     [m_frameTimer invalidate];
     
     m_frameTimer = nil;

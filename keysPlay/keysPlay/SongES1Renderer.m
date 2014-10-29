@@ -137,7 +137,7 @@
     
     m_currentPosition = position;
     
-    //NSLog(@"Current position is %f",m_currentPosition);
+    //DLog(@"Current position is %f",m_currentPosition);
     
     //
     // This is for the initial offset, which is currently negative.

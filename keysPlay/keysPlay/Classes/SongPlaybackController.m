@@ -122,7 +122,7 @@
  */
 - (void)playSong {
     
-    NSLog(@"Song Playback Controller: play song");
+    DLog(@"Song Playback Controller: play song");
     
     [g_soundMaster reset];
     [self startMainEventLoop];
@@ -172,7 +172,7 @@
 
 - (void)startMainEventLoop {
     
-    NSLog(@"Song Playback Controller: start main event loop");
+    DLog(@"Song Playback Controller: start main event loop");
     
     if ( m_songModel.m_percentageComplete >= 1.0 )
         return;
@@ -229,18 +229,18 @@
 
 - (void)songModelEnterFrame:(NSNoteFrame*)frame {
     
-    //NSLog(@"Song playback controller: song model enter frame");
+    //DLog(@"Song playback controller: song model enter frame");
     
     for ( NSNote * note in frame.m_notes ) {
         if ( note.m_key == KEYS_KEY_MUTED ) {
             
-            NSLog(@"play muted key %i",note.m_key-1);
+            DLog(@"play muted key %i",note.m_key-1);
             
             [g_soundMaster playMutedKey:note.m_key-1];
             
         }
         else {
-            NSLog(@"pluck string %i",note.m_key-1);
+            DLog(@"pluck string %i",note.m_key-1);
             
             [g_soundMaster playKey:note.m_key-1];
             

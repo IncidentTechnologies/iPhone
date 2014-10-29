@@ -6,7 +6,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "AppCore.h"
 
 //@class AudioController;
 

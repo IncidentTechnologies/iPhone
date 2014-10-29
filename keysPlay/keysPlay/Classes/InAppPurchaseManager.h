@@ -6,6 +6,8 @@
 //
 //
 
+
+#import "AppCore.h"
 #import <StoreKit/StoreKit.h>
 
 #import "SongPurchaseRequest.h"

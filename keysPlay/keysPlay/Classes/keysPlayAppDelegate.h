@@ -6,8 +6,7 @@
 //  Copyright 2011 Msft. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "TestFlight.h"
+#import "AppCore.h"
 #import "KeysController.h"
 #import "keysNavigationController.h"
 

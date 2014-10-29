@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import <gTarAppCore/ES1Renderer.h>
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 @class LineModel;
 @class KeyPathModel;

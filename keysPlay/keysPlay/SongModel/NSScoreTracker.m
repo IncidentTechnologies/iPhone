@@ -168,8 +168,8 @@
     // Score
     //
     
-    NSLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
-    NSLog(@"Current loops is %i",loop);
+    DLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
+    DLog(@"Current loops is %i",loop);
     
     int subscore = noteScore * m_multiplier * complexMultiplier;
     
@@ -181,7 +181,7 @@
         
         if(loop > [m_loopScores count]){
             
-            NSLog(@"Trying to access the next loop");
+            DLog(@"Trying to access the next loop");
             return percentAccuracy;
             
         }else{

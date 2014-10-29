@@ -9,7 +9,7 @@
 #import "NSNoteFrame.h"
 #import "NSNote.h"
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 @implementation NSNoteFrame
 

@@ -44,7 +44,7 @@
         
         NSArray * noteArray = [xmlDom getChildArrayWithName:@"note"];
         
-//        NSLog(@"Measure start %f", m_startBeat);
+//        DLog(@"Measure start %f", m_startBeat);
         
         for ( XmlDom * noteDom in noteArray )
         {

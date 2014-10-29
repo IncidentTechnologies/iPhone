@@ -10,7 +10,7 @@
 
 #import "XmlDom.h"
 
-#import <gTarAppCore/AppCore.h>
+#import "AppCore.h"
 
 @implementation NSNote
 
@@ -79,7 +79,7 @@
 		self.m_absoluteBeatStart = absoluteBeatStart;
         self.m_key = [self convertValueToKey:value];
 		
-        //NSLog(@"NOTE VALUE IS %@ KEY IS %i",m_value,m_key);
+        //DLog(@"NOTE VALUE IS %@ KEY IS %i",m_value,m_key);
         
 	}
 	

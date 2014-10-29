@@ -156,12 +156,12 @@ extern FileController *g_fileController;
     InAppPurchaseManager* purchaseManager = [InAppPurchaseManager sharedInstance];
     if ([purchaseManager canMakePurchases])
     {
-        NSLog(@"Can make in app purchase");
+        DLog(@"Can make in app purchase");
         [purchaseManager loadStore];
     }
     else
     {
-        NSLog(@"Can NOT make in app purchase");
+        DLog(@"Can NOT make in app purchase");
     }
     
     if ( [m_storeSongArray count] == 0 ) {
@@ -682,7 +682,7 @@ extern FileController *g_fileController;
      [self presentViewController:_songOptionsModal animated:YES completion:nil];
      */
     
-    NSLog(@"Table view row selected!");
+    DLog(@"Table view row selected!");
 }
 
 - (void)updateTable
@@ -810,7 +810,7 @@ extern FileController *g_fileController;
 
 - (void)requestStoreSongListCallback:(CloudResponse*)cloudResponse
 {
-    NSLog(@"Got Cloud Response for Song List");
+    DLog(@"Got Cloud Response for Song List");
     [_pullToUpdateSongList stopAnimating];
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
@@ -830,7 +830,7 @@ extern FileController *g_fileController;
         // Archive the new array to standardUserDefaults
         [settings setObject:[NSKeyedArchiver archivedDataWithRootObject:m_storeSongArray] forKey:kStoreSongCacheKey];
         if(![settings synchronize])
-            NSLog(@"Failed to syncronize standardUserDefaults");
+            DLog(@"Failed to syncronize standardUserDefaults");
         
         // Reload table data
         [_pullToUpdateSongList reloadData];
@@ -843,7 +843,7 @@ extern FileController *g_fileController;
          [self backButtonClicked:nil];
          }*/
         
-        NSLog(@"Something bad happened, no data to show");
+        DLog(@"Something bad happened, no data to show");
     }
 }
 
@@ -851,27 +851,27 @@ extern FileController *g_fileController;
 #pragma mark - Sliding Instrument Selector delegate and other audio stuff
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
-    NSLog(@"Song Selection VC: did select instrument %@",instrumentName);
+    DLog(@"Song Selection VC: did select instrument %@",instrumentName);
     [_playerViewController didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
 - (void)stopAudioEffects
 {
-    NSLog(@"Song Selection View Controller: stop audio effects");
+    DLog(@"Song Selection View Controller: stop audio effects");
     
     [_playerViewController stopAudioEffects];
 }
 
 -(NSInteger)getSelectedInstrumentIndex
 {
-    NSLog(@"Song Selection View Controller: get selected instrument index");
+    DLog(@"Song Selection View Controller: get selected instrument index");
     
     return [_playerViewController getSelectedInstrumentIndex];
 }
 
 -(NSArray *)getInstrumentList
 {
-    NSLog(@"Song Selection View Controller: get instrument list");
+    DLog(@"Song Selection View Controller: get instrument list");
     
     return [_playerViewController getInstrumentList];
 }

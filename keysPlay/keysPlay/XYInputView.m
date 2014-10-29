@@ -105,7 +105,7 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Touches began JamPad");
+    DLog(@"Touches began JamPad");
     
 	// For now we just want to recognize that a touch (any touch) occurred
 	UITouch * touch = [[touches allObjects] objectAtIndex:0];
