@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		260AFCC41814757700F7536A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 260AFCC31814757700F7536A /* libstdc++.dylib */; };
 		260CF0B218EBEFDF0083903A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 260CF0B418EBEFDF0083903A /* Localizable.strings */; };
-		261582C8192F00CA00AB0CFC /* gTar_AppIcon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */; };
-		261582C9192F00CA00AB0CFC /* gTar_AppIcon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */; };
-		261582CA192F00CA00AB0CFC /* gTar_AppIcon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */; };
 		26868D8617D2A46500DC990F /* StoreSongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8517D2A46500DC990F /* StoreSongListCell.m */; };
 		26868D8817D2A8DF00DC990F /* StoreSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */; };
 		26868D8B17D2F3C500DC990F /* StoreListBuyButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D8A17D2F3C500DC990F /* StoreListBuyButtonView.m */; };
@@ -201,6 +198,12 @@
 		6DB2860E1921915600B3D14C /* Electric Guitar 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */; };
 		6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */; };
 		6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */; };
+		6DD135E21A02DEB300996073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E11A02DEB300996073 /* Images.xcassets */; };
+		6DD135E91A02DEFA00996073 /* keys_AppIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E31A02DEFA00996073 /* keys_AppIcon_57.png */; };
+		6DD135EA1A02DEFA00996073 /* keys_AppIcon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E41A02DEFA00996073 /* keys_AppIcon_58.png */; };
+		6DD135EB1A02DEFA00996073 /* keys_AppIcon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E51A02DEFA00996073 /* keys_AppIcon_80.png */; };
+		6DD135EC1A02DEFA00996073 /* keys_AppIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E61A02DEFA00996073 /* keys_AppIcon_114.png */; };
+		6DD135ED1A02DEFA00996073 /* keys_AppIcon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E71A02DEFA00996073 /* keys_AppIcon_120.png */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
 		6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556D19789A9B00E8B360 /* AuxIcon.png */; };
 		6DE1557019789A9B00E8B360 /* SpeakerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */; };
@@ -1039,8 +1042,6 @@
 		EC34161C1739ADA600501AF4 /* SessionModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3416191739ADA400501AF4 /* SessionModalViewController.m */; };
 		EC34161D1739ADA600501AF4 /* SessionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */; };
 		EC34161E1739ADA600501AF4 /* SessionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */; };
-		EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
-		EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */; };
 		EC48665417287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
 		EC48665517287E8D0066194D /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC48665317287E8D0066194D /* SlidingViewController.m */; };
 		EC48665A172889CA0066194D /* SlidingInstrumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC486658172889CA0066194D /* SlidingInstrumentViewController.m */; };
@@ -1493,9 +1494,6 @@
 		260CF0B318EBEFDF0083903A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		260CF0B718EBEFFB0083903A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		260CF0B818EBF00A0083903A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_58.png; sourceTree = "<group>"; };
-		261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_80.png; sourceTree = "<group>"; };
-		261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTar_AppIcon_120.png; sourceTree = "<group>"; };
 		26868D8417D2A46500DC990F /* StoreSongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreSongListCell.h; sourceTree = "<group>"; };
 		26868D8517D2A46500DC990F /* StoreSongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreSongListCell.m; sourceTree = "<group>"; };
 		26868D8717D2A8DF00DC990F /* StoreSongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreSongListCell.xib; sourceTree = "<group>"; };
@@ -1729,6 +1727,12 @@
 		6DC3D83B190ED853003AAD4E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D83C190F01AA003AAD4E /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6DC3D83D190F0240003AAD4E /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6DD135E11A02DEB300996073 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = keysPlay/Images.xcassets; sourceTree = "<group>"; };
+		6DD135E31A02DEFA00996073 /* keys_AppIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_57.png; sourceTree = "<group>"; };
+		6DD135E41A02DEFA00996073 /* keys_AppIcon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_58.png; sourceTree = "<group>"; };
+		6DD135E51A02DEFA00996073 /* keys_AppIcon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_80.png; sourceTree = "<group>"; };
+		6DD135E61A02DEFA00996073 /* keys_AppIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_114.png; sourceTree = "<group>"; };
+		6DD135E71A02DEFA00996073 /* keys_AppIcon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_120.png; sourceTree = "<group>"; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
 		6DE1556D19789A9B00E8B360 /* AuxIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxIcon.png; path = Resources/Images/Play/AuxIcon.png; sourceTree = SOURCE_ROOT; };
@@ -2293,7 +2297,6 @@
 		EC3416181739ADA300501AF4 /* SessionModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModalViewController.h; sourceTree = "<group>"; };
 		EC3416191739ADA400501AF4 /* SessionModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModalViewController.m; sourceTree = "<group>"; };
 		EC34161A1739ADA500501AF4 /* SessionModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionModalViewController.xib; sourceTree = "<group>"; };
-		EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = MeetChrisVideo.mp4; path = Resources/Video/MeetChrisVideo.mp4; sourceTree = "<group>"; };
 		EC48665217287E8D0066194D /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
 		EC48665317287E8D0066194D /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
 		EC486657172889CA0066194D /* SlidingInstrumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingInstrumentViewController.h; sourceTree = "<group>"; };
@@ -2509,9 +2512,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				261582C5192F00CA00AB0CFC /* gTar_AppIcon_58.png */,
-				261582C6192F00CA00AB0CFC /* gTar_AppIcon_80.png */,
-				261582C7192F00CA00AB0CFC /* gTar_AppIcon_120.png */,
 				6D3D06D718F4D2E8007683DB /* TestFlightSDK3.0.0 */,
 				260CF0B418EBEFDF0083903A /* Localizable.strings */,
 				9DCC3B6E1790DACD00DDD603 /* gTarIcon_114x114.png */,
@@ -2546,7 +2546,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ECFF77201742F042002D7D40 /* Videos */,
+				6DD135E11A02DEB300996073 /* Images.xcassets */,
 				EC87EEDD13277B08007DAEC9 /* Images */,
 				EC995EA014DA229C00C86824 /* PreloadedContent */,
 				9D0BF7B814B57F8F00CF6372 /* Audio */,
@@ -3792,6 +3792,11 @@
 		EC995E9B14DA1E6900C86824 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DD135E31A02DEFA00996073 /* keys_AppIcon_57.png */,
+				6DD135E41A02DEFA00996073 /* keys_AppIcon_58.png */,
+				6DD135E51A02DEFA00996073 /* keys_AppIcon_80.png */,
+				6DD135E61A02DEFA00996073 /* keys_AppIcon_114.png */,
+				6DD135E71A02DEFA00996073 /* keys_AppIcon_120.png */,
 				6D34E73D19F9CDCD001D8EF6 /* Keys_Logo.png */,
 				EC0BAD3316EE93AC00E567A6 /* Default-568h@2x.png */,
 				ECE832281718BE81006E2391 /* Default-568hRot.png */,
@@ -4018,14 +4023,6 @@
 			name = Global;
 			sourceTree = "<group>";
 		};
-		ECFF77201742F042002D7D40 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				EC48663917272B8F0066194D /* MeetChrisVideo.mp4 */,
-			);
-			name = Videos;
-			sourceTree = "<group>";
-		};
 		ECFF773017440B5A002D7D40 /* FirmwareModalViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4147,6 +4144,7 @@
 				EC24DCF8161A89C000016B78 /* Acoustic Guitar 53.mp3 in Resources */,
 				EC24DCF9161A89C000016B78 /* Acoustic Guitar 54.mp3 in Resources */,
 				6DB285EE1921915600B3D14C /* Electric Guitar 68.mp3 in Resources */,
+				6DD135EB1A02DEFA00996073 /* keys_AppIcon_80.png in Resources */,
 				EC24DCFA161A89C000016B78 /* Acoustic Guitar 55.mp3 in Resources */,
 				EC24DCFB161A89C000016B78 /* Acoustic Guitar 56.mp3 in Resources */,
 				6DAD0B2F19187F1F005B3807 /* Warm Analogue 70.mp3 in Resources */,
@@ -4184,8 +4182,6 @@
 				6DB286051921915600B3D14C /* Electric Guitar 89.mp3 in Resources */,
 				EC24DD13161A89C000016B78 /* Acoustic Guitar 80.mp3 in Resources */,
 				EC24DD14161A89C400016B78 /* Rock Guitar 40.mp3 in Resources */,
-				261582C8192F00CA00AB0CFC /* gTar_AppIcon_58.png in Resources */,
-				261582CA192F00CA00AB0CFC /* gTar_AppIcon_120.png in Resources */,
 				EC24DD15161A89C400016B78 /* Rock Guitar 41.mp3 in Resources */,
 				EC24DD16161A89C400016B78 /* Rock Guitar 42.mp3 in Resources */,
 				6DB2860D1921915600B3D14C /* Electric Guitar 96.mp3 in Resources */,
@@ -4304,6 +4300,7 @@
 				EC24DD73161A89CD00016B78 /* Rhodes 53.mp3 in Resources */,
 				EC24DD74161A89CD00016B78 /* Rhodes 54.mp3 in Resources */,
 				6DB285BA1921915600B3D14C /* Electric Guitar 20.mp3 in Resources */,
+				6DD135ED1A02DEFA00996073 /* keys_AppIcon_120.png in Resources */,
 				EC24DD75161A89CD00016B78 /* Rhodes 55.mp3 in Resources */,
 				EC24DD76161A89CD00016B78 /* Rhodes 56.mp3 in Resources */,
 				EC24DD77161A89CD00016B78 /* Rhodes 57.mp3 in Resources */,
@@ -4503,6 +4500,7 @@
 				6DB285B11921915600B3D14C /* Electric Guitar 12.mp3 in Resources */,
 				ECCC036A170CD53E0021DB00 /* VolumeKnob.png in Resources */,
 				ECCC0393170E33600021DB00 /* MinusRotated.png in Resources */,
+				6DD135E21A02DEB300996073 /* Images.xcassets in Resources */,
 				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
 				6DB285B81921915600B3D14C /* Electric Guitar 19.mp3 in Resources */,
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
@@ -4536,7 +4534,6 @@
 				6DB285F51921915600B3D14C /* Electric Guitar 74.mp3 in Resources */,
 				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482D1725EFEE0056A6D1 /* LightIcon.png in Resources */,
-				EC48663A17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 				9DF1483017261E840056A6D1 /* MenuIcon.png in Resources */,
 				EC48665C172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
 				EC4866621728B34C0066194D /* OrangeEffects.png in Resources */,
@@ -4614,6 +4611,7 @@
 				9D054CC2174C68E000FA3239 /* Bowed Strings 50.mp3 in Resources */,
 				9D054CC4174C68E000FA3239 /* Bowed Strings 51.mp3 in Resources */,
 				9D054CC6174C68E000FA3239 /* Bowed Strings 52.mp3 in Resources */,
+				6DD135EC1A02DEFA00996073 /* keys_AppIcon_114.png in Resources */,
 				9D054CC8174C68E000FA3239 /* Bowed Strings 53.mp3 in Resources */,
 				9D054CCA174C68E000FA3239 /* Bowed Strings 54.mp3 in Resources */,
 				9D054CCC174C68E000FA3239 /* Bowed Strings 55.mp3 in Resources */,
@@ -4661,6 +4659,7 @@
 				9D054D3A174C68E700FA3239 /* Carl's Synth 48.mp3 in Resources */,
 				9D054D3C174C68E700FA3239 /* Carl's Synth 49.mp3 in Resources */,
 				9D054D3E174C68E700FA3239 /* Carl's Synth 50.mp3 in Resources */,
+				6DD135EA1A02DEFA00996073 /* keys_AppIcon_58.png in Resources */,
 				9D054D40174C68E700FA3239 /* Carl's Synth 51.mp3 in Resources */,
 				9D054D42174C68E700FA3239 /* Carl's Synth 52.mp3 in Resources */,
 				9D054D44174C68E700FA3239 /* Carl's Synth 53.mp3 in Resources */,
@@ -4691,6 +4690,7 @@
 				9D054D6C174C68E700FA3239 /* Carl's Synth 73.mp3 in Resources */,
 				9D054D6E174C68E700FA3239 /* Carl's Synth 74.mp3 in Resources */,
 				9D054D70174C68E700FA3239 /* Carl's Synth 75.mp3 in Resources */,
+				6DD135E91A02DEFA00996073 /* keys_AppIcon_57.png in Resources */,
 				9D054D72174C68E700FA3239 /* Carl's Synth 76.mp3 in Resources */,
 				9D054D74174C68E700FA3239 /* Carl's Synth 77.mp3 in Resources */,
 				9D054D76174C68E700FA3239 /* Carl's Synth 78.mp3 in Resources */,
@@ -4752,7 +4752,6 @@
 				9D054E22174C68FB00FA3239 /* Upright Bass 40.mp3 in Resources */,
 				9D054E24174C68FB00FA3239 /* Upright Bass 41.mp3 in Resources */,
 				9D054E26174C68FB00FA3239 /* Upright Bass 42.mp3 in Resources */,
-				261582C9192F00CA00AB0CFC /* gTar_AppIcon_80.png in Resources */,
 				9D054E28174C68FB00FA3239 /* Upright Bass 43.mp3 in Resources */,
 				9D054E2A174C68FB00FA3239 /* Upright Bass 44.mp3 in Resources */,
 				9D054E2C174C68FB00FA3239 /* Upright Bass 45.mp3 in Resources */,
@@ -5178,7 +5177,6 @@
 				9DF148281725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
 				9DF1482B1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
 				9DF1482E1725EFEE0056A6D1 /* LightIcon.png in Resources */,
-				EC48663B17272B8F0066194D /* MeetChrisVideo.mp4 in Resources */,
 				9DF1483117261E840056A6D1 /* MenuIcon.png in Resources */,
 				EC48665D172889CA0066194D /* SlidingInstrumentViewController.xib in Resources */,
 				EC4866631728B34C0066194D /* OrangeEffects.png in Resources */,

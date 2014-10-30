@@ -278,11 +278,11 @@ extern UserController * g_userController;
         [self loggedinScreen];
         
     }
-    else if ( g_cloudController.m_loggedIn == NO && guitarConnectedBefore == NO )
+    /*else if ( g_cloudController.m_loggedIn == NO && guitarConnectedBefore == NO )
     {
         // We aren't logged in, and never plugged in a guitar. Display the gatekeeping view.
         [self gatekeeperScreen];
-    }
+    }*/
     else if ( g_cloudController.m_loggedIn == NO )
     {
         // We aren't logged out
@@ -421,6 +421,8 @@ extern UserController * g_userController;
 #pragma mark - Panel collections
 
 - (void)gatekeeperScreen {
+    
+    /*
     [self swapLeftPanel:_gatekeeperLeftPanel];
     [self swapRightPanel:_videoRightPanel];
     
@@ -443,6 +445,8 @@ extern UserController * g_userController;
         _videoPreviewImage.contentMode = UIViewContentModeScaleAspectFit;
         _videoPreviewImage.image = thumbNail;
     }
+     */
+    
 }
 
 - (void)loggedoutScreen {
