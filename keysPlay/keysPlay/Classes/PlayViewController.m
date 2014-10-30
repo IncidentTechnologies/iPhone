@@ -378,7 +378,7 @@ extern UserController * g_userController;
     // Attach the volume view controller
     CGRect targetFrame = [_topBar convertRect:_volumeSliderView.frame toView:self.view];
     
-    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:YES];
+    _volumeViewController = [[VolumeViewController alloc] initWithNibName:nil bundle:nil andSoundMaster:g_soundMaster isInverse:NO];
     
     [_volumeViewController attachToSuperview:self.view withFrame:targetFrame];
     
@@ -667,7 +667,7 @@ extern UserController * g_userController;
     {
         [_metronomeSwitch setOn:_playMetronome];
         [self showHideMenu:_menuView isOpen:YES];
-        [_menuDownArrow setHidden:NO];
+        //[_menuDownArrow setHidden:NO];
     }
     else
     {
