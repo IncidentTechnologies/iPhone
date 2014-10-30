@@ -191,6 +191,7 @@
 	
     // Set background color
     glClearColor(38/255.0, 45/255.0, 51/255.0, 1.0f);
+    //glClearColor(210/255.0, 210/255.0, 210/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
 	//

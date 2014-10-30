@@ -64,7 +64,8 @@
     
     NSTimer * m_preloadTimer;
     
-    Texture2D * m_noteTexture;
+    Texture2D * m_whiteKeyTexture;
+    Texture2D * m_blackKeyTexture;
     
     NumberModel * m_mutedTexture;
     

@@ -112,7 +112,7 @@ extern UserController * g_userController;
     BOOL isScrolling;
     BOOL isStandalone;
     BOOL isRestrictPlayFrame;
-    BOOL isTouching;
+    NSMutableArray * activeTouchPoints;
     
     // Practice
     NSMutableArray * markerButtons;
@@ -2957,18 +2957,32 @@ extern UserController * g_userController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if(!isTouching){
+    
+    if(!isStandalone || _songIsPaused){
         
-        isTouching = true;
-        
-        // Gather all the touches
-        NSMutableArray * touchPoints = [[NSMutableArray alloc] init];
-        
-        for(UITouch * touch in [event allTouches]){
-            CGPoint touchPoint = [touch locationInView:self.glView];
-        
-            [touchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
+        // Debug
+#ifdef Debug_BUILD
+        if(g_keysController.connected){
+            _skipNotes = YES;
         }
+#endif
+        
+        return;
+    }
+    
+    if(activeTouchPoints == nil){
+        activeTouchPoints = [[NSMutableArray alloc] init];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
+        
+    }
+    
+    // Gather all the touches to send with a timer
+    for(UITouch * touch in [event allTouches]){
+        CGPoint touchPoint = [touch locationInView:self.glView];
+    
+        [activeTouchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
+    }
         
         //UITouch * touch = [[touches allObjects] objectAtIndex:0];
         
@@ -2988,20 +3002,13 @@ extern UserController * g_userController;
         //DLog(@"Current frame is %@",_currentFrame);
         
         // Determine whether to play the tapped string
-        if(isStandalone && !_songIsPaused){
-            [self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:touchPoints];
+        //if(isStandalone && !_songIsPaused){
+            //[self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:touchPoints];
             
             //[self tapNoteFromTouchPoint:touchPoints];
-        }
+        //}
+    
         
-        // Debug
-    #ifdef Debug_BUILD
-        if(g_keysController.connected){
-            _skipNotes = YES;
-        }
-    #endif
-            
-    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -3027,14 +3034,15 @@ extern UserController * g_userController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    isTouching = false;
     
 }
 
 #pragma mark - Standalone logic
 // Standalone
-- (void)tapNoteFromTouchPoint:(NSMutableArray *)touchPoints
+- (void)tapNoteFromTouchPoint
 {
+    NSMutableArray * touchPoints = [[NSMutableArray alloc] initWithArray:activeTouchPoints copyItems:YES];
+    
     NSMutableDictionary * frameWithKey = [_displayController getKeyPressFromTap:touchPoints];
     
     double accuracy = -1;
@@ -3076,6 +3084,9 @@ extern UserController * g_userController;
 
         [self colorKeyOnTap:minHeightSubview withAccuracy:accuracy];
     }
+    
+    [activeTouchPoints removeAllObjects];
+    activeTouchPoints = nil;
 
 }
 
@@ -3109,7 +3120,7 @@ extern UserController * g_userController;
         accuracyColor = [UIColor colorWithRed:255/255.0 green:113/255.0 blue:66/255.0 alpha:1.0];
     }
     
-    [UIView animateWithDuration:0.2 animations:^(void){
+    [UIView animateWithDuration:0.0 animations:^(void){
         [key setBackgroundColor:accuracyColor];
     } completion:^(BOOL finished){
         [UIView animateWithDuration:0.2 delay:0.1 options:nil animations:^(void){

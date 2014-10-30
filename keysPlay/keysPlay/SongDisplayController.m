@@ -26,7 +26,7 @@
 #define GL_SEEK_LINE_Y 46.0
 #define GL_TOUCH_AREA_HEIGHT 100.0
 
-#define GL_NOTE_HEIGHT ( GL_SCREEN_HEIGHT / 7.0 )
+#define GL_NOTE_HEIGHT 38.0 //( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
 //#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
 
@@ -428,10 +428,13 @@
             
         }*/
         
-        model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:m_noteTexture andOverlay:overlay];
+        Texture2D * modelTexture = [self isKeyBlackKey:note.m_key] ? m_blackKeyTexture : m_whiteKeyTexture;
+        
+        model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:modelTexture andOverlay:overlay];
         
         model.m_key = note.m_key;
         model.m_standalonekey = (isStandalone) ? [self getMappedKeyFromKey:note.m_key] : KEYS_OCTAVE_COUNT;
+        
         
         NSValue * key = [NSValue valueWithNonretainedObject:note];
         
@@ -674,19 +677,27 @@
 
 - (void)createNoteTexture
 {
-    UIImage * scaledImage;
-    UIImage * image = [UIImage imageNamed:@"NoteGreyscale.png"];
+    UIImage * whiteKeyScaledImage;
+    UIImage * blackKeyScaledImage;
+    UIImage * whiteKeyImage = [UIImage imageNamed:@"NoteGreyscale.png"];
+    UIImage * blackKeyImage = [UIImage imageNamed:@"NoteGreyscale2.png"];
     
     CGSize size;
     size.height = GL_NOTE_HEIGHT;
     size.width = GL_NOTE_HEIGHT;
     
     UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    [whiteKeyImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    whiteKeyScaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    m_noteTexture = [[Texture2D alloc] initWithImage:scaledImage];
+    UIGraphicsBeginImageContext(size);
+    [blackKeyImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    blackKeyScaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    m_whiteKeyTexture = [[Texture2D alloc] initWithImage:whiteKeyScaledImage];
+    m_blackKeyTexture = [[Texture2D alloc] initWithImage:blackKeyScaledImage];
     
 }
 
@@ -810,6 +821,17 @@
     }else{
         return key % 5;
     }
+}
+
+-(BOOL)isKeyBlackKey:(int)key
+{
+    int mappedKey = [self getMappedKeyFromKey:key];
+    
+    if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (NSMutableDictionary *)getKeyPressFromTap:(NSMutableArray *)touchPoints
