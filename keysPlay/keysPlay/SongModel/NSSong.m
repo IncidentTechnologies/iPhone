@@ -12,7 +12,7 @@
 #import "NSMarker.h"
 #import "XmlDom.h"
 
-#define DEFAULT_INSTRUMENT @"Electric Guitar"
+#define DEFAULT_INSTRUMENT @"Piano"
 
 @implementation NSSong
 

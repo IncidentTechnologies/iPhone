@@ -31,7 +31,7 @@
 #define EFFECT_NAME_DISTORT @"Distortion"
 #define EFFECT_NAME_SLIDING @"Sliding"
 
-#define DEFAULT_INSTRUMENT @"Electric Guitar"
+#define DEFAULT_INSTRUMENT @"Piano"
 
 #define DEFAULT_GAIN 0.4
 #define GAIN_MULTIPLIER 0.6
