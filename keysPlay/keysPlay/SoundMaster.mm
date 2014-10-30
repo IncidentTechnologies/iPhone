@@ -386,7 +386,18 @@
                 instrumentName = DEFAULT_INSTRUMENT;
             }
             
-            for(int j = firstNote; j < firstNote+numNotes; j++){
+            // Fill so samples always starts at 0
+            for(int i = 0; i < firstNote; i++){
+                
+                // make sure instrument hasn't been released off thread
+                if(currentInstrumentIndex == index){
+                    char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"mp3"] UTF8String];
+                    
+                    m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
+                }
+            }
+            
+            for(int j = firstNote; j < numNotes; j++){
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){

@@ -19,88 +19,8 @@
 		26868D9117E29AD700DC990F /* UITriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26868D9017E29AD700DC990F /* UITriangleView.m */; };
 		26F85ED818146FA500326CE7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F85ED718146FA500326CE7 /* StoreKit.framework */; };
 		6D0BDE441A01AA2F00593F2C /* NoteGreyscale2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */; };
-		6D0BDE6D1A01CDFB00593F2C /* Piano 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE451A01CDFB00593F2C /* Piano 0.mp3 */; };
-		6D0BDE6E1A01CDFB00593F2C /* Piano 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE461A01CDFB00593F2C /* Piano 1.mp3 */; };
-		6D0BDE6F1A01CDFB00593F2C /* Piano 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE471A01CDFB00593F2C /* Piano 2.mp3 */; };
-		6D0BDE701A01CDFB00593F2C /* Piano 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE481A01CDFB00593F2C /* Piano 3.mp3 */; };
-		6D0BDE711A01CDFB00593F2C /* Piano 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE491A01CDFB00593F2C /* Piano 4.mp3 */; };
-		6D0BDE721A01CDFB00593F2C /* Piano 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4A1A01CDFB00593F2C /* Piano 5.mp3 */; };
-		6D0BDE731A01CDFB00593F2C /* Piano 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4B1A01CDFB00593F2C /* Piano 6.mp3 */; };
-		6D0BDE741A01CDFB00593F2C /* Piano 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4C1A01CDFB00593F2C /* Piano 7.mp3 */; };
-		6D0BDE751A01CDFB00593F2C /* Piano 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4D1A01CDFB00593F2C /* Piano 8.mp3 */; };
-		6D0BDE761A01CDFB00593F2C /* Piano 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4E1A01CDFB00593F2C /* Piano 9.mp3 */; };
-		6D0BDE771A01CDFB00593F2C /* Piano 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE4F1A01CDFB00593F2C /* Piano 10.mp3 */; };
-		6D0BDE781A01CDFB00593F2C /* Piano 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE501A01CDFB00593F2C /* Piano 11.mp3 */; };
-		6D0BDE791A01CDFB00593F2C /* Piano 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE511A01CDFB00593F2C /* Piano 12.mp3 */; };
-		6D0BDE7A1A01CDFB00593F2C /* Piano 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE521A01CDFB00593F2C /* Piano 13.mp3 */; };
-		6D0BDE7B1A01CDFB00593F2C /* Piano 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE531A01CDFB00593F2C /* Piano 14.mp3 */; };
-		6D0BDE7C1A01CDFB00593F2C /* Piano 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE541A01CDFB00593F2C /* Piano 15.mp3 */; };
-		6D0BDE7D1A01CDFB00593F2C /* Piano 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE551A01CDFB00593F2C /* Piano 16.mp3 */; };
-		6D0BDE7E1A01CDFB00593F2C /* Piano 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE561A01CDFB00593F2C /* Piano 17.mp3 */; };
-		6D0BDE7F1A01CDFB00593F2C /* Piano 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE571A01CDFB00593F2C /* Piano 18.mp3 */; };
-		6D0BDE801A01CDFB00593F2C /* Piano 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE581A01CDFB00593F2C /* Piano 19.mp3 */; };
-		6D0BDE811A01CDFB00593F2C /* Piano 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE591A01CDFB00593F2C /* Piano 20.mp3 */; };
-		6D0BDE821A01CDFB00593F2C /* Piano 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5A1A01CDFB00593F2C /* Piano 21.mp3 */; };
-		6D0BDE831A01CDFB00593F2C /* Piano 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5B1A01CDFB00593F2C /* Piano 22.mp3 */; };
-		6D0BDE841A01CDFB00593F2C /* Piano 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5C1A01CDFB00593F2C /* Piano 23.mp3 */; };
-		6D0BDE851A01CDFB00593F2C /* Piano 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5D1A01CDFB00593F2C /* Piano 24.mp3 */; };
-		6D0BDE861A01CDFB00593F2C /* Piano 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5E1A01CDFB00593F2C /* Piano 25.mp3 */; };
-		6D0BDE871A01CDFB00593F2C /* Piano 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE5F1A01CDFB00593F2C /* Piano 26.mp3 */; };
-		6D0BDE881A01CDFB00593F2C /* Piano 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE601A01CDFB00593F2C /* Piano 27.mp3 */; };
-		6D0BDE891A01CDFB00593F2C /* Piano 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE611A01CDFB00593F2C /* Piano 28.mp3 */; };
-		6D0BDE8A1A01CDFB00593F2C /* Piano 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE621A01CDFB00593F2C /* Piano 29.mp3 */; };
-		6D0BDE8B1A01CDFB00593F2C /* Piano 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE631A01CDFB00593F2C /* Piano 30.mp3 */; };
-		6D0BDE8C1A01CDFB00593F2C /* Piano 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE641A01CDFB00593F2C /* Piano 31.mp3 */; };
-		6D0BDE8D1A01CDFB00593F2C /* Piano 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE651A01CDFB00593F2C /* Piano 32.mp3 */; };
-		6D0BDE8E1A01CDFB00593F2C /* Piano 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE661A01CDFB00593F2C /* Piano 33.mp3 */; };
-		6D0BDE8F1A01CDFB00593F2C /* Piano 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE671A01CDFB00593F2C /* Piano 34.mp3 */; };
-		6D0BDE901A01CDFB00593F2C /* Piano 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE681A01CDFB00593F2C /* Piano 35.mp3 */; };
-		6D0BDE911A01CDFB00593F2C /* Piano 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE691A01CDFB00593F2C /* Piano 36.mp3 */; };
-		6D0BDE921A01CDFB00593F2C /* Piano 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE6A1A01CDFB00593F2C /* Piano 37.mp3 */; };
-		6D0BDE931A01CDFB00593F2C /* Piano 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE6B1A01CDFB00593F2C /* Piano 38.mp3 */; };
-		6D0BDE941A01CDFB00593F2C /* Piano 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE6C1A01CDFB00593F2C /* Piano 39.mp3 */; };
 		6D0BDE971A01CE0600593F2C /* Electric Guitar 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */; };
 		6D0BDE981A01CE0600593F2C /* Electric Guitar 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE961A01CE0600593F2C /* Electric Guitar 1.mp3 */; };
-		6D0BDEC11A01D0A700593F2C /* Acoustic Guitar 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE991A01D0A700593F2C /* Acoustic Guitar 0.mp3 */; };
-		6D0BDEC21A01D0A700593F2C /* Acoustic Guitar 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9A1A01D0A700593F2C /* Acoustic Guitar 1.mp3 */; };
-		6D0BDEC31A01D0A700593F2C /* Acoustic Guitar 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9B1A01D0A700593F2C /* Acoustic Guitar 2.mp3 */; };
-		6D0BDEC41A01D0A700593F2C /* Acoustic Guitar 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9C1A01D0A700593F2C /* Acoustic Guitar 3.mp3 */; };
-		6D0BDEC51A01D0A700593F2C /* Acoustic Guitar 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9D1A01D0A700593F2C /* Acoustic Guitar 4.mp3 */; };
-		6D0BDEC61A01D0A700593F2C /* Acoustic Guitar 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9E1A01D0A700593F2C /* Acoustic Guitar 5.mp3 */; };
-		6D0BDEC71A01D0A700593F2C /* Acoustic Guitar 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE9F1A01D0A700593F2C /* Acoustic Guitar 6.mp3 */; };
-		6D0BDEC81A01D0A700593F2C /* Acoustic Guitar 7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA01A01D0A700593F2C /* Acoustic Guitar 7.mp3 */; };
-		6D0BDEC91A01D0A700593F2C /* Acoustic Guitar 8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA11A01D0A700593F2C /* Acoustic Guitar 8.mp3 */; };
-		6D0BDECA1A01D0A700593F2C /* Acoustic Guitar 9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA21A01D0A700593F2C /* Acoustic Guitar 9.mp3 */; };
-		6D0BDECB1A01D0A700593F2C /* Acoustic Guitar 10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA31A01D0A700593F2C /* Acoustic Guitar 10.mp3 */; };
-		6D0BDECC1A01D0A700593F2C /* Acoustic Guitar 11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA41A01D0A700593F2C /* Acoustic Guitar 11.mp3 */; };
-		6D0BDECD1A01D0A700593F2C /* Acoustic Guitar 12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA51A01D0A700593F2C /* Acoustic Guitar 12.mp3 */; };
-		6D0BDECE1A01D0A700593F2C /* Acoustic Guitar 13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA61A01D0A700593F2C /* Acoustic Guitar 13.mp3 */; };
-		6D0BDECF1A01D0A700593F2C /* Acoustic Guitar 14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA71A01D0A700593F2C /* Acoustic Guitar 14.mp3 */; };
-		6D0BDED01A01D0A700593F2C /* Acoustic Guitar 15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA81A01D0A700593F2C /* Acoustic Guitar 15.mp3 */; };
-		6D0BDED11A01D0A700593F2C /* Acoustic Guitar 16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEA91A01D0A700593F2C /* Acoustic Guitar 16.mp3 */; };
-		6D0BDED21A01D0A700593F2C /* Acoustic Guitar 17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAA1A01D0A700593F2C /* Acoustic Guitar 17.mp3 */; };
-		6D0BDED31A01D0A700593F2C /* Acoustic Guitar 18.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAB1A01D0A700593F2C /* Acoustic Guitar 18.mp3 */; };
-		6D0BDED41A01D0A700593F2C /* Acoustic Guitar 19.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAC1A01D0A700593F2C /* Acoustic Guitar 19.mp3 */; };
-		6D0BDED51A01D0A700593F2C /* Acoustic Guitar 20.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAD1A01D0A700593F2C /* Acoustic Guitar 20.mp3 */; };
-		6D0BDED61A01D0A700593F2C /* Acoustic Guitar 21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAE1A01D0A700593F2C /* Acoustic Guitar 21.mp3 */; };
-		6D0BDED71A01D0A700593F2C /* Acoustic Guitar 22.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEAF1A01D0A700593F2C /* Acoustic Guitar 22.mp3 */; };
-		6D0BDED81A01D0A700593F2C /* Acoustic Guitar 23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB01A01D0A700593F2C /* Acoustic Guitar 23.mp3 */; };
-		6D0BDED91A01D0A700593F2C /* Acoustic Guitar 24.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB11A01D0A700593F2C /* Acoustic Guitar 24.mp3 */; };
-		6D0BDEDA1A01D0A700593F2C /* Acoustic Guitar 25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB21A01D0A700593F2C /* Acoustic Guitar 25.mp3 */; };
-		6D0BDEDB1A01D0A700593F2C /* Acoustic Guitar 26.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB31A01D0A700593F2C /* Acoustic Guitar 26.mp3 */; };
-		6D0BDEDC1A01D0A700593F2C /* Acoustic Guitar 27.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB41A01D0A700593F2C /* Acoustic Guitar 27.mp3 */; };
-		6D0BDEDD1A01D0A700593F2C /* Acoustic Guitar 28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB51A01D0A700593F2C /* Acoustic Guitar 28.mp3 */; };
-		6D0BDEDE1A01D0A700593F2C /* Acoustic Guitar 29.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB61A01D0A700593F2C /* Acoustic Guitar 29.mp3 */; };
-		6D0BDEDF1A01D0A700593F2C /* Acoustic Guitar 30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB71A01D0A700593F2C /* Acoustic Guitar 30.mp3 */; };
-		6D0BDEE01A01D0A700593F2C /* Acoustic Guitar 31.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB81A01D0A700593F2C /* Acoustic Guitar 31.mp3 */; };
-		6D0BDEE11A01D0A700593F2C /* Acoustic Guitar 32.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEB91A01D0A700593F2C /* Acoustic Guitar 32.mp3 */; };
-		6D0BDEE21A01D0A700593F2C /* Acoustic Guitar 33.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBA1A01D0A700593F2C /* Acoustic Guitar 33.mp3 */; };
-		6D0BDEE31A01D0A700593F2C /* Acoustic Guitar 34.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBB1A01D0A700593F2C /* Acoustic Guitar 34.mp3 */; };
-		6D0BDEE41A01D0A700593F2C /* Acoustic Guitar 35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBC1A01D0A700593F2C /* Acoustic Guitar 35.mp3 */; };
-		6D0BDEE51A01D0A700593F2C /* Acoustic Guitar 36.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBD1A01D0A700593F2C /* Acoustic Guitar 36.mp3 */; };
-		6D0BDEE61A01D0A700593F2C /* Acoustic Guitar 37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBE1A01D0A700593F2C /* Acoustic Guitar 37.mp3 */; };
-		6D0BDEE71A01D0A700593F2C /* Acoustic Guitar 38.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEBF1A01D0A700593F2C /* Acoustic Guitar 38.mp3 */; };
-		6D0BDEE81A01D0A700593F2C /* Acoustic Guitar 39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDEC01A01D0A700593F2C /* Acoustic Guitar 39.mp3 */; };
 		6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D20EF5E191AA68600E78A9D /* PreviewIcon.png */; };
 		6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81618F3794300887E40 /* libc++.dylib */; };
 		6D26A81918F3794900887E40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81818F3794900887E40 /* libz.dylib */; };
@@ -111,6 +31,7 @@
 		6D3D06DF18F4D2E8007683DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06D918F4D2E8007683DB /* README.md */; };
 		6D3D06E018F4D2E8007683DB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D06DA18F4D2E8007683DB /* release_notes.md */; };
 		6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D594C101909BCF900CF3128 /* HighlightModel.m */; };
+		6D613F531A02B46600856194 /* Silence.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D613F521A02B46600856194 /* Silence.mp3 */; };
 		6D61D1DA19FB07C5008CFA5A /* NSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CB19FB07C5008CFA5A /* NSMarker.m */; };
 		6D61D1DB19FB07C5008CFA5A /* NSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CD19FB07C5008CFA5A /* NSMeasure.m */; };
 		6D61D1DC19FB07C5008CFA5A /* NSNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1CF19FB07C5008CFA5A /* NSNote.m */; };
@@ -1004,47 +925,47 @@
 		EC24DD8C161A89CD00016B78 /* Rhodes 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EA14E0726D00DC7083 /* Rhodes 78.mp3 */; };
 		EC24DD8D161A89CD00016B78 /* Rhodes 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EB14E0726D00DC7083 /* Rhodes 79.mp3 */; };
 		EC24DD8E161A89CD00016B78 /* Rhodes 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EC14E0726D00DC7083 /* Rhodes 80.mp3 */; };
-		EC24DD8F161A89D200016B78 /* Droplet 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */; };
-		EC24DD90161A89D200016B78 /* Droplet 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */; };
-		EC24DD91161A89D200016B78 /* Droplet 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */; };
-		EC24DD92161A89D200016B78 /* Droplet 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC0155CD9C500F92DBE /* Droplet 55.mp3 */; };
-		EC24DD93161A89D200016B78 /* Droplet 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC1155CD9C500F92DBE /* Droplet 56.mp3 */; };
-		EC24DD94161A89D200016B78 /* Droplet 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC2155CD9C500F92DBE /* Droplet 57.mp3 */; };
-		EC24DD95161A89D200016B78 /* Droplet 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC3155CD9C500F92DBE /* Droplet 58.mp3 */; };
-		EC24DD96161A89D200016B78 /* Droplet 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC4155CD9C500F92DBE /* Droplet 59.mp3 */; };
-		EC24DD97161A89D200016B78 /* Droplet 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC5155CD9C500F92DBE /* Droplet 60.mp3 */; };
-		EC24DD98161A89D200016B78 /* Droplet 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC6155CD9C500F92DBE /* Droplet 61.mp3 */; };
-		EC24DD99161A89D200016B78 /* Droplet 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC7155CD9C500F92DBE /* Droplet 62.mp3 */; };
-		EC24DD9A161A89D200016B78 /* Droplet 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC8155CD9C500F92DBE /* Droplet 63.mp3 */; };
-		EC24DD9B161A89D200016B78 /* Droplet 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC9155CD9C500F92DBE /* Droplet 64.mp3 */; };
-		EC24DD9C161A89D200016B78 /* Droplet 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCA155CD9C500F92DBE /* Droplet 65.mp3 */; };
-		EC24DD9D161A89D200016B78 /* Droplet 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCB155CD9C500F92DBE /* Droplet 66.mp3 */; };
-		EC24DD9E161A89D200016B78 /* Droplet 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCC155CD9C500F92DBE /* Droplet 67.mp3 */; };
-		EC24DD9F161A89D200016B78 /* Droplet 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCD155CD9C500F92DBE /* Droplet 68.mp3 */; };
-		EC24DDA0161A89D200016B78 /* Droplet 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCE155CD9C500F92DBE /* Droplet 69.mp3 */; };
-		EC24DDA1161A89D200016B78 /* Droplet 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCF155CD9C500F92DBE /* Droplet 70.mp3 */; };
-		EC24DDA2161A89D200016B78 /* Droplet 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD0155CD9C500F92DBE /* Droplet 71.mp3 */; };
-		EC24DDA3161A89D200016B78 /* Droplet 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD1155CD9C500F92DBE /* Droplet 72.mp3 */; };
-		EC24DDA4161A89D200016B78 /* Droplet 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD2155CD9C500F92DBE /* Droplet 73.mp3 */; };
-		EC24DDA5161A89D200016B78 /* Droplet 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD3155CD9C500F92DBE /* Droplet 74.mp3 */; };
-		EC24DDA6161A89D200016B78 /* Droplet 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD4155CD9C500F92DBE /* Droplet 75.mp3 */; };
-		EC24DDA7161A89D200016B78 /* Droplet 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD5155CD9C500F92DBE /* Droplet 76.mp3 */; };
-		EC24DDA8161A89D200016B78 /* Droplet 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD6155CD9C500F92DBE /* Droplet 77.mp3 */; };
-		EC24DDA9161A89D200016B78 /* Droplet 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD7155CD9C500F92DBE /* Droplet 78.mp3 */; };
-		EC24DDAA161A89D200016B78 /* Droplet 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD8155CD9C500F92DBE /* Droplet 79.mp3 */; };
-		EC24DDAB161A89D200016B78 /* Droplet 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD9155CD9C500F92DBE /* Droplet 80.mp3 */; };
-		EC24DDAC161A89D200016B78 /* Droplet 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDA155CD9C500F92DBE /* Droplet 81.mp3 */; };
-		EC24DDAD161A89D200016B78 /* Droplet 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDB155CD9C500F92DBE /* Droplet 82.mp3 */; };
-		EC24DDAE161A89D200016B78 /* Droplet 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDC155CD9C500F92DBE /* Droplet 83.mp3 */; };
-		EC24DDAF161A89D200016B78 /* Droplet 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDD155CD9C500F92DBE /* Droplet 84.mp3 */; };
-		EC24DDB0161A89D200016B78 /* Droplet 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDE155CD9C500F92DBE /* Droplet 85.mp3 */; };
-		EC24DDB1161A89D200016B78 /* Droplet 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDF155CD9C500F92DBE /* Droplet 86.mp3 */; };
-		EC24DDB2161A89D200016B78 /* Droplet 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE0155CD9C500F92DBE /* Droplet 87.mp3 */; };
-		EC24DDB3161A89D200016B78 /* Droplet 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE1155CD9C500F92DBE /* Droplet 88.mp3 */; };
-		EC24DDB4161A89D200016B78 /* Droplet 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE2155CD9C500F92DBE /* Droplet 89.mp3 */; };
-		EC24DDB5161A89D200016B78 /* Droplet 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE3155CD9C500F92DBE /* Droplet 90.mp3 */; };
-		EC24DDB6161A89D200016B78 /* Droplet 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE4155CD9C500F92DBE /* Droplet 91.mp3 */; };
-		EC24DDB7161A89D200016B78 /* Droplet 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */; };
+		EC24DD8F161A89D200016B78 /* Droplet 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBD155CD9C500F92DBE /* Droplet 40.mp3 */; };
+		EC24DD90161A89D200016B78 /* Droplet 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBE155CD9C500F92DBE /* Droplet 41.mp3 */; };
+		EC24DD91161A89D200016B78 /* Droplet 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBF155CD9C500F92DBE /* Droplet 42.mp3 */; };
+		EC24DD92161A89D200016B78 /* Droplet 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC0155CD9C500F92DBE /* Droplet 43.mp3 */; };
+		EC24DD93161A89D200016B78 /* Droplet 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC1155CD9C500F92DBE /* Droplet 44.mp3 */; };
+		EC24DD94161A89D200016B78 /* Droplet 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC2155CD9C500F92DBE /* Droplet 45.mp3 */; };
+		EC24DD95161A89D200016B78 /* Droplet 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC3155CD9C500F92DBE /* Droplet 46.mp3 */; };
+		EC24DD96161A89D200016B78 /* Droplet 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC4155CD9C500F92DBE /* Droplet 47.mp3 */; };
+		EC24DD97161A89D200016B78 /* Droplet 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC5155CD9C500F92DBE /* Droplet 48.mp3 */; };
+		EC24DD98161A89D200016B78 /* Droplet 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC6155CD9C500F92DBE /* Droplet 49.mp3 */; };
+		EC24DD99161A89D200016B78 /* Droplet 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC7155CD9C500F92DBE /* Droplet 50.mp3 */; };
+		EC24DD9A161A89D200016B78 /* Droplet 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC8155CD9C500F92DBE /* Droplet 51.mp3 */; };
+		EC24DD9B161A89D200016B78 /* Droplet 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC9155CD9C500F92DBE /* Droplet 52.mp3 */; };
+		EC24DD9C161A89D200016B78 /* Droplet 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCA155CD9C500F92DBE /* Droplet 53.mp3 */; };
+		EC24DD9D161A89D200016B78 /* Droplet 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCB155CD9C500F92DBE /* Droplet 54.mp3 */; };
+		EC24DD9E161A89D200016B78 /* Droplet 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCC155CD9C500F92DBE /* Droplet 55.mp3 */; };
+		EC24DD9F161A89D200016B78 /* Droplet 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCD155CD9C500F92DBE /* Droplet 56.mp3 */; };
+		EC24DDA0161A89D200016B78 /* Droplet 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCE155CD9C500F92DBE /* Droplet 57.mp3 */; };
+		EC24DDA1161A89D200016B78 /* Droplet 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCF155CD9C500F92DBE /* Droplet 58.mp3 */; };
+		EC24DDA2161A89D200016B78 /* Droplet 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD0155CD9C500F92DBE /* Droplet 59.mp3 */; };
+		EC24DDA3161A89D200016B78 /* Droplet 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD1155CD9C500F92DBE /* Droplet 60.mp3 */; };
+		EC24DDA4161A89D200016B78 /* Droplet 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD2155CD9C500F92DBE /* Droplet 61.mp3 */; };
+		EC24DDA5161A89D200016B78 /* Droplet 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD3155CD9C500F92DBE /* Droplet 62.mp3 */; };
+		EC24DDA6161A89D200016B78 /* Droplet 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD4155CD9C500F92DBE /* Droplet 63.mp3 */; };
+		EC24DDA7161A89D200016B78 /* Droplet 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD5155CD9C500F92DBE /* Droplet 64.mp3 */; };
+		EC24DDA8161A89D200016B78 /* Droplet 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD6155CD9C500F92DBE /* Droplet 65.mp3 */; };
+		EC24DDA9161A89D200016B78 /* Droplet 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD7155CD9C500F92DBE /* Droplet 66.mp3 */; };
+		EC24DDAA161A89D200016B78 /* Droplet 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD8155CD9C500F92DBE /* Droplet 67.mp3 */; };
+		EC24DDAB161A89D200016B78 /* Droplet 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD9155CD9C500F92DBE /* Droplet 68.mp3 */; };
+		EC24DDAC161A89D200016B78 /* Droplet 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDA155CD9C500F92DBE /* Droplet 69.mp3 */; };
+		EC24DDAD161A89D200016B78 /* Droplet 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDB155CD9C500F92DBE /* Droplet 70.mp3 */; };
+		EC24DDAE161A89D200016B78 /* Droplet 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDC155CD9C500F92DBE /* Droplet 71.mp3 */; };
+		EC24DDAF161A89D200016B78 /* Droplet 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDD155CD9C500F92DBE /* Droplet 72.mp3 */; };
+		EC24DDB0161A89D200016B78 /* Droplet 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDE155CD9C500F92DBE /* Droplet 73.mp3 */; };
+		EC24DDB1161A89D200016B78 /* Droplet 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDF155CD9C500F92DBE /* Droplet 74.mp3 */; };
+		EC24DDB2161A89D200016B78 /* Droplet 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE0155CD9C500F92DBE /* Droplet 75.mp3 */; };
+		EC24DDB3161A89D200016B78 /* Droplet 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE1155CD9C500F92DBE /* Droplet 76.mp3 */; };
+		EC24DDB4161A89D200016B78 /* Droplet 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE2155CD9C500F92DBE /* Droplet 77.mp3 */; };
+		EC24DDB5161A89D200016B78 /* Droplet 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE3155CD9C500F92DBE /* Droplet 78.mp3 */; };
+		EC24DDB6161A89D200016B78 /* Droplet 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE4155CD9C500F92DBE /* Droplet 79.mp3 */; };
+		EC24DDB7161A89D200016B78 /* Droplet 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE5155CD9C500F92DBE /* Droplet 80.mp3 */; };
 		EC24DE85161A89F000016B78 /* Square 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */; };
 		EC24DE86161A89F000016B78 /* Square 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */; };
 		EC24DE87161A89F000016B78 /* Square 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */; };
@@ -1339,47 +1260,47 @@
 		ECC11F60162D07AD001A231A /* Rhodes 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EA14E0726D00DC7083 /* Rhodes 78.mp3 */; };
 		ECC11F61162D07AD001A231A /* Rhodes 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EB14E0726D00DC7083 /* Rhodes 79.mp3 */; };
 		ECC11F62162D07AD001A231A /* Rhodes 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC31B9EC14E0726D00DC7083 /* Rhodes 80.mp3 */; };
-		ECC11F63162D07AD001A231A /* Droplet 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */; };
-		ECC11F64162D07AD001A231A /* Droplet 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */; };
-		ECC11F65162D07AD001A231A /* Droplet 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */; };
-		ECC11F66162D07AD001A231A /* Droplet 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC0155CD9C500F92DBE /* Droplet 55.mp3 */; };
-		ECC11F67162D07AD001A231A /* Droplet 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC1155CD9C500F92DBE /* Droplet 56.mp3 */; };
-		ECC11F68162D07AD001A231A /* Droplet 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC2155CD9C500F92DBE /* Droplet 57.mp3 */; };
-		ECC11F69162D07AD001A231A /* Droplet 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC3155CD9C500F92DBE /* Droplet 58.mp3 */; };
-		ECC11F6A162D07AD001A231A /* Droplet 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC4155CD9C500F92DBE /* Droplet 59.mp3 */; };
-		ECC11F6B162D07AD001A231A /* Droplet 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC5155CD9C500F92DBE /* Droplet 60.mp3 */; };
-		ECC11F6C162D07AD001A231A /* Droplet 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC6155CD9C500F92DBE /* Droplet 61.mp3 */; };
-		ECC11F6D162D07AD001A231A /* Droplet 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC7155CD9C500F92DBE /* Droplet 62.mp3 */; };
-		ECC11F6E162D07AD001A231A /* Droplet 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC8155CD9C500F92DBE /* Droplet 63.mp3 */; };
-		ECC11F6F162D07AD001A231A /* Droplet 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC9155CD9C500F92DBE /* Droplet 64.mp3 */; };
-		ECC11F70162D07AD001A231A /* Droplet 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCA155CD9C500F92DBE /* Droplet 65.mp3 */; };
-		ECC11F71162D07AD001A231A /* Droplet 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCB155CD9C500F92DBE /* Droplet 66.mp3 */; };
-		ECC11F72162D07AD001A231A /* Droplet 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCC155CD9C500F92DBE /* Droplet 67.mp3 */; };
-		ECC11F73162D07AD001A231A /* Droplet 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCD155CD9C500F92DBE /* Droplet 68.mp3 */; };
-		ECC11F74162D07AD001A231A /* Droplet 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCE155CD9C500F92DBE /* Droplet 69.mp3 */; };
-		ECC11F75162D07AD001A231A /* Droplet 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCF155CD9C500F92DBE /* Droplet 70.mp3 */; };
-		ECC11F76162D07AD001A231A /* Droplet 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD0155CD9C500F92DBE /* Droplet 71.mp3 */; };
-		ECC11F77162D07AD001A231A /* Droplet 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD1155CD9C500F92DBE /* Droplet 72.mp3 */; };
-		ECC11F78162D07AD001A231A /* Droplet 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD2155CD9C500F92DBE /* Droplet 73.mp3 */; };
-		ECC11F79162D07AD001A231A /* Droplet 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD3155CD9C500F92DBE /* Droplet 74.mp3 */; };
-		ECC11F7A162D07AD001A231A /* Droplet 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD4155CD9C500F92DBE /* Droplet 75.mp3 */; };
-		ECC11F7B162D07AD001A231A /* Droplet 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD5155CD9C500F92DBE /* Droplet 76.mp3 */; };
-		ECC11F7C162D07AD001A231A /* Droplet 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD6155CD9C500F92DBE /* Droplet 77.mp3 */; };
-		ECC11F7D162D07AD001A231A /* Droplet 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD7155CD9C500F92DBE /* Droplet 78.mp3 */; };
-		ECC11F7E162D07AD001A231A /* Droplet 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD8155CD9C500F92DBE /* Droplet 79.mp3 */; };
-		ECC11F7F162D07AD001A231A /* Droplet 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD9155CD9C500F92DBE /* Droplet 80.mp3 */; };
-		ECC11F80162D07AD001A231A /* Droplet 81.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDA155CD9C500F92DBE /* Droplet 81.mp3 */; };
-		ECC11F81162D07AD001A231A /* Droplet 82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDB155CD9C500F92DBE /* Droplet 82.mp3 */; };
-		ECC11F82162D07AD001A231A /* Droplet 83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDC155CD9C500F92DBE /* Droplet 83.mp3 */; };
-		ECC11F83162D07AD001A231A /* Droplet 84.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDD155CD9C500F92DBE /* Droplet 84.mp3 */; };
-		ECC11F84162D07AD001A231A /* Droplet 85.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDE155CD9C500F92DBE /* Droplet 85.mp3 */; };
-		ECC11F85162D07AD001A231A /* Droplet 86.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDF155CD9C500F92DBE /* Droplet 86.mp3 */; };
-		ECC11F86162D07AD001A231A /* Droplet 87.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE0155CD9C500F92DBE /* Droplet 87.mp3 */; };
-		ECC11F87162D07AD001A231A /* Droplet 88.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE1155CD9C500F92DBE /* Droplet 88.mp3 */; };
-		ECC11F88162D07AD001A231A /* Droplet 89.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE2155CD9C500F92DBE /* Droplet 89.mp3 */; };
-		ECC11F89162D07AD001A231A /* Droplet 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE3155CD9C500F92DBE /* Droplet 90.mp3 */; };
-		ECC11F8A162D07AD001A231A /* Droplet 91.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE4155CD9C500F92DBE /* Droplet 91.mp3 */; };
-		ECC11F8B162D07AD001A231A /* Droplet 92.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */; };
+		ECC11F63162D07AD001A231A /* Droplet 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBD155CD9C500F92DBE /* Droplet 40.mp3 */; };
+		ECC11F64162D07AD001A231A /* Droplet 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBE155CD9C500F92DBE /* Droplet 41.mp3 */; };
+		ECC11F65162D07AD001A231A /* Droplet 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFBF155CD9C500F92DBE /* Droplet 42.mp3 */; };
+		ECC11F66162D07AD001A231A /* Droplet 43.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC0155CD9C500F92DBE /* Droplet 43.mp3 */; };
+		ECC11F67162D07AD001A231A /* Droplet 44.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC1155CD9C500F92DBE /* Droplet 44.mp3 */; };
+		ECC11F68162D07AD001A231A /* Droplet 45.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC2155CD9C500F92DBE /* Droplet 45.mp3 */; };
+		ECC11F69162D07AD001A231A /* Droplet 46.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC3155CD9C500F92DBE /* Droplet 46.mp3 */; };
+		ECC11F6A162D07AD001A231A /* Droplet 47.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC4155CD9C500F92DBE /* Droplet 47.mp3 */; };
+		ECC11F6B162D07AD001A231A /* Droplet 48.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC5155CD9C500F92DBE /* Droplet 48.mp3 */; };
+		ECC11F6C162D07AD001A231A /* Droplet 49.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC6155CD9C500F92DBE /* Droplet 49.mp3 */; };
+		ECC11F6D162D07AD001A231A /* Droplet 50.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC7155CD9C500F92DBE /* Droplet 50.mp3 */; };
+		ECC11F6E162D07AD001A231A /* Droplet 51.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC8155CD9C500F92DBE /* Droplet 51.mp3 */; };
+		ECC11F6F162D07AD001A231A /* Droplet 52.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFC9155CD9C500F92DBE /* Droplet 52.mp3 */; };
+		ECC11F70162D07AD001A231A /* Droplet 53.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCA155CD9C500F92DBE /* Droplet 53.mp3 */; };
+		ECC11F71162D07AD001A231A /* Droplet 54.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCB155CD9C500F92DBE /* Droplet 54.mp3 */; };
+		ECC11F72162D07AD001A231A /* Droplet 55.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCC155CD9C500F92DBE /* Droplet 55.mp3 */; };
+		ECC11F73162D07AD001A231A /* Droplet 56.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCD155CD9C500F92DBE /* Droplet 56.mp3 */; };
+		ECC11F74162D07AD001A231A /* Droplet 57.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCE155CD9C500F92DBE /* Droplet 57.mp3 */; };
+		ECC11F75162D07AD001A231A /* Droplet 58.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFCF155CD9C500F92DBE /* Droplet 58.mp3 */; };
+		ECC11F76162D07AD001A231A /* Droplet 59.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD0155CD9C500F92DBE /* Droplet 59.mp3 */; };
+		ECC11F77162D07AD001A231A /* Droplet 60.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD1155CD9C500F92DBE /* Droplet 60.mp3 */; };
+		ECC11F78162D07AD001A231A /* Droplet 61.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD2155CD9C500F92DBE /* Droplet 61.mp3 */; };
+		ECC11F79162D07AD001A231A /* Droplet 62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD3155CD9C500F92DBE /* Droplet 62.mp3 */; };
+		ECC11F7A162D07AD001A231A /* Droplet 63.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD4155CD9C500F92DBE /* Droplet 63.mp3 */; };
+		ECC11F7B162D07AD001A231A /* Droplet 64.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD5155CD9C500F92DBE /* Droplet 64.mp3 */; };
+		ECC11F7C162D07AD001A231A /* Droplet 65.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD6155CD9C500F92DBE /* Droplet 65.mp3 */; };
+		ECC11F7D162D07AD001A231A /* Droplet 66.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD7155CD9C500F92DBE /* Droplet 66.mp3 */; };
+		ECC11F7E162D07AD001A231A /* Droplet 67.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD8155CD9C500F92DBE /* Droplet 67.mp3 */; };
+		ECC11F7F162D07AD001A231A /* Droplet 68.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFD9155CD9C500F92DBE /* Droplet 68.mp3 */; };
+		ECC11F80162D07AD001A231A /* Droplet 69.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDA155CD9C500F92DBE /* Droplet 69.mp3 */; };
+		ECC11F81162D07AD001A231A /* Droplet 70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDB155CD9C500F92DBE /* Droplet 70.mp3 */; };
+		ECC11F82162D07AD001A231A /* Droplet 71.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDC155CD9C500F92DBE /* Droplet 71.mp3 */; };
+		ECC11F83162D07AD001A231A /* Droplet 72.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDD155CD9C500F92DBE /* Droplet 72.mp3 */; };
+		ECC11F84162D07AD001A231A /* Droplet 73.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDE155CD9C500F92DBE /* Droplet 73.mp3 */; };
+		ECC11F85162D07AD001A231A /* Droplet 74.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFDF155CD9C500F92DBE /* Droplet 74.mp3 */; };
+		ECC11F86162D07AD001A231A /* Droplet 75.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE0155CD9C500F92DBE /* Droplet 75.mp3 */; };
+		ECC11F87162D07AD001A231A /* Droplet 76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE1155CD9C500F92DBE /* Droplet 76.mp3 */; };
+		ECC11F88162D07AD001A231A /* Droplet 77.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE2155CD9C500F92DBE /* Droplet 77.mp3 */; };
+		ECC11F89162D07AD001A231A /* Droplet 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE3155CD9C500F92DBE /* Droplet 78.mp3 */; };
+		ECC11F8A162D07AD001A231A /* Droplet 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE4155CD9C500F92DBE /* Droplet 79.mp3 */; };
+		ECC11F8B162D07AD001A231A /* Droplet 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DE9FFE5155CD9C500F92DBE /* Droplet 80.mp3 */; };
 		ECC12059162D07AD001A231A /* Square 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7B1564DD1B006B38C0 /* Square 40.mp3 */; };
 		ECC1205A162D07AD001A231A /* Square 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7C1564DD1B006B38C0 /* Square 41.mp3 */; };
 		ECC1205B162D07AD001A231A /* Square 42.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D2DFF7D1564DD1B006B38C0 /* Square 42.mp3 */; };
@@ -1592,88 +1513,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6D0BDE401A01684700593F2C /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
 		6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoteGreyscale2.png; path = Resources/Images/Play/NoteGreyscale2.png; sourceTree = SOURCE_ROOT; };
-		6D0BDE451A01CDFB00593F2C /* Piano 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 0.mp3"; sourceTree = "<group>"; };
-		6D0BDE461A01CDFB00593F2C /* Piano 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 1.mp3"; sourceTree = "<group>"; };
-		6D0BDE471A01CDFB00593F2C /* Piano 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 2.mp3"; sourceTree = "<group>"; };
-		6D0BDE481A01CDFB00593F2C /* Piano 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 3.mp3"; sourceTree = "<group>"; };
-		6D0BDE491A01CDFB00593F2C /* Piano 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 4.mp3"; sourceTree = "<group>"; };
-		6D0BDE4A1A01CDFB00593F2C /* Piano 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 5.mp3"; sourceTree = "<group>"; };
-		6D0BDE4B1A01CDFB00593F2C /* Piano 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 6.mp3"; sourceTree = "<group>"; };
-		6D0BDE4C1A01CDFB00593F2C /* Piano 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 7.mp3"; sourceTree = "<group>"; };
-		6D0BDE4D1A01CDFB00593F2C /* Piano 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 8.mp3"; sourceTree = "<group>"; };
-		6D0BDE4E1A01CDFB00593F2C /* Piano 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 9.mp3"; sourceTree = "<group>"; };
-		6D0BDE4F1A01CDFB00593F2C /* Piano 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 10.mp3"; sourceTree = "<group>"; };
-		6D0BDE501A01CDFB00593F2C /* Piano 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 11.mp3"; sourceTree = "<group>"; };
-		6D0BDE511A01CDFB00593F2C /* Piano 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 12.mp3"; sourceTree = "<group>"; };
-		6D0BDE521A01CDFB00593F2C /* Piano 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 13.mp3"; sourceTree = "<group>"; };
-		6D0BDE531A01CDFB00593F2C /* Piano 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 14.mp3"; sourceTree = "<group>"; };
-		6D0BDE541A01CDFB00593F2C /* Piano 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 15.mp3"; sourceTree = "<group>"; };
-		6D0BDE551A01CDFB00593F2C /* Piano 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 16.mp3"; sourceTree = "<group>"; };
-		6D0BDE561A01CDFB00593F2C /* Piano 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 17.mp3"; sourceTree = "<group>"; };
-		6D0BDE571A01CDFB00593F2C /* Piano 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 18.mp3"; sourceTree = "<group>"; };
-		6D0BDE581A01CDFB00593F2C /* Piano 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 19.mp3"; sourceTree = "<group>"; };
-		6D0BDE591A01CDFB00593F2C /* Piano 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 20.mp3"; sourceTree = "<group>"; };
-		6D0BDE5A1A01CDFB00593F2C /* Piano 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 21.mp3"; sourceTree = "<group>"; };
-		6D0BDE5B1A01CDFB00593F2C /* Piano 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 22.mp3"; sourceTree = "<group>"; };
-		6D0BDE5C1A01CDFB00593F2C /* Piano 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 23.mp3"; sourceTree = "<group>"; };
-		6D0BDE5D1A01CDFB00593F2C /* Piano 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 24.mp3"; sourceTree = "<group>"; };
-		6D0BDE5E1A01CDFB00593F2C /* Piano 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 25.mp3"; sourceTree = "<group>"; };
-		6D0BDE5F1A01CDFB00593F2C /* Piano 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 26.mp3"; sourceTree = "<group>"; };
-		6D0BDE601A01CDFB00593F2C /* Piano 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 27.mp3"; sourceTree = "<group>"; };
-		6D0BDE611A01CDFB00593F2C /* Piano 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 28.mp3"; sourceTree = "<group>"; };
-		6D0BDE621A01CDFB00593F2C /* Piano 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 29.mp3"; sourceTree = "<group>"; };
-		6D0BDE631A01CDFB00593F2C /* Piano 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 30.mp3"; sourceTree = "<group>"; };
-		6D0BDE641A01CDFB00593F2C /* Piano 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 31.mp3"; sourceTree = "<group>"; };
-		6D0BDE651A01CDFB00593F2C /* Piano 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 32.mp3"; sourceTree = "<group>"; };
-		6D0BDE661A01CDFB00593F2C /* Piano 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 33.mp3"; sourceTree = "<group>"; };
-		6D0BDE671A01CDFB00593F2C /* Piano 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 34.mp3"; sourceTree = "<group>"; };
-		6D0BDE681A01CDFB00593F2C /* Piano 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 35.mp3"; sourceTree = "<group>"; };
-		6D0BDE691A01CDFB00593F2C /* Piano 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 36.mp3"; sourceTree = "<group>"; };
-		6D0BDE6A1A01CDFB00593F2C /* Piano 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 37.mp3"; sourceTree = "<group>"; };
-		6D0BDE6B1A01CDFB00593F2C /* Piano 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 38.mp3"; sourceTree = "<group>"; };
-		6D0BDE6C1A01CDFB00593F2C /* Piano 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Piano 39.mp3"; sourceTree = "<group>"; };
 		6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 0.mp3"; sourceTree = "<group>"; };
 		6D0BDE961A01CE0600593F2C /* Electric Guitar 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 1.mp3"; sourceTree = "<group>"; };
-		6D0BDE991A01D0A700593F2C /* Acoustic Guitar 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 0.mp3"; path = "Acoustic Guitar/Acoustic Guitar 0.mp3"; sourceTree = "<group>"; };
-		6D0BDE9A1A01D0A700593F2C /* Acoustic Guitar 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 1.mp3"; path = "Acoustic Guitar/Acoustic Guitar 1.mp3"; sourceTree = "<group>"; };
-		6D0BDE9B1A01D0A700593F2C /* Acoustic Guitar 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 2.mp3"; path = "Acoustic Guitar/Acoustic Guitar 2.mp3"; sourceTree = "<group>"; };
-		6D0BDE9C1A01D0A700593F2C /* Acoustic Guitar 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 3.mp3"; path = "Acoustic Guitar/Acoustic Guitar 3.mp3"; sourceTree = "<group>"; };
-		6D0BDE9D1A01D0A700593F2C /* Acoustic Guitar 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 4.mp3"; path = "Acoustic Guitar/Acoustic Guitar 4.mp3"; sourceTree = "<group>"; };
-		6D0BDE9E1A01D0A700593F2C /* Acoustic Guitar 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 5.mp3"; path = "Acoustic Guitar/Acoustic Guitar 5.mp3"; sourceTree = "<group>"; };
-		6D0BDE9F1A01D0A700593F2C /* Acoustic Guitar 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 6.mp3"; path = "Acoustic Guitar/Acoustic Guitar 6.mp3"; sourceTree = "<group>"; };
-		6D0BDEA01A01D0A700593F2C /* Acoustic Guitar 7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 7.mp3"; path = "Acoustic Guitar/Acoustic Guitar 7.mp3"; sourceTree = "<group>"; };
-		6D0BDEA11A01D0A700593F2C /* Acoustic Guitar 8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 8.mp3"; path = "Acoustic Guitar/Acoustic Guitar 8.mp3"; sourceTree = "<group>"; };
-		6D0BDEA21A01D0A700593F2C /* Acoustic Guitar 9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 9.mp3"; path = "Acoustic Guitar/Acoustic Guitar 9.mp3"; sourceTree = "<group>"; };
-		6D0BDEA31A01D0A700593F2C /* Acoustic Guitar 10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 10.mp3"; path = "Acoustic Guitar/Acoustic Guitar 10.mp3"; sourceTree = "<group>"; };
-		6D0BDEA41A01D0A700593F2C /* Acoustic Guitar 11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 11.mp3"; path = "Acoustic Guitar/Acoustic Guitar 11.mp3"; sourceTree = "<group>"; };
-		6D0BDEA51A01D0A700593F2C /* Acoustic Guitar 12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 12.mp3"; path = "Acoustic Guitar/Acoustic Guitar 12.mp3"; sourceTree = "<group>"; };
-		6D0BDEA61A01D0A700593F2C /* Acoustic Guitar 13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 13.mp3"; path = "Acoustic Guitar/Acoustic Guitar 13.mp3"; sourceTree = "<group>"; };
-		6D0BDEA71A01D0A700593F2C /* Acoustic Guitar 14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 14.mp3"; path = "Acoustic Guitar/Acoustic Guitar 14.mp3"; sourceTree = "<group>"; };
-		6D0BDEA81A01D0A700593F2C /* Acoustic Guitar 15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 15.mp3"; path = "Acoustic Guitar/Acoustic Guitar 15.mp3"; sourceTree = "<group>"; };
-		6D0BDEA91A01D0A700593F2C /* Acoustic Guitar 16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 16.mp3"; path = "Acoustic Guitar/Acoustic Guitar 16.mp3"; sourceTree = "<group>"; };
-		6D0BDEAA1A01D0A700593F2C /* Acoustic Guitar 17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 17.mp3"; path = "Acoustic Guitar/Acoustic Guitar 17.mp3"; sourceTree = "<group>"; };
-		6D0BDEAB1A01D0A700593F2C /* Acoustic Guitar 18.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 18.mp3"; path = "Acoustic Guitar/Acoustic Guitar 18.mp3"; sourceTree = "<group>"; };
-		6D0BDEAC1A01D0A700593F2C /* Acoustic Guitar 19.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 19.mp3"; path = "Acoustic Guitar/Acoustic Guitar 19.mp3"; sourceTree = "<group>"; };
-		6D0BDEAD1A01D0A700593F2C /* Acoustic Guitar 20.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 20.mp3"; path = "Acoustic Guitar/Acoustic Guitar 20.mp3"; sourceTree = "<group>"; };
-		6D0BDEAE1A01D0A700593F2C /* Acoustic Guitar 21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 21.mp3"; path = "Acoustic Guitar/Acoustic Guitar 21.mp3"; sourceTree = "<group>"; };
-		6D0BDEAF1A01D0A700593F2C /* Acoustic Guitar 22.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 22.mp3"; path = "Acoustic Guitar/Acoustic Guitar 22.mp3"; sourceTree = "<group>"; };
-		6D0BDEB01A01D0A700593F2C /* Acoustic Guitar 23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 23.mp3"; path = "Acoustic Guitar/Acoustic Guitar 23.mp3"; sourceTree = "<group>"; };
-		6D0BDEB11A01D0A700593F2C /* Acoustic Guitar 24.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 24.mp3"; path = "Acoustic Guitar/Acoustic Guitar 24.mp3"; sourceTree = "<group>"; };
-		6D0BDEB21A01D0A700593F2C /* Acoustic Guitar 25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 25.mp3"; path = "Acoustic Guitar/Acoustic Guitar 25.mp3"; sourceTree = "<group>"; };
-		6D0BDEB31A01D0A700593F2C /* Acoustic Guitar 26.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 26.mp3"; path = "Acoustic Guitar/Acoustic Guitar 26.mp3"; sourceTree = "<group>"; };
-		6D0BDEB41A01D0A700593F2C /* Acoustic Guitar 27.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 27.mp3"; path = "Acoustic Guitar/Acoustic Guitar 27.mp3"; sourceTree = "<group>"; };
-		6D0BDEB51A01D0A700593F2C /* Acoustic Guitar 28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 28.mp3"; path = "Acoustic Guitar/Acoustic Guitar 28.mp3"; sourceTree = "<group>"; };
-		6D0BDEB61A01D0A700593F2C /* Acoustic Guitar 29.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 29.mp3"; path = "Acoustic Guitar/Acoustic Guitar 29.mp3"; sourceTree = "<group>"; };
-		6D0BDEB71A01D0A700593F2C /* Acoustic Guitar 30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 30.mp3"; path = "Acoustic Guitar/Acoustic Guitar 30.mp3"; sourceTree = "<group>"; };
-		6D0BDEB81A01D0A700593F2C /* Acoustic Guitar 31.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 31.mp3"; path = "Acoustic Guitar/Acoustic Guitar 31.mp3"; sourceTree = "<group>"; };
-		6D0BDEB91A01D0A700593F2C /* Acoustic Guitar 32.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 32.mp3"; path = "Acoustic Guitar/Acoustic Guitar 32.mp3"; sourceTree = "<group>"; };
-		6D0BDEBA1A01D0A700593F2C /* Acoustic Guitar 33.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 33.mp3"; path = "Acoustic Guitar/Acoustic Guitar 33.mp3"; sourceTree = "<group>"; };
-		6D0BDEBB1A01D0A700593F2C /* Acoustic Guitar 34.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 34.mp3"; path = "Acoustic Guitar/Acoustic Guitar 34.mp3"; sourceTree = "<group>"; };
-		6D0BDEBC1A01D0A700593F2C /* Acoustic Guitar 35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 35.mp3"; path = "Acoustic Guitar/Acoustic Guitar 35.mp3"; sourceTree = "<group>"; };
-		6D0BDEBD1A01D0A700593F2C /* Acoustic Guitar 36.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 36.mp3"; path = "Acoustic Guitar/Acoustic Guitar 36.mp3"; sourceTree = "<group>"; };
-		6D0BDEBE1A01D0A700593F2C /* Acoustic Guitar 37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 37.mp3"; path = "Acoustic Guitar/Acoustic Guitar 37.mp3"; sourceTree = "<group>"; };
-		6D0BDEBF1A01D0A700593F2C /* Acoustic Guitar 38.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 38.mp3"; path = "Acoustic Guitar/Acoustic Guitar 38.mp3"; sourceTree = "<group>"; };
-		6D0BDEC01A01D0A700593F2C /* Acoustic Guitar 39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Acoustic Guitar 39.mp3"; path = "Acoustic Guitar/Acoustic Guitar 39.mp3"; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
 		6D26A81618F3794300887E40 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D26A81818F3794900887E40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1689,6 +1530,7 @@
 		6D3D06DD18F4D2E8007683DB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6D594C0F1909BCF900CF3128 /* HighlightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightModel.h; sourceTree = "<group>"; };
 		6D594C101909BCF900CF3128 /* HighlightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightModel.m; sourceTree = "<group>"; };
+		6D613F521A02B46600856194 /* Silence.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Silence.mp3; sourceTree = "<group>"; };
 		6D61D1CA19FB07C5008CFA5A /* NSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMarker.h; path = SongModel/NSMarker.h; sourceTree = SOURCE_ROOT; };
 		6D61D1CB19FB07C5008CFA5A /* NSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSMarker.m; path = SongModel/NSMarker.m; sourceTree = SOURCE_ROOT; };
 		6D61D1CC19FB07C5008CFA5A /* NSMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSMeasure.h; path = SongModel/NSMeasure.h; sourceTree = SOURCE_ROOT; };
@@ -2319,47 +2161,47 @@
 		9DE6576714C902770034F437 /* instrumentList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = instrumentList.plist; sourceTree = "<group>"; };
 		9DE6B3491713A69B0083B980 /* EffectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsTableViewController.h; sourceTree = "<group>"; };
 		9DE6B34A1713A69B0083B980 /* EffectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectsTableViewController.m; sourceTree = "<group>"; };
-		9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 52.mp3"; sourceTree = "<group>"; };
-		9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 53.mp3"; sourceTree = "<group>"; };
-		9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 54.mp3"; sourceTree = "<group>"; };
-		9DE9FFC0155CD9C500F92DBE /* Droplet 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 55.mp3"; sourceTree = "<group>"; };
-		9DE9FFC1155CD9C500F92DBE /* Droplet 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 56.mp3"; sourceTree = "<group>"; };
-		9DE9FFC2155CD9C500F92DBE /* Droplet 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 57.mp3"; sourceTree = "<group>"; };
-		9DE9FFC3155CD9C500F92DBE /* Droplet 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 58.mp3"; sourceTree = "<group>"; };
-		9DE9FFC4155CD9C500F92DBE /* Droplet 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 59.mp3"; sourceTree = "<group>"; };
-		9DE9FFC5155CD9C500F92DBE /* Droplet 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 60.mp3"; sourceTree = "<group>"; };
-		9DE9FFC6155CD9C500F92DBE /* Droplet 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 61.mp3"; sourceTree = "<group>"; };
-		9DE9FFC7155CD9C500F92DBE /* Droplet 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 62.mp3"; sourceTree = "<group>"; };
-		9DE9FFC8155CD9C500F92DBE /* Droplet 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 63.mp3"; sourceTree = "<group>"; };
-		9DE9FFC9155CD9C500F92DBE /* Droplet 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 64.mp3"; sourceTree = "<group>"; };
-		9DE9FFCA155CD9C500F92DBE /* Droplet 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 65.mp3"; sourceTree = "<group>"; };
-		9DE9FFCB155CD9C500F92DBE /* Droplet 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 66.mp3"; sourceTree = "<group>"; };
-		9DE9FFCC155CD9C500F92DBE /* Droplet 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 67.mp3"; sourceTree = "<group>"; };
-		9DE9FFCD155CD9C500F92DBE /* Droplet 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 68.mp3"; sourceTree = "<group>"; };
-		9DE9FFCE155CD9C500F92DBE /* Droplet 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 69.mp3"; sourceTree = "<group>"; };
-		9DE9FFCF155CD9C500F92DBE /* Droplet 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 70.mp3"; sourceTree = "<group>"; };
-		9DE9FFD0155CD9C500F92DBE /* Droplet 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 71.mp3"; sourceTree = "<group>"; };
-		9DE9FFD1155CD9C500F92DBE /* Droplet 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 72.mp3"; sourceTree = "<group>"; };
-		9DE9FFD2155CD9C500F92DBE /* Droplet 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 73.mp3"; sourceTree = "<group>"; };
-		9DE9FFD3155CD9C500F92DBE /* Droplet 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 74.mp3"; sourceTree = "<group>"; };
-		9DE9FFD4155CD9C500F92DBE /* Droplet 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 75.mp3"; sourceTree = "<group>"; };
-		9DE9FFD5155CD9C500F92DBE /* Droplet 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 76.mp3"; sourceTree = "<group>"; };
-		9DE9FFD6155CD9C500F92DBE /* Droplet 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 77.mp3"; sourceTree = "<group>"; };
-		9DE9FFD7155CD9C500F92DBE /* Droplet 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 78.mp3"; sourceTree = "<group>"; };
-		9DE9FFD8155CD9C500F92DBE /* Droplet 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 79.mp3"; sourceTree = "<group>"; };
-		9DE9FFD9155CD9C500F92DBE /* Droplet 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 80.mp3"; sourceTree = "<group>"; };
-		9DE9FFDA155CD9C500F92DBE /* Droplet 81.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 81.mp3"; sourceTree = "<group>"; };
-		9DE9FFDB155CD9C500F92DBE /* Droplet 82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 82.mp3"; sourceTree = "<group>"; };
-		9DE9FFDC155CD9C500F92DBE /* Droplet 83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 83.mp3"; sourceTree = "<group>"; };
-		9DE9FFDD155CD9C500F92DBE /* Droplet 84.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 84.mp3"; sourceTree = "<group>"; };
-		9DE9FFDE155CD9C500F92DBE /* Droplet 85.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 85.mp3"; sourceTree = "<group>"; };
-		9DE9FFDF155CD9C500F92DBE /* Droplet 86.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 86.mp3"; sourceTree = "<group>"; };
-		9DE9FFE0155CD9C500F92DBE /* Droplet 87.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 87.mp3"; sourceTree = "<group>"; };
-		9DE9FFE1155CD9C500F92DBE /* Droplet 88.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 88.mp3"; sourceTree = "<group>"; };
-		9DE9FFE2155CD9C500F92DBE /* Droplet 89.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 89.mp3"; sourceTree = "<group>"; };
-		9DE9FFE3155CD9C500F92DBE /* Droplet 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 90.mp3"; sourceTree = "<group>"; };
-		9DE9FFE4155CD9C500F92DBE /* Droplet 91.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 91.mp3"; sourceTree = "<group>"; };
-		9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 92.mp3"; sourceTree = "<group>"; };
+		9DE9FFBD155CD9C500F92DBE /* Droplet 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 40.mp3"; sourceTree = "<group>"; };
+		9DE9FFBE155CD9C500F92DBE /* Droplet 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 41.mp3"; sourceTree = "<group>"; };
+		9DE9FFBF155CD9C500F92DBE /* Droplet 42.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 42.mp3"; sourceTree = "<group>"; };
+		9DE9FFC0155CD9C500F92DBE /* Droplet 43.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 43.mp3"; sourceTree = "<group>"; };
+		9DE9FFC1155CD9C500F92DBE /* Droplet 44.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 44.mp3"; sourceTree = "<group>"; };
+		9DE9FFC2155CD9C500F92DBE /* Droplet 45.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 45.mp3"; sourceTree = "<group>"; };
+		9DE9FFC3155CD9C500F92DBE /* Droplet 46.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 46.mp3"; sourceTree = "<group>"; };
+		9DE9FFC4155CD9C500F92DBE /* Droplet 47.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 47.mp3"; sourceTree = "<group>"; };
+		9DE9FFC5155CD9C500F92DBE /* Droplet 48.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 48.mp3"; sourceTree = "<group>"; };
+		9DE9FFC6155CD9C500F92DBE /* Droplet 49.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 49.mp3"; sourceTree = "<group>"; };
+		9DE9FFC7155CD9C500F92DBE /* Droplet 50.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 50.mp3"; sourceTree = "<group>"; };
+		9DE9FFC8155CD9C500F92DBE /* Droplet 51.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 51.mp3"; sourceTree = "<group>"; };
+		9DE9FFC9155CD9C500F92DBE /* Droplet 52.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 52.mp3"; sourceTree = "<group>"; };
+		9DE9FFCA155CD9C500F92DBE /* Droplet 53.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 53.mp3"; sourceTree = "<group>"; };
+		9DE9FFCB155CD9C500F92DBE /* Droplet 54.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 54.mp3"; sourceTree = "<group>"; };
+		9DE9FFCC155CD9C500F92DBE /* Droplet 55.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 55.mp3"; sourceTree = "<group>"; };
+		9DE9FFCD155CD9C500F92DBE /* Droplet 56.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 56.mp3"; sourceTree = "<group>"; };
+		9DE9FFCE155CD9C500F92DBE /* Droplet 57.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 57.mp3"; sourceTree = "<group>"; };
+		9DE9FFCF155CD9C500F92DBE /* Droplet 58.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 58.mp3"; sourceTree = "<group>"; };
+		9DE9FFD0155CD9C500F92DBE /* Droplet 59.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 59.mp3"; sourceTree = "<group>"; };
+		9DE9FFD1155CD9C500F92DBE /* Droplet 60.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 60.mp3"; sourceTree = "<group>"; };
+		9DE9FFD2155CD9C500F92DBE /* Droplet 61.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 61.mp3"; sourceTree = "<group>"; };
+		9DE9FFD3155CD9C500F92DBE /* Droplet 62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 62.mp3"; sourceTree = "<group>"; };
+		9DE9FFD4155CD9C500F92DBE /* Droplet 63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 63.mp3"; sourceTree = "<group>"; };
+		9DE9FFD5155CD9C500F92DBE /* Droplet 64.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 64.mp3"; sourceTree = "<group>"; };
+		9DE9FFD6155CD9C500F92DBE /* Droplet 65.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 65.mp3"; sourceTree = "<group>"; };
+		9DE9FFD7155CD9C500F92DBE /* Droplet 66.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 66.mp3"; sourceTree = "<group>"; };
+		9DE9FFD8155CD9C500F92DBE /* Droplet 67.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 67.mp3"; sourceTree = "<group>"; };
+		9DE9FFD9155CD9C500F92DBE /* Droplet 68.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 68.mp3"; sourceTree = "<group>"; };
+		9DE9FFDA155CD9C500F92DBE /* Droplet 69.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 69.mp3"; sourceTree = "<group>"; };
+		9DE9FFDB155CD9C500F92DBE /* Droplet 70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 70.mp3"; sourceTree = "<group>"; };
+		9DE9FFDC155CD9C500F92DBE /* Droplet 71.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 71.mp3"; sourceTree = "<group>"; };
+		9DE9FFDD155CD9C500F92DBE /* Droplet 72.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 72.mp3"; sourceTree = "<group>"; };
+		9DE9FFDE155CD9C500F92DBE /* Droplet 73.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 73.mp3"; sourceTree = "<group>"; };
+		9DE9FFDF155CD9C500F92DBE /* Droplet 74.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 74.mp3"; sourceTree = "<group>"; };
+		9DE9FFE0155CD9C500F92DBE /* Droplet 75.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 75.mp3"; sourceTree = "<group>"; };
+		9DE9FFE1155CD9C500F92DBE /* Droplet 76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 76.mp3"; sourceTree = "<group>"; };
+		9DE9FFE2155CD9C500F92DBE /* Droplet 77.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 77.mp3"; sourceTree = "<group>"; };
+		9DE9FFE3155CD9C500F92DBE /* Droplet 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 78.mp3"; sourceTree = "<group>"; };
+		9DE9FFE4155CD9C500F92DBE /* Droplet 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 79.mp3"; sourceTree = "<group>"; };
+		9DE9FFE5155CD9C500F92DBE /* Droplet 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Droplet 80.mp3"; sourceTree = "<group>"; };
 		9DEB904F1714D66100A7C0CF /* EffectsOffButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOffButton.png; path = Resources/Images/Freeplay/EffectsOffButton.png; sourceTree = "<group>"; };
 		9DEB90561714D6B000A7C0CF /* EffectsOnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsOnButton.png; path = Resources/Images/Freeplay/EffectsOnButton.png; sourceTree = "<group>"; };
 		9DF148261725EFDB0056A6D1 /* EffectsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EffectsIcon.png; path = Resources/Images/Freeplay/EffectsIcon.png; sourceTree = "<group>"; };
@@ -3301,6 +3143,7 @@
 		9D0BF7B814B57F8F00CF6372 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6D613F521A02B46600856194 /* Silence.mp3 */,
 				6DB285441921915600B3D14C /* Electric */,
 				6D62271E191D84D9003D8534 /* Metronome.mp3 */,
 				6DAD0AE719187F1F005B3807 /* Warm Analogue */,
@@ -3324,46 +3167,6 @@
 		9D2A05821534E2BD00218ABB /* Acoustic Guitar */ = {
 			isa = PBXGroup;
 			children = (
-				6D0BDE991A01D0A700593F2C /* Acoustic Guitar 0.mp3 */,
-				6D0BDE9A1A01D0A700593F2C /* Acoustic Guitar 1.mp3 */,
-				6D0BDE9B1A01D0A700593F2C /* Acoustic Guitar 2.mp3 */,
-				6D0BDE9C1A01D0A700593F2C /* Acoustic Guitar 3.mp3 */,
-				6D0BDE9D1A01D0A700593F2C /* Acoustic Guitar 4.mp3 */,
-				6D0BDE9E1A01D0A700593F2C /* Acoustic Guitar 5.mp3 */,
-				6D0BDE9F1A01D0A700593F2C /* Acoustic Guitar 6.mp3 */,
-				6D0BDEA01A01D0A700593F2C /* Acoustic Guitar 7.mp3 */,
-				6D0BDEA11A01D0A700593F2C /* Acoustic Guitar 8.mp3 */,
-				6D0BDEA21A01D0A700593F2C /* Acoustic Guitar 9.mp3 */,
-				6D0BDEA31A01D0A700593F2C /* Acoustic Guitar 10.mp3 */,
-				6D0BDEA41A01D0A700593F2C /* Acoustic Guitar 11.mp3 */,
-				6D0BDEA51A01D0A700593F2C /* Acoustic Guitar 12.mp3 */,
-				6D0BDEA61A01D0A700593F2C /* Acoustic Guitar 13.mp3 */,
-				6D0BDEA71A01D0A700593F2C /* Acoustic Guitar 14.mp3 */,
-				6D0BDEA81A01D0A700593F2C /* Acoustic Guitar 15.mp3 */,
-				6D0BDEA91A01D0A700593F2C /* Acoustic Guitar 16.mp3 */,
-				6D0BDEAA1A01D0A700593F2C /* Acoustic Guitar 17.mp3 */,
-				6D0BDEAB1A01D0A700593F2C /* Acoustic Guitar 18.mp3 */,
-				6D0BDEAC1A01D0A700593F2C /* Acoustic Guitar 19.mp3 */,
-				6D0BDEAD1A01D0A700593F2C /* Acoustic Guitar 20.mp3 */,
-				6D0BDEAE1A01D0A700593F2C /* Acoustic Guitar 21.mp3 */,
-				6D0BDEAF1A01D0A700593F2C /* Acoustic Guitar 22.mp3 */,
-				6D0BDEB01A01D0A700593F2C /* Acoustic Guitar 23.mp3 */,
-				6D0BDEB11A01D0A700593F2C /* Acoustic Guitar 24.mp3 */,
-				6D0BDEB21A01D0A700593F2C /* Acoustic Guitar 25.mp3 */,
-				6D0BDEB31A01D0A700593F2C /* Acoustic Guitar 26.mp3 */,
-				6D0BDEB41A01D0A700593F2C /* Acoustic Guitar 27.mp3 */,
-				6D0BDEB51A01D0A700593F2C /* Acoustic Guitar 28.mp3 */,
-				6D0BDEB61A01D0A700593F2C /* Acoustic Guitar 29.mp3 */,
-				6D0BDEB71A01D0A700593F2C /* Acoustic Guitar 30.mp3 */,
-				6D0BDEB81A01D0A700593F2C /* Acoustic Guitar 31.mp3 */,
-				6D0BDEB91A01D0A700593F2C /* Acoustic Guitar 32.mp3 */,
-				6D0BDEBA1A01D0A700593F2C /* Acoustic Guitar 33.mp3 */,
-				6D0BDEBB1A01D0A700593F2C /* Acoustic Guitar 34.mp3 */,
-				6D0BDEBC1A01D0A700593F2C /* Acoustic Guitar 35.mp3 */,
-				6D0BDEBD1A01D0A700593F2C /* Acoustic Guitar 36.mp3 */,
-				6D0BDEBE1A01D0A700593F2C /* Acoustic Guitar 37.mp3 */,
-				6D0BDEBF1A01D0A700593F2C /* Acoustic Guitar 38.mp3 */,
-				6D0BDEC01A01D0A700593F2C /* Acoustic Guitar 39.mp3 */,
 				9D2A05831534F6A500218ABB /* Acoustic Guitar 40.mp3 */,
 				9D2A05841534F6A500218ABB /* Acoustic Guitar 41.mp3 */,
 				9D2A05851534F6A500218ABB /* Acoustic Guitar 42.mp3 */,
@@ -3460,46 +3263,6 @@
 		9D63D34C154F221100FABD5B /* Piano */ = {
 			isa = PBXGroup;
 			children = (
-				6D0BDE451A01CDFB00593F2C /* Piano 0.mp3 */,
-				6D0BDE461A01CDFB00593F2C /* Piano 1.mp3 */,
-				6D0BDE471A01CDFB00593F2C /* Piano 2.mp3 */,
-				6D0BDE481A01CDFB00593F2C /* Piano 3.mp3 */,
-				6D0BDE491A01CDFB00593F2C /* Piano 4.mp3 */,
-				6D0BDE4A1A01CDFB00593F2C /* Piano 5.mp3 */,
-				6D0BDE4B1A01CDFB00593F2C /* Piano 6.mp3 */,
-				6D0BDE4C1A01CDFB00593F2C /* Piano 7.mp3 */,
-				6D0BDE4D1A01CDFB00593F2C /* Piano 8.mp3 */,
-				6D0BDE4E1A01CDFB00593F2C /* Piano 9.mp3 */,
-				6D0BDE4F1A01CDFB00593F2C /* Piano 10.mp3 */,
-				6D0BDE501A01CDFB00593F2C /* Piano 11.mp3 */,
-				6D0BDE511A01CDFB00593F2C /* Piano 12.mp3 */,
-				6D0BDE521A01CDFB00593F2C /* Piano 13.mp3 */,
-				6D0BDE531A01CDFB00593F2C /* Piano 14.mp3 */,
-				6D0BDE541A01CDFB00593F2C /* Piano 15.mp3 */,
-				6D0BDE551A01CDFB00593F2C /* Piano 16.mp3 */,
-				6D0BDE561A01CDFB00593F2C /* Piano 17.mp3 */,
-				6D0BDE571A01CDFB00593F2C /* Piano 18.mp3 */,
-				6D0BDE581A01CDFB00593F2C /* Piano 19.mp3 */,
-				6D0BDE591A01CDFB00593F2C /* Piano 20.mp3 */,
-				6D0BDE5A1A01CDFB00593F2C /* Piano 21.mp3 */,
-				6D0BDE5B1A01CDFB00593F2C /* Piano 22.mp3 */,
-				6D0BDE5C1A01CDFB00593F2C /* Piano 23.mp3 */,
-				6D0BDE5D1A01CDFB00593F2C /* Piano 24.mp3 */,
-				6D0BDE5E1A01CDFB00593F2C /* Piano 25.mp3 */,
-				6D0BDE5F1A01CDFB00593F2C /* Piano 26.mp3 */,
-				6D0BDE601A01CDFB00593F2C /* Piano 27.mp3 */,
-				6D0BDE611A01CDFB00593F2C /* Piano 28.mp3 */,
-				6D0BDE621A01CDFB00593F2C /* Piano 29.mp3 */,
-				6D0BDE631A01CDFB00593F2C /* Piano 30.mp3 */,
-				6D0BDE641A01CDFB00593F2C /* Piano 31.mp3 */,
-				6D0BDE651A01CDFB00593F2C /* Piano 32.mp3 */,
-				6D0BDE661A01CDFB00593F2C /* Piano 33.mp3 */,
-				6D0BDE671A01CDFB00593F2C /* Piano 34.mp3 */,
-				6D0BDE681A01CDFB00593F2C /* Piano 35.mp3 */,
-				6D0BDE691A01CDFB00593F2C /* Piano 36.mp3 */,
-				6D0BDE6A1A01CDFB00593F2C /* Piano 37.mp3 */,
-				6D0BDE6B1A01CDFB00593F2C /* Piano 38.mp3 */,
-				6D0BDE6C1A01CDFB00593F2C /* Piano 39.mp3 */,
 				9D63D34D154F221100FABD5B /* Piano 40.mp3 */,
 				9D63D34E154F221100FABD5B /* Piano 41.mp3 */,
 				9D63D34F154F221100FABD5B /* Piano 42.mp3 */,
@@ -3681,47 +3444,47 @@
 		9DE9FFBC155CD9C400F92DBE /* Droplet */ = {
 			isa = PBXGroup;
 			children = (
-				9DE9FFBD155CD9C500F92DBE /* Droplet 52.mp3 */,
-				9DE9FFBE155CD9C500F92DBE /* Droplet 53.mp3 */,
-				9DE9FFBF155CD9C500F92DBE /* Droplet 54.mp3 */,
-				9DE9FFC0155CD9C500F92DBE /* Droplet 55.mp3 */,
-				9DE9FFC1155CD9C500F92DBE /* Droplet 56.mp3 */,
-				9DE9FFC2155CD9C500F92DBE /* Droplet 57.mp3 */,
-				9DE9FFC3155CD9C500F92DBE /* Droplet 58.mp3 */,
-				9DE9FFC4155CD9C500F92DBE /* Droplet 59.mp3 */,
-				9DE9FFC5155CD9C500F92DBE /* Droplet 60.mp3 */,
-				9DE9FFC6155CD9C500F92DBE /* Droplet 61.mp3 */,
-				9DE9FFC7155CD9C500F92DBE /* Droplet 62.mp3 */,
-				9DE9FFC8155CD9C500F92DBE /* Droplet 63.mp3 */,
-				9DE9FFC9155CD9C500F92DBE /* Droplet 64.mp3 */,
-				9DE9FFCA155CD9C500F92DBE /* Droplet 65.mp3 */,
-				9DE9FFCB155CD9C500F92DBE /* Droplet 66.mp3 */,
-				9DE9FFCC155CD9C500F92DBE /* Droplet 67.mp3 */,
-				9DE9FFCD155CD9C500F92DBE /* Droplet 68.mp3 */,
-				9DE9FFCE155CD9C500F92DBE /* Droplet 69.mp3 */,
-				9DE9FFCF155CD9C500F92DBE /* Droplet 70.mp3 */,
-				9DE9FFD0155CD9C500F92DBE /* Droplet 71.mp3 */,
-				9DE9FFD1155CD9C500F92DBE /* Droplet 72.mp3 */,
-				9DE9FFD2155CD9C500F92DBE /* Droplet 73.mp3 */,
-				9DE9FFD3155CD9C500F92DBE /* Droplet 74.mp3 */,
-				9DE9FFD4155CD9C500F92DBE /* Droplet 75.mp3 */,
-				9DE9FFD5155CD9C500F92DBE /* Droplet 76.mp3 */,
-				9DE9FFD6155CD9C500F92DBE /* Droplet 77.mp3 */,
-				9DE9FFD7155CD9C500F92DBE /* Droplet 78.mp3 */,
-				9DE9FFD8155CD9C500F92DBE /* Droplet 79.mp3 */,
-				9DE9FFD9155CD9C500F92DBE /* Droplet 80.mp3 */,
-				9DE9FFDA155CD9C500F92DBE /* Droplet 81.mp3 */,
-				9DE9FFDB155CD9C500F92DBE /* Droplet 82.mp3 */,
-				9DE9FFDC155CD9C500F92DBE /* Droplet 83.mp3 */,
-				9DE9FFDD155CD9C500F92DBE /* Droplet 84.mp3 */,
-				9DE9FFDE155CD9C500F92DBE /* Droplet 85.mp3 */,
-				9DE9FFDF155CD9C500F92DBE /* Droplet 86.mp3 */,
-				9DE9FFE0155CD9C500F92DBE /* Droplet 87.mp3 */,
-				9DE9FFE1155CD9C500F92DBE /* Droplet 88.mp3 */,
-				9DE9FFE2155CD9C500F92DBE /* Droplet 89.mp3 */,
-				9DE9FFE3155CD9C500F92DBE /* Droplet 90.mp3 */,
-				9DE9FFE4155CD9C500F92DBE /* Droplet 91.mp3 */,
-				9DE9FFE5155CD9C500F92DBE /* Droplet 92.mp3 */,
+				9DE9FFBD155CD9C500F92DBE /* Droplet 40.mp3 */,
+				9DE9FFBE155CD9C500F92DBE /* Droplet 41.mp3 */,
+				9DE9FFBF155CD9C500F92DBE /* Droplet 42.mp3 */,
+				9DE9FFC0155CD9C500F92DBE /* Droplet 43.mp3 */,
+				9DE9FFC1155CD9C500F92DBE /* Droplet 44.mp3 */,
+				9DE9FFC2155CD9C500F92DBE /* Droplet 45.mp3 */,
+				9DE9FFC3155CD9C500F92DBE /* Droplet 46.mp3 */,
+				9DE9FFC4155CD9C500F92DBE /* Droplet 47.mp3 */,
+				9DE9FFC5155CD9C500F92DBE /* Droplet 48.mp3 */,
+				9DE9FFC6155CD9C500F92DBE /* Droplet 49.mp3 */,
+				9DE9FFC7155CD9C500F92DBE /* Droplet 50.mp3 */,
+				9DE9FFC8155CD9C500F92DBE /* Droplet 51.mp3 */,
+				9DE9FFC9155CD9C500F92DBE /* Droplet 52.mp3 */,
+				9DE9FFCA155CD9C500F92DBE /* Droplet 53.mp3 */,
+				9DE9FFCB155CD9C500F92DBE /* Droplet 54.mp3 */,
+				9DE9FFCC155CD9C500F92DBE /* Droplet 55.mp3 */,
+				9DE9FFCD155CD9C500F92DBE /* Droplet 56.mp3 */,
+				9DE9FFCE155CD9C500F92DBE /* Droplet 57.mp3 */,
+				9DE9FFCF155CD9C500F92DBE /* Droplet 58.mp3 */,
+				9DE9FFD0155CD9C500F92DBE /* Droplet 59.mp3 */,
+				9DE9FFD1155CD9C500F92DBE /* Droplet 60.mp3 */,
+				9DE9FFD2155CD9C500F92DBE /* Droplet 61.mp3 */,
+				9DE9FFD3155CD9C500F92DBE /* Droplet 62.mp3 */,
+				9DE9FFD4155CD9C500F92DBE /* Droplet 63.mp3 */,
+				9DE9FFD5155CD9C500F92DBE /* Droplet 64.mp3 */,
+				9DE9FFD6155CD9C500F92DBE /* Droplet 65.mp3 */,
+				9DE9FFD7155CD9C500F92DBE /* Droplet 66.mp3 */,
+				9DE9FFD8155CD9C500F92DBE /* Droplet 67.mp3 */,
+				9DE9FFD9155CD9C500F92DBE /* Droplet 68.mp3 */,
+				9DE9FFDA155CD9C500F92DBE /* Droplet 69.mp3 */,
+				9DE9FFDB155CD9C500F92DBE /* Droplet 70.mp3 */,
+				9DE9FFDC155CD9C500F92DBE /* Droplet 71.mp3 */,
+				9DE9FFDD155CD9C500F92DBE /* Droplet 72.mp3 */,
+				9DE9FFDE155CD9C500F92DBE /* Droplet 73.mp3 */,
+				9DE9FFDF155CD9C500F92DBE /* Droplet 74.mp3 */,
+				9DE9FFE0155CD9C500F92DBE /* Droplet 75.mp3 */,
+				9DE9FFE1155CD9C500F92DBE /* Droplet 76.mp3 */,
+				9DE9FFE2155CD9C500F92DBE /* Droplet 77.mp3 */,
+				9DE9FFE3155CD9C500F92DBE /* Droplet 78.mp3 */,
+				9DE9FFE4155CD9C500F92DBE /* Droplet 79.mp3 */,
+				9DE9FFE5155CD9C500F92DBE /* Droplet 80.mp3 */,
 			);
 			path = Droplet;
 			sourceTree = "<group>";
@@ -4365,14 +4128,11 @@
 			files = (
 				EC24DC2A161A84F300016B78 /* Default.png in Resources */,
 				EC24DC2B161A84F500016B78 /* Default@2x.png in Resources */,
-				6D0BDEE71A01D0A700593F2C /* Acoustic Guitar 38.mp3 in Resources */,
 				EC24DCEB161A89C000016B78 /* Acoustic Guitar 40.mp3 in Resources */,
 				EC24DCEC161A89C000016B78 /* Acoustic Guitar 41.mp3 in Resources */,
 				6DB285F71921915600B3D14C /* Electric Guitar 76.mp3 in Resources */,
 				EC24DCED161A89C000016B78 /* Acoustic Guitar 42.mp3 in Resources */,
-				6D0BDE931A01CDFB00593F2C /* Piano 38.mp3 in Resources */,
 				EC24DCEE161A89C000016B78 /* Acoustic Guitar 43.mp3 in Resources */,
-				6D0BDE8A1A01CDFB00593F2C /* Piano 29.mp3 in Resources */,
 				EC24DCEF161A89C000016B78 /* Acoustic Guitar 44.mp3 in Resources */,
 				EC24DCF0161A89C000016B78 /* Acoustic Guitar 45.mp3 in Resources */,
 				EC24DCF1161A89C000016B78 /* Acoustic Guitar 46.mp3 in Resources */,
@@ -4380,7 +4140,6 @@
 				6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */,
 				EC24DCF2161A89C000016B78 /* Acoustic Guitar 47.mp3 in Resources */,
 				EC24DCF3161A89C000016B78 /* Acoustic Guitar 48.mp3 in Resources */,
-				6D0BDECF1A01D0A700593F2C /* Acoustic Guitar 14.mp3 in Resources */,
 				EC24DCF4161A89C000016B78 /* Acoustic Guitar 49.mp3 in Resources */,
 				EC24DCF5161A89C000016B78 /* Acoustic Guitar 50.mp3 in Resources */,
 				EC24DCF6161A89C000016B78 /* Acoustic Guitar 51.mp3 in Resources */,
@@ -4389,13 +4148,10 @@
 				EC24DCF9161A89C000016B78 /* Acoustic Guitar 54.mp3 in Resources */,
 				6DB285EE1921915600B3D14C /* Electric Guitar 68.mp3 in Resources */,
 				EC24DCFA161A89C000016B78 /* Acoustic Guitar 55.mp3 in Resources */,
-				6D0BDE771A01CDFB00593F2C /* Piano 10.mp3 in Resources */,
 				EC24DCFB161A89C000016B78 /* Acoustic Guitar 56.mp3 in Resources */,
 				6DAD0B2F19187F1F005B3807 /* Warm Analogue 70.mp3 in Resources */,
 				6DB286081921915600B3D14C /* Electric Guitar 91.mp3 in Resources */,
-				6D0BDEC71A01D0A700593F2C /* Acoustic Guitar 6.mp3 in Resources */,
 				EC24DCFC161A89C000016B78 /* Acoustic Guitar 57.mp3 in Resources */,
-				6D0BDE701A01CDFB00593F2C /* Piano 3.mp3 in Resources */,
 				EC24DCFD161A89C000016B78 /* Acoustic Guitar 58.mp3 in Resources */,
 				6DAD0B2C19187F1F005B3807 /* Warm Analogue 67.mp3 in Resources */,
 				EC24DCFE161A89C000016B78 /* Acoustic Guitar 59.mp3 in Resources */,
@@ -4408,7 +4164,6 @@
 				6DB285FB1921915600B3D14C /* Electric Guitar 8.mp3 in Resources */,
 				EC24DD04161A89C000016B78 /* Acoustic Guitar 65.mp3 in Resources */,
 				EC24DD05161A89C000016B78 /* Acoustic Guitar 66.mp3 in Resources */,
-				6D0BDEE01A01D0A700593F2C /* Acoustic Guitar 31.mp3 in Resources */,
 				EC24DD06161A89C000016B78 /* Acoustic Guitar 67.mp3 in Resources */,
 				EC24DD07161A89C000016B78 /* Acoustic Guitar 68.mp3 in Resources */,
 				EC24DD08161A89C000016B78 /* Acoustic Guitar 69.mp3 in Resources */,
@@ -4422,11 +4177,8 @@
 				6DAD0B2819187F1F005B3807 /* Warm Analogue 63.mp3 in Resources */,
 				EC24DD0E161A89C000016B78 /* Acoustic Guitar 75.mp3 in Resources */,
 				6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */,
-				6D0BDE8B1A01CDFB00593F2C /* Piano 30.mp3 in Resources */,
 				EC24DD0F161A89C000016B78 /* Acoustic Guitar 76.mp3 in Resources */,
 				EC24DD10161A89C000016B78 /* Acoustic Guitar 77.mp3 in Resources */,
-				6D0BDE781A01CDFB00593F2C /* Piano 11.mp3 in Resources */,
-				6D0BDE7D1A01CDFB00593F2C /* Piano 16.mp3 in Resources */,
 				EC24DD11161A89C000016B78 /* Acoustic Guitar 78.mp3 in Resources */,
 				EC24DD12161A89C000016B78 /* Acoustic Guitar 79.mp3 in Resources */,
 				6DB286051921915600B3D14C /* Electric Guitar 89.mp3 in Resources */,
@@ -4436,13 +4188,10 @@
 				261582CA192F00CA00AB0CFC /* gTar_AppIcon_120.png in Resources */,
 				EC24DD15161A89C400016B78 /* Rock Guitar 41.mp3 in Resources */,
 				EC24DD16161A89C400016B78 /* Rock Guitar 42.mp3 in Resources */,
-				6D0BDE741A01CDFB00593F2C /* Piano 7.mp3 in Resources */,
 				6DB2860D1921915600B3D14C /* Electric Guitar 96.mp3 in Resources */,
 				EC24DD17161A89C400016B78 /* Rock Guitar 43.mp3 in Resources */,
-				6D0BDE801A01CDFB00593F2C /* Piano 19.mp3 in Resources */,
 				EC24DD18161A89C400016B78 /* Rock Guitar 44.mp3 in Resources */,
 				6D3D06DF18F4D2E8007683DB /* README.md in Resources */,
-				6D0BDECB1A01D0A700593F2C /* Acoustic Guitar 10.mp3 in Resources */,
 				EC24DD19161A89C400016B78 /* Rock Guitar 45.mp3 in Resources */,
 				EC24DD1A161A89C400016B78 /* Rock Guitar 46.mp3 in Resources */,
 				EC24DD1B161A89C400016B78 /* Rock Guitar 47.mp3 in Resources */,
@@ -4468,10 +4217,8 @@
 				EC24DD2E161A89C400016B78 /* Rock Guitar 66.mp3 in Resources */,
 				EC24DD2F161A89C400016B78 /* Rock Guitar 67.mp3 in Resources */,
 				EC24DD30161A89C400016B78 /* Rock Guitar 68.mp3 in Resources */,
-				6D0BDE7F1A01CDFB00593F2C /* Piano 18.mp3 in Resources */,
 				6DB285FD1921915600B3D14C /* Electric Guitar 81.mp3 in Resources */,
 				EC24DD31161A89C400016B78 /* Rock Guitar 69.mp3 in Resources */,
-				6D0BDE901A01CDFB00593F2C /* Piano 35.mp3 in Resources */,
 				EC24DD32161A89C400016B78 /* Rock Guitar 70.mp3 in Resources */,
 				EC24DD33161A89C400016B78 /* Rock Guitar 71.mp3 in Resources */,
 				EC24DD34161A89C400016B78 /* Rock Guitar 72.mp3 in Resources */,
@@ -4485,16 +4232,13 @@
 				6DAD0B3119187F1F005B3807 /* Warm Analogue 72.mp3 in Resources */,
 				EC24DD3C161A89C400016B78 /* Rock Guitar 80.mp3 in Resources */,
 				EC24DD3D161A89C800016B78 /* Piano 40.mp3 in Resources */,
-				6D0BDE871A01CDFB00593F2C /* Piano 26.mp3 in Resources */,
 				6DB285B61921915600B3D14C /* Electric Guitar 17.mp3 in Resources */,
 				EC24DD3E161A89C800016B78 /* Piano 41.mp3 in Resources */,
 				EC24DD3F161A89C800016B78 /* Piano 42.mp3 in Resources */,
 				EC24DD40161A89C800016B78 /* Piano 43.mp3 in Resources */,
 				EC24DD41161A89C800016B78 /* Piano 44.mp3 in Resources */,
-				6D0BDE941A01CDFB00593F2C /* Piano 39.mp3 in Resources */,
 				6DAD0B2D19187F1F005B3807 /* Warm Analogue 68.mp3 in Resources */,
 				6DB285CC1921915600B3D14C /* Electric Guitar 37.mp3 in Resources */,
-				6D0BDECE1A01D0A700593F2C /* Acoustic Guitar 13.mp3 in Resources */,
 				EC24DD42161A89C800016B78 /* Piano 45.mp3 in Resources */,
 				EC24DD43161A89C800016B78 /* Piano 46.mp3 in Resources */,
 				EC24DD44161A89C800016B78 /* Piano 47.mp3 in Resources */,
@@ -4502,7 +4246,6 @@
 				EC24DD46161A89C800016B78 /* Piano 49.mp3 in Resources */,
 				EC24DD47161A89C800016B78 /* Piano 50.mp3 in Resources */,
 				EC24DD48161A89C800016B78 /* Piano 51.mp3 in Resources */,
-				6D0BDEE31A01D0A700593F2C /* Acoustic Guitar 34.mp3 in Resources */,
 				EC24DD49161A89C800016B78 /* Piano 52.mp3 in Resources */,
 				EC24DD4A161A89C800016B78 /* Piano 53.mp3 in Resources */,
 				EC24DD4B161A89C800016B78 /* Piano 54.mp3 in Resources */,
@@ -4512,9 +4255,7 @@
 				6DB285BE1921915600B3D14C /* Electric Guitar 24.mp3 in Resources */,
 				EC24DD4F161A89C800016B78 /* Piano 58.mp3 in Resources */,
 				EC24DD50161A89C800016B78 /* Piano 59.mp3 in Resources */,
-				6D0BDE7E1A01CDFB00593F2C /* Piano 17.mp3 in Resources */,
 				EC24DD51161A89C800016B78 /* Piano 60.mp3 in Resources */,
-				6D0BDE8E1A01CDFB00593F2C /* Piano 33.mp3 in Resources */,
 				EC24DD52161A89C800016B78 /* Piano 61.mp3 in Resources */,
 				EC24DD53161A89C800016B78 /* Piano 62.mp3 in Resources */,
 				EC24DD54161A89C800016B78 /* Piano 63.mp3 in Resources */,
@@ -4524,7 +4265,6 @@
 				EC24DD57161A89C800016B78 /* Piano 66.mp3 in Resources */,
 				EC24DD58161A89C800016B78 /* Piano 67.mp3 in Resources */,
 				6DB285C01921915600B3D14C /* Electric Guitar 26.mp3 in Resources */,
-				6D0BDE811A01CDFB00593F2C /* Piano 20.mp3 in Resources */,
 				6DAD0B3319187F1F005B3807 /* Warm Analogue 74.mp3 in Resources */,
 				EC24DD59161A89C800016B78 /* Piano 68.mp3 in Resources */,
 				EC24DD5A161A89C800016B78 /* Piano 69.mp3 in Resources */,
@@ -4547,12 +4287,8 @@
 				EC24DD67161A89CD00016B78 /* Rhodes 41.mp3 in Resources */,
 				EC24DD68161A89CD00016B78 /* Rhodes 42.mp3 in Resources */,
 				6DAD0B2A19187F1F005B3807 /* Warm Analogue 65.mp3 in Resources */,
-				6D0BDEDD1A01D0A700593F2C /* Acoustic Guitar 28.mp3 in Resources */,
-				6D0BDE8F1A01CDFB00593F2C /* Piano 34.mp3 in Resources */,
-				6D0BDE861A01CDFB00593F2C /* Piano 25.mp3 in Resources */,
 				EC24DD69161A89CD00016B78 /* Rhodes 43.mp3 in Resources */,
 				EC24DD6A161A89CD00016B78 /* Rhodes 44.mp3 in Resources */,
-				6D0BDE881A01CDFB00593F2C /* Piano 27.mp3 in Resources */,
 				EC24DD6B161A89CD00016B78 /* Rhodes 45.mp3 in Resources */,
 				EC24DD6C161A89CD00016B78 /* Rhodes 46.mp3 in Resources */,
 				EC24DD6D161A89CD00016B78 /* Rhodes 47.mp3 in Resources */,
@@ -4562,7 +4298,6 @@
 				EC24DD70161A89CD00016B78 /* Rhodes 50.mp3 in Resources */,
 				EC24DD71161A89CD00016B78 /* Rhodes 51.mp3 in Resources */,
 				6DB285BB1921915600B3D14C /* Electric Guitar 21.mp3 in Resources */,
-				6D0BDED21A01D0A700593F2C /* Acoustic Guitar 17.mp3 in Resources */,
 				6DB285B31921915600B3D14C /* Electric Guitar 14.mp3 in Resources */,
 				EC24DD72161A89CD00016B78 /* Rhodes 52.mp3 in Resources */,
 				6DB286071921915600B3D14C /* Electric Guitar 90.mp3 in Resources */,
@@ -4576,7 +4311,6 @@
 				EC24DD79161A89CD00016B78 /* Rhodes 59.mp3 in Resources */,
 				EC24DD7A161A89CD00016B78 /* Rhodes 60.mp3 in Resources */,
 				EC24DD7B161A89CD00016B78 /* Rhodes 61.mp3 in Resources */,
-				6D0BDECD1A01D0A700593F2C /* Acoustic Guitar 12.mp3 in Resources */,
 				EC24DD7C161A89CD00016B78 /* Rhodes 62.mp3 in Resources */,
 				EC24DD7D161A89CD00016B78 /* Rhodes 63.mp3 in Resources */,
 				EC24DD7E161A89CD00016B78 /* Rhodes 64.mp3 in Resources */,
@@ -4585,7 +4319,6 @@
 				EC24DD81161A89CD00016B78 /* Rhodes 67.mp3 in Resources */,
 				6DAD0B1519187F1F005B3807 /* Warm Analogue 44.mp3 in Resources */,
 				EC24DD82161A89CD00016B78 /* Rhodes 68.mp3 in Resources */,
-				6D0BDEC31A01D0A700593F2C /* Acoustic Guitar 2.mp3 in Resources */,
 				EC24DD83161A89CD00016B78 /* Rhodes 69.mp3 in Resources */,
 				EC24DD84161A89CD00016B78 /* Rhodes 70.mp3 in Resources */,
 				EC24DD85161A89CD00016B78 /* Rhodes 71.mp3 in Resources */,
@@ -4601,66 +4334,61 @@
 				EC24DD8D161A89CD00016B78 /* Rhodes 79.mp3 in Resources */,
 				6DB285B01921915600B3D14C /* Electric Guitar 11.mp3 in Resources */,
 				EC24DD8E161A89CD00016B78 /* Rhodes 80.mp3 in Resources */,
-				EC24DD8F161A89D200016B78 /* Droplet 52.mp3 in Resources */,
-				EC24DD90161A89D200016B78 /* Droplet 53.mp3 in Resources */,
-				EC24DD91161A89D200016B78 /* Droplet 54.mp3 in Resources */,
-				EC24DD92161A89D200016B78 /* Droplet 55.mp3 in Resources */,
-				EC24DD93161A89D200016B78 /* Droplet 56.mp3 in Resources */,
-				EC24DD94161A89D200016B78 /* Droplet 57.mp3 in Resources */,
-				EC24DD95161A89D200016B78 /* Droplet 58.mp3 in Resources */,
-				EC24DD96161A89D200016B78 /* Droplet 59.mp3 in Resources */,
-				6D0BDE6F1A01CDFB00593F2C /* Piano 2.mp3 in Resources */,
-				EC24DD97161A89D200016B78 /* Droplet 60.mp3 in Resources */,
-				EC24DD98161A89D200016B78 /* Droplet 61.mp3 in Resources */,
-				EC24DD99161A89D200016B78 /* Droplet 62.mp3 in Resources */,
+				EC24DD8F161A89D200016B78 /* Droplet 40.mp3 in Resources */,
+				EC24DD90161A89D200016B78 /* Droplet 41.mp3 in Resources */,
+				EC24DD91161A89D200016B78 /* Droplet 42.mp3 in Resources */,
+				EC24DD92161A89D200016B78 /* Droplet 43.mp3 in Resources */,
+				EC24DD93161A89D200016B78 /* Droplet 44.mp3 in Resources */,
+				EC24DD94161A89D200016B78 /* Droplet 45.mp3 in Resources */,
+				EC24DD95161A89D200016B78 /* Droplet 46.mp3 in Resources */,
+				EC24DD96161A89D200016B78 /* Droplet 47.mp3 in Resources */,
+				EC24DD97161A89D200016B78 /* Droplet 48.mp3 in Resources */,
+				EC24DD98161A89D200016B78 /* Droplet 49.mp3 in Resources */,
+				EC24DD99161A89D200016B78 /* Droplet 50.mp3 in Resources */,
 				6DB285FE1921915600B3D14C /* Electric Guitar 82.mp3 in Resources */,
-				EC24DD9A161A89D200016B78 /* Droplet 63.mp3 in Resources */,
-				EC24DD9B161A89D200016B78 /* Droplet 64.mp3 in Resources */,
+				EC24DD9A161A89D200016B78 /* Droplet 51.mp3 in Resources */,
+				EC24DD9B161A89D200016B78 /* Droplet 52.mp3 in Resources */,
 				6DB285DA1921915600B3D14C /* Electric Guitar 5.mp3 in Resources */,
-				EC24DD9C161A89D200016B78 /* Droplet 65.mp3 in Resources */,
+				EC24DD9C161A89D200016B78 /* Droplet 53.mp3 in Resources */,
 				6DB285D91921915600B3D14C /* Electric Guitar 49.mp3 in Resources */,
 				6DB285EF1921915600B3D14C /* Electric Guitar 69.mp3 in Resources */,
-				EC24DD9D161A89D200016B78 /* Droplet 66.mp3 in Resources */,
-				EC24DD9E161A89D200016B78 /* Droplet 67.mp3 in Resources */,
-				EC24DD9F161A89D200016B78 /* Droplet 68.mp3 in Resources */,
+				EC24DD9D161A89D200016B78 /* Droplet 54.mp3 in Resources */,
+				EC24DD9E161A89D200016B78 /* Droplet 55.mp3 in Resources */,
+				EC24DD9F161A89D200016B78 /* Droplet 56.mp3 in Resources */,
 				6DB285CB1921915600B3D14C /* Electric Guitar 36.mp3 in Resources */,
-				EC24DDA0161A89D200016B78 /* Droplet 69.mp3 in Resources */,
-				6D0BDE6E1A01CDFB00593F2C /* Piano 1.mp3 in Resources */,
+				EC24DDA0161A89D200016B78 /* Droplet 57.mp3 in Resources */,
 				6DB285CE1921915600B3D14C /* Electric Guitar 39.mp3 in Resources */,
-				EC24DDA1161A89D200016B78 /* Droplet 70.mp3 in Resources */,
-				6D0BDED81A01D0A700593F2C /* Acoustic Guitar 23.mp3 in Resources */,
-				EC24DDA2161A89D200016B78 /* Droplet 71.mp3 in Resources */,
-				EC24DDA3161A89D200016B78 /* Droplet 72.mp3 in Resources */,
-				EC24DDA4161A89D200016B78 /* Droplet 73.mp3 in Resources */,
-				EC24DDA5161A89D200016B78 /* Droplet 74.mp3 in Resources */,
-				EC24DDA6161A89D200016B78 /* Droplet 75.mp3 in Resources */,
-				EC24DDA7161A89D200016B78 /* Droplet 76.mp3 in Resources */,
-				EC24DDA8161A89D200016B78 /* Droplet 77.mp3 in Resources */,
-				EC24DDA9161A89D200016B78 /* Droplet 78.mp3 in Resources */,
-				EC24DDAA161A89D200016B78 /* Droplet 79.mp3 in Resources */,
-				EC24DDAB161A89D200016B78 /* Droplet 80.mp3 in Resources */,
+				EC24DDA1161A89D200016B78 /* Droplet 58.mp3 in Resources */,
+				EC24DDA2161A89D200016B78 /* Droplet 59.mp3 in Resources */,
+				EC24DDA3161A89D200016B78 /* Droplet 60.mp3 in Resources */,
+				EC24DDA4161A89D200016B78 /* Droplet 61.mp3 in Resources */,
+				EC24DDA5161A89D200016B78 /* Droplet 62.mp3 in Resources */,
+				EC24DDA6161A89D200016B78 /* Droplet 63.mp3 in Resources */,
+				EC24DDA7161A89D200016B78 /* Droplet 64.mp3 in Resources */,
+				EC24DDA8161A89D200016B78 /* Droplet 65.mp3 in Resources */,
+				EC24DDA9161A89D200016B78 /* Droplet 66.mp3 in Resources */,
+				EC24DDAA161A89D200016B78 /* Droplet 67.mp3 in Resources */,
+				EC24DDAB161A89D200016B78 /* Droplet 68.mp3 in Resources */,
 				6DB285FC1921915600B3D14C /* Electric Guitar 80.mp3 in Resources */,
-				EC24DDAC161A89D200016B78 /* Droplet 81.mp3 in Resources */,
-				EC24DDAD161A89D200016B78 /* Droplet 82.mp3 in Resources */,
-				EC24DDAE161A89D200016B78 /* Droplet 83.mp3 in Resources */,
+				EC24DDAC161A89D200016B78 /* Droplet 69.mp3 in Resources */,
+				EC24DDAD161A89D200016B78 /* Droplet 70.mp3 in Resources */,
+				EC24DDAE161A89D200016B78 /* Droplet 71.mp3 in Resources */,
 				6DB285F11921915600B3D14C /* Electric Guitar 70.mp3 in Resources */,
-				EC24DDAF161A89D200016B78 /* Droplet 84.mp3 in Resources */,
-				EC24DDB0161A89D200016B78 /* Droplet 85.mp3 in Resources */,
-				EC24DDB1161A89D200016B78 /* Droplet 86.mp3 in Resources */,
-				6D0BDED01A01D0A700593F2C /* Acoustic Guitar 15.mp3 in Resources */,
+				EC24DDAF161A89D200016B78 /* Droplet 72.mp3 in Resources */,
+				EC24DDB0161A89D200016B78 /* Droplet 73.mp3 in Resources */,
+				EC24DDB1161A89D200016B78 /* Droplet 74.mp3 in Resources */,
 				6DB285C71921915600B3D14C /* Electric Guitar 32.mp3 in Resources */,
-				EC24DDB2161A89D200016B78 /* Droplet 87.mp3 in Resources */,
+				EC24DDB2161A89D200016B78 /* Droplet 75.mp3 in Resources */,
 				6DB285C41921915600B3D14C /* Electric Guitar 3.mp3 in Resources */,
-				EC24DDB3161A89D200016B78 /* Droplet 88.mp3 in Resources */,
-				EC24DDB4161A89D200016B78 /* Droplet 89.mp3 in Resources */,
-				EC24DDB5161A89D200016B78 /* Droplet 90.mp3 in Resources */,
+				EC24DDB3161A89D200016B78 /* Droplet 76.mp3 in Resources */,
+				EC24DDB4161A89D200016B78 /* Droplet 77.mp3 in Resources */,
+				EC24DDB5161A89D200016B78 /* Droplet 78.mp3 in Resources */,
 				6DB285E41921915600B3D14C /* Electric Guitar 59.mp3 in Resources */,
-				EC24DDB6161A89D200016B78 /* Droplet 91.mp3 in Resources */,
-				EC24DDB7161A89D200016B78 /* Droplet 92.mp3 in Resources */,
+				EC24DDB6161A89D200016B78 /* Droplet 79.mp3 in Resources */,
+				EC24DDB7161A89D200016B78 /* Droplet 80.mp3 in Resources */,
 				6DAD0B3219187F1F005B3807 /* Warm Analogue 73.mp3 in Resources */,
 				EC24DE85161A89F000016B78 /* Square 40.mp3 in Resources */,
 				EC24DE86161A89F000016B78 /* Square 41.mp3 in Resources */,
-				6D0BDE8C1A01CDFB00593F2C /* Piano 31.mp3 in Resources */,
 				EC24DE87161A89F000016B78 /* Square 42.mp3 in Resources */,
 				EC24DE88161A89F000016B78 /* Square 43.mp3 in Resources */,
 				6DB285DD1921915600B3D14C /* Electric Guitar 52.mp3 in Resources */,
@@ -4671,7 +4399,6 @@
 				6DB2860C1921915600B3D14C /* Electric Guitar 95.mp3 in Resources */,
 				EC24DE8C161A89F000016B78 /* Square 47.mp3 in Resources */,
 				EC24DE8D161A89F000016B78 /* Square 48.mp3 in Resources */,
-				6D0BDEE21A01D0A700593F2C /* Acoustic Guitar 33.mp3 in Resources */,
 				EC24DE8E161A89F000016B78 /* Square 49.mp3 in Resources */,
 				6DB285CD1921915600B3D14C /* Electric Guitar 38.mp3 in Resources */,
 				EC24DE8F161A89F000016B78 /* Square 50.mp3 in Resources */,
@@ -4687,11 +4414,9 @@
 				EC24DE96161A89F000016B78 /* Square 57.mp3 in Resources */,
 				EC24DE97161A89F000016B78 /* Square 58.mp3 in Resources */,
 				EC24DE98161A89F000016B78 /* Square 59.mp3 in Resources */,
-				6D0BDED91A01D0A700593F2C /* Acoustic Guitar 24.mp3 in Resources */,
 				6DB285ED1921915600B3D14C /* Electric Guitar 67.mp3 in Resources */,
 				6DB285C51921915600B3D14C /* Electric Guitar 30.mp3 in Resources */,
 				6DB285F61921915600B3D14C /* Electric Guitar 75.mp3 in Resources */,
-				6D0BDE721A01CDFB00593F2C /* Piano 5.mp3 in Resources */,
 				EC24DE99161A89F000016B78 /* Square 60.mp3 in Resources */,
 				EC24DE9A161A89F000016B78 /* Square 61.mp3 in Resources */,
 				6DB285C21921915600B3D14C /* Electric Guitar 28.mp3 in Resources */,
@@ -4706,9 +4431,8 @@
 				6DAD0B2619187F1F005B3807 /* Warm Analogue 61.mp3 in Resources */,
 				EC24DEA2161A89F000016B78 /* Square 69.mp3 in Resources */,
 				EC24DEA3161A89F000016B78 /* Square 70.mp3 in Resources */,
-				6D0BDE711A01CDFB00593F2C /* Piano 4.mp3 in Resources */,
 				EC24DEA4161A89F000016B78 /* Square 71.mp3 in Resources */,
-				6D0BDEC91A01D0A700593F2C /* Acoustic Guitar 8.mp3 in Resources */,
+				6D613F531A02B46600856194 /* Silence.mp3 in Resources */,
 				EC24DEA5161A89F000016B78 /* Square 72.mp3 in Resources */,
 				EC24DEA6161A89F000016B78 /* Square 73.mp3 in Resources */,
 				EC24DEA7161A89F000016B78 /* Square 74.mp3 in Resources */,
@@ -4729,7 +4453,6 @@
 				EC24DF6D161A8A4800016B78 /* BlackBackArrow_DOWN.png in Resources */,
 				EC24DF6E161A8A4800016B78 /* BlackBackArrow_RIGHT.png in Resources */,
 				EC24DF6F161A8A4800016B78 /* BlackBackArrow_UP.png in Resources */,
-				6D0BDE761A01CDFB00593F2C /* Piano 9.mp3 in Resources */,
 				EC24DF70161A8A4800016B78 /* BlackBackArrow_LEFT.png in Resources */,
 				EC24DF71161A8A4800016B78 /* WhiteBackArrow_DOWN.png in Resources */,
 				EC24DF72161A8A4800016B78 /* WhiteBackArrow_RIGHT.png in Resources */,
@@ -4745,12 +4468,10 @@
 				EC24DFF4161A8B0E00016B78 /* MainWindow.xib in Resources */,
 				6DB285C11921915600B3D14C /* Electric Guitar 27.mp3 in Resources */,
 				ECBBBF70161CF25C00BC5BE2 /* FreePlayController.xib in Resources */,
-				6D0BDED11A01D0A700593F2C /* Acoustic Guitar 16.mp3 in Resources */,
 				EC26A3A516CB198F006E97E2 /* DefaultRot.png in Resources */,
 				EC26A3A716CB198F006E97E2 /* DefaultRot@2x.png in Resources */,
 				EC0BAD3116EE8E3C00E567A6 /* TitleNavigationController.xib in Resources */,
 				EC0BAD3416EE93AC00E567A6 /* Default-568h@2x.png in Resources */,
-				6D0BDECA1A01D0A700593F2C /* Acoustic Guitar 9.mp3 in Resources */,
 				EC0BAD8716F18B3400E567A6 /* ActivityFeedCell.xib in Resources */,
 				ECE9D23516FBAF2600BB6C53 /* SongSelectionViewController.xib in Resources */,
 				ECE9D23D16FBB7DA00BB6C53 /* SongListCell.xib in Resources */,
@@ -4767,19 +4488,15 @@
 				ECCC0329170A45E90021DB00 /* DiffEasyButton.png in Resources */,
 				ECCC032B170A45E90021DB00 /* DiffHardButton.png in Resources */,
 				ECCC032D170A45E90021DB00 /* DiffMedButton.png in Resources */,
-				6D0BDE831A01CDFB00593F2C /* Piano 22.mp3 in Resources */,
 				ECCC032F170A45E90021DB00 /* MenuPauseBG.jpg in Resources */,
 				6DB285CA1921915600B3D14C /* Electric Guitar 35.mp3 in Resources */,
 				ECCC0337170A493E0021DB00 /* DiffEasyButtonON.png in Resources */,
 				6DB285F21921915600B3D14C /* Electric Guitar 71.mp3 in Resources */,
 				ECCC0339170A493E0021DB00 /* DiffHardButtonON.png in Resources */,
 				ECCC033B170A493E0021DB00 /* DiffMedButtonON.png in Resources */,
-				6D0BDEC51A01D0A700593F2C /* Acoustic Guitar 4.mp3 in Resources */,
 				ECCC033D170A493E0021DB00 /* SwitchBG.png in Resources */,
 				6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */,
 				ECCC0344170B80250021DB00 /* NoteGreyscale.png in Resources */,
-				6D0BDEC81A01D0A700593F2C /* Acoustic Guitar 7.mp3 in Resources */,
-				6D0BDE751A01CDFB00593F2C /* Piano 8.mp3 in Resources */,
 				ECCC035B170CBA570021DB00 /* VolumeViewController.xib in Resources */,
 				ECCC0366170CD53E0021DB00 /* Minus.png in Resources */,
 				ECCC0368170CD53E0021DB00 /* Plus.png in Resources */,
@@ -4787,20 +4504,16 @@
 				ECCC036A170CD53E0021DB00 /* VolumeKnob.png in Resources */,
 				ECCC0393170E33600021DB00 /* MinusRotated.png in Resources */,
 				ECCC039B170F716F0021DB00 /* MenuPauseBGSubsection.jpg in Resources */,
-				6D0BDEDB1A01D0A700593F2C /* Acoustic Guitar 26.mp3 in Resources */,
 				6DB285B81921915600B3D14C /* Electric Guitar 19.mp3 in Resources */,
 				ECCC039E170F862C0021DB00 /* EndCap.png in Resources */,
 				ECCC03A1170FBA140021DB00 /* InvisibleTrack.png in Resources */,
 				EC69BA1717137072004E982F /* InstrumentIcon.png in Resources */,
-				6D0BDEC21A01D0A700593F2C /* Acoustic Guitar 1.mp3 in Resources */,
 				6DB286031921915600B3D14C /* Electric Guitar 87.mp3 in Resources */,
 				6DB285D11921915600B3D14C /* Electric Guitar 41.mp3 in Resources */,
 				6D0BDE971A01CE0600593F2C /* Electric Guitar 0.mp3 in Resources */,
-				6D0BDECC1A01D0A700593F2C /* Acoustic Guitar 11.mp3 in Resources */,
 				9DEB90501714D66100A7C0CF /* EffectsOffButton.png in Resources */,
 				9DEB90571714D6B000A7C0CF /* EffectsOnButton.png in Resources */,
 				6DAD0B2719187F1F005B3807 /* Warm Analogue 62.mp3 in Resources */,
-				6D0BDE791A01CDFB00593F2C /* Piano 12.mp3 in Resources */,
 				ECE831FF1717653E006E2391 /* UserCommentCell.xib in Resources */,
 				6DAD0B3419187F1F005B3807 /* Warm Analogue 75.mp3 in Resources */,
 				6DB285E61921915600B3D14C /* Electric Guitar 60.mp3 in Resources */,
@@ -4831,10 +4544,8 @@
 				9DF148441729C6230056A6D1 /* DownArrowOrange.png in Resources */,
 				9DF148461729C6230056A6D1 /* DownArrowRedOrange.png in Resources */,
 				6D0BDE981A01CE0600593F2C /* Electric Guitar 1.mp3 in Resources */,
-				6D0BDEC61A01D0A700593F2C /* Acoustic Guitar 5.mp3 in Resources */,
 				9DF148481729C6230056A6D1 /* DownArrowYellow.png in Resources */,
 				EC3415F8173863AD00501AF4 /* SocialUserCell.xib in Resources */,
-				6D0BDED71A01D0A700593F2C /* Acoustic Guitar 22.mp3 in Resources */,
 				EC3416161739983800501AF4 /* SocialSongCell.xib in Resources */,
 				EC34161D1739ADA600501AF4 /* SessionModalViewController.xib in Resources */,
 				6DB285BC1921915600B3D14C /* Electric Guitar 22.mp3 in Resources */,
@@ -4851,7 +4562,6 @@
 				9DB5C4C617430FA700EAF9A6 /* Shape_ContinuousButtonON.png in Resources */,
 				9DB5C4C817430FA700EAF9A6 /* Shape_SingleButtonOFF.png in Resources */,
 				6DB285F41921915600B3D14C /* Electric Guitar 73.mp3 in Resources */,
-				6D0BDE7B1A01CDFB00593F2C /* Piano 14.mp3 in Resources */,
 				6DB285D81921915600B3D14C /* Electric Guitar 48.mp3 in Resources */,
 				9DB5C4CA17430FA700EAF9A6 /* Shape_SingleButtonON.png in Resources */,
 				ECFF776617457E3D002D7D40 /* CloseXButton.png in Resources */,
@@ -4873,16 +4583,13 @@
 				9DB5C4E0174448E100EAF9A6 /* Color_orange.png in Resources */,
 				6DB285AD1921915600B3D14C /* Electric Guitar 101.mp3 in Resources */,
 				9DB5C4E2174448E100EAF9A6 /* Color_purple.png in Resources */,
-				6D0BDEDC1A01D0A700593F2C /* Acoustic Guitar 27.mp3 in Resources */,
 				9DB5C4E4174448E100EAF9A6 /* Color_red.png in Resources */,
 				9DB5C4E8174448E100EAF9A6 /* Color_yellow.png in Resources */,
 				9DB5C4EB1744495300EAF9A6 /* Color_white.png in Resources */,
 				6DB285E11921915600B3D14C /* Electric Guitar 56.mp3 in Resources */,
 				9DB5C4FD1745ACE700EAF9A6 /* Color_blue_Select.png in Resources */,
-				6D0BDE731A01CDFB00593F2C /* Piano 6.mp3 in Resources */,
 				9DB5C4FF1745ACE700EAF9A6 /* Color_cyan_Select.png in Resources */,
 				9DB5C5011745ACE700EAF9A6 /* Color_green_Select.png in Resources */,
-				6D0BDE8D1A01CDFB00593F2C /* Piano 32.mp3 in Resources */,
 				6DB285BD1921915600B3D14C /* Electric Guitar 23.mp3 in Resources */,
 				9DB5C5071745ACE700EAF9A6 /* Color_multi_Select.png in Resources */,
 				9DB5C5091745ACE700EAF9A6 /* Color_orange_Select.png in Resources */,
@@ -4898,7 +4605,6 @@
 				9D054CB4174C68E000FA3239 /* Bowed Strings 43.mp3 in Resources */,
 				9D054CB6174C68E000FA3239 /* Bowed Strings 44.mp3 in Resources */,
 				6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */,
-				6D0BDEE51A01D0A700593F2C /* Acoustic Guitar 36.mp3 in Resources */,
 				6DAD0B1919187F1F005B3807 /* Warm Analogue 48.mp3 in Resources */,
 				9D054CB8174C68E000FA3239 /* Bowed Strings 45.mp3 in Resources */,
 				9D054CBA174C68E000FA3239 /* Bowed Strings 46.mp3 in Resources */,
@@ -4926,16 +4632,13 @@
 				9D054CE2174C68E000FA3239 /* Bowed Strings 66.mp3 in Resources */,
 				9D054CE4174C68E000FA3239 /* Bowed Strings 67.mp3 in Resources */,
 				9D054CE6174C68E000FA3239 /* Bowed Strings 68.mp3 in Resources */,
-				6D0BDEC41A01D0A700593F2C /* Acoustic Guitar 3.mp3 in Resources */,
 				9D054CE8174C68E000FA3239 /* Bowed Strings 69.mp3 in Resources */,
 				9D054CEA174C68E000FA3239 /* Bowed Strings 70.mp3 in Resources */,
 				9D054CEC174C68E000FA3239 /* Bowed Strings 71.mp3 in Resources */,
 				6DB285DC1921915600B3D14C /* Electric Guitar 51.mp3 in Resources */,
 				9D054CEE174C68E000FA3239 /* Bowed Strings 72.mp3 in Resources */,
 				9D054CF0174C68E000FA3239 /* Bowed Strings 73.mp3 in Resources */,
-				6D0BDE891A01CDFB00593F2C /* Piano 28.mp3 in Resources */,
 				6DB285E91921915600B3D14C /* Electric Guitar 63.mp3 in Resources */,
-				6D0BDE821A01CDFB00593F2C /* Piano 21.mp3 in Resources */,
 				6DB285B91921915600B3D14C /* Electric Guitar 2.mp3 in Resources */,
 				6DAD0B1319187F1F005B3807 /* Warm Analogue 42.mp3 in Resources */,
 				9D054CF2174C68E000FA3239 /* Bowed Strings 74.mp3 in Resources */,
@@ -4960,7 +4663,6 @@
 				9D054D3E174C68E700FA3239 /* Carl's Synth 50.mp3 in Resources */,
 				9D054D40174C68E700FA3239 /* Carl's Synth 51.mp3 in Resources */,
 				9D054D42174C68E700FA3239 /* Carl's Synth 52.mp3 in Resources */,
-				6D0BDEE61A01D0A700593F2C /* Acoustic Guitar 37.mp3 in Resources */,
 				9D054D44174C68E700FA3239 /* Carl's Synth 53.mp3 in Resources */,
 				9D054D46174C68E700FA3239 /* Carl's Synth 54.mp3 in Resources */,
 				9D054D48174C68E700FA3239 /* Carl's Synth 55.mp3 in Resources */,
@@ -4972,12 +4674,10 @@
 				9D054D50174C68E700FA3239 /* Carl's Synth 59.mp3 in Resources */,
 				9D054D52174C68E700FA3239 /* Carl's Synth 60.mp3 in Resources */,
 				9D054D54174C68E700FA3239 /* Carl's Synth 61.mp3 in Resources */,
-				6D0BDEC11A01D0A700593F2C /* Acoustic Guitar 0.mp3 in Resources */,
 				9D054D56174C68E700FA3239 /* Carl's Synth 62.mp3 in Resources */,
 				6DB285AB1921915600B3D14C /* Electric Guitar 10.mp3 in Resources */,
 				9D054D58174C68E700FA3239 /* Carl's Synth 63.mp3 in Resources */,
 				9D054D5A174C68E700FA3239 /* Carl's Synth 64.mp3 in Resources */,
-				6D0BDEDE1A01D0A700593F2C /* Acoustic Guitar 29.mp3 in Resources */,
 				9D054D5C174C68E700FA3239 /* Carl's Synth 65.mp3 in Resources */,
 				9D054D5E174C68E700FA3239 /* Carl's Synth 66.mp3 in Resources */,
 				9D054D60174C68E700FA3239 /* Carl's Synth 67.mp3 in Resources */,
@@ -4995,7 +4695,6 @@
 				9D054D74174C68E700FA3239 /* Carl's Synth 77.mp3 in Resources */,
 				9D054D76174C68E700FA3239 /* Carl's Synth 78.mp3 in Resources */,
 				9D054D78174C68E700FA3239 /* Carl's Synth 79.mp3 in Resources */,
-				6D0BDED51A01D0A700593F2C /* Acoustic Guitar 20.mp3 in Resources */,
 				9D054D7A174C68E700FA3239 /* Carl's Synth 80.mp3 in Resources */,
 				9D054DA6174C68EE00FA3239 /* Muted Clav 40.mp3 in Resources */,
 				6DAD0B1219187F1F005B3807 /* Warm Analogue 41.mp3 in Resources */,
@@ -5005,22 +4704,18 @@
 				9D054DAE174C68EE00FA3239 /* Muted Clav 44.mp3 in Resources */,
 				9D054DB0174C68EE00FA3239 /* Muted Clav 45.mp3 in Resources */,
 				9D054DB2174C68EE00FA3239 /* Muted Clav 46.mp3 in Resources */,
-				6D0BDEE41A01D0A700593F2C /* Acoustic Guitar 35.mp3 in Resources */,
 				9D054DB4174C68EE00FA3239 /* Muted Clav 47.mp3 in Resources */,
 				9D054DB6174C68EE00FA3239 /* Muted Clav 48.mp3 in Resources */,
 				9D054DB8174C68EE00FA3239 /* Muted Clav 49.mp3 in Resources */,
 				6DAD0B2419187F1F005B3807 /* Warm Analogue 59.mp3 in Resources */,
-				6D0BDEDA1A01D0A700593F2C /* Acoustic Guitar 25.mp3 in Resources */,
 				9D054DBA174C68EE00FA3239 /* Muted Clav 50.mp3 in Resources */,
 				9D054DBC174C68EE00FA3239 /* Muted Clav 51.mp3 in Resources */,
 				9D054DBE174C68EE00FA3239 /* Muted Clav 52.mp3 in Resources */,
 				6DB285FF1921915600B3D14C /* Electric Guitar 83.mp3 in Resources */,
 				9D054DC0174C68EE00FA3239 /* Muted Clav 53.mp3 in Resources */,
-				6D0BDED41A01D0A700593F2C /* Acoustic Guitar 19.mp3 in Resources */,
 				9D054DC2174C68EE00FA3239 /* Muted Clav 54.mp3 in Resources */,
 				6DB285B21921915600B3D14C /* Electric Guitar 13.mp3 in Resources */,
 				9D054DC4174C68EE00FA3239 /* Muted Clav 55.mp3 in Resources */,
-				6D0BDE7C1A01CDFB00593F2C /* Piano 15.mp3 in Resources */,
 				6DB285C81921915600B3D14C /* Electric Guitar 33.mp3 in Resources */,
 				9D054DC6174C68EE00FA3239 /* Muted Clav 56.mp3 in Resources */,
 				9D054DC8174C68EE00FA3239 /* Muted Clav 57.mp3 in Resources */,
@@ -5071,17 +4766,13 @@
 				6DB286091921915600B3D14C /* Electric Guitar 92.mp3 in Resources */,
 				9D054E3A174C68FB00FA3239 /* Upright Bass 52.mp3 in Resources */,
 				6DA8C1F9192C2C8400182BCF /* RegisterPromptViewController.xib in Resources */,
-				6D0BDEE11A01D0A700593F2C /* Acoustic Guitar 32.mp3 in Resources */,
 				9D054E3C174C68FB00FA3239 /* Upright Bass 53.mp3 in Resources */,
-				6D0BDED61A01D0A700593F2C /* Acoustic Guitar 21.mp3 in Resources */,
 				9D054E3E174C68FB00FA3239 /* Upright Bass 54.mp3 in Resources */,
 				6DB285D61921915600B3D14C /* Electric Guitar 46.mp3 in Resources */,
-				6D0BDE841A01CDFB00593F2C /* Piano 23.mp3 in Resources */,
 				9D054E40174C68FB00FA3239 /* Upright Bass 55.mp3 in Resources */,
 				6DB285DB1921915600B3D14C /* Electric Guitar 50.mp3 in Resources */,
 				9D054E42174C68FB00FA3239 /* Upright Bass 56.mp3 in Resources */,
 				6DB285C61921915600B3D14C /* Electric Guitar 31.mp3 in Resources */,
-				6D0BDE6D1A01CDFB00593F2C /* Piano 0.mp3 in Resources */,
 				9D054E44174C68FB00FA3239 /* Upright Bass 57.mp3 in Resources */,
 				6DAD0B2119187F1F005B3807 /* Warm Analogue 56.mp3 in Resources */,
 				9D054E46174C68FB00FA3239 /* Upright Bass 58.mp3 in Resources */,
@@ -5089,7 +4780,6 @@
 				9D054E4A174C68FB00FA3239 /* Upright Bass 60.mp3 in Resources */,
 				9D054E4C174C68FB00FA3239 /* Upright Bass 61.mp3 in Resources */,
 				9D054E4E174C68FB00FA3239 /* Upright Bass 62.mp3 in Resources */,
-				6D0BDE921A01CDFB00593F2C /* Piano 37.mp3 in Resources */,
 				9D054E50174C68FB00FA3239 /* Upright Bass 63.mp3 in Resources */,
 				9D054E52174C68FB00FA3239 /* Upright Bass 64.mp3 in Resources */,
 				9D054E54174C68FB00FA3239 /* Upright Bass 65.mp3 in Resources */,
@@ -5102,7 +4792,6 @@
 				6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */,
 				9D054E62174C68FB00FA3239 /* Upright Bass 72.mp3 in Resources */,
 				9D054E64174C68FB00FA3239 /* Upright Bass 73.mp3 in Resources */,
-				6D0BDE7A1A01CDFB00593F2C /* Piano 13.mp3 in Resources */,
 				6DB285AF1921915600B3D14C /* Electric Guitar 103.mp3 in Resources */,
 				9D054E66174C68FB00FA3239 /* Upright Bass 74.mp3 in Resources */,
 				9D054E68174C68FB00FA3239 /* Upright Bass 75.mp3 in Resources */,
@@ -5119,8 +4808,6 @@
 				9D054EA4174D425B00FA3239 /* Marimba 43.mp3 in Resources */,
 				6DB285EA1921915600B3D14C /* Electric Guitar 64.mp3 in Resources */,
 				9D054EA6174D425B00FA3239 /* Marimba 44.mp3 in Resources */,
-				6D0BDEE81A01D0A700593F2C /* Acoustic Guitar 39.mp3 in Resources */,
-				6D0BDE911A01CDFB00593F2C /* Piano 36.mp3 in Resources */,
 				6DAD0B2519187F1F005B3807 /* Warm Analogue 60.mp3 in Resources */,
 				9D054EA8174D425B00FA3239 /* Marimba 45.mp3 in Resources */,
 				9D054EAA174D425B00FA3239 /* Marimba 46.mp3 in Resources */,
@@ -5147,18 +4834,15 @@
 				9D054ECE174D425B00FA3239 /* Marimba 64.mp3 in Resources */,
 				6DB285D71921915600B3D14C /* Electric Guitar 47.mp3 in Resources */,
 				9D054ED0174D425B00FA3239 /* Marimba 65.mp3 in Resources */,
-				6D0BDED31A01D0A700593F2C /* Acoustic Guitar 18.mp3 in Resources */,
 				9D054ED2174D425B00FA3239 /* Marimba 66.mp3 in Resources */,
 				9D054ED4174D425B00FA3239 /* Marimba 67.mp3 in Resources */,
 				9D054ED6174D425B00FA3239 /* Marimba 68.mp3 in Resources */,
 				9D054ED8174D425B00FA3239 /* Marimba 69.mp3 in Resources */,
 				9D054EDA174D425B00FA3239 /* Marimba 70.mp3 in Resources */,
 				9D054EDC174D425B00FA3239 /* Marimba 71.mp3 in Resources */,
-				6D0BDE851A01CDFB00593F2C /* Piano 24.mp3 in Resources */,
 				6DB285D51921915600B3D14C /* Electric Guitar 45.mp3 in Resources */,
 				9D054EDE174D425B00FA3239 /* Marimba 72.mp3 in Resources */,
 				9D054EE0174D425B00FA3239 /* Marimba 73.mp3 in Resources */,
-				6D0BDEDF1A01D0A700593F2C /* Acoustic Guitar 30.mp3 in Resources */,
 				9D054EE2174D425B00FA3239 /* Marimba 74.mp3 in Resources */,
 				9D054EE4174D425B00FA3239 /* Marimba 75.mp3 in Resources */,
 				9D054EE6174D425B00FA3239 /* Marimba 76.mp3 in Resources */,
@@ -5351,47 +5035,47 @@
 				ECC11F60162D07AD001A231A /* Rhodes 78.mp3 in Resources */,
 				ECC11F61162D07AD001A231A /* Rhodes 79.mp3 in Resources */,
 				ECC11F62162D07AD001A231A /* Rhodes 80.mp3 in Resources */,
-				ECC11F63162D07AD001A231A /* Droplet 52.mp3 in Resources */,
-				ECC11F64162D07AD001A231A /* Droplet 53.mp3 in Resources */,
-				ECC11F65162D07AD001A231A /* Droplet 54.mp3 in Resources */,
-				ECC11F66162D07AD001A231A /* Droplet 55.mp3 in Resources */,
-				ECC11F67162D07AD001A231A /* Droplet 56.mp3 in Resources */,
-				ECC11F68162D07AD001A231A /* Droplet 57.mp3 in Resources */,
-				ECC11F69162D07AD001A231A /* Droplet 58.mp3 in Resources */,
-				ECC11F6A162D07AD001A231A /* Droplet 59.mp3 in Resources */,
-				ECC11F6B162D07AD001A231A /* Droplet 60.mp3 in Resources */,
-				ECC11F6C162D07AD001A231A /* Droplet 61.mp3 in Resources */,
-				ECC11F6D162D07AD001A231A /* Droplet 62.mp3 in Resources */,
-				ECC11F6E162D07AD001A231A /* Droplet 63.mp3 in Resources */,
-				ECC11F6F162D07AD001A231A /* Droplet 64.mp3 in Resources */,
-				ECC11F70162D07AD001A231A /* Droplet 65.mp3 in Resources */,
-				ECC11F71162D07AD001A231A /* Droplet 66.mp3 in Resources */,
-				ECC11F72162D07AD001A231A /* Droplet 67.mp3 in Resources */,
-				ECC11F73162D07AD001A231A /* Droplet 68.mp3 in Resources */,
-				ECC11F74162D07AD001A231A /* Droplet 69.mp3 in Resources */,
-				ECC11F75162D07AD001A231A /* Droplet 70.mp3 in Resources */,
-				ECC11F76162D07AD001A231A /* Droplet 71.mp3 in Resources */,
-				ECC11F77162D07AD001A231A /* Droplet 72.mp3 in Resources */,
-				ECC11F78162D07AD001A231A /* Droplet 73.mp3 in Resources */,
-				ECC11F79162D07AD001A231A /* Droplet 74.mp3 in Resources */,
-				ECC11F7A162D07AD001A231A /* Droplet 75.mp3 in Resources */,
-				ECC11F7B162D07AD001A231A /* Droplet 76.mp3 in Resources */,
-				ECC11F7C162D07AD001A231A /* Droplet 77.mp3 in Resources */,
-				ECC11F7D162D07AD001A231A /* Droplet 78.mp3 in Resources */,
-				ECC11F7E162D07AD001A231A /* Droplet 79.mp3 in Resources */,
-				ECC11F7F162D07AD001A231A /* Droplet 80.mp3 in Resources */,
-				ECC11F80162D07AD001A231A /* Droplet 81.mp3 in Resources */,
-				ECC11F81162D07AD001A231A /* Droplet 82.mp3 in Resources */,
-				ECC11F82162D07AD001A231A /* Droplet 83.mp3 in Resources */,
-				ECC11F83162D07AD001A231A /* Droplet 84.mp3 in Resources */,
-				ECC11F84162D07AD001A231A /* Droplet 85.mp3 in Resources */,
-				ECC11F85162D07AD001A231A /* Droplet 86.mp3 in Resources */,
-				ECC11F86162D07AD001A231A /* Droplet 87.mp3 in Resources */,
-				ECC11F87162D07AD001A231A /* Droplet 88.mp3 in Resources */,
-				ECC11F88162D07AD001A231A /* Droplet 89.mp3 in Resources */,
-				ECC11F89162D07AD001A231A /* Droplet 90.mp3 in Resources */,
-				ECC11F8A162D07AD001A231A /* Droplet 91.mp3 in Resources */,
-				ECC11F8B162D07AD001A231A /* Droplet 92.mp3 in Resources */,
+				ECC11F63162D07AD001A231A /* Droplet 40.mp3 in Resources */,
+				ECC11F64162D07AD001A231A /* Droplet 41.mp3 in Resources */,
+				ECC11F65162D07AD001A231A /* Droplet 42.mp3 in Resources */,
+				ECC11F66162D07AD001A231A /* Droplet 43.mp3 in Resources */,
+				ECC11F67162D07AD001A231A /* Droplet 44.mp3 in Resources */,
+				ECC11F68162D07AD001A231A /* Droplet 45.mp3 in Resources */,
+				ECC11F69162D07AD001A231A /* Droplet 46.mp3 in Resources */,
+				ECC11F6A162D07AD001A231A /* Droplet 47.mp3 in Resources */,
+				ECC11F6B162D07AD001A231A /* Droplet 48.mp3 in Resources */,
+				ECC11F6C162D07AD001A231A /* Droplet 49.mp3 in Resources */,
+				ECC11F6D162D07AD001A231A /* Droplet 50.mp3 in Resources */,
+				ECC11F6E162D07AD001A231A /* Droplet 51.mp3 in Resources */,
+				ECC11F6F162D07AD001A231A /* Droplet 52.mp3 in Resources */,
+				ECC11F70162D07AD001A231A /* Droplet 53.mp3 in Resources */,
+				ECC11F71162D07AD001A231A /* Droplet 54.mp3 in Resources */,
+				ECC11F72162D07AD001A231A /* Droplet 55.mp3 in Resources */,
+				ECC11F73162D07AD001A231A /* Droplet 56.mp3 in Resources */,
+				ECC11F74162D07AD001A231A /* Droplet 57.mp3 in Resources */,
+				ECC11F75162D07AD001A231A /* Droplet 58.mp3 in Resources */,
+				ECC11F76162D07AD001A231A /* Droplet 59.mp3 in Resources */,
+				ECC11F77162D07AD001A231A /* Droplet 60.mp3 in Resources */,
+				ECC11F78162D07AD001A231A /* Droplet 61.mp3 in Resources */,
+				ECC11F79162D07AD001A231A /* Droplet 62.mp3 in Resources */,
+				ECC11F7A162D07AD001A231A /* Droplet 63.mp3 in Resources */,
+				ECC11F7B162D07AD001A231A /* Droplet 64.mp3 in Resources */,
+				ECC11F7C162D07AD001A231A /* Droplet 65.mp3 in Resources */,
+				ECC11F7D162D07AD001A231A /* Droplet 66.mp3 in Resources */,
+				ECC11F7E162D07AD001A231A /* Droplet 67.mp3 in Resources */,
+				ECC11F7F162D07AD001A231A /* Droplet 68.mp3 in Resources */,
+				ECC11F80162D07AD001A231A /* Droplet 69.mp3 in Resources */,
+				ECC11F81162D07AD001A231A /* Droplet 70.mp3 in Resources */,
+				ECC11F82162D07AD001A231A /* Droplet 71.mp3 in Resources */,
+				ECC11F83162D07AD001A231A /* Droplet 72.mp3 in Resources */,
+				ECC11F84162D07AD001A231A /* Droplet 73.mp3 in Resources */,
+				ECC11F85162D07AD001A231A /* Droplet 74.mp3 in Resources */,
+				ECC11F86162D07AD001A231A /* Droplet 75.mp3 in Resources */,
+				ECC11F87162D07AD001A231A /* Droplet 76.mp3 in Resources */,
+				ECC11F88162D07AD001A231A /* Droplet 77.mp3 in Resources */,
+				ECC11F89162D07AD001A231A /* Droplet 78.mp3 in Resources */,
+				ECC11F8A162D07AD001A231A /* Droplet 79.mp3 in Resources */,
+				ECC11F8B162D07AD001A231A /* Droplet 80.mp3 in Resources */,
 				ECC12059162D07AD001A231A /* Square 40.mp3 in Resources */,
 				ECC1205A162D07AD001A231A /* Square 41.mp3 in Resources */,
 				ECC1205B162D07AD001A231A /* Square 42.mp3 in Resources */,
