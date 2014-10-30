@@ -146,8 +146,8 @@ typedef enum
 // LED light tab
 @property (strong, nonatomic) IBOutlet TransparentAreaView *m_LEDTab;
 @property (strong, nonatomic) IBOutlet UIView *m_LEDGeneralSurface;
-@property (strong, nonatomic) IBOutlet UIView *m_LEDFretSurface;
-@property (strong, nonatomic) IBOutlet UIView *m_LEDStringSurface;
+@property (strong, nonatomic) IBOutlet UIView *m_LEDKeySurface;
+//@property (strong, nonatomic) IBOutlet UIView *m_LEDStringSurface;
 @property (strong, nonatomic) IBOutlet UIView *m_LEDAllSurface;
 @property (assign, nonatomic) LEDTouchArea m_LEDTouchArea;
 @property (assign, nonatomic) CGPoint m_lastLEDTouch;

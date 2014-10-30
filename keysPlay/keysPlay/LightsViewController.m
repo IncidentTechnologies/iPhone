@@ -40,9 +40,9 @@
     [self localizeViews];
     
     _generalSurface.transform = CGAffineTransformMakeScale(1, -1);
-    _stringSurface.transform = CGAffineTransformMakeScale(1, -1);
+    //_stringSurface.transform = CGAffineTransformMakeScale(1, -1);
     
-    _lastLEDTouch = CGPointMake(-1, -1);
+    _lastLEDTouch = -1;
     _LEDMode = LEDModeTrail;
     _LEDShape = LEDShapeDot;
     _LEDLoop = NUM_LEDLoop_ENTRIES;
@@ -61,9 +61,10 @@
     _allLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ALL", NULL)];
     
     [_colorButton setTitle:NSLocalizedString(@"COLOR", NULL) forState:UIControlStateNormal];
-    [_shapeButton setTitle:NSLocalizedString(@"SHAPE", NULL) forState:UIControlStateNormal];
+    //[_shapeButton setTitle:NSLocalizedString(@"SHAPE", NULL) forState:UIControlStateNormal];
     [_loopButton setTitle:NSLocalizedString(@"LOOP", NULL) forState:UIControlStateNormal];
     [_clearButton setTitle:NSLocalizedString(@"CLEAR", NULL) forState:UIControlStateNormal];
+    [_allButton setTitle:NSLocalizedString(@"ALL", NULL) forState:UIControlStateNormal];
     
     
     [_ledSingleLabel setText:NSLocalizedString(@"Single", NULL)];
@@ -80,20 +81,20 @@
 {
     [super viewDidAppear:animated];
     
-    [self.view insertSubview:_shapeView belowSubview:_shapeButton];
-    [self.view insertSubview:_colorView belowSubview:_shapeView];
+    //[self.view insertSubview:_shapeView belowSubview:_shapeButton];
+    [self.view insertSubview:_colorView belowSubview:_allButton];
     
     _shapeView.transform = CGAffineTransformIdentity;
     _colorView.transform = CGAffineTransformIdentity;
     
-    CGRect frame = _shapeView.frame;
-    frame.origin.y = _shapeButton.frame.origin.y;
+    CGRect frame = _colorView.frame;
+    frame.origin.y = _allButton.frame.origin.y;
     frame.size.width = self.view.frame.size.width;
     
     [_shapeView setFrame:frame];
     [_colorView setFrame:frame];
     
-    [_shapeButton setSelected:NO];
+    //[_shapeButton setSelected:NO];
     [_colorButton setSelected:NO];
 }
 
@@ -120,9 +121,14 @@
     [self stopLoop];
 }
 
+- (IBAction)userDidSelectAllButton:(id)sender
+{
+    [self turnOnAllLEDRandom];
+}
+
 - (IBAction)toggleShapeView:(id)sender
 {
-    [_shapeButton setSelected:![_shapeButton isSelected]];
+    /*[_shapeButton setSelected:![_shapeButton isSelected]];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.8];
@@ -144,7 +150,7 @@
         _colorView.transform = CGAffineTransformIdentity;
     }
     
-    [UIView commitAnimations];
+    [UIView commitAnimations];*/
 }
 
 - (IBAction)toggleColorView:(id)sender
@@ -167,11 +173,11 @@
     }
     
     // if shape view is up bring it down
-    if ([_shapeButton isSelected])
+    /*if ([_shapeButton isSelected])
     {
         [_shapeButton setSelected:NO];
         _shapeView.transform = CGAffineTransformIdentity;
-    }
+    }*/
     
     [UIView commitAnimations];
 }
@@ -200,18 +206,18 @@
     {
         _LEDTouchArea = LEDTouchGeneral;
     }
-    else if (touchedView == _fretSurface)
+    else if (touchedView == _keySurface)
     {
-        _LEDTouchArea = LEDTouchFret;
+        _LEDTouchArea = LEDTouchKey;
     }
-    else if (touchedView == _stringSurface)
+    /*else if (touchedView == _stringSurface)
     {
         _LEDTouchArea = LEDTouchString;
-    }
-    else if (touchedView == _allSurface)
+    }*/
+    /*else if (touchedView == _allSurface)
     {
         _LEDTouchArea = LEDTouchAll;
-    }
+    }*/
     else
     {
         _LEDTouchArea = LEDTouchNone;
@@ -223,6 +229,8 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    DLog(@"touches moved lights view controller");
+    
     [delegate touchesMoved:touches withEvent:event];
     
     // Only take action if the touch is inside a designated LED area
@@ -240,11 +248,11 @@
     if (LEDTouchNone != _LEDTouchArea && LEDTouchAll != _LEDTouchArea)
     {
         // Turn off last LED touch point when finger touch ends
-        //[self turnOffLED:_lastLEDTouch.x AndFret:_lastLEDTouch.y];
+        [self turnOffLED:_lastLEDTouch];
     }
     
     // reset the last touch point
-    _lastLEDTouch = CGPointMake(-1, -1);
+    _lastLEDTouch = -1;
 }
 
 
@@ -256,34 +264,31 @@
     
     RGBColor *color = [_colors objectAtIndex:_currentColorIndex];
     
-    // string and fret position, 1 based. A value of 0 for string/fret
-    // indicates all strings/frets respectively on the specified fret/string
-    int string, fret;
+    // key position, 1 based. A value of 0 for key
+    // indicates all keys on - possible math needed to make 0-based?
     
     for (UITouch *touch in touches)
     {
-        /*
-        CGPoint stringFret = [self getFretPositionFromTouch:touch];
         
-        string = stringFret.x;
-        fret = stringFret.y;
-        if (string < 0 || fret < 0)
+        int key = [self getKeyPositionFromTouch:touch];
+        
+        if (key < 0)
         {
-            DLog(@"touchedLED: Invalid fret & string. fret:%d string:%d", fret, string);
+            DLog(@"touchedLED:Invalid Key %i", key);
             return;
         }
         
-        if (string == _lastLEDTouch.x && fret == _lastLEDTouch.y && (string > 0 || fret > 0))
+        if (key == _lastLEDTouch && key > 0)
         {
-            // finger is on same fret, do nothing
+            // finger is on same key, do nothing
             return;
         }
         
         // Finger position had changed, turn off previous location according
         // to LEDMode
-        [self turnOffLED:_lastLEDTouch.x AndFret:_lastLEDTouch.y];
+        [self turnOffLED:_lastLEDTouch];
         
-        _lastLEDTouch = CGPointMake(string, fret);
+        _lastLEDTouch = key;
         
         // Turn on new fret position
         if (LEDTouchAll == _LEDTouchArea && LEDColorRandom == _LEDColorMode)
@@ -293,7 +298,7 @@
         }
         else
         {
-            [self turnOnLED:string AndFret:fret WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
+            [self turnOnLED:key WithColorRed:color.R AndGreen:color.G AndBlue:color.B];
         }
         
         // if color mode is 'random' rotate colors on every new led position
@@ -305,84 +310,54 @@
                 _currentColorIndex = 0;
             }
         }
-         */
+        
     }
 }
 
 // Turns the UITouch point and converts it into a string and fret position
 // corresponding to this point based on the active LEDTouchArea.
-- (CGPoint) getFretPositionFromTouch:(UITouch *)touch
+- (int) getKeyPositionFromTouch:(UITouch *)touch
 {
-    int string = -1;
-    int fret = -1;
+    int key = -1;
     CGPoint point;
     switch (_LEDTouchArea)
     {
         case LEDTouchGeneral:
             point = [touch locationInView:_generalSurface];
             
-            string = (point.y / (_generalSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
-            if (string < 1)
+            key = (point.x / (_generalSurface.frame.size.width/KEYS_KEY_COUNT)) + 1;
+            if (key < 1)
             {
-                string = 1;
+                key = 1;
             }
-            else if ( string > KEYS_GUITAR_STRING_COUNT)
+            else if ( key > KEYS_KEY_COUNT )
             {
-                string = (KEYS_GUITAR_STRING_COUNT);
-            }
-            
-            fret = (point.x / (_generalSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
-            if (fret < 1)
-            {
-                fret = 1;
-            }
-            else if ( fret > KEYS_GUITAR_FRET_COUNT )
-            {
-                fret = (KEYS_GUITAR_FRET_COUNT);
+                key = (KEYS_KEY_COUNT);
             }
             
             break;
             
-        case LEDTouchFret:
-            point = [touch locationInView:_fretSurface];
+        case LEDTouchKey:
+            point = [touch locationInView:_keySurface];
             
-            fret = (point.x / (_fretSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
-            if ( fret < 1 )
+            key = (point.x / (_keySurface.frame.size.width/KEYS_KEY_COUNT)) + 1;
+            if ( key < 1 )
             {
-                fret = 1;
+                key = 1;
             }
-            else if ( fret > KEYS_GUITAR_FRET_COUNT )
+            else if ( key > KEYS_KEY_COUNT )
             {
-                fret = (KEYS_GUITAR_FRET_COUNT);
+                key = (KEYS_KEY_COUNT);
             }
             
             // Light up this fret across all strings
-            string = 0;
-            
-            break;
-            
-        case LEDTouchString:
-            point = [touch locationInView:_stringSurface];
-            
-            string = (point.y / (_stringSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
-            if (string < 1)
-            {
-                string = 1;
-            }
-            else if ( string > KEYS_GUITAR_STRING_COUNT)
-            {
-                string = (KEYS_GUITAR_STRING_COUNT);
-            }
-            
-            // Light up this string on all frets
-            fret = 0;
+            // string = 0;
             
             break;
             
         case LEDTouchAll:
-            // Light up the entire fret board
-            string = 0;
-            fret = 0;
+            // Light up the entire key board
+            key = 0;
             
             break;
             
@@ -391,7 +366,7 @@
             break;
     }
     
-    return CGPointMake(string, fret);
+    return key;
 }
 
 // turns on the LED at the specified string and fret based on the current
@@ -556,7 +531,7 @@
     sender.selected = YES;
     
     // Bring down shape view
-    _shapeButton.selected = NO;
+    //_shapeButton.selected = NO;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.8];
     _shapeView.transform = CGAffineTransformIdentity;
@@ -686,6 +661,8 @@
 // fret position, the colors are rotating fromt the colors array
 - (void) turnOnAllLEDRandom
 {
+    DLog(@"TURN ON ALL LEDs RANDOM");
+    
     RGBColor *color;
     for (int key = 1; key <= KEYS_KEY_COUNT; key++)
     {

@@ -16,8 +16,8 @@ extern KeysController * g_keysController;
 typedef enum
 {
     LEDTouchGeneral,
-    LEDTouchFret,
-    LEDTouchString,
+    LEDTouchKey,
+    //LEDTouchString,
     LEDTouchAll,
     LEDTouchNone
 } LEDTouchArea;
@@ -76,17 +76,17 @@ typedef enum
 
 
 @property (strong, nonatomic) IBOutlet UIView *generalSurface;
-@property (strong, nonatomic) IBOutlet UIView *fretSurface;
-@property (strong, nonatomic) IBOutlet UIView *stringSurface;
+@property (strong, nonatomic) IBOutlet UIView *keySurface;
+//@property (strong, nonatomic) IBOutlet UIView *stringSurface;
 @property (strong, nonatomic) IBOutlet UIView *allSurface;
 
 @property (strong, nonatomic) IBOutlet UIView *shapeView;
 @property (strong, nonatomic) IBOutlet UIView *colorView;
 
-@property (strong, nonatomic) IBOutlet UIButton *shapeButton;
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 @property (strong, nonatomic) IBOutlet UIButton *loopButton;
 @property (strong, nonatomic) IBOutlet UIButton *clearButton;
+@property (strong, nonatomic) IBOutlet UIButton *allButton;
 
 @property (strong, nonatomic) IBOutlet UIImageView *arrowFretsRight;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowStringsTop;
@@ -104,7 +104,7 @@ typedef enum
 @property (nonatomic, strong) IBOutlet UILabel *ledContinuousLabel;
 
 @property (assign, nonatomic) LEDTouchArea LEDTouchArea;
-@property (assign, nonatomic) CGPoint lastLEDTouch;
+@property (assign, nonatomic) int lastLEDTouch;
 @property (assign, nonatomic) LEDColorMode LEDColorMode;
 @property (strong, nonatomic) NSArray *colors;
 @property (assign, nonatomic) NSInteger currentColorIndex;

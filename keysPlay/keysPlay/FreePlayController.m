@@ -78,8 +78,8 @@ extern KeysController * g_keysController;
 @synthesize m_bSpeakerRoute;
 @synthesize m_LEDTab;
 @synthesize m_LEDGeneralSurface;
-@synthesize m_LEDFretSurface;
-@synthesize m_LEDStringSurface;
+@synthesize m_LEDKeySurface;
+//@synthesize m_LEDStringSurface;
 @synthesize m_LEDAllSurface;
 @synthesize m_LEDTouchArea;
 @synthesize m_lastLEDTouch;
@@ -348,10 +348,10 @@ extern KeysController * g_keysController;
     // Setup LED light tab
     [m_LEDGeneralSurface setBackgroundColor:[UIColor clearColor]];
     [m_LEDAllSurface setBackgroundColor:[UIColor clearColor]];
-    [m_LEDFretSurface setBackgroundColor:[UIColor clearColor]];
-    [m_LEDStringSurface setBackgroundColor:[UIColor clearColor]];
+    [m_LEDKeySurface setBackgroundColor:[UIColor clearColor]];
+    //[m_LEDStringSurface setBackgroundColor:[UIColor clearColor]];
     m_LEDGeneralSurface.transform = CGAffineTransformMakeScale(1, -1);
-    m_LEDStringSurface.transform = CGAffineTransformMakeScale(1, -1);
+    //m_LEDStringSurface.transform = CGAffineTransformMakeScale(1, -1);
     
     m_lastLEDTouch = CGPointMake(-1, -1);
     m_LEDMode = LEDModeTrail;
@@ -435,8 +435,8 @@ extern KeysController * g_keysController;
     //[self setM_lineOutVolumeSlider:nil];
     [self setM_LEDTab:nil];
     [self setM_LEDGeneralSurface:nil];
-    [self setM_LEDFretSurface:nil];
-    [self setM_LEDStringSurface:nil];
+    [self setM_LEDKeySurface:nil];
+    //[self setM_LEDStringSurface:nil];
     [self setM_LEDAllSurface:nil];
     
     //[self setM_audioRouteSwitch:nil];
@@ -659,14 +659,14 @@ extern KeysController * g_keysController;
     {
         m_LEDTouchArea = LEDTouchGeneral;
     }
-    else if (touchedView == m_LEDFretSurface)
+    else if (touchedView == m_LEDKeySurface)
     {
-        m_LEDTouchArea = LEDTouchFret;
+        m_LEDTouchArea = LEDTouchKey;
     }
-    else if (touchedView == m_LEDStringSurface)
+    /*else if (touchedView == m_LEDStringSurface)
     {
         m_LEDTouchArea = LEDTouchString;
-    }
+    }*/
     else if (touchedView == m_LEDAllSurface)
     {
         m_LEDTouchArea = LEDTouchAll;
@@ -677,6 +677,17 @@ extern KeysController * g_keysController;
 #ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
         
+        int key = (point.x / (_mainContentView.frame.size.width/KEYS_KEY_COUNT)) + 1;
+        
+        DLog(@"Play key %f/(%f/%i)+1 = %i",point.x,_mainContentView.frame.size.width,KEYS_KEY_COUNT,key);
+        
+        KeysPress press;
+        press.velocity = KeysMaxPressVelocity;
+        press.position = key;
+        
+        [self keysNoteOn:press];
+        
+        /*
         if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
             
             int str = KEYS_GUITAR_STRING_COUNT - ceil((point.y-60) / (143/KEYS_GUITAR_STRING_COUNT));
@@ -689,13 +700,8 @@ extern KeysController * g_keysController;
                 fret = (KEYS_GUITAR_FRET_COUNT-1);
             }
             
-            KeysPress press;
-            press.velocity = KeysMaxPressVelocity;
-            press.position = (KEYS_GUITAR_FRET_COUNT-fret-1);
-            
-            [self keysNoteOn:press];
-            
         }
+         */
 #endif
         
         m_LEDTouchArea = LEDTouchNone;
@@ -834,10 +840,10 @@ extern KeysController * g_keysController;
             
             break;
             
-        case LEDTouchFret:
-            point = [touch locationInView:self.m_LEDFretSurface];
+        case LEDTouchKey:
+            point = [touch locationInView:self.m_LEDKeySurface];
             
-            fret = (point.x / (m_LEDFretSurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
+            fret = (point.x / (m_LEDKeySurface.frame.size.width/KEYS_GUITAR_FRET_COUNT)) + 1;
             if ( fret < 1 )
             {
                 fret = 1;
@@ -852,7 +858,7 @@ extern KeysController * g_keysController;
             
             break;
             
-        case LEDTouchString:
+        /*case LEDTouchString:
             point = [touch locationInView:self.m_LEDStringSurface];
             
             string = (point.y / (m_LEDStringSurface.frame.size.height/KEYS_GUITAR_STRING_COUNT)) + 1;
@@ -868,7 +874,7 @@ extern KeysController * g_keysController;
             // Light up this string on all frets
             fret = 0;
             
-            break;
+            break;*/
             
         case LEDTouchAll:
             // Light up the entire fret board

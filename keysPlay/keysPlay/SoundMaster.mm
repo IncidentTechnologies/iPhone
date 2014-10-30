@@ -361,7 +361,7 @@
     int numNotes = [[instrument objectForKey:@"NumNotes"] intValue];
     
     // Generate a bank
-    m_activeBankNode = [self generateBank:0 numSamples:numNotes];
+    m_activeBankNode = [self generateBank:0 numSamples:KEYS_KEY_COUNT];
     
     DLog(@"Load samples for instrument %i",index);
     
@@ -389,6 +389,8 @@
             // Fill so samples always starts at 0
             for(int i = 0; i < firstNote; i++){
                 
+                DLog(@"Load note %i",i);
+                
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
                     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"mp3"] UTF8String];
@@ -399,9 +401,23 @@
             
             for(int j = firstNote; j < numNotes; j++){
                 
+                DLog(@"Load note %i",j);
+                
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
                     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:[instrumentName stringByAppendingFormat:@" %i",j] ofType:@"mp3"] UTF8String];
+                    
+                    m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
+                }
+            }
+            
+            for(int i = numNotes; i < KEYS_KEY_COUNT; i++){
+                
+                DLog(@"Load note %i",i);
+                
+                // make sure instrument hasn't been released off thread
+                if(currentInstrumentIndex == index){
+                    char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"mp3"] UTF8String];
                     
                     m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode,filepath);
                 }
