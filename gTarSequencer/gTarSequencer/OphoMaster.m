@@ -496,37 +496,45 @@ extern NSUser * g_loggedInUser;
 
 - (void)loadSongList
 {
-    songIdSet = [[NSMutableArray alloc] init];
-    songLoadSet = [[NSMutableArray alloc] init];
-    songDateSet = [[NSMutableArray alloc] init];
-    
+    if(songIdSet == nil){
+        songIdSet = [[NSMutableArray alloc] init];
+        songLoadSet = [[NSMutableArray alloc] init];
+        songDateSet = [[NSMutableArray alloc] init];
+    }
+        
     [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:)];
 }
 
 - (void)loadSequenceList
 {
-    sequenceIdSet = [[NSMutableArray alloc] init];
-    sequenceLoadSet = [[NSMutableArray alloc] init];
-    sequenceDateSet = [[NSMutableArray alloc] init];
+    if(sequenceIdSet == nil){
+        sequenceIdSet = [[NSMutableArray alloc] init];
+        sequenceLoadSet = [[NSMutableArray alloc] init];
+        sequenceDateSet = [[NSMutableArray alloc] init];
+    }
     
     [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:)];
 }
 
 - (void)loadSampleList
 {
-    sampleIdSet = [[NSMutableArray alloc] init];
-    sampleLoadSet = [[NSMutableArray alloc] init];
-    sampleDateSet = [[NSMutableArray alloc] init];
+    if(sampleIdSet == nil){
+        sampleIdSet = [[NSMutableArray alloc] init];
+        sampleLoadSet = [[NSMutableArray alloc] init];
+        sampleDateSet = [[NSMutableArray alloc] init];
+    }
     
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
 }
 
 - (void)loadInstrumentList
 {
-    instrumentIdSet = [[NSMutableArray alloc] init];
-    instrumentLoadSet = [[NSMutableArray alloc] init];
-    instrumentDateSet = [[NSMutableArray alloc] init];
-    
+    if(instrumentIdSet == nil){
+        instrumentIdSet = [[NSMutableArray alloc] init];
+        instrumentLoadSet = [[NSMutableArray alloc] init];
+        instrumentDateSet = [[NSMutableArray alloc] init];
+    }
+        
     [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:)];
 }
 
@@ -536,6 +544,10 @@ extern NSUser * g_loggedInUser;
     
     NSArray * xmpList = cloudResponse.m_xmpList;
     
+    [songIdSet removeAllObjects];
+    [songLoadSet removeAllObjects];
+    [songDateSet removeAllObjects];
+    
     [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet];
 }
 
@@ -544,6 +556,10 @@ extern NSUser * g_loggedInUser;
     DLog(@"Request Get Xmp Instrument List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
+    
+    [instrumentIdSet removeAllObjects];
+    [instrumentLoadSet removeAllObjects];
+    [instrumentDateSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet];
     
@@ -555,6 +571,10 @@ extern NSUser * g_loggedInUser;
     DLog(@"Request Get Xmp Sequence List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
+    
+    [sequenceIdSet removeAllObjects];
+    [sequenceLoadSet removeAllObjects];
+    [sequenceDateSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet];
     
@@ -577,6 +597,10 @@ extern NSUser * g_loggedInUser;
     DLog(@"Request Get Xmp Sample List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
+    
+    [sampleIdSet removeAllObjects];
+    [sampleLoadSet removeAllObjects];
+    [sampleDateSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet];
 }

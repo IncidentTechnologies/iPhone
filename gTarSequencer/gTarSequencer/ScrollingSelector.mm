@@ -156,7 +156,12 @@
         NSString * name = [dict objectForKey:@"Name"];
         [names addObject:name];
         
-        NSString * iconName = @"Icon_Trumpet";//[dict objectForKey:@"IconName"]
+        // Check if there's an icon for the name
+        NSString * filePath = [[NSBundle mainBundle] pathForResource:[@"Icon_" stringByAppendingString:name] ofType:@"png"];
+        NSString * iconName = @"Icon_Custom";
+        if([[NSFileManager defaultManager] fileExistsAtPath:filePath]){
+            iconName = [@"Icon_" stringByAppendingString:name];
+        }
         
         UIImage * normalImage = [UIImage imageNamed:iconName];
         [images addObject:normalImage];

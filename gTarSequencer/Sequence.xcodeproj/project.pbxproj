@@ -11,9 +11,9 @@
 		5805D04B188DB3E7000832A9 /* Icon_Custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 5805D04A188DB3E7000832A9 /* Icon_Custom.png */; };
 		580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F11864DFF50077240B /* gTarConnectedLogo.png */; };
 		580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */; };
-		580A52051864DFF50077240B /* Icon_Guitar.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F51864DFF50077240B /* Icon_Guitar.png */; };
-		580A52061864DFF50077240B /* Icon_Percussion.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F61864DFF50077240B /* Icon_Percussion.png */; };
-		580A52071864DFF50077240B /* Icon_Piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F71864DFF50077240B /* Icon_Piano.png */; };
+		580A52051864DFF50077240B /* Icon_GUITAR.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F51864DFF50077240B /* Icon_GUITAR.png */; };
+		580A52061864DFF50077240B /* Icon_HOUSE.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F61864DFF50077240B /* Icon_HOUSE.png */; };
+		580A52071864DFF50077240B /* Icon_PIANO.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F71864DFF50077240B /* Icon_PIANO.png */; };
 		580A52091864DFF50077240B /* Icon_WubWub.png in Resources */ = {isa = PBXBuildFile; fileRef = 580A51F91864DFF50077240B /* Icon_WubWub.png */; };
 		5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */ = {isa = PBXBuildFile; fileRef = 5811AADE187B88C800FC0BD2 /* Sample Pack INFO */; };
 		5811AB49187B95BA00FC0BD2 /* SEQNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811AB48187B95BA00FC0BD2 /* SEQNote.m */; };
@@ -89,8 +89,8 @@
 		58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F5449618AC0C2B009E6E43 /* Trash_Icon.png */; };
 		58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61678188F5E2700020A74 /* Icon_Music.png */; };
 		58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F61679188F5E2700020A74 /* Icon_Trombone.png */; };
-		58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */; };
-		58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167B188F5E2700020A74 /* Icon_Violin.png */; };
+		58F6167E188F5E2700020A74 /* Icon_VIBRAPHONE.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167A188F5E2700020A74 /* Icon_VIBRAPHONE.png */; };
+		58F6167F188F5E2700020A74 /* Icon_VIOLIN.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F6167B188F5E2700020A74 /* Icon_VIOLIN.png */; };
 		6D02290418F31D6A000E2DE4 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856F318EF43CE00CCA191 /* libJSONKit.a */; };
 		6D02290518F31D6A000E2DE4 /* libOAuth2Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA856FE18EF43DA00CCA191 /* libOAuth2Client.a */; };
 		6D02290618F31D6A000E2DE4 /* libOHAttributedLabel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8570418EF43E500CCA191 /* libOHAttributedLabel.a */; };
@@ -100,6 +100,12 @@
 		6D03F58219CBA4DE00451CFD /* RecordEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03F58119CBA4DE00451CFD /* RecordEditor.m */; };
 		6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */; };
 		6D1C776819EEF0CA002AD74A /* OphoMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C776719EEF0CA002AD74A /* OphoMaster.m */; };
+		6D1DDB481A04084B00A770E7 /* Icon_808.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB421A04084B00A770E7 /* Icon_808.png */; };
+		6D1DDB491A04084B00A770E7 /* Icon_CHIPTUNE.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB431A04084B00A770E7 /* Icon_CHIPTUNE.png */; };
+		6D1DDB4A1A04084B00A770E7 /* Icon_DOUBLE BASS.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB441A04084B00A770E7 /* Icon_DOUBLE BASS.png */; };
+		6D1DDB4B1A04084B00A770E7 /* Icon_JUNO.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB451A04084B00A770E7 /* Icon_JUNO.png */; };
+		6D1DDB4C1A04084B00A770E7 /* Icon_PLUCK.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB461A04084B00A770E7 /* Icon_PLUCK.png */; };
+		6D1DDB4D1A04084B00A770E7 /* Icon_ROCK.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1DDB471A04084B00A770E7 /* Icon_ROCK.png */; };
 		6D1E5C1019C0D574005956F4 /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C0F19C0D574005956F4 /* NSSong.m */; };
 		6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1919C0D5E4005956F4 /* NSClip.mm */; };
 		6D1E5C1E19C127DA005956F4 /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1D19C127DA005956F4 /* MainEventController.m */; };
@@ -485,9 +491,9 @@
 		5805D04A188DB3E7000832A9 /* Icon_Custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Custom.png; sourceTree = "<group>"; };
 		580A51F11864DFF50077240B /* gTarConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarConnectedLogo.png; sourceTree = "<group>"; };
 		580A51F21864DFF50077240B /* gTarNotConnectedLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gTarNotConnectedLogo.png; sourceTree = "<group>"; };
-		580A51F51864DFF50077240B /* Icon_Guitar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Guitar.png; sourceTree = "<group>"; };
-		580A51F61864DFF50077240B /* Icon_Percussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Percussion.png; sourceTree = "<group>"; };
-		580A51F71864DFF50077240B /* Icon_Piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Piano.png; sourceTree = "<group>"; };
+		580A51F51864DFF50077240B /* Icon_GUITAR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_GUITAR.png; sourceTree = "<group>"; };
+		580A51F61864DFF50077240B /* Icon_HOUSE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_HOUSE.png; sourceTree = "<group>"; };
+		580A51F71864DFF50077240B /* Icon_PIANO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_PIANO.png; sourceTree = "<group>"; };
 		580A51F91864DFF50077240B /* Icon_WubWub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_WubWub.png; sourceTree = "<group>"; };
 		5811AADE187B88C800FC0BD2 /* Sample Pack INFO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Sample Pack INFO"; sourceTree = "<group>"; };
 		5811AB47187B95BA00FC0BD2 /* SEQNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEQNote.h; sourceTree = "<group>"; };
@@ -591,8 +597,8 @@
 		58F5449618AC0C2B009E6E43 /* Trash_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trash_Icon.png; sourceTree = "<group>"; };
 		58F61678188F5E2700020A74 /* Icon_Music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Music.png; sourceTree = "<group>"; };
 		58F61679188F5E2700020A74 /* Icon_Trombone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Trombone.png; sourceTree = "<group>"; };
-		58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Vibraphone.png; sourceTree = "<group>"; };
-		58F6167B188F5E2700020A74 /* Icon_Violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Violin.png; sourceTree = "<group>"; };
+		58F6167A188F5E2700020A74 /* Icon_VIBRAPHONE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_VIBRAPHONE.png; sourceTree = "<group>"; };
+		58F6167B188F5E2700020A74 /* Icon_VIOLIN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_VIOLIN.png; sourceTree = "<group>"; };
 		6D030C9019CA0E1300BFC44D /* HorizontalAdjustor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalAdjustor.h; sourceTree = "<group>"; };
 		6D030C9119CA0E1300BFC44D /* HorizontalAdjustor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalAdjustor.m; sourceTree = "<group>"; };
 		6D03F58019CBA4DE00451CFD /* RecordEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordEditor.h; sourceTree = "<group>"; };
@@ -603,6 +609,12 @@
 		6D19EC3919B6A86700A963E4 /* FacebookIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FacebookIcon.jpg; sourceTree = "<group>"; };
 		6D1C776619EEF0CA002AD74A /* OphoMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OphoMaster.h; sourceTree = "<group>"; };
 		6D1C776719EEF0CA002AD74A /* OphoMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OphoMaster.m; sourceTree = "<group>"; };
+		6D1DDB421A04084B00A770E7 /* Icon_808.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_808.png; sourceTree = "<group>"; };
+		6D1DDB431A04084B00A770E7 /* Icon_CHIPTUNE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_CHIPTUNE.png; sourceTree = "<group>"; };
+		6D1DDB441A04084B00A770E7 /* Icon_DOUBLE BASS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_DOUBLE BASS.png"; sourceTree = "<group>"; };
+		6D1DDB451A04084B00A770E7 /* Icon_JUNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_JUNO.png; sourceTree = "<group>"; };
+		6D1DDB461A04084B00A770E7 /* Icon_PLUCK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_PLUCK.png; sourceTree = "<group>"; };
+		6D1DDB471A04084B00A770E7 /* Icon_ROCK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_ROCK.png; sourceTree = "<group>"; };
 		6D1E5C0E19C0D574005956F4 /* NSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSong.h; sourceTree = "<group>"; };
 		6D1E5C0F19C0D574005956F4 /* NSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSong.m; sourceTree = "<group>"; };
 		6D1E5C1819C0D5E4005956F4 /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
@@ -1007,18 +1019,24 @@
 		580A52101864E0230077240B /* Instrument Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6D1DDB421A04084B00A770E7 /* Icon_808.png */,
+				6D1DDB431A04084B00A770E7 /* Icon_CHIPTUNE.png */,
+				6D1DDB441A04084B00A770E7 /* Icon_DOUBLE BASS.png */,
+				6D1DDB451A04084B00A770E7 /* Icon_JUNO.png */,
+				6D1DDB461A04084B00A770E7 /* Icon_PLUCK.png */,
+				6D1DDB471A04084B00A770E7 /* Icon_ROCK.png */,
 				6DAF30D718D2207700036958 /* Icon_Trumpet.png */,
 				58F5449218ABFDAA009E6E43 /* Icon_Saxophone.png */,
 				58F5449318ABFDAA009E6E43 /* Icon_Sound.png */,
 				58F61678188F5E2700020A74 /* Icon_Music.png */,
 				58F61679188F5E2700020A74 /* Icon_Trombone.png */,
-				58F6167A188F5E2700020A74 /* Icon_Vibraphone.png */,
-				58F6167B188F5E2700020A74 /* Icon_Violin.png */,
+				58F6167A188F5E2700020A74 /* Icon_VIBRAPHONE.png */,
+				58F6167B188F5E2700020A74 /* Icon_VIOLIN.png */,
 				5805D04A188DB3E7000832A9 /* Icon_Custom.png */,
 				58B7FDC5188A15A700A2C1B1 /* Icon_Bacon.png */,
-				580A51F51864DFF50077240B /* Icon_Guitar.png */,
-				580A51F61864DFF50077240B /* Icon_Percussion.png */,
-				580A51F71864DFF50077240B /* Icon_Piano.png */,
+				580A51F51864DFF50077240B /* Icon_GUITAR.png */,
+				580A51F61864DFF50077240B /* Icon_HOUSE.png */,
+				580A51F71864DFF50077240B /* Icon_PIANO.png */,
 				580A51F91864DFF50077240B /* Icon_WubWub.png */,
 			);
 			name = "Instrument Icons";
@@ -2287,6 +2305,7 @@
 				6DDF536019F04636002EB720 /* Trumpet_G#.wav in Resources */,
 				6DDF534D19F04636002EB720 /* Flute_F.wav in Resources */,
 				6DDF535C19F04636002EB720 /* Trumpet_D.wav in Resources */,
+				6D1DDB481A04084B00A770E7 /* Icon_808.png in Resources */,
 				6DDF535019F04636002EB720 /* Trombone_A.wav in Resources */,
 				6DDF52FB19F04636002EB720 /* DoubleBass_G.wav in Resources */,
 				6DDF533919F04636002EB720 /* Pluck_A.wav in Resources */,
@@ -2304,9 +2323,10 @@
 				6DDF52D019F04636002EB720 /* Piano_C.wav in Resources */,
 				6DDF538019F04636002EB720 /* House_Clap.wav in Resources */,
 				6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */,
-				58F6167E188F5E2700020A74 /* Icon_Vibraphone.png in Resources */,
+				58F6167E188F5E2700020A74 /* Icon_VIBRAPHONE.png in Resources */,
 				6D813EC518DA268500D29F48 /* Tutorial_gTar.png in Resources */,
 				6DDF538219F04636002EB720 /* House_Kick.wav in Resources */,
+				6D1DDB4D1A04084B00A770E7 /* Icon_ROCK.png in Resources */,
 				6DDF533B19F04636002EB720 /* Pluck_C#.wav in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
 				6DDF535D19F04636002EB720 /* Trumpet_E.wav in Resources */,
@@ -2354,7 +2374,7 @@
 				6DDF537B19F04636002EB720 /* Dubstep_ClosedHat.wav in Resources */,
 				6DDF536F19F04636002EB720 /* 808_ClosedHat.wav in Resources */,
 				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
-				580A52051864DFF50077240B /* Icon_Guitar.png in Resources */,
+				580A52051864DFF50077240B /* Icon_GUITAR.png in Resources */,
 				6DDF534719F04636002EB720 /* Flute_C#.wav in Resources */,
 				6DDF52D719F04636002EB720 /* Piano_G.wav in Resources */,
 				6DDF537619F04636002EB720 /* Chiptune_Lazer.wav in Resources */,
@@ -2380,6 +2400,7 @@
 				6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */,
 				6DDF538E19F04636002EB720 /* Sounds_Bacon.wav in Resources */,
 				6DDF530319F04636002EB720 /* Guitar_E.wav in Resources */,
+				6D1DDB491A04084B00A770E7 /* Icon_CHIPTUNE.png in Resources */,
 				6DDF52F819F04636002EB720 /* DoubleBass_F#.wav in Resources */,
 				6DA724C318E6493A00872705 /* ShareView.xib in Resources */,
 				6DDF536B19F04636002EB720 /* Rock_OpenHat.wav in Resources */,
@@ -2391,6 +2412,7 @@
 				6DDF52DF19F04636002EB720 /* Vibraphone_E.wav in Resources */,
 				6DDF530D19F04636002EB720 /* Violin_D#.wav in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
+				6D1DDB4C1A04084B00A770E7 /* Icon_PLUCK.png in Resources */,
 				6DDF52F319F04636002EB720 /* DoubleBass_C#.wav in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
 				6DDF52E419F04636002EB720 /* Acoustic_A#.wav in Resources */,
@@ -2418,7 +2440,7 @@
 				6DDF534019F04636002EB720 /* Pluck_F#.wav in Resources */,
 				6DDF537119F04636002EB720 /* 808_OpenHat.wav in Resources */,
 				6DDF532E19F04636002EB720 /* MiniBass_B.wav in Resources */,
-				580A52071864DFF50077240B /* Icon_Piano.png in Resources */,
+				580A52071864DFF50077240B /* Icon_PIANO.png in Resources */,
 				6DDF52D219F04636002EB720 /* Piano_D.wav in Resources */,
 				6DDF534519F04636002EB720 /* Flute_A.wav in Resources */,
 				6DDF52E719F04636002EB720 /* Acoustic_C#.wav in Resources */,
@@ -2506,7 +2528,7 @@
 				6DDF535319F04636002EB720 /* Trombone_D.wav in Resources */,
 				6DDF535E19F04636002EB720 /* Trumpet_F#.wav in Resources */,
 				58D617181863B8D7001EB327 /* InfoPlist.strings in Resources */,
-				58F6167F188F5E2700020A74 /* Icon_Violin.png in Resources */,
+				58F6167F188F5E2700020A74 /* Icon_VIOLIN.png in Resources */,
 				6DDF52F119F04636002EB720 /* DoubleBass_A.wav in Resources */,
 				6DDF52CD19F04636002EB720 /* Piano_A.wav in Resources */,
 				6DDF531F19F04636002EB720 /* Juno_G.wav in Resources */,
@@ -2530,10 +2552,12 @@
 				6DDF533D19F04636002EB720 /* Pluck_D#.wav in Resources */,
 				58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */,
 				6DDF536219F04636002EB720 /* HandDrum_Clink.wav in Resources */,
-				580A52061864DFF50077240B /* Icon_Percussion.png in Resources */,
+				580A52061864DFF50077240B /* Icon_HOUSE.png in Resources */,
+				6D1DDB4B1A04084B00A770E7 /* Icon_JUNO.png in Resources */,
 				6DDF533419F04636002EB720 /* MiniBass_F#.wav in Resources */,
 				6DDF531219F04636002EB720 /* Violin_G#.wav in Resources */,
 				6DDF532119F04636002EB720 /* Ladder_A.wav in Resources */,
+				6D1DDB4A1A04084B00A770E7 /* Icon_DOUBLE BASS.png in Resources */,
 				6DDF52D919F04636002EB720 /* Vibraphone_A.wav in Resources */,
 				6DDF535A19F04636002EB720 /* Trumpet_C.wav in Resources */,
 				6DDF533A19F04636002EB720 /* Pluck_B.wav in Resources */,

@@ -394,7 +394,7 @@
     
     [button setImage:[UIImage imageNamed:[customIconSet objectAtIndex:customIconCounter]] forState:UIControlStateNormal];
     
-    [button addTarget:self action:@selector(changeCustomIcon) forControlEvents:UIControlEventTouchUpInside];
+    //[button addTarget:self action:@selector(changeCustomIcon) forControlEvents:UIControlEventTouchUpInside];
     
     customIconButton = button;
     
@@ -778,7 +778,7 @@
     m_bankNode = [soundMaster generateBank];
     
     if(datastring == nil || [datastring length] == 0){
-        DLog(@"ERROR: attempting to play string with empty name");
+        DLog(@"ERROR: attempting to play string with empty data");
         return;
     }
     

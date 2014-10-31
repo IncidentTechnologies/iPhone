@@ -11,8 +11,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>0</integer>
-			<key>IconName</key>
-			<string>Icon_Custom</string>
 			<key>Strings</key>
 			<array>
 				<string>Silence</string>
@@ -48,8 +46,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>3</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
 				<string>Juno_C</string>
@@ -85,8 +81,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>5</integer>
-			<key>IconName</key>
-			<string>Icon_Guitar</string>
 			<key>Strings</key>
 			<array>
 				<string>Guitar_C</string>
@@ -122,8 +116,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>6</integer>
-			<key>IconName</key>
-			<string>Icon_Piano</string>
 			<key>Strings</key>
 			<array>
 				<string>Piano_C</string>
@@ -159,8 +151,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>10</integer>
-			<key>IconName</key>
-			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
 				<string>Violin_C</string>
@@ -196,8 +186,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>11</integer>
-			<key>IconName</key>
-			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
 				<string>Vibraphone_C</string>
@@ -233,8 +221,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>7</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
 				<string>Chiptune_Kick</string>
@@ -270,8 +256,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>4</integer>
-			<key>IconName</key>
-			<string>Icon_Vibraphone</string>
 			<key>Strings</key>
 			<array>
 				<string>Pluck_C</string>
@@ -307,8 +291,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>1</integer>
-			<key>IconName</key>
-			<string>Icon_Violin</string>
 			<key>Strings</key>
 			<array>
 				<string>DoubleBass_C</string>
@@ -344,8 +326,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>2</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
 				<string>808_Kick</string>
@@ -381,8 +361,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>9</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
 				<string>House_Kick</string>
@@ -418,8 +396,6 @@
 			<false/>
 			<key>Index</key>
 			<integer>8</integer>
-			<key>IconName</key>
-			<string>Icon_Percussion</string>
 			<key>Strings</key>
 			<array>
 				<string>Rock_Kick</string>

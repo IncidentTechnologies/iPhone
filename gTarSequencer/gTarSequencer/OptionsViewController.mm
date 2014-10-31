@@ -477,10 +477,10 @@
     //[loadTable reloadData];
     [self reloadFileTable];
     
-    if([fileLoadSet count] == 0){
+    //if([fileLoadSet count] == 0){
         // schedule this because the table loading inevitably has a delay
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showNoSetsLabel) userInfo:nil repeats:NO];
-    }
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showListOrNoSetsLabel) userInfo:nil repeats:NO];
+    //}
 
 }
 
@@ -679,6 +679,15 @@
 }
 
 #pragma mark - Empty set
+
+- (void)showListOrNoSetsLabel
+{
+    if([fileLoadSet count] == 0){
+        [self showNoSetsLabel];
+    }else{
+        [self reloadFileTable];
+    }
+}
 
 - (void)showNoSetsLabel
 {

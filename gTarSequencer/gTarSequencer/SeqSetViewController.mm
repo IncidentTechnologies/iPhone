@@ -291,7 +291,7 @@
     // load custom instrument selector
     [self initCustomInstrumentSelector];
     
-    [instrumentTable reloadData];
+    //[instrumentTable reloadData];
     
 }
 
@@ -639,11 +639,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([remainingInstrumentOptions count] == 0){
-        return [sequence trackCount];
-    }else{
+    //if ([remainingInstrumentOptions count] == 0){
+    //    return [sequence trackCount];
+    //}else{
         return [sequence trackCount] + 1;
-    }
+    //}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -936,7 +936,7 @@
     addInstCell.selected = NO;
     
     // Set instrumentSelectors options and move off screen:
-    instrumentSelector.options = remainingInstrumentOptions;
+    [instrumentSelector setOptions:remainingInstrumentOptions];
     [instrumentSelector moveFrame:offLeftSelectorFrame];
     
     // Unhide instrument selector:
@@ -989,7 +989,6 @@
         
         /*
         NSString * instName = [dict objectForKey:@"Name"];
-        NSString * iconName = [dict objectForKey:@"IconName"];
         NSArray * stringSet = [dict objectForKey:@"Strings"];
         NSArray * stringPaths = [dict objectForKey:@"StringPaths"];
         NSArray * stringIds = [dict objectForKey:@"StringXmpIds"];
@@ -1039,7 +1038,6 @@
 - (void)initCustomInstrumentSelector
 {
     
-    // TODO: figure out positioning for 4"
     DLog(@"Init custom instrument selector");
     
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
@@ -1122,7 +1120,6 @@
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
-    [dict setValue:iconName forKey:@"IconName"];
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
     [dict setValue:stringSet forKey:@"Strings"];
