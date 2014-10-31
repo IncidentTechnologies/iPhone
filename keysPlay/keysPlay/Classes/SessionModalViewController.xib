@@ -86,12 +86,12 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="100" userLabel="VolumeButton" customClass="IconButton">
                                     <rect key="frame" x="100" y="0.0" width="100" height="46"/>
-                                    <color key="backgroundColor" red="0.65098039215686276" green="0.79607843137254897" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.098039215690000001" green="0.80000000000000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="157"/>
                                         <constraint firstAttribute="height" constant="46" id="158"/>
                                     </constraints>
-                                    <color key="tintColor" red="0.32549019607843138" green="0.52941176470588236" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.054411117609254864" green="0.51181839923469385" blue="0.42232993347080211" alpha="1" colorSpace="calibratedRGB"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                     <state key="normal" image="VolumeIcon.png"/>
                                     <connections>

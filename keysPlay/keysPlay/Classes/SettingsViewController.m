@@ -47,7 +47,7 @@ unsigned char g_sensitivity[6];
     
     [g_keysController addObserver:self];
     
-    [_settingsSelector setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"KEYS",NULL), NSLocalizedString(@"CALIBRATE",NULL), NSLocalizedString(@"CONTROLS",NULL), nil]];
+    [_settingsSelector setTitles:[NSArray arrayWithObjects:NSLocalizedString(@"KEYS",NULL), NSLocalizedString(@"CONTROLS",NULL), nil]];
     [_topBar addShadow];
     
     [self updateKeysRegistered];
@@ -234,13 +234,6 @@ unsigned char g_sensitivity[6];
         // keys
         [_keysView setHidden:NO];
         [_calibrateView setHidden:YES];
-        [_controlsView setHidden:YES];
-        
-    }else if(_settingsSelector.selectedIndex == 1){
-        
-        // calibrate
-        [_keysView setHidden:YES];
-        [_calibrateView setHidden:NO];
         [_controlsView setHidden:YES];
         
     }else{

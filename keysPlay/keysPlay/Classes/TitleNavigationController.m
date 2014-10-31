@@ -1244,6 +1244,7 @@ extern UserController * g_userController;
     
     g_keysController.m_delegate = self;
     [g_keysController sendRequestFirmwareVersion];
+    [g_keysController sendRequestKeysRange];
     
     //    [self playStartupLightSequence];
     //

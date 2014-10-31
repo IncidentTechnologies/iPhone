@@ -72,7 +72,7 @@
     
     context = UIGraphicsGetCurrentContext();
     
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:166/255.0 green:203/255.0 blue:116/255.0 alpha:1.0].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:25/255.0 green:204/255.0 blue:166/255.0 alpha:1.0].CGColor);
     
     CGContextFillRect(context, CGRectMake(0,0,size.width,size.height));
     
@@ -92,7 +92,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:166/255.0 green:203/255.0 blue:116/255.0 alpha:1.0].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:25/255.0 green:204/255.0 blue:166/255.0 alpha:1.0].CGColor);
     
     CGContextFillEllipseInRect(context, CGRectMake(0,0,size.width,size.height));
     
