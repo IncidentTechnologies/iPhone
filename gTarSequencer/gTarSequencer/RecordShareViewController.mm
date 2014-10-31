@@ -135,7 +135,7 @@
         CGRect instFrame = CGRectMake(-1, i*instHeight, instWidth+2, displayHeight);
         
         UIButton * instView = [[UIButton alloc] initWithFrame:instFrame];
-        [instView setImage:[UIImage imageNamed:inst.m_iconName] forState:UIControlStateNormal];
+        [instView setImage:[UIImage imageNamed:[inst getIconName]] forState:UIControlStateNormal];
         [instView setBackgroundColor:[UIColor colorWithRed:23/255.0 green:160/255.0 blue:195/255.0 alpha:1.0]];
         [instView setUserInteractionEnabled:NO];
         [instView setImageEdgeInsets:UIEdgeInsetsMake(5,14,5,14)];

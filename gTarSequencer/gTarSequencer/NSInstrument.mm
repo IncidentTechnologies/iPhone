@@ -13,7 +13,7 @@
 @synthesize m_id;
 @synthesize m_xmpid;
 @synthesize m_name;
-@synthesize m_iconName;
+//@synthesize m_iconName;
 @synthesize m_custom;
 @synthesize m_sampler;
 
@@ -31,7 +31,7 @@
         
         m_name = [[NSString alloc] initWithUTF8String:[instrument GetAttributeValueWithName:@"name"].GetPszValue()];
         
-        m_iconName = [[NSString alloc] initWithUTF8String:[instrument GetAttributeValueWithName:@"iconname"].GetPszValue()];
+        //m_iconName = [[NSString alloc] initWithUTF8String:[instrument GetAttributeValueWithName:@"iconname"].GetPszValue()];
         
         [instrument GetAttributeValueWithName:@"index"].GetValueInt(&m_id);
         
@@ -62,7 +62,7 @@
         
         m_name = [dom getTextFromChildWithName:@"name"];
         
-        m_iconName = [dom getTextFromChildWithName:@"iconname"];
+        //m_iconName = [dom getTextFromChildWithName:@"iconname"];
         
         m_id = [dom getIntegerFromChildWithName:@"index"];
         
@@ -93,7 +93,7 @@
         m_name = @"";
         m_id = -1;
         m_xmpid = -1;
-        m_iconName = @"";
+        //m_iconName = @"";
         m_custom = NO;
         
         m_sampler = [[NSSampler alloc] init];
@@ -112,7 +112,7 @@
         m_name = name;
         m_id = index;
         m_xmpid = m_id;
-        m_iconName = iconName;
+        //m_iconName = iconName;
         m_custom = isCustom;
         
         m_sampler = [[NSSampler alloc] init];
@@ -129,7 +129,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
     
-    node->AddAttribute(new XMPAttribute((char *)"iconname", (char *)[m_iconName UTF8String]));
+    //node->AddAttribute(new XMPAttribute((char *)"iconname", (char *)[m_iconName UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"index", m_id));
     
@@ -205,6 +205,17 @@
     
     if(!result)
         DLog(@"Error deleting");
+}
+
+- (NSString *)getIconName
+{
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:[@"Icon_" stringByAppendingString:m_name] ofType:@"png"];
+    NSString * iconName = @"Icon_Custom";
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath]){
+        iconName = [@"Icon_" stringByAppendingString:m_name];
+    }
+    
+    return iconName;
 }
 
 

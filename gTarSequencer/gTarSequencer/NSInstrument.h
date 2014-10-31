@@ -16,7 +16,7 @@
     long m_id;
     long m_xmpid;
     NSString * m_name;
-    NSString * m_iconName;
+   // NSString * m_iconName;
     bool m_custom;
     
     NSSampler * m_sampler;
@@ -25,7 +25,7 @@
 @property (nonatomic) long m_id;
 @property (nonatomic) long m_xmpid;
 @property (retain, nonatomic) NSString * m_name;
-@property (retain, nonatomic) NSString * m_iconName;
+//@property (retain, nonatomic) NSString * m_iconName;
 @property (nonatomic) bool m_custom;
 
 @property (retain, nonatomic) NSSampler * m_sampler;
@@ -36,6 +36,8 @@
 -(id)initWithName:(NSString *)name id:(long)index iconName:(NSString *)iconName isCustom:(BOOL)isCustom;
 
 -(id)init;
+
+- (NSString *)getIconName;
 
 -(XMPNode *)convertToSequenceXmp;
 -(XMPNode *)convertToSongXmp;

@@ -278,7 +278,7 @@
     BOOL toMute = track.m_muted;
     
     // Icon
-    [instrumentIcon setImage:[UIImage imageNamed:track.m_instrument.m_iconName]];
+    [instrumentIcon setImage:[UIImage imageNamed:[track.m_instrument getIconName]]];
     
     // Reset playband
     [self resetPlayband];

@@ -451,7 +451,7 @@
 
 - (void)setSelectedInstrument:(NSInstrument *)inst
 {
-    [leftNavigator enableInstrumentViewWithIcon:inst.m_iconName showCustom:inst.m_custom];
+    [leftNavigator enableInstrumentViewWithIcon:[inst getIconName] showCustom:inst.m_custom];
 }
 
 - (void)openInstrument:(int)instIndex
@@ -1322,7 +1322,7 @@
 {
     if(numInstruments > 0){
         NSTrack * track = [seqSetViewController getCurrentTrack];
-        [leftNavigator enableInstrumentViewWithIcon:track.m_instrument.m_iconName showCustom:track.m_instrument.m_custom];
+        [leftNavigator enableInstrumentViewWithIcon:[track.m_instrument getIconName] showCustom:track.m_instrument.m_custom];
     }else{
         [leftNavigator disableInstrumentView];
     }

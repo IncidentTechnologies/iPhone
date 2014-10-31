@@ -263,7 +263,7 @@
         
         DLog(@"Position is %f",instrumentIconFrame.origin.x);
         
-        [instrumentIcon setImage:[UIImage imageNamed:track.m_instrument.m_iconName] forState:UIControlStateNormal];
+        [instrumentIcon setImage:[UIImage imageNamed:[track.m_instrument getIconName]] forState:UIControlStateNormal];
         [instrumentIcon setContentEdgeInsets:UIEdgeInsetsMake(10,10,10,10)];
         
         instrumentIcon.layer.cornerRadius = 5.0;

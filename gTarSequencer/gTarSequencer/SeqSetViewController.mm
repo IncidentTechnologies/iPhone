@@ -52,11 +52,30 @@
 // Load state from disk
 - (void)initTempTutorialSequence
 {
-    /*sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
+    // copy to documents so it can be loaded on device
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *directory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sequences"];
+    
+    NSError * err = NULL;
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    [fm createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&err];
+    
+    NSString * tutorialBundlePath = [[NSBundle mainBundle] pathForResource:DEFAULT_SET_PATH ofType:@"xml"];
+    NSString * tutorialFilepath = [directory stringByAppendingPathComponent:[DEFAULT_SET_PATH stringByAppendingString:@".xml"]];
+    
+    if([fm fileExistsAtPath:tutorialFilepath]){
+        [fm removeItemAtPath:tutorialFilepath error:nil];
+    }
+    
+    [fm copyItemAtPath:tutorialBundlePath toPath:tutorialFilepath error:nil];
+    
+    sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:NO];
     [self setInstrumentsFromData];
     [delegate setTempo:sequence.m_tempo];
     [delegate setVolume:sequence.m_volume];
-     */
+    
 }
 
 - (void)initSequenceWithFilename:(NSString *)filename
@@ -291,7 +310,7 @@
     // load custom instrument selector
     [self initCustomInstrumentSelector];
     
-    //[instrumentTable reloadData];
+    [instrumentTable reloadData];
     
 }
 
@@ -639,11 +658,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    //if ([remainingInstrumentOptions count] == 0){
-    //    return [sequence trackCount];
-    //}else{
+    if ([remainingInstrumentOptions count] == 0){
+        return [sequence trackCount];
+    }else{
         return [sequence trackCount] + 1;
-    //}
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -697,7 +716,7 @@
         [tempTrack turnOnAllFlags];
         
         cell.instrumentName = tempTrack.m_instrument.m_name;
-        cell.instrumentIcon = [UIImage imageNamed:tempTrack.m_instrument.m_iconName];
+        cell.instrumentIcon = [UIImage imageNamed:[tempTrack.m_instrument getIconName]];
         cell.track = tempTrack;
         cell.isMute = tempTrack.m_muted;
         

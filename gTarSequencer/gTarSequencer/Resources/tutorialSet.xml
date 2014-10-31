@@ -12,7 +12,7 @@
             </header>
             <content>
                 <track name="ROCK" level="1.000000" muted="0">
-                    <instrument name="ROCK" iconname="Icon_Percussion" index="8" custom="0">
+                    <instrument name="ROCK" iconname="Icon_ROCK" index="8" custom="0">
                         <sampler>
                             <sample name="Rock_Kick" value="0" custom="0" xmpfileid="0"/>
                             <sample name="Rock_Snare" value="1" custom="0" xmpfileid="0"/>
@@ -39,7 +39,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="DOUBLE BASS" level="0.397353" muted="0">
-                    <instrument name="DOUBLE BASS" iconname="Icon_Violin" index="1" custom="0">
+                    <instrument name="DOUBLE BASS" iconname="Icon_DOUBLE BASS" index="1" custom="0">
                         <sampler>
                             <sample name="DoubleBass_C" value="0" custom="0" xmpfileid="0"/>
                             <sample name="DoubleBass_D" value="1" custom="0" xmpfileid="0"/>
@@ -74,7 +74,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="VIBRAPHONE" level="1.000000" muted="0">
-                    <instrument name="VIBRAPHONE" iconname="Icon_Vibraphone" index="11" custom="0">
+                    <instrument name="VIBRAPHONE" iconname="Icon_VIBRAPHONE" index="11" custom="0">
                         <sampler>
                             <sample name="Vibraphone_C" value="0" custom="0" xmpfileid="0"/>
                             <sample name="Vibraphone_D" value="1" custom="0" xmpfileid="0"/>
@@ -154,7 +154,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="GUITAR" level="1.000000" muted="1">
-                    <instrument name="GUITAR" iconname="Icon_Guitar" index="5" custom="0">
+                    <instrument name="GUITAR" iconname="Icon_GUITAR" index="5" custom="0">
                         <sampler>
                             <sample name="Guitar_C" value="0" custom="0" xmpfileid="0"/>
                             <sample name="Guitar_D" value="1" custom="0" xmpfileid="0"/>
