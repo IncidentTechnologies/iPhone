@@ -154,20 +154,41 @@
 
 - (void)saveRecordingToFilename:(NSString *)filename
 {
-    // Save editing changes to file
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * path = [paths objectAtIndex:0];
-    NSString * newPath = [path stringByAppendingPathComponent:defaultFilename];
+    DLog(@"Save Recording to Filename %@",filename);
     
-    char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
-    pathName = (char *) [newPath UTF8String];
+    BOOL useBundle = TRUE;
+    NSString * newPath;
     
-    m_sampNode->SaveToFile(pathName, YES);
+    if(useBundle){
+        
+        // *** Save Bundle Sound To File
+        
+        newPath = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
+        
+        DLog(@"Using Main Bundle Filepath %@",newPath);
+        
+    }else{
+        
+        // **** Save Recorded Sound To File
+        
+        // Save editing changes to file (CustomSoundPlaceholder.wav)
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * path = [paths objectAtIndex:0];
+        newPath = [path stringByAppendingPathComponent:defaultFilename];
+        
+        DLog(@"Using Custom Sound Filepath %@",newPath);
+        
+        char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
+        pathName = (char *) [newPath UTF8String];
+        
+        m_sampNode->SaveToFile(pathName, YES);
+        
+    }
     
     // Then get data and upload
     NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
     
-    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav",filename] custom:YES value:@"0" xmpFileId:DEFAULT_STRING_ID];
+    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav",filename] custom:YES value:@"0" xmpFileId:0];
     
     [g_ophoMaster saveSample:xmpSample withFile:data];
     

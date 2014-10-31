@@ -373,8 +373,8 @@ extern NSUser * g_loggedInUser;
     
     // Then load al the samples asynchronously
     for(NSSample * sample in samples){
-        int xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_STRING_ID : sample.m_xmpFileId;
-        sample.m_xmpFileId = DEFAULT_STRING_ID;
+        int xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_SAMPLE_ID : sample.m_xmpFileId;
+        sample.m_xmpFileId = DEFAULT_SAMPLE_ID;
         [self loadFromId:xmpId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
     }
 }

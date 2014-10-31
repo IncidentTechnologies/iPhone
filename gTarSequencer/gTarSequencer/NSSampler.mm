@@ -90,7 +90,7 @@
             
             int stringId = [[stringIds objectAtIndex:i] intValue];
             if(stringId == 0){
-                stringId = DEFAULT_STRING_ID;
+                stringId = DEFAULT_SAMPLE_ID;
             }
             
             NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] xmpFileId:stringId];

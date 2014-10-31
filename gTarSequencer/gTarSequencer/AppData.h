@@ -49,7 +49,7 @@
 #define DEFAULT_SET_NAME @"Tutorial"
 #define BLANK_SET_NAME @"New Set"
 #define DEFAULT_SET_PATH @"tutorialSet"
-#define DEFAULT_STRING_ID 424
+#define DEFAULT_SAMPLE_ID 424
 
 #define TYPE_SEQUENCE @"Sequences"
 #define TYPE_SONG @"Songs"

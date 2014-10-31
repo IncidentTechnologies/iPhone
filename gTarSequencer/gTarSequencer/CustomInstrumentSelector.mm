@@ -682,7 +682,7 @@
 {
     NSArray * tempList = [customSampleList[0] objectForKey:@"Sampleset"];
     
-    DLog(@"CustomSampleList is %@",tempList);
+    //DLog(@"CustomSampleList is %@",tempList);
     
     int customCount = 0;
     
@@ -979,11 +979,11 @@
 {
     // Ensure both recording name and recording are ready
     if(isRecordingNameReady && isRecordingReady){
-        DLog(@"Showing save");
+        //DLog(@"Showing save");
         [self showHideButton:recordSaveButton isHidden:NO withSelector:@selector(userDidSaveRecord:)];
         recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
     }else{
-        DLog(@"Hiding save");
+        //DLog(@"Hiding save");
         [self showHideButton:recordSaveButton isHidden:YES withSelector:@selector(userDidSaveRecord:)];
         recordSaveButton.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
     }
@@ -1548,7 +1548,7 @@
 
 - (NSInteger)getSampleIndexFromIndexPath:(NSIndexPath *)indexPath
 {
-    DLog(@"SampleList is %@",sampleList);
+    //DLog(@"SampleList is %@",sampleList);
     
     if([sampleStack count] == 0){
         
@@ -1568,7 +1568,7 @@
 - (NSString *)getSampleFromIndexPath:(NSIndexPath *)indexPath
 {
     
-    DLog(@"SampleList is %@",sampleList);
+   //DLog(@"SampleList is %@",sampleList);
     
     if([sampleStack count] == 0){
         
