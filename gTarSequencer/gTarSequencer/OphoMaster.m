@@ -39,6 +39,8 @@ extern NSUser * g_loggedInUser;
         ophoInstruments = [[NSMutableDictionary alloc] init];
         ophoLoadingInstrumentQueue = [[NSMutableDictionary alloc] init];
         
+        [self loadSampleCache];
+        
     }
     return self;
 }
@@ -356,28 +358,38 @@ extern NSUser * g_loggedInUser;
     if([ophoInstruments objectForKey:instrumentName] != nil){
         DLog(@"Instrument already loaded");
         
-        [object performSelector:selector withObject:[ophoInstruments objectForKey:[NSNumber numberWithInt:instrumentId]] afterDelay:0.0];
+        [object performSelector:selector withObject:[ophoInstruments objectForKey:[NSNumber numberWithLong:instrumentId]] afterDelay:0.0];
         
         return;
     }
     
     [loadingDelegate loadingBegan];
     
-    DLog(@"Load samples from instrument %i, %@",instrumentId,samples);
+    DLog(@"Load samples from instrument %li, %@",instrumentId,samples);
     
     // Create an entry
     NSMutableArray * instrumentStrings = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",@"",@"", nil];
-    [ophoInstruments setObject:instrumentStrings forKey:[NSNumber numberWithInt:instrumentId]];
+    [ophoInstruments setObject:instrumentStrings forKey:[NSNumber numberWithLong:instrumentId]];
     
-    [ophoLoadingInstrumentQueue setObject:[NSArray arrayWithObjects:samples,object,NSStringFromSelector(selector), nil] forKey:[NSNumber numberWithInt:instrumentId]];
+    [ophoLoadingInstrumentQueue setObject:[NSArray arrayWithObjects:samples,object,NSStringFromSelector(selector), nil] forKey:[NSNumber numberWithLong:instrumentId]];
     
     // Then load al the samples asynchronously
     for(NSSample * sample in samples){
-        int xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_SAMPLE_ID : sample.m_xmpFileId;
+        long xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_SAMPLE_ID : sample.m_xmpFileId;
         sample.m_xmpFileId = DEFAULT_SAMPLE_ID;
-        [self loadFromId:xmpId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
+        
+        NSString * cachedSample = [self getSampleFromCache:sample.m_xmpFileId];
+        
+        if(cachedSample == nil){
+            DLog(@"Loading sample from ID");
+            [self loadFromId:xmpId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
+        }else{
+            DLog(@"Loading sample from cache");
+            [self addData:cachedSample forLoadingInstrumentSample:sample.m_xmpFileId];
+        }
     }
 }
+
 
 - (void)addSampleXmpToOphoInstrument:(CloudResponse *)cloudResponse
 {
@@ -388,7 +400,22 @@ extern NSUser * g_loggedInUser;
     
     NSString * datastring = [sampleXmp getText];
     
-    DLog(@"Opho Instruments is %@ | %@",ophoInstruments,ophoLoadingInstrumentQueue);
+    [self addData:datastring forLoadingInstrumentSample:xmpId];
+    
+    if([self getSampleFromCache:xmpId] == nil){
+        long index = [sampleIdSet indexOfObject:[NSNumber numberWithLong:xmpId]];
+        int version = [[sampleVersionSet objectAtIndex:index] intValue];
+        
+        [self cacheSample:datastring forSampleId:xmpId withVersion:version];
+    }
+}
+
+- (void)addData:(NSString *)datastring forLoadingInstrumentSample:(long)xmpId
+{
+    
+    //DLog(@"Opho Instruments is %@ | %@",ophoInstruments,ophoLoadingInstrumentQueue);
+    
+    DLog(@"Opho loading instruments queue count is %li",[[ophoLoadingInstrumentQueue allKeys] count]);
     
     NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
     
@@ -397,42 +424,55 @@ extern NSUser * g_loggedInUser;
         return;
     }
     
-    for(id instId in ophoLoadingInstrumentQueue){
-        
-        NSArray * samples = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:0];
-        id object = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:1];
-        SEL selector = NSSelectorFromString([[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:2]) ;
-        
-        for(NSSample * sample in samples){
+    @synchronized(ophoLoadingInstrumentQueue){
+        for(id instId in ophoLoadingInstrumentQueue){
             
-            DLog(@"Attempting samples, %li == %li",(long)xmpId,sample.m_xmpFileId);
+            // Ensure if it's already complete it's skipped
+            BOOL isComplete = true;
+            for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
+                if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
+                    isComplete = false;
+                }
+            }
             
-            if((long)xmpId == sample.m_xmpFileId){
+            if(isComplete){
+                [keysToRemove addObject:instId];
+                continue;
+            }
+            
+            NSArray * samples = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:0];
+            id object = [[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:1];
+            SEL selector = NSSelectorFromString([[ophoLoadingInstrumentQueue objectForKey:instId] objectAtIndex:2]) ;
+            
+            for(NSSample * sample in samples){
                 
-                // Stash the sound data
-                [[ophoInstruments objectForKey:instId] setObject:datastring atIndexedSubscript:[sample.m_value intValue]];
+                if((long)xmpId == sample.m_xmpFileId){
+                    
+                    // Stash the sound data
+                    [[ophoInstruments objectForKey:instId] setObject:datastring atIndexedSubscript:[sample.m_value intValue]];
+                }
             }
-        }
-        
-        // If done, empty queue and call delegate
-        BOOL isComplete = true;
-        for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
-            if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
-                isComplete = false;
-            }
-        }
-        
-        if(isComplete){
             
-            [object performSelector:selector withObject:[ophoInstruments objectForKey:instId] afterDelay:0.0];
-            [keysToRemove addObject:instId];
+            // If done, empty queue and call delegate
+            isComplete = true;
+            for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
+                if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
+                    isComplete = false;
+                }
+            }
+            
+            if(isComplete){
+                
+                [object performSelector:selector withObject:[ophoInstruments objectForKey:instId]];
+                
+            }
         }
-    }
-    
-    [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
-    
-    if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
-        [loadingDelegate loadingEnded];
+        
+        [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
+        
+        if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+            [loadingDelegate loadingEnded];
+        }
     }
     
 }
@@ -473,6 +513,8 @@ extern NSUser * g_loggedInUser;
 {
     NSDictionary * sampleList = [NSDictionary dictionaryWithObjectsAndKeys:sampleIdSet,OPHO_LIST_IDS,sampleLoadSet,OPHO_LIST_NAMES,sampleDateSet,OPHO_LIST_DATES, nil];
     
+    [self refreshCacheFromSampleList];
+    
     return sampleList;
 }
 
@@ -481,6 +523,105 @@ extern NSUser * g_loggedInUser;
     NSDictionary * instrumentList = [NSDictionary dictionaryWithObjectsAndKeys:instrumentIdSet,OPHO_LIST_IDS,instrumentLoadSet,OPHO_LIST_NAMES,instrumentDateSet,OPHO_LIST_DATES, nil];
     
     return instrumentList;
+}
+
+#pragma mark - Caching Samples
+- (void)loadSampleCache
+{
+    ophoSampleCache = [[NSMutableDictionary alloc] init];
+    
+    // Unarchive cache from disk
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString * sampleCachePath = [[paths objectAtIndex:0]
+                                  stringByAppendingPathComponent:@"sampleCache"];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:sampleCachePath]){
+        DLog(@"No sample cache found at %@",sampleCachePath);
+        return;
+    }
+    
+    // Load all cached samples to a dictionary
+    NSData * cacheData = [NSData dataWithContentsOfFile:sampleCachePath options:0 error:nil];
+    
+    ophoSampleCache = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:cacheData];
+    
+    
+    //[[NSDictionary dictionaryWithContentsOfFile:sampleCachePath] mutableCopy];
+    
+}
+
+- (void)cacheSample:(NSString *)sample forSampleId:(long)xmpId withVersion:(int)version
+{
+    DLog(@"Cache sample %li with version %i",xmpId,version);
+    
+    NSDictionary * cacheEntry = [[NSDictionary alloc] initWithObjectsAndKeys:sample,@"Data",[NSNumber numberWithInt:version],@"Version", nil];
+    
+    [ophoSampleCache setObject:cacheEntry forKey:[NSNumber numberWithLong:xmpId]];
+    
+    [self saveCacheToFile];
+    
+}
+
+- (NSString *)getSampleFromCache:(long)xmpId
+{
+    NSDictionary * cacheEntry = [ophoSampleCache objectForKey:[NSNumber numberWithLong:xmpId]];
+    
+    if(cacheEntry == nil){
+        return nil;
+    }
+    
+    return [cacheEntry objectForKey:@"Data"];
+}
+
+- (void)saveCacheToFile
+{
+    // Backup cache to disk
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString * sampleCachePath = [[paths objectAtIndex:0]
+                                  stringByAppendingPathComponent:@"sampleCache"];
+    
+    NSData * convertedData = [NSKeyedArchiver archivedDataWithRootObject:ophoSampleCache];
+    
+    BOOL success = [convertedData writeToFile:sampleCachePath atomically:YES];
+    
+    //BOOL success = [ophoSampleCache writeToFile:sampleCachePath atomically:YES];
+    
+    if(success){
+        DLog(@"Saved cache to file");
+    }else{
+        DLog(@"Failed to save cache to file");
+    }
+}
+
+- (void)refreshCacheFromSampleList
+{
+    // Remove any IDs in cache not in sampleIdSet
+    DLog(@"Refresh cache from sample list");
+    
+    for(id key in ophoSampleCache){
+        if(![sampleIdSet containsObject:key]){
+            // Remove if absent
+            [self removeSampleFromCache:[key longValue]];
+        }else{
+            // Check versions match
+            long index = [sampleIdSet indexOfObject:key];
+            long newVersion = [[sampleVersionSet objectAtIndex:index] longValue];
+            long oldVersion = [[[ophoSampleCache objectForKey:key] objectForKey:@"Version"] longValue];
+            
+            if(newVersion != oldVersion){
+                [self removeSampleFromCache:[key longValue]];
+            }
+        }
+    }
+}
+
+- (void)removeSampleFromCache:(long)xmpId
+{
+    [ophoSampleCache removeObjectForKey:[NSNumber numberWithLong:xmpId]];
+    
+    [self saveCacheToFile];
 }
 
 #pragma mark - Pregenerate XMP Data
@@ -500,6 +641,7 @@ extern NSUser * g_loggedInUser;
         songIdSet = [[NSMutableArray alloc] init];
         songLoadSet = [[NSMutableArray alloc] init];
         songDateSet = [[NSMutableArray alloc] init];
+        songVersionSet = [[NSMutableArray alloc] init];
     }
         
     [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:)];
@@ -511,6 +653,7 @@ extern NSUser * g_loggedInUser;
         sequenceIdSet = [[NSMutableArray alloc] init];
         sequenceLoadSet = [[NSMutableArray alloc] init];
         sequenceDateSet = [[NSMutableArray alloc] init];
+        sequenceVersionSet = [[NSMutableArray alloc] init];
     }
     
     [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:)];
@@ -522,6 +665,7 @@ extern NSUser * g_loggedInUser;
         sampleIdSet = [[NSMutableArray alloc] init];
         sampleLoadSet = [[NSMutableArray alloc] init];
         sampleDateSet = [[NSMutableArray alloc] init];
+        sampleVersionSet = [[NSMutableArray alloc] init];
     }
     
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
@@ -533,6 +677,7 @@ extern NSUser * g_loggedInUser;
         instrumentIdSet = [[NSMutableArray alloc] init];
         instrumentLoadSet = [[NSMutableArray alloc] init];
         instrumentDateSet = [[NSMutableArray alloc] init];
+        instrumentVersionSet = [[NSMutableArray alloc] init];
     }
         
     [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:)];
@@ -547,8 +692,9 @@ extern NSUser * g_loggedInUser;
     [songIdSet removeAllObjects];
     [songLoadSet removeAllObjects];
     [songDateSet removeAllObjects];
+    [songVersionSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet];
+    [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet withVersion:songVersionSet];
 }
 
 - (void)requestGetXmpInstrumentListCallback:(CloudResponse *)cloudResponse
@@ -560,8 +706,9 @@ extern NSUser * g_loggedInUser;
     [instrumentIdSet removeAllObjects];
     [instrumentLoadSet removeAllObjects];
     [instrumentDateSet removeAllObjects];
+    [instrumentVersionSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet];
+    [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet withVersion:instrumentVersionSet];
     
     [loadingDelegate instrumentListLoaded];
 }
@@ -575,8 +722,9 @@ extern NSUser * g_loggedInUser;
     [sequenceIdSet removeAllObjects];
     [sequenceLoadSet removeAllObjects];
     [sequenceDateSet removeAllObjects];
+    [sequenceVersionSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet];
+    [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet withVersion:sequenceVersionSet];
     
     // Check that TUTORIAL has been copied over
     BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
@@ -601,8 +749,9 @@ extern NSUser * g_loggedInUser;
     [sampleIdSet removeAllObjects];
     [sampleLoadSet removeAllObjects];
     [sampleDateSet removeAllObjects];
+    [sampleVersionSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet];
+    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet];
 }
 
 - (BOOL)defaultSetExists
@@ -616,7 +765,7 @@ extern NSUser * g_loggedInUser;
     return FALSE;
 }
 
-- (void)buildSortedXmpList:(NSArray *)xmpList withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withDates:(NSMutableArray *)fileDateSet;
+- (void)buildSortedXmpList:(NSArray *)xmpList withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withDates:(NSMutableArray *)fileDateSet withVersion:(NSMutableArray *)fileVersionSet;
 {
     
     NSDateFormatter * df = [[NSDateFormatter alloc] init];
@@ -625,13 +774,14 @@ extern NSUser * g_loggedInUser;
     
     for(XmlDom * xmp in xmpList){
         NSInteger xmpid = [[xmp getTextFromChildWithName:@"xmp_id"] intValue];
+        NSInteger version = [[xmp getTextFromChildWithName:@"xmp_current_version_number"] intValue];
         NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
         
         DLog(@"Date is %@",date);
         
         if(xmpid > 0){
-            [fileIdSet addObject:[NSNumber numberWithInt:xmpid]];
+            [fileIdSet addObject:[NSNumber numberWithLong:xmpid]];
         }
         
         if(name != nil){
@@ -641,24 +791,29 @@ extern NSUser * g_loggedInUser;
         if(date != nil){
             [fileDateSet addObject:date];
         }
+        
+        if(version >= 0){
+            [fileVersionSet addObject:[NSNumber numberWithLong:version]];
+        }
     }
     
-    DLog(@"FileIdSet %@ FileLoadSet %@ FileDateSet %@",fileIdSet, fileLoadSet,fileDateSet);
+    //DLog(@"FileIdSet %@ FileLoadSet %@ FileDateSet %@",fileIdSet, fileLoadSet,fileDateSet);
     
     // Sort by date order
     if([fileLoadSet count] > 0){
-        [self sortFilesByDates:fileDateSet withIds:fileIdSet withData:fileLoadSet];
+        [self sortFilesByDates:fileDateSet withIds:fileIdSet withData:fileLoadSet withVersions:fileVersionSet];
     }
     
 }
 
 // TODO: this can probably be done nicer with comparators
-- (void)sortFilesByDates:(NSMutableArray *)fileDateSet withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet
+- (void)sortFilesByDates:(NSMutableArray *)fileDateSet withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withVersions:(NSMutableArray *)fileVersionSet;
 {
     
     NSString * newFileLoadSet[[fileDateSet count]];
     NSDate * newFileDateSet[[fileDateSet count]];
     NSNumber * newFileIdSet[[fileDateSet count]];
+    NSNumber * newFileVersionSet[[fileDateSet count]];
     
     NSDate * maxDate;
     int maxDateIndex;
@@ -679,6 +834,7 @@ extern NSUser * g_loggedInUser;
             newFileDateSet[i] = fileDateSet[maxDateIndex];
             newFileLoadSet[i] = fileLoadSet[maxDateIndex];
             newFileIdSet[i] = fileIdSet[maxDateIndex];
+            newFileVersionSet[i] = fileVersionSet[maxDateIndex];
             
             fileDateSet[maxDateIndex] = [NSDate distantPast];
         }
@@ -688,6 +844,7 @@ extern NSUser * g_loggedInUser;
         [fileLoadSet setObject:newFileLoadSet[i] atIndexedSubscript:i];
         [fileDateSet setObject:newFileDateSet[i] atIndexedSubscript:i];
         [fileIdSet setObject:newFileIdSet[i] atIndexedSubscript:i];
+        [fileVersionSet setObject:newFileVersionSet[i] atIndexedSubscript:i];
     }
 }
 

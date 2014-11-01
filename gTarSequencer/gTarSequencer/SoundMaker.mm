@@ -78,6 +78,8 @@
 
 - (void)instrumentLoadedWithSamples:(NSArray *)samples
 {
+    DLog(@"Instrument loaded with %li samples",[samples count]);
+    
     audioSampleSet = [[NSArray alloc] initWithArray:samples];
     
     m_samplerBank = [m_soundMaster generateBank];

@@ -52,19 +52,28 @@
     NSMutableDictionary * ophoInstruments;
     NSMutableDictionary * ophoLoadingInstrumentQueue;
     
+    NSMutableDictionary * ophoSampleCache;
+    
     // Preloaded Data
     NSMutableArray * songIdSet;
     NSMutableArray * songLoadSet;
     NSMutableArray * songDateSet;
+    NSMutableArray * songVersionSet;
+    
     NSMutableArray * sequenceIdSet;
     NSMutableArray * sequenceLoadSet;
     NSMutableArray * sequenceDateSet;
+    NSMutableArray * sequenceVersionSet;
+    
     NSMutableArray * sampleIdSet;
     NSMutableArray * sampleLoadSet;
     NSMutableArray * sampleDateSet;
+    NSMutableArray * sampleVersionSet;
+    
     NSMutableArray * instrumentIdSet;
     NSMutableArray * instrumentLoadSet;
     NSMutableArray * instrumentDateSet;
+    NSMutableArray * instrumentVersionSet;
 
     BOOL pendingLoadTutorial;
     
