@@ -2,8 +2,8 @@
 //  MeasureView.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 7/18/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 1/3/14.
+//  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
 #import "MeasureView.h"
@@ -33,7 +33,10 @@
 
 - (void)sharedInit {
     measure = nil;
- 
+    
+    defaultBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.6];
+    highlightBackgroundColor = [UIColor colorWithRed:14/255.0 green:194/255.0 blue:239/255.0 alpha:0.2];
+    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:imageView];
     
@@ -42,43 +45,47 @@
     CGRect playbandFrame = CGRectMake(10, 0, noteFrameWidth, self.frame.size.height);
     
     playbandView = [[UIView alloc] initWithFrame:playbandFrame];
-    [playbandView setBackgroundColor:[UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1]];
+    [playbandView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]];
     [playbandView setHidden:YES];
     
     [self addSubview:playbandView];
     
+    [self initColors];
+}
+
+- (void)initColors
+{
     CGFloat initColors[STRINGS_ON_GTAR][4] = {
-        {1, 0, 1, 1},
-        {0, 1, 1, 1},
-        {1, 1, 0, 1},
-        {0, 0, 1, 1},
-        {0, 1, 0, 1},
-        {1, 0, 0, 1}
+        {148/255.0, 102/255.0, 177/255.0, 1},
+        {0/255.0, 141/255.0, 218/255.0, 1},
+        {43/255.0, 198/255.0, 34/255.0, 1},
+        {204/255.0, 234/255.0, 0/255.0, 1},
+        {234/255.0, 154/255.0, 41/255.0, 1},
+        {239/255.0, 92/255.0, 53/255.0, 1}
     };
     
     memcpy(colors, initColors, sizeof(initColors));
 }
 
-- (void)setMeasure:(Measure *)newMeasure
+- (void)setMeasure:(NSMeasure *)newMeasure
 {
     measure = newMeasure;
 }
 
 - (void)update
 {
-    if ( measure == nil )
+    if (measure == nil)
         return;
     
     // Check if notes need to be redrawn:
-    if ( [measure shouldUpdateNotesOnMinimap] )
-    {
-        //[self createImage];
+    if ([measure shouldUpdateNotesOnMinimap]){
+        [self createImage];
+        //[self performSelectorInBackground:@selector(createImage) withObject:nil];
         [measure setUpdateNotesOnMinimap:NO];
     }
     
     // Update playband:
-    if ( [measure shouldUpdatePlaybandOnMinimap] )
-    {
+    if ([measure shouldUpdatePlaybandOnMinimap]){
         [self movePlayband];
         [measure setUpdatePlaybandOnMinimap:NO];
     }
@@ -91,18 +98,16 @@
 }
 
 - (void)movePlayband {
-    if ( measure.playband >= 0 )
-    {  
+    
+    if (measure.playband >= 0 && !isBlankMeasure) {
         CGRect newFrame = playbandView.frame;
         newFrame.origin.x = measure.playband * noteFrameWidth;
         
         playbandView.frame = newFrame;
-        if (playbandView.hidden)
-        {
+        if (playbandView.hidden){
             [playbandView setHidden:NO];
         }
-    }
-    else {
+    } else {
         [playbandView setHidden:YES];
     }
 }
@@ -110,49 +115,56 @@
 #pragma mark Quartz Drawing
 
 - (void)selectMeasure {
-    self.backgroundColor = [UIColor colorWithRed:247/255.0 green:148/255.0 blue:29/255.0 alpha:1];
+    self.backgroundColor = highlightBackgroundColor;
 }
 
 - (void)deselectMeasure {
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = defaultBackgroundColor;
 }
 
-- (void)drawBorder
+- (void)drawMeasure:(BOOL)isBlank
 {
-    [playbandView setHidden:YES];
+    isBlankMeasure = isBlank;
+    
+    if (isBlank){
+        [playbandView setHidden:YES];
+    }
     
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
     
     UIGraphicsBeginImageContext(size);
-                                
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    // fill whole thing with background color:
-    CGRect wholeFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    int borderWidth = 0;
+    CGRect wholeFrame = CGRectMake(borderWidth, borderWidth, self.frame.size.width-(2*borderWidth), self.frame.size.height-(2*borderWidth));
     CGContextAddRect(context, wholeFrame);
     
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:110/255.0 green:110/255.0 blue:114/255.0 alpha:1].CGColor);
+    // fill whole thing with background color:
+    if (isBlank){
+        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1].CGColor);
+    }else{
+        CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    }
+    
     CGContextFillPath(context);
     
-    // stroke the border:
-    int borderWidth = 2;
-    CGContextSetLineWidth(context, borderWidth);
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextStrokePath(context);
-    
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    imageView.image = image;
-        
+    if(image != nil && imageView != nil){
+        imageView.image = image;
+    }
+    
     UIGraphicsEndImageContext();
 }
 
 - (void)createImage {
+    
     CGSize size = CGSizeMake(self.frame.size.width, self.frame.size.height);
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    double lineWidth = 0.5;
+    double lineWidth = 0.2;
     
     CGFloat noteFrameHeight = self.frame.size.height / STRINGS_ON_GTAR;
     CGRect noteFrame = CGRectMake(0, 0, noteFrameWidth, noteFrameHeight);
@@ -162,47 +174,48 @@
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
     // Update all the notes:
-    for (int f = 0; f < FRETS_ON_GTAR; f++) {
-        for (int s = 0; s < STRINGS_ON_GTAR; s++) {
-            // Adjust frame:
-            noteFrame.origin.x = f*noteFrameWidth;
-            noteFrame.origin.y = s*noteFrameHeight;
+    int f, s;
+    for (f = 0, s = 0; f < FRETS_ON_GTAR; f++)
+    {
+        CGContextMoveToPoint(context, f*noteFrameWidth, 0);
+        CGContextAddLineToPoint(context, f*noteFrameWidth, s*noteFrameHeight);
+        CGContextStrokePath(context);
+        
+        for (s = 0; s < STRINGS_ON_GTAR; s++)
+        {
+            if(f == 0){
+                CGContextMoveToPoint(context, 0, s*noteFrameHeight);
+                CGContextAddLineToPoint(context, FRETS_ON_GTAR*noteFrameWidth, s*noteFrameHeight);
+                CGContextStrokePath(context);
+            }
             
-            // Add rect:
-            CGContextAddRect(context, noteFrame);
-            CGContextStrokePath(context);
-            
-            if ( [measure isNoteOnAtString:[self invertString:s] andFret:f] )
-                CGContextSetFillColor(context, colors[s]);  // Get color for that string and fill:
-            else
-                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0 green:175.0/255.0 blue:236.0/255.0 alpha:1].CGColor); // Fill with normal background color:
-            
-            CGContextFillRect(context, noteFrame);
+            if ([measure isNoteOnAtString:[self invertString:s] andFret:f]){
+                
+                // Adjust frame:
+                noteFrame.origin.x = f*noteFrameWidth;
+                noteFrame.origin.y = s*noteFrameHeight;
+                
+                CGContextAddRect(context, noteFrame);
+                
+                CGContextSetFillColorWithColor(context, [UIColor colorWithRed:colors[s][0] green:colors[s][1] blue:colors[s][2] alpha:colors[s][3]].CGColor);  // Get color for that string and fill
+                
+                CGContextFillRect(context, noteFrame);
+            }
         }
     }
-    [measure setUpdateNotesOnMinimap:NO];
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
     imageView.image = newImage;
-    
     UIGraphicsEndImageContext();
+    
+    [measure setUpdateNotesOnMinimap:NO];
+    
 }
 
 - (int)invertString:(int)string
 {
     return (STRINGS_ON_GTAR - 1 - string);
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-
-}
-*/
-
 
 
 @end

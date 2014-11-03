@@ -2,8 +2,8 @@
 //  Measure.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/5/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "Measure.h"
@@ -21,6 +21,8 @@
         {
             notes[i] = false;
         }
+        
+        [self initFakeNotes];
         
         [self sharedInit];
     }
@@ -40,6 +42,18 @@
         [self sharedInit];
     }
     return self;
+}
+
+- (void)initFakeNotes
+{
+    int numnotes = random()%8;
+    DLog(@"initting for %i notes",numnotes);
+    
+    for(int i=0;i<numnotes;i++){
+        int r = random()%MAX_NOTES;
+        DLog(@"at index %i",r);
+        notes[r] = true;
+    }
 }
 
 - (void)sharedInit
@@ -129,16 +143,18 @@
 
 #pragma mark Playing Notes/Lights
 
-- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex
+- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight
 {
-    if ( instrumentIndex >= 0 )
+    if (instrumentIndex >= 0)
     {
+        [audioSource updateAmplitude:amplitudeweight];
+        
         int startingLocation = fret * STRINGS_ON_GTAR;
-        for (int i=0;i<STRINGS_ON_GTAR;i++)
+        for (int i=0; i < STRINGS_ON_GTAR; i++)
         {
             if (notes[startingLocation+i])
             {
-                [audio PluckStringFret:i atFret:instrumentIndex];
+                [audioSource pluckString:i];
             }
         }
     }
@@ -166,13 +182,23 @@
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret
 {
     int location = [self getLocationFromString:str andFret:fret];
-    return notes[location];
+    if(location < MAX_NOTES){
+        return notes[location];
+    }else{
+        return FALSE;
+    }
 }
 
 - (BOOL)isNoteOnAtLocation:(int)location
 {
     return notes[location];
 }
+
+- (char *)getNotes
+{
+    return notes;
+}
+
 
 #pragma mark Empty(ing)
 

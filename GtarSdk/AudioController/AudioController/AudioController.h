@@ -23,12 +23,26 @@
     AudioStreamBasicDescription m_StreamDefaultDescription;
 }
 
+<<<<<<< HEAD
 @property (retain, nonatomic) NSMutableArray* effects;
+=======
+@property (retain) NSArray * m_stringSet;
+@property (retain) NSArray * m_stringPaths;
+@property (assign) float frequency;
+@property (assign) double sinPhase;
+@property (assign) bool m_fNoteOn;
+>>>>>>> 5b0dd0a7e65454b9c5ce3a0de4c3eaa4fe2d7501
 
 +(id) sharedAudioController;
 
 //- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
 
+<<<<<<< HEAD
+=======
+- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument;
+- (id) initWithAudioSource:(AudioSource)audioSource AndInstrument:(NSString*)instrument AndStringSet:(NSArray*)stringSet AndStringPaths:(NSArray*)stringPaths;
+
+>>>>>>> 5b0dd0a7e65454b9c5ce3a0de4c3eaa4fe2d7501
 - (void) initializeAUGraph;
 - (void) startAUGraph;
 - (void) stopAUGraph;

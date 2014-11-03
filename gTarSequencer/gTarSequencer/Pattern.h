@@ -1,25 +1,25 @@
 //
-//  BeatSequence.h
+//  Pattern.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/5/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AppData.h"
 #import "Measure.h"
 
 @interface Pattern : NSObject <NSCoding>
 {
     int measureCount;
-
+    
     Measure * selectedMeasure;
     int selectedMeasureIndex;
     
     NSMutableArray * measures;
 }
 
-- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex;
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
 - (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret;

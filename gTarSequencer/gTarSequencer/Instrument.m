@@ -1,21 +1,28 @@
 //
-//  Sequencer.m
-//  gTarStudio
+//  Instrument.m
+//  gTarSequencer
 //
-//  Created by Ilan Gray on 5/31/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "Instrument.h"
 
 @implementation Instrument
 
+@synthesize audio;
 @synthesize instrumentName;
 @synthesize iconName;
 @synthesize instrument;
+@synthesize stringSet;
+@synthesize stringPaths;
 @synthesize selectedPattern;
+@synthesize selectedPatternIndex;
 @synthesize selectedPatternDidChange;
 @synthesize isMuted;
+@synthesize isCustom;
+@synthesize patterns;
+@synthesize amplitude;
 
 - (id)init
 {
@@ -34,6 +41,9 @@
         isSelected = NO;
         selectedPatternDidChange = YES;
         isMuted = NO;
+        amplitude = 0.27;
+        isCustom = [NSNumber numberWithBool:FALSE];
+        
     }
     return self;
 }
@@ -55,9 +65,25 @@
         
         isSelected = [aDecoder decodeBoolForKey:@"Is Selected"];
         
+        isMuted = [aDecoder decodeBoolForKey:@"Is Muted"];
+        
+        stringSet = [aDecoder decodeObjectForKey:@"Strings"];
+        
+        stringPaths = [aDecoder decodeObjectForKey:@"StringPaths"];
+        
+        isCustom = [aDecoder decodeObjectForKey:@"Custom"];
+        
+        amplitude = [aDecoder decodeDoubleForKey:@"Amplitude"];
+        
         selectedPatternDidChange = YES;
+        
     }
     return self;
+}
+
+- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster
+{
+    audio = [[SoundMaker alloc] initWithStringSet:stringSet andStringPaths:stringPaths andIndex:instrument andSoundMaster:soundMaster];
 }
 
 - (void)setSelected:(BOOL)yesno
@@ -81,15 +107,37 @@
     [selectedPattern turnOnAllFlags];
 }
 
+- (void)setCustom:(BOOL)yesno
+{
+    isCustom = [NSNumber numberWithBool:yesno];
+}
+
+- (BOOL)checkIsCustom
+{
+    return [isCustom boolValue];
+}
+
+- (double)getAmplitude
+{
+    return amplitude;
+}
+
 #pragma Playing Notes
 
 // Play audio:
-- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)masteramplitude
 {
-    if (sound)
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument];
+    [audio updateMasterAmplitude:masteramplitude];
+    
+    if (sound && amplitude > 0)
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument:instrument andAudio:audio withAmplitude:AMPLITUDE_SCALE*amplitude];
     else
-        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1];
+        [selectedPattern playFret:fret inRealMeasure:measure withInstrument: -1 andAudio:audio withAmplitude:0.0];
+}
+
+- (void)releaseSounds
+{
+    [audio releaseSounds];
 }
 
 - (void)displayAllNotes {
@@ -116,13 +164,12 @@
 }
 
 - (void)removeMeasure {
-    if ( selectedPattern.measureCount == 1 )
-    {
+    
+    if (selectedPattern.measureCount == 1){
         return;
     }
     
-    @synchronized(selectedPattern)
-    {
+    @synchronized(selectedPattern){
         // Remove half the measures:
         [selectedPattern halveMeasures];
     }
@@ -176,6 +223,13 @@
     [aCoder encodeObject:instrumentName forKey:@"Instrument Name"];
     [aCoder encodeObject:iconName forKey:@"Icon Name"];
     [aCoder encodeBool:isSelected forKey:@"Is Selected"];
+    [aCoder encodeObject:stringSet forKey:@"Strings"];
+    [aCoder encodeObject:stringPaths forKey:@"StringPaths"];
+    [aCoder encodeBool:isMuted forKey:@"Is Muted"];
+    [aCoder encodeObject:isCustom forKey:@"Custom"];
+    [aCoder encodeDouble:amplitude forKey:@"Amplitude"];
+        
 }
 
 @end
+

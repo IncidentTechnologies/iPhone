@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SequencerViewController">
+            <connections>
+                <outlet property="loadingOverlay" destination="USq-Xs-tAi" id="dRU-ab-jAz"/>
+                <outlet property="view" destination="gDd-LH-5NP" id="J3N-12-f9q"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gDd-LH-5NP">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LbA-Mg-sPa">
+                    <rect key="frame" x="0.0" y="264" width="480" height="1"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QG1-J9-6Ls">
+                    <rect key="frame" x="0.0" y="265" width="480" height="55"/>
+                    <color key="backgroundColor" red="0.15686274509803921" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USq-Xs-tAi">
+                    <rect key="frame" x="-44" y="0.0" width="568" height="320"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grk-Qq-Dsb">
+                            <rect key="frame" x="191" y="102" width="186" height="49"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.058823529409999999" green="0.42745098040000001" blue="0.52156862749999999" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="Grk-Qq-Dsb" secondAttribute="centerX" id="Hcc-GL-bMK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.11372549019607843" green="0.34509803921568627" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="QG1-J9-6Ls" firstAttribute="leading" secondItem="gDd-LH-5NP" secondAttribute="leading" id="GiC-v0-m9M"/>
+                <constraint firstItem="USq-Xs-tAi" firstAttribute="leading" secondItem="gDd-LH-5NP" secondAttribute="leading" constant="-44" id="JP1-ve-pnJ"/>
+                <constraint firstAttribute="bottom" secondItem="QG1-J9-6Ls" secondAttribute="bottom" id="Pig-Cr-ZCQ"/>
+                <constraint firstAttribute="trailing" secondItem="QG1-J9-6Ls" secondAttribute="trailing" id="RDB-5F-ldb"/>
+                <constraint firstAttribute="trailing" secondItem="LbA-Mg-sPa" secondAttribute="trailing" id="iyN-fb-ivt"/>
+                <constraint firstAttribute="trailing" secondItem="USq-Xs-tAi" secondAttribute="trailing" constant="-44" id="lCu-be-HWD"/>
+                <constraint firstItem="LbA-Mg-sPa" firstAttribute="leading" secondItem="gDd-LH-5NP" secondAttribute="leading" id="qzo-ek-sp5"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

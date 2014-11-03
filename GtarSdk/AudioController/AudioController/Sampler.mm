@@ -1,3 +1,5 @@
+
+
 //
 //  Sampler.m
 //  gTarAudioController
@@ -15,7 +17,10 @@
 @synthesize stereoStreamFormat;
 @synthesize m_samplePackName;
 @synthesize m_firstNoteMidiNum;
+@synthesize m_noteModNum;
 @synthesize m_numberOfSamples;
+@synthesize m_stringSet;
+@synthesize m_stringPaths;
 @synthesize m_tuning;
 @synthesize m_standardTunning;
 @synthesize m_instruments;
@@ -54,6 +59,16 @@
     
     return self;
 }
+
+- (id) initWithSampleRate:(int)sampleRate AndSamplePack:(NSString *)name AndStringSet:(NSArray *)stringSet AndStringPaths:(NSArray *)stringPaths
+{
+    m_stringSet = stringSet;
+    m_stringPaths = stringPaths;
+    self = [self initWithSampleRate:sampleRate AndSamplePack:name];
+    
+    return self;
+}
+
 
 // Extract the array of instrument data in instrument.plist
 - (bool) loadInstrumentArray {
@@ -153,7 +168,7 @@
     return true;
 }
 
-// Asynchronously loads the sampler with the given name. The name can be the sampler name or it's
+// Asynchronously loads the sampler with the given name. The name can be the sampler name or its
 // 'friendly name', and the name match will happen in that order.
 - (void) asynchLoadSamplerWithName:(NSString*)name withSelector:(SEL)aSelector andOwner:(NSObject*)parent
 {
@@ -236,6 +251,17 @@
     
     m_firstNoteMidiNum = [[selectedInstrument objectForKey:@"FirstNoteMidiNum"] intValue];
     m_numberOfSamples = [[selectedInstrument objectForKey:@"NumNotes"] intValue];
+    
+    // get mod to determine spacing of samples, default to total # samples
+    m_noteModNum = [[selectedInstrument objectForKey:@"NoteModNum"] intValue];
+    
+    if(!m_noteModNum){
+        m_noteModNum = 1;
+    }
+    
+    // get a placeholder note if using mod math!
+    m_placeholderNote = [selectedInstrument objectForKey:@"PlaceholderNote"];
+    
     m_tuning = [selectedInstrument objectForKey:@"Tuning"];
 
     if (nil == m_tuning)
@@ -255,14 +281,72 @@
 
 - (void) obtainSoundFileURLs
 {
+    // Get full URL for placeholder to avoid repeat loading
+    if(m_placeholderNote != NULL){
+        CFURLRef placeholderRef = (CFURLRef)[[NSBundle mainBundle] URLForResource: m_placeholderNote withExtension:@"mp3"];
+        
+        m_placeholderUrl = (NSString *)CFURLGetString(placeholderRef);
+        
+    }
+    
     // Create the URLs for the source audio files.
+<<<<<<< HEAD
     for (int noteNum = m_firstNoteMidiNum; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++) {
         NSString *filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, noteNum];
         
         NSURL *url = [[NSBundle mainBundle] URLForResource: filename
                                              withExtension: @"mp3"];
+=======
+    for (int noteNum = m_firstNoteMidiNum, modNum = m_firstNoteMidiNum - 1; noteNum < m_firstNoteMidiNum + m_numberOfSamples; noteNum++)
+    {
         
-        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+        NSString * filename;
+        
+        // Use mod math to determine frequency to change sounds
+        if((noteNum - m_firstNoteMidiNum) % m_noteModNum == 0){
+            
+            // Use next sound in string set, or number from sample pack
+            if(m_stringSet != nil){
+                filename = m_stringSet[++modNum];
+            }else{
+                filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, ++modNum];
+            }
+            
+        }else if(m_placeholderNote != NULL){
+            // Use a placeholder note
+            filename = m_placeholderNote;
+        }else{
+            
+            // Repeat previous note if no placeholder, or step up in sample pack
+            if(m_stringSet != nil){
+                filename = m_stringSet[modNum];
+            }else{
+                filename = [NSString stringWithFormat:@"%@ %d", m_samplePackName, modNum];
+            }
+        }
+        
+        NSURL * url;
+        
+        if(m_stringPaths == nil || [m_stringPaths[modNum] isEqualToString:@"Default"]){
+            
+            url = [[NSBundle mainBundle] URLForResource: filename
+                                                 withExtension: @"mp3"];
+        }else{
+         
+            // Use custom URL and secondary (m4a) filetype
+            filename = [filename stringByAppendingString:@".m4a"];
+            
+            NSArray * pathComponents = [NSArray arrayWithObjects:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject], filename, nil];
+            
+            url = [NSURL fileURLWithPathComponents:pathComponents];
+            
+        }
+
+>>>>>>> 5b0dd0a7e65454b9c5ce3a0de4c3eaa4fe2d7501
+        
+        //m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) [url retain];
+        m_sampleNameArray[noteNum - m_firstNoteMidiNum] = (CFURLRef) url;
+        
     }
 }
 
@@ -313,7 +397,20 @@
         // Instantiate an extended audio file object.
         ExtAudioFileRef audioFileObject = 0;
         
+        if(m_placeholderNote != nil){
+            NSString * sampleFilename = (NSString *)CFURLGetString(m_sampleNameArray[noteNum]);
+            
+            if([sampleFilename isEqualToString:m_placeholderUrl]){
+                NSLog(@"PLACEHOLDER");
+                m_soundStructArray[noteNum].frameCount = 0;
+                m_soundStructArray[noteNum].audioDataLeft = NULL;
+                m_soundStructArray[noteNum].audioDataRight = NULL;
+                continue;
+            }
+        }
+        
         NSLog(@"Opening URL: %@", m_sampleNameArray[noteNum]);
+        
         
         // Open an audio file and associate it with the extended audio file objects;
         OSStatus result = ExtAudioFileOpenURL(m_sampleNameArray[noteNum], &audioFileObject);

@@ -984,6 +984,7 @@
 					"-all_load",
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/gTarAppCore;
+				PROVISIONING_PROFILE = "30B9B78E-7DFD-461F-AC87-3F2E75670AC8";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/gTarAppCore;
 				SDKROOT = iphoneos;
 			};
@@ -1009,6 +1010,7 @@
 					"-all_load",
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/gTarAppCore;
+				PROVISIONING_PROFILE = "30B9B78E-7DFD-461F-AC87-3F2E75670AC8";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/gTarAppCore;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

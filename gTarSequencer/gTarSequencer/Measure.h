@@ -2,29 +2,25 @@
 //  Measure.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/5/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <GtarController/GtarController.h>
-
+#import "GtarController.h"
+#import "AppData.h"
 #import "SoundMaker.h"
 
-#define MAX_NOTES 96
-#define FIRST_FRET 0 
+#define FIRST_FRET 0
 #define LAST_FRET 15
-#define FRETS_ON_GTAR 16
-#define STRINGS_ON_GTAR 6
 
-extern SoundMaker * audio;
+//extern SoundMaker * audio;
 
 // A Measure containts 6*16 = 96 notes. It also contains the flags
 //      that indicate whether things should be updated.
 @interface Measure : NSObject <NSCoding>
 {
     char notes[MAX_NOTES];
-
+    
     BOOL guitarUpdateNotes;
     BOOL guitarUpdatePlayband;
     BOOL minimapUpdateNotes;
@@ -36,13 +32,15 @@ extern SoundMaker * audio;
 - (id)init;
 - (id)initWithMeasure:(Measure *)measure;
 
-- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex;
+- (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight;
 
 - (void)changeNoteAtString:(int)str andFret:(int)fret;
 - (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
 
 - (void)clearNotes;
 - (BOOL)isEmpty;
+
+- (char *)getNotes;
 
 - (BOOL)shouldUpdatePlaybandOnGuitar;
 - (BOOL)shouldUpdatePlaybandOnMinimap;
@@ -58,3 +56,4 @@ extern SoundMaker * audio;
 - (void)setUpdatePlaybandOnMinimap:(BOOL)yesno;
 
 @end
+
