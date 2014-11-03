@@ -322,18 +322,43 @@
     masterInstrumentOptions = [[NSMutableArray alloc] init];
     sequencerInstrumentsPath = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
     
-    NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
+    NSMutableDictionary * instDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
     
     
     // Get instrument list from the server
-    NSDictionary * customInstDictionary = [g_ophoMaster getInstrumentList];
+    NSDictionary * standardInstDictionary = [g_ophoMaster getInstrumentList];
+    NSArray * instIds = [standardInstDictionary objectForKey:OPHO_LIST_IDS];
+    NSArray * instNames = [standardInstDictionary objectForKey:OPHO_LIST_NAMES];
+    
+    NSDictionary * customInstDictionary = [g_ophoMaster getCustomInstrumentList];
     NSArray * customInstIds = [customInstDictionary objectForKey:OPHO_LIST_IDS];
     NSArray * customInstNames = [customInstDictionary objectForKey:OPHO_LIST_NAMES];
     
-    [masterInstrumentOptions addObjectsFromArray:[plistDictionary objectForKey:@"Instruments"]];
+    // TODO: comment this out when instruments have moved over
+    [masterInstrumentOptions addObjectsFromArray:[instDictionary objectForKey:@"Instruments"]];
+    
+    
+    if([instIds count] > 0){
+        DLog(@"The standard instruments list exists");
+        
+        for(int i = 0; i < [instIds count]; i++){
+            
+            NSMutableDictionary * instDict = [[NSMutableDictionary alloc] init];
+            [instDict setObject:instIds[i] forKey:@"Index"];
+            [instDict setObject:instNames[i] forKey:@"Name"];
+            [instDict setObject:[NSNumber numberWithBool:false] forKey:@"Custom"];
+            
+            [masterInstrumentOptions addObject:instDict];
+            
+        }
+        
+        DLog(@"Standard Inst Dictionary is %@",standardInstDictionary);
+        
+    }
+    
     
     if([customInstIds count] > 0){
-        DLog(@"The custom instruments plist exists");
+        DLog(@"The custom instruments list exists");
         
         for(int i = 0; i < [customInstIds count]; i++){
             

@@ -294,7 +294,7 @@
     track.m_muted = NO;
     isMute = NO;
     
-    [parent saveStateToDiskWithForce:YES];
+    [parent saveStateToDiskWithForce:NO];
 }
 
 -(void)turnOffInstrumentView
@@ -308,7 +308,7 @@
     track.m_muted = YES;
     isMute = YES;
     
-    [parent saveStateToDiskWithForce:YES];
+    [parent saveStateToDiskWithForce:NO];
 }
 
 - (void)updatePatternButton:(UIButton *)newButton playState:(BOOL)isPlaying

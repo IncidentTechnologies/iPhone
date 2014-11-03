@@ -59,23 +59,29 @@
     NSMutableArray * songLoadSet;
     NSMutableArray * songDateSet;
     NSMutableArray * songVersionSet;
+    NSMutableArray * songIsCustomSet;
     
     NSMutableArray * sequenceIdSet;
     NSMutableArray * sequenceLoadSet;
     NSMutableArray * sequenceDateSet;
     NSMutableArray * sequenceVersionSet;
+    NSMutableArray * sequenceIsCustomSet;
     
     NSMutableArray * sampleIdSet;
     NSMutableArray * sampleLoadSet;
     NSMutableArray * sampleDateSet;
     NSMutableArray * sampleVersionSet;
+    NSMutableArray * sampleIsCustomSet;
     
     NSMutableArray * instrumentIdSet;
     NSMutableArray * instrumentLoadSet;
     NSMutableArray * instrumentDateSet;
     NSMutableArray * instrumentVersionSet;
+    NSMutableArray * instrumentIsCustomSet;
 
     BOOL pendingLoadTutorial;
+    
+    BOOL loggedInAndLoaded;
     
 }
 
@@ -120,6 +126,7 @@
 - (NSDictionary *)getSongList;
 - (NSDictionary *)getSequenceList;
 - (NSDictionary *)getSampleList;
+- (NSDictionary *)getCustomInstrumentList;
 - (NSDictionary *)getInstrumentList;
 
 @end

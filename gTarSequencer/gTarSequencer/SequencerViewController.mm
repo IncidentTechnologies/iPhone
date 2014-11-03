@@ -245,9 +245,13 @@
 {
     DLog(@"Loading began");
     
-    [loadingOverlay setHidden:NO];
-    
-    [self.view bringSubviewToFront:loadingOverlay];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [loadingOverlay setHidden:NO];
+        
+        [self.view bringSubviewToFront:loadingOverlay];
+            
+    });
     
 }
 
@@ -255,7 +259,11 @@
 {
     DLog(@"Loading ended");
     
-    [loadingOverlay setHidden:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [loadingOverlay setHidden:YES];
+        
+    });
     
 }
 

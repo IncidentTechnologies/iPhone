@@ -41,6 +41,8 @@ extern NSUser * g_loggedInUser;
         
         [self loadSampleCache];
         
+        loggedInAndLoaded = false;
+        
     }
     return self;
 }
@@ -62,11 +64,18 @@ extern NSUser * g_loggedInUser;
 {
     if(cloudResponse.m_status == CloudResponseStatusSuccess){
         
+        DLog(@"Logged in with USER ID %li",cloudResponse.m_responseUserId);
+        
         [g_loggedInUser loadWithId:cloudResponse.m_responseUserId Name:cloudResponse.m_cloudRequest.m_username Password:cloudResponse.m_cloudRequest.m_password Email:cloudResponse.m_cloudRequest.m_email Image:cloudResponse.m_responseFileId Profile:cloudResponse.m_responseUserProfile];
         
         [g_loggedInUser cache];
         
         [loginDelegate loggedInCallback];
+        
+        if(!loggedInAndLoaded){
+            loggedInAndLoaded = true;
+            [loadingDelegate loadingBegan];
+        }
         
         [self regenerateData];
         
@@ -463,6 +472,7 @@ extern NSUser * g_loggedInUser;
             
             if(isComplete){
                 
+                [loadingDelegate loadingEnded];
                 [object performSelector:selector withObject:[ophoInstruments objectForKey:instId]];
                 
             }
@@ -470,9 +480,9 @@ extern NSUser * g_loggedInUser;
         
         [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
         
-        if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
-            [loadingDelegate loadingEnded];
-        }
+        //if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+        //    [loadingDelegate loadingEnded];
+        //}
     }
     
 }
@@ -520,9 +530,40 @@ extern NSUser * g_loggedInUser;
 
 - (NSDictionary *)getInstrumentList
 {
-    NSDictionary * instrumentList = [NSDictionary dictionaryWithObjectsAndKeys:instrumentIdSet,OPHO_LIST_IDS,instrumentLoadSet,OPHO_LIST_NAMES,instrumentDateSet,OPHO_LIST_DATES, nil];
+    NSMutableArray * instIdSet = [[NSMutableArray alloc] init];
+    NSMutableArray * instLoadSet = [[NSMutableArray alloc] init];
+    NSMutableArray * instDateSet = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [instrumentIdSet count]; i++){
+        if(![[instrumentIsCustomSet objectAtIndex:i] boolValue]){
+            [instIdSet addObject:[instrumentIdSet objectAtIndex:i]];
+            [instLoadSet addObject:[instrumentLoadSet objectAtIndex:i]];
+            [instDateSet addObject:[instrumentDateSet objectAtIndex:i]];
+        }
+    }
+    
+    NSDictionary * instrumentList = [NSDictionary dictionaryWithObjectsAndKeys:instIdSet,OPHO_LIST_IDS,instLoadSet,OPHO_LIST_NAMES,instDateSet,OPHO_LIST_DATES, nil];
     
     return instrumentList;
+}
+
+- (NSDictionary *)getCustomInstrumentList
+{
+    NSMutableArray * customInstIdSet = [[NSMutableArray alloc] init];
+    NSMutableArray * customInstLoadSet = [[NSMutableArray alloc] init];
+    NSMutableArray * customInstDateSet = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [instrumentIdSet count]; i++){
+        if([[instrumentIsCustomSet objectAtIndex:i] boolValue]){
+            [customInstIdSet addObject:[instrumentIdSet objectAtIndex:i]];
+            [customInstLoadSet addObject:[instrumentLoadSet objectAtIndex:i]];
+            [customInstDateSet addObject:[instrumentDateSet objectAtIndex:i]];
+        }
+    }
+    
+    NSDictionary * customInstrumentList = [NSDictionary dictionaryWithObjectsAndKeys:customInstIdSet,OPHO_LIST_IDS,customInstLoadSet,OPHO_LIST_NAMES,customInstDateSet,OPHO_LIST_DATES, nil];
+    
+    return customInstrumentList;
 }
 
 #pragma mark - Caching Samples
@@ -642,6 +683,7 @@ extern NSUser * g_loggedInUser;
         songLoadSet = [[NSMutableArray alloc] init];
         songDateSet = [[NSMutableArray alloc] init];
         songVersionSet = [[NSMutableArray alloc] init];
+        songIsCustomSet = [[NSMutableArray alloc] init];
     }
         
     [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:)];
@@ -654,6 +696,7 @@ extern NSUser * g_loggedInUser;
         sequenceLoadSet = [[NSMutableArray alloc] init];
         sequenceDateSet = [[NSMutableArray alloc] init];
         sequenceVersionSet = [[NSMutableArray alloc] init];
+        sequenceIsCustomSet = [[NSMutableArray alloc] init];
     }
     
     [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:)];
@@ -666,6 +709,7 @@ extern NSUser * g_loggedInUser;
         sampleLoadSet = [[NSMutableArray alloc] init];
         sampleDateSet = [[NSMutableArray alloc] init];
         sampleVersionSet = [[NSMutableArray alloc] init];
+        sampleIsCustomSet = [[NSMutableArray alloc] init];
     }
     
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
@@ -678,6 +722,7 @@ extern NSUser * g_loggedInUser;
         instrumentLoadSet = [[NSMutableArray alloc] init];
         instrumentDateSet = [[NSMutableArray alloc] init];
         instrumentVersionSet = [[NSMutableArray alloc] init];
+        instrumentIsCustomSet = [[NSMutableArray alloc] init];
     }
         
     [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:)];
@@ -693,8 +738,9 @@ extern NSUser * g_loggedInUser;
     [songLoadSet removeAllObjects];
     [songDateSet removeAllObjects];
     [songVersionSet removeAllObjects];
+    [songIsCustomSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet withVersion:songVersionSet];
+    [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet withVersion:songVersionSet withCustom:songIsCustomSet];
 }
 
 - (void)requestGetXmpInstrumentListCallback:(CloudResponse *)cloudResponse
@@ -707,8 +753,11 @@ extern NSUser * g_loggedInUser;
     [instrumentLoadSet removeAllObjects];
     [instrumentDateSet removeAllObjects];
     [instrumentVersionSet removeAllObjects];
+    [instrumentIsCustomSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet withVersion:instrumentVersionSet];
+    [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet withVersion:instrumentVersionSet withCustom:instrumentIsCustomSet];
+    
+    DLog(@"Instrument Is Custom Set %@, ID Set %@, %i",instrumentIsCustomSet,instrumentIdSet,g_loggedInUser.m_userId);
     
     [loadingDelegate instrumentListLoaded];
 }
@@ -723,8 +772,9 @@ extern NSUser * g_loggedInUser;
     [sequenceLoadSet removeAllObjects];
     [sequenceDateSet removeAllObjects];
     [sequenceVersionSet removeAllObjects];
+    [sequenceIsCustomSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet withVersion:sequenceVersionSet];
+    [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet withVersion:sequenceVersionSet withCustom:sequenceIsCustomSet];
     
     // Check that TUTORIAL has been copied over
     BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
@@ -750,8 +800,9 @@ extern NSUser * g_loggedInUser;
     [sampleLoadSet removeAllObjects];
     [sampleDateSet removeAllObjects];
     [sampleVersionSet removeAllObjects];
+    [sampleIsCustomSet removeAllObjects];
     
-    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet];
+    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
 }
 
 - (BOOL)defaultSetExists
@@ -765,7 +816,7 @@ extern NSUser * g_loggedInUser;
     return FALSE;
 }
 
-- (void)buildSortedXmpList:(NSArray *)xmpList withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withDates:(NSMutableArray *)fileDateSet withVersion:(NSMutableArray *)fileVersionSet;
+- (void)buildSortedXmpList:(NSArray *)xmpList withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withDates:(NSMutableArray *)fileDateSet withVersion:(NSMutableArray *)fileVersionSet withCustom:(NSMutableArray *)fileCustomSet;
 {
     
     NSDateFormatter * df = [[NSDateFormatter alloc] init];
@@ -777,6 +828,7 @@ extern NSUser * g_loggedInUser;
         NSInteger version = [[xmp getTextFromChildWithName:@"xmp_current_version_number"] intValue];
         NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
+        NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId)];
         
         DLog(@"Date is %@",date);
         
@@ -795,25 +847,30 @@ extern NSUser * g_loggedInUser;
         if(version >= 0){
             [fileVersionSet addObject:[NSNumber numberWithLong:version]];
         }
+        
+        if(custom != nil){
+            [fileCustomSet addObject:custom];
+        }
     }
     
     //DLog(@"FileIdSet %@ FileLoadSet %@ FileDateSet %@",fileIdSet, fileLoadSet,fileDateSet);
     
     // Sort by date order
     if([fileLoadSet count] > 0){
-        [self sortFilesByDates:fileDateSet withIds:fileIdSet withData:fileLoadSet withVersions:fileVersionSet];
+        [self sortFilesByDates:fileDateSet withIds:fileIdSet withData:fileLoadSet withVersions:fileVersionSet withCustom:fileCustomSet];
     }
     
 }
 
 // TODO: this can probably be done nicer with comparators
-- (void)sortFilesByDates:(NSMutableArray *)fileDateSet withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withVersions:(NSMutableArray *)fileVersionSet;
+- (void)sortFilesByDates:(NSMutableArray *)fileDateSet withIds:(NSMutableArray *)fileIdSet withData:(NSMutableArray *)fileLoadSet withVersions:(NSMutableArray *)fileVersionSet withCustom:(NSMutableArray *)fileCustomSet;
 {
     
     NSString * newFileLoadSet[[fileDateSet count]];
     NSDate * newFileDateSet[[fileDateSet count]];
     NSNumber * newFileIdSet[[fileDateSet count]];
     NSNumber * newFileVersionSet[[fileDateSet count]];
+    NSNumber * newFileCustomSet[[fileDateSet count]];
     
     NSDate * maxDate;
     int maxDateIndex;
@@ -835,6 +892,7 @@ extern NSUser * g_loggedInUser;
             newFileLoadSet[i] = fileLoadSet[maxDateIndex];
             newFileIdSet[i] = fileIdSet[maxDateIndex];
             newFileVersionSet[i] = fileVersionSet[maxDateIndex];
+            newFileCustomSet[i] = fileCustomSet[maxDateIndex];
             
             fileDateSet[maxDateIndex] = [NSDate distantPast];
         }
@@ -845,6 +903,7 @@ extern NSUser * g_loggedInUser;
         [fileDateSet setObject:newFileDateSet[i] atIndexedSubscript:i];
         [fileIdSet setObject:newFileIdSet[i] atIndexedSubscript:i];
         [fileVersionSet setObject:newFileVersionSet[i] atIndexedSubscript:i];
+        [fileCustomSet setObject:newFileCustomSet[i] atIndexedSubscript:i];
     }
 }
 
