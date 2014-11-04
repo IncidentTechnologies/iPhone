@@ -427,6 +427,28 @@
     
     NSInstrument * instrument = [[NSInstrument alloc] initWithXmlDom:[instrumentXmp getChildWithName:@"instrument"]];
     
+    // First check that the instrument in the set still exists, it may have been removed
+    if(instrument.m_name == nil && instrument.m_id == 0){
+        
+        // Pass the intended corresponding track
+        NSArray * responseArray = [cloudResponse.m_statusText componentsSeparatedByString:@" "];
+        int instId = [[responseArray lastObject] intValue];
+        
+        DLog(@"Loaded instrument for XMP %i does not exist, remove from list",instId);
+        
+        int trackIndex = 0;
+        for(NSTrack * track in sequence.m_tracks){
+            if(track.m_instrument.m_id == instId){
+                DLog(@"Removing at track index %i",trackIndex);
+                [self removeSequencerWithIndex:trackIndex];
+                return;
+            }
+            trackIndex++;
+        }
+        
+        return;
+    }
+    
     // Add to the correct track for the loaded sequence
     for(NSTrack * track in sequence.m_tracks){
         if([track.m_name isEqualToString:instrument.m_name]){
@@ -1059,10 +1081,7 @@
             }
         }
         
-        instrumentSelector.options = remainingInstrumentOptions;
-        
-        // Resave pList
-        //[self saveCustomInstrumentToPlist:customInstrumentOptions];
+        [instrumentSelector setOptions:remainingInstrumentOptions];
         
     }
 }
@@ -1174,7 +1193,7 @@
     NSNumber * instId = instData[0];
     NSString * instName = instData[1];
     
-    DLog(@" *** new instrument saved with ID %i, name %@",[instId intValue],instName);
+    DLog(@"New instrument saved with ID %i, name %@",[instId intValue],instName);
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
@@ -1185,10 +1204,8 @@
     [remainingInstrumentOptions addObject:dict];
     [customInstrumentOptions addObject:dict];
     
-    // set options for instrument selector
+    // set options for instrument selector to reload
     [instrumentSelector setOptions:remainingInstrumentOptions];
-    
-    DLog(@"Instrument table reloaded");
     
 }
 
