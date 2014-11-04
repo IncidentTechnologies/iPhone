@@ -65,7 +65,7 @@
 - (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude;
 - (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure;
 
-- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
+//- (BOOL)isNoteOnAtString:(int)str andFret:(int)fret;
 
 //
 

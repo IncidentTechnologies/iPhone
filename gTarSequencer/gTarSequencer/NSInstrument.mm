@@ -174,7 +174,7 @@
     char * filepath = (char *)[instrumentFilepath UTF8String];
     
     XMPNode *node = NULL;
-    XMPNode *custom = NULL;
+    //XMPNode *custom = NULL;
     node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
     //custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
     //node->AddChild(custom);

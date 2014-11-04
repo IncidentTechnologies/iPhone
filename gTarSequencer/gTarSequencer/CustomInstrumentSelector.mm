@@ -631,7 +631,7 @@
 
 - (void)recordingNameFieldDidChange:(id)sender
 {
-    int maxLength = 15;
+    int maxLength = 20;
     
     if([recordingNameField.text length] > maxLength){
         recordingNameField.text = [recordingNameField.text substringToIndex:maxLength];

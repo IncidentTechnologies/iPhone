@@ -14,6 +14,7 @@
 @protocol TutorialDelegate <NSObject>
 
 - (void) notifyTutorialEnded;
+@optional
 - (void) forceToPlay;
 - (void) closeLeftNavigator;
 - (void) presentGatekeeper:(BOOL)animate;

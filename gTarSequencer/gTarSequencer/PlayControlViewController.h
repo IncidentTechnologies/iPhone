@@ -24,7 +24,6 @@
 - (void) pauseRecordPlayback;
 
 - (void) saveStateToDiskWithForce:(BOOL)forceSave;
-- (void) userDidLoadSequenceOptions;
 
 - (void) stopGestures;
 - (void) startGestures;
@@ -71,7 +70,6 @@
    
 }
 
-- (IBAction)userDidLoadOptions:(id)sender; // TODO: move to left nav
 - (IBAction)startStop:(id)sender;
 - (IBAction)startStopRecordPlayback:(id)sender;
 - (IBAction)toggleVolumeOpen:(id)sender;

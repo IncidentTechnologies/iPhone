@@ -68,8 +68,8 @@
 - (void)changePercentageComplete:(double)percentage;
 
 - (void)checkFrames;
-- (void)exitCurrentFrame;
-- (void)enterCurrentFrame;
+//- (void)exitCurrentFrame;
+//- (void)enterCurrentFrame;
 - (double)getFirstAudibleBeat:(NSArray *)notesArray;
 
 - (void)setStartBeat:(double)start;

@@ -326,7 +326,6 @@
     
 }
 
-
 - (void)retrieveInstrumentOptions
 {
     // Init
@@ -1137,6 +1136,9 @@
 // save a new instrument
 - (void)saveCustomInstrumentWithStrings:(NSArray *)stringSet stringIds:(NSArray *)stringIdSet andName:(NSString *)instName andStringPaths:(NSArray *)stringPaths andIcon:(NSString *)iconName
 {
+    
+    DLog(@"Save custom instrument with name %@",instName);
+    
     NSInstrument * instrument = [[NSInstrument alloc] initWithName:instName id:0 iconName:iconName isCustom:TRUE];
     
     for(int i = 0; i < [stringSet count]; i++){
@@ -1145,29 +1147,49 @@
         [instrument.m_sampler addSample:sample];
     }
     
-    [g_ophoMaster saveInstrument:instrument];
+    [g_ophoMaster saveNewInstrument:instrument callbackObj:self selector:@selector(newInstrumentSavedWithId:)];
+//    [g_ophoMaster saveInstrument:instrument];
     
-    /*
-    
+    // Manually add to the
+   /*
     NSNumber * newIndex = [NSNumber numberWithInt:[self getCustomInstrumentsNewIndex]];
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
     [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
     [dict setValue:newIndex forKey:@"Index"];
     [dict setValue:instName forKey:@"Name"];
-    [dict setValue:stringSet forKey:@"Strings"];
-    [dict setValue:stringPaths forKey:@"StringPaths"];
-    [dict setValue:stringIdSet forKey:@"StringXmpIds"];
     
     [masterInstrumentOptions addObject:dict];
     [remainingInstrumentOptions addObject:dict];
     [customInstrumentOptions addObject:dict];
     
     [self saveCustomInstrumentToPlist:customInstrumentOptions];
-    
     */
     
     [self closeCustomInstrumentSelectorAndScroll:NO];
+}
+
+- (void)newInstrumentSavedWithId:(NSArray *)instData
+{
+    NSNumber * instId = instData[0];
+    NSString * instName = instData[1];
+    
+    DLog(@" *** new instrument saved with ID %i, name %@",[instId intValue],instName);
+    
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:[NSNumber numberWithBool:TRUE] forKey:@"Custom"];
+    [dict setValue:instId forKey:@"Index"];
+    [dict setValue:instName forKey:@"Name"];
+    
+    [masterInstrumentOptions addObject:dict];
+    [remainingInstrumentOptions addObject:dict];
+    [customInstrumentOptions addObject:dict];
+    
+    // set options for instrument selector
+    [instrumentSelector setOptions:remainingInstrumentOptions];
+    
+    DLog(@"Instrument table reloaded");
+    
 }
 
 

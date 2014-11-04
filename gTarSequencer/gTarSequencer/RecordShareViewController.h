@@ -105,7 +105,6 @@ extern NSUser * g_loggedInUser;
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence;
 
 - (IBAction)userDidBack:(id)sender;
-- (IBAction)userDidSaveTrack:(id)sender;
 - (BOOL)showHideSessionOverlay;
 - (void)openShareScreen;
 
@@ -113,7 +112,7 @@ extern NSUser * g_loggedInUser;
 - (void)stopRecordPlayback;
 - (void)pauseRecordPlayback;
 
-- (void)interruptRecording;
+//- (void)interruptRecording;
 
 - (NSString *)generateNextRecordedSongName;
 

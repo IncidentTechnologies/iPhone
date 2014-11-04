@@ -25,7 +25,7 @@ extern OphoMaster * g_ophoMaster;
 
 - (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster;
 
-- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster;
+//- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster;
 
 - (void)instrumentLoadedWithSamples:(NSArray *)samples;
 

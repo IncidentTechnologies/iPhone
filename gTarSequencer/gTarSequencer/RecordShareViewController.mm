@@ -1442,7 +1442,7 @@
 
 -(void)songNameFieldDidChange:(id)sender
 {
-    int maxLength = 15;
+    int maxLength = 20;
     
     if([songNameField.text length] > maxLength){
         songNameField.text = [songNameField.text substringToIndex:maxLength];

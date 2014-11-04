@@ -42,8 +42,8 @@
 - (void)fillToPercent:(double)percent;
 - (void)setTempo:(NSString *)value;
 
-- (void)beginContext;
-- (void)endContext;
+//- (void)beginContext;
+//- (void)endContext;
 
 @property (nonatomic) CGPoint center;
 

@@ -2098,7 +2098,7 @@
 - (float)getSongMaxBeat
 {
     
-    int newNumMeasures = 0.0;
+    //int newNumMeasures = 0.0;
     float maxBeat = 0.0;
     
     // count the maximum measure

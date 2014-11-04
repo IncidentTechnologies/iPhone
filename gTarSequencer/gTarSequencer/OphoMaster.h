@@ -94,6 +94,8 @@
 @property (strong, nonatomic) NSSample * savingSample;
 @property (strong, nonatomic) NSData * savingSampleData;
 @property (strong, nonatomic) NSInstrument * savingInstrument;
+@property (strong, nonatomic) id savingInstrumentObject;
+@property (strong, nonatomic) NSString * savingInstrumentSelector;
 
 - (id)init;
 
@@ -108,6 +110,7 @@
 - (void)saveSong:(NSSong *)song;
 - (void)saveSample:(NSSample *)sample withFile:(NSData *)data;
 - (void)saveInstrument:(NSInstrument *)instrument;
+- (void)saveNewInstrument:(NSInstrument *)instrument callbackObj:(id)object selector:(SEL)selector;
 
 - (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name;
 - (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name;

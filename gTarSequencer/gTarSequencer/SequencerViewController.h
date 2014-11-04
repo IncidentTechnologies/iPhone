@@ -61,6 +61,7 @@ extern NSUser * g_loggedInUser;
     // Save/Load
     NSSong * activeSong;
     NSString * sequencerToSave;
+    BOOL stateLoaded;
     
     // Left nav
     BOOL leftNavOpen;

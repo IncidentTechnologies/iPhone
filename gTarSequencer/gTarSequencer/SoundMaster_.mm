@@ -36,8 +36,6 @@
 -(SamplerBankNode *)generateBank;
 -(void)releaseBank:(SamplerBankNode *)samplerBank;
 -(void)releaseBankAndDisconnect:(SamplerBankNode *)samplerBank;
--(void)loadSample:(char *)filepath intoBank:(SamplerBankNode *)samplerBank;
--(void)triggerSample:(int)sample forBank:(SamplerBankNode *)samplerBank;
 
 -(FileoutNode *)generateFileoutNode:(NSString *)filename;
 

@@ -39,8 +39,6 @@
 - (IBAction)userDidTapInstrumentIcon:(id)sender;
 - (IBAction)userDidSelectNewPattern:(id)sender;
 - (IBAction)userDidSelectNewMeasure:(id)sender;
-- (IBAction)userDidSelectVolumeControl:(id)sender;
-- (IBAction)userDidReleaseVolumeControl:(id)sender;
 - (IBAction)removeMeasures:(id)sender;
 - (IBAction)addMeasures:(id)sender;
 

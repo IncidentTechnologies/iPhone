@@ -97,6 +97,8 @@
     g_ophoMaster.tutorialDelegate = self;
     g_ophoMaster.loadingDelegate = self;
     
+    stateLoaded = false;
+    
 }
 
 - (void)initSubviews
@@ -514,13 +516,13 @@
 {
     
     if([type isEqualToString:TYPE_SEQUENCE]){
-        DLog(@"Load set from %i",xmpId);
+        DLog(@"Load set from %li",xmpId);
         
         [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSequenceXmpCallback:)];
         
         
     }else if([type isEqualToString:TYPE_SONG]){
-        DLog(@"Load song from %i",xmpId);
+        DLog(@"Load song from %li",xmpId);
         
         [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(requestLoadSongXmpCallback:)];
         
@@ -731,8 +733,8 @@
 
 - (void)loadStateFromDisk
 {
-    BOOL loaded = [seqSetViewController loadStateFromDisk];
-    
+    stateLoaded = [seqSetViewController loadStateFromDisk];
+ 
     // TODO: on callback refresh active sequence
 
     [self setActiveSong:activeSong];
@@ -1544,7 +1546,7 @@
 #pragma mark - Logged Out
 - (void)loggedOut:(BOOL)animate
 {
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    //FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     float x = [frameGenerator getFullscreenWidth];
     float y = [frameGenerator getFullscreenHeight];
@@ -1584,10 +1586,13 @@
 
 - (void)instrumentListLoaded
 {
-    [seqSetViewController initInstrumentOptions];
-    
-    // Load locally saved state
-    [self loadStateFromDisk];
+    // Load locally saved state and instrument options
+    if(!stateLoaded){
+        
+        [seqSetViewController initInstrumentOptions];
+        
+        [self loadStateFromDisk];
+    }
     
 }
 
@@ -1613,7 +1618,7 @@
     
     [g_ophoMaster loadTutorialSequenceWhenReady];
     
-    FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+    //FrameGenerator * fg = [[FrameGenerator alloc] init];
     
     float x = [frameGenerator getFullscreenWidth];
     float y = [frameGenerator getFullscreenHeight];

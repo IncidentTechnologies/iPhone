@@ -101,7 +101,7 @@
 - (void)drawPatternLetterForClip:(NSClip *)clip inView:(UIView *)view;
 - (void)drawPatternNotesForClip:(NSClip *)clip inView:(UIView *)view;
 - (void)drawProgressBarForClip:(NSClip *)clip atIndex:(float)trackIndex;
-- (void)drawAddClipMeasureForTrack:(NSString *)trackName;
+//- (void)drawAddClipMeasureForTrack:(NSString *)trackName;
 
 - (float)getXPositionForClipBeat:(float)beat;
 - (float)getProgressXPositionForClipBeat:(float)beat;
