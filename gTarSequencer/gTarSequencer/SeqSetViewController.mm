@@ -52,6 +52,7 @@
 // Load state from disk
 - (void)initTempTutorialSequence
 {
+    DLog(@"Init temp tutorial sequence");
     // copy to documents so it can be loaded on device
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -81,6 +82,7 @@
 - (void)initSequenceWithFilename:(NSString *)filename
 {
     if(filename != nil){
+        DLog(@"Init sequence with filename");
         sequence = [[NSSequence alloc] initWithXMPFilename:filename fromBundle:NO];
         [self refreshSequenceName:filename];
         [self setInstrumentsFromData];
@@ -91,6 +93,8 @@
 
 - (void)initSequenceWithSequence:(NSSequence *)newsequence
 {
+    DLog(@"Init sequence with sequence %@",newsequence.m_name);
+    
     sequence = newsequence;
     
     // Compare to list to get xmpName
@@ -210,11 +214,15 @@
         NSInteger activeSong = [[currentState objectForKey:@"Active Song"] intValue];
         
         if(activeSong){
+            DLog(@"Load active song %i",activeSong);
+            
             // Sequence will automatically load
             loadSequence = false;
             [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
         }
     }
+    
+    DLog(@"Load sequence is %i",loadSequence);
     
     if(loadSequence){
         // Load as edited from disk
@@ -251,6 +259,10 @@
 
 - (void)saveStateToDiskWithForce:(BOOL)forceSave
 {
+    if(![g_ophoMaster loggedIn]){
+        return;
+    }
+    
     if(saveContextTimer == nil || forceSave){
         
         // Prevent from saving many times in a row, but never block a manual save
@@ -392,39 +404,65 @@
 
 - (void)setInstrumentsFromData
 {
+    DLog(@"Set instruments from data for sequence %@",sequence);
     
     [self setRemainingInstrumentOptionsFromMasterOptions];
     
-    NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
     for(NSTrack * track in sequence.m_tracks){
         NSInstrument * inst = track.m_instrument;
         
-        for(NSDictionary * dict in remainingInstrumentOptions){
-            if([[dict objectForKey:@"Name"] isEqualToString:inst.m_name]){
-                
-                NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
-                NSMutableArray * stringSet = [[NSMutableArray alloc] init];
-                NSMutableArray * stringIdSet = [[NSMutableArray alloc] init];
-                
-                for(NSSample * sample in inst.m_sampler.m_samples){
-                    NSString * isCustom = (sample.m_custom) ? @"Custom" : @"Default";
-                    [stringSet addObject:sample.m_name];
-                    [stringPaths addObject:isCustom];
-                    [stringIdSet addObject:[NSNumber numberWithInt:sample.m_xmpFileId]];
-                }
-                
-                [inst.m_sampler initAudioWithInstrument:inst.m_id andName:inst.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIdSet];
-                [dictionariesToRemove addObject:dict];
-            }
-        }
+        // Load instrument by ID
+        [g_ophoMaster loadFromId:inst.m_id callbackObj:self selector:@selector(instrumentSampleListLoaded:)];
         
     }
-    
-    [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
     
     [instrumentTable reloadData];
     
     [delegate numInstrumentsDidChange:[sequence trackCount]];
+    
+}
+
+- (void)instrumentSampleListLoaded:(CloudResponse *)cloudResponse
+{
+    XmlDom * instrumentXmp = cloudResponse.m_xmpDom;
+    
+    NSInstrument * instrument = [[NSInstrument alloc] initWithXmlDom:[instrumentXmp getChildWithName:@"instrument"]];
+    
+    // Add to the correct track for the loaded sequence
+    for(NSTrack * track in sequence.m_tracks){
+        if([track.m_name isEqualToString:instrument.m_name]){
+            track.m_instrument = instrument;
+        }
+    }
+    
+    DLog(@"Instrument sample list loaded, load samples from instrument %@",instrument.m_name);
+    
+    NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
+    
+    for(NSDictionary * dict in remainingInstrumentOptions){
+        if([[dict objectForKey:@"Name"] isEqualToString:instrument.m_name]){
+            
+            NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
+             NSMutableArray * stringSet = [[NSMutableArray alloc] init];
+             NSMutableArray * stringIdSet = [[NSMutableArray alloc] init];
+             
+             for(NSSample * sample in instrument.m_sampler.m_samples){
+                 NSString * isCustom = (sample.m_custom) ? @"Custom" : @"Default";
+                 [stringSet addObject:sample.m_name];
+                 [stringPaths addObject:isCustom];
+                 [stringIdSet addObject:[NSNumber numberWithInt:sample.m_xmpFileId]];
+             }
+             
+             [instrument.m_sampler initAudioWithInstrument:instrument.m_id andName:instrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIdSet];
+            
+            [dictionariesToRemove addObject:dict];
+    
+        }
+    }
+
+    [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
+    
+    [instrumentTable reloadData];
     
 }
 
@@ -625,55 +663,6 @@
     [self saveStateToDiskWithForce:YES];
 }
 
-/*
-- (void)addNewInstrumentWithIndex:(int)index andName:(NSString *)instName andIconName:(NSString *)iconName andStringSet:(NSArray *)stringSet andStringPaths:(NSArray *)stringPaths andStringIds:(NSArray *)stringIds andIsCustom:(BOOL)isCustom
-{
-    NSTrack * newTrack = [[NSTrack alloc] initWithName:instName level:1.0 muted:NO];
-    
-    
-    // Add Track
-    [sequence addTrack:newTrack];
-
-    NSInstrument * newInstrument = newTrack.m_instrument;
-    newInstrument.m_id = index;
-    newInstrument.m_name= instName;
-    newInstrument.m_iconName = iconName;
-    newInstrument.m_custom = isCustom;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [newInstrument.m_sampler initAudioWithInstrument:index andName:newInstrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIds];
-    });
-    
-    [self selectInstrument:[sequence trackCount] - 1];
-    
-    // insert cell:
-    if ([sequence trackCount] == 1){
-        
-        [delegate turnOffGuitarEffects];
-        
-        // Reloading data forcibly resizes the add inst button
-        [instrumentTable reloadData];
-        
-    }else{
-        
-        // If there are no more options in the options array, then reload the table to get rid of the +inst cell.
-        if ([remainingInstrumentOptions count] == 0){
-            [instrumentTable reloadData];
-        }else{
-            [instrumentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sequence trackCount] -1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-            
-            if(![delegate checkIsPlaying]){
-                [self updateAllVisibleCells];
-            }
-        }
-    }
-    
-    [delegate numInstrumentsDidChange:[sequence trackCount]];
-    [self saveStateToDiskWithForce:YES];
-}
-*/
- 
- 
 #pragma mark Table View Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

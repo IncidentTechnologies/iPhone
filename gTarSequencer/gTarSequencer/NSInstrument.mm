@@ -152,6 +152,8 @@
     
     node->AddAttribute(new XMPAttribute((char *)"xmpid", m_id));
     
+    node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
+    
     return node;
 }
 

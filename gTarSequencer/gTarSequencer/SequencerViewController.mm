@@ -56,9 +56,6 @@
     
     [self initSubviews];
     
-    // Load locally saved state
-    [self loadStateFromDisk];
-    
     [self selectNavChoice:@"Set" withShift:NO];
     
     // Overlay tutorial?
@@ -245,26 +242,26 @@
 {
     DLog(@"Loading began");
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    /*dispatch_async(dispatch_get_main_queue(), ^{
         
         [loadingOverlay setHidden:NO];
         
         [self.view bringSubviewToFront:loadingOverlay];
             
     });
-    
+    */
 }
 
 - (void)loadingEnded
 {
     DLog(@"Loading ended");
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    /*dispatch_async(dispatch_get_main_queue(), ^{
         
         [loadingOverlay setHidden:YES];
         
     });
-    
+    */
 }
 
 #pragma mark - Left Navigator
@@ -1588,6 +1585,10 @@
 - (void)instrumentListLoaded
 {
     [seqSetViewController initInstrumentOptions];
+    
+    // Load locally saved state
+    [self loadStateFromDisk];
+    
 }
 
 #pragma mark - FTU Tutorial

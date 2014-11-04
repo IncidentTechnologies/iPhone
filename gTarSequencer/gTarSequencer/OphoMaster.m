@@ -43,6 +43,7 @@ extern NSUser * g_loggedInUser;
         
         loggedInAndLoaded = false;
         
+        
     }
     return self;
 }
@@ -78,6 +79,8 @@ extern NSUser * g_loggedInUser;
         }
         
         [self regenerateData];
+        
+        [self buildDefaultInstrumentsToSaveToOpho];
         
     }else{
         
@@ -241,6 +244,129 @@ extern NSUser * g_loggedInUser;
 
 // Instruments
 
+- (void)buildDefaultInstrumentsToSaveToOpho
+{
+    
+    // TODO: save with live sample IDs
+    // TODO: change to open permission
+    
+    NSInstrument * juno = [[NSInstrument alloc] initWithName:@"JUNO" id:456 iconName:nil isCustom:NO];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_C" custom:NO value:@"0" xmpFileId:0]];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_D" custom:NO value:@"1" xmpFileId:0]];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_E" custom:NO value:@"2" xmpFileId:0]];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_G" custom:NO value:@"3" xmpFileId:0]];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_A" custom:NO value:@"4" xmpFileId:0]];
+    [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:juno];
+    
+    NSInstrument * guitar = [[NSInstrument alloc] initWithName:@"GUITAR" id:457 iconName:nil isCustom:NO];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_C" custom:NO value:@"0" xmpFileId:0]];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_D" custom:NO value:@"1" xmpFileId:0]];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_E" custom:NO value:@"2" xmpFileId:0]];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_G" custom:NO value:@"3" xmpFileId:0]];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_A" custom:NO value:@"4" xmpFileId:0]];
+    [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:guitar];
+    
+    NSInstrument * piano = [[NSInstrument alloc] initWithName:@"PIANO" id:458 iconName:nil isCustom:NO];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_C" custom:NO value:@"0" xmpFileId:490]];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_D" custom:NO value:@"1" xmpFileId:489]];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_E" custom:NO value:@"2" xmpFileId:488]];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_G" custom:NO value:@"3" xmpFileId:487]];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_A" custom:NO value:@"4" xmpFileId:486]];
+    [piano.m_sampler addSample:[[NSSample alloc] initWithName:@"Piano_B" custom:NO value:@"5" xmpFileId:485]];
+    
+    //[self saveInstrument:piano];
+    
+    NSInstrument * violin = [[NSInstrument alloc] initWithName:@"VIOLIN" id:459 iconName:nil isCustom:NO];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_C" custom:NO value:@"0" xmpFileId:0]];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_D" custom:NO value:@"1" xmpFileId:0]];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_E" custom:NO value:@"2" xmpFileId:0]];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_G" custom:NO value:@"3" xmpFileId:0]];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_A" custom:NO value:@"4" xmpFileId:0]];
+    [violin.m_sampler addSample:[[NSSample alloc] initWithName:@"Violin_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:violin];
+    
+    NSInstrument * vibraphone = [[NSInstrument alloc] initWithName:@"VIBRAPHONE" id:460 iconName:nil isCustom:NO];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_C" custom:NO value:@"0" xmpFileId:0]];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_D" custom:NO value:@"1" xmpFileId:0]];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_E" custom:NO value:@"2" xmpFileId:0]];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_G" custom:NO value:@"3" xmpFileId:0]];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_A" custom:NO value:@"4" xmpFileId:0]];
+    [vibraphone.m_sampler addSample:[[NSSample alloc] initWithName:@"Vibraphone_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:vibraphone];
+    
+    NSInstrument * chiptune = [[NSInstrument alloc] initWithName:@"CHIPTUNE" id:461 iconName:nil isCustom:NO];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Kick" custom:NO value:@"0" xmpFileId:0]];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Snare" custom:NO value:@"1" xmpFileId:0]];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Siren" custom:NO value:@"2" xmpFileId:0]];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Beep" custom:NO value:@"3" xmpFileId:0]];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Triangle" custom:NO value:@"4" xmpFileId:0]];
+    [chiptune.m_sampler addSample:[[NSSample alloc] initWithName:@"Chiptune_Lazer" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:chiptune];
+    
+    
+    NSInstrument * pluck = [[NSInstrument alloc] initWithName:@"PLUCK" id:462 iconName:nil isCustom:NO];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_C" custom:NO value:@"0" xmpFileId:0]];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_D" custom:NO value:@"1" xmpFileId:0]];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_E" custom:NO value:@"2" xmpFileId:0]];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_G" custom:NO value:@"3" xmpFileId:0]];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_A" custom:NO value:@"4" xmpFileId:0]];
+    [pluck.m_sampler addSample:[[NSSample alloc] initWithName:@"Pluck_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:pluck];
+    
+    
+    NSInstrument * doublebass = [[NSInstrument alloc] initWithName:@"DOUBLE BASS" id:463 iconName:nil isCustom:NO];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_C" custom:NO value:@"0" xmpFileId:0]];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_D" custom:NO value:@"1" xmpFileId:0]];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_E" custom:NO value:@"2" xmpFileId:0]];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_G" custom:NO value:@"3" xmpFileId:0]];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_A" custom:NO value:@"4" xmpFileId:0]];
+    [doublebass.m_sampler addSample:[[NSSample alloc] initWithName:@"DoubleBass_B" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:doublebass];
+    
+    
+    NSInstrument * eight = [[NSInstrument alloc] initWithName:@"808" id:464 iconName:nil isCustom:NO];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_Kick" custom:NO value:@"0" xmpFileId:0]];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_Snare" custom:NO value:@"1" xmpFileId:0]];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_ClosedHat" custom:NO value:@"2" xmpFileId:0]];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_OpenHat" custom:NO value:@"3" xmpFileId:0]];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_Tom" custom:NO value:@"4" xmpFileId:0]];
+    [eight.m_sampler addSample:[[NSSample alloc] initWithName:@"808_Clap" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:eight];
+    
+    
+    NSInstrument * house = [[NSInstrument alloc] initWithName:@"HOUSE" id:465 iconName:nil isCustom:NO];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_Kick" custom:NO value:@"0" xmpFileId:0]];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_Clip" custom:NO value:@"1" xmpFileId:0]];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_OpenHat" custom:NO value:@"2" xmpFileId:0]];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_ClosedHat" custom:NO value:@"3" xmpFileId:0]];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_Snare" custom:NO value:@"4" xmpFileId:0]];
+    [house.m_sampler addSample:[[NSSample alloc] initWithName:@"House_WoodBlock" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:house];
+    
+    
+    NSInstrument * rock = [[NSInstrument alloc] initWithName:@"ROCK" id:466 iconName:nil isCustom:NO];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_Kick" custom:NO value:@"0" xmpFileId:0]];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_Snare" custom:NO value:@"1" xmpFileId:0]];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_ClosedHat" custom:NO value:@"2" xmpFileId:0]];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_OpenHat" custom:NO value:@"3" xmpFileId:0]];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_Tom" custom:NO value:@"4" xmpFileId:0]];
+    [rock.m_sampler addSample:[[NSSample alloc] initWithName:@"Rock_Crash" custom:NO value:@"5" xmpFileId:0]];
+    
+    //[self saveInstrument:rock];
+    
+}
+
 - (void)saveInstrument:(NSInstrument *)instrument
 {
     DLog(@"Instrument is %@",instrument);
@@ -385,15 +511,15 @@ extern NSUser * g_loggedInUser;
     // Then load al the samples asynchronously
     for(NSSample * sample in samples){
         long xmpId = (sample.m_xmpFileId == 0) ? DEFAULT_SAMPLE_ID : sample.m_xmpFileId;
-        sample.m_xmpFileId = DEFAULT_SAMPLE_ID;
+        sample.m_xmpFileId = xmpId;
         
         NSString * cachedSample = [self getSampleFromCache:sample.m_xmpFileId];
         
         if(cachedSample == nil){
-            DLog(@"Loading sample from ID");
-            [self loadFromId:xmpId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
+            DLog(@"Loading sample from ID %li",sample.m_xmpFileId);
+            [self loadFromId:sample.m_xmpFileId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
         }else{
-            DLog(@"Loading sample from cache");
+            DLog(@"Loading sample from cache %li",sample.m_xmpFileId);
             [self addData:cachedSample forLoadingInstrumentSample:sample.m_xmpFileId];
         }
     }
@@ -784,7 +910,10 @@ extern NSUser * g_loggedInUser;
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
     }
     
-    if(pendingLoadTutorial){
+    if(pendingLoadTutorial && [sequenceLoadSet count] > 0){
+        
+        DLog(@"Pending load tutorial, sequenceLoadSet is %@",sequenceLoadSet);
+        
         [self launchPendingTutorial];
     }
     
@@ -916,6 +1045,8 @@ extern NSUser * g_loggedInUser;
 
 - (void)copyTutorialFile
 {
+    DLog(@"Copy tutorial file");
+    
     NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
     
     [self saveSequence:tutorialSequence];
@@ -923,6 +1054,9 @@ extern NSUser * g_loggedInUser;
 
 - (void)launchPendingTutorial
 {
+    DLog(@"Launch pending tutorial");
+    
+    
     pendingLoadTutorial = NO;
     
     NSInteger xmpId;

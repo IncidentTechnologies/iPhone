@@ -12,16 +12,7 @@
             </header>
             <content>
                 <track name="ROCK" level="1.000000" muted="0">
-                    <instrument name="ROCK" iconname="Icon_ROCK" index="8" custom="0">
-                        <sampler>
-                            <sample name="Rock_Kick" value="0" custom="0" xmpfileid="0"/>
-                            <sample name="Rock_Snare" value="1" custom="0" xmpfileid="0"/>
-                            <sample name="Rock_ClosedHat" value="2" custom="0" xmpfileid="0"/>
-                            <sample name="Rock_OpenHat" value="3" custom="0" xmpfileid="0"/>
-                            <sample name="Rock_Tom" value="4" custom="0" xmpfileid="0"/>
-                            <sample name="Rock_Crash" value="5" custom="0" xmpfileid="0"/>
-                        </sampler>
-                    </instrument>
+                    <instrument name="ROCK" index="466" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="3" beatstart="2.000000" />
@@ -39,16 +30,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="DOUBLE BASS" level="0.397353" muted="0">
-                    <instrument name="DOUBLE BASS" iconname="Icon_DOUBLE BASS" index="1" custom="0">
-                        <sampler>
-                            <sample name="DoubleBass_C" value="0" custom="0" xmpfileid="0"/>
-                            <sample name="DoubleBass_D" value="1" custom="0" xmpfileid="0"/>
-                            <sample name="DoubleBass_E" value="2" custom="0" xmpfileid="0"/>
-                            <sample name="DoubleBass_G" value="3" custom="0" xmpfileid="0"/>
-                            <sample name="DoubleBass_A" value="4" custom="0" xmpfileid="0"/>
-                            <sample name="DoubleBass_B" value="5" custom="0" xmpfileid="0"/>
-                        </sampler>
-                    </instrument>
+                    <instrument name="DOUBLE BASS" index="463" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="0" beatstart="4.000000" />
@@ -74,16 +56,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="VIBRAPHONE" level="1.000000" muted="0">
-                    <instrument name="VIBRAPHONE" iconname="Icon_VIBRAPHONE" index="11" custom="0">
-                        <sampler>
-                            <sample name="Vibraphone_C" value="0" custom="0" xmpfileid="0"/>
-                            <sample name="Vibraphone_D" value="1" custom="0" xmpfileid="0"/>
-                            <sample name="Vibraphone_E" value="2" custom="0" xmpfileid="0"/>
-                            <sample name="Vibraphone_G" value="3" custom="0" xmpfileid="0"/>
-                            <sample name="Vibraphone_A" value="4" custom="0" xmpfileid="0"/>
-                            <sample name="Vibraphone_B" value="5" custom="0" xmpfileid="0"/>
-                        </sampler>
-                    </instrument>
+                    <instrument name="VIBRAPHONE" index="460" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="5" beatstart="0.000000" />
                         <note value="3" beatstart="0.000000" />
@@ -154,16 +127,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="GUITAR" level="1.000000" muted="1">
-                    <instrument name="GUITAR" iconname="Icon_GUITAR" index="5" custom="0">
-                        <sampler>
-                            <sample name="Guitar_C" value="0" custom="0" xmpfileid="0"/>
-                            <sample name="Guitar_D" value="1" custom="0" xmpfileid="0"/>
-                            <sample name="Guitar_E" value="2" custom="0" xmpfileid="0"/>
-                            <sample name="Guitar_G" value="3" custom="0" xmpfileid="0"/>
-                            <sample name="Guitar_A" value="4" custom="0" xmpfileid="0"/>
-                            <sample name="Guitar_B" value="5" custom="0" xmpfileid="0"/>
-                        </sampler>
-                    </instrument>
+                    <instrument name="GUITAR" index="457" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="2" beatstart="2.000000" />

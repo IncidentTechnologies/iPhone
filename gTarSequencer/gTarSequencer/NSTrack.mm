@@ -201,7 +201,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     
-    node->AddChild([m_instrument convertToSequenceXmp]);
+    node->AddChild([m_instrument convertToSongXmp]);
     
     for(NSPattern * pattern in m_patterns){
         node->AddChild([pattern convertToXmp]);
