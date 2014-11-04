@@ -244,26 +244,18 @@
 {
     DLog(@"Loading began");
     
-    /*dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [loadingOverlay setHidden:NO];
-        
-        [self.view bringSubviewToFront:loadingOverlay];
-            
-    });
-    */
+    [loadingOverlay setHidden:NO];
+    
+    [self.view bringSubviewToFront:loadingOverlay];
+
 }
 
 - (void)loadingEnded
 {
     DLog(@"Loading ended");
     
-    /*dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [loadingOverlay setHidden:YES];
-        
-    });
-    */
+    [loadingOverlay setHidden:YES];
+    
 }
 
 #pragma mark - Left Navigator

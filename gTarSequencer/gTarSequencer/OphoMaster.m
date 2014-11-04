@@ -77,7 +77,10 @@ extern NSUser * g_loggedInUser;
         
         if(!loggedInAndLoaded){
             loggedInAndLoaded = true;
-            [loadingDelegate loadingBegan];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [loadingDelegate loadingBegan];
+            });
         }
         
         [self regenerateData];
@@ -428,12 +431,12 @@ extern NSUser * g_loggedInUser;
 
 - (void)saveToId:(NSInteger)xmpId withFile:(NSData *)data withName:(NSString *)name
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:data andXmpData:nil andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:data andXmpDataString:nil andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
 }
 
 - (void)saveToId:(NSInteger)xmpId withData:(NSString *)data withName:(NSString *)name
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFile:nil andXmpData:data andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:nil andXmpDataString:data andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
 }
 
 - (void)saveCallback:(CloudResponse *)cloudResponse
@@ -515,7 +518,9 @@ extern NSUser * g_loggedInUser;
         return;
     }
     
-    [loadingDelegate loadingBegan];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [loadingDelegate loadingBegan];
+    });
     
     DLog(@"Load samples from instrument %li, %@",instrumentId,samples);
     
@@ -573,6 +578,13 @@ extern NSUser * g_loggedInUser;
     
     if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
         // work already done
+    
+        DLog(@"Return early");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadingDelegate loadingEnded];
+        });
+        
         return;
     }
     
@@ -614,18 +626,22 @@ extern NSUser * g_loggedInUser;
             }
             
             if(isComplete){
-                
-                [loadingDelegate loadingEnded];
                 [object performSelector:selector withObject:[ophoInstruments objectForKey:instId]];
-                
+                [keysToRemove addObject:instId];
             }
         }
         
         [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
         
-        //if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
-        //    [loadingDelegate loadingEnded];
-        //}
+        //DLog(@"(queue count is now %li)",[ophoLoadingInstrumentQueue count]);
+    
+        if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [loadingDelegate loadingEnded];
+            });
+            
+        }
     }
     
 }
