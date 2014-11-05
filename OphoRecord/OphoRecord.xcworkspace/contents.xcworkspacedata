@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../IncidentPlatform/iOS/IncidentPlatform/IncidentPlatform.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:Opho Record/Opho Record.xcodeproj">
+   </FileRef>
+</Workspace>

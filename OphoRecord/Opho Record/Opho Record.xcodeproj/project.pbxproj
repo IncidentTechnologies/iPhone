@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2627C11E1A07EA8000A9B39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627C11D1A07EA8000A9B39A /* main.m */; };
+		2627C1211A07EA8000A9B39A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627C1201A07EA8000A9B39A /* AppDelegate.m */; };
+		2627C1241A07EA8000A9B39A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627C1231A07EA8000A9B39A /* ViewController.m */; };
+		2627C1291A07EA8000A9B39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2627C1281A07EA8000A9B39A /* Images.xcassets */; };
+		2627C12C1A07EA8000A9B39A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2627C12A1A07EA8000A9B39A /* LaunchScreen.xib */; };
+		2627C1381A07EA8000A9B39A /* Opho_RecordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627C1371A07EA8000A9B39A /* Opho_RecordTests.m */; };
+		2627C1441A07EBD100A9B39A /* DefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2627C1421A07EBD100A9B39A /* DefaultViewController.m */; };
+		2627C1451A07EBD100A9B39A /* DefaultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2627C1431A07EBD100A9B39A /* DefaultViewController.xib */; };
+		263B36C71A07F32000C47935 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36C61A07F32000C47935 /* libIncidentPlatform.a */; };
+		263B36C91A07F33200C47935 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36C81A07F33200C47935 /* libstdc++.dylib */; };
+		263B36CB1A07F33E00C47935 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36CA1A07F33E00C47935 /* libz.dylib */; };
+		263B36CD1A07F34900C47935 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36CC1A07F34900C47935 /* libc++.dylib */; };
+		263B36CF1A07F35D00C47935 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36CE1A07F35D00C47935 /* CoreMIDI.framework */; };
+		263B36D11A07F36800C47935 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36D01A07F36800C47935 /* AudioToolbox.framework */; };
+		263B36D31A07F36D00C47935 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36D21A07F36D00C47935 /* AVFoundation.framework */; };
+		263B36D51A07F37800C47935 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36D41A07F37800C47935 /* UIKit.framework */; };
+		263B36D91A07F82C00C47935 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263B36D71A07F82C00C47935 /* LoginViewController.m */; };
+		263B36DA1A07F82C00C47935 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B36D81A07F82C00C47935 /* LoginViewController.xib */; };
+		263B36DD1A07F88800C47935 /* LoginBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 263B36DC1A07F88800C47935 /* LoginBG.png */; };
+		263B36E01A07F96500C47935 /* ophoGraphic_pink_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 263B36DF1A07F96500C47935 /* ophoGraphic_pink_transparent.png */; };
+		263B36E51A0809BC00C47935 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36E21A0809BC00C47935 /* OpenGLES.framework */; };
+		263B36E61A0809BC00C47935 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36E31A0809BC00C47935 /* QuartzCore.framework */; };
+		263B36E81A0809BE00C47935 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263B36E71A0809BE00C47935 /* Foundation.framework */; };
+		26BC1F4B1A0862E300703337 /* OphoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC1F4A1A0862E300703337 /* OphoController.m */; };
+		26BC1F4F1A0865C400703337 /* UserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC1F4E1A0865C400703337 /* UserSession.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2627C1321A07EA8000A9B39A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2627C1101A07EA8000A9B39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2627C1171A07EA8000A9B39A;
+			remoteInfo = "Opho Record";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		260B43661A08248200AA5104 /* libgTarAppCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgTarAppCore.a; path = "../../gTarAppCore/gTarAppCore/build/Debug-iphoneos/libgTarAppCore.a"; sourceTree = "<group>"; };
+		2627C1181A07EA8000A9B39A /* Opho Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Opho Record.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2627C11C1A07EA8000A9B39A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2627C11D1A07EA8000A9B39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2627C11F1A07EA8000A9B39A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2627C1201A07EA8000A9B39A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2627C1221A07EA8000A9B39A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2627C1231A07EA8000A9B39A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2627C1281A07EA8000A9B39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2627C12B1A07EA8000A9B39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		2627C1311A07EA8000A9B39A /* Opho RecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Opho RecordTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2627C1361A07EA8000A9B39A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2627C1371A07EA8000A9B39A /* Opho_RecordTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Opho_RecordTests.m; sourceTree = "<group>"; };
+		2627C1411A07EBD100A9B39A /* DefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultViewController.h; sourceTree = "<group>"; };
+		2627C1421A07EBD100A9B39A /* DefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultViewController.m; sourceTree = "<group>"; };
+		2627C1431A07EBD100A9B39A /* DefaultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultViewController.xib; sourceTree = "<group>"; };
+		263B36C61A07F32000C47935 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
+		263B36C81A07F33200C47935 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		263B36CA1A07F33E00C47935 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		263B36CC1A07F34900C47935 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		263B36CE1A07F35D00C47935 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		263B36D01A07F36800C47935 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		263B36D21A07F36D00C47935 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		263B36D41A07F37800C47935 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		263B36D61A07F82C00C47935 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
+		263B36D71A07F82C00C47935 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../LoginViewController.m; sourceTree = "<group>"; };
+		263B36D81A07F82C00C47935 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = ../LoginViewController.xib; sourceTree = "<group>"; };
+		263B36DC1A07F88800C47935 /* LoginBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBG.png; sourceTree = "<group>"; };
+		263B36DF1A07F96500C47935 /* ophoGraphic_pink_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ophoGraphic_pink_transparent.png; sourceTree = "<group>"; };
+		263B36E11A0809BC00C47935 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		263B36E21A0809BC00C47935 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		263B36E31A0809BC00C47935 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		263B36E71A0809BE00C47935 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		26BC1F491A0862E300703337 /* OphoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OphoController.h; sourceTree = "<group>"; };
+		26BC1F4A1A0862E300703337 /* OphoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OphoController.m; sourceTree = "<group>"; };
+		26BC1F4D1A0865C400703337 /* UserSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSession.h; sourceTree = "<group>"; };
+		26BC1F4E1A0865C400703337 /* UserSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSession.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2627C1151A07EA8000A9B39A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				263B36D11A07F36800C47935 /* AudioToolbox.framework in Frameworks */,
+				263B36D51A07F37800C47935 /* UIKit.framework in Frameworks */,
+				263B36E51A0809BC00C47935 /* OpenGLES.framework in Frameworks */,
+				263B36E61A0809BC00C47935 /* QuartzCore.framework in Frameworks */,
+				263B36E81A0809BE00C47935 /* Foundation.framework in Frameworks */,
+				263B36CF1A07F35D00C47935 /* CoreMIDI.framework in Frameworks */,
+				263B36D31A07F36D00C47935 /* AVFoundation.framework in Frameworks */,
+				263B36CD1A07F34900C47935 /* libc++.dylib in Frameworks */,
+				263B36CB1A07F33E00C47935 /* libz.dylib in Frameworks */,
+				263B36C91A07F33200C47935 /* libstdc++.dylib in Frameworks */,
+				263B36C71A07F32000C47935 /* libIncidentPlatform.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2627C12E1A07EA8000A9B39A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2627C10F1A07EA8000A9B39A = {
+			isa = PBXGroup;
+			children = (
+				263B36EA1A080B6B00C47935 /* Libraries */,
+				263B36E91A080B5C00C47935 /* Frameworks */,
+				2627C11A1A07EA8000A9B39A /* Opho Record */,
+				2627C1341A07EA8000A9B39A /* Opho RecordTests */,
+				2627C1191A07EA8000A9B39A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2627C1191A07EA8000A9B39A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2627C1181A07EA8000A9B39A /* Opho Record.app */,
+				2627C1311A07EA8000A9B39A /* Opho RecordTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2627C11A1A07EA8000A9B39A /* Opho Record */ = {
+			isa = PBXGroup;
+			children = (
+				26BC1F4C1A0865B100703337 /* UserSession */,
+				263B36DE1A07F8B200C47935 /* OphoController */,
+				263B36DB1A07F86900C47935 /* Images */,
+				263B36D61A07F82C00C47935 /* LoginViewController.h */,
+				263B36D71A07F82C00C47935 /* LoginViewController.m */,
+				263B36D81A07F82C00C47935 /* LoginViewController.xib */,
+				2627C11F1A07EA8000A9B39A /* AppDelegate.h */,
+				2627C1201A07EA8000A9B39A /* AppDelegate.m */,
+				2627C1221A07EA8000A9B39A /* ViewController.h */,
+				2627C1231A07EA8000A9B39A /* ViewController.m */,
+				2627C1281A07EA8000A9B39A /* Images.xcassets */,
+				2627C12A1A07EA8000A9B39A /* LaunchScreen.xib */,
+				2627C11B1A07EA8000A9B39A /* Supporting Files */,
+				2627C1411A07EBD100A9B39A /* DefaultViewController.h */,
+				2627C1421A07EBD100A9B39A /* DefaultViewController.m */,
+				2627C1431A07EBD100A9B39A /* DefaultViewController.xib */,
+			);
+			path = "Opho Record";
+			sourceTree = "<group>";
+		};
+		2627C11B1A07EA8000A9B39A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2627C11C1A07EA8000A9B39A /* Info.plist */,
+				2627C11D1A07EA8000A9B39A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2627C1341A07EA8000A9B39A /* Opho RecordTests */ = {
+			isa = PBXGroup;
+			children = (
+				2627C1371A07EA8000A9B39A /* Opho_RecordTests.m */,
+				2627C1351A07EA8000A9B39A /* Supporting Files */,
+			);
+			path = "Opho RecordTests";
+			sourceTree = "<group>";
+		};
+		2627C1351A07EA8000A9B39A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2627C1361A07EA8000A9B39A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		263B36DB1A07F86900C47935 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				263B36DF1A07F96500C47935 /* ophoGraphic_pink_transparent.png */,
+				263B36DC1A07F88800C47935 /* LoginBG.png */,
+			);
+			name = Images;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		263B36DE1A07F8B200C47935 /* OphoController */ = {
+			isa = PBXGroup;
+			children = (
+				26BC1F491A0862E300703337 /* OphoController.h */,
+				26BC1F4A1A0862E300703337 /* OphoController.m */,
+			);
+			name = OphoController;
+			sourceTree = "<group>";
+		};
+		263B36E91A080B5C00C47935 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				260B43661A08248200AA5104 /* libgTarAppCore.a */,
+				263B36E71A0809BE00C47935 /* Foundation.framework */,
+				263B36E11A0809BC00C47935 /* AudioUnit.framework */,
+				263B36E21A0809BC00C47935 /* OpenGLES.framework */,
+				263B36E31A0809BC00C47935 /* QuartzCore.framework */,
+				263B36D41A07F37800C47935 /* UIKit.framework */,
+				263B36D21A07F36D00C47935 /* AVFoundation.framework */,
+				263B36D01A07F36800C47935 /* AudioToolbox.framework */,
+				263B36CE1A07F35D00C47935 /* CoreMIDI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		263B36EA1A080B6B00C47935 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				263B36CC1A07F34900C47935 /* libc++.dylib */,
+				263B36CA1A07F33E00C47935 /* libz.dylib */,
+				263B36C81A07F33200C47935 /* libstdc++.dylib */,
+				263B36C61A07F32000C47935 /* libIncidentPlatform.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		26BC1F4C1A0865B100703337 /* UserSession */ = {
+			isa = PBXGroup;
+			children = (
+				26BC1F4D1A0865C400703337 /* UserSession.h */,
+				26BC1F4E1A0865C400703337 /* UserSession.m */,
+			);
+			name = UserSession;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2627C1171A07EA8000A9B39A /* Opho Record */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2627C13B1A07EA8000A9B39A /* Build configuration list for PBXNativeTarget "Opho Record" */;
+			buildPhases = (
+				2627C1141A07EA8000A9B39A /* Sources */,
+				2627C1151A07EA8000A9B39A /* Frameworks */,
+				2627C1161A07EA8000A9B39A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Opho Record";
+			productName = "Opho Record";
+			productReference = 2627C1181A07EA8000A9B39A /* Opho Record.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2627C1301A07EA8000A9B39A /* Opho RecordTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2627C13E1A07EA8000A9B39A /* Build configuration list for PBXNativeTarget "Opho RecordTests" */;
+			buildPhases = (
+				2627C12D1A07EA8000A9B39A /* Sources */,
+				2627C12E1A07EA8000A9B39A /* Frameworks */,
+				2627C12F1A07EA8000A9B39A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2627C1331A07EA8000A9B39A /* PBXTargetDependency */,
+			);
+			name = "Opho RecordTests";
+			productName = "Opho RecordTests";
+			productReference = 2627C1311A07EA8000A9B39A /* Opho RecordTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2627C1101A07EA8000A9B39A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Incident Technologies, Inc";
+				TargetAttributes = {
+					2627C1171A07EA8000A9B39A = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = AE9ZEG65F3;
+					};
+					2627C1301A07EA8000A9B39A = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 2627C1171A07EA8000A9B39A;
+					};
+				};
+			};
+			buildConfigurationList = 2627C1131A07EA8000A9B39A /* Build configuration list for PBXProject "Opho Record" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2627C10F1A07EA8000A9B39A;
+			productRefGroup = 2627C1191A07EA8000A9B39A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2627C1171A07EA8000A9B39A /* Opho Record */,
+				2627C1301A07EA8000A9B39A /* Opho RecordTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2627C1161A07EA8000A9B39A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				263B36E01A07F96500C47935 /* ophoGraphic_pink_transparent.png in Resources */,
+				263B36DA1A07F82C00C47935 /* LoginViewController.xib in Resources */,
+				2627C12C1A07EA8000A9B39A /* LaunchScreen.xib in Resources */,
+				2627C1451A07EBD100A9B39A /* DefaultViewController.xib in Resources */,
+				263B36DD1A07F88800C47935 /* LoginBG.png in Resources */,
+				2627C1291A07EA8000A9B39A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2627C12F1A07EA8000A9B39A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2627C1141A07EA8000A9B39A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2627C1241A07EA8000A9B39A /* ViewController.m in Sources */,
+				26BC1F4F1A0865C400703337 /* UserSession.m in Sources */,
+				26BC1F4B1A0862E300703337 /* OphoController.m in Sources */,
+				2627C1211A07EA8000A9B39A /* AppDelegate.m in Sources */,
+				2627C1441A07EBD100A9B39A /* DefaultViewController.m in Sources */,
+				2627C11E1A07EA8000A9B39A /* main.m in Sources */,
+				263B36D91A07F82C00C47935 /* LoginViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2627C12D1A07EA8000A9B39A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2627C1381A07EA8000A9B39A /* Opho_RecordTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2627C1331A07EA8000A9B39A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2627C1171A07EA8000A9B39A /* Opho Record */;
+			targetProxy = 2627C1321A07EA8000A9B39A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2627C12A1A07EA8000A9B39A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2627C12B1A07EA8000A9B39A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2627C1391A07EA8000A9B39A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2627C13A1A07EA8000A9B39A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2627C13C1A07EA8000A9B39A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+					$PROJECT_DIR,
+					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
+					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
+				);
+				INFOPLIST_FILE = "Opho Record/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/idanbeck/dev/IncidentTechnologies/IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos",
+					"/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarAppCore/gTarAppCore/build/Debug-iphoneos",
+				);
+				OTHER_CFLAGS = "-mthumb";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2627C13D1A07EA8000A9B39A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+					$PROJECT_DIR,
+					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
+					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
+				);
+				INFOPLIST_FILE = "Opho Record/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/idanbeck/dev/IncidentTechnologies/IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos",
+					"/Users/idanbeck/dev/IncidentTechnologies/iPhone/gTarAppCore/gTarAppCore/build/Debug-iphoneos",
+				);
+				OTHER_CFLAGS = "-mthumb";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2627C13F1A07EA8000A9B39A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Opho RecordTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Opho Record.app/Opho Record";
+			};
+			name = Debug;
+		};
+		2627C1401A07EA8000A9B39A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Opho RecordTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Opho Record.app/Opho Record";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2627C1131A07EA8000A9B39A /* Build configuration list for PBXProject "Opho Record" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2627C1391A07EA8000A9B39A /* Debug */,
+				2627C13A1A07EA8000A9B39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2627C13B1A07EA8000A9B39A /* Build configuration list for PBXNativeTarget "Opho Record" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2627C13C1A07EA8000A9B39A /* Debug */,
+				2627C13D1A07EA8000A9B39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2627C13E1A07EA8000A9B39A /* Build configuration list for PBXNativeTarget "Opho RecordTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2627C13F1A07EA8000A9B39A /* Debug */,
+				2627C1401A07EA8000A9B39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2627C1101A07EA8000A9B39A /* Project object */;
+}
