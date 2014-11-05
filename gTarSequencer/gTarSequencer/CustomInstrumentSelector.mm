@@ -744,7 +744,7 @@
         
         DLog(@"Play audio for XMP ID %i",xmpId);
         
-        [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
+        [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
         
     /*}else{
         
@@ -762,13 +762,8 @@
     
 }
 
-- (void)playOphoAudio:(CloudResponse *)cloudResponse
+- (void)playOphoAudio:(NSString *)datastring
 {
-    XmlDom * xmp = cloudResponse.m_xmpDom;
-    XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
-    
-    NSString * datastring = [sampleXmp getText];
-    
     // Add to sample buffer create from base 64 string
     
     if(!soundMaster){

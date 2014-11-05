@@ -96,6 +96,8 @@
 @property (strong, nonatomic) NSInstrument * savingInstrument;
 @property (strong, nonatomic) id savingInstrumentObject;
 @property (strong, nonatomic) NSString * savingInstrumentSelector;
+@property (strong, nonatomic) id loadingSampleObject;
+@property (strong, nonatomic) NSString * loadingSampleSelector;
 
 - (id)init;
 
@@ -116,6 +118,7 @@
 - (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name;
 
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
+- (void)loadSampleFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
 
 - (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector;
 

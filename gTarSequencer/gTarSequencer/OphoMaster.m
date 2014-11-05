@@ -29,6 +29,8 @@ extern NSUser * g_loggedInUser;
 @synthesize savingInstrument;
 @synthesize savingInstrumentObject;
 @synthesize savingInstrumentSelector;
+@synthesize loadingSampleObject;
+@synthesize loadingSampleSelector;
 
 - (id)init
 {
@@ -502,9 +504,52 @@ extern NSUser * g_loggedInUser;
 
 #pragma mark - XMP Load
 
+// Load anything by ID
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector
 {
     [ophoCloudController requestGetXmpWithId:xmpId isXmpOnly:false andCallbackObj:callbackObj andCallbackSel:selector];
+}
+
+// Load an individual sample by ID, from cache if available
+- (void)loadSampleFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector
+{
+    NSString * cachedSample = [self getSampleFromCache:xmpId];
+    
+    loadingSampleObject = callbackObj;
+    loadingSampleSelector = NSStringFromSelector(selector);
+    
+    if(cachedSample == nil){
+        // TODO: check loadingSampleObject is nil
+        DLog(@"Loading sample from ID %li",xmpId);
+        [self loadFromId:xmpId callbackObj:self selector:@selector(loadSampleCallback:)];
+    }else{
+        DLog(@"Loading sample from cache %li",xmpId);
+        [callbackObj performSelector:selector withObject:cachedSample];
+    }
+}
+
+// Callback to save to cache and call pending callback
+- (void)loadSampleCallback:(CloudResponse *)cloudResponse
+{
+    NSInteger xmpId = cloudResponse.m_id;
+    
+    XmlDom * xmp = cloudResponse.m_xmpDom;
+    XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
+    
+    NSString * datastring = [sampleXmp getText];
+    
+    if(loadingSampleObject != nil){
+        [loadingSampleObject performSelector:NSSelectorFromString(loadingSampleSelector) withObject:datastring];
+     
+        loadingSampleObject = nil;
+    }
+    
+    if([self getSampleFromCache:xmpId] == nil){
+        long index = [sampleIdSet indexOfObject:[NSNumber numberWithLong:xmpId]];
+        int version = [[sampleVersionSet objectAtIndex:index] intValue];
+        
+        [self cacheSample:datastring forSampleId:xmpId withVersion:version];
+    }
 }
 
 - (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector
