@@ -682,9 +682,45 @@ extern NSUser * g_loggedInUser;
 {
     NSDictionary * sampleList = [NSDictionary dictionaryWithObjectsAndKeys:sampleIdSet,OPHO_LIST_IDS,sampleLoadSet,OPHO_LIST_NAMES,sampleDateSet,OPHO_LIST_DATES, nil];
     
-    [self refreshCacheFromSampleList];
-    
     return sampleList;
+}
+
+- (NSDictionary *)getStandardSampleList
+{
+    NSMutableArray * standardSampIdSet = [[NSMutableArray alloc] init];
+    NSMutableArray * standardSampLoadSet = [[NSMutableArray alloc] init];
+    NSMutableArray * standardSampDateSet = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [sampleIdSet count]; i++){
+        if(![[sampleIsCustomSet objectAtIndex:i] boolValue]){
+            [standardSampIdSet addObject:[sampleIdSet objectAtIndex:i]];
+            [standardSampLoadSet addObject:[sampleLoadSet objectAtIndex:i]];
+            [standardSampDateSet addObject:[sampleDateSet objectAtIndex:i]];
+        }
+    }
+    
+    NSDictionary * standardSampleList = [NSDictionary dictionaryWithObjectsAndKeys:standardSampIdSet,OPHO_LIST_IDS,standardSampLoadSet,OPHO_LIST_NAMES,standardSampDateSet,OPHO_LIST_DATES, nil];
+    
+    return standardSampleList;
+}
+
+- (NSDictionary *)getCustomSampleList
+{
+    NSMutableArray * customSampIdSet = [[NSMutableArray alloc] init];
+    NSMutableArray * customSampLoadSet = [[NSMutableArray alloc] init];
+    NSMutableArray * customSampDateSet = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [sampleIdSet count]; i++){
+        if([[sampleIsCustomSet objectAtIndex:i] boolValue]){
+            [customSampIdSet addObject:[sampleIdSet objectAtIndex:i]];
+            [customSampLoadSet addObject:[sampleLoadSet objectAtIndex:i]];
+            [customSampDateSet addObject:[sampleDateSet objectAtIndex:i]];
+        }
+    }
+    
+    NSDictionary * customSampleList = [NSDictionary dictionaryWithObjectsAndKeys:customSampIdSet,OPHO_LIST_IDS,customSampLoadSet,OPHO_LIST_NAMES,customSampDateSet,OPHO_LIST_DATES, nil];
+    
+    return customSampleList;
 }
 
 - (NSDictionary *)getInstrumentList
@@ -965,6 +1001,8 @@ extern NSUser * g_loggedInUser;
     [sampleIsCustomSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
+    
+    [self refreshCacheFromSampleList];
 }
 
 - (BOOL)defaultSetExists

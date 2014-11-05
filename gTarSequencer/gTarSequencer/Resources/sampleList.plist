@@ -18,111 +18,41 @@
 							<key>Section</key>
 							<string>808</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Snare</string>
-								<string>Closed Hat</string>
-								<string>Open Hat</string>
-								<string>Tom</string>
-								<string>Clap</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Chiptune</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Snare</string>
-								<string>Siren</string>
-								<string>Beep</string>
-								<string>Triangle</string>
-								<string>Lazer</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Dubstep</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Snare</string>
-								<string>Open Hat</string>
-								<string>Closed Hat</string>
-								<string>Clap</string>
-								<string>Shaker</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>House</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Clap</string>
-								<string>Open Hat</string>
-								<string>Closed Hat</string>
-								<string>Snare</string>
-								<string>Wood Block</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>WubWub</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Clap</string>
-								<string>Arp</string>
-								<string>Airhorn</string>
-								<string>Bass Synth</string>
-								<string>Womp</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -135,45 +65,17 @@
 							<key>Section</key>
 							<string>Rock</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Kick</string>
-								<string>Snare</string>
-								<string>Closed Hat</string>
-								<string>Open Hat</string>
-								<string>Tom</string>
-								<string>Crash</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Hand Drum</string>
 							<key>Sampleset</key>
-							<array>
-								<string>Djembe Kick</string>
-								<string>Djembe High</string>
-								<string>Tom</string>
-								<string>Shaker</string>
-								<string>Knock</string>
-								<string>Clink</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -193,69 +95,17 @@
 							<key>Section</key>
 							<string>Piano</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Vibraphone</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -268,137 +118,33 @@
 							<key>Section</key>
 							<string>Violin</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Guitar</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Acoustic</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Double Bass</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -411,91 +157,25 @@
 							<key>Section</key>
 							<string>Trombone</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Trumpet</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Flute</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -508,137 +188,33 @@
 							<key>Section</key>
 							<string>Pluck</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Juno</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Ladder</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 						<dict>
 							<key>Section</key>
 							<string>Mini Bass</string>
 							<key>Sampleset</key>
-							<array>
-								<string>B</string>
-								<string>A</string>
-								<string>G</string>
-								<string>E</string>
-								<string>D</string>
-								<string>C</string>
-								<string>F</string>
-								<string>A#</string>
-								<string>G#</string>
-								<string>F#</string>
-								<string>D#</string>
-								<string>C#</string>
-							</array>
+							<array/>
 							<key>XmpIdSet</key>
-							<array>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-								<integer>0</integer>
-							</array>
+							<array/>
 						</dict>
 					</array>
 				</dict>
@@ -648,23 +224,9 @@
 			<key>Section</key>
 			<string>Sounds</string>
 			<key>Sampleset</key>
-			<array>
-				<string>I&apos;m Bacon</string>
-				<string>I&apos;m</string>
-				<string>Ba-</string>
-				<string>-con</string>
-				<string>Bacon</string>
-				<string>Reverse I&apos;m Bacon</string>
-			</array>
+			<array/>
 			<key>XmpIdSet</key>
-			<array>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>0</integer>
-				<integer>0</integer>
-			</array>
+			<array/>
 		</dict>
 	</array>
 </dict>

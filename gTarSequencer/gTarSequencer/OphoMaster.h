@@ -128,7 +128,11 @@
 // Acces pregenerated data
 - (NSDictionary *)getSongList;
 - (NSDictionary *)getSequenceList;
+
 - (NSDictionary *)getSampleList;
+- (NSDictionary *)getCustomSampleList;
+- (NSDictionary *)getStandardSampleList;
+
 - (NSDictionary *)getCustomInstrumentList;
 - (NSDictionary *)getInstrumentList;
 

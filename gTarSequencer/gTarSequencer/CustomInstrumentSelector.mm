@@ -740,13 +740,13 @@
     
     filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    if(useCustomPath){
+    //if(useCustomPath){
         
         DLog(@"Play audio for XMP ID %i",xmpId);
         
         [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
         
-    }else{
+    /*}else{
         
         path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
         
@@ -758,7 +758,7 @@
         self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
                 
         [self.audio play];
-    }
+    }*/
     
 }
 
@@ -1858,8 +1858,8 @@
     
     // Remove the XMP
     // Get the ID
-    NSArray * names = [[g_ophoMaster getSampleList] objectForKey:OPHO_LIST_NAMES];
-    NSArray * ids = [[g_ophoMaster getSampleList] objectForKey:OPHO_LIST_IDS];
+    NSArray * names = [[g_ophoMaster getCustomSampleList] objectForKey:OPHO_LIST_NAMES];
+    NSArray * ids = [[g_ophoMaster getCustomSampleList] objectForKey:OPHO_LIST_IDS];
     
     for(int i = 0; i < [names count]; i++){
         if([names[i] isEqualToString:filename]){
@@ -2248,7 +2248,11 @@
 
 - (void)retrieveSampleList
 {
-    NSMutableDictionary * customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getSampleList]];
+    NSDictionary * standardSampleOphoDictionary = [g_ophoMaster getSampleList];
+    NSMutableArray * standardSampleNames = [[NSMutableArray alloc] initWithArray:[standardSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] copyItems:YES];
+    NSMutableArray * standardSampleIds = [[NSMutableArray alloc] initWithArray:[standardSampleOphoDictionary objectForKey:OPHO_LIST_IDS] copyItems:YES];
+    
+    NSMutableDictionary * customSampleOphoDictionary = [NSMutableDictionary dictionaryWithDictionary:[g_ophoMaster getCustomSampleList]];
     NSMutableDictionary * customList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES],@"Sampleset",[customSampleOphoDictionary objectForKey:OPHO_LIST_IDS],@"XmpIdSet",@"Custom",@"Section", nil];
     
     // Init
@@ -2268,6 +2272,16 @@
     
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
+    [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
+    
+    // Go through and add the samples found to various sections
+    for(int i = 0; i < [standardSampleNames count]; i++){
+        NSString * sampleName = standardSampleNames[i];
+        int sampleXmpId = [standardSampleIds[i] intValue];
+        
+        [self addSampleToSampleList:sampleName withId:sampleXmpId];
+        
+    }
     
     // Append a second local custom sounds pList to the regular sample list
     if ([[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] count] > 0) {
@@ -2275,17 +2289,56 @@
         DLog(@"Custom samples found");
         
         [sampleList addObject:customList];
-        [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
-        
         
     } else {
         
         DLog(@"There are no custom samples");
         
-        sampleList = [plistDictionary objectForKey:@"Samples"];
         customSampleList = nil;
-        
     }
+}
+
+- (void)addSampleToSampleList:(NSString *)sampleName withId:(int)sampleId
+{
+    NSString * sampleSection = [[sampleName componentsSeparatedByString:@"_"] firstObject];
+    
+    sampleName = [sampleName stringByReplacingOccurrencesOfString:@"_" withString:@""];
+    sampleName = [sampleName stringByReplacingOccurrencesOfString:sampleSection withString:@""];
+    
+    NSMutableDictionary * sampleDict = [self recursiveSearchArray:sampleList forChild:sampleSection];
+    
+    if(sampleDict == nil){
+        DLog(@"Sample will be added separately to Custom, for now it is redundant here");
+        return;
+    }
+    
+    DLog(@"Adding sample %@ to sampleDict %@",sampleName,sampleDict);
+    NSMutableArray * sampleSet = [sampleDict objectForKey:@"Sampleset"];
+    NSMutableArray * xmpIdSet = [sampleDict objectForKey:@"XmpIdSet"];
+    
+    [sampleSet addObject:sampleName];
+    [xmpIdSet addObject:[NSNumber numberWithInt:sampleId]];
+    
+}
+
+// Recursively find the dictionary a sample should get added to
+- (NSMutableDictionary *)recursiveSearchArray:(NSArray *)sampleArray forChild:(NSString *)sampleSection
+{
+    for(NSMutableDictionary * dict in sampleArray){
+        
+        NSString * sectionName = [[dict objectForKey:@"Section"] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if([sectionName isEqualToString:sampleSection]){
+            return dict;
+        }else if([dict objectForKey:@"Sectionset"] != nil){
+            NSMutableDictionary * dictionaryFound = [self recursiveSearchArray:[dict objectForKey:@"Sectionset"] forChild:sampleSection];
+            if(dictionaryFound != nil){
+                return dictionaryFound;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (void)removeCustomSampleList
