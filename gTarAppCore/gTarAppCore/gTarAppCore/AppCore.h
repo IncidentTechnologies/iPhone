@@ -6,7 +6,8 @@
  *  Copyright 2010 IncidentTech. All rights reserved.
  *
  */
-#import <GtarController/Gtar.h>
+//#import <GtarController/Gtar.h>
+#import <Gtar.h>
 
 #define GTAR_GUITAR_STRING_COUNT GtarStringCount
 #define GTAR_GUITAR_FRET_COUNT GtarFretCount

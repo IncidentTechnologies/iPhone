@@ -8,7 +8,8 @@
 
 #import "InstrumentTableViewController.h"
 
-#import <AudioController/AudioController.h>
+//#import <AudioController/AudioController.h>
+#import <AudioController.h>
 
 @interface InstrumentTableViewController ()
 {

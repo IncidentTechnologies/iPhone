@@ -186,9 +186,9 @@
     }
     
     // Then get data and upload
-    NSData * data = [[NSData alloc] initWithContentsOfFile:newPath];
+
     
-    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav",filename] custom:YES value:@"0" xmpFileId:0];
+    NSSample * xmpSample = [[NSSample alloc] initWithName:[NSString stringWithFormat:@"%@.wav", filename] custom:YES value:@"0" xmpFileId:0];
     
     [g_ophoMaster saveSample:xmpSample withFile:data];
     

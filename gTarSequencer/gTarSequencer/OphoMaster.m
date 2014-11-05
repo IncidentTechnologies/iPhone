@@ -250,7 +250,7 @@ extern NSUser * g_loggedInUser;
 
 -(void)saveNewInstrumentCallback:(CloudResponse *)cloudResponse
 {
-    DLog(@"Cloud respones id is %i",cloudResponse.m_id);
+    DLog(@"Cloud respones id is %i", cloudResponse.m_id);
     
     [self saveInstrumentToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
 }

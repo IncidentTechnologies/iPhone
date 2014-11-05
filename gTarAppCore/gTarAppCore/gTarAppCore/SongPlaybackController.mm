@@ -8,7 +8,8 @@
 
 #import "SongPlaybackController.h"
 
-#import <AudioController/AudioController.h>
+//#import <AudioController/AudioController.h>
+#import <AudioController.h>
 
 #import "AppCore.h"
 

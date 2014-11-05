@@ -15,8 +15,7 @@
 @class UserEntry;
 @class UserSongSession;
 
-@interface UserController : NSObject
-{
+@interface UserController : NSObject {
     
     // This doesn't log out untill the user actively logs out
     NSString * m_loggedInUsername;

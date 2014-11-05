@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260B43651A08210C00AA5104 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 260B43641A08210C00AA5104 /* libIncidentPlatform.a */; };
 		268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E70C51810B2D9007404B0 /* libc++.dylib */; };
 		26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C3F9241810F93A00744A9D /* libstdc++.dylib */; };
 		9D4C70CF17A8B02D00DC7B4D /* InstrumentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,8 +53,6 @@
 		EC24E020161BBC0C00016B78 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC24E01E161BBC0C00016B78 /* SettingsController.m */; };
 		EC354E0516C9B084009D472A /* TelemetryEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = EC354E0416C9B084009D472A /* TelemetryEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA850161A5D160015832E /* Foundation.framework */; };
-		EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA871161A5D7A0015832E /* libAudioController.a */; };
-		EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5DA872161A5D7A0015832E /* libGtarController.a */; };
 		EC5DA878161A5EF40015832E /* TelemetryController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA876161A5EF40015832E /* TelemetryController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA879161A5EF40015832E /* TelemetryController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA877161A5EF40015832E /* TelemetryController.m */; };
 		EC5DA87D161A5F500015832E /* ContentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA87B161A5F500015832E /* ContentController.h */; };
@@ -160,6 +159,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		260B43641A08210C00AA5104 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../../../Library/Developer/Xcode/DerivedData/OphoRecord-aszbivzfqkbeobboebqmaivrzvgu/Build/Products/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		268E70C51810B2D9007404B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		26C3F9241810F93A00744A9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		9D4C70CD17A8B02D00DC7B4D /* InstrumentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentTableViewController.h; sourceTree = "<group>"; };
@@ -322,8 +322,7 @@
 			files = (
 				26C3F9251810F93A00744A9D /* libstdc++.dylib in Frameworks */,
 				268E70C61810B2D9007404B0 /* libc++.dylib in Frameworks */,
-				EC5DA873161A5D7A0015832E /* libAudioController.a in Frameworks */,
-				EC5DA874161A5D7A0015832E /* libGtarController.a in Frameworks */,
+				260B43651A08210C00AA5104 /* libIncidentPlatform.a in Frameworks */,
 				EC5DA851161A5D160015832E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +428,7 @@
 		EC5DA84F161A5D160015832E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				260B43641A08210C00AA5104 /* libIncidentPlatform.a */,
 				26C3F9241810F93A00744A9D /* libstdc++.dylib */,
 				268E70C51810B2D9007404B0 /* libc++.dylib */,
 				EC5DA871161A5D7A0015832E /* libAudioController.a */,
@@ -1027,6 +1027,11 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/OphoRecord-aszbivzfqkbeobboebqmaivrzvgu/Build/Products/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1044,6 +1049,11 @@
 					"\"$(BUILT_PRODUCTS_DIR)/usr/local/include\"",
 					"\"$(BUILD_ROOT)/../InstallationBuildProductsLocation/usr/local/include\"",
 					"\"$(BUILT_PRODUCTS_DIR)/../../include\"",
+					"$(BUILT_PRODUCTS_DIR)/include/IncidentPlatform/",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/OphoRecord-aszbivzfqkbeobboebqmaivrzvgu/Build/Products/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
