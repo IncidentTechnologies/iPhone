@@ -14,6 +14,7 @@
 @synthesize m_value;
 @synthesize m_custom;
 @synthesize m_xmpFileId;
+@synthesize m_externalId;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -34,8 +35,14 @@
         
         [sample GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
-        [sample GetAttributeValueWithName:@"xmpfileid"].GetValueInt(&m_xmpFileId);
+        [sample GetAttributeValueWithName:@"xmpid"].GetValueInt(&m_xmpFileId);
         
+        if([sample HasAttributeWithName:@"id"]){
+            m_externalId = [[NSString alloc] initWithUTF8String:[sample GetAttributeValueWithName:@"id"].GetPszValue()];
+        }else{
+            m_externalId = @"";
+        }
+            
         DLog(@"SAMPLE %@",m_name);
         
     }
@@ -60,7 +67,9 @@
         
         m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
         
-        m_xmpFileId = [[dom getTextFromChildWithName:@"xmpfileid"] intValue];
+        m_xmpFileId = [[dom getTextFromChildWithName:@"xmpid"] intValue];
+        
+        m_externalId = [dom getTextFromChildWithName:@"id"];
         
         DLog(@"SAMPLE %@",m_name);
     }
@@ -68,7 +77,7 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value xmpFileId:(long)xmpFileId
+-(id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value externalId:(NSString *)externalId xmpFileId:(long)xmpFileId
 {
     self = [super init];
     
@@ -78,6 +87,7 @@
         m_value = value;
         m_custom = custom;
         m_xmpFileId = xmpFileId;
+        m_externalId = externalId;
     }
     
     return self;
@@ -124,7 +134,9 @@
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
     
-    node->AddAttribute(new XMPAttribute((char *)"xmpfileid", m_xmpFileId));
+    node->AddAttribute(new XMPAttribute((char *)"xmpid", m_xmpFileId));
+    
+    node->AddAttribute(new XMPAttribute((char *)"id", (char *)[m_externalId UTF8String]));
     
     return node;
 }

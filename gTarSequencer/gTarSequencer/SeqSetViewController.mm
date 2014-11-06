@@ -73,7 +73,11 @@
     [fm copyItemAtPath:tutorialBundlePath toPath:tutorialFilepath error:nil];
     
     sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:NO];
-    [self setInstrumentsFromData];
+    
+    if([g_ophoMaster loggedIn]){
+        [self setInstrumentsFromData];
+    }
+    
     [delegate setTempo:sequence.m_tempo];
     [delegate setVolume:sequence.m_volume];
     
@@ -1161,12 +1165,13 @@
     NSInstrument * instrument = [[NSInstrument alloc] initWithName:instName id:0 iconName:iconName isCustom:TRUE];
     
     for(int i = 0; i < [stringSet count]; i++){
-        NSSample * sample = [[NSSample alloc] initWithName:stringSet[i] custom:[stringPaths[i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] xmpFileId:[stringIdSet[i] intValue]];
+        NSSample * sample = [[NSSample alloc] initWithName:stringSet[i] custom:[stringPaths[i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] externalId:[NSString stringWithFormat:@"sample_%i",i] xmpFileId:[stringIdSet[i] intValue]];
         
         [instrument.m_sampler addSample:sample];
     }
     
     [g_ophoMaster saveNewInstrument:instrument callbackObj:self selector:@selector(newInstrumentSavedWithId:)];
+    
 //    [g_ophoMaster saveInstrument:instrument];
     
     // Manually add to the

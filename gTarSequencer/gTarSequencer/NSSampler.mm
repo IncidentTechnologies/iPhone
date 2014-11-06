@@ -30,11 +30,13 @@
         
         m_samples = [[NSMutableArray alloc] init];
         
-        list<XMPNode *>* t_samples = xmpNode->GetChildren();
+        list<XMPNode *>* t_banks = xmpNode->GetChildren();
         
-        for(list<XMPNode *>::iterator it = t_samples->First(); it != NULL; it++){
+        for(list<XMPNode *>::iterator it = t_banks->First(); it != NULL; it++){
             
-            NSSample * sample = [[NSSample alloc] initWithXMPNode:*it];
+            XMPNode * bank = *it;
+            
+            NSSample * sample = [[NSSample alloc] initWithXMPNode:bank->FindChildByName((char *)"sample")];
             
             [self addSample:sample];
         }
@@ -57,11 +59,13 @@
         
         m_samples = [[NSMutableArray alloc] init];
         
-        NSArray * samplechildren = [dom getChildArrayWithName:@"sample"];
+        NSArray * bankchildren = [dom getChildArrayWithName:@"bank"];
         
-        for(XmlDom * child in samplechildren){
+        for(XmlDom * child in bankchildren){
             
-            NSSample * sample = [[NSSample alloc] initWithXmlDom:child];
+            XmlDom * samplechild = [child getChildWithName:@"sample"];
+            
+            NSSample * sample = [[NSSample alloc] initWithXmlDom:samplechild];
             
             [self addSample:sample];
         }
@@ -93,7 +97,7 @@
                 stringId = DEFAULT_SAMPLE_ID;
             }
             
-            NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] xmpFileId:stringId];
+            NSSample * sample = [[NSSample alloc] initWithName:[stringSet objectAtIndex:i] custom:[[stringPaths objectAtIndex:i] isEqualToString:@"Custom"] value:[NSString stringWithFormat:@"%i",i] externalId:[NSString stringWithFormat:@"sample_%i",i] xmpFileId:stringId];
             
             [self addSample:sample];
         }
@@ -103,18 +107,21 @@
     
     audio = [[SoundMaker alloc] initWithInstrumentId:index andName:name andSamples:m_samples andSoundMaster:soundMaster];
     
-    DLog(@"Samples count is %i",[m_samples count]);
+    DLog(@"Samples count is %li",[m_samples count]);
     
 }
 
 -(XMPNode *)convertToXmp
 {
     XMPNode *node = NULL;
-    
     node = new XMPNode((char *)[@"sampler" UTF8String],NULL);
     
     for(NSSample * sample in m_samples){
-        node->AddChild([sample convertToXmp]);
+        
+        XMPNode *bank = NULL;
+        bank = new XMPNode((char *)[@"bank" UTF8String],NULL);
+        node->AddChild(bank);
+        bank->AddChild([sample convertToXmp]);
     }
     
     return node;

@@ -574,6 +574,16 @@
     [disableRecord setHidden:YES];
 }
 
+-(void)showTutorialOverlay
+{
+    [disableRecord setHidden:NO];
+}
+
+-(void)hideTutorialOverlay
+{
+    [disableRecord setHidden:YES];
+}
+
 -(IBAction)userDidSelectShare:(id)sender
 {
     [delegate userDidSelectShare];

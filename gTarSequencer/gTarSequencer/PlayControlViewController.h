@@ -95,6 +95,9 @@
 - (void)showRecordOverlay;
 - (void)hideRecordOverlay;
 
+- (void)showTutorialOverlay;
+- (void)hideTutorialOverlay;
+
 @property (weak, nonatomic) id<PlayControlDelegate> delegate;
 @property (weak, nonatomic) IBOutlet RadialButton * tempoSlider;
 @property (weak, nonatomic) IBOutlet UIButton * volumeButton;

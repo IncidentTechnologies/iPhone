@@ -16,6 +16,7 @@
     NSString * m_value;
     bool m_custom;
     
+    NSString * m_externalId;
     long m_xmpFileId;
 }
 
@@ -23,12 +24,13 @@
 @property (retain, nonatomic) NSString * m_value;
 @property (nonatomic) bool m_custom;
 @property (nonatomic, assign) long m_xmpFileId;
+@property (nonatomic, retain) NSString * m_externalId;
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 
 - (id)initWithXmlDom:(XmlDom *)dom;
 
-- (id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value xmpFileId:(long)xmpFileId;
+- (id)initWithName:(NSString *)name custom:(bool)custom value:(NSString *)value externalId:(NSString *)externalId xmpFileId:(long)xmpFileId;
 
 - (void)saveToFile;
 

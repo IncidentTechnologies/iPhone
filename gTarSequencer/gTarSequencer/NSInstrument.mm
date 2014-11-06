@@ -42,8 +42,11 @@
         
         [instrument GetAttributeValueWithName:@"custom"].GetValueBool(&m_custom);
         
-        m_sampler = [[NSSampler alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"sampler")];
-        
+        if(xmpNode->HasChild((char *)"gain")){
+            m_sampler = [[NSSampler alloc] initWithXMPNode:xmpNode->FindChildByName((char *)"gain")->FindChildByName((char *)"sampler")];
+        }else{
+            m_sampler = nil;
+        }
     }
     
     return self;
@@ -73,7 +76,7 @@
         
         m_custom = [[dom getTextFromChildWithName:@"custom"] boolValue];
         
-        m_sampler = [[NSSampler alloc] initWithXmlDom:[dom getChildWithName:@"sampler"]];
+        m_sampler = [[NSSampler alloc] initWithXmlDom:[[dom getChildWithName:@"gain"] getChildWithName:@"sampler"]];
         
         DLog(@"INSTRUMENT name | %@",m_name);
         
@@ -158,22 +161,32 @@
         label->AppendContentNode((char*)[m_name UTF8String]);
         view->AddChild(label);
         
+        int sampleIndex = 0;
         for(NSSample * sample in m_sampler.m_samples){
+            
+            int topPx = 35+30*sampleIndex;
+            NSString * topPxString = [NSString stringWithFormat:@"%ipx",topPx];
             
             XMPNode * button = NULL;
             button = new XMPNode((char *)[@"button" UTF8String],NULL);
-            button->AddAttribute(new XMPAttribute((char *)"top",(char *)"35px"));
+            button->AddAttribute(new XMPAttribute((char *)"top",(char *)[topPxString UTF8String]));
             button->AddAttribute(new XMPAttribute((char *)"left",(char *)"15px"));
-            button->AddAttribute(new XMPAttribute((char *)"target",(char *)"samplename"));
+            button->AddAttribute(new XMPAttribute((char *)"target",(char *)[sample.m_externalId UTF8String]));
             button->AddAttribute(new XMPAttribute((char *)"param",(char *)"trigger"));
             button->AddAttribute(new XMPAttribute((char *)"type",(char *)"momentary"));
             button->AddAttribute(new XMPAttribute((char *)"value",(char *)"0"));
             button->AppendContentNode((char*)[sample.m_name UTF8String]);
             view->AddChild(button);
             
+            sampleIndex++;
         }
         
-        node->AddChild([m_sampler convertToXmp]);
+        XMPNode * gain = NULL;
+        gain = new XMPNode((char *)[@"gain" UTF8String],NULL);
+        gain->AddAttribute(new XMPAttribute((char *)"value",1.0));
+        node->AddChild(gain);
+        
+        gain->AddChild([m_sampler convertToXmp]);
     }
     
     return node;

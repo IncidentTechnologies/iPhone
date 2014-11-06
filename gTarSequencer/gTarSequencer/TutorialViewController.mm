@@ -385,19 +385,16 @@
         float screenWidth = [frameGenerator getFullscreenWidth];
         
         // pointer to play
-        CGRect newTutorialFrame = CGRectMake(0, 0, screenWidth, screenHeight);
+        CGRect newTutorialFrame = CGRectMake(0, 0, screenWidth, screenHeight-BOTTOMBAR_HEIGHT);
         [tutorialScreen setFrame:newTutorialFrame];
         [tutorialScreen setBackgroundColor:fadedGray];
         
-        DLog(@"tutorial screen bounds %f %f %f %f",tutorialScreen.bounds.origin.x,tutorialScreen.bounds.origin.y,tutorialScreen.bounds.size.width,tutorialScreen.bounds.size.height);
-        
         float playButtonWidth = 65;
         
-        CGRect bottomBarFrame = CGRectMake(0, screenHeight-BOTTOMBAR_HEIGHT, playButtonWidth, BOTTOMBAR_HEIGHT);
+        CGRect bottomBarFrame = CGRectMake(playButtonWidth, screenHeight-BOTTOMBAR_HEIGHT, screenWidth-playButtonWidth, BOTTOMBAR_HEIGHT);
         tutorialBottomBar = [[UIButton alloc] initWithFrame:bottomBarFrame];
-        [tutorialBottomBar setBackgroundColor:[UIColor redColor]];
+        [tutorialBottomBar setBackgroundColor:fadedGray];
         [tutorialBottomBar setUserInteractionEnabled:YES];
-        [tutorialBottomBar addTarget:self action:@selector(swipeToPlay) forControlEvents:UIControlEventTouchUpInside];
         
         [self fadeInTutorialSubview:tutorialBottomBar isReverseDirection:reverse];
         

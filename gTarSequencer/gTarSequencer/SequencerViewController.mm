@@ -1671,6 +1671,7 @@
     DLog(@"Notify tutorial tap to play screen");
     
     isTapToPlayScreen = YES;
+    [playControlViewController showTutorialOverlay];
     
     // Ensure that something needs to load
     if(isLoading && [g_ophoMaster loggedIn]){
@@ -1683,6 +1684,8 @@
 {
     isTutorialOpen = NO;
     isTapToPlayScreen = NO;
+    
+    [playControlViewController hideTutorialOverlay];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
