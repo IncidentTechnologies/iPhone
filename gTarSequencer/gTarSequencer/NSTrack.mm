@@ -189,7 +189,7 @@
     
 }
 
--(XMPNode *)convertToSequenceXmp
+-(XMPNode *)convertToSequenceXmp:(BOOL)saveWithSamples
 {
     XMPNode *node = NULL;
     
@@ -201,7 +201,11 @@
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     
-    node->AddChild([m_instrument convertToSongXmp]);
+    if(saveWithSamples){
+        node->AddChild([m_instrument convertToSequenceXmp]);
+    }else{
+        node->AddChild([m_instrument convertToSongXmp]);
+    }
     
     for(NSPattern * pattern in m_patterns){
         node->AddChild([pattern convertToXmp]);

@@ -28,6 +28,8 @@
 
 - (void)initAudioWithInstrument:(int)index andName:(NSString *)name andSoundMaster:(SoundMaster *)soundMaster stringSet:(NSArray *)stringSet stringPaths:(NSArray *)stringPaths stringIds:(NSArray *)stringIds;
 
+- (void)initAudioWithInstrument:(int)index andName:(NSString *)name andSoundMaster:(SoundMaster *)soundMaster;
+
 -(XMPNode *)convertToXmp;
 
 -(void)addSample:(NSSample *)sample;

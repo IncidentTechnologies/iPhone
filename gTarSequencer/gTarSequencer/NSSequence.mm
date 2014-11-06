@@ -21,6 +21,43 @@
 
 #define DEFAULT_STATE_NAME @"sequenceCurrentState"
 
+// Use to load sequence object with XmlDom
+- (id)initWithXMLFilename:(NSString *)filename fromBundle:(BOOL)fromBundle
+{
+    if(filename == nil || [filename length] == 0){
+        return nil;
+    }
+    
+    self = [super init];
+    
+    if(self){
+        
+        NSString * sequenceFilepath;
+        
+        if(fromBundle){
+            sequenceFilepath = [[NSBundle mainBundle] pathForResource:filename ofType:@"xml"];
+        }else{
+            NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            
+            sequenceFilepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[@"Sequences/" stringByAppendingString:[filename stringByAppendingString:@".xml"]]];
+        }
+        
+        DLog(@"initWithXMPFilename %@.xml",filename);
+        
+        NSString * fileString = [NSString stringWithContentsOfFile:sequenceFilepath encoding:NSUTF8StringEncoding error:nil];
+        
+        XmlDom * dom = [[XmlDom alloc] initWithXmlString:fileString];
+        
+        self = [self initWithXmlDom:dom];
+        
+        DLog(@"Finished XML init");
+        
+    }
+    
+    return self;
+}
+
+// Use to load Sequence object with XmpNode
 - (id)initWithXMPFilename:(NSString *)filename fromBundle:(BOOL)fromBundle
 {
     if(filename == nil || [filename length] == 0){
@@ -116,6 +153,7 @@
         XmlDom * content = [[[dom getChildWithName:@"custom"]  getChildWithName:@"sequence"] getChildWithName:@"content"];
         
         m_name = [header getTextFromChildWithName:@"name"];
+        m_xmpName = m_name;
         m_id = [[header getValueFromChildWithName:@"id"] intValue];
         m_tempo = [[header getValueFromChildWithName:@"tempo"] floatValue];
         m_volume = [[header getValueFromChildWithName:@"volume"] floatValue];
@@ -195,7 +233,7 @@
 	return self;
 }
 
--(XMPNode *)convertToXmp
+-(XMPNode *)convertToXmp:(BOOL)saveWithSamples
 {
     XMPNode *node = NULL;
     
@@ -228,13 +266,13 @@
     headerNode->AddChild(tempNode);
     
     for(NSTrack * track in m_tracks){
-        contentNode->AddChild([track convertToSequenceXmp]);
+        contentNode->AddChild([track convertToSequenceXmp:saveWithSamples]);
     }
     
     return node;
 }
 
--(NSString *)saveToFile:(NSString *)filename
+-(NSString *)saveToFile:(NSString *)filename saveWithSamples:(BOOL)saveWithSamples
 {
     if([m_tracks count] == 0 || [[m_tracks firstObject] m_instrument] == nil){
         DLog(@"ERROR Trying to save incomplete Sequence");
@@ -266,7 +304,7 @@
     node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
     custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
     node->AddChild(custom);
-    custom->AddChild([self convertToXmp]);
+    custom->AddChild([self convertToXmp:saveWithSamples]);
     
     XMPTree tree = NULL;
     
@@ -311,6 +349,8 @@
 {
     m_name = newName;
     m_xmpName = newName;
+    
+    
 }
 
 - (void)giveAppOwnership

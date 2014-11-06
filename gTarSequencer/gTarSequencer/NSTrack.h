@@ -51,7 +51,7 @@
 - (id)initWithName:(NSString *)name level:(double)level muted:(bool)muted;
 
 - (XMPNode *)convertToSongXmp;
-- (XMPNode *)convertToSequenceXmp;
+-(XMPNode *)convertToSequenceXmp:(BOOL)saveWithSamples;
 
 // Track Actions
 - (void)setSelected:(BOOL)selected;

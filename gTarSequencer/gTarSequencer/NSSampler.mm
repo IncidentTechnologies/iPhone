@@ -111,6 +111,14 @@
     
 }
 
+- (void)initAudioWithInstrument:(int)index andName:(NSString *)name andSoundMaster:(SoundMaster *)soundMaster
+{
+    // All the samples already exist
+    DLog(@"Init audio for instrument %i with %li samples",index,[m_samples count]);
+    
+    audio = [[SoundMaker alloc] initWithInstrumentId:index andName:name andSamples:m_samples andSoundMaster:soundMaster];
+}
+
 -(XMPNode *)convertToXmp
 {
     XMPNode *node = NULL;

@@ -34,6 +34,7 @@
 
 @property (nonatomic) int m_selectedTrackIndex;
 
+- (id)initWithXMLFilename:(NSString *)filename fromBundle:(BOOL)fromBundle;
 - (id)initWithXMPFilename:(NSString *)filename fromBundle:(BOOL)fromBundle;
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 - (id)initWithXmlDom:(XmlDom *)dom;
@@ -43,8 +44,8 @@
 // convert from archaic format
 - (id)initWithName:(NSString *)name tempo:(double)tempo volume:(double)volume instruments:(NSArray *)instruments;
 
-- (XMPNode *)convertToXmp;
-- (NSString *)saveToFile:(NSString *)filename;
+- (XMPNode *)convertToXmp:(BOOL)saveWithSamples;
+- (NSString *)saveToFile:(NSString *)filename saveWithSamples:(BOOL)saveWithSamples;
 - (void)deleteFile;
 
 - (void)addTrack:(NSTrack *)track;

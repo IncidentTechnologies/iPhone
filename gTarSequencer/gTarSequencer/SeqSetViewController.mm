@@ -72,11 +72,11 @@
     
     [fm copyItemAtPath:tutorialBundlePath toPath:tutorialFilepath error:nil];
     
-    sequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:NO];
+    sequence = [[NSSequence alloc] initWithXMLFilename:DEFAULT_SET_PATH fromBundle:NO];
     
-    if([g_ophoMaster loggedIn]){
+    //if([g_ophoMaster loggedIn]){
         [self setInstrumentsFromData];
-    }
+    //}
     
     [delegate setTempo:sequence.m_tempo];
     [delegate setVolume:sequence.m_volume];
@@ -87,7 +87,7 @@
 {
     if(filename != nil){
         DLog(@"Init sequence with filename");
-        sequence = [[NSSequence alloc] initWithXMPFilename:filename fromBundle:NO];
+        sequence = [[NSSequence alloc] initWithXMLFilename:filename fromBundle:NO];
         [self refreshSequenceName:filename];
         [self setInstrumentsFromData];
         [delegate setTempo:sequence.m_tempo];
@@ -293,7 +293,7 @@
         DLog(@"Save metadata success: %i", success);
         
         // Save to file on disk
-        [sequence saveToFile:filepath];
+        [sequence saveToFile:filepath saveWithSamples:NO];
         
     }
 }
@@ -338,7 +338,6 @@
     sequencerInstrumentsPath = [[NSBundle mainBundle] pathForResource:@"sequencerInstruments" ofType:@"plist"];
     
     NSMutableDictionary * instDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:sequencerInstrumentsPath];
-    
     
     // Get instrument list from the server
     NSDictionary * standardInstDictionary = [g_ophoMaster getInstrumentList];
@@ -403,6 +402,20 @@
     for (NSDictionary * dict in masterInstrumentOptions) {
         [remainingInstrumentOptions addObject:dict];
     }
+    
+    // Remove any active tracks
+    NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
+    
+    for(NSDictionary * dict in remainingInstrumentOptions){
+        for(NSTrack * track in sequence.m_tracks){
+            if([[dict objectForKey:@"Name"] isEqualToString:track.m_instrument.m_name]){
+                [dictionariesToRemove addObject:dict];
+            }
+        }
+    }
+    
+    [remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
+    
 }
 
 - (void)setInstrumentsFromData
@@ -414,8 +427,13 @@
     for(NSTrack * track in sequence.m_tracks){
         NSInstrument * inst = track.m_instrument;
         
-        // Load instrument by ID
-        [g_ophoMaster loadFromId:inst.m_id callbackObj:self selector:@selector(instrumentSampleListLoaded:)];
+        if(inst.m_sampler != nil){
+            // Already loaded into XMP, so just call the callback
+            [self instrumentLoadedWithXmp:track.m_instrument];
+        }else{
+            // Load instrument by ID
+            [g_ophoMaster loadFromId:inst.m_id callbackObj:self selector:@selector(instrumentSampleListLoaded:)];
+        }
         
     }
     
@@ -425,6 +443,32 @@
     
 }
 
+// Instrument loaded directly in XMP, setup audio and instrument as a track
+- (void)instrumentLoadedWithXmp:(NSInstrument *)instrument
+{
+    DLog(@"Instrument %@ loaded with XMP",instrument.m_name);
+    
+    // This is loading directly from XMP, so no need to check it still exists on server
+    // Track already has it
+    
+    //NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
+    
+    //for(NSDictionary * dict in remainingInstrumentOptions){
+        //if([[dict objectForKey:@"Name"] isEqualToString:instrument.m_name]){
+            
+            [instrument.m_sampler initAudioWithInstrument:instrument.m_id andName:instrument.m_name andSoundMaster:soundMaster];
+            
+            //[dictionariesToRemove addObject:dict];
+            
+        //}
+    //}
+    
+    //[remainingInstrumentOptions removeObjectsInArray:dictionariesToRemove];
+    
+    [instrumentTable reloadData];
+}
+
+// After the instrument is loaded by its ID, call to setup samples and setup instrument as a track, remove from the library of available instruments
 - (void)instrumentSampleListLoaded:(CloudResponse *)cloudResponse
 {
     XmlDom * instrumentXmp = cloudResponse.m_xmpDom;

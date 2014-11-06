@@ -18,6 +18,8 @@
     
     NSString * m_externalId;
     long m_xmpFileId;
+    
+    NSString * m_sampleData;
 }
 
 @property (retain, nonatomic) NSString * m_name;
@@ -25,6 +27,7 @@
 @property (nonatomic) bool m_custom;
 @property (nonatomic, assign) long m_xmpFileId;
 @property (nonatomic, retain) NSString * m_externalId;
+@property (nonatomic, retain) NSString * m_sampleData;
 
 - (id)initWithXMPNode:(XMPNode *)xmpNode;
 

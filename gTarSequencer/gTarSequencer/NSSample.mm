@@ -15,6 +15,7 @@
 @synthesize m_custom;
 @synthesize m_xmpFileId;
 @synthesize m_externalId;
+@synthesize m_sampleData;
 
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
@@ -42,7 +43,12 @@
         }else{
             m_externalId = @"";
         }
-            
+        
+        DLog(@"Text is %s",xmpNode->text());
+        char * plaintext = xmpNode->text();
+        
+        m_sampleData = [sample Text];
+        
         DLog(@"SAMPLE %@",m_name);
         
     }
@@ -61,6 +67,7 @@
     
     if ( self )
     {
+        
         m_name = [dom getTextFromChildWithName:@"name"];
         
         m_value = [dom getTextFromChildWithName:@"value"];
@@ -71,7 +78,10 @@
         
         m_externalId = [dom getTextFromChildWithName:@"id"];
         
+        m_sampleData = [dom getText];
+        
         DLog(@"SAMPLE %@",m_name);
+        
     }
     
     return self;
@@ -88,6 +98,7 @@
         m_custom = custom;
         m_xmpFileId = xmpFileId;
         m_externalId = externalId;
+        m_sampleData = nil;
     }
     
     return self;
@@ -137,6 +148,10 @@
     node->AddAttribute(new XMPAttribute((char *)"xmpid", m_xmpFileId));
     
     node->AddAttribute(new XMPAttribute((char *)"id", (char *)[m_externalId UTF8String]));
+    
+    if(m_sampleData != nil && [m_sampleData length] > 0){
+        node->AppendContentNode((char *)[m_sampleData UTF8String]);
+    }
     
     return node;
 }

@@ -80,9 +80,9 @@ extern NSUser * g_loggedInUser;
         if(!loggedInAndLoaded){
             loggedInAndLoaded = true;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [loadingDelegate loadingBegan];
-            });
+            //dispatch_async(dispatch_get_main_queue(), ^{
+            //    [loadingDelegate loadingBegan];
+            //});
         }
         
         [self regenerateData];
@@ -167,7 +167,11 @@ extern NSUser * g_loggedInUser;
     
     DLog(@"Sequence ID is now %li",savingSequence.m_id);
     
-    NSString * sequenceData = [savingSequence saveToFile:savingSequence.m_name];
+    // Only save samples for the default set
+    BOOL saveWithSamples = NO;
+    //BOOL saveWithSamples = ([name isEqualToString:DEFAULT_SET_NAME]) ? YES : NO;
+    
+    NSString * sequenceData = [savingSequence saveToFile:savingSequence.m_name saveWithSamples:saveWithSamples];
     
     [self saveToId:savingSequence.m_id withData:sequenceData withName:savingSequence.m_name];
 }
@@ -619,7 +623,10 @@ extern NSUser * g_loggedInUser;
         
         NSString * cachedSample = [self getSampleFromCache:sample.m_xmpFileId];
         
-        if(cachedSample == nil){
+        if(sample.m_sampleData != nil && [sample.m_sampleData length] > 0){
+            DLog(@"Loading sample from sampleData for ID %li",sample.m_xmpFileId);
+            [self addData:sample.m_sampleData forLoadingInstrumentSample:sample.m_xmpFileId];
+        }else if(cachedSample == nil){
             DLog(@"Loading sample from ID %li",sample.m_xmpFileId);
             [self loadFromId:sample.m_xmpFileId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
         }else{
@@ -1211,7 +1218,7 @@ extern NSUser * g_loggedInUser;
 {
     DLog(@"Copy tutorial file");
     
-    NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMPFilename:DEFAULT_SET_PATH fromBundle:YES];
+    NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMLFilename:DEFAULT_SET_PATH fromBundle:YES];
     
     [self saveSequence:tutorialSequence];
 }
@@ -1219,7 +1226,6 @@ extern NSUser * g_loggedInUser;
 - (void)launchPendingTutorial
 {
     DLog(@"Launch pending tutorial");
-    
     
     pendingLoadTutorial = NO;
     
@@ -1231,7 +1237,7 @@ extern NSUser * g_loggedInUser;
         }
     }
     
-    [tutorialDelegate tutorialReady:xmpId];
+    //[tutorialDelegate tutorialReady:xmpId];
 }
 
 

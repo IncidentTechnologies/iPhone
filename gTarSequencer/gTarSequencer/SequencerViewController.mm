@@ -518,6 +518,8 @@
 
 - (void)tutorialReady:(NSInteger)xmpId
 {
+    DLog(@"Tutorial ready: %i",xmpId);
+    
     [self loadFromXmpId:xmpId andType:TYPE_SEQUENCE];
 }
 
@@ -1593,7 +1595,7 @@
     }];
     
     if(isLoading && isTapToPlayScreen){
-        [self forceLoadingBegan];
+        //[self forceLoadingBegan];
     }
     
 }
@@ -1676,7 +1678,7 @@
     // Ensure that something needs to load
     if(isLoading && [g_ophoMaster loggedIn]){
         DLog(@"Logged in is %i",[g_ophoMaster loggedIn]);
-        [self forceLoadingBegan];
+        //[self forceLoadingBegan];
     }
 }
 
