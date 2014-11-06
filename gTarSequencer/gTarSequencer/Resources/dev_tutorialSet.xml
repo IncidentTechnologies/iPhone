@@ -12,7 +12,7 @@
             </header>
             <content>
                 <track name="ROCK" level="1.000000" muted="0">
-                    <instrument name="ROCK" index="15" custom="0"/>
+                    <instrument name="ROCK" index="466" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="3" beatstart="2.000000" />
@@ -30,7 +30,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="DOUBLE BASS" level="0.397353" muted="0">
-                    <instrument name="DOUBLE BASS" index="12" custom="0"/>
+                    <instrument name="DOUBLE BASS" index="463" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="0" beatstart="4.000000" />
@@ -56,7 +56,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="VIBRAPHONE" level="1.000000" muted="0">
-                    <instrument name="VIBRAPHONE" index="9" custom="0"/>
+                    <instrument name="VIBRAPHONE" index="460" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="5" beatstart="0.000000" />
                         <note value="3" beatstart="0.000000" />
@@ -127,7 +127,7 @@
                     <pattern name="-D" on="0" />
                 </track>
                 <track name="GUITAR" level="1.000000" muted="1">
-                    <instrument name="GUITAR" index="6" custom="0"/>
+                    <instrument name="GUITAR" index="457" custom="0"/>
                     <pattern name="-A" on="1">
                         <note value="0" beatstart="0.000000" />
                         <note value="2" beatstart="2.000000" />

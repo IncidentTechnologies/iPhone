@@ -156,13 +156,12 @@
 {
     DLog(@"Save Recording to Filename %@",filename);
     
-    BOOL useBundle = TRUE;
+    BOOL useBundle = FALSE;
     NSString * newPath;
     
     if(useBundle){
         
         // *** Save Bundle Sound To File
-        
         newPath = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
         
         DLog(@"Using Main Bundle Filepath %@",newPath);

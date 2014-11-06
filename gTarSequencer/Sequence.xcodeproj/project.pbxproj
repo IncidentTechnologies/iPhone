@@ -170,204 +170,7 @@
 		6DD142A719DF562B00E24384 /* Copy_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142A519DF562B00E24384 /* Copy_Icon.png */; };
 		6DD142A819DF562B00E24384 /* Notes_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142A619DF562B00E24384 /* Notes_Icon.png */; };
 		6DD142AC19DF5A7300E24384 /* Paste_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD142AA19DF5A7300E24384 /* Paste_Icon.png */; };
-		6DDF52CC19F04636002EB720 /* Piano_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51EB19F04636002EB720 /* Piano_A#.wav */; };
-		6DDF52CD19F04636002EB720 /* Piano_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51EC19F04636002EB720 /* Piano_A.wav */; };
-		6DDF52CE19F04636002EB720 /* Piano_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51ED19F04636002EB720 /* Piano_B.wav */; };
-		6DDF52CF19F04636002EB720 /* Piano_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51EE19F04636002EB720 /* Piano_C#.wav */; };
-		6DDF52D019F04636002EB720 /* Piano_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51EF19F04636002EB720 /* Piano_C.wav */; };
-		6DDF52D119F04636002EB720 /* Piano_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F019F04636002EB720 /* Piano_D#.wav */; };
-		6DDF52D219F04636002EB720 /* Piano_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F119F04636002EB720 /* Piano_D.wav */; };
-		6DDF52D319F04636002EB720 /* Piano_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F219F04636002EB720 /* Piano_E.wav */; };
-		6DDF52D419F04636002EB720 /* Piano_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F319F04636002EB720 /* Piano_F#.wav */; };
-		6DDF52D519F04636002EB720 /* Piano_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F419F04636002EB720 /* Piano_F.wav */; };
-		6DDF52D619F04636002EB720 /* Piano_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F519F04636002EB720 /* Piano_G#.wav */; };
-		6DDF52D719F04636002EB720 /* Piano_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F619F04636002EB720 /* Piano_G.wav */; };
-		6DDF52D819F04636002EB720 /* Vibraphone_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F819F04636002EB720 /* Vibraphone_A#.wav */; };
-		6DDF52D919F04636002EB720 /* Vibraphone_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51F919F04636002EB720 /* Vibraphone_A.wav */; };
-		6DDF52DA19F04636002EB720 /* Vibraphone_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FA19F04636002EB720 /* Vibraphone_B.wav */; };
-		6DDF52DB19F04636002EB720 /* Vibraphone_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FB19F04636002EB720 /* Vibraphone_C#.wav */; };
-		6DDF52DC19F04636002EB720 /* Vibraphone_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FC19F04636002EB720 /* Vibraphone_C.wav */; };
-		6DDF52DD19F04636002EB720 /* Vibraphone_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FD19F04636002EB720 /* Vibraphone_D#.wav */; };
-		6DDF52DE19F04636002EB720 /* Vibraphone_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FE19F04636002EB720 /* Vibraphone_D.wav */; };
-		6DDF52DF19F04636002EB720 /* Vibraphone_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF51FF19F04636002EB720 /* Vibraphone_E.wav */; };
-		6DDF52E019F04636002EB720 /* Vibraphone_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520019F04636002EB720 /* Vibraphone_F#.wav */; };
-		6DDF52E119F04636002EB720 /* Vibraphone_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520119F04636002EB720 /* Vibraphone_F.wav */; };
-		6DDF52E219F04636002EB720 /* Vibraphone_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520219F04636002EB720 /* Vibraphone_G#.wav */; };
-		6DDF52E319F04636002EB720 /* Vibraphone_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520319F04636002EB720 /* Vibraphone_G.wav */; };
-		6DDF52E419F04636002EB720 /* Acoustic_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520619F04636002EB720 /* Acoustic_A#.wav */; };
-		6DDF52E519F04636002EB720 /* Acoustic_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520719F04636002EB720 /* Acoustic_A.wav */; };
-		6DDF52E619F04636002EB720 /* Acoustic_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520819F04636002EB720 /* Acoustic_B.wav */; };
-		6DDF52E719F04636002EB720 /* Acoustic_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520919F04636002EB720 /* Acoustic_C#.wav */; };
-		6DDF52E819F04636002EB720 /* Acoustic_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520A19F04636002EB720 /* Acoustic_C.wav */; };
-		6DDF52E919F04636002EB720 /* Acoustic_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520B19F04636002EB720 /* Acoustic_D#.wav */; };
-		6DDF52EA19F04636002EB720 /* Acoustic_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520C19F04636002EB720 /* Acoustic_D.wav */; };
-		6DDF52EB19F04636002EB720 /* Acoustic_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520D19F04636002EB720 /* Acoustic_E.wav */; };
-		6DDF52EC19F04636002EB720 /* Acoustic_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520E19F04636002EB720 /* Acoustic_F#.wav */; };
-		6DDF52ED19F04636002EB720 /* Acoustic_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF520F19F04636002EB720 /* Acoustic_F.wav */; };
-		6DDF52EE19F04636002EB720 /* Acoustic_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521019F04636002EB720 /* Acoustic_G#.wav */; };
-		6DDF52EF19F04636002EB720 /* Acoustic_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521119F04636002EB720 /* Acoustic_G.wav */; };
-		6DDF52F019F04636002EB720 /* DoubleBass_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521319F04636002EB720 /* DoubleBass_A#.wav */; };
-		6DDF52F119F04636002EB720 /* DoubleBass_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521419F04636002EB720 /* DoubleBass_A.wav */; };
-		6DDF52F219F04636002EB720 /* DoubleBass_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521519F04636002EB720 /* DoubleBass_B.wav */; };
-		6DDF52F319F04636002EB720 /* DoubleBass_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521619F04636002EB720 /* DoubleBass_C#.wav */; };
-		6DDF52F419F04636002EB720 /* DoubleBass_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521719F04636002EB720 /* DoubleBass_C.wav */; };
-		6DDF52F519F04636002EB720 /* DoubleBass_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521819F04636002EB720 /* DoubleBass_D#.wav */; };
-		6DDF52F619F04636002EB720 /* DoubleBass_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521919F04636002EB720 /* DoubleBass_D.wav */; };
-		6DDF52F719F04636002EB720 /* DoubleBass_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521A19F04636002EB720 /* DoubleBass_E.wav */; };
-		6DDF52F819F04636002EB720 /* DoubleBass_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521B19F04636002EB720 /* DoubleBass_F#.wav */; };
-		6DDF52F919F04636002EB720 /* DoubleBass_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521C19F04636002EB720 /* DoubleBass_F.wav */; };
-		6DDF52FA19F04636002EB720 /* DoubleBass_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521D19F04636002EB720 /* DoubleBass_G#.wav */; };
-		6DDF52FB19F04636002EB720 /* DoubleBass_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF521E19F04636002EB720 /* DoubleBass_G.wav */; };
-		6DDF52FC19F04636002EB720 /* Guitar_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522019F04636002EB720 /* Guitar_A#.wav */; };
-		6DDF52FD19F04636002EB720 /* Guitar_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522119F04636002EB720 /* Guitar_A.wav */; };
-		6DDF52FE19F04636002EB720 /* Guitar_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522219F04636002EB720 /* Guitar_B.wav */; };
-		6DDF52FF19F04636002EB720 /* Guitar_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522319F04636002EB720 /* Guitar_C#.wav */; };
-		6DDF530019F04636002EB720 /* Guitar_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522419F04636002EB720 /* Guitar_C.wav */; };
-		6DDF530119F04636002EB720 /* Guitar_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522519F04636002EB720 /* Guitar_D#.wav */; };
-		6DDF530219F04636002EB720 /* Guitar_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522619F04636002EB720 /* Guitar_D.wav */; };
-		6DDF530319F04636002EB720 /* Guitar_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522719F04636002EB720 /* Guitar_E.wav */; };
-		6DDF530419F04636002EB720 /* Guitar_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522819F04636002EB720 /* Guitar_F#.wav */; };
-		6DDF530519F04636002EB720 /* Guitar_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522919F04636002EB720 /* Guitar_F.wav */; };
-		6DDF530619F04636002EB720 /* Guitar_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522A19F04636002EB720 /* Guitar_G#.wav */; };
-		6DDF530719F04636002EB720 /* Guitar_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522B19F04636002EB720 /* Guitar_G.wav */; };
-		6DDF530819F04636002EB720 /* Violin_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522D19F04636002EB720 /* Violin_A#.wav */; };
-		6DDF530919F04636002EB720 /* Violin_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522E19F04636002EB720 /* Violin_A.wav */; };
-		6DDF530A19F04636002EB720 /* Violin_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF522F19F04636002EB720 /* Violin_B.wav */; };
-		6DDF530B19F04636002EB720 /* Violin_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523019F04636002EB720 /* Violin_C#.wav */; };
-		6DDF530C19F04636002EB720 /* Violin_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523119F04636002EB720 /* Violin_C.wav */; };
-		6DDF530D19F04636002EB720 /* Violin_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523219F04636002EB720 /* Violin_D#.wav */; };
-		6DDF530E19F04636002EB720 /* Violin_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523319F04636002EB720 /* Violin_D.wav */; };
-		6DDF530F19F04636002EB720 /* Violin_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523419F04636002EB720 /* Violin_E.wav */; };
-		6DDF531019F04636002EB720 /* Violin_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523519F04636002EB720 /* Violin_F#.wav */; };
-		6DDF531119F04636002EB720 /* Violin_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523619F04636002EB720 /* Violin_F.wav */; };
-		6DDF531219F04636002EB720 /* Violin_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523719F04636002EB720 /* Violin_G#.wav */; };
-		6DDF531319F04636002EB720 /* Violin_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523819F04636002EB720 /* Violin_G.wav */; };
-		6DDF531419F04636002EB720 /* Juno_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523B19F04636002EB720 /* Juno_A#.wav */; };
-		6DDF531519F04636002EB720 /* Juno_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523C19F04636002EB720 /* Juno_A.wav */; };
-		6DDF531619F04636002EB720 /* Juno_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523D19F04636002EB720 /* Juno_B.wav */; };
-		6DDF531719F04636002EB720 /* Juno_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523E19F04636002EB720 /* Juno_C#.wav */; };
-		6DDF531819F04636002EB720 /* Juno_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF523F19F04636002EB720 /* Juno_C.wav */; };
-		6DDF531919F04636002EB720 /* Juno_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524019F04636002EB720 /* Juno_D#.wav */; };
-		6DDF531A19F04636002EB720 /* Juno_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524119F04636002EB720 /* Juno_D.wav */; };
-		6DDF531B19F04636002EB720 /* Juno_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524219F04636002EB720 /* Juno_E.wav */; };
-		6DDF531C19F04636002EB720 /* Juno_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524319F04636002EB720 /* Juno_F#.wav */; };
-		6DDF531D19F04636002EB720 /* Juno_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524419F04636002EB720 /* Juno_F.wav */; };
-		6DDF531E19F04636002EB720 /* Juno_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524519F04636002EB720 /* Juno_G#.wav */; };
-		6DDF531F19F04636002EB720 /* Juno_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524619F04636002EB720 /* Juno_G.wav */; };
-		6DDF532019F04636002EB720 /* Ladder_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524819F04636002EB720 /* Ladder_A#.wav */; };
-		6DDF532119F04636002EB720 /* Ladder_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524919F04636002EB720 /* Ladder_A.wav */; };
-		6DDF532219F04636002EB720 /* Ladder_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524A19F04636002EB720 /* Ladder_B.wav */; };
-		6DDF532319F04636002EB720 /* Ladder_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524B19F04636002EB720 /* Ladder_C#.wav */; };
-		6DDF532419F04636002EB720 /* Ladder_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524C19F04636002EB720 /* Ladder_C.wav */; };
-		6DDF532519F04636002EB720 /* Ladder_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524D19F04636002EB720 /* Ladder_D#.wav */; };
-		6DDF532619F04636002EB720 /* Ladder_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524E19F04636002EB720 /* Ladder_D.wav */; };
-		6DDF532719F04636002EB720 /* Ladder_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF524F19F04636002EB720 /* Ladder_E.wav */; };
-		6DDF532819F04636002EB720 /* Ladder_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525019F04636002EB720 /* Ladder_F#.wav */; };
-		6DDF532919F04636002EB720 /* Ladder_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525119F04636002EB720 /* Ladder_F.wav */; };
-		6DDF532A19F04636002EB720 /* Ladder_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525219F04636002EB720 /* Ladder_G#.wav */; };
-		6DDF532B19F04636002EB720 /* Ladder_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525319F04636002EB720 /* Ladder_G.wav */; };
-		6DDF532C19F04636002EB720 /* MiniBass_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525519F04636002EB720 /* MiniBass_A#.wav */; };
-		6DDF532D19F04636002EB720 /* MiniBass_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525619F04636002EB720 /* MiniBass_A.wav */; };
-		6DDF532E19F04636002EB720 /* MiniBass_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525719F04636002EB720 /* MiniBass_B.wav */; };
-		6DDF532F19F04636002EB720 /* MiniBass_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525819F04636002EB720 /* MiniBass_C#.wav */; };
-		6DDF533019F04636002EB720 /* MiniBass_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525919F04636002EB720 /* MiniBass_C.wav */; };
-		6DDF533119F04636002EB720 /* MiniBass_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525A19F04636002EB720 /* MiniBass_D#.wav */; };
-		6DDF533219F04636002EB720 /* MiniBass_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525B19F04636002EB720 /* MiniBass_D.wav */; };
-		6DDF533319F04636002EB720 /* MiniBass_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525C19F04636002EB720 /* MiniBass_E.wav */; };
-		6DDF533419F04636002EB720 /* MiniBass_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525D19F04636002EB720 /* MiniBass_F#.wav */; };
-		6DDF533519F04636002EB720 /* MiniBass_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525E19F04636002EB720 /* MiniBass_F.wav */; };
-		6DDF533619F04636002EB720 /* MiniBass_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF525F19F04636002EB720 /* MiniBass_G#.wav */; };
-		6DDF533719F04636002EB720 /* MiniBass_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526019F04636002EB720 /* MiniBass_G.wav */; };
-		6DDF533819F04636002EB720 /* Pluck_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526219F04636002EB720 /* Pluck_A#.wav */; };
-		6DDF533919F04636002EB720 /* Pluck_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526319F04636002EB720 /* Pluck_A.wav */; };
-		6DDF533A19F04636002EB720 /* Pluck_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526419F04636002EB720 /* Pluck_B.wav */; };
-		6DDF533B19F04636002EB720 /* Pluck_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526519F04636002EB720 /* Pluck_C#.wav */; };
-		6DDF533C19F04636002EB720 /* Pluck_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526619F04636002EB720 /* Pluck_C.wav */; };
-		6DDF533D19F04636002EB720 /* Pluck_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526719F04636002EB720 /* Pluck_D#.wav */; };
-		6DDF533E19F04636002EB720 /* Pluck_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526819F04636002EB720 /* Pluck_D.wav */; };
-		6DDF533F19F04636002EB720 /* Pluck_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526919F04636002EB720 /* Pluck_E.wav */; };
-		6DDF534019F04636002EB720 /* Pluck_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526A19F04636002EB720 /* Pluck_F#.wav */; };
-		6DDF534119F04636002EB720 /* Pluck_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526B19F04636002EB720 /* Pluck_F.wav */; };
-		6DDF534219F04636002EB720 /* Pluck_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526C19F04636002EB720 /* Pluck_G#.wav */; };
-		6DDF534319F04636002EB720 /* Pluck_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF526D19F04636002EB720 /* Pluck_G.wav */; };
-		6DDF534419F04636002EB720 /* Flute_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527019F04636002EB720 /* Flute_A#.wav */; };
-		6DDF534519F04636002EB720 /* Flute_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527119F04636002EB720 /* Flute_A.wav */; };
-		6DDF534619F04636002EB720 /* Flute_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527219F04636002EB720 /* Flute_B.wav */; };
-		6DDF534719F04636002EB720 /* Flute_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527319F04636002EB720 /* Flute_C#.wav */; };
-		6DDF534819F04636002EB720 /* Flute_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527419F04636002EB720 /* Flute_C.wav */; };
-		6DDF534919F04636002EB720 /* Flute_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527519F04636002EB720 /* Flute_D#.wav */; };
-		6DDF534A19F04636002EB720 /* Flute_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527619F04636002EB720 /* Flute_D.wav */; };
-		6DDF534B19F04636002EB720 /* Flute_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527719F04636002EB720 /* Flute_E.wav */; };
-		6DDF534C19F04636002EB720 /* Flute_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527819F04636002EB720 /* Flute_F#.wav */; };
-		6DDF534D19F04636002EB720 /* Flute_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527919F04636002EB720 /* Flute_F.wav */; };
-		6DDF534E19F04636002EB720 /* Flute_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527A19F04636002EB720 /* Flute_G#.wav */; };
-		6DDF534F19F04636002EB720 /* Flute_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527B19F04636002EB720 /* Flute_G.wav */; };
-		6DDF535019F04636002EB720 /* Trombone_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527D19F04636002EB720 /* Trombone_A.wav */; };
-		6DDF535119F04636002EB720 /* Trombone_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527E19F04636002EB720 /* Trombone_B.wav */; };
-		6DDF535219F04636002EB720 /* Trombone_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF527F19F04636002EB720 /* Trombone_C.wav */; };
-		6DDF535319F04636002EB720 /* Trombone_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528019F04636002EB720 /* Trombone_D.wav */; };
-		6DDF535419F04636002EB720 /* Trombone_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528119F04636002EB720 /* Trombone_E.wav */; };
-		6DDF535519F04636002EB720 /* Trombone_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528219F04636002EB720 /* Trombone_G.wav */; };
-		6DDF535619F04636002EB720 /* Trumpet_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528419F04636002EB720 /* Trumpet_A#.wav */; };
-		6DDF535719F04636002EB720 /* Trumpet_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528519F04636002EB720 /* Trumpet_A.wav */; };
-		6DDF535819F04636002EB720 /* Trumpet_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528619F04636002EB720 /* Trumpet_B.wav */; };
-		6DDF535919F04636002EB720 /* Trumpet_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528719F04636002EB720 /* Trumpet_C#.wav */; };
-		6DDF535A19F04636002EB720 /* Trumpet_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528819F04636002EB720 /* Trumpet_C.wav */; };
-		6DDF535B19F04636002EB720 /* Trumpet_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528919F04636002EB720 /* Trumpet_D#.wav */; };
-		6DDF535C19F04636002EB720 /* Trumpet_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528A19F04636002EB720 /* Trumpet_D.wav */; };
-		6DDF535D19F04636002EB720 /* Trumpet_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528B19F04636002EB720 /* Trumpet_E.wav */; };
-		6DDF535E19F04636002EB720 /* Trumpet_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528C19F04636002EB720 /* Trumpet_F#.wav */; };
-		6DDF535F19F04636002EB720 /* Trumpet_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528D19F04636002EB720 /* Trumpet_F.wav */; };
-		6DDF536019F04636002EB720 /* Trumpet_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528E19F04636002EB720 /* Trumpet_G#.wav */; };
-		6DDF536119F04636002EB720 /* Trumpet_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF528F19F04636002EB720 /* Trumpet_G.wav */; };
-		6DDF536219F04636002EB720 /* HandDrum_Clink.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529319F04636002EB720 /* HandDrum_Clink.wav */; };
-		6DDF536319F04636002EB720 /* HandDrum_DjembeHigh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529419F04636002EB720 /* HandDrum_DjembeHigh.wav */; };
-		6DDF536419F04636002EB720 /* HandDrum_DjembeKick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529519F04636002EB720 /* HandDrum_DjembeKick.wav */; };
-		6DDF536519F04636002EB720 /* HandDrum_Knock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529619F04636002EB720 /* HandDrum_Knock.wav */; };
-		6DDF536619F04636002EB720 /* HandDrum_Shaker.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529719F04636002EB720 /* HandDrum_Shaker.wav */; };
-		6DDF536719F04636002EB720 /* HandDrum_Tom.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529819F04636002EB720 /* HandDrum_Tom.wav */; };
-		6DDF536819F04636002EB720 /* Rock_ClosedHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529A19F04636002EB720 /* Rock_ClosedHat.wav */; };
-		6DDF536919F04636002EB720 /* Rock_Crash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529B19F04636002EB720 /* Rock_Crash.wav */; };
-		6DDF536A19F04636002EB720 /* Rock_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529C19F04636002EB720 /* Rock_Kick.wav */; };
-		6DDF536B19F04636002EB720 /* Rock_OpenHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529D19F04636002EB720 /* Rock_OpenHat.wav */; };
-		6DDF536C19F04636002EB720 /* Rock_Snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529E19F04636002EB720 /* Rock_Snare.wav */; };
-		6DDF536D19F04636002EB720 /* Rock_Tom.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF529F19F04636002EB720 /* Rock_Tom.wav */; };
-		6DDF536E19F04636002EB720 /* 808_Clap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A219F04636002EB720 /* 808_Clap.wav */; };
-		6DDF536F19F04636002EB720 /* 808_ClosedHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A319F04636002EB720 /* 808_ClosedHat.wav */; };
-		6DDF537019F04636002EB720 /* 808_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A419F04636002EB720 /* 808_Kick.wav */; };
-		6DDF537119F04636002EB720 /* 808_OpenHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A519F04636002EB720 /* 808_OpenHat.wav */; };
-		6DDF537219F04636002EB720 /* 808_Snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A619F04636002EB720 /* 808_Snare.wav */; };
-		6DDF537319F04636002EB720 /* 808_Tom.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A719F04636002EB720 /* 808_Tom.wav */; };
-		6DDF537419F04636002EB720 /* Chiptune_Beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52A919F04636002EB720 /* Chiptune_Beep.wav */; };
-		6DDF537519F04636002EB720 /* Chiptune_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52AA19F04636002EB720 /* Chiptune_Kick.wav */; };
-		6DDF537619F04636002EB720 /* Chiptune_Lazer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52AB19F04636002EB720 /* Chiptune_Lazer.wav */; };
-		6DDF537719F04636002EB720 /* Chiptune_Siren.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52AC19F04636002EB720 /* Chiptune_Siren.wav */; };
-		6DDF537819F04636002EB720 /* Chiptune_Snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52AD19F04636002EB720 /* Chiptune_Snare.wav */; };
-		6DDF537919F04636002EB720 /* Chiptune_Triangle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52AE19F04636002EB720 /* Chiptune_Triangle.wav */; };
-		6DDF537A19F04636002EB720 /* Dubstep_Clap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B019F04636002EB720 /* Dubstep_Clap.wav */; };
-		6DDF537B19F04636002EB720 /* Dubstep_ClosedHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B119F04636002EB720 /* Dubstep_ClosedHat.wav */; };
-		6DDF537C19F04636002EB720 /* Dubstep_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B219F04636002EB720 /* Dubstep_Kick.wav */; };
-		6DDF537D19F04636002EB720 /* Dubstep_OpenHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B319F04636002EB720 /* Dubstep_OpenHat.wav */; };
-		6DDF537E19F04636002EB720 /* Dubstep_Shaker.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B419F04636002EB720 /* Dubstep_Shaker.wav */; };
-		6DDF537F19F04636002EB720 /* Dubstep_Snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B519F04636002EB720 /* Dubstep_Snare.wav */; };
-		6DDF538019F04636002EB720 /* House_Clap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B719F04636002EB720 /* House_Clap.wav */; };
-		6DDF538119F04636002EB720 /* House_ClosedHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B819F04636002EB720 /* House_ClosedHat.wav */; };
-		6DDF538219F04636002EB720 /* House_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52B919F04636002EB720 /* House_Kick.wav */; };
-		6DDF538319F04636002EB720 /* House_OpenHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52BA19F04636002EB720 /* House_OpenHat.wav */; };
-		6DDF538419F04636002EB720 /* House_Snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52BB19F04636002EB720 /* House_Snare.wav */; };
-		6DDF538519F04636002EB720 /* House_WoodBlock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52BC19F04636002EB720 /* House_WoodBlock.wav */; };
-		6DDF538619F04636002EB720 /* WubWub_Airhorn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52BE19F04636002EB720 /* WubWub_Airhorn.wav */; };
-		6DDF538719F04636002EB720 /* WubWub_Arp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52BF19F04636002EB720 /* WubWub_Arp.wav */; };
-		6DDF538819F04636002EB720 /* WubWub_BassSynth.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C019F04636002EB720 /* WubWub_BassSynth.wav */; };
-		6DDF538919F04636002EB720 /* WubWub_Clap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C119F04636002EB720 /* WubWub_Clap.wav */; };
-		6DDF538A19F04636002EB720 /* WubWub_Kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C219F04636002EB720 /* WubWub_Kick.wav */; };
-		6DDF538B19F04636002EB720 /* WubWub_Womp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C319F04636002EB720 /* WubWub_Womp.wav */; };
-		6DDF538C19F04636002EB720 /* Sounds_-con.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C619F04636002EB720 /* Sounds_-con.wav */; };
-		6DDF538D19F04636002EB720 /* Sounds_Ba-.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C719F04636002EB720 /* Sounds_Ba-.wav */; };
-		6DDF538E19F04636002EB720 /* Sounds_Bacon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C819F04636002EB720 /* Sounds_Bacon.wav */; };
-		6DDF538F19F04636002EB720 /* Sounds_I'm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52C919F04636002EB720 /* Sounds_I'm.wav */; };
-		6DDF539019F04636002EB720 /* Sounds_I'mBacon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52CA19F04636002EB720 /* Sounds_I'mBacon.wav */; };
-		6DDF539119F04636002EB720 /* Sounds_ReverseI'mBacon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF52CB19F04636002EB720 /* Sounds_ReverseI'mBacon.wav */; };
+		6DE96B071A0AC68A004F70BC /* dev_tutorialSet.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6DE96B061A0AC68A004F70BC /* dev_tutorialSet.xml */; };
 		6DEA47FB18B6E65800D3FD59 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */; };
 		6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */; };
 		6DED45D3199C4E4400E4AF08 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DED45D2199C4E4400E4AF08 /* MessageUI.framework */; };
@@ -730,204 +533,7 @@
 		6DD142A519DF562B00E24384 /* Copy_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Copy_Icon.png; sourceTree = "<group>"; };
 		6DD142A619DF562B00E24384 /* Notes_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Notes_Icon.png; sourceTree = "<group>"; };
 		6DD142AA19DF5A7300E24384 /* Paste_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paste_Icon.png; sourceTree = "<group>"; };
-		6DDF51EB19F04636002EB720 /* Piano_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Piano_A#.wav"; sourceTree = "<group>"; };
-		6DDF51EC19F04636002EB720 /* Piano_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_A.wav; sourceTree = "<group>"; };
-		6DDF51ED19F04636002EB720 /* Piano_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_B.wav; sourceTree = "<group>"; };
-		6DDF51EE19F04636002EB720 /* Piano_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Piano_C#.wav"; sourceTree = "<group>"; };
-		6DDF51EF19F04636002EB720 /* Piano_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_C.wav; sourceTree = "<group>"; };
-		6DDF51F019F04636002EB720 /* Piano_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Piano_D#.wav"; sourceTree = "<group>"; };
-		6DDF51F119F04636002EB720 /* Piano_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_D.wav; sourceTree = "<group>"; };
-		6DDF51F219F04636002EB720 /* Piano_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_E.wav; sourceTree = "<group>"; };
-		6DDF51F319F04636002EB720 /* Piano_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Piano_F#.wav"; sourceTree = "<group>"; };
-		6DDF51F419F04636002EB720 /* Piano_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_F.wav; sourceTree = "<group>"; };
-		6DDF51F519F04636002EB720 /* Piano_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Piano_G#.wav"; sourceTree = "<group>"; };
-		6DDF51F619F04636002EB720 /* Piano_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Piano_G.wav; sourceTree = "<group>"; };
-		6DDF51F819F04636002EB720 /* Vibraphone_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Vibraphone_A#.wav"; sourceTree = "<group>"; };
-		6DDF51F919F04636002EB720 /* Vibraphone_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_A.wav; sourceTree = "<group>"; };
-		6DDF51FA19F04636002EB720 /* Vibraphone_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_B.wav; sourceTree = "<group>"; };
-		6DDF51FB19F04636002EB720 /* Vibraphone_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Vibraphone_C#.wav"; sourceTree = "<group>"; };
-		6DDF51FC19F04636002EB720 /* Vibraphone_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_C.wav; sourceTree = "<group>"; };
-		6DDF51FD19F04636002EB720 /* Vibraphone_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Vibraphone_D#.wav"; sourceTree = "<group>"; };
-		6DDF51FE19F04636002EB720 /* Vibraphone_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_D.wav; sourceTree = "<group>"; };
-		6DDF51FF19F04636002EB720 /* Vibraphone_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_E.wav; sourceTree = "<group>"; };
-		6DDF520019F04636002EB720 /* Vibraphone_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Vibraphone_F#.wav"; sourceTree = "<group>"; };
-		6DDF520119F04636002EB720 /* Vibraphone_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_F.wav; sourceTree = "<group>"; };
-		6DDF520219F04636002EB720 /* Vibraphone_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Vibraphone_G#.wav"; sourceTree = "<group>"; };
-		6DDF520319F04636002EB720 /* Vibraphone_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Vibraphone_G.wav; sourceTree = "<group>"; };
-		6DDF520619F04636002EB720 /* Acoustic_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Acoustic_A#.wav"; sourceTree = "<group>"; };
-		6DDF520719F04636002EB720 /* Acoustic_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_A.wav; sourceTree = "<group>"; };
-		6DDF520819F04636002EB720 /* Acoustic_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_B.wav; sourceTree = "<group>"; };
-		6DDF520919F04636002EB720 /* Acoustic_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Acoustic_C#.wav"; sourceTree = "<group>"; };
-		6DDF520A19F04636002EB720 /* Acoustic_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_C.wav; sourceTree = "<group>"; };
-		6DDF520B19F04636002EB720 /* Acoustic_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Acoustic_D#.wav"; sourceTree = "<group>"; };
-		6DDF520C19F04636002EB720 /* Acoustic_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_D.wav; sourceTree = "<group>"; };
-		6DDF520D19F04636002EB720 /* Acoustic_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_E.wav; sourceTree = "<group>"; };
-		6DDF520E19F04636002EB720 /* Acoustic_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Acoustic_F#.wav"; sourceTree = "<group>"; };
-		6DDF520F19F04636002EB720 /* Acoustic_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_F.wav; sourceTree = "<group>"; };
-		6DDF521019F04636002EB720 /* Acoustic_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Acoustic_G#.wav"; sourceTree = "<group>"; };
-		6DDF521119F04636002EB720 /* Acoustic_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Acoustic_G.wav; sourceTree = "<group>"; };
-		6DDF521319F04636002EB720 /* DoubleBass_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "DoubleBass_A#.wav"; sourceTree = "<group>"; };
-		6DDF521419F04636002EB720 /* DoubleBass_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_A.wav; sourceTree = "<group>"; };
-		6DDF521519F04636002EB720 /* DoubleBass_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_B.wav; sourceTree = "<group>"; };
-		6DDF521619F04636002EB720 /* DoubleBass_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "DoubleBass_C#.wav"; sourceTree = "<group>"; };
-		6DDF521719F04636002EB720 /* DoubleBass_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_C.wav; sourceTree = "<group>"; };
-		6DDF521819F04636002EB720 /* DoubleBass_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "DoubleBass_D#.wav"; sourceTree = "<group>"; };
-		6DDF521919F04636002EB720 /* DoubleBass_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_D.wav; sourceTree = "<group>"; };
-		6DDF521A19F04636002EB720 /* DoubleBass_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_E.wav; sourceTree = "<group>"; };
-		6DDF521B19F04636002EB720 /* DoubleBass_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "DoubleBass_F#.wav"; sourceTree = "<group>"; };
-		6DDF521C19F04636002EB720 /* DoubleBass_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_F.wav; sourceTree = "<group>"; };
-		6DDF521D19F04636002EB720 /* DoubleBass_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "DoubleBass_G#.wav"; sourceTree = "<group>"; };
-		6DDF521E19F04636002EB720 /* DoubleBass_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DoubleBass_G.wav; sourceTree = "<group>"; };
-		6DDF522019F04636002EB720 /* Guitar_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Guitar_A#.wav"; sourceTree = "<group>"; };
-		6DDF522119F04636002EB720 /* Guitar_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_A.wav; sourceTree = "<group>"; };
-		6DDF522219F04636002EB720 /* Guitar_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_B.wav; sourceTree = "<group>"; };
-		6DDF522319F04636002EB720 /* Guitar_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Guitar_C#.wav"; sourceTree = "<group>"; };
-		6DDF522419F04636002EB720 /* Guitar_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_C.wav; sourceTree = "<group>"; };
-		6DDF522519F04636002EB720 /* Guitar_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Guitar_D#.wav"; sourceTree = "<group>"; };
-		6DDF522619F04636002EB720 /* Guitar_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_D.wav; sourceTree = "<group>"; };
-		6DDF522719F04636002EB720 /* Guitar_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_E.wav; sourceTree = "<group>"; };
-		6DDF522819F04636002EB720 /* Guitar_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Guitar_F#.wav"; sourceTree = "<group>"; };
-		6DDF522919F04636002EB720 /* Guitar_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_F.wav; sourceTree = "<group>"; };
-		6DDF522A19F04636002EB720 /* Guitar_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Guitar_G#.wav"; sourceTree = "<group>"; };
-		6DDF522B19F04636002EB720 /* Guitar_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Guitar_G.wav; sourceTree = "<group>"; };
-		6DDF522D19F04636002EB720 /* Violin_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Violin_A#.wav"; sourceTree = "<group>"; };
-		6DDF522E19F04636002EB720 /* Violin_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_A.wav; sourceTree = "<group>"; };
-		6DDF522F19F04636002EB720 /* Violin_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_B.wav; sourceTree = "<group>"; };
-		6DDF523019F04636002EB720 /* Violin_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Violin_C#.wav"; sourceTree = "<group>"; };
-		6DDF523119F04636002EB720 /* Violin_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_C.wav; sourceTree = "<group>"; };
-		6DDF523219F04636002EB720 /* Violin_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Violin_D#.wav"; sourceTree = "<group>"; };
-		6DDF523319F04636002EB720 /* Violin_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_D.wav; sourceTree = "<group>"; };
-		6DDF523419F04636002EB720 /* Violin_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_E.wav; sourceTree = "<group>"; };
-		6DDF523519F04636002EB720 /* Violin_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Violin_F#.wav"; sourceTree = "<group>"; };
-		6DDF523619F04636002EB720 /* Violin_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_F.wav; sourceTree = "<group>"; };
-		6DDF523719F04636002EB720 /* Violin_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Violin_G#.wav"; sourceTree = "<group>"; };
-		6DDF523819F04636002EB720 /* Violin_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Violin_G.wav; sourceTree = "<group>"; };
-		6DDF523B19F04636002EB720 /* Juno_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Juno_A#.wav"; sourceTree = "<group>"; };
-		6DDF523C19F04636002EB720 /* Juno_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_A.wav; sourceTree = "<group>"; };
-		6DDF523D19F04636002EB720 /* Juno_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_B.wav; sourceTree = "<group>"; };
-		6DDF523E19F04636002EB720 /* Juno_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Juno_C#.wav"; sourceTree = "<group>"; };
-		6DDF523F19F04636002EB720 /* Juno_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_C.wav; sourceTree = "<group>"; };
-		6DDF524019F04636002EB720 /* Juno_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Juno_D#.wav"; sourceTree = "<group>"; };
-		6DDF524119F04636002EB720 /* Juno_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_D.wav; sourceTree = "<group>"; };
-		6DDF524219F04636002EB720 /* Juno_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_E.wav; sourceTree = "<group>"; };
-		6DDF524319F04636002EB720 /* Juno_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Juno_F#.wav"; sourceTree = "<group>"; };
-		6DDF524419F04636002EB720 /* Juno_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_F.wav; sourceTree = "<group>"; };
-		6DDF524519F04636002EB720 /* Juno_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Juno_G#.wav"; sourceTree = "<group>"; };
-		6DDF524619F04636002EB720 /* Juno_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Juno_G.wav; sourceTree = "<group>"; };
-		6DDF524819F04636002EB720 /* Ladder_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ladder_A#.wav"; sourceTree = "<group>"; };
-		6DDF524919F04636002EB720 /* Ladder_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_A.wav; sourceTree = "<group>"; };
-		6DDF524A19F04636002EB720 /* Ladder_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_B.wav; sourceTree = "<group>"; };
-		6DDF524B19F04636002EB720 /* Ladder_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ladder_C#.wav"; sourceTree = "<group>"; };
-		6DDF524C19F04636002EB720 /* Ladder_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_C.wav; sourceTree = "<group>"; };
-		6DDF524D19F04636002EB720 /* Ladder_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ladder_D#.wav"; sourceTree = "<group>"; };
-		6DDF524E19F04636002EB720 /* Ladder_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_D.wav; sourceTree = "<group>"; };
-		6DDF524F19F04636002EB720 /* Ladder_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_E.wav; sourceTree = "<group>"; };
-		6DDF525019F04636002EB720 /* Ladder_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ladder_F#.wav"; sourceTree = "<group>"; };
-		6DDF525119F04636002EB720 /* Ladder_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_F.wav; sourceTree = "<group>"; };
-		6DDF525219F04636002EB720 /* Ladder_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ladder_G#.wav"; sourceTree = "<group>"; };
-		6DDF525319F04636002EB720 /* Ladder_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ladder_G.wav; sourceTree = "<group>"; };
-		6DDF525519F04636002EB720 /* MiniBass_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MiniBass_A#.wav"; sourceTree = "<group>"; };
-		6DDF525619F04636002EB720 /* MiniBass_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_A.wav; sourceTree = "<group>"; };
-		6DDF525719F04636002EB720 /* MiniBass_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_B.wav; sourceTree = "<group>"; };
-		6DDF525819F04636002EB720 /* MiniBass_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MiniBass_C#.wav"; sourceTree = "<group>"; };
-		6DDF525919F04636002EB720 /* MiniBass_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_C.wav; sourceTree = "<group>"; };
-		6DDF525A19F04636002EB720 /* MiniBass_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MiniBass_D#.wav"; sourceTree = "<group>"; };
-		6DDF525B19F04636002EB720 /* MiniBass_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_D.wav; sourceTree = "<group>"; };
-		6DDF525C19F04636002EB720 /* MiniBass_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_E.wav; sourceTree = "<group>"; };
-		6DDF525D19F04636002EB720 /* MiniBass_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MiniBass_F#.wav"; sourceTree = "<group>"; };
-		6DDF525E19F04636002EB720 /* MiniBass_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_F.wav; sourceTree = "<group>"; };
-		6DDF525F19F04636002EB720 /* MiniBass_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "MiniBass_G#.wav"; sourceTree = "<group>"; };
-		6DDF526019F04636002EB720 /* MiniBass_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MiniBass_G.wav; sourceTree = "<group>"; };
-		6DDF526219F04636002EB720 /* Pluck_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Pluck_A#.wav"; sourceTree = "<group>"; };
-		6DDF526319F04636002EB720 /* Pluck_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_A.wav; sourceTree = "<group>"; };
-		6DDF526419F04636002EB720 /* Pluck_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_B.wav; sourceTree = "<group>"; };
-		6DDF526519F04636002EB720 /* Pluck_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Pluck_C#.wav"; sourceTree = "<group>"; };
-		6DDF526619F04636002EB720 /* Pluck_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_C.wav; sourceTree = "<group>"; };
-		6DDF526719F04636002EB720 /* Pluck_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Pluck_D#.wav"; sourceTree = "<group>"; };
-		6DDF526819F04636002EB720 /* Pluck_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_D.wav; sourceTree = "<group>"; };
-		6DDF526919F04636002EB720 /* Pluck_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_E.wav; sourceTree = "<group>"; };
-		6DDF526A19F04636002EB720 /* Pluck_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Pluck_F#.wav"; sourceTree = "<group>"; };
-		6DDF526B19F04636002EB720 /* Pluck_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_F.wav; sourceTree = "<group>"; };
-		6DDF526C19F04636002EB720 /* Pluck_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Pluck_G#.wav"; sourceTree = "<group>"; };
-		6DDF526D19F04636002EB720 /* Pluck_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Pluck_G.wav; sourceTree = "<group>"; };
-		6DDF527019F04636002EB720 /* Flute_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Flute_A#.wav"; sourceTree = "<group>"; };
-		6DDF527119F04636002EB720 /* Flute_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_A.wav; sourceTree = "<group>"; };
-		6DDF527219F04636002EB720 /* Flute_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_B.wav; sourceTree = "<group>"; };
-		6DDF527319F04636002EB720 /* Flute_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Flute_C#.wav"; sourceTree = "<group>"; };
-		6DDF527419F04636002EB720 /* Flute_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_C.wav; sourceTree = "<group>"; };
-		6DDF527519F04636002EB720 /* Flute_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Flute_D#.wav"; sourceTree = "<group>"; };
-		6DDF527619F04636002EB720 /* Flute_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_D.wav; sourceTree = "<group>"; };
-		6DDF527719F04636002EB720 /* Flute_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_E.wav; sourceTree = "<group>"; };
-		6DDF527819F04636002EB720 /* Flute_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Flute_F#.wav"; sourceTree = "<group>"; };
-		6DDF527919F04636002EB720 /* Flute_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_F.wav; sourceTree = "<group>"; };
-		6DDF527A19F04636002EB720 /* Flute_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Flute_G#.wav"; sourceTree = "<group>"; };
-		6DDF527B19F04636002EB720 /* Flute_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Flute_G.wav; sourceTree = "<group>"; };
-		6DDF527D19F04636002EB720 /* Trombone_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_A.wav; sourceTree = "<group>"; };
-		6DDF527E19F04636002EB720 /* Trombone_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_B.wav; sourceTree = "<group>"; };
-		6DDF527F19F04636002EB720 /* Trombone_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_C.wav; sourceTree = "<group>"; };
-		6DDF528019F04636002EB720 /* Trombone_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_D.wav; sourceTree = "<group>"; };
-		6DDF528119F04636002EB720 /* Trombone_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_E.wav; sourceTree = "<group>"; };
-		6DDF528219F04636002EB720 /* Trombone_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trombone_G.wav; sourceTree = "<group>"; };
-		6DDF528419F04636002EB720 /* Trumpet_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Trumpet_A#.wav"; sourceTree = "<group>"; };
-		6DDF528519F04636002EB720 /* Trumpet_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_A.wav; sourceTree = "<group>"; };
-		6DDF528619F04636002EB720 /* Trumpet_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_B.wav; sourceTree = "<group>"; };
-		6DDF528719F04636002EB720 /* Trumpet_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Trumpet_C#.wav"; sourceTree = "<group>"; };
-		6DDF528819F04636002EB720 /* Trumpet_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_C.wav; sourceTree = "<group>"; };
-		6DDF528919F04636002EB720 /* Trumpet_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Trumpet_D#.wav"; sourceTree = "<group>"; };
-		6DDF528A19F04636002EB720 /* Trumpet_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_D.wav; sourceTree = "<group>"; };
-		6DDF528B19F04636002EB720 /* Trumpet_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_E.wav; sourceTree = "<group>"; };
-		6DDF528C19F04636002EB720 /* Trumpet_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Trumpet_F#.wav"; sourceTree = "<group>"; };
-		6DDF528D19F04636002EB720 /* Trumpet_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_F.wav; sourceTree = "<group>"; };
-		6DDF528E19F04636002EB720 /* Trumpet_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Trumpet_G#.wav"; sourceTree = "<group>"; };
-		6DDF528F19F04636002EB720 /* Trumpet_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Trumpet_G.wav; sourceTree = "<group>"; };
-		6DDF529319F04636002EB720 /* HandDrum_Clink.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_Clink.wav; sourceTree = "<group>"; };
-		6DDF529419F04636002EB720 /* HandDrum_DjembeHigh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_DjembeHigh.wav; sourceTree = "<group>"; };
-		6DDF529519F04636002EB720 /* HandDrum_DjembeKick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_DjembeKick.wav; sourceTree = "<group>"; };
-		6DDF529619F04636002EB720 /* HandDrum_Knock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_Knock.wav; sourceTree = "<group>"; };
-		6DDF529719F04636002EB720 /* HandDrum_Shaker.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_Shaker.wav; sourceTree = "<group>"; };
-		6DDF529819F04636002EB720 /* HandDrum_Tom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = HandDrum_Tom.wav; sourceTree = "<group>"; };
-		6DDF529A19F04636002EB720 /* Rock_ClosedHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_ClosedHat.wav; sourceTree = "<group>"; };
-		6DDF529B19F04636002EB720 /* Rock_Crash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_Crash.wav; sourceTree = "<group>"; };
-		6DDF529C19F04636002EB720 /* Rock_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_Kick.wav; sourceTree = "<group>"; };
-		6DDF529D19F04636002EB720 /* Rock_OpenHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_OpenHat.wav; sourceTree = "<group>"; };
-		6DDF529E19F04636002EB720 /* Rock_Snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_Snare.wav; sourceTree = "<group>"; };
-		6DDF529F19F04636002EB720 /* Rock_Tom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rock_Tom.wav; sourceTree = "<group>"; };
-		6DDF52A219F04636002EB720 /* 808_Clap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_Clap.wav; sourceTree = "<group>"; };
-		6DDF52A319F04636002EB720 /* 808_ClosedHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_ClosedHat.wav; sourceTree = "<group>"; };
-		6DDF52A419F04636002EB720 /* 808_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_Kick.wav; sourceTree = "<group>"; };
-		6DDF52A519F04636002EB720 /* 808_OpenHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_OpenHat.wav; sourceTree = "<group>"; };
-		6DDF52A619F04636002EB720 /* 808_Snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_Snare.wav; sourceTree = "<group>"; };
-		6DDF52A719F04636002EB720 /* 808_Tom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 808_Tom.wav; sourceTree = "<group>"; };
-		6DDF52A919F04636002EB720 /* Chiptune_Beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Beep.wav; sourceTree = "<group>"; };
-		6DDF52AA19F04636002EB720 /* Chiptune_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Kick.wav; sourceTree = "<group>"; };
-		6DDF52AB19F04636002EB720 /* Chiptune_Lazer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Lazer.wav; sourceTree = "<group>"; };
-		6DDF52AC19F04636002EB720 /* Chiptune_Siren.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Siren.wav; sourceTree = "<group>"; };
-		6DDF52AD19F04636002EB720 /* Chiptune_Snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Snare.wav; sourceTree = "<group>"; };
-		6DDF52AE19F04636002EB720 /* Chiptune_Triangle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chiptune_Triangle.wav; sourceTree = "<group>"; };
-		6DDF52B019F04636002EB720 /* Dubstep_Clap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_Clap.wav; sourceTree = "<group>"; };
-		6DDF52B119F04636002EB720 /* Dubstep_ClosedHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_ClosedHat.wav; sourceTree = "<group>"; };
-		6DDF52B219F04636002EB720 /* Dubstep_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_Kick.wav; sourceTree = "<group>"; };
-		6DDF52B319F04636002EB720 /* Dubstep_OpenHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_OpenHat.wav; sourceTree = "<group>"; };
-		6DDF52B419F04636002EB720 /* Dubstep_Shaker.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_Shaker.wav; sourceTree = "<group>"; };
-		6DDF52B519F04636002EB720 /* Dubstep_Snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dubstep_Snare.wav; sourceTree = "<group>"; };
-		6DDF52B719F04636002EB720 /* House_Clap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_Clap.wav; sourceTree = "<group>"; };
-		6DDF52B819F04636002EB720 /* House_ClosedHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_ClosedHat.wav; sourceTree = "<group>"; };
-		6DDF52B919F04636002EB720 /* House_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_Kick.wav; sourceTree = "<group>"; };
-		6DDF52BA19F04636002EB720 /* House_OpenHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_OpenHat.wav; sourceTree = "<group>"; };
-		6DDF52BB19F04636002EB720 /* House_Snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_Snare.wav; sourceTree = "<group>"; };
-		6DDF52BC19F04636002EB720 /* House_WoodBlock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = House_WoodBlock.wav; sourceTree = "<group>"; };
-		6DDF52BE19F04636002EB720 /* WubWub_Airhorn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_Airhorn.wav; sourceTree = "<group>"; };
-		6DDF52BF19F04636002EB720 /* WubWub_Arp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_Arp.wav; sourceTree = "<group>"; };
-		6DDF52C019F04636002EB720 /* WubWub_BassSynth.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_BassSynth.wav; sourceTree = "<group>"; };
-		6DDF52C119F04636002EB720 /* WubWub_Clap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_Clap.wav; sourceTree = "<group>"; };
-		6DDF52C219F04636002EB720 /* WubWub_Kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_Kick.wav; sourceTree = "<group>"; };
-		6DDF52C319F04636002EB720 /* WubWub_Womp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WubWub_Womp.wav; sourceTree = "<group>"; };
-		6DDF52C619F04636002EB720 /* Sounds_-con.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_-con.wav"; sourceTree = "<group>"; };
-		6DDF52C719F04636002EB720 /* Sounds_Ba-.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_Ba-.wav"; sourceTree = "<group>"; };
-		6DDF52C819F04636002EB720 /* Sounds_Bacon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds_Bacon.wav; sourceTree = "<group>"; };
-		6DDF52C919F04636002EB720 /* Sounds_I'm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_I'm.wav"; sourceTree = "<group>"; };
-		6DDF52CA19F04636002EB720 /* Sounds_I'mBacon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_I'mBacon.wav"; sourceTree = "<group>"; };
-		6DDF52CB19F04636002EB720 /* Sounds_ReverseI'mBacon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sounds_ReverseI'mBacon.wav"; sourceTree = "<group>"; };
+		6DE96B061A0AC68A004F70BC /* dev_tutorialSet.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = dev_tutorialSet.xml; path = ../dev_tutorialSet.xml; sourceTree = "<group>"; };
 		6DEA47FA18B6E65800D3FD59 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
 		6DEA47FC18B6E7EC00D3FD59 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6DED45D2199C4E4400E4AF08 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1097,8 +703,8 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				6DDF51E719F04636002EB720 /* Samples */,
 				6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */,
+				6DE96B061A0AC68A004F70BC /* dev_tutorialSet.xml */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
 				58241D7C188DE31000498DB5 /* sampleList.plist */,
 			);
@@ -1674,451 +1280,6 @@
 			name = CyclingTextField;
 			sourceTree = "<group>";
 		};
-		6DDF51E719F04636002EB720 /* Samples */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF51E819F04636002EB720 /* Melodic */,
-				6DDF529019F04636002EB720 /* Percussion */,
-				6DDF52C419F04636002EB720 /* Sounds */,
-			);
-			path = Samples;
-			sourceTree = "<group>";
-		};
-		6DDF51E819F04636002EB720 /* Melodic */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF51E919F04636002EB720 /* Percussive */,
-				6DDF520419F04636002EB720 /* Strings */,
-				6DDF523919F04636002EB720 /* Synths */,
-				6DDF526E19F04636002EB720 /* Winds */,
-			);
-			path = Melodic;
-			sourceTree = "<group>";
-		};
-		6DDF51E919F04636002EB720 /* Percussive */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF51EA19F04636002EB720 /* Piano */,
-				6DDF51F719F04636002EB720 /* Vibra */,
-			);
-			path = Percussive;
-			sourceTree = "<group>";
-		};
-		6DDF51EA19F04636002EB720 /* Piano */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF51EB19F04636002EB720 /* Piano_A#.wav */,
-				6DDF51EC19F04636002EB720 /* Piano_A.wav */,
-				6DDF51ED19F04636002EB720 /* Piano_B.wav */,
-				6DDF51EE19F04636002EB720 /* Piano_C#.wav */,
-				6DDF51EF19F04636002EB720 /* Piano_C.wav */,
-				6DDF51F019F04636002EB720 /* Piano_D#.wav */,
-				6DDF51F119F04636002EB720 /* Piano_D.wav */,
-				6DDF51F219F04636002EB720 /* Piano_E.wav */,
-				6DDF51F319F04636002EB720 /* Piano_F#.wav */,
-				6DDF51F419F04636002EB720 /* Piano_F.wav */,
-				6DDF51F519F04636002EB720 /* Piano_G#.wav */,
-				6DDF51F619F04636002EB720 /* Piano_G.wav */,
-			);
-			path = Piano;
-			sourceTree = "<group>";
-		};
-		6DDF51F719F04636002EB720 /* Vibra */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF51F819F04636002EB720 /* Vibraphone_A#.wav */,
-				6DDF51F919F04636002EB720 /* Vibraphone_A.wav */,
-				6DDF51FA19F04636002EB720 /* Vibraphone_B.wav */,
-				6DDF51FB19F04636002EB720 /* Vibraphone_C#.wav */,
-				6DDF51FC19F04636002EB720 /* Vibraphone_C.wav */,
-				6DDF51FD19F04636002EB720 /* Vibraphone_D#.wav */,
-				6DDF51FE19F04636002EB720 /* Vibraphone_D.wav */,
-				6DDF51FF19F04636002EB720 /* Vibraphone_E.wav */,
-				6DDF520019F04636002EB720 /* Vibraphone_F#.wav */,
-				6DDF520119F04636002EB720 /* Vibraphone_F.wav */,
-				6DDF520219F04636002EB720 /* Vibraphone_G#.wav */,
-				6DDF520319F04636002EB720 /* Vibraphone_G.wav */,
-			);
-			path = Vibra;
-			sourceTree = "<group>";
-		};
-		6DDF520419F04636002EB720 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF520519F04636002EB720 /* Acoustic */,
-				6DDF521219F04636002EB720 /* Double Bass */,
-				6DDF521F19F04636002EB720 /* Guitar */,
-				6DDF522C19F04636002EB720 /* Violin */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		6DDF520519F04636002EB720 /* Acoustic */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF520619F04636002EB720 /* Acoustic_A#.wav */,
-				6DDF520719F04636002EB720 /* Acoustic_A.wav */,
-				6DDF520819F04636002EB720 /* Acoustic_B.wav */,
-				6DDF520919F04636002EB720 /* Acoustic_C#.wav */,
-				6DDF520A19F04636002EB720 /* Acoustic_C.wav */,
-				6DDF520B19F04636002EB720 /* Acoustic_D#.wav */,
-				6DDF520C19F04636002EB720 /* Acoustic_D.wav */,
-				6DDF520D19F04636002EB720 /* Acoustic_E.wav */,
-				6DDF520E19F04636002EB720 /* Acoustic_F#.wav */,
-				6DDF520F19F04636002EB720 /* Acoustic_F.wav */,
-				6DDF521019F04636002EB720 /* Acoustic_G#.wav */,
-				6DDF521119F04636002EB720 /* Acoustic_G.wav */,
-			);
-			path = Acoustic;
-			sourceTree = "<group>";
-		};
-		6DDF521219F04636002EB720 /* Double Bass */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF521319F04636002EB720 /* DoubleBass_A#.wav */,
-				6DDF521419F04636002EB720 /* DoubleBass_A.wav */,
-				6DDF521519F04636002EB720 /* DoubleBass_B.wav */,
-				6DDF521619F04636002EB720 /* DoubleBass_C#.wav */,
-				6DDF521719F04636002EB720 /* DoubleBass_C.wav */,
-				6DDF521819F04636002EB720 /* DoubleBass_D#.wav */,
-				6DDF521919F04636002EB720 /* DoubleBass_D.wav */,
-				6DDF521A19F04636002EB720 /* DoubleBass_E.wav */,
-				6DDF521B19F04636002EB720 /* DoubleBass_F#.wav */,
-				6DDF521C19F04636002EB720 /* DoubleBass_F.wav */,
-				6DDF521D19F04636002EB720 /* DoubleBass_G#.wav */,
-				6DDF521E19F04636002EB720 /* DoubleBass_G.wav */,
-			);
-			path = "Double Bass";
-			sourceTree = "<group>";
-		};
-		6DDF521F19F04636002EB720 /* Guitar */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF522019F04636002EB720 /* Guitar_A#.wav */,
-				6DDF522119F04636002EB720 /* Guitar_A.wav */,
-				6DDF522219F04636002EB720 /* Guitar_B.wav */,
-				6DDF522319F04636002EB720 /* Guitar_C#.wav */,
-				6DDF522419F04636002EB720 /* Guitar_C.wav */,
-				6DDF522519F04636002EB720 /* Guitar_D#.wav */,
-				6DDF522619F04636002EB720 /* Guitar_D.wav */,
-				6DDF522719F04636002EB720 /* Guitar_E.wav */,
-				6DDF522819F04636002EB720 /* Guitar_F#.wav */,
-				6DDF522919F04636002EB720 /* Guitar_F.wav */,
-				6DDF522A19F04636002EB720 /* Guitar_G#.wav */,
-				6DDF522B19F04636002EB720 /* Guitar_G.wav */,
-			);
-			path = Guitar;
-			sourceTree = "<group>";
-		};
-		6DDF522C19F04636002EB720 /* Violin */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF522D19F04636002EB720 /* Violin_A#.wav */,
-				6DDF522E19F04636002EB720 /* Violin_A.wav */,
-				6DDF522F19F04636002EB720 /* Violin_B.wav */,
-				6DDF523019F04636002EB720 /* Violin_C#.wav */,
-				6DDF523119F04636002EB720 /* Violin_C.wav */,
-				6DDF523219F04636002EB720 /* Violin_D#.wav */,
-				6DDF523319F04636002EB720 /* Violin_D.wav */,
-				6DDF523419F04636002EB720 /* Violin_E.wav */,
-				6DDF523519F04636002EB720 /* Violin_F#.wav */,
-				6DDF523619F04636002EB720 /* Violin_F.wav */,
-				6DDF523719F04636002EB720 /* Violin_G#.wav */,
-				6DDF523819F04636002EB720 /* Violin_G.wav */,
-			);
-			path = Violin;
-			sourceTree = "<group>";
-		};
-		6DDF523919F04636002EB720 /* Synths */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF523A19F04636002EB720 /* Juno */,
-				6DDF524719F04636002EB720 /* Ladder */,
-				6DDF525419F04636002EB720 /* Mini Bass */,
-				6DDF526119F04636002EB720 /* Pluck */,
-			);
-			path = Synths;
-			sourceTree = "<group>";
-		};
-		6DDF523A19F04636002EB720 /* Juno */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF523B19F04636002EB720 /* Juno_A#.wav */,
-				6DDF523C19F04636002EB720 /* Juno_A.wav */,
-				6DDF523D19F04636002EB720 /* Juno_B.wav */,
-				6DDF523E19F04636002EB720 /* Juno_C#.wav */,
-				6DDF523F19F04636002EB720 /* Juno_C.wav */,
-				6DDF524019F04636002EB720 /* Juno_D#.wav */,
-				6DDF524119F04636002EB720 /* Juno_D.wav */,
-				6DDF524219F04636002EB720 /* Juno_E.wav */,
-				6DDF524319F04636002EB720 /* Juno_F#.wav */,
-				6DDF524419F04636002EB720 /* Juno_F.wav */,
-				6DDF524519F04636002EB720 /* Juno_G#.wav */,
-				6DDF524619F04636002EB720 /* Juno_G.wav */,
-			);
-			path = Juno;
-			sourceTree = "<group>";
-		};
-		6DDF524719F04636002EB720 /* Ladder */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF524819F04636002EB720 /* Ladder_A#.wav */,
-				6DDF524919F04636002EB720 /* Ladder_A.wav */,
-				6DDF524A19F04636002EB720 /* Ladder_B.wav */,
-				6DDF524B19F04636002EB720 /* Ladder_C#.wav */,
-				6DDF524C19F04636002EB720 /* Ladder_C.wav */,
-				6DDF524D19F04636002EB720 /* Ladder_D#.wav */,
-				6DDF524E19F04636002EB720 /* Ladder_D.wav */,
-				6DDF524F19F04636002EB720 /* Ladder_E.wav */,
-				6DDF525019F04636002EB720 /* Ladder_F#.wav */,
-				6DDF525119F04636002EB720 /* Ladder_F.wav */,
-				6DDF525219F04636002EB720 /* Ladder_G#.wav */,
-				6DDF525319F04636002EB720 /* Ladder_G.wav */,
-			);
-			path = Ladder;
-			sourceTree = "<group>";
-		};
-		6DDF525419F04636002EB720 /* Mini Bass */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF525519F04636002EB720 /* MiniBass_A#.wav */,
-				6DDF525619F04636002EB720 /* MiniBass_A.wav */,
-				6DDF525719F04636002EB720 /* MiniBass_B.wav */,
-				6DDF525819F04636002EB720 /* MiniBass_C#.wav */,
-				6DDF525919F04636002EB720 /* MiniBass_C.wav */,
-				6DDF525A19F04636002EB720 /* MiniBass_D#.wav */,
-				6DDF525B19F04636002EB720 /* MiniBass_D.wav */,
-				6DDF525C19F04636002EB720 /* MiniBass_E.wav */,
-				6DDF525D19F04636002EB720 /* MiniBass_F#.wav */,
-				6DDF525E19F04636002EB720 /* MiniBass_F.wav */,
-				6DDF525F19F04636002EB720 /* MiniBass_G#.wav */,
-				6DDF526019F04636002EB720 /* MiniBass_G.wav */,
-			);
-			path = "Mini Bass";
-			sourceTree = "<group>";
-		};
-		6DDF526119F04636002EB720 /* Pluck */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF526219F04636002EB720 /* Pluck_A#.wav */,
-				6DDF526319F04636002EB720 /* Pluck_A.wav */,
-				6DDF526419F04636002EB720 /* Pluck_B.wav */,
-				6DDF526519F04636002EB720 /* Pluck_C#.wav */,
-				6DDF526619F04636002EB720 /* Pluck_C.wav */,
-				6DDF526719F04636002EB720 /* Pluck_D#.wav */,
-				6DDF526819F04636002EB720 /* Pluck_D.wav */,
-				6DDF526919F04636002EB720 /* Pluck_E.wav */,
-				6DDF526A19F04636002EB720 /* Pluck_F#.wav */,
-				6DDF526B19F04636002EB720 /* Pluck_F.wav */,
-				6DDF526C19F04636002EB720 /* Pluck_G#.wav */,
-				6DDF526D19F04636002EB720 /* Pluck_G.wav */,
-			);
-			path = Pluck;
-			sourceTree = "<group>";
-		};
-		6DDF526E19F04636002EB720 /* Winds */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF526F19F04636002EB720 /* Flute */,
-				6DDF527C19F04636002EB720 /* Trombone */,
-				6DDF528319F04636002EB720 /* Trumpet */,
-			);
-			path = Winds;
-			sourceTree = "<group>";
-		};
-		6DDF526F19F04636002EB720 /* Flute */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF527019F04636002EB720 /* Flute_A#.wav */,
-				6DDF527119F04636002EB720 /* Flute_A.wav */,
-				6DDF527219F04636002EB720 /* Flute_B.wav */,
-				6DDF527319F04636002EB720 /* Flute_C#.wav */,
-				6DDF527419F04636002EB720 /* Flute_C.wav */,
-				6DDF527519F04636002EB720 /* Flute_D#.wav */,
-				6DDF527619F04636002EB720 /* Flute_D.wav */,
-				6DDF527719F04636002EB720 /* Flute_E.wav */,
-				6DDF527819F04636002EB720 /* Flute_F#.wav */,
-				6DDF527919F04636002EB720 /* Flute_F.wav */,
-				6DDF527A19F04636002EB720 /* Flute_G#.wav */,
-				6DDF527B19F04636002EB720 /* Flute_G.wav */,
-			);
-			path = Flute;
-			sourceTree = "<group>";
-		};
-		6DDF527C19F04636002EB720 /* Trombone */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF527D19F04636002EB720 /* Trombone_A.wav */,
-				6DDF527E19F04636002EB720 /* Trombone_B.wav */,
-				6DDF527F19F04636002EB720 /* Trombone_C.wav */,
-				6DDF528019F04636002EB720 /* Trombone_D.wav */,
-				6DDF528119F04636002EB720 /* Trombone_E.wav */,
-				6DDF528219F04636002EB720 /* Trombone_G.wav */,
-			);
-			path = Trombone;
-			sourceTree = "<group>";
-		};
-		6DDF528319F04636002EB720 /* Trumpet */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF528419F04636002EB720 /* Trumpet_A#.wav */,
-				6DDF528519F04636002EB720 /* Trumpet_A.wav */,
-				6DDF528619F04636002EB720 /* Trumpet_B.wav */,
-				6DDF528719F04636002EB720 /* Trumpet_C#.wav */,
-				6DDF528819F04636002EB720 /* Trumpet_C.wav */,
-				6DDF528919F04636002EB720 /* Trumpet_D#.wav */,
-				6DDF528A19F04636002EB720 /* Trumpet_D.wav */,
-				6DDF528B19F04636002EB720 /* Trumpet_E.wav */,
-				6DDF528C19F04636002EB720 /* Trumpet_F#.wav */,
-				6DDF528D19F04636002EB720 /* Trumpet_F.wav */,
-				6DDF528E19F04636002EB720 /* Trumpet_G#.wav */,
-				6DDF528F19F04636002EB720 /* Trumpet_G.wav */,
-			);
-			path = Trumpet;
-			sourceTree = "<group>";
-		};
-		6DDF529019F04636002EB720 /* Percussion */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF529119F04636002EB720 /* Acoustic */,
-				6DDF52A019F04636002EB720 /* Electronic */,
-			);
-			path = Percussion;
-			sourceTree = "<group>";
-		};
-		6DDF529119F04636002EB720 /* Acoustic */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF529219F04636002EB720 /* Hand Drum */,
-				6DDF529919F04636002EB720 /* Rock */,
-			);
-			path = Acoustic;
-			sourceTree = "<group>";
-		};
-		6DDF529219F04636002EB720 /* Hand Drum */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF529319F04636002EB720 /* HandDrum_Clink.wav */,
-				6DDF529419F04636002EB720 /* HandDrum_DjembeHigh.wav */,
-				6DDF529519F04636002EB720 /* HandDrum_DjembeKick.wav */,
-				6DDF529619F04636002EB720 /* HandDrum_Knock.wav */,
-				6DDF529719F04636002EB720 /* HandDrum_Shaker.wav */,
-				6DDF529819F04636002EB720 /* HandDrum_Tom.wav */,
-			);
-			path = "Hand Drum";
-			sourceTree = "<group>";
-		};
-		6DDF529919F04636002EB720 /* Rock */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF529A19F04636002EB720 /* Rock_ClosedHat.wav */,
-				6DDF529B19F04636002EB720 /* Rock_Crash.wav */,
-				6DDF529C19F04636002EB720 /* Rock_Kick.wav */,
-				6DDF529D19F04636002EB720 /* Rock_OpenHat.wav */,
-				6DDF529E19F04636002EB720 /* Rock_Snare.wav */,
-				6DDF529F19F04636002EB720 /* Rock_Tom.wav */,
-			);
-			path = Rock;
-			sourceTree = "<group>";
-		};
-		6DDF52A019F04636002EB720 /* Electronic */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52A119F04636002EB720 /* 808 */,
-				6DDF52A819F04636002EB720 /* Chiptune */,
-				6DDF52AF19F04636002EB720 /* Dubstep */,
-				6DDF52B619F04636002EB720 /* House */,
-				6DDF52BD19F04636002EB720 /* WubWub */,
-			);
-			path = Electronic;
-			sourceTree = "<group>";
-		};
-		6DDF52A119F04636002EB720 /* 808 */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52A219F04636002EB720 /* 808_Clap.wav */,
-				6DDF52A319F04636002EB720 /* 808_ClosedHat.wav */,
-				6DDF52A419F04636002EB720 /* 808_Kick.wav */,
-				6DDF52A519F04636002EB720 /* 808_OpenHat.wav */,
-				6DDF52A619F04636002EB720 /* 808_Snare.wav */,
-				6DDF52A719F04636002EB720 /* 808_Tom.wav */,
-			);
-			path = 808;
-			sourceTree = "<group>";
-		};
-		6DDF52A819F04636002EB720 /* Chiptune */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52A919F04636002EB720 /* Chiptune_Beep.wav */,
-				6DDF52AA19F04636002EB720 /* Chiptune_Kick.wav */,
-				6DDF52AB19F04636002EB720 /* Chiptune_Lazer.wav */,
-				6DDF52AC19F04636002EB720 /* Chiptune_Siren.wav */,
-				6DDF52AD19F04636002EB720 /* Chiptune_Snare.wav */,
-				6DDF52AE19F04636002EB720 /* Chiptune_Triangle.wav */,
-			);
-			path = Chiptune;
-			sourceTree = "<group>";
-		};
-		6DDF52AF19F04636002EB720 /* Dubstep */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52B019F04636002EB720 /* Dubstep_Clap.wav */,
-				6DDF52B119F04636002EB720 /* Dubstep_ClosedHat.wav */,
-				6DDF52B219F04636002EB720 /* Dubstep_Kick.wav */,
-				6DDF52B319F04636002EB720 /* Dubstep_OpenHat.wav */,
-				6DDF52B419F04636002EB720 /* Dubstep_Shaker.wav */,
-				6DDF52B519F04636002EB720 /* Dubstep_Snare.wav */,
-			);
-			path = Dubstep;
-			sourceTree = "<group>";
-		};
-		6DDF52B619F04636002EB720 /* House */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52B719F04636002EB720 /* House_Clap.wav */,
-				6DDF52B819F04636002EB720 /* House_ClosedHat.wav */,
-				6DDF52B919F04636002EB720 /* House_Kick.wav */,
-				6DDF52BA19F04636002EB720 /* House_OpenHat.wav */,
-				6DDF52BB19F04636002EB720 /* House_Snare.wav */,
-				6DDF52BC19F04636002EB720 /* House_WoodBlock.wav */,
-			);
-			path = House;
-			sourceTree = "<group>";
-		};
-		6DDF52BD19F04636002EB720 /* WubWub */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52BE19F04636002EB720 /* WubWub_Airhorn.wav */,
-				6DDF52BF19F04636002EB720 /* WubWub_Arp.wav */,
-				6DDF52C019F04636002EB720 /* WubWub_BassSynth.wav */,
-				6DDF52C119F04636002EB720 /* WubWub_Clap.wav */,
-				6DDF52C219F04636002EB720 /* WubWub_Kick.wav */,
-				6DDF52C319F04636002EB720 /* WubWub_Womp.wav */,
-			);
-			path = WubWub;
-			sourceTree = "<group>";
-		};
-		6DDF52C419F04636002EB720 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52C519F04636002EB720 /* Bacon */,
-			);
-			path = Sounds;
-			sourceTree = "<group>";
-		};
-		6DDF52C519F04636002EB720 /* Bacon */ = {
-			isa = PBXGroup;
-			children = (
-				6DDF52C619F04636002EB720 /* Sounds_-con.wav */,
-				6DDF52C719F04636002EB720 /* Sounds_Ba-.wav */,
-				6DDF52C819F04636002EB720 /* Sounds_Bacon.wav */,
-				6DDF52C919F04636002EB720 /* Sounds_I'm.wav */,
-				6DDF52CA19F04636002EB720 /* Sounds_I'mBacon.wav */,
-				6DDF52CB19F04636002EB720 /* Sounds_ReverseI'mBacon.wav */,
-			);
-			path = Bacon;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2291,298 +1452,101 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DDF52E319F04636002EB720 /* Vibraphone_G.wav in Resources */,
-				6DDF538C19F04636002EB720 /* Sounds_-con.wav in Resources */,
-				6DDF533819F04636002EB720 /* Pluck_A#.wav in Resources */,
-				6DDF52DB19F04636002EB720 /* Vibraphone_C#.wav in Resources */,
-				6DDF534419F04636002EB720 /* Flute_A#.wav in Resources */,
 				58D617661863BF5E001EB327 /* Sequence11.png in Resources */,
-				6DDF534F19F04636002EB720 /* Flute_G.wav in Resources */,
-				6DDF536619F04636002EB720 /* HandDrum_Shaker.wav in Resources */,
-				6DDF52E519F04636002EB720 /* Acoustic_A.wav in Resources */,
 				58BBFD1D1891BEA400E41CD2 /* CustomInstrumentNamer.xib in Resources */,
-				6DDF52E119F04636002EB720 /* Vibraphone_F.wav in Resources */,
-				6DDF536019F04636002EB720 /* Trumpet_G#.wav in Resources */,
-				6DDF534D19F04636002EB720 /* Flute_F.wav in Resources */,
-				6DDF535C19F04636002EB720 /* Trumpet_D.wav in Resources */,
 				6D1DDB481A04084B00A770E7 /* Icon_808.png in Resources */,
-				6DDF535019F04636002EB720 /* Trombone_A.wav in Resources */,
-				6DDF52FB19F04636002EB720 /* DoubleBass_G.wav in Resources */,
-				6DDF533919F04636002EB720 /* Pluck_A.wav in Resources */,
-				6DDF52DC19F04636002EB720 /* Vibraphone_C.wav in Resources */,
-				6DDF534B19F04636002EB720 /* Flute_E.wav in Resources */,
-				6DDF52D319F04636002EB720 /* Piano_E.wav in Resources */,
-				6DDF534C19F04636002EB720 /* Flute_F#.wav in Resources */,
-				6DDF535119F04636002EB720 /* Trombone_B.wav in Resources */,
-				6DDF52ED19F04636002EB720 /* Acoustic_F.wav in Resources */,
-				6DDF530219F04636002EB720 /* Guitar_D.wav in Resources */,
-				6DDF52E619F04636002EB720 /* Acoustic_B.wav in Resources */,
-				6DDF536419F04636002EB720 /* HandDrum_DjembeKick.wav in Resources */,
-				6DDF532719F04636002EB720 /* Ladder_E.wav in Resources */,
-				6DDF52FE19F04636002EB720 /* Guitar_B.wav in Resources */,
-				6DDF52D019F04636002EB720 /* Piano_C.wav in Resources */,
-				6DDF538019F04636002EB720 /* House_Clap.wav in Resources */,
 				6DAA158818C12472003DAB30 /* Sequencer_AppIcon-57x57rd.png in Resources */,
 				58F6167E188F5E2700020A74 /* Icon_VIBRAPHONE.png in Resources */,
 				6D813EC518DA268500D29F48 /* Tutorial_gTar.png in Resources */,
-				6DDF538219F04636002EB720 /* House_Kick.wav in Resources */,
 				6D1DDB4D1A04084B00A770E7 /* Icon_ROCK.png in Resources */,
-				6DDF533B19F04636002EB720 /* Pluck_C#.wav in Resources */,
 				58F6167C188F5E2700020A74 /* Icon_Music.png in Resources */,
-				6DDF535D19F04636002EB720 /* Trumpet_E.wav in Resources */,
-				6DDF537719F04636002EB720 /* Chiptune_Siren.wav in Resources */,
-				6DDF535419F04636002EB720 /* Trombone_E.wav in Resources */,
 				58F5449118AB161E009E6E43 /* Volume_Icon.png in Resources */,
-				6DDF536E19F04636002EB720 /* 808_Clap.wav in Resources */,
-				6DDF52CE19F04636002EB720 /* Piano_B.wav in Resources */,
-				6DDF538B19F04636002EB720 /* WubWub_Womp.wav in Resources */,
-				6DDF537519F04636002EB720 /* Chiptune_Kick.wav in Resources */,
-				6DDF538919F04636002EB720 /* WubWub_Clap.wav in Resources */,
-				6DDF531519F04636002EB720 /* Juno_A.wav in Resources */,
-				6DDF532519F04636002EB720 /* Ladder_D#.wav in Resources */,
-				6DDF535819F04636002EB720 /* Trumpet_B.wav in Resources */,
 				580A52091864DFF50077240B /* Icon_WubWub.png in Resources */,
 				58F2900718A5626C00552A24 /* CustomInstrumentRecorder.xib in Resources */,
 				6DAA158918C12472003DAB30 /* Sequencer_AppIcon-57x57sq.png in Resources */,
 				58F5449418ABFDAA009E6E43 /* Icon_Saxophone.png in Resources */,
-				6DDF530C19F04636002EB720 /* Violin_C.wav in Resources */,
 				58B4D3D5186E32AD0035D9E5 /* SeqSetViewCell.xib in Resources */,
-				6DDF52F219F04636002EB720 /* DoubleBass_B.wav in Resources */,
-				6DDF537A19F04636002EB720 /* Dubstep_Clap.wav in Resources */,
 				6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */,
 				6DAB0CEA18C7B8F400FFBDE6 /* README.md in Resources */,
 				6DFDB02218C02BB2004D573B /* SeqSetViewCell_4.xib in Resources */,
-				6DDF538A19F04636002EB720 /* WubWub_Kick.wav in Resources */,
-				6DDF52CF19F04636002EB720 /* Piano_C#.wav in Resources */,
-				6DDF538819F04636002EB720 /* WubWub_BassSynth.wav in Resources */,
 				580A52011864DFF50077240B /* gTarConnectedLogo.png in Resources */,
-				6DDF536A19F04636002EB720 /* Rock_Kick.wav in Resources */,
 				6D72B28318BE7C8400969A8F /* CustomSampleCell.xib in Resources */,
-				6DDF530F19F04636002EB720 /* Violin_E.wav in Resources */,
 				5840858618652D9000BFF3C5 /* SeqSetView.xib in Resources */,
-				6DDF52E019F04636002EB720 /* Vibraphone_F#.wav in Resources */,
 				58D617261863B8D7001EB327 /* Images.xcassets in Resources */,
 				6DD142A819DF562B00E24384 /* Notes_Icon.png in Resources */,
-				6DDF534319F04636002EB720 /* Pluck_G.wav in Resources */,
-				6DDF533E19F04636002EB720 /* Pluck_D.wav in Resources */,
-				6DDF52E819F04636002EB720 /* Acoustic_C.wav in Resources */,
 				6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */,
-				6DDF537C19F04636002EB720 /* Dubstep_Kick.wav in Resources */,
-				6DDF536319F04636002EB720 /* HandDrum_DjembeHigh.wav in Resources */,
 				6DAA158F18C12525003DAB30 /* Sequencer_Icon58px.png in Resources */,
-				6DDF530019F04636002EB720 /* Guitar_C.wav in Resources */,
-				6DDF537B19F04636002EB720 /* Dubstep_ClosedHat.wav in Resources */,
-				6DDF536F19F04636002EB720 /* 808_ClosedHat.wav in Resources */,
 				58D6176D1863BF5E001EB327 /* Sequence8.png in Resources */,
 				580A52051864DFF50077240B /* Icon_GUITAR.png in Resources */,
-				6DDF534719F04636002EB720 /* Flute_C#.wav in Resources */,
-				6DDF52D719F04636002EB720 /* Piano_G.wav in Resources */,
-				6DDF537619F04636002EB720 /* Chiptune_Lazer.wav in Resources */,
 				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
-				6DDF537219F04636002EB720 /* 808_Snare.wav in Resources */,
 				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
 				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
-				6DDF534A19F04636002EB720 /* Flute_D.wav in Resources */,
-				6DDF530719F04636002EB720 /* Guitar_G.wav in Resources */,
-				6DDF536C19F04636002EB720 /* Rock_Snare.wav in Resources */,
 				6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */,
-				6DDF52FD19F04636002EB720 /* Guitar_A.wav in Resources */,
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,
-				6DDF538D19F04636002EB720 /* Sounds_Ba-.wav in Resources */,
-				6DDF52F419F04636002EB720 /* DoubleBass_C.wav in Resources */,
-				6DDF536819F04636002EB720 /* Rock_ClosedHat.wav in Resources */,
-				6DDF538719F04636002EB720 /* WubWub_Arp.wav in Resources */,
-				6DDF52EF19F04636002EB720 /* Acoustic_G.wav in Resources */,
-				6DDF52D519F04636002EB720 /* Piano_F.wav in Resources */,
-				6DDF52F919F04636002EB720 /* DoubleBass_F.wav in Resources */,
-				6DDF52DD19F04636002EB720 /* Vibraphone_D#.wav in Resources */,
-				6DDF52D819F04636002EB720 /* Vibraphone_A#.wav in Resources */,
 				6D19EC3A19B6A86700A963E4 /* FacebookIcon.jpg in Resources */,
-				6DDF538E19F04636002EB720 /* Sounds_Bacon.wav in Resources */,
-				6DDF530319F04636002EB720 /* Guitar_E.wav in Resources */,
 				6D1DDB491A04084B00A770E7 /* Icon_CHIPTUNE.png in Resources */,
-				6DDF52F819F04636002EB720 /* DoubleBass_F#.wav in Resources */,
 				6DA724C318E6493A00872705 /* ShareView.xib in Resources */,
-				6DDF536B19F04636002EB720 /* Rock_OpenHat.wav in Resources */,
 				588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */,
-				6DDF532619F04636002EB720 /* Ladder_D.wav in Resources */,
-				6DDF533519F04636002EB720 /* MiniBass_F.wav in Resources */,
-				6DDF537E19F04636002EB720 /* Dubstep_Shaker.wav in Resources */,
-				6DDF52E219F04636002EB720 /* Vibraphone_G#.wav in Resources */,
-				6DDF52DF19F04636002EB720 /* Vibraphone_E.wav in Resources */,
-				6DDF530D19F04636002EB720 /* Violin_D#.wav in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
 				6D1DDB4C1A04084B00A770E7 /* Icon_PLUCK.png in Resources */,
-				6DDF52F319F04636002EB720 /* DoubleBass_C#.wav in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
-				6DDF52E419F04636002EB720 /* Acoustic_A#.wav in Resources */,
-				6DDF533019F04636002EB720 /* MiniBass_C.wav in Resources */,
-				6DDF532B19F04636002EB720 /* Ladder_G.wav in Resources */,
 				6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */,
-				6DDF533119F04636002EB720 /* MiniBass_D#.wav in Resources */,
 				58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */,
-				6DDF530919F04636002EB720 /* Violin_A.wav in Resources */,
-				6DDF531A19F04636002EB720 /* Juno_D.wav in Resources */,
 				58868EDB187619ED00B469C2 /* BottomBar.xib in Resources */,
 				6DAA159118C12525003DAB30 /* Sequencer_Icon120px.png in Resources */,
-				6DDF536719F04636002EB720 /* HandDrum_Tom.wav in Resources */,
 				6DA724BF18E6479500872705 /* Social_Facebook_Icon.png in Resources */,
-				6DDF539019F04636002EB720 /* Sounds_I'mBacon.wav in Resources */,
 				58F5449018AB161E009E6E43 /* Set_Icon.png in Resources */,
-				6DDF52DA19F04636002EB720 /* Vibraphone_B.wav in Resources */,
-				6DDF537F19F04636002EB720 /* Dubstep_Snare.wav in Resources */,
-				6DDF531919F04636002EB720 /* Juno_D#.wav in Resources */,
-				6DDF530119F04636002EB720 /* Guitar_D#.wav in Resources */,
 				6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */,
 				6DAA159318C66363003DAB30 /* Save_Icon.png in Resources */,
-				6DDF535519F04636002EB720 /* Trombone_G.wav in Resources */,
-				6DDF534819F04636002EB720 /* Flute_C.wav in Resources */,
-				6DDF534019F04636002EB720 /* Pluck_F#.wav in Resources */,
-				6DDF537119F04636002EB720 /* 808_OpenHat.wav in Resources */,
-				6DDF532E19F04636002EB720 /* MiniBass_B.wav in Resources */,
 				580A52071864DFF50077240B /* Icon_PIANO.png in Resources */,
-				6DDF52D219F04636002EB720 /* Piano_D.wav in Resources */,
-				6DDF534519F04636002EB720 /* Flute_A.wav in Resources */,
-				6DDF52E719F04636002EB720 /* Acoustic_C#.wav in Resources */,
-				6DDF535219F04636002EB720 /* Trombone_C.wav in Resources */,
-				6DDF532419F04636002EB720 /* Ladder_C.wav in Resources */,
-				6DDF533619F04636002EB720 /* MiniBass_G#.wav in Resources */,
-				6DDF538319F04636002EB720 /* House_OpenHat.wav in Resources */,
-				6DDF52D619F04636002EB720 /* Piano_G#.wav in Resources */,
 				5805D04B188DB3E7000832A9 /* Icon_Custom.png in Resources */,
-				6DDF532D19F04636002EB720 /* MiniBass_A.wav in Resources */,
-				6DDF537D19F04636002EB720 /* Dubstep_OpenHat.wav in Resources */,
-				6DDF537819F04636002EB720 /* Chiptune_Snare.wav in Resources */,
-				6DDF536919F04636002EB720 /* Rock_Crash.wav in Resources */,
-				6DDF538F19F04636002EB720 /* Sounds_I'm.wav in Resources */,
 				58D617671863BF5E001EB327 /* Sequence2.png in Resources */,
-				6DDF52DE19F04636002EB720 /* Vibraphone_D.wav in Resources */,
 				6DFF6A0B19BA7505001A7E23 /* Bear_Brown.png in Resources */,
 				6DD142AC19DF5A7300E24384 /* Paste_Icon.png in Resources */,
 				58D6176A1863BF5E001EB327 /* Sequence5.png in Resources */,
 				581C31F2188F266D00D7AD79 /* CustomStringCell.xib in Resources */,
 				6DA724C118E6479500872705 /* Social_SoundCloud_Icon.png in Resources */,
-				6DDF52FA19F04636002EB720 /* DoubleBass_G#.wav in Resources */,
 				58D6176B1863BF5E001EB327 /* Sequence6.png in Resources */,
-				6DDF538119F04636002EB720 /* House_ClosedHat.wav in Resources */,
-				6DDF538519F04636002EB720 /* House_WoodBlock.wav in Resources */,
-				6DDF532C19F04636002EB720 /* MiniBass_A#.wav in Resources */,
 				6D5FD01F18D12B5C00ED96F6 /* Tutorial_Dock.png in Resources */,
-				6DDF531119F04636002EB720 /* Violin_F.wav in Resources */,
-				6DDF536119F04636002EB720 /* Trumpet_G.wav in Resources */,
-				6DDF531019F04636002EB720 /* Violin_F#.wav in Resources */,
-				6DDF534619F04636002EB720 /* Flute_B.wav in Resources */,
 				580A52021864DFF50077240B /* gTarNotConnectedLogo.png in Resources */,
-				6DDF533719F04636002EB720 /* MiniBass_G.wav in Resources */,
-				6DDF532819F04636002EB720 /* Ladder_F#.wav in Resources */,
-				6DDF52EE19F04636002EB720 /* Acoustic_G#.wav in Resources */,
-				6DDF539119F04636002EB720 /* Sounds_ReverseI'mBacon.wav in Resources */,
-				6DDF534919F04636002EB720 /* Flute_D#.wav in Resources */,
-				6DDF52EA19F04636002EB720 /* Acoustic_D.wav in Resources */,
-				6DDF533F19F04636002EB720 /* Pluck_E.wav in Resources */,
 				6D62EFAC19DC900F001B8E18 /* OptionsViewCell.xib in Resources */,
-				6DDF534E19F04636002EB720 /* Flute_G#.wav in Resources */,
-				6DDF530519F04636002EB720 /* Guitar_F.wav in Resources */,
-				6DDF534219F04636002EB720 /* Pluck_G#.wav in Resources */,
-				6DDF535619F04636002EB720 /* Trumpet_A#.wav in Resources */,
-				6DDF532319F04636002EB720 /* Ladder_C#.wav in Resources */,
 				6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
 				6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */,
-				6DDF535719F04636002EB720 /* Trumpet_A.wav in Resources */,
-				6DDF536519F04636002EB720 /* HandDrum_Knock.wav in Resources */,
-				6DDF533219F04636002EB720 /* MiniBass_D.wav in Resources */,
 				5805D049188DAF4C000832A9 /* CustomInstrumentSelector.xib in Resources */,
 				6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */,
-				6DDF530A19F04636002EB720 /* Violin_B.wav in Resources */,
 				6DA724BE18E6479500872705 /* Social_Email_Icon.png in Resources */,
-				6DDF52FC19F04636002EB720 /* Guitar_A#.wav in Resources */,
-				6DDF52D119F04636002EB720 /* Piano_D#.wav in Resources */,
-				6DDF52F719F04636002EB720 /* DoubleBass_E.wav in Resources */,
-				6DDF532019F04636002EB720 /* Ladder_A#.wav in Resources */,
 				583917951877995D006E3DC3 /* ScrollingSelector.xib in Resources */,
 				58429A1818A1BD6A00BDD09B /* InstrumentViewController.xib in Resources */,
-				6DDF533319F04636002EB720 /* MiniBass_E.wav in Resources */,
-				6DDF537319F04636002EB720 /* 808_Tom.wav in Resources */,
-				6DDF531B19F04636002EB720 /* Juno_E.wav in Resources */,
 				5811AB46187B88C800FC0BD2 /* Sample Pack INFO in Resources */,
 				6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */,
-				6DDF530819F04636002EB720 /* Violin_A#.wav in Resources */,
 				6DAA158B18C12472003DAB30 /* Sequencer_AppIcon-114x114sq.png in Resources */,
-				6DDF531D19F04636002EB720 /* Juno_F.wav in Resources */,
 				58B7FDC6188A15A800A2C1B1 /* Icon_Bacon.png in Resources */,
 				58D6176C1863BF5E001EB327 /* Sequence7.png in Resources */,
 				6DAA158A18C12472003DAB30 /* Sequencer_AppIcon-114x114rd.png in Resources */,
-				6DDF532F19F04636002EB720 /* MiniBass_C#.wav in Resources */,
-				6DDF52EC19F04636002EB720 /* Acoustic_F#.wav in Resources */,
-				6DDF530419F04636002EB720 /* Guitar_F#.wav in Resources */,
 				58D617651863BF5E001EB327 /* Sequence10.png in Resources */,
-				6DDF535F19F04636002EB720 /* Trumpet_F.wav in Resources */,
-				6DDF531419F04636002EB720 /* Juno_A#.wav in Resources */,
 				6D44A45D18B686C400992D3D /* G_Icon.png in Resources */,
-				6DDF531719F04636002EB720 /* Juno_C#.wav in Resources */,
-				6DDF533C19F04636002EB720 /* Pluck_C.wav in Resources */,
 				6DF6BC7518CE5E1800D20EC7 /* tutorialSet.xml in Resources */,
-				6DDF531619F04636002EB720 /* Juno_B.wav in Resources */,
 				6DAA159018C12525003DAB30 /* Sequencer_Icon80px.png in Resources */,
-				6DDF535319F04636002EB720 /* Trombone_D.wav in Resources */,
-				6DDF535E19F04636002EB720 /* Trumpet_F#.wav in Resources */,
 				58D617181863B8D7001EB327 /* InfoPlist.strings in Resources */,
 				58F6167F188F5E2700020A74 /* Icon_VIOLIN.png in Resources */,
-				6DDF52F119F04636002EB720 /* DoubleBass_A.wav in Resources */,
-				6DDF52CD19F04636002EB720 /* Piano_A.wav in Resources */,
-				6DDF531F19F04636002EB720 /* Juno_G.wav in Resources */,
-				6DDF530B19F04636002EB720 /* Violin_C#.wav in Resources */,
 				58B006DF1864CC0F00C2D08F /* gTarbyIncidentLoadingWide.png in Resources */,
-				6DDF538419F04636002EB720 /* House_Snare.wav in Resources */,
-				6DDF536D19F04636002EB720 /* Rock_Tom.wav in Resources */,
-				6DDF537019F04636002EB720 /* 808_Kick.wav in Resources */,
 				6DD142A719DF562B00E24384 /* Copy_Icon.png in Resources */,
-				6DDF537919F04636002EB720 /* Chiptune_Triangle.wav in Resources */,
-				6DDF531C19F04636002EB720 /* Juno_F#.wav in Resources */,
-				6DDF52CC19F04636002EB720 /* Piano_A#.wav in Resources */,
 				6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */,
-				6DDF534119F04636002EB720 /* Pluck_F.wav in Resources */,
 				58241D7D188DE31000498DB5 /* sampleList.plist in Resources */,
 				6DA8572118EF44E300CCA191 /* SoundCloud.bundle in Resources */,
 				6DA724C018E6479500872705 /* Social_SMS_Icon.png in Resources */,
 				58F5448E18AB161E009E6E43 /* Options_Icon.png in Resources */,
 				58F5448F18AB161E009E6E43 /* Power_Icon.png in Resources */,
-				6DDF535919F04636002EB720 /* Trumpet_C#.wav in Resources */,
-				6DDF533D19F04636002EB720 /* Pluck_D#.wav in Resources */,
 				58F6167D188F5E2700020A74 /* Icon_Trombone.png in Resources */,
-				6DDF536219F04636002EB720 /* HandDrum_Clink.wav in Resources */,
 				580A52061864DFF50077240B /* Icon_HOUSE.png in Resources */,
 				6D1DDB4B1A04084B00A770E7 /* Icon_JUNO.png in Resources */,
-				6DDF533419F04636002EB720 /* MiniBass_F#.wav in Resources */,
-				6DDF531219F04636002EB720 /* Violin_G#.wav in Resources */,
-				6DDF532119F04636002EB720 /* Ladder_A.wav in Resources */,
+				6DE96B071A0AC68A004F70BC /* dev_tutorialSet.xml in Resources */,
 				6D1DDB4A1A04084B00A770E7 /* Icon_DOUBLE BASS.png in Resources */,
-				6DDF52D919F04636002EB720 /* Vibraphone_A.wav in Resources */,
-				6DDF535A19F04636002EB720 /* Trumpet_C.wav in Resources */,
-				6DDF533A19F04636002EB720 /* Pluck_B.wav in Resources */,
-				6DDF537419F04636002EB720 /* Chiptune_Beep.wav in Resources */,
-				6DDF52F519F04636002EB720 /* DoubleBass_D#.wav in Resources */,
-				6DDF52EB19F04636002EB720 /* Acoustic_E.wav in Resources */,
-				6DDF530E19F04636002EB720 /* Violin_D.wav in Resources */,
-				6DDF531819F04636002EB720 /* Juno_C.wav in Resources */,
-				6DDF530619F04636002EB720 /* Guitar_G#.wav in Resources */,
-				6DDF52D419F04636002EB720 /* Piano_F#.wav in Resources */,
 				58CA4E7E18A19C8A0026D83C /* LeftNavigatorViewController.xib in Resources */,
 				6DFDB02418C0346B004D573B /* InstrumentViewController_4.xib in Resources */,
-				6DDF52F619F04636002EB720 /* DoubleBass_D.wav in Resources */,
-				6DDF52F019F04636002EB720 /* DoubleBass_A#.wav in Resources */,
 				6DC9A2BB19B8F4E80099372E /* GatekeeperViewController.xib in Resources */,
-				6DDF52E919F04636002EB720 /* Acoustic_D#.wav in Resources */,
-				6DDF52FF19F04636002EB720 /* Guitar_C#.wav in Resources */,
-				6DDF535B19F04636002EB720 /* Trumpet_D#.wav in Resources */,
-				6DDF532919F04636002EB720 /* Ladder_F.wav in Resources */,
 				58D617691863BF5E001EB327 /* Sequence4.png in Resources */,
-				6DDF532219F04636002EB720 /* Ladder_B.wav in Resources */,
-				6DDF531E19F04636002EB720 /* Juno_G#.wav in Resources */,
-				6DDF531319F04636002EB720 /* Violin_G.wav in Resources */,
-				6DDF532A19F04636002EB720 /* Ladder_G#.wav in Resources */,
-				6DDF538619F04636002EB720 /* WubWub_Airhorn.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
