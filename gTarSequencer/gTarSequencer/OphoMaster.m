@@ -302,7 +302,7 @@ extern NSUser * g_loggedInUser;
     [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_A" custom:NO value:@"4" xmpFileId:34]];
     [juno.m_sampler addSample:[[NSSample alloc] initWithName:@"Juno_B" custom:NO value:@"5" xmpFileId:32]];
     
-    //[self saveInstrument:juno];
+    [self saveInstrument:juno];
     
     NSInstrument * guitar = [[NSInstrument alloc] initWithName:@"GUITAR" id:6 iconName:nil isCustom:NO];
     [guitar.m_sampler addSample:[[NSSample alloc] initWithName:@"Guitar_C" custom:NO value:@"0" xmpFileId:91]];
@@ -1121,7 +1121,7 @@ extern NSUser * g_loggedInUser;
         NSInteger version = [[xmp getTextFromChildWithName:@"xmp_current_version_number"] intValue];
         NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
-        NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId)];
+        NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId && [[xmp getTextFromChildWithName:@"xmp_access_level"] intValue] == 2)];
         
         DLog(@"Date is %@",date);
         

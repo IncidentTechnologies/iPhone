@@ -2243,7 +2243,7 @@
 
 - (void)retrieveSampleList
 {
-    NSDictionary * standardSampleOphoDictionary = [g_ophoMaster getSampleList];
+    NSDictionary * standardSampleOphoDictionary = [g_ophoMaster getStandardSampleList];
     NSMutableArray * standardSampleNames = [[NSMutableArray alloc] initWithArray:[standardSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] copyItems:YES];
     NSMutableArray * standardSampleIds = [[NSMutableArray alloc] initWithArray:[standardSampleOphoDictionary objectForKey:OPHO_LIST_IDS] copyItems:YES];
     

@@ -33,6 +33,7 @@
     
     UIView * tutorialScreen;
     UIView * tutorialBottomBar;
+    UIView * tutorialTopBar;
     UIButton * tutorialNext;
     
     UISwipeGestureRecognizer * swipeLeft;

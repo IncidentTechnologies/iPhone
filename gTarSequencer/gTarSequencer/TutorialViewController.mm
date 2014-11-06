@@ -135,6 +135,7 @@
     float screenWidth = tutorialScreen.frame.size.width;
     
     [tutorialBottomBar setAlpha:0.0];
+    [tutorialTopBar setAlpha:0.0];
     
     [UIView animateWithDuration:0.5 animations:^(void){
         for (UIView * v in views) {
@@ -149,6 +150,7 @@
         if(removeAll){
             [tutorialScreen removeFromSuperview];
             [tutorialBottomBar removeFromSuperview];
+            [tutorialTopBar removeFromSuperview];
         }else{
             for (UIView * v in views) {
                 [v removeFromSuperview];
@@ -379,14 +381,26 @@
         //
         // PLAY TO START
         //
+        FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
+        float screenHeight = [frameGenerator getFullscreenHeight];
+        float screenWidth = [frameGenerator getFullscreenWidth];
         
         // pointer to play
-        CGRect newTutorialFrame = CGRectMake(0, 0, tutorialScreen.frame.size.width, tutorialScreen.frame.size.height - BOTTOMBAR_HEIGHT);
+        CGRect newTutorialFrame = CGRectMake(0, 0, screenWidth, screenHeight);
         [tutorialScreen setFrame:newTutorialFrame];
-        [tutorialScreen setBackgroundColor:fadedGray];
+        [tutorialScreen setBackgroundColor:[UIColor clearColor]];
+        
+        DLog(@"tutorial screen bounds %f %f %f %f",tutorialScreen.bounds.origin.x,tutorialScreen.bounds.origin.y,tutorialScreen.bounds.size.width,tutorialScreen.bounds.size.height);
         
         float playButtonWidth = 65;
-        CGRect bottomBarFrame = CGRectMake(playButtonWidth, newTutorialFrame.size.height, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
+        
+        CGRect topBarFrame = CGRectMake(0, 0, screenWidth, screenHeight-BOTTOMBAR_HEIGHT);
+        tutorialTopBar = [[UIView alloc] initWithFrame:topBarFrame];
+        [tutorialTopBar setBackgroundColor:fadedGray];
+        
+        [self fadeInTutorialSubview:tutorialTopBar isReverseDirection:reverse];
+        
+        CGRect bottomBarFrame = CGRectMake(playButtonWidth, screenHeight-BOTTOMBAR_HEIGHT, tutorialScreen.frame.size.width - playButtonWidth, BOTTOMBAR_HEIGHT);
         tutorialBottomBar = [[UIView alloc] initWithFrame:bottomBarFrame];
         [tutorialBottomBar setBackgroundColor:fadedGray];
         
@@ -395,7 +409,7 @@
         // Start playing
         float playLabelWidth = 195;
         
-        CGRect playLabelFrame = CGRectMake(23, tutorialScreen.frame.size.height-85, playLabelWidth, defaultLabelHeight+15);
+        CGRect playLabelFrame = CGRectMake(23, screenHeight-BOTTOMBAR_HEIGHT-85, playLabelWidth, defaultLabelHeight+15);
         [self drawTutorialLabel:playLabelFrame withTitle:@"Tap to PLAY" withColor:blueColor isHeader:YES isReverseDirection:reverse];
         
         // Play stripe

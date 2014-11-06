@@ -135,7 +135,44 @@
     
     node->AddAttribute(new XMPAttribute((char *)"custom", m_custom));
     
+    XMPNode * header = NULL;
+    header = new XMPNode((char *)[@"header" UTF8String],NULL);
+    node->AddChild(header);
+    
     if(m_sampler != nil){
+        
+        // Add display XMP for Gears
+        XMPNode * display = NULL;
+        display = new XMPNode((char *)[@"display" UTF8String],NULL);
+        header->AddChild(display);
+        
+        XMPNode * view = NULL;
+        view = new XMPNode((char *)[@"view" UTF8String],NULL);
+        view->AddAttribute(new XMPAttribute((char *)"width",(char *)"200px"));
+        display->AddChild(view);
+        
+        XMPNode * label = NULL;
+        label = new XMPNode((char *)[@"label" UTF8String],NULL);
+        label->AddAttribute(new XMPAttribute((char *)"top",(char *)"10px"));
+        label->AddAttribute(new XMPAttribute((char *)"left",(char *)"15px"));
+        label->AppendContentNode((char*)[m_name UTF8String]);
+        view->AddChild(label);
+        
+        for(NSSample * sample in m_sampler.m_samples){
+            
+            XMPNode * button = NULL;
+            button = new XMPNode((char *)[@"button" UTF8String],NULL);
+            button->AddAttribute(new XMPAttribute((char *)"top",(char *)"35px"));
+            button->AddAttribute(new XMPAttribute((char *)"left",(char *)"15px"));
+            button->AddAttribute(new XMPAttribute((char *)"target",(char *)"samplename"));
+            button->AddAttribute(new XMPAttribute((char *)"param",(char *)"trigger"));
+            button->AddAttribute(new XMPAttribute((char *)"type",(char *)"momentary"));
+            button->AddAttribute(new XMPAttribute((char *)"value",(char *)"0"));
+            button->AppendContentNode((char*)[sample.m_name UTF8String]);
+            view->AddChild(button);
+            
+        }
+        
         node->AddChild([m_sampler convertToXmp]);
     }
     
