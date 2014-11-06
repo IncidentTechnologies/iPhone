@@ -15,6 +15,7 @@
 
 - (void) notifyTutorialEnded;
 @optional
+- (void) notifyTutorialTapToPlayScreen;
 - (void) forceToPlay;
 - (void) closeLeftNavigator;
 - (void) presentGatekeeper:(BOOL)animate;
@@ -32,8 +33,7 @@
     NSString * tutorialName;
     
     UIView * tutorialScreen;
-    UIView * tutorialBottomBar;
-    UIView * tutorialTopBar;
+    UIButton * tutorialBottomBar;
     UIButton * tutorialNext;
     
     UISwipeGestureRecognizer * swipeLeft;

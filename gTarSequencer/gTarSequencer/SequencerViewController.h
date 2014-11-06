@@ -32,8 +32,10 @@ extern NSUser * g_loggedInUser;
 
 @interface SequencerViewController : UIViewController <GuitarViewDelegate,PlayControlDelegate,SeqSetDelegate,LeftNavigatorDelegate,OptionsDelegate,InstrumentDelegate,InfoDelegate,TutorialDelegate,RecordShareDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,GatekeeperDelegate,OphoTutorialDelegate,OphoLoadingDelegate> {
     
-    // tutorial
+    // tutorial and loading
     BOOL isTutorialOpen;
+    BOOL isTapToPlayScreen;
+    BOOL isLoading;
     
     // gTar connection
     BOOL isConnected;

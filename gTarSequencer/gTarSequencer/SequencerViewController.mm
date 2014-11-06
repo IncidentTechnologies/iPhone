@@ -240,19 +240,36 @@
 
 #pragma mark - Opho Loading
 
-- (void)loadingBegan
+- (void)forceLoadingBegan
 {
-    DLog(@"Loading began");
+    DLog(@"Force loading began");
+    
+    isLoading = true;
     
     [loadingOverlay setHidden:NO];
     
     [self.view bringSubviewToFront:loadingOverlay];
+}
+
+- (void)loadingBegan
+{
+    DLog(@"Loading began");
+    
+    isLoading = true;
+    
+    if(!isTutorialOpen){
+        [loadingOverlay setHidden:NO];
+        
+        [self.view bringSubviewToFront:loadingOverlay];
+    }
 
 }
 
 - (void)loadingEnded
 {
     DLog(@"Loading ended");
+    
+    isLoading = false;
     
     [loadingOverlay setHidden:YES];
     
@@ -1574,6 +1591,11 @@
         [gatekeeperViewController.view removeFromSuperview];
         [playControlViewController.view setUserInteractionEnabled:YES];
     }];
+    
+    if(isLoading && isTapToPlayScreen){
+        [self forceLoadingBegan];
+    }
+    
 }
 
 - (void)instrumentListLoaded
@@ -1631,6 +1653,7 @@
     [tutorialViewController launch];
     
     isTutorialOpen = YES;
+    isLoading = YES;
     
     [self stopGestures];
     
@@ -1643,9 +1666,24 @@
     [tutorialViewController end];
 }
 
+- (void)notifyTutorialTapToPlayScreen
+{
+    DLog(@"Notify tutorial tap to play screen");
+    
+    isTapToPlayScreen = YES;
+    
+    // Ensure that something needs to load
+    if(isLoading && [g_ophoMaster loggedIn]){
+        DLog(@"Logged in is %i",[g_ophoMaster loggedIn]);
+        [self forceLoadingBegan];
+    }
+}
+
 - (void)notifyTutorialEnded
 {
     isTutorialOpen = NO;
+    isTapToPlayScreen = NO;
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self startGestures];
@@ -1669,6 +1707,7 @@
     [UIView animateWithDuration:duration animations:^(void){
         [gatekeeperViewController.view setAlpha:1.0];
     }];
+    
 }
 
 @end
