@@ -623,15 +623,18 @@ extern NSUser * g_loggedInUser;
         
         NSString * cachedSample = [self getSampleFromCache:sample.m_xmpFileId];
         
-        if(sample.m_sampleData != nil && [sample.m_sampleData length] > 0){
-            DLog(@"Loading sample from sampleData for ID %li",sample.m_xmpFileId);
-            [self addData:sample.m_sampleData forLoadingInstrumentSample:sample.m_xmpFileId];
-        }else if(cachedSample == nil){
-            DLog(@"Loading sample from ID %li",sample.m_xmpFileId);
-            [self loadFromId:sample.m_xmpFileId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
-        }else{
+        if(cachedSample != nil){
             DLog(@"Loading sample from cache %li",sample.m_xmpFileId);
             [self addData:cachedSample forLoadingInstrumentSample:sample.m_xmpFileId];
+        }else if(sample.m_sampleData != nil && [sample.m_sampleData length] > 0){
+            DLog(@"Loading sample from sampleData for ID %li",sample.m_xmpFileId);
+            [self addData:sample.m_sampleData forLoadingInstrumentSample:sample.m_xmpFileId];
+            
+            // Also cache it
+            [self cacheSample:sample.m_sampleData forSampleId:sample.m_xmpFileId withVersion:1];
+        }else{
+            DLog(@"Loading sample from ID %li",sample.m_xmpFileId);
+            [self loadFromId:sample.m_xmpFileId callbackObj:self selector:@selector(addSampleXmpToOphoInstrument:)];
         }
     }
 }
@@ -929,26 +932,29 @@ extern NSUser * g_loggedInUser;
     // Remove any IDs in cache not in sampleIdSet
     DLog(@"Refresh cache from sample list");
     
-    NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
+    @synchronized(ophoSampleCache){
+        NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
     
-    for(id key in ophoSampleCache){
-        if(![sampleIdSet containsObject:key]){
-            // Remove if absent
-            [keysToRemove addObject:key];
-        }else{
-            // Check versions match
-            long index = [sampleIdSet indexOfObject:key];
-            long newVersion = [[sampleVersionSet objectAtIndex:index] longValue];
-            long oldVersion = [[[ophoSampleCache objectForKey:key] objectForKey:@"Version"] longValue];
-            
-            if(newVersion != oldVersion){
-                [self removeSampleFromCache:[key longValue]];
+        for(id key in ophoSampleCache){
+            if(![sampleIdSet containsObject:key]){
+                // Remove if absent
+                [keysToRemove addObject:key];
+            }else{
+                // Check versions match
+                long index = [sampleIdSet indexOfObject:key];
+                long newVersion = [[sampleVersionSet objectAtIndex:index] longValue];
+                long oldVersion = [[[ophoSampleCache objectForKey:key] objectForKey:@"Version"] longValue];
+                
+                if(newVersion != oldVersion){
+                    [keysToRemove addObject:key];
+                }
             }
         }
-    }
+   
     
-    for(id key in keysToRemove){
-        [self removeSampleFromCache:[key longValue]];
+        for(id key in keysToRemove){
+            [self removeSampleFromCache:[key longValue]];
+        }
     }
     
 }

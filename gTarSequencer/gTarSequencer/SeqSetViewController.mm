@@ -508,7 +508,9 @@
     
     NSMutableArray * dictionariesToRemove = [[NSMutableArray alloc] init];
     
-    for(NSDictionary * dict in remainingInstrumentOptions){
+    // remainingInstrumentOptions may have already been set, so pull
+    // instruments from master and remove if necessary
+    for(NSDictionary * dict in masterInstrumentOptions){
         if([[dict objectForKey:@"Name"] isEqualToString:instrument.m_name]){
             
             NSMutableArray * stringPaths = [[NSMutableArray alloc] init];
