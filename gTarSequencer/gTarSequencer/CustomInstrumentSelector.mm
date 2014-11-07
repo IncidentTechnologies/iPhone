@@ -2103,23 +2103,6 @@
     [cell stopLoading];
 }
 
-- (void)drawLoadingIndicatorForCell:(CustomSampleCell *)cell
-{
-    CGSize size = CGSizeMake(cell.sampleArrow.frame.size.width, cell.sampleArrow.frame.size.width);
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    
-    CGContextFillEllipseInRect(context, CGRectMake(0,7.0,14.0,9.0));
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    [cell.sampleArrow setImage:newImage];
-    
-    UIGraphicsEndImageContext();
-}
-
 - (void)drawNextButtonArrowForCell:(CustomSampleCell *)cell
 {
     CGSize size = CGSizeMake(cell.sampleArrow.frame.size.width, cell.sampleArrow.frame.size.height);

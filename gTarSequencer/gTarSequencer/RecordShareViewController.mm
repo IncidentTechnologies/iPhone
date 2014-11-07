@@ -14,6 +14,8 @@
 
 #define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.wav"
 
+#define RENDER_UPPER_LIMIT 2638832
+
 #define TICK_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
 
 @interface RecordShareViewController ()
@@ -93,6 +95,9 @@
     [self initShareScreen];
     
     [self initEditScreen];
+    
+    // Ensure all data is cleared out
+    [self clearRecordedSongDirectory:YES];
     
 }
 
@@ -1117,7 +1122,6 @@
 
 -(void)beginRecordSession
 {
-    
     DLog(@"Recording song is %@",recordingSong);
     
     fileNode = [loadedSoundMaster generateFileoutNode:DEFAULT_SONG_NAME];
@@ -1126,16 +1130,9 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
     
-    // First clear the directory
-    NSFileManager * fm = [[NSFileManager alloc] init];
-    NSError * error = nil;
-    for(NSString * file in [fm contentsOfDirectoryAtPath:documentsDirectory error:&error]){
-        DLog(@"Remove item at path %@",[NSString stringWithFormat:@"%@/%@",documentsDirectory,file]);
-        if(![file isEqualToString:DEFAULT_SONG_NAME]){
-            [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documentsDirectory,file] error:&error];
-        }
-    }
-    
+    // Clear recorded song directory without removing the new recording
+    [self clearRecordedSongDirectory:NO];
+
     sessionFilepath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
     
     double recordinterval = 1/44100;
@@ -1148,6 +1145,24 @@
         // TODO: thread? runloop?
         recordTimer = [NSTimer scheduledTimerWithTimeInterval:recordinterval target:self selector:@selector(recordToFile) userInfo:nil repeats:YES];
     }
+}
+
+-(void)clearRecordedSongDirectory:(BOOL)removeDefaultRecording
+{
+    // Remove everything in the recorded song directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    
+    // First clear the directory
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    NSError * error = nil;
+    for(NSString * file in [fm contentsOfDirectoryAtPath:documentsDirectory error:&error]){
+        DLog(@"Remove item at path %@",[NSString stringWithFormat:@"%@/%@",documentsDirectory,file]);
+        if(![file isEqualToString:DEFAULT_SONG_NAME] || removeDefaultRecording){
+            [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@",documentsDirectory,file] error:&error];
+        }
+    }
+    
 }
 
 -(void)resetAudio
@@ -1214,17 +1229,6 @@
     [delegate stopSoundMaster];
     
 }
-
-/*
--(void)interruptRecording
-{
-    if(isWritingFile){
-        DLog(@"Interrupt recording");
-        [self stopRecording];
-    }else{
-        DLog(@"Ignore interrupt recording");
-    }
-}*/
 
 -(void)releaseFileoutNode
 {
@@ -1340,7 +1344,7 @@
     if(songModel == nil){
         songModel = [[NSSongModel alloc] initWithSong:recordingSong andInstruments:instruments];
         
-        [self saveRecordingSongToXmp];
+        [self saveRecordingSongToXmp:NO];
     }
         
     [songModel startWithDelegate:self];
@@ -1352,28 +1356,48 @@
     [songModel incrementTimeSerialAccess:0.25]; // quarter beat
 }
 
-- (void)saveRecordingSongToXmp
+- (void)saveRecordingSongToXmp:(BOOL)force
 {
-    // Append the song data if it has rendered
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * path = [paths objectAtIndex:0];
-    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
-    NSString * songPath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
-    
-    if([[NSFileManager defaultManager] fileExistsAtPath:songPath]){
+    if(!isSaving || force){
         
-        // Then get data and upload
-        NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
+        isSaving = YES;
         
-        [g_ophoMaster saveSong:recordingSong withFile:data];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(resetRecordSave) userInfo:nil repeats:NO];
         
-    }else{
+        // Save the song if it gets played
+        // Save the song with a render if it gets shared
         
-        [g_ophoMaster saveSong:recordingSong withFile:nil];
+        // Append the song data if it has rendered
         
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * path = [paths objectAtIndex:0];
+        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+        NSString * songPath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
+        
+        if([[NSFileManager defaultManager] fileExistsAtPath:songPath]){
+            
+            // Then get data and upload
+            NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
+            
+            if([data length] < RENDER_UPPER_LIMIT){
+                [g_ophoMaster saveSong:recordingSong withFile:data];
+            }else{
+                DLog(@"Render length exceeds upper limit, do not upload");
+                [g_ophoMaster saveSong:recordingSong withFile:nil];
+            }
+            
+        }else{
+            
+            [g_ophoMaster saveSong:recordingSong withFile:nil];
+            
+        }
     }
 
+}
+
+- (void)resetRecordSave
+{
+    isSaving = NO;
 }
 
 #pragma mark - Song Description Field
@@ -1383,7 +1407,7 @@
     [songDescriptionField resignFirstResponder];
     
     [recordingSong renameToName:recordingSong.m_xmpName andDescription:songDescriptionField.text];
-    [self saveRecordingSongToXmp];
+    [self saveRecordingSongToXmp:NO];
     
 }
 - (void)textViewDidChange:(UITextView *)textView
@@ -1500,7 +1524,7 @@
     
     [recordingSong renameToName:songNameField.text andDescription:songDescriptionField.text];
     
-    [self saveRecordingSongToXmp];
+    [self saveRecordingSongToXmp:NO];
     
 }
 
@@ -1769,7 +1793,7 @@
     [recordEditor deactivateEditingClip];
     [self enableEdit];
     
-    [self saveRecordingSongToXmp];
+    [self saveRecordingSongToXmp:NO];
 }
 
 - (void)disablePaste
