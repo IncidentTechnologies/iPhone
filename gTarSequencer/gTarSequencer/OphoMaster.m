@@ -474,7 +474,7 @@ extern NSUser * g_loggedInUser;
     
     DLog(@"Instrument ID is now %li",savingInstrument.m_id);
     
-    NSString * instrumentData = [savingInstrument saveToFile:savingInstrument.m_name];
+    NSString * instrumentData = [savingInstrument saveToFile:savingInstrument.m_name saveWithSamples:YES];
     
     [self saveToId:savingInstrument.m_id withFile:nil withData:instrumentData withName:savingInstrument.m_name];
 }

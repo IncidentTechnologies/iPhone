@@ -145,7 +145,7 @@
     if(m_sampler != nil){
         
         // Add display XMP for Gears
-        /*XMPNode * display = NULL;
+        XMPNode * display = NULL;
         display = new XMPNode((char *)[@"display" UTF8String],NULL);
         header->AddChild(display);
         
@@ -180,7 +180,7 @@
             
             sampleIndex++;
         }
-         */
+        
         
         XMPNode * gain = NULL;
         gain = new XMPNode((char *)[@"gain" UTF8String],NULL);
@@ -209,7 +209,7 @@
 }
 
 
--(NSString *)saveToFile:(NSString *)filename
+-(NSString *)saveToFile:(NSString *)filename saveWithSamples:(BOOL)saveWithSamples
 {
     m_name = filename;
     
@@ -229,7 +229,12 @@
     node = new XMPNode((char *)[@"xmp" UTF8String],NULL);
     //custom = new XMPNode((char *)[@"custom" UTF8String],NULL);
     //node->AddChild(custom);
-    node->AddChild([self convertToSongXmp]);
+    
+    if(saveWithSamples){
+        node->AddChild([self convertToSequenceXmp]);
+    }else{
+        node->AddChild([self convertToSongXmp]);
+    }
     
     XMPTree tree = NULL;
     

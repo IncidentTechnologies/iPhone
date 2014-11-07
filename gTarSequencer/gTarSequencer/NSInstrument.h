@@ -42,7 +42,7 @@
 -(XMPNode *)convertToSequenceXmp;
 -(XMPNode *)convertToSongXmp;
 
-- (NSString *)saveToFile:(NSString *)filename;
+-(NSString *)saveToFile:(NSString *)filename saveWithSamples:(BOOL)saveWithSamples;
 - (void)deleteFile;
 
 - (void)releaseSounds;
