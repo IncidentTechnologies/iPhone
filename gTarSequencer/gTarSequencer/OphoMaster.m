@@ -23,6 +23,7 @@ extern NSUser * g_loggedInUser;
 @synthesize sampleDelegate;
 @synthesize loadingDelegate;
 @synthesize savingSong;
+@synthesize savingSongData;
 @synthesize savingSequence;
 @synthesize savingSample;
 @synthesize savingSampleData;
@@ -173,22 +174,23 @@ extern NSUser * g_loggedInUser;
     
     NSString * sequenceData = [savingSequence saveToFile:savingSequence.m_name saveWithSamples:saveWithSamples];
     
-    [self saveToId:savingSequence.m_id withData:sequenceData withName:savingSequence.m_name];
+    [self saveToId:savingSequence.m_id withFile:nil withData:sequenceData withName:savingSequence.m_name];
 }
 
 // Songs
-- (void)saveSong:(NSSong *)song
+- (void)saveSong:(NSSong *)song withFile:(NSData *)filedata
 {
     DLog(@"Song is %@",song);
     
     if(savingSong == nil && song != nil){
         
         savingSong = song;
+        savingSongData = filedata;
         
         if(savingSong.m_id <= 0){
             [self saveToNewWithName:song.m_xmpName callbackObj:self selector:@selector(saveNewSongCallback:)];
         }else{
-            [self saveSongToId:song.m_id withName:song.m_xmpName];
+            [self saveSongToId:song.m_id withFile:filedata withName:song.m_xmpName];
         }
     }
 }
@@ -197,25 +199,37 @@ extern NSUser * g_loggedInUser;
 {
     DLog(@"Cloud response id is %i",cloudResponse.m_id);
     
-    [self saveSongToId:(long)cloudResponse.m_id withName:cloudResponse.m_xmpName];
+    [self saveSongToId:(long)cloudResponse.m_id withFile:savingSongData withName:cloudResponse.m_xmpName];
 }
 
-- (void)saveSongToId:(long)newId withName:(NSString *)name
+- (void)saveSongToId:(long)newId withFile:(NSData *)filedata withName:(NSString *)name
 {
     savingSong.m_id = newId;
     [savingSong renameToName:name andDescription:savingSong.m_description];
     
     DLog(@"Song ID is now %li %@",savingSong.m_id,savingSong);
     
-    NSString * songData = [savingSong saveToFile:savingSong.m_xmpName];
+    NSString * songdatastring = [savingSong saveToFile:savingSong.m_xmpName];
     
-    [self saveToId:savingSong.m_id withData:songData withName:savingSong.m_xmpName];
+    [self saveToId:savingSong.m_id withFile:nil withData:songdatastring withName:savingSong.m_xmpName];
     
+    [self saveSongRender:savingSong.m_id withFile:savingSongData];
+    
+}
+
+- (void)saveSongRender:(long)xmpId withFile:(NSData *)filedata
+{
+    [ophoCloudController requestSetXmpRenderWithId:xmpId andName:[savingSong.m_xmpName stringByAppendingString:@".wav"] andRenderBlob:filedata andCallbackObj:self andCallbackSel:@selector(saveSongRenderCallback:)];
+}
+
+- (void)saveSongRenderCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"Save Song Render Callback");
 }
 
 // Samples
 
-- (void)saveSample:(NSSample *)sample withFile:(NSData *)data
+- (void)saveSample:(NSSample *)sample withFile:(NSData *)filedata
 {
     // Samples can't currently be renamed, so it's OK to track m_name instead of m_xmpName
     
@@ -224,7 +238,7 @@ extern NSUser * g_loggedInUser;
     if(savingSample == nil && sample != nil){
         
         savingSample = sample;
-        savingSampleData = data;
+        savingSampleData = filedata;
         
         if(savingSample.m_xmpFileId <= 0){
             [self saveToNewWithName:sample.m_name callbackObj:self selector:@selector(saveNewSampleCallback:)];
@@ -250,7 +264,8 @@ extern NSUser * g_loggedInUser;
     
     DLog(@"Sample ID is now %li %@",savingSample.m_xmpFileId,savingSample);
     
-    [self saveToId:savingSample.m_xmpFileId withFile:savingSampleData withName:savingSample.m_name];
+    [self saveToId:savingSample.m_xmpFileId withFile:savingSampleData withData:nil withName:savingSample.m_name];
+    
 }
 
 - (void)saveOphoSample:(NSTimer *)timer
@@ -265,7 +280,6 @@ extern NSUser * g_loggedInUser;
     [g_ophoMaster saveSample:xmpSample withFile:data];
     
 }
-
 // Instruments
 
 - (void)buildDefaultInstrumentsToSaveToOpho
@@ -462,7 +476,7 @@ extern NSUser * g_loggedInUser;
     
     NSString * instrumentData = [savingInstrument saveToFile:savingInstrument.m_name];
     
-    [self saveToId:savingInstrument.m_id withData:instrumentData withName:savingInstrument.m_name];
+    [self saveToId:savingInstrument.m_id withFile:nil withData:instrumentData withName:savingInstrument.m_name];
 }
 
 
@@ -472,14 +486,9 @@ extern NSUser * g_loggedInUser;
     [ophoCloudController requestNewXmpWithFolderId:0 andName:name andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
-- (void)saveToId:(NSInteger)xmpId withFile:(NSData *)data withName:(NSString *)name
+- (void)saveToId:(NSInteger)xmpId withFile:(NSData *)filedata withData:(NSString *)datastring withName:(NSString *)name
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:data andXmpDataString:nil andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
-}
-
-- (void)saveToId:(NSInteger)xmpId withData:(NSString *)data withName:(NSString *)name
-{
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:nil andXmpDataString:data andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:filedata andXmpDataString:datastring andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
 }
 
 - (void)saveCallback:(CloudResponse *)cloudResponse
@@ -491,6 +500,7 @@ extern NSUser * g_loggedInUser;
     if(savingSong != nil){
         [savingSong deleteFile];
         savingSong = nil;
+        savingSongData = nil;
         [self loadSongList];
     }
     

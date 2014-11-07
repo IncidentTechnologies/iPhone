@@ -90,6 +90,7 @@
 @property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
 @property (weak, nonatomic) id <OphoLoadingDelegate> loadingDelegate;
 @property (strong, nonatomic) NSSong * savingSong;
+@property (strong, nonatomic) NSData * savingSongData;
 @property (strong, nonatomic) NSSequence * savingSequence;
 @property (strong, nonatomic) NSSample * savingSample;
 @property (strong, nonatomic) NSData * savingSampleData;
@@ -109,8 +110,8 @@
 
 // XMP
 - (void)saveSequence:(NSSequence *)sequence;
-- (void)saveSong:(NSSong *)song;
-- (void)saveSample:(NSSample *)sample withFile:(NSData *)data;
+- (void)saveSong:(NSSong *)song withFile:(NSData *)filedata;
+- (void)saveSample:(NSSample *)sample withFile:(NSData *)filedata;
 - (void)saveInstrument:(NSInstrument *)instrument;
 - (void)saveNewInstrument:(NSInstrument *)instrument callbackObj:(id)object selector:(SEL)selector;
 

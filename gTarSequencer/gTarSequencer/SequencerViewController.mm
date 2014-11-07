@@ -240,7 +240,7 @@
 
 #pragma mark - Opho Loading
 
-- (void)forceLoadingBegan
+/*- (void)forceLoadingBegan
 {
     DLog(@"Force loading began");
     
@@ -249,7 +249,7 @@
     [loadingOverlay setHidden:NO];
     
     [self.view bringSubviewToFront:loadingOverlay];
-}
+}*/
 
 - (void)loadingBegan
 {
@@ -1594,9 +1594,9 @@
         [playControlViewController.view setUserInteractionEnabled:YES];
     }];
     
-    if(isLoading && isTapToPlayScreen){
+    //if(isLoading && isTapToPlayScreen){
         //[self forceLoadingBegan];
-    }
+    //}
     
 }
 
@@ -1676,10 +1676,10 @@
     [playControlViewController showTutorialOverlay];
     
     // Ensure that something needs to load
-    if(isLoading && [g_ophoMaster loggedIn]){
-        DLog(@"Logged in is %i",[g_ophoMaster loggedIn]);
+    //if(isLoading && [g_ophoMaster loggedIn]){
+    //    DLog(@"Logged in is %i",[g_ophoMaster loggedIn]);
         //[self forceLoadingBegan];
-    }
+    //}
 }
 
 - (void)notifyTutorialEnded

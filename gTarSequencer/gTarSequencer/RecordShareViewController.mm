@@ -1354,7 +1354,26 @@
 
 - (void)saveRecordingSongToXmp
 {
-    [g_ophoMaster saveSong:recordingSong];
+    // Append the song data if it has rendered
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * path = [paths objectAtIndex:0];
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    NSString * songPath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:songPath]){
+        
+        // Then get data and upload
+        NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
+        
+        [g_ophoMaster saveSong:recordingSong withFile:data];
+        
+    }else{
+        
+        [g_ophoMaster saveSong:recordingSong withFile:nil];
+        
+    }
+
 }
 
 #pragma mark - Song Description Field
