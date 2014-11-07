@@ -1146,7 +1146,7 @@ extern NSUser * g_loggedInUser;
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
         NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId && [[xmp getTextFromChildWithName:@"xmp_access_level"] intValue] == 2)];
         
-        DLog(@"Date is %@",date);
+        //DLog(@"Date is %@",date);
         
         if(xmpid > 0){
             [fileIdSet addObject:[NSNumber numberWithLong:xmpid]];

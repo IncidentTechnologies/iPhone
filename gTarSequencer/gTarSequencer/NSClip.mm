@@ -8,6 +8,14 @@
 
 #import "NSClip.h"
 
+#define PATTERN_A @"-A"
+#define PATTERN_B @"-B"
+#define PATTERN_C @"-C"
+#define PATTERN_D @"-D"
+#define PATTERN_E @"-★" // Custom
+#define PATTERN_E_PENDING @"-E" // Custom pending
+#define PATTERN_OFF @"-ø"
+
 @implementation NSClip
 
 @synthesize m_notes;
@@ -175,6 +183,23 @@
 
 - (XMPNode *)convertToSongXmp
 {
+    // Set some details for OPHO
+    NSArray * colorOptions = [NSArray arrayWithObjects:@"#FFFFFF",@"#EEEEEE",@"#DDDDDD",@"#CCCCCC",@"#888888",@"#BBBBBB", nil];
+    
+    NSString * ophoColor = m_color;
+    
+    if([m_name isEqualToString:PATTERN_B]){
+        ophoColor = colorOptions[1];
+    }else if([m_name isEqualToString:PATTERN_C]){
+        ophoColor = colorOptions[2];
+    }else if([m_name isEqualToString:PATTERN_D]){
+        ophoColor = colorOptions[3];
+    }else if([m_name isEqualToString:PATTERN_OFF]){
+        ophoColor = colorOptions[4];
+    }else if([m_name isEqualToString:PATTERN_E]){
+        ophoColor = colorOptions[5];
+    }
+    
     XMPNode *node = NULL;
     
     node = new XMPNode((char *)[@"clip" UTF8String],NULL);
@@ -195,7 +220,7 @@
     
     node->AddAttribute(new XMPAttribute((char *)"looplength", m_looplength));
     
-    node->AddAttribute(new XMPAttribute((char *)"color", (char *)[m_color UTF8String]));
+    node->AddAttribute(new XMPAttribute((char *)"color", (char *)[ophoColor UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"muted", m_muted));
     

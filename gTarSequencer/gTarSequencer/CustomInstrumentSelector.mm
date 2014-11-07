@@ -1229,7 +1229,11 @@
         
         CustomStringCell * cell = (CustomStringCell *)[stringTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         
-        if([cell.sampleFilename isEqualToString:filename]){
+        DLog(@"Delete from string list, %@ == %@ ?",cell.sampleFilename,filename);
+        
+        NSArray * filenameComponents = [cell.sampleFilename componentsSeparatedByString:@"_"];
+        
+        if([[filenameComponents lastObject] isEqualToString:filename]){
             [self deselectString:cell];
             cell.stringLabel.text = @"";
             cell.xmpId = 0;
@@ -2265,6 +2269,20 @@
         DLog(@"The sample plist does not exist");
     }
     
+    // Prepend the custom sounds list to the regular sample list
+    if ([[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] count] > 0) {
+        
+        DLog(@"Custom samples found");
+        
+        [sampleList addObject:customList];
+        
+    } else {
+        
+        DLog(@"There are no custom samples");
+        
+        customSampleList = nil;
+    }
+    
     NSMutableDictionary * plistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
     [sampleList addObjectsFromArray:[plistDictionary objectForKey:@"Samples"]];
@@ -2278,19 +2296,6 @@
         
     }
     
-    // Append a second local custom sounds pList to the regular sample list
-    if ([[customSampleOphoDictionary objectForKey:OPHO_LIST_NAMES] count] > 0) {
-        
-        DLog(@"Custom samples found");
-        
-        [sampleList addObject:customList];
-        
-    } else {
-        
-        DLog(@"There are no custom samples");
-        
-        customSampleList = nil;
-    }
 }
 
 - (void)addSampleToSampleList:(NSString *)sampleName withId:(int)sampleId
@@ -2339,6 +2344,7 @@
 - (void)removeCustomSampleList
 {
     customSampleList = nil;
+    
     
     /*
     DLog(@"Deleting custom sample list");
