@@ -740,26 +740,9 @@
     
     filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    //if(useCustomPath){
-        
-        DLog(@"Play audio for XMP ID %i",xmpId);
-        
-        [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
-        
-    /*}else{
-        
-        path = [[NSBundle mainBundle] pathForResource:filename ofType:@"wav"];
-        
-        NSError * error = nil;
-        NSURL * url = [NSURL fileURLWithPath:path];
-        
-        DLog(@"Playing URL %@",url);
-        
-        self.audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-                
-        [self.audio play];
-    }*/
+    DLog(@"Play audio for XMP ID %i",xmpId);
     
+    [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
 }
 
 - (void)playOphoAudio:(NSString *)datastring
@@ -2103,6 +2086,40 @@
     [cell.sampleArrow setImage:nil];
 }
 
+- (void)showLoadingIndicatorForCell:(CustomSampleCell *)cell
+{
+    DLog(@"Draw loading indicator");
+    [cell startLoading];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hideLoadingIndicatorForCell:) userInfo:cell repeats:NO];
+}
+
+- (void)hideLoadingIndicatorForCell:(NSTimer *)timer
+{
+    DLog(@"Hide loading indicator");
+    
+    CustomSampleCell * cell = (CustomSampleCell *)[timer userInfo];
+    
+    [cell stopLoading];
+}
+
+- (void)drawLoadingIndicatorForCell:(CustomSampleCell *)cell
+{
+    CGSize size = CGSizeMake(cell.sampleArrow.frame.size.width, cell.sampleArrow.frame.size.width);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    
+    CGContextFillEllipseInRect(context, CGRectMake(0,7.0,14.0,9.0));
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    [cell.sampleArrow setImage:newImage];
+    
+    UIGraphicsEndImageContext();
+}
+
 - (void)drawNextButtonArrowForCell:(CustomSampleCell *)cell
 {
     CGSize size = CGSizeMake(cell.sampleArrow.frame.size.width, cell.sampleArrow.frame.size.height);
@@ -2191,7 +2208,12 @@
         return NO;
     }else{
         [self styleSampleCell:cell turnOff:selectedSampleCell];
+        
         selectedSampleCell = cell;
+        
+        if(![g_ophoMaster cacheForSample:cell.xmpId]){
+            [self showLoadingIndicatorForCell:selectedSampleCell];
+        }
         
         BOOL isCustom = ([self isCustomInstrumentList]) ? TRUE : FALSE;
         NSString * filename = [cell.parentCategory stringByAppendingString:@"_"];

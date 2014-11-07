@@ -33,10 +33,14 @@
 @property (nonatomic, strong) UIPanGestureRecognizer * panRecognizer;
 @property (nonatomic, assign) CGPoint panStartPoint;
 @property (nonatomic, assign) CGFloat startingLeftConstraint;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView * activityIndicator;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint * rightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint * leftConstraint;
 
 - (IBAction)userDidSelectDeleteButton:(id)sender;
+
+- (void)startLoading;
+- (void)stopLoading;
 
 @end

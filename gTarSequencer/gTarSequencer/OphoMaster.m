@@ -905,6 +905,11 @@ extern NSUser * g_loggedInUser;
     
 }
 
+- (BOOL)cacheForSample:(long)xmpId
+{
+    return ([self getSampleFromCache:xmpId] != nil);
+}
+
 - (NSString *)getSampleFromCache:(long)xmpId
 {
     NSDictionary * cacheEntry = [ophoSampleCache objectForKey:[NSNumber numberWithLong:xmpId]];

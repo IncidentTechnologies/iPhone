@@ -41,6 +41,9 @@
                                     <action selector="userDidSelectDeleteButton:" destination="W05-zP-FMQ" eventType="touchUpInside" id="KZm-dy-KRh"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="SZQ-yg-6lP">
+                                <rect key="frame" x="184" y="11" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="DmN-fU-ygS" secondAttribute="trailing" constant="42" id="6ND-8g-YP0"/>
@@ -55,6 +58,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activityIndicator" destination="SZQ-yg-6lP" id="R8p-lX-9gj"/>
                 <outlet property="container" destination="aWW-iY-yfM" id="63n-ws-AF8"/>
                 <outlet property="deleteButton" destination="Lwc-Fu-yZm" id="gg7-4P-m29"/>
                 <outlet property="leftConstraint" destination="jdg-PN-ZpF" id="g7c-RT-mV6"/>

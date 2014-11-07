@@ -16,6 +16,7 @@
 @synthesize sampleArrow;
 @synthesize parentCategory;
 @synthesize xmpId;
+@synthesize activityIndicator;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,6 +25,8 @@
         // Initialization code
         
         xmpId = -3;
+        
+        [activityIndicator setHidesWhenStopped:TRUE];
     }
     return self;
 }
@@ -179,7 +182,16 @@
     DLog(@"Delete cell");
     
     [delegate deleteCustomSampleCell:self];
-    
+}
+
+- (void)startLoading
+{
+    [activityIndicator startAnimating];
+}
+
+- (void)stopLoading
+{
+    [activityIndicator stopAnimating];
 }
 
 @end

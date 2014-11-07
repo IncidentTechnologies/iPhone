@@ -108,6 +108,9 @@
 - (void)logout;
 - (BOOL)loggedIn;
 
+// Caching
+- (BOOL)cacheForSample:(long)xmpId;
+
 // XMP
 - (void)saveSequence:(NSSequence *)sequence;
 - (void)saveSong:(NSSong *)song withFile:(NSData *)filedata;
