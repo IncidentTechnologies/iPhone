@@ -16,6 +16,14 @@
 #define PATTERN_E_PENDING @"-E" // Custom pending
 #define PATTERN_OFF @"-ø"
 
+#define OPHO_PATTERN_A @"Pattern A"
+#define OPHO_PATTERN_B @"Pattern B"
+#define OPHO_PATTERN_C @"Pattern C"
+#define OPHO_PATTERN_D @"Pattern D"
+#define OPHO_PATTERN_E @"Custom" // Custom
+#define OPHO_PATTERN_E_PENDING @"-E" // Custom pending
+#define OPHO_PATTERN_OFF @"OFF"
+
 @implementation NSClip
 
 @synthesize m_notes;
@@ -47,7 +55,7 @@
     {
         m_clip = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
-        m_name = [[NSString alloc] initWithUTF8String:[m_clip GetAttributeValueWithName:@"name"].GetPszValue()];
+        m_name = [self getPatternNameFromOphoName:[[NSString alloc] initWithUTF8String:[m_clip GetAttributeValueWithName:@"name"].GetPszValue()]];
         
         m_color = [[NSString alloc] initWithUTF8String:[m_clip GetAttributeValueWithName:@"color"].GetPszValue()];
         
@@ -108,7 +116,7 @@
     {
         DLog(@"CLIP");
         
-        m_name = [dom getTextFromChildWithName:@"name"];
+        m_name = [self getPatternNameFromOphoName:[dom getTextFromChildWithName:@"name"]];
         
         m_color = [dom getTextFromChildWithName:@"color"];
         
@@ -184,19 +192,22 @@
 - (XMPNode *)convertToSongXmp
 {
     // Set some details for OPHO
-    NSArray * colorOptions = [NSArray arrayWithObjects:@"#FFFFFF",@"#EEEEEE",@"#DDDDDD",@"#CCCCCC",@"#888888",@"#BBBBBB", nil];
+    NSArray * colorOptions = [NSArray arrayWithObjects:@"#82B3BE",@"#7EBDCD",@"#79B2C7",@"#A9C8D0",@"#79AAC5",@"#636363", nil];
     
-    NSString * ophoColor = m_color;
+    NSString * ophoName = [self getOphoNameFromPatternName:m_name isMute:m_muted];
+    NSString * ophoColor;
     
-    if([m_name isEqualToString:PATTERN_B]){
+    if([ophoName isEqualToString:OPHO_PATTERN_A]){
+        ophoColor = colorOptions[0];
+    }else if([ophoName isEqualToString:OPHO_PATTERN_B]){
         ophoColor = colorOptions[1];
-    }else if([m_name isEqualToString:PATTERN_C]){
+    }else if([ophoName isEqualToString:OPHO_PATTERN_C]){
         ophoColor = colorOptions[2];
-    }else if([m_name isEqualToString:PATTERN_D]){
+    }else if([ophoName isEqualToString:OPHO_PATTERN_D]){
         ophoColor = colorOptions[3];
-    }else if([m_name isEqualToString:PATTERN_OFF]){
+    }else if([ophoName isEqualToString:OPHO_PATTERN_E]){
         ophoColor = colorOptions[4];
-    }else if([m_name isEqualToString:PATTERN_E]){
+    }else{
         ophoColor = colorOptions[5];
     }
     
@@ -204,7 +215,7 @@
     
     node = new XMPNode((char *)[@"clip" UTF8String],NULL);
     
-    node->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_name UTF8String]));
+    node->AddAttribute(new XMPAttribute((char *)"name", (char *)[ophoName UTF8String]));
     
     node->AddAttribute(new XMPAttribute((char *)"startbeat", m_startbeat));
     
@@ -229,6 +240,40 @@
     }
     
     return node;
+}
+
+- (NSString *)getOphoNameFromPatternName:(NSString *)patternName isMute:(BOOL)mute
+{
+    if(mute){
+        return OPHO_PATTERN_OFF;
+    }else if([patternName isEqualToString:PATTERN_A]){
+        return OPHO_PATTERN_A;
+    }else if([patternName isEqualToString:PATTERN_B]){
+        return OPHO_PATTERN_B;
+    }else if([patternName isEqualToString:PATTERN_C]){
+        return OPHO_PATTERN_C;
+    }else if([patternName isEqualToString:PATTERN_D]){
+        return OPHO_PATTERN_D;
+    }else{
+        return OPHO_PATTERN_E;
+    }
+}
+
+- (NSString *)getPatternNameFromOphoName:(NSString *)ophoName
+{
+    if([ophoName isEqualToString:OPHO_PATTERN_A]){
+        return PATTERN_A;
+    }else if([ophoName isEqualToString:OPHO_PATTERN_B]){
+        return PATTERN_B;
+    }else if([ophoName isEqualToString:OPHO_PATTERN_C]){
+        return PATTERN_C;
+    }else if([ophoName isEqualToString:OPHO_PATTERN_D]){
+        return PATTERN_D;
+    }else if([ophoName isEqualToString:OPHO_PATTERN_E]){
+        return PATTERN_E;
+    }else{
+        return PATTERN_OFF;
+    }
 }
 
 - (void)addNote:(NSNote *)note
