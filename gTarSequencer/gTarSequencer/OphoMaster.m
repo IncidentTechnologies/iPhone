@@ -213,8 +213,9 @@ extern NSUser * g_loggedInUser;
     
     [self saveToId:savingSong.m_id withFile:nil withData:songdatastring withName:savingSong.m_xmpName];
     
-    [self saveSongRender:savingSong.m_id withFile:savingSongData];
-    
+    if(savingSongData != nil){
+        [self saveSongRender:savingSong.m_id withFile:savingSongData];
+    }
 }
 
 - (void)saveSongRender:(long)xmpId withFile:(NSData *)filedata

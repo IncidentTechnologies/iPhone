@@ -1445,7 +1445,8 @@
     [email setSubject:@"Check Out the Song I Made"];
     
     // Body
-    NSString * body = @"Check out the song I just made with Sequence!<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>";
+    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%li<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>",recordingSong.m_id];
+    
     [email setMessageBody:body isHTML:YES];
     
     // Attachment
@@ -1468,17 +1469,17 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = @"Check out the song I just made with Sequence! Get it for free and make your own here: http://gtar.fm/seq";
+    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%li",recordingSong.m_id];
     [message setBody:body];
     
     // Attachment
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
-    NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
-    NSData * fileData = [NSData dataWithContentsOfFile:filepath];
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    //NSString * filepath = [documentsDirectory stringByAppendingPathComponent:filename];
+    //NSData * fileData = [NSData dataWithContentsOfFile:filepath];
     
     //kUTTypeMPEG4Audio
-    [message addAttachmentData:fileData typeIdentifier:@"kUTTypeAudio" filename:filename];
+    //[message addAttachmentData:fileData typeIdentifier:@"kUTTypeAudio" filename:filename];
     
     if(message != nil){
         [self.navigationController presentViewController:message animated:YES completion:nil];

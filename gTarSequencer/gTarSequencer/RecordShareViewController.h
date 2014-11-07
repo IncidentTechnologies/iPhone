@@ -60,9 +60,6 @@ extern NSUser * g_loggedInUser;
     
     int numMeasures;
     
-    // Saving
-    BOOL isSaving;
-    
     // Recording
     NSTimer * recordTimer;
     BOOL isWritingFile;

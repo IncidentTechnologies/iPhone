@@ -277,7 +277,9 @@
     
     // ensure record playback gbegets refreshed
     [self stopRecordPlayback];
-
+    
+    // save to opho
+    [self saveRecordingSongToXmp:NO];
 }
 
 - (void)regenerateDataForTrack:(NSTrack *)track
@@ -1227,6 +1229,7 @@
     
     DLog(@"Stop recording");
     [delegate stopSoundMaster];
+    [self saveRecordingSongToXmp:YES];
     
 }
 
@@ -1356,48 +1359,44 @@
     [songModel incrementTimeSerialAccess:0.25]; // quarter beat
 }
 
-- (void)saveRecordingSongToXmp:(BOOL)force
+- (void)saveRecordingSongToXmp:(BOOL)saveWithRender
 {
-    if(!isSaving || force){
+
+    // Save the song if it gets played
+    // Save the song with a render if it gets shared
+    
+    // Append the song data if it has rendered
+    
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * path = [paths objectAtIndex:0];
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
+    NSString * songPath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
+    
+    if(saveWithRender && [[NSFileManager defaultManager] fileExistsAtPath:songPath]){
         
-        isSaving = YES;
+        // Then get data and upload
+        NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
         
-        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(resetRecordSave) userInfo:nil repeats:NO];
-        
-        // Save the song if it gets played
-        // Save the song with a render if it gets shared
-        
-        // Append the song data if it has rendered
-        
-        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString * path = [paths objectAtIndex:0];
-        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Sessions"];
-        NSString * songPath = [documentsDirectory stringByAppendingPathComponent:DEFAULT_SONG_NAME];
-        
-        if([[NSFileManager defaultManager] fileExistsAtPath:songPath]){
+        if([data length] < RENDER_UPPER_LIMIT){
             
-            // Then get data and upload
-            NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
+            DLog(@"Save recording song %li with render",recordingSong.m_id);
             
-            if([data length] < RENDER_UPPER_LIMIT){
-                [g_ophoMaster saveSong:recordingSong withFile:data];
-            }else{
-                DLog(@"Render length exceeds upper limit, do not upload");
-                [g_ophoMaster saveSong:recordingSong withFile:nil];
-            }
-            
+            [g_ophoMaster saveSong:recordingSong withFile:data];
         }else{
             
-            [g_ophoMaster saveSong:recordingSong withFile:nil];
+            DLog(@"Render length exceeds upper limit, save %li without render",recordingSong.m_id);
             
+            [g_ophoMaster saveSong:recordingSong withFile:nil];
         }
+        
+    }else{
+        
+        DLog(@"Save recording song %li without render",recordingSong.m_id);
+        
+        [g_ophoMaster saveSong:recordingSong withFile:nil];
+        
     }
 
-}
-
-- (void)resetRecordSave
-{
-    isSaving = NO;
 }
 
 #pragma mark - Song Description Field
