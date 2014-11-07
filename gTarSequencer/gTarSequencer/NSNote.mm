@@ -8,6 +8,8 @@
 
 #import "NSNote.h"
 
+#define DEFAULT_NOTE_DURATION 0.25
+
 @implementation NSNote
 
 @synthesize m_value;
@@ -36,6 +38,8 @@
         
         [m_note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
         
+        [m_note GetAttributeValueWithName:@"duration"].GetValueDouble(&m_duration);
+        
         DLog(@"NOTE");
     }
     
@@ -60,6 +64,9 @@
         m_beatstart = [[dom getTextFromChildWithName:@"beatstart"] doubleValue];
         
         m_stringvalue = [[dom getTextFromChildWithName:@"value"] intValue];
+        
+        m_duration = [[dom getTextFromChildWithName:@"duration"] doubleValue];
+        
     }
     
     return self;
@@ -75,6 +82,7 @@
         m_value = value;
         m_stringvalue = [value intValue];
         m_beatstart = beatstart;
+        m_duration = DEFAULT_NOTE_DURATION;
     }
     
     return self;
@@ -118,10 +126,14 @@
     
     node->AddAttribute(new XMPAttribute((char *)"beatstart", m_beatstart));
     
-    node->AddAttribute(new XMPAttribute((char *)"duration", m_duration));
+    if(m_duration <= 0){
+        node->AddAttribute(new XMPAttribute((char *)"duration", DEFAULT_NOTE_DURATION));
+    }else{
+        node->AddAttribute(new XMPAttribute((char *)"duration", m_duration));
+    }
     
     XMPNode *tempNode = new XMPNode((char *)"guitarposition", node);
-    tempNode->AddAttribute(new XMPAttribute((char *)"string", m_stringvalue));
+    tempNode->AddAttribute(new XMPAttribute((char *)"string", m_stringvalue+1));
     tempNode->AddAttribute(new XMPAttribute((char *)"fret", 0));
     node->AddChild(tempNode);
     
