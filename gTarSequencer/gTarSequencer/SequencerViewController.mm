@@ -240,17 +240,6 @@
 
 #pragma mark - Opho Loading
 
-/*- (void)forceLoadingBegan
-{
-    DLog(@"Force loading began");
-    
-    isLoading = true;
-    
-    [loadingOverlay setHidden:NO];
-    
-    [self.view bringSubviewToFront:loadingOverlay];
-}*/
-
 - (void)loadingBegan
 {
     DLog(@"Loading began");
@@ -267,12 +256,22 @@
 
 - (void)loadingEnded
 {
+    DLog(@"Loading ended?");
+    
+    // Add a delay to ensure this doesn't flicker
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(delayedLoadingEnded) userInfo:nil repeats:NO];
+
+    
+}
+
+- (void)delayedLoadingEnded
+{
     DLog(@"Loading ended");
     
     isLoading = false;
     
-    [loadingOverlay setHidden:YES];
-    
+   [loadingOverlay setHidden:YES];
 }
 
 #pragma mark - Left Navigator
@@ -1594,10 +1593,6 @@
         [playControlViewController.view setUserInteractionEnabled:YES];
     }];
     
-    //if(isLoading && isTapToPlayScreen){
-        //[self forceLoadingBegan];
-    //}
-    
 }
 
 - (void)instrumentListLoaded
@@ -1675,11 +1670,6 @@
     isTapToPlayScreen = YES;
     [playControlViewController showTutorialOverlay];
     
-    // Ensure that something needs to load
-    //if(isLoading && [g_ophoMaster loggedIn]){
-    //    DLog(@"Logged in is %i",[g_ophoMaster loggedIn]);
-        //[self forceLoadingBegan];
-    //}
 }
 
 - (void)notifyTutorialEnded
