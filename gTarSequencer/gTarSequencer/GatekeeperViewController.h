@@ -7,7 +7,6 @@
 //
 
 #import "AppData.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CyclingTextField.h"
 
 extern OphoMaster * g_ophoMaster;
@@ -22,7 +21,7 @@ extern NSUser * g_loggedInUser;
 
 @end
 
-@interface GatekeeperViewController : UIViewController <UITextFieldDelegate,FBLoginViewDelegate, OphoLoginDelegate>
+@interface GatekeeperViewController : UIViewController <UITextFieldDelegate, OphoLoginDelegate>
 {
     
 }
@@ -51,8 +50,6 @@ extern NSUser * g_loggedInUser;
 @property (strong, nonatomic) IBOutlet UIButton * loggedoutSignupButton;
 
 @property (strong, nonatomic) IBOutlet UIView * view;
-
-@property (weak, nonatomic) IBOutlet FBLoginView * loginView;
 
 - (IBAction)loggedoutSigninButtonClicked:(id)sender;
 - (IBAction)loggedoutSignupButtonClicked:(id)sender;

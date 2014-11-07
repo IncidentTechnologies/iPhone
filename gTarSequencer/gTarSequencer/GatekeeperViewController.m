@@ -17,14 +17,11 @@
 #define SIGNUP_EMAIL_INVALID @"Invalid Email"
 #define SIGNIN_USERNAME_INVALID @"Invalid Username"
 #define SIGNIN_PASSWORD_INVALID @"Invalid Password"
-#define FACEBOOK_INVALID @"Facebook failed to login"
 
 @interface GatekeeperViewController ()
 {
     UIView * _currentTopPanel;
     NSTimer *_textFieldSliderTimer;
-    
-    BOOL _waitingForFacebook;
 }
 @end
 
@@ -63,8 +60,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self resetScreen];
-    
-    _loginView.readPermissions = @[@"public_profile",@"email"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -337,7 +332,6 @@
     
     [delegate loggedIn:YES];
 }
-*/
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
@@ -354,6 +348,7 @@
     [self displayNotification:FACEBOOK_INVALID turnRed:YES];
 }
 
+ */
 
 #pragma mark - UITextFieldDelegate
 

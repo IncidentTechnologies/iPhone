@@ -10,7 +10,6 @@
 #import "LoadingViewController.h"
 #import "TestFlight.h"
 #import "SCUI.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

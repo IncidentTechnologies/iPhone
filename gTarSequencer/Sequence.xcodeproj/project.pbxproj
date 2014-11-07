@@ -124,6 +124,7 @@
 		6D813EC518DA268500D29F48 /* Tutorial_gTar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D813EC418DA268500D29F48 /* Tutorial_gTar.png */; };
 		6D813EC918DA804100D29F48 /* VolumeKnobView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D813EC818DA804100D29F48 /* VolumeKnobView.mm */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
+		6D8B35511A0C5E23005DB1E8 /* Vibraphone_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */; };
 		6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.mm */; };
 		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
 		6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B818E4D72F00872705 /* Share_Icon.png */; };
@@ -155,7 +156,6 @@
 		6DAF30D818D2207700036958 /* Icon_Trumpet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAF30D718D2207700036958 /* Icon_Trumpet.png */; };
 		6DAF30DC18D2468500036958 /* TutorialViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DAF30DB18D2468500036958 /* TutorialViewController.mm */; };
 		6DAFBA1319DB404A00258CE5 /* FrameGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAFBA1219DB404A00258CE5 /* FrameGenerator.m */; };
-		6DC4963019B930D5000FAA01 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4962F19B930D5000FAA01 /* FacebookSDK.framework */; };
 		6DC4966819B93C9F000FAA01 /* NSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4966719B93C9F000FAA01 /* NSUser.m */; };
 		6DC78A01199BFEC5006B14F5 /* NSSampler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A00199BFEC5006B14F5 /* NSSampler.mm */; };
 		6DC78A04199BFED1006B14F5 /* NSSample.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DC78A03199BFED1006B14F5 /* NSSample.mm */; };
@@ -457,6 +457,7 @@
 		6D813EC718DA804100D29F48 /* VolumeKnobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeKnobView.h; sourceTree = "<group>"; };
 		6D813EC818DA804100D29F48 /* VolumeKnobView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VolumeKnobView.mm; sourceTree = "<group>"; };
 		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
+		6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Vibraphone_C.wav; path = Samples/Melodic/Percussive/Vibra/Vibraphone_C.wav; sourceTree = "<group>"; };
 		6DA724B118E25B0700872705 /* RecordShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordShareViewController.h; sourceTree = "<group>"; };
 		6DA724B218E25B0700872705 /* RecordShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordShareViewController.mm; sourceTree = "<group>"; };
 		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
@@ -554,7 +555,6 @@
 				6D02290518F31D6A000E2DE4 /* libOAuth2Client.a in Frameworks */,
 				6D02290618F31D6A000E2DE4 /* libOHAttributedLabel.a in Frameworks */,
 				6D02290718F31D6A000E2DE4 /* libSoundCloudAPI.a in Frameworks */,
-				6DC4963019B930D5000FAA01 /* FacebookSDK.framework in Frameworks */,
 				6D02290818F31D6A000E2DE4 /* libSoundCloudUI.a in Frameworks */,
 				6DEA47FD18B6E7EC00D3FD59 /* libstdc++.dylib in Frameworks */,
 				587B6EC81885E9720071BE15 /* libz.dylib in Frameworks */,
@@ -703,6 +703,7 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */,
 				6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */,
 				6DE96B061A0AC68A004F70BC /* dev_tutorialSet.xml */,
 				5811AADE187B88C800FC0BD2 /* Sample Pack INFO */,
@@ -1512,6 +1513,7 @@
 				6D62EFAC19DC900F001B8E18 /* OptionsViewCell.xib in Resources */,
 				6DAB0CEB18C7B8F400FFBDE6 /* release_notes.md in Resources */,
 				58D6960E1864D20A00113AF2 /* SequencerViewController.xib in Resources */,
+				6D8B35511A0C5E23005DB1E8 /* Vibraphone_C.wav in Resources */,
 				6DFDB02018C0278D004D573B /* BottomBar_4.xib in Resources */,
 				5805D049188DAF4C000832A9 /* CustomInstrumentSelector.xib in Resources */,
 				6D44A45A18B5937B00992D3D /* InfoLogo.png in Resources */,
@@ -1757,10 +1759,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kateschnippering/Documents/Sites/incident/FacebookSDK,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";
@@ -1802,10 +1801,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch (*) .DS_Store CVS .svn .git .hg *.xcode*";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kateschnippering/Documents/Sites/incident/FacebookSDK,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarSequencer/Sequence-Prefix.pch";

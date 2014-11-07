@@ -119,10 +119,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>FacebookAppID</key>
-	<string>578774078914641</string>
-	<key>FacebookDisplayName</key>
-	<string>Sequence by Incident</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

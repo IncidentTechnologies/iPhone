@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -10,7 +11,6 @@
                 <outlet property="loadingTopPanel" destination="iJl-iw-Nyi" id="fzG-Xc-XzC"/>
                 <outlet property="loggedoutSigninButton" destination="hX2-F1-Gcb" id="sup-B9-x9F"/>
                 <outlet property="loggedoutSignupButton" destination="1Ns-mA-Bbd" id="eFA-vc-8bd"/>
-                <outlet property="loginView" destination="lx5-sM-4gG" id="CQA-UW-vwq"/>
                 <outlet property="notificationLabel" destination="GLx-cz-jov" id="kpv-EJ-V0b"/>
                 <outlet property="notificationVerticalSpace" destination="4h9-a5-eed" id="gX2-ue-hF5"/>
                 <outlet property="notificationView" destination="pba-jQ-lAW" id="tfd-7L-yyL"/>
@@ -179,64 +179,6 @@
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-Qv-cyy" userLabel="SigninRightPanelInner">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="234"/>
                             <subviews>
-                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lx5-sM-4gG" customClass="FBLoginView">
-                                    <rect key="frame" x="50" y="172" width="380" height="41"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="41" id="Hbh-Bo-2Mc"/>
-                                        <constraint firstAttribute="width" constant="380" id="QpT-e4-MKX"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="Z3T-15-vRd"/>
-                                    </connections>
-                                </view>
-                                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-Fq-Euu" userLabel="FacebookView">
-                                    <rect key="frame" x="50" y="172" width="380" height="41"/>
-                                    <subviews>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXN-Wl-m8Z">
-                                            <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sign In with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRy-dl-EHQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="380" id="apC-55-Gxq"/>
-                                                        <constraint firstAttribute="height" constant="41" id="fct-81-Ffr"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRg-7x-vj8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="41"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="380" id="F4x-Gx-8Md"/>
-                                                        <constraint firstAttribute="height" constant="41" id="Zys-ds-Mjz"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <inset key="imageEdgeInsets" minX="12" minY="8" maxX="355" maxY="8"/>
-                                                    <state key="normal" image="FacebookIcon.jpg">
-                                                        <color key="titleColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="WRy-dl-EHQ" firstAttribute="leading" secondItem="YXN-Wl-m8Z" secondAttribute="leading" id="Ctw-to-J6k"/>
-                                                <constraint firstItem="kRg-7x-vj8" firstAttribute="leading" secondItem="YXN-Wl-m8Z" secondAttribute="leading" id="TyG-IE-6FK"/>
-                                                <constraint firstItem="kRg-7x-vj8" firstAttribute="top" secondItem="YXN-Wl-m8Z" secondAttribute="top" id="zj7-qW-cD5"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="41" id="Udn-Tv-CGO"/>
-                                        <constraint firstAttribute="centerX" secondItem="YXN-Wl-m8Z" secondAttribute="centerX" id="X6Y-11-m7M"/>
-                                        <constraint firstAttribute="width" constant="380" id="dvv-WJ-RTy"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-a1-jIv" userLabel="UsernameView">
                                     <rect key="frame" x="50" y="52" width="380" height="41"/>
                                     <subviews>
@@ -319,9 +261,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.16078431369999999" green="0.41960784309999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="centerX" secondItem="lx5-sM-4gG" secondAttribute="centerX" id="F2R-4C-xnU"/>
                                 <constraint firstAttribute="centerX" secondItem="5A2-x1-5XL" secondAttribute="centerX" id="cfn-uO-TMR"/>
-                                <constraint firstAttribute="centerX" secondItem="aoB-Fq-Euu" secondAttribute="centerX" id="jlx-fr-K69"/>
                                 <constraint firstAttribute="centerX" secondItem="dGM-RX-q70" secondAttribute="centerX" id="pWU-rf-tFz"/>
                                 <constraint firstAttribute="centerX" secondItem="HYz-a1-jIv" secondAttribute="centerX" id="qUK-sQ-8As"/>
                                 <constraint firstAttribute="height" constant="234" id="z2C-jx-EII"/>
@@ -432,9 +372,6 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="FacebookIcon.jpg" width="25" height="48"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
