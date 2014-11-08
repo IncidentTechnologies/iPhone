@@ -519,6 +519,10 @@
         
         [clip clearNotes];
         
+        if(clip.m_muted){
+            continue;
+        }
+        
         // Get the pattern data
         NSPattern * clipPattern;
         float patternLength = 0;
