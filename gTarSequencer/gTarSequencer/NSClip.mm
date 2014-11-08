@@ -284,16 +284,18 @@
 - (void)removeNoteAtBeat:(float)beat atValue:(long)value
 {
     
+    float relativeBeat = beat - self.m_startbeat;
+    
     NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
     
     for(NSNote * note in m_notes){
         
-        if(note.m_beatstart - 0.20 < beat && note.m_beatstart + 0.20 > beat && note.m_stringvalue == value){
+        if(note.m_beatstart - 0.20 < relativeBeat && note.m_beatstart + 0.20 > relativeBeat && note.m_stringvalue == value){
             [notesToRemove addObject:note];
         }
     }
     
-    DLog(@"%i notes found for removal",[notesToRemove count]);
+    DLog(@"%li notes found for removal",[notesToRemove count]);
     
     // In guessing which note we're removing we need to avoid duplicates
     
@@ -302,7 +304,7 @@
         NSNote * minDiffNote = [notesToRemove firstObject];
         
         for(NSNote * n in notesToRemove){
-            if(fabs(n.m_beatstart-beat) < fabs(minDiffNote.m_beatstart-beat)){
+            if(fabs(n.m_beatstart-relativeBeat) < fabs(minDiffNote.m_beatstart-relativeBeat)){
                 minDiffNote = n;
             }
         }

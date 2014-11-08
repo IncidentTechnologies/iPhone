@@ -233,9 +233,9 @@
     int f, s;
     for(NSNote * note in clip.m_notes){
         
-        if(note.m_beatstart < clip.m_endbeat){
+        if(note.m_beatstart+clip.m_startbeat < clip.m_endbeat){
             s = STRINGS_ON_GTAR - 1 - note.m_stringvalue;
-            f = (int)((note.m_beatstart - clip.m_startbeat) * 4.0);
+            f = (int)((note.m_beatstart) * 4.0);
             
             // Adjust frame:
             noteFrame.origin.x = f*noteFrameWidth+1.0;
@@ -1184,12 +1184,12 @@
 
 - (void)moveNotesForClip:(NSClip *)clip byDiff:(float)noteDiff
 {
-    NSString * clipPattern = clip.m_name;
+    /*NSString * clipPattern = clip.m_name;
     if([clipPattern isEqualToString:PATTERN_E]){
         for(NSNote * note in clip.m_notes){
             note.m_beatstart += noteDiff;
         }
-    }
+    }*/
 }
 
 #pragma mark - Track Editing Actions
@@ -1420,7 +1420,7 @@
     [self clearEditingMeasureNotes];
     
     // Turn on/off notes for the appropriate measure
-    float measureStartbeat = [self getBeatFromXPosition:editingMeasureOverlay.frame.origin.x+editingClipView.frame.origin.x];
+    float measureStartbeat = [self getBeatFromXPosition:editingMeasureOverlay.frame.origin.x+editingClipView.frame.origin.x] - editingClip.m_startbeat;
     
     float measureEndbeat = measureStartbeat+4.0;
     
@@ -1511,7 +1511,7 @@
     float fretWidth = measureWidth / FRETS_ON_GTAR;
     float frameBase = ceilf(editingMeasureOverlay.frame.origin.x / fretWidth) * fretWidth;
     
-    float beat = editingClip.m_startbeat + [self getBeatFromXPosition:frameBase+f*fretWidth];
+    float beat = [self getBeatFromXPosition:frameBase+f*fretWidth];
     
     DLog(@"Beat is %f",beat);
     
@@ -1647,9 +1647,9 @@
     [self adjustViewForClip:clip inTrack:track];
     
     // Adjust notes
-    for(NSNote * note in clip.m_notes){
-        note.m_beatstart += diff;
-    }
+    //for(NSNote * note in clip.m_notes){
+    //    note.m_beatstart += diff;
+    //}
 }
 
 - (void)adjustViewForClip:(NSClip *)clip inTrack:(NSTrack *)track

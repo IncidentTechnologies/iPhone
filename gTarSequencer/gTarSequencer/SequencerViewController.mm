@@ -841,7 +841,10 @@
                     strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
                     
                     if(isStringOn){
-                        NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:r_beat/4.0 duration:0.25];
+                        
+                        float noteBeat = r_beat/4.0 - songClip.m_startbeat;
+                        
+                        NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:noteBeat duration:0.25];
                         [songClip addNote:newNote];
                     }
                 }

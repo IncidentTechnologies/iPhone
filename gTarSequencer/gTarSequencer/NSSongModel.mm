@@ -61,12 +61,8 @@
     m_lengthBeats = MIN_BEATS;
     
     for(NSTrack * track in m_song.m_tracks){
-        
         for(NSClip * clip in track.m_clips){
-            
-            for(NSNote * note in clip.m_notes){
-                m_lengthBeats = MAX(m_lengthBeats,note.m_beatstart + note.m_duration);
-            }
+            m_lengthBeats = MAX(m_lengthBeats,clip.m_endbeat);
         }
     }
 }
@@ -122,6 +118,7 @@
     
 }
 
+/*
 - (double)getFirstAudibleBeat:(NSArray *)notesArray
 {
     if([notesArray count] > 0){
@@ -133,6 +130,8 @@
     
     return 0;
 }
+
+ */
 
 /*
 - (void)incrementBeatSerialAccess:(double)delta
@@ -220,7 +219,9 @@
             if(!clip.m_muted){
                 for(NSNote * note in clip.m_notes){
                     
-                    if(m_currentBeat >= note.m_beatstart - SONG_MODEL_NOTE_FRAME_WIDTH && m_currentBeat <= note.m_beatstart + SONG_MODEL_NOTE_FRAME_WIDTH){
+                    float noteBeat = clip.m_startbeat + note.m_beatstart;
+                    
+                    if(m_currentBeat >= noteBeat - SONG_MODEL_NOTE_FRAME_WIDTH && m_currentBeat <= noteBeat + SONG_MODEL_NOTE_FRAME_WIDTH){
                         
                         [instTrack.m_instrument.m_sampler.audio pluckString:note.m_stringvalue];
                         

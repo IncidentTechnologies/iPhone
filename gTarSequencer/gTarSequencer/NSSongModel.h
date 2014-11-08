@@ -70,7 +70,7 @@
 - (void)checkFrames;
 //- (void)exitCurrentFrame;
 //- (void)enterCurrentFrame;
-- (double)getFirstAudibleBeat:(NSArray *)notesArray;
+//- (double)getFirstAudibleBeat:(NSArray *)notesArray;
 
 - (void)setStartBeat:(double)start;
 - (void)setEndBeat:(double)end;

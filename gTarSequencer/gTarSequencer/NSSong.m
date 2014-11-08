@@ -403,7 +403,7 @@
     for(NSTrack * track in m_tracks){
         for(NSClip * clip in track.m_clips){
             for(NSNote * note in clip.m_notes){
-                lastBeat = MAX(lastBeat,note.m_beatstart + note.m_duration);
+                lastBeat = MAX(lastBeat,clip.m_startbeat + note.m_beatstart + note.m_duration);
             }
         }
     }

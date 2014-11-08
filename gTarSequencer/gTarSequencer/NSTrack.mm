@@ -554,7 +554,7 @@
                 
                 if(noteStartbeat >= clip.m_startbeat && noteStartbeat <= clip.m_endbeat){
                     
-                    NSNote * clipNote = [[NSNote alloc] initWithValue:n.m_value beatstart:noteStartbeat duration:n.m_duration];
+                    NSNote * clipNote = [[NSNote alloc] initWithValue:n.m_value beatstart:noteStartbeat-clip.m_startbeat duration:n.m_duration];
                     [clip addNote:clipNote];
                     
                 }

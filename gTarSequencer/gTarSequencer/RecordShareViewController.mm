@@ -368,7 +368,7 @@
         for(NSClip * clip in track.m_clips){
             for(NSNote * note in clip.m_notes){
                 if(note != nil){
-                    maxMeasure = MAX(maxMeasure,note.m_beatstart);
+                    maxMeasure = MAX(maxMeasure,clip.m_startbeat+note.m_beatstart);
                 }
             }
             maxMeasure = MAX(maxMeasure,clip.m_endbeat);
@@ -1180,7 +1180,7 @@
                 if(!clip.m_muted){
                     for(NSNote * note in clip.m_notes){
                         
-                        if(note.m_beatstart == r_beat/MEASURE_BEATS){
+                        if(note.m_beatstart+clip.m_startbeat == r_beat/MEASURE_BEATS){
                             
                             NSTrack * instTrack = [instruments objectAtIndex:[self getIndexForInstrument:track.m_instrument.m_id]];
                             
