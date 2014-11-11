@@ -519,11 +519,17 @@
 {
     DLog(@"Tutorial ready: %i",xmpId);
     
-    [self loadFromXmpId:xmpId andType:TYPE_SEQUENCE];
+    [self loadFromXmpId:xmpId andType:TYPE_SEQUENCE clearData:YES];
 }
 
-- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type
+- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type clearData:(BOOL)clearData
 {
+    if(clearData){
+        
+        // Clear the loaded song
+        loadedSong = nil;
+        [recordShareController clearLoadedSong];
+    }
     
     if([type isEqualToString:TYPE_SEQUENCE]){
         DLog(@"Load set from %li",xmpId);
@@ -547,15 +553,37 @@
     
     NSSequence * sequence = [[NSSequence alloc] initWithXmlDom:sequenceXmp];
     
-    [seqSetViewController initSequenceWithSequence:sequence];
-    
-    // First clear any sound playing
-    [seqSetViewController resetSoundMaster];
-    
-    [self refreshActiveSequence];
+    if(sequence != nil){
+        
+        // Load sequence if not NIL, otherwise preserve active sequence
+        
+        [seqSetViewController initSequenceWithSequence:sequence];
+        
+        // First clear any sound playing
+        [seqSetViewController resetSoundMaster];
+        
+        [self refreshActiveSequence];
+        
+    }
     
     // May have loaded the sequence after a song
     if(loadedSong != nil){
+        
+        // Ensure that the sequence just loaded matches
+        // the sequence expected for the song
+        if(![loadedSong doesSongMatchSequence:sequence]){
+            
+            NSSequence * newSequence = [loadedSong generateSequenceFromSong];
+            
+            // Load track info for sequence
+            
+            DLog(@"New sequence is %@, overwriting old sequence %@",newSequence,sequence);
+            
+            [seqSetViewController initSequenceWithSequence:newSequence];
+            
+            [self refreshActiveSequence];
+            
+        }
         
         // Load into record share view
         SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
@@ -585,7 +613,7 @@
         DLog(@"Loading sequence ID %li for song %li",loadedSong.m_sequenceId,loadedSong.m_id);
         
         // Set the active sequencer accordingly
-        [self loadFromXmpId:loadedSong.m_sequenceId andType:TYPE_SEQUENCE];
+        [self loadFromXmpId:loadedSong.m_sequenceId andType:TYPE_SEQUENCE clearData:NO];
         
     }
     
@@ -1113,7 +1141,7 @@
 - (void)stopAllPlaying
 {
     if(isRecording){
-        [self addFinalRecordedPartialMeasure];
+        //[self addFinalRecordedPartialMeasure];
     }
     
     isPlaying = FALSE;

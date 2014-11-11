@@ -47,7 +47,7 @@
 #define NUM_MEASURES 4
 
 #define DEFAULT_SET_NAME @"Tutorial"
-#define BLANK_SET_NAME @"New Set"
+//#define BLANK_SET_NAME @"New Set"
 #define DEFAULT_SET_PATH @"tutorialSet"
 #define DEFAULT_SAMPLE_ID 32
 
@@ -57,3 +57,19 @@
 
 #define DEFAULT_TEMPO 120
 #define SECONDS_PER_MIN 60.0
+
+#define PATTERN_A @"-A"
+#define PATTERN_B @"-B"
+#define PATTERN_C @"-C"
+#define PATTERN_D @"-D"
+#define PATTERN_E @"-★" // Custom
+#define PATTERN_E_PENDING @"-E" // Custom pending
+#define PATTERN_OFF @"-ø"
+
+#define OPHO_PATTERN_A @"Pattern A"
+#define OPHO_PATTERN_B @"Pattern B"
+#define OPHO_PATTERN_C @"Pattern C"
+#define OPHO_PATTERN_D @"Pattern D"
+#define OPHO_PATTERN_E @"Custom" // Custom
+#define OPHO_PATTERN_E_PENDING @"-E" // Custom pending
+#define OPHO_PATTERN_OFF @"OFF"

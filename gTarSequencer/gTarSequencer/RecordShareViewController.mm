@@ -239,6 +239,19 @@
     
     return -1;
 }
+
+- (void)clearLoadedSong
+{
+    recordingSong = nil;
+    loadedSequence = nil;
+    loadedSoundMaster = nil;
+    
+    [self resetSongModel];
+    
+    [self reloadInstruments];
+    
+}
+
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence
 {
     [delegate refreshSong:song];
@@ -264,7 +277,7 @@
     
     DLog(@"Instruments is %@",instruments);
     
-    [self removeDeletedMeasuresFromRecordedSong];
+    [self removeDeletedTracksFromRecordedSong];
     
     [self setMeasures:[self countMeasuresFromRecordedSong] drawGrid:YES];
     
@@ -342,9 +355,9 @@
     }
 }
 
-- (void)removeDeletedMeasuresFromRecordedSong
+- (void)removeDeletedTracksFromRecordedSong
 {
-    DLog(@"Remove deleted measures from recorded song");
+    DLog(@"Remove deleted tracks from recorded song");
     
     NSMutableArray * tracksToRemove = [[NSMutableArray alloc] init];
     
@@ -1361,7 +1374,11 @@
 
 - (void)saveRecordingSongToXmp:(BOOL)saveWithRender
 {
-
+    // Ensure a possibly updated sequence gets saved to the song
+    [recordingSong setSongSequence:loadedSequence];
+    
+    DLog(@"Save song %@ with loaded sequence %@",recordingSong,loadedSequence);
+    
     // Save the song if it gets played
     // Save the song with a render if it gets shared
     

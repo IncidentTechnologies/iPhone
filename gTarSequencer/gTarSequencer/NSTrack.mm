@@ -24,8 +24,6 @@
 
 @synthesize m_track;
 
-#define PATTERN_E @"-★" // Custom
-
 -(id)initWithXMPNode:(XMPNode *)xmpNode
 {
     if (xmpNode == nil){

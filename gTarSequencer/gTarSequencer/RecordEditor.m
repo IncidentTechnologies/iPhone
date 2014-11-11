@@ -8,14 +8,6 @@
 
 #import "RecordEditor.h"
 
-#define PATTERN_A @"-A"
-#define PATTERN_B @"-B"
-#define PATTERN_C @"-C"
-#define PATTERN_D @"-D"
-#define PATTERN_E @"-★" // Custom
-#define PATTERN_E_PENDING @"-E" // Custom pending
-#define PATTERN_OFF @"-ø"
-
 #define PATTERN_LETTER_WIDTH 30.0
 #define PATTERN_LETTER_INDENT 10.0
 

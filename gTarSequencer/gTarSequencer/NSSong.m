@@ -241,7 +241,9 @@
     headerNode->AddChild(tempNode);
     
     tempNode = new XMPNode((char *)"sequence", headerNode);
-    tempNode->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_sequenceName UTF8String]));
+    if(m_sequenceName != nil){
+        tempNode->AddAttribute(new XMPAttribute((char *)"name", (char *)[m_sequenceName UTF8String]));
+    }
     tempNode->AddAttribute(new XMPAttribute((char *)"xmpid", m_sequenceId));
     headerNode->AddChild(tempNode);
     
@@ -419,6 +421,65 @@
     m_title = name;
     m_xmpName = name;
     m_description = description;
+}
+
+
+- (void)setSongSequence:(NSSequence *)sequence
+{
+    m_sequenceName = sequence.m_name;
+    m_sequenceId = sequence.m_id;
+}
+
+- (BOOL)doesSongMatchSequence:(NSSequence *)sequence
+{
+    int matchingTracksCount = 0;
+    
+    for(NSTrack * track in sequence.m_tracks){
+        
+        for(NSTrack * songTrack in m_tracks){
+            
+            if(track.m_instrument.m_id == songTrack.m_instrument.m_id){
+                matchingTracksCount++;
+            }
+            
+        }
+    }
+    
+    DLog(@"Does song match sequence? Matching tracks: %i",matchingTracksCount);
+    
+    return (matchingTracksCount > 0);
+    
+}
+
+- (NSSequence *)generateSequenceFromSong
+{
+    // Generate sequence from song if sequence does not match
+    NSSequence * sequence = [[NSSequence alloc] initWithName:[g_ophoMaster generateNextSequenceName] tempo:self.m_tempo volume:1.0];
+    
+    // Get the IDs for all the instruments
+    for(NSTrack * track in self.m_tracks){
+        
+        NSTrack * sequenceTrack = [[NSTrack alloc] initWithName:track.m_name level:track.m_level muted:track.m_muted];
+        
+        sequenceTrack.m_instrument = [[NSInstrument alloc] initWithName:track.m_name id:track.m_instrument.m_xmpid iconName:[track.m_instrument getIconName] isCustom:track.m_instrument.m_custom];
+        
+        [sequence addTrack:sequenceTrack];
+        
+    }
+    
+    // Rename song's patterns to custom so they don't get cleared
+    
+    for(NSTrack * track in m_tracks){
+        for(NSClip * clip in track.m_clips){
+            if([clip.m_name isEqualToString:OPHO_PATTERN_OFF] || [clip.m_name isEqualToString:PATTERN_OFF]){
+                [clip setMute:YES];
+            }else{
+                [clip changePattern:PATTERN_E];
+            }
+        }
+    }
+    
+    return sequence;
 }
 
 @end

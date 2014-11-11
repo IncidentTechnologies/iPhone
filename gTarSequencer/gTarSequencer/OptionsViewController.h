@@ -14,7 +14,7 @@
 @protocol OptionsDelegate <NSObject>
 
 - (void) saveSequenceWithId:(NSInteger)xmpId andName:(NSString *)filename;
-- (void) loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type;
+- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type clearData:(BOOL)clearData;
 - (void) renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 - (void) createNewSaveName:(NSString *)filename;
 
@@ -77,7 +77,7 @@ extern NSUser * g_loggedInUser;
 - (void)deselectAllRows;
 - (BOOL)isDuplicateFilename:(NSString *)filename;
 - (void)alertDuplicateFilename;
-- (NSString *)generateNextSetName;
+//- (NSString *)generateNextSetName;
 - (void)disableScroll;
 - (void)enableScroll;
 

@@ -32,11 +32,25 @@
     {
         m_note = [[XMPObject alloc] initWithXMPNode:xmpNode];
         
-        m_value = [[NSString alloc] initWithUTF8String:[m_note GetAttributeValueWithName:@"value"].GetPszValue()];
-        
         [m_note GetAttributeValueWithName:@"beatstart"].GetValueDouble(&m_beatstart);
         
-        [m_note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
+        if([m_note HasChildWithName:@"guitarposition"]){
+            
+            m_value = [[NSString alloc] initWithUTF8String:[[m_note GetChildWithName:@"guitarposition"] GetAttributeValueWithName:@"string"].GetPszValue()];
+            
+            m_value = [NSString stringWithFormat:@"%i",[m_value intValue] - 1];
+            
+            [[m_note GetChildWithName:@"guitarposition"] GetAttributeValueWithName:@"string"].GetValueInt(&m_stringvalue);
+            
+            m_stringvalue -= 1;
+            
+        }else{
+        
+            m_value = [[NSString alloc] initWithUTF8String:[m_note GetAttributeValueWithName:@"value"].GetPszValue()];
+            
+            [m_note GetAttributeValueWithName:@"value"].GetValueInt(&m_stringvalue);
+            
+        }
         
         [m_note GetAttributeValueWithName:@"duration"].GetValueDouble(&m_duration);
         
@@ -57,15 +71,26 @@
     
     if ( self )
     {
-        DLog(@"NOTE");
-        
-        m_value = [dom getTextFromChildWithName:@"value"];
-        
         m_beatstart = [[dom getTextFromChildWithName:@"beatstart"] doubleValue];
         
-        m_stringvalue = [[dom getTextFromChildWithName:@"value"] intValue];
+        XmlDom * guitarposition = [dom getChildWithName:@"guitarposition"];
+        
+        if(guitarposition != nil){
+            
+            m_stringvalue = [[guitarposition getTextFromChildWithName:@"string"] intValue] - 1;
+            
+            m_value = [NSString stringWithFormat:@"%i",[[guitarposition getTextFromChildWithName:@"string"] intValue] - 1 ];
+            
+        }else{
+            
+            m_stringvalue = [[dom getTextFromChildWithName:@"value"] intValue];
+            
+            m_value = [dom getTextFromChildWithName:@"value"];
+        }
         
         m_duration = [[dom getTextFromChildWithName:@"duration"] doubleValue];
+        
+        DLog(@"NOTE value %@ stringvalue %li",m_value,m_stringvalue);
         
     }
     

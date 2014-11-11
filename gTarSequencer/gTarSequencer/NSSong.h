@@ -11,6 +11,7 @@
 #import "XMPNode.h"
 #import "XMPObject.h"
 #import "NSTrack.h"
+#import "NSSequence.h"
 
 @interface NSSong : NSObject
 {
@@ -71,5 +72,8 @@
 
 - (void)renameToName:(NSString *)name andDescription:(NSString *)description;
 
+- (void)setSongSequence:(NSSequence *)sequence;
+- (BOOL)doesSongMatchSequence:(NSSequence *)sequence;
+- (NSSequence *)generateSequenceFromSong;
 
 @end

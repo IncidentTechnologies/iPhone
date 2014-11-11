@@ -133,7 +133,7 @@
 
 - (void)initFirstSequence
 {
-    sequence = [[NSSequence alloc] initWithName:BLANK_SET_NAME tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
+    sequence = [[NSSequence alloc] initWithName:[g_ophoMaster generateNextSequenceName] tempo:DEFAULT_TEMPO volume:DEFAULT_VOLUME];
 }
 
 - (void)viewDidLoad
@@ -222,7 +222,7 @@
             
             // Sequence will automatically load
             loadSequence = false;
-            [delegate loadFromXmpId:activeSong andType:TYPE_SONG];
+            [delegate loadFromXmpId:activeSong andType:TYPE_SONG clearData:YES];
         }
     }
     
@@ -427,11 +427,13 @@
     for(NSTrack * track in sequence.m_tracks){
         NSInstrument * inst = track.m_instrument;
         
-        if(inst.m_sampler != nil){
+        if(inst.m_sampler != nil && [inst.m_sampler.m_samples count] > 0){
             // Already loaded into XMP, so just call the callback
             [self instrumentLoadedWithXmp:track.m_instrument];
         }else{
             // Load instrument by ID
+            DLog(@"Load instrument from ID: %i",inst.m_id);
+            
             [g_ophoMaster loadFromId:inst.m_id callbackObj:self selector:@selector(instrumentSampleListLoaded:)];
         }
         

@@ -1229,6 +1229,39 @@ extern NSUser * g_loggedInUser;
     }
 }
 
+#pragma mark - Name Generating
+
+
+- (NSString *)generateNextSequenceName
+{
+    int customCount = 0;
+    
+    for(int i = 0; i < [sequenceLoadSet count]; i++){
+        NSString * filename = sequenceLoadSet[i];
+        if(!([filename rangeOfString:@"Set"].location == NSNotFound)){
+            
+            NSString * customSuffix = [filename stringByReplacingCharactersInRange:[filename rangeOfString:@"Set"] withString:@""];
+            int numFromSuffix = [customSuffix intValue];
+            
+            customCount = MAX(customCount,numFromSuffix);
+        }
+    }
+    
+    customCount++;
+    
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPaddingCharacter:@"0"];
+    [numberFormatter setPaddingPosition:NSNumberFormatterPadBeforePrefix];
+    [numberFormatter setMinimumIntegerDigits:3];
+    
+    NSNumber * number = [NSNumber numberWithInt:customCount];
+    
+    NSString * numberString = [numberFormatter stringFromNumber:number];
+    
+    return [@"Set" stringByAppendingString:numberString];
+    
+}
+
 #pragma mark - Default Tutorial File
 
 - (void)loadTutorialSequenceWhenReady

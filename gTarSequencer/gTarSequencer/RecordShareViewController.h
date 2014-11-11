@@ -102,6 +102,7 @@ extern NSUser * g_loggedInUser;
 }
 
 - (void)reloadInstruments;
+- (void)clearLoadedSong;
 - (void)loadSong:(NSSong *)song andSoundMaster:(SoundMaster *)soundMaster activeSequence:(NSSequence *)activeSequence;
 
 - (IBAction)userDidBack:(id)sender;

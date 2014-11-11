@@ -39,8 +39,7 @@
 - (void) setTempo:(int)tempo;
 - (void) setVolume:(double)volume;
 
-
-- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type;
+- (void)loadFromXmpId:(NSInteger)xmpId andType:(NSString *)type clearData:(BOOL)clearData;
 - (NSInteger)getActiveSongId;
 
 - (BOOL)isLeftNavOpen;

@@ -146,7 +146,7 @@
         DLog(@"user did load SET %i",xmpId);
         
         // delegate calls back to set activeSequencer
-        [delegate loadFromXmpId:xmpId andType:loadedTableType];
+        [delegate loadFromXmpId:xmpId andType:loadedTableType clearData:YES];
         
         // Delegate sets activeSequencer/activeSong
         [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(loadSetView) userInfo:nil repeats:NO];
@@ -155,7 +155,7 @@
         DLog(@"user did load SONG %i",xmpId);
         
         // delegate calls back to set activeSong
-        [delegate loadFromXmpId:xmpId andType:loadedTableType];
+        [delegate loadFromXmpId:xmpId andType:loadedTableType clearData:YES];
         
         [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(loadSongView) userInfo:nil repeats:NO];
         
@@ -221,7 +221,7 @@
 {
     selectMode = @"Load";
     
-    NSString * newSet = (activeSequence.m_originSequenceRoot || activeSequence.m_xmpName == nil) ? [self generateNextSetName] : activeSequence.m_xmpName;
+    NSString * newSet = (activeSequence.m_originSequenceRoot || activeSequence.m_xmpName == nil) ? [g_ophoMaster generateNextSequenceName] : activeSequence.m_xmpName;
     
     // delegate sets activeSequencer
     [delegate createNewSaveName:newSet];
@@ -718,7 +718,7 @@
     }
 }
 
-- (NSString *)generateNextSetName
+/*- (NSString *)generateNextSetName
 {
     int customCount = 0;
     
@@ -747,7 +747,7 @@
     return [@"Set" stringByAppendingString:numberString];
     
 }
-
+*/
 #pragma mark - Drawing
 
 - (void)reloadUserProfile
