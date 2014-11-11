@@ -22,6 +22,13 @@ extern NSUser * g_loggedInUser;
 @synthesize tutorialDelegate;
 @synthesize sampleDelegate;
 @synthesize loadingDelegate;
+
+@synthesize userRootFolderId;
+@synthesize userSequenceFolderId;
+@synthesize userSampleFolderId;
+@synthesize userSongFolderId;
+@synthesize userInstrumentFolderId;
+
 @synthesize savingSong;
 @synthesize savingSongData;
 @synthesize savingSequence;
@@ -45,8 +52,6 @@ extern NSUser * g_loggedInUser;
         ophoLoadingInstrumentQueue = [[NSMutableDictionary alloc] init];
         
         [self loadSampleCache];
-        
-        loggedInAndLoaded = false;
         
         savingInstrumentObject = nil;
     }
@@ -78,13 +83,7 @@ extern NSUser * g_loggedInUser;
         
         [loginDelegate loggedInCallback];
         
-        if(!loggedInAndLoaded){
-            loggedInAndLoaded = true;
-            
-            //dispatch_async(dispatch_get_main_queue(), ^{
-            //    [loadingDelegate loadingBegan];
-            //});
-        }
+        [self loadUserFolderId];
         
         [self regenerateData];
         
@@ -112,6 +111,143 @@ extern NSUser * g_loggedInUser;
 - (BOOL)loggedIn
 {
     return ophoCloudController.m_loggedIn;
+}
+
+#pragma mark - User Folder
+
+- (void)loadUserFolderId
+{
+    [ophoCloudController requestGetXmpFolderContentList:1 andXmpType:0 andExcludeType:0 andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(loadUserRootFolderIdCallback:)];
+}
+
+- (void)loadUserChildFoldersFromRoot
+{
+    [ophoCloudController requestGetXmpFolderContentList:userRootFolderId andXmpType:0 andExcludeType:0 andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(loadUserChildFoldersFromRootCallback:)];
+}
+
+- (void)createRootFolderForUser
+{
+    [ophoCloudController requestNewXmpFolderWithName:[self generateRootFolderName] andParentFolderId:1 andXmpType:0 andCallbackObj:self andCallbackSel:@selector(newRootFolderForUser:)];
+}
+
+- (void)createChildFolder:(NSString *)type xmpType:(int)xmpType
+{
+    [ophoCloudController requestNewXmpFolderWithName:[self generateChildFolderName:type] andParentFolderId:userRootFolderId andXmpType:xmpType andCallbackObj:self andCallbackSel:@selector(newChildFolderForUser:)];
+}
+
+- (NSString *)generateRootFolderName
+{
+    return [NSString stringWithFormat:@"sequence_user%li",g_loggedInUser.m_userId];
+}
+
+- (NSString *)generateChildFolderName:(NSString *)type
+{
+    return [NSString stringWithFormat:@"sequence_user%li_%@",g_loggedInUser.m_userId,type];
+}
+
+
+- (void)loadUserRootFolderIdCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"User Folder ID Callback: %@",cloudResponse);
+    
+    userRootFolderId = 0;
+    
+    NSArray * folderList = cloudResponse.m_folderList;
+    
+    for(XmlDom * folder in folderList){
+        NSInteger folderid = [[folder getTextFromChildWithName:@"xmp_folder_id"] intValue];
+        NSString * foldername = [folder getTextFromChildWithName:@"xmp_folder_name"];
+        
+        if([foldername isEqualToString:[self generateRootFolderName]]){
+            userRootFolderId = folderid;
+            [self loadUserChildFoldersFromRoot];
+        }
+    }
+    
+    DLog(@"user root folder id is %i",userRootFolderId);
+    
+    if(userRootFolderId == 0){
+        
+        [self createRootFolderForUser];
+        
+    }
+    
+}
+
+- (void)loadUserChildFoldersFromRootCallback:(CloudResponse *)cloudResponse
+{
+    DLog(@"User Child Folders ID Callback: %@",cloudResponse);
+    
+    userSequenceFolderId = 0;
+    userSampleFolderId = 0;
+    userSongFolderId = 0;
+    userInstrumentFolderId = 0;
+    
+    NSArray * folderList = cloudResponse.m_folderList;
+    
+    for(XmlDom * folder in folderList){
+        NSInteger folderid = [[folder getTextFromChildWithName:@"xmp_folder_id"] intValue];
+        NSString * foldername = [folder getTextFromChildWithName:@"xmp_folder_name"];
+        
+        if([foldername isEqualToString:[self generateChildFolderName:FOLDER_TYPE_SEQUENCE]]){
+            userSequenceFolderId = folderid;
+        }else if([foldername isEqualToString:[self generateChildFolderName:FOLDER_TYPE_SAMPLE]]){
+            userSampleFolderId = folderid;
+        }else if([foldername isEqualToString:[self generateChildFolderName:FOLDER_TYPE_SONG]]){
+            userSongFolderId = folderid;
+        }else if([foldername isEqualToString:[self generateChildFolderName:FOLDER_TYPE_INSTRUMENT]]){
+            userInstrumentFolderId = folderid;
+        }
+    }
+    
+    DLog(@"child ids are sequence=%li sample=%li song=%li instrument=%li",userSequenceFolderId,userSampleFolderId,userSongFolderId,userInstrumentFolderId);
+    
+    if(userSequenceFolderId == 0){
+        [self createChildFolder:FOLDER_TYPE_SEQUENCE xmpType:OphoXmpTypeAppDefined];
+    }
+    
+    if(userSampleFolderId == 0){
+        [self createChildFolder:FOLDER_TYPE_SAMPLE xmpType:OphoXmpTypeXMPSample];
+    }
+    
+    if(userSongFolderId == 0){
+        [self createChildFolder:FOLDER_TYPE_SONG xmpType:OphoXmpTypeSong];
+    }
+    
+    if(userInstrumentFolderId == 0){
+        [self createChildFolder:FOLDER_TYPE_INSTRUMENT xmpType:OphoXmpTypeXMPInstrument];
+    }
+}
+
+- (void)newRootFolderForUser:(CloudResponse *)cloudResponse;
+{
+    userRootFolderId = cloudResponse.m_folderId;
+    
+    DLog(@"user root folder id is %i",userRootFolderId);
+    
+    [self loadUserChildFoldersFromRoot];
+    
+}
+
+- (void)newChildFolderForUser:(CloudResponse *)cloudResponse
+{
+    if(cloudResponse.m_xmpType == OphoXmpTypeAppDefined){
+        userSequenceFolderId = cloudResponse.m_folderId;
+        DLog(@"user child id is sequence=%li",userSequenceFolderId);
+    }else if(cloudResponse.m_xmpType == OphoXmpTypeXMPSample){
+        userSampleFolderId = cloudResponse.m_folderId;
+        DLog(@"user child id is sample=%li",userSampleFolderId);
+    }else if(cloudResponse.m_xmpType == OphoXmpTypeSong){
+        userSongFolderId = cloudResponse.m_folderId;
+        DLog(@"user child id is song=%li",userSongFolderId);
+    }else if(cloudResponse.m_xmpType == OphoXmpTypeXMPInstrument){
+        userInstrumentFolderId = cloudResponse.m_folderId;
+        DLog(@"user child id is instrument=%li",userInstrumentFolderId);
+    }else{
+        DLog(@"Created new child folder with type %i",cloudResponse.m_xmpType);
+    }
+    
+    
 }
 
 #pragma mark - XMP Lists

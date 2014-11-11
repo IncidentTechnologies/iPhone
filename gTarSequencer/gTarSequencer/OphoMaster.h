@@ -13,6 +13,11 @@
 #define OPHO_LIST_NAMES @"names"
 #define OPHO_LIST_DATES @"dates"
 
+#define FOLDER_TYPE_SEQUENCE @"set"
+#define FOLDER_TYPE_SAMPLE @"sample"
+#define FOLDER_TYPE_SONG @"song"
+#define FOLDER_TYPE_INSTRUMENT @"instrument"
+
 @class NSSong;
 @class NSSequence;
 @class NSSample;
@@ -81,14 +86,18 @@
 
     BOOL pendingLoadTutorial;
     
-    BOOL loggedInAndLoaded;
-    
 }
 
 @property (weak, nonatomic) id <OphoLoginDelegate> loginDelegate;
 @property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
 @property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
 @property (weak, nonatomic) id <OphoLoadingDelegate> loadingDelegate;
+@property (assign, nonatomic) NSInteger userRootFolderId;
+@property (assign, nonatomic) NSInteger userSequenceFolderId;
+@property (assign, nonatomic) NSInteger userSampleFolderId;
+@property (assign, nonatomic) NSInteger userSongFolderId;
+@property (assign, nonatomic) NSInteger userInstrumentFolderId;
+
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSData * savingSongData;
 @property (strong, nonatomic) NSSequence * savingSequence;
