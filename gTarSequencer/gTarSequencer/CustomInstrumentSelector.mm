@@ -753,6 +753,8 @@
         soundMaster = [[SoundMaster alloc] init];
     }
     
+    [soundMaster start];
+    
     m_bankNode = [soundMaster generateBank];
     
     if(datastring == nil || [datastring length] == 0){

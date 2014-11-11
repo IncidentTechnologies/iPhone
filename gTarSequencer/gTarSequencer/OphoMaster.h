@@ -55,6 +55,12 @@
 
 @end
 
+@protocol OphoProfileDelegate <NSObject>
+
+- (void)profileLoaded;
+
+@end
+
 @interface OphoMaster : NSObject
 {
     OphoCloudController * ophoCloudController;
@@ -97,6 +103,7 @@
 @property (weak, nonatomic) id <OphoTutorialDelegate> tutorialDelegate;
 @property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
 @property (weak, nonatomic) id <OphoLoadingDelegate> loadingDelegate;
+@property (weak, nonatomic) id <OphoProfileDelegate> profileDelegate;
 @property (assign, nonatomic) NSInteger userRootFolderId;
 @property (assign, nonatomic) NSInteger userSequenceFolderId;
 @property (assign, nonatomic) NSInteger userSampleFolderId;
@@ -125,6 +132,7 @@
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password;
 - (void)logout;
 - (BOOL)loggedIn;
+- (UIImage *)getUserProfileImage;
 
 // Caching
 - (BOOL)cacheForSample:(long)xmpId;

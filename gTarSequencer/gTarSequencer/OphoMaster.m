@@ -22,6 +22,7 @@ extern NSUser * g_loggedInUser;
 @synthesize tutorialDelegate;
 @synthesize sampleDelegate;
 @synthesize loadingDelegate;
+@synthesize profileDelegate;
 
 @synthesize userRootFolderId;
 @synthesize userSequenceFolderId;
@@ -99,6 +100,8 @@ extern NSUser * g_loggedInUser;
 {
     [loginDelegate loggedInCallback];
     
+    [self requestUserProfileImage];
+    
     [self regenerateData];
     
     [self buildDefaultInstrumentsToSaveToOpho];
@@ -119,6 +122,23 @@ extern NSUser * g_loggedInUser;
 - (BOOL)loggedIn
 {
     return ophoCloudController.m_loggedIn;
+}
+
+- (void)requestUserProfileImage
+{
+    [ophoCloudController requestUserProfileImage:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(requestUserProfileImageCallback:)];
+}
+
+- (void)requestUserProfileImageCallback:(CloudResponse *)cloudResponse
+{
+    g_loggedInUser.m_image = [[UIImage alloc] initWithData:cloudResponse.m_receivedData];
+    
+    [profileDelegate profileLoaded];
+}
+
+- (UIImage *)getUserProfileImage
+{
+    return g_loggedInUser.m_image;
 }
 
 #pragma mark - User Folder
@@ -400,7 +420,9 @@ extern NSUser * g_loggedInUser;
 
 - (void)saveSongRender:(long)xmpId withFile:(NSData *)filedata
 {
-    [ophoCloudController requestSetXmpRenderWithId:xmpId andName:[savingSong.m_xmpName stringByAppendingString:@".wav"] andRenderBlob:filedata andCallbackObj:self andCallbackSel:@selector(saveSongRenderCallback:)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestSetXmpRenderWithId:xmpId andName:[savingSong.m_xmpName stringByAppendingString:@".wav"] andRenderBlob:filedata andCallbackObj:self andCallbackSel:@selector(saveSongRenderCallback:)];
+    });
 }
 
 - (void)saveSongRenderCallback:(CloudResponse *)cloudResponse
@@ -664,12 +686,17 @@ extern NSUser * g_loggedInUser;
 // Generic
 - (void)saveToNewWithName:(NSString *)name folderId:(NSInteger)folderId callbackObj:(id)callbackObj selector:(SEL)selector
 {
-    [ophoCloudController requestNewXmpWithFolderId:folderId andName:name andCallbackObj:callbackObj andCallbackSel:selector];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestNewXmpWithFolderId:folderId andName:name andCallbackObj:callbackObj andCallbackSel:selector];
+    });
 }
 
 - (void)saveToId:(NSInteger)xmpId withFile:(NSData *)filedata withData:(NSString *)datastring withName:(NSString *)name
 {
-    [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:filedata andXmpDataString:datastring andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestSaveXmpWithId:xmpId andXmpFileData:filedata andXmpDataString:datastring andName:name andCallbackObj:self andCallbackSel:@selector(saveCallback:)];
+    });
 }
 
 - (void)saveCallback:(CloudResponse *)cloudResponse
@@ -709,13 +736,19 @@ extern NSUser * g_loggedInUser;
 
 - (void)renameSongWithId:(NSInteger)xmpId toName:(NSString *)name
 {
-    [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSongCallback:)];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSongCallback:)];
+    });
     
 }
 
 - (void)renameSequenceWithId:(NSInteger)xmpId toName:(NSString *)name
 {
-    [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSequenceCallback:)];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestSetXmpNameWithId:xmpId andName:name andCallbackObj:self andCallbackSel:@selector(renameSequenceCallback:)];
+    });
 }
 
 - (void)renameSongCallback:(CloudResponse *)cloudResponse
@@ -941,7 +974,9 @@ extern NSUser * g_loggedInUser;
 {
     DLog(@"Delete with ID %i",xmpId);
     
-    [ophoCloudController requestDeleteXmpWithId:xmpId andCallbackObj:self andCallbackSel:@selector(deleteCallback:)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [ophoCloudController requestDeleteXmpWithId:xmpId andCallbackObj:self andCallbackSel:@selector(deleteCallback:)];
+    });
 }
 
 - (void)deleteCallback:(CloudResponse *)cloudResponse

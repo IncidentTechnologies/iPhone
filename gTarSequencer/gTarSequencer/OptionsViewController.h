@@ -23,9 +23,6 @@
 
 - (void) loggedOut:(BOOL)animate;
 
-- (int) countInstruments;
-- (int) countSounds;
-
 - (BOOL) isLeftNavOpen;
 
 @end
@@ -33,7 +30,7 @@
 extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
-@interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface OptionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,OphoProfileDelegate>
 {
     NSMutableArray * fileIdSet;
     NSMutableArray * fileLoadSet;
@@ -49,6 +46,8 @@ extern NSUser * g_loggedInUser;
     
     BOOL isScreenLarge;
 }
+
+- (void)profileLoaded;
 
 - (IBAction)userDidSelectCreateNew:(id)sender;
 - (IBAction)userDidSelectSaveCurrent:(id)sender;

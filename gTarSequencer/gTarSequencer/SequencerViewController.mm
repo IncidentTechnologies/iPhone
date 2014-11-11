@@ -486,18 +486,6 @@
     [soundMaster commitMasterLevelSlider:masterSlider];
 }
 
-#pragma mark - Options View Controller
-
-- (int)countInstruments
-{
-    return [seqSetViewController countMasterInstrumentOptions];
-}
-
-- (int)countSounds
-{
-    return [seqSetViewController countSamples];
-}
-
 #pragma mark - Save Load
 
 - (void)saveSequenceWithId:(NSInteger)xmpId andName:(NSString *)filename
@@ -645,9 +633,12 @@
     DLog(@"Create new save name: %@",filename);
     
     // Save previous set if not blank
-    if([seqSetViewController countTracks] > 0 && ![filename isEqualToString:DEFAULT_SET_NAME]){
+    if([seqSetViewController countTracks] > 0){
         
-        // TODO: prompt
+        if([filename isEqualToString:DEFAULT_SET_NAME]){
+            filename = [g_ophoMaster generateNextSequenceName];
+        }
+        
         NSString * promptTitle = [@"Save " stringByAppendingFormat:@"%@",filename];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:promptTitle message:@"Save changes to your current set?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES",nil];
@@ -680,7 +671,9 @@
     
     DLog(@"Create new set and save for sequence ID %li, name %@",sequence.m_id,sequencerToSave);
     
-    [self saveSequenceWithId:sequence.m_id andName:sequencerToSave];
+    long sequenceId = ([sequence.m_name isEqualToString:DEFAULT_SET_NAME]) ? 0 : sequence.m_id;
+    
+    [self saveSequenceWithId:sequenceId andName:sequencerToSave];
     sequencerToSave = @"";
     [self createNewSet];
 }
@@ -1625,7 +1618,6 @@
         [gatekeeperViewController.view removeFromSuperview];
         [playControlViewController.view setUserInteractionEnabled:YES];
     }];
-    
 }
 
 - (void)instrumentListLoaded

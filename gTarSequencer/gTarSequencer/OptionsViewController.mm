@@ -77,6 +77,11 @@
     [self reloadUserProfile];
 }
 
+- (void)profileLoaded
+{
+    [self reloadUserProfile];
+}
+
 - (void)unloadView
 {
     // Hide any cells showing keyboard
@@ -88,6 +93,9 @@
 
 - (void)initOptions
 {
+    
+    g_ophoMaster.profileDelegate = self;
+    
     loadedTableType = TYPE_SEQUENCE;
     
     // Check for first launch
@@ -752,14 +760,33 @@
 
 - (void)reloadUserProfile
 {
-    UIImage * image = [UIImage imageNamed:@"Bear_Brown"];
+    // set default
+    [profileButton setImage:[UIImage imageNamed:@"Bear_Brown"] forState:UIControlStateNormal];
     
-    if(g_loggedInUser.m_image != nil && g_loggedInUser.m_userProfile.m_imgFileId > 1){
-        image = g_loggedInUser.m_image;
+    [self loadUserProfileImage];
+    
+    profileNameLabel.text = g_loggedInUser.m_username;
+    
+    // Counts
+    [self showSetCount];
+    [self showInstrumentCount];
+    [self showSoundCount];
+}
+
+- (void)loadUserProfileImage
+{
+    UIImage * image = [g_ophoMaster getUserProfileImage];
+    
+    if(image == nil){
+        return;
+    }
+    
+    if(image != nil){
         profileButton.imageView.layer.cornerRadius = 5.0;
         profileButton.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         profileButton.imageView.layer.borderWidth = 1.0;
     }else{
+        image = [UIImage imageNamed:@"Bear_Brown"];
         profileButton.imageView.layer.cornerRadius = 0.0;
         profileButton.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         profileButton.imageView.layer.borderWidth = 0.0;
@@ -767,12 +794,6 @@
     
     // User info
     [profileButton setImage:image forState:UIControlStateNormal];
-    profileNameLabel.text = g_loggedInUser.m_username;
-    
-    // Counts
-    [self showSetCount];
-    [self showInstrumentCount];
-    [self showSoundCount];
 }
 
 -(void)drawProfileButtonsAndLabels
@@ -792,9 +813,11 @@
 
 - (void)showSetCount
 {
-    [profileSetLabel setText:[NSString stringWithFormat:@"%i",[fileLoadSet count]+1]];
+    long setCount = [[[g_ophoMaster getSequenceList] objectForKey:OPHO_LIST_IDS] count];
     
-    if([fileLoadSet count] > 0){
+    [profileSetLabel setText:[NSString stringWithFormat:@"%li",MAX(setCount,0)]];
+    
+    if(setCount != 1){
         [profileSetNameLabel setText:@"sets"];
     }else{
         [profileSetNameLabel setText:@"set"];
@@ -805,17 +828,17 @@
 - (void)showInstrumentCount
 {
     // Subtract the custom instrument creator
-    int instrumentCount = [delegate countInstruments]-1;
+    long instrumentCount = [[[g_ophoMaster getInstrumentList] objectForKey:OPHO_LIST_IDS] count];
     
-    [profileInstrumentLabel setText:[NSString stringWithFormat:@"%i",instrumentCount]];
+    [profileInstrumentLabel setText:[NSString stringWithFormat:@"%li",MAX(instrumentCount,0)]];
     
 }
 
 - (void)showSoundCount
 {
-    int soundCount = [delegate countSounds];
+    long soundCount = [[[g_ophoMaster getSampleList] objectForKey:OPHO_LIST_IDS] count];
     
-    [profileSoundLabel setText:[NSString stringWithFormat:@"%i",soundCount]];
+    [profileSoundLabel setText:[NSString stringWithFormat:@"%li",MAX(soundCount,0)]];
     
 }
 
