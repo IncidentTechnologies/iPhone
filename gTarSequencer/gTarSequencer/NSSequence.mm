@@ -274,10 +274,10 @@
 
 -(NSString *)saveToFile:(NSString *)filename saveWithSamples:(BOOL)saveWithSamples
 {
-    if([m_tracks count] == 0 || [[m_tracks firstObject] m_instrument] == nil){
+    /*if([m_tracks count] == 0 || [[m_tracks firstObject] m_instrument] == nil){
         DLog(@"ERROR Trying to save incomplete Sequence");
         return nil;
-    }
+    }*/
     
     // First change the name
     if(![filename isEqualToString:DEFAULT_STATE_NAME]){
