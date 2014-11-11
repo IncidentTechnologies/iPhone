@@ -1003,8 +1003,9 @@
                 DLog(@"DEQUEUEING THE NEXT PATTERN");
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forTrack:nextPatternTrack];
-                
-                if(activeMainView == instrumentViewController.view && track==[seqSetViewController getCurrentTrack]){
+            
+                if(activeMainView == instrumentViewController.view && track == [seqSetViewController getCurrentTrack]){
+                    
                     [instrumentViewController commitPatternChange:nextPatternIndex];
                 }
                 

@@ -1596,15 +1596,27 @@
     
     NSPattern * newSelection = [track selectPattern:indexToSelect];
     
+    NSTrack * currentTrack = [self getCurrentTrack];
+    
     [delegate updatePlaybandForTrack:track];
     
-    [self selectInstrument:track.m_instrument.m_id];
+    int trackIndex = 0;
+    for(NSTrack * sequenceTrack in sequence.m_tracks){
+        if(sequenceTrack.m_instrument.m_id == track.m_instrument.m_id){
+            [self selectInstrument:trackIndex];
+        }
+        trackIndex++;
+    }
+    
+    currentTrack = [self getCurrentTrack];
     
     [delegate setMeasureAndUpdate:newSelection.selectedMeasure checkNotPlaying:TRUE];
     
     if (![delegate checkIsPlaying]){
         [self updateAllVisibleCells];
     }
+    
+    currentTrack = [self getCurrentTrack];
     
     [self saveStateToDiskWithForce:NO];
 }
