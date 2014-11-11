@@ -1327,9 +1327,13 @@ extern NSUser * g_loggedInUser;
     
     NSArray * xmpList = cloudResponse.m_xmpList;
     
+    BOOL firstCallback = ([sampleIdSet count] == 0);
+    
     [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
     
-    [self refreshCacheFromSampleList];
+    if(!firstCallback){
+        [self refreshCacheFromSampleList];
+    }
 }
 
 - (BOOL)defaultSetExists
