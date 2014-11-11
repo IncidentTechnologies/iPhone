@@ -16,6 +16,8 @@
 
 - (void) resetPlayLocation;
 
+- (void) loadingBegan;
+
 - (void) stopAll;
 - (void) startAll;
 - (BOOL) checkIsPlaying;

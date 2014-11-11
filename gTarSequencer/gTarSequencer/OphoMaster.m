@@ -88,6 +88,7 @@ extern NSUser * g_loggedInUser;
         
         [self loadUserFolderId];
         
+        [loadingDelegate loadingBegan];
         
     }else{
         
@@ -98,6 +99,8 @@ extern NSUser * g_loggedInUser;
 
 - (void)loggedInAndLoaded
 {
+    [loadingDelegate loadingBegan];
+    
     [loginDelegate loggedInCallback];
     
     [self requestUserProfileImage];

@@ -552,6 +552,11 @@
         
         [self refreshActiveSequence];
         
+        // Ensure loading clears if there are no tracks
+        if([sequence.m_tracks count] == 0){
+            [self loadingEnded];
+        }
+        
     }
     
     // May have loaded the sequence after a song
@@ -766,16 +771,17 @@
 {
     stateLoaded = [seqSetViewController loadStateFromDisk];
  
-    // TODO: on callback refresh active sequence
-
     [self setActiveSong:activeSong];
     
     // Ensure sequence exists or is created
-    //!loaded && 
-    if([seqSetViewController getSequence] == nil){
+    //!loaded &&
+    NSSequence * loadedSequence = [seqSetViewController getSequence];
+    if(loadedSequence == nil){
         [seqSetViewController initFirstSequence];
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
+    }else if([loadedSequence.m_tracks count] == 0){
+        [self loadingEnded];
     }
 }
 
@@ -1461,7 +1467,7 @@
 
 #pragma mark - External file sharing
 
-- (void)userDidLaunchEmailWithAttachment:(NSString *)filename
+- (void)userDidLaunchEmailWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId
 {
     MFMailComposeViewController * email = [[MFMailComposeViewController alloc] init];
     email.mailComposeDelegate = self;
@@ -1470,7 +1476,7 @@
     [email setSubject:@"Check Out the Song I Made"];
     
     // Body
-    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%li<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>",recordingSong.m_id];
+    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%i<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>",xmpId];
     
     [email setMessageBody:body isHTML:YES];
     
@@ -1486,7 +1492,7 @@
     
 }
 
-- (void)userDidLaunchSMSWithAttachment:(NSString *)filename
+- (void)userDidLaunchSMSWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId
 {
     DLog(@"Launching SMS");
     
@@ -1494,7 +1500,7 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%li",recordingSong.m_id];
+    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%i",xmpId];
     [message setBody:body];
     
     // Attachment
@@ -1512,7 +1518,7 @@
     
 }
 
-- (void)userDidLaunchSoundCloudAuthWithFile:(NSString *)filename
+- (void)userDidLaunchSoundCloudAuthWithFile:(NSString *)filename xmpId:(NSInteger)xmpId
 {
     if([SCSoundCloud account] == nil){
         

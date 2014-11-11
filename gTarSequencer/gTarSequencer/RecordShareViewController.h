@@ -30,9 +30,9 @@
 - (void) refreshSong:(NSSong *)song;
 - (void) viewSeqSetWithAnimation:(BOOL)animate;
 - (void) recordPlaybackDidEnd;
-- (void) userDidLaunchEmailWithAttachment:(NSString *)filename;
-- (void) userDidLaunchSMSWithAttachment:(NSString *)filename;
-- (void) userDidLaunchSoundCloudAuthWithFile:(NSString *)filename;
+- (void) userDidLaunchEmailWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId;
+- (void) userDidLaunchSMSWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId;
+- (void) userDidLaunchSoundCloudAuthWithFile:(NSString *)filename xmpId:(NSInteger)xmpId;
 
 - (void) renameForXmpId:(NSInteger)xmpId FromName:(NSString *)filename toName:(NSString *)newname andType:(NSString *)type;
 

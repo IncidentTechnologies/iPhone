@@ -843,17 +843,17 @@
     if(senderButton == shareEmailButton){
         
         selectedShareType = @"Email";
-        [delegate userDidLaunchEmailWithAttachment:songname];
+        [delegate userDidLaunchEmailWithAttachment:songname xmpId:recordingSong.m_id];
         
     }else if(senderButton == shareSMSButton){
         
         selectedShareType = @"SMS";
-        [delegate userDidLaunchSMSWithAttachment:songname];
+        [delegate userDidLaunchSMSWithAttachment:songname xmpId:recordingSong.m_id];
         
     }else if(senderButton == shareSoundcloudButton){
         
         selectedShareType = @"SoundCloud";
-        [delegate userDidLaunchSoundCloudAuthWithFile:songname];
+        [delegate userDidLaunchSoundCloudAuthWithFile:songname xmpId:recordingSong.m_id];
         
     }
 }
