@@ -28,6 +28,10 @@ extern NSUser * g_loggedInUser;
 @synthesize userSampleFolderId;
 @synthesize userSongFolderId;
 @synthesize userInstrumentFolderId;
+@synthesize ophoSequenceFolderId;
+@synthesize ophoSampleFolderId;
+@synthesize ophoSongFolderId;
+@synthesize ophoInstrumentFolderId;
 
 @synthesize savingSong;
 @synthesize savingSongData;
@@ -81,19 +85,23 @@ extern NSUser * g_loggedInUser;
         
         [g_loggedInUser cache];
         
-        [loginDelegate loggedInCallback];
-        
         [self loadUserFolderId];
         
-        [self regenerateData];
-        
-        [self buildDefaultInstrumentsToSaveToOpho];
         
     }else{
         
         [loginDelegate loginFailedCallback:cloudResponse.m_statusText];
         
     }
+}
+
+- (void)loggedInAndLoaded
+{
+    [loginDelegate loggedInCallback];
+    
+    [self regenerateData];
+    
+    [self buildDefaultInstrumentsToSaveToOpho];
 }
 
 - (void)logout
@@ -161,10 +169,20 @@ extern NSUser * g_loggedInUser;
         if([foldername isEqualToString:[self generateRootFolderName]]){
             userRootFolderId = folderid;
             [self loadUserChildFoldersFromRoot];
+        }else if([foldername isEqualToString:OPHO_FOLDER_SEQUENCE]){
+            ophoSequenceFolderId = folderid;
+        }else if([foldername isEqualToString:OPHO_FOLDER_SAMPLE]){
+            ophoSampleFolderId = folderid;
+        }else if([foldername isEqualToString:OPHO_FOLDER_SONG]){
+            ophoSongFolderId = folderid;
+        }else if([foldername isEqualToString:OPHO_FOLDER_INSTRUMENT]){
+            ophoInstrumentFolderId = folderid;
         }
     }
     
     DLog(@"user root folder id is %i",userRootFolderId);
+    
+    DLog(@"opho folder ids sequence=%li sample=%li song=%li instrument=%li",ophoSequenceFolderId,ophoSampleFolderId,ophoSongFolderId,ophoInstrumentFolderId);
     
     if(userRootFolderId == 0){
         
@@ -217,6 +235,11 @@ extern NSUser * g_loggedInUser;
     if(userInstrumentFolderId == 0){
         [self createChildFolder:FOLDER_TYPE_INSTRUMENT xmpType:OphoXmpTypeXMPInstrument];
     }
+    
+    if(userSequenceFolderId > 0 && userSampleFolderId > 0 && userSongFolderId > 0 && userInstrumentFolderId > 0){
+        [self loggedInAndLoaded];
+    }
+    
 }
 
 - (void)newRootFolderForUser:(CloudResponse *)cloudResponse;
@@ -247,29 +270,50 @@ extern NSUser * g_loggedInUser;
         DLog(@"Created new child folder with type %i",cloudResponse.m_xmpType);
     }
     
+    if(userSequenceFolderId > 0 && userSampleFolderId > 0 && userSongFolderId > 0 && userInstrumentFolderId > 0){
+        [self loggedInAndLoaded];
+    }
     
 }
 
 #pragma mark - XMP Lists
 
-- (void)getSongListForCallbackObj:(id)callbackObj selector:(SEL)selector
+- (void)getSongListForCallbackObj:(id)callbackObj selector:(SEL)selector isCustom:(BOOL)isCustom
 {
-    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+    NSInteger folderId = (isCustom) ? userSongFolderId : ophoSongFolderId;
+    
+    NSInteger userId = (isCustom) ? g_loggedInUser.m_userId : 1;
+    
+    [ophoCloudController requestGetXmpFolderContentList:folderId andXmpType:OphoXmpTypeSong andExcludeType:0 andUserId:userId andCallbackObj:callbackObj andCallbackSel:selector];
+    
 }
 
-- (void)getSequenceListForCallbackObj:(id)callbackObj selector:(SEL)selector
+- (void)getSequenceListForCallbackObj:(id)callbackObj selector:(SEL)selector isCustom:(BOOL)isCustom
 {
-    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeAppDefined andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+    NSInteger folderId = (isCustom) ? userSequenceFolderId : ophoSequenceFolderId;
+    
+    NSInteger userId = (isCustom) ? g_loggedInUser.m_userId : 1;
+    
+    [ophoCloudController requestGetXmpFolderContentList:folderId andXmpType:OphoXmpTypeAppDefined andExcludeType:0 andUserId:userId andCallbackObj:callbackObj andCallbackSel:selector];
+    
 }
 
-- (void)getSampleListForCallbackObj:(id)callbackObj selector:(SEL)selector
+- (void)getSampleListForCallbackObj:(id)callbackObj selector:(SEL)selector isCustom:(BOOL)isCustom
 {
-    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeXMPSample andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+    NSInteger folderId = (isCustom) ? userSampleFolderId : ophoSampleFolderId;
+    
+    NSInteger userId = (isCustom) ? g_loggedInUser.m_userId : 1;
+    
+    [ophoCloudController requestGetXmpFolderContentList:folderId andXmpType:OphoXmpTypeXMPSample andExcludeType:0 andUserId:userId andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
-- (void)getInstrumentListForCallbackObj:(id)callbackObj selector:(SEL)selector
+- (void)getInstrumentListForCallbackObj:(id)callbackObj selector:(SEL)selector isCustom:(BOOL)isCustom
 {
-    [ophoCloudController requestGetXmpListWithType:OphoXmpTypeXMPInstrument andUserId:g_loggedInUser.m_userId andCallbackObj:callbackObj andCallbackSel:selector];
+    NSInteger folderId = (isCustom) ? userInstrumentFolderId : ophoInstrumentFolderId;
+    
+    NSInteger userId = (isCustom) ? g_loggedInUser.m_userId : 1;
+    
+    [ophoCloudController requestGetXmpFolderContentList:folderId andXmpType:OphoXmpTypeXMPInstrument andExcludeType:0 andUserId:userId andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
 #pragma mark - XMP Save
@@ -284,7 +328,7 @@ extern NSUser * g_loggedInUser;
         [savingSequence giveUserOwnership]; // May be an edited preset
         
         if(savingSequence.m_id <= 0){
-            [self saveToNewWithName:sequence.m_xmpName callbackObj:self selector:@selector(saveNewSequenceCallback:)];
+            [self saveToNewWithName:sequence.m_xmpName folderId:userSequenceFolderId callbackObj:self selector:@selector(saveNewSequenceCallback:)];
         }else{
             [self saveSequenceToId:sequence.m_id withName:sequence.m_xmpName];
         }
@@ -324,7 +368,7 @@ extern NSUser * g_loggedInUser;
         savingSongData = filedata;
         
         if(savingSong.m_id <= 0){
-            [self saveToNewWithName:song.m_xmpName callbackObj:self selector:@selector(saveNewSongCallback:)];
+            [self saveToNewWithName:song.m_xmpName folderId:userSongFolderId callbackObj:self selector:@selector(saveNewSongCallback:)];
         }else{
             [self saveSongToId:song.m_id withFile:filedata withName:song.m_xmpName];
         }
@@ -378,7 +422,7 @@ extern NSUser * g_loggedInUser;
         savingSampleData = filedata;
         
         if(savingSample.m_xmpFileId <= 0){
-            [self saveToNewWithName:sample.m_name callbackObj:self selector:@selector(saveNewSampleCallback:)];
+            [self saveToNewWithName:sample.m_name folderId:userSampleFolderId callbackObj:self selector:@selector(saveNewSampleCallback:)];
         }else{
             [self saveSampleToId:sample.m_xmpFileId withName:sample.m_name];
         }
@@ -570,7 +614,7 @@ extern NSUser * g_loggedInUser;
         savingInstrument = instrument;
         
         if(savingInstrument.m_id <= 0){
-            [self saveToNewWithName:instrument.m_name callbackObj:self selector:@selector(saveNewInstrumentCallback:)];
+            [self saveToNewWithName:instrument.m_name folderId:userInstrumentFolderId callbackObj:self selector:@selector(saveNewInstrumentCallback:)];
         }else{
             [self saveInstrumentToId:savingInstrument.m_id withName:savingInstrument.m_name];
         }
@@ -618,9 +662,9 @@ extern NSUser * g_loggedInUser;
 
 
 // Generic
-- (void)saveToNewWithName:(NSString *)name callbackObj:(id)callbackObj selector:(SEL)selector
+- (void)saveToNewWithName:(NSString *)name folderId:(NSInteger)folderId callbackObj:(id)callbackObj selector:(SEL)selector
 {
-    [ophoCloudController requestNewXmpWithFolderId:0 andName:name andCallbackObj:callbackObj andCallbackSel:selector];
+    [ophoCloudController requestNewXmpWithFolderId:folderId andName:name andCallbackObj:callbackObj andCallbackSel:selector];
 }
 
 - (void)saveToId:(NSInteger)xmpId withFile:(NSData *)filedata withData:(NSString *)datastring withName:(NSString *)name
@@ -790,6 +834,8 @@ extern NSUser * g_loggedInUser;
 - (void)addSampleXmpToOphoInstrument:(CloudResponse *)cloudResponse
 {
     NSInteger xmpId = cloudResponse.m_id;
+    
+    DLog(@"attempting to add sample %i to opho instrument",xmpId);
     
     XmlDom * xmp = cloudResponse.m_xmpDom;
     XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
@@ -1137,9 +1183,19 @@ extern NSUser * g_loggedInUser;
         songDateSet = [[NSMutableArray alloc] init];
         songVersionSet = [[NSMutableArray alloc] init];
         songIsCustomSet = [[NSMutableArray alloc] init];
+    }else{
+        
+        [songIdSet removeAllObjects];
+        [songLoadSet removeAllObjects];
+        [songDateSet removeAllObjects];
+        [songVersionSet removeAllObjects];
+        [songIsCustomSet removeAllObjects];
+        
     }
         
-    [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:)];
+    [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:) isCustom:YES];
+    
+    [self getSongListForCallbackObj:self selector:@selector(requestGetXmpSongListCallback:) isCustom:NO];
 }
 
 - (void)loadSequenceList
@@ -1150,9 +1206,19 @@ extern NSUser * g_loggedInUser;
         sequenceDateSet = [[NSMutableArray alloc] init];
         sequenceVersionSet = [[NSMutableArray alloc] init];
         sequenceIsCustomSet = [[NSMutableArray alloc] init];
+    }else{
+        
+        [sequenceIdSet removeAllObjects];
+        [sequenceLoadSet removeAllObjects];
+        [sequenceDateSet removeAllObjects];
+        [sequenceVersionSet removeAllObjects];
+        [sequenceIsCustomSet removeAllObjects];
+        
     }
     
-    [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:)];
+    [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:) isCustom:YES];
+    
+    [self getSequenceListForCallbackObj:self selector:@selector(requestGetXmpSequenceListCallback:) isCustom:NO];
 }
 
 - (void)loadSampleList
@@ -1163,9 +1229,20 @@ extern NSUser * g_loggedInUser;
         sampleDateSet = [[NSMutableArray alloc] init];
         sampleVersionSet = [[NSMutableArray alloc] init];
         sampleIsCustomSet = [[NSMutableArray alloc] init];
+    }else{
+        
+        [sampleIdSet removeAllObjects];
+        [sampleLoadSet removeAllObjects];
+        [sampleDateSet removeAllObjects];
+        [sampleVersionSet removeAllObjects];
+        [sampleIsCustomSet removeAllObjects];
+        
     }
     
-    [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:)];
+    // Merge samples for user and system
+    [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:) isCustom:YES];
+    
+    [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:) isCustom:NO];
 }
 
 - (void)loadInstrumentList
@@ -1176,9 +1253,19 @@ extern NSUser * g_loggedInUser;
         instrumentDateSet = [[NSMutableArray alloc] init];
         instrumentVersionSet = [[NSMutableArray alloc] init];
         instrumentIsCustomSet = [[NSMutableArray alloc] init];
+    }else{
+        
+        [instrumentIdSet removeAllObjects];
+        [instrumentLoadSet removeAllObjects];
+        [instrumentDateSet removeAllObjects];
+        [instrumentVersionSet removeAllObjects];
+        [instrumentIsCustomSet removeAllObjects];
+        
     }
         
-    [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:)];
+    [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:) isCustom:NO];
+    
+    [self getInstrumentListForCallbackObj:self selector:@selector(requestGetXmpInstrumentListCallback:) isCustom:YES];
 }
 
 - (void)requestGetXmpSongListCallback:(CloudResponse *)cloudResponse
@@ -1186,12 +1273,6 @@ extern NSUser * g_loggedInUser;
     DLog(@"Request Get Xmp Song List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
-    
-    [songIdSet removeAllObjects];
-    [songLoadSet removeAllObjects];
-    [songDateSet removeAllObjects];
-    [songVersionSet removeAllObjects];
-    [songIsCustomSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet withVersion:songVersionSet withCustom:songIsCustomSet];
 }
@@ -1202,17 +1283,15 @@ extern NSUser * g_loggedInUser;
     
     NSArray * xmpList = cloudResponse.m_xmpList;
     
-    [instrumentIdSet removeAllObjects];
-    [instrumentLoadSet removeAllObjects];
-    [instrumentDateSet removeAllObjects];
-    [instrumentVersionSet removeAllObjects];
-    [instrumentIsCustomSet removeAllObjects];
+    BOOL firstCallback = ([instrumentIdSet count] == 0);
     
     [self buildSortedXmpList:xmpList withIds:instrumentIdSet withData:instrumentLoadSet withDates:instrumentDateSet withVersion:instrumentVersionSet withCustom:instrumentIsCustomSet];
     
     //DLog(@"Instrument Is Custom Set %@, ID Set %@, %i",instrumentIsCustomSet,instrumentIdSet,g_loggedInUser.m_userId);
     
-    [loadingDelegate instrumentListLoaded];
+    if(!firstCallback){
+        [loadingDelegate instrumentListLoaded];
+    }
 }
 
 - (void)requestGetXmpSequenceListCallback:(CloudResponse *)cloudResponse
@@ -1220,12 +1299,6 @@ extern NSUser * g_loggedInUser;
     DLog(@"Request Get Xmp Sequence List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
-    
-    [sequenceIdSet removeAllObjects];
-    [sequenceLoadSet removeAllObjects];
-    [sequenceDateSet removeAllObjects];
-    [sequenceVersionSet removeAllObjects];
-    [sequenceIsCustomSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet withVersion:sequenceVersionSet withCustom:sequenceIsCustomSet];
     
@@ -1248,15 +1321,11 @@ extern NSUser * g_loggedInUser;
 
 - (void)requestGetXmpSampleListCallback:(CloudResponse *)cloudResponse
 {
+    // This will get called twice when samples return for user and default assets
+    
     DLog(@"Request Get Xmp Sample List Callback");
     
     NSArray * xmpList = cloudResponse.m_xmpList;
-    
-    [sampleIdSet removeAllObjects];
-    [sampleLoadSet removeAllObjects];
-    [sampleDateSet removeAllObjects];
-    [sampleVersionSet removeAllObjects];
-    [sampleIsCustomSet removeAllObjects];
     
     [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
     
