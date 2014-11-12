@@ -54,12 +54,18 @@
     return m_samplerBank;
 }
 
--(void)releaseBank:(SamplerBankNode *)m_samplerBank
+-(void)releaseBank:(SamplerBankNode *)samplerBank
 {
     [audioController stopAUGraph];
     //m_samplerNode->ReleaseBank(0);
-    m_samplerNode->ReleaseBank(m_samplerBank);
+    m_samplerNode->ReleaseBank(samplerBank);
     [audioController startAUGraph];
+}
+
+-(void)releaseBankWithoutPause:(SamplerBankNode *)samplerBank
+{
+    samplerBank->StopAllSamples();
+    m_samplerNode->ReleaseBank(samplerBank);
 }
 
 -(void)releaseBankAndDisconnect:(SamplerBankNode *)m_samplerBank
