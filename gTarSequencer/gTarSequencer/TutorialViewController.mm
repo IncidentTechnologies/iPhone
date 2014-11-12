@@ -100,6 +100,7 @@
     [self end];
     //tutorialStep = tutorialTotalSteps;
     //[self drawTutorialScreenForStep:tutorialStep isReverseDirection:NO];
+    [delegate notifyTutorialSkipped];
 }
 
 - (void)end

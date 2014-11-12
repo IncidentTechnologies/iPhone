@@ -1035,7 +1035,7 @@
 - (IBAction)loadInstrumentSelector:(id)sender andScroll:(BOOL)scroll
 {
     // Clear all sounds
-    [soundMaster reset];
+    //[soundMaster reset];
     
     // Turn off selected status of the add instrument button (which was just clicked):
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[sequence trackCount] inSection:0];

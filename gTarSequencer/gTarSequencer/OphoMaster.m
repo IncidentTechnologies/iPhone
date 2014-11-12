@@ -51,7 +51,7 @@ extern NSUser * g_loggedInUser;
     if ( self )
     {
         ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
-        pendingLoadTutorial = NO;
+        //pendingLoadTutorial = NO;
         
         ophoInstruments = [[NSMutableDictionary alloc] init];
         ophoLoadingInstrumentQueue = [[NSMutableDictionary alloc] init];
@@ -59,6 +59,10 @@ extern NSUser * g_loggedInUser;
         [self loadSampleCache];
         
         savingInstrumentObject = nil;
+        
+        loggedInAndLoaded = false;
+        
+        [self resetTutorial];
     }
     return self;
 }
@@ -88,7 +92,9 @@ extern NSUser * g_loggedInUser;
         
         [self loadUserFolderId];
         
-        [loadingDelegate loadingBegan];
+        if(!tutorialSkipped){
+            [loadingDelegate loadingBegan];
+        }
         
     }else{
         
@@ -99,7 +105,12 @@ extern NSUser * g_loggedInUser;
 
 - (void)loggedInAndLoaded
 {
-    [loadingDelegate loadingBegan];
+    if(!loggedInAndLoaded && !tutorialSkipped){
+        loggedInAndLoaded = true;
+        [loadingDelegate loadingBegan];
+    }else{
+        [loadingDelegate loadingEnded];
+    }
     
     [loginDelegate loggedInCallback];
     
@@ -107,7 +118,7 @@ extern NSUser * g_loggedInUser;
     
     [self regenerateData];
     
-    [self buildDefaultInstrumentsToSaveToOpho];
+    //[self buildDefaultInstrumentsToSaveToOpho];
 }
 
 - (void)logout
@@ -492,10 +503,10 @@ extern NSUser * g_loggedInUser;
     
 }
 // Instruments
-
+/*
 - (void)buildDefaultInstrumentsToSaveToOpho
 {
-    /*
+ 
      [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(saveOphoSample:) userInfo:@"WubWub_Kick" repeats:NO];
      
      [NSTimer scheduledTimerWithTimeInterval:6.0 target:self selector:@selector(saveOphoSample:) userInfo:@"WubWub_Clap" repeats:NO];
@@ -519,7 +530,7 @@ extern NSUser * g_loggedInUser;
      [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(saveOphoSample:) userInfo:@"Sounds_Bacon" repeats:NO];
      
      [NSTimer scheduledTimerWithTimeInterval:66.0 target:self selector:@selector(saveOphoSample:) userInfo:@"Sounds_ReverseI'mBacon" repeats:NO];
-     */
+ 
     
     // TODO: change to open permission
     
@@ -634,6 +645,7 @@ extern NSUser * g_loggedInUser;
     //[self saveInstrument:rock];
     
 }
+ */
 
 - (void)saveInstrument:(NSInstrument *)instrument
 {
@@ -897,7 +909,7 @@ extern NSUser * g_loggedInUser;
 {
     //DLog(@"Opho Instruments is %@ | %@",ophoInstruments,ophoLoadingInstrumentQueue);
     
-    DLog(@"Opho loading instruments queue count is %li",[[ophoLoadingInstrumentQueue allKeys] count]);
+    NSLog(@"Opho loading instruments queue count is %li, d:%@",[[ophoLoadingInstrumentQueue allKeys] count],ophoLoadingInstrumentQueue);
     
     NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
     
@@ -1318,6 +1330,10 @@ extern NSUser * g_loggedInUser;
     NSArray * xmpList = cloudResponse.m_xmpList;
     
     [self buildSortedXmpList:xmpList withIds:songIdSet withData:songLoadSet withDates:songDateSet withVersion:songVersionSet withCustom:songIsCustomSet];
+    
+    //if([songIdSet count] > 0){
+    //    [profileDelegate profileLoaded];
+    //}
 }
 
 - (void)requestGetXmpInstrumentListCallback:(CloudResponse *)cloudResponse
@@ -1334,6 +1350,7 @@ extern NSUser * g_loggedInUser;
     
     if(!firstCallback){
         [loadingDelegate instrumentListLoaded];
+        [profileDelegate profileLoaded];
     }
 }
 
@@ -1353,11 +1370,15 @@ extern NSUser * g_loggedInUser;
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
     }
     
-    if(pendingLoadTutorial && [sequenceLoadSet count] > 0){
+    /*if(pendingLoadTutorial && [sequenceLoadSet count] > 0){
         
         DLog(@"Pending load tutorial, sequenceLoadSet is %@",sequenceLoadSet);
         
         [self launchPendingTutorial];
+    }*/
+    
+    if([sequenceIdSet count] > 0){
+        [profileDelegate profileLoaded];
     }
     
 }
@@ -1376,6 +1397,7 @@ extern NSUser * g_loggedInUser;
     
     if(!firstCallback){
         [self refreshCacheFromSampleList];
+        [profileDelegate profileLoaded];
     }
 }
 
@@ -1516,10 +1538,20 @@ extern NSUser * g_loggedInUser;
 
 #pragma mark - Default Tutorial File
 
-- (void)loadTutorialSequenceWhenReady
+- (void)resetTutorial
+{
+    tutorialSkipped = false;
+}
+
+- (void)tutorialSkipped
+{
+    tutorialSkipped = true;
+}
+
+/*- (void)loadTutorialSequenceWhenReady
 {
     pendingLoadTutorial = YES;
-}
+}*/
 
 - (void)copyTutorialFile
 {
@@ -1530,6 +1562,7 @@ extern NSUser * g_loggedInUser;
     [self saveSequence:tutorialSequence];
 }
 
+/*
 - (void)launchPendingTutorial
 {
     DLog(@"Launch pending tutorial");
@@ -1546,6 +1579,6 @@ extern NSUser * g_loggedInUser;
     
     //[tutorialDelegate tutorialReady:xmpId];
 }
-
+*/
 
 @end

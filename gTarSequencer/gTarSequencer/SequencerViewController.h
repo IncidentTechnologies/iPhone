@@ -98,6 +98,7 @@ extern NSUser * g_loggedInUser;
 @property (retain, nonatomic) NSSong * loadedSong;
 
 @property (strong, nonatomic) IBOutlet UIView * loadingOverlay;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView * loadingIndicator;
 
 // FTU Tutorial
 //@property (weak, nonatomic) IBOutlet UIButton * yesButton;

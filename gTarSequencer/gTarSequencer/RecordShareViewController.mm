@@ -39,6 +39,7 @@
 @synthesize noSessionOverlay;
 @synthesize noSessionLabel;
 @synthesize processingScreen;
+@synthesize processingIndicator;
 @synthesize shareEmailButton;
 @synthesize shareSMSButton;
 @synthesize shareSoundcloudButton;
@@ -732,11 +733,13 @@
 -(void)hideProcessingOverlay
 {
     [processingScreen setHidden:YES];
+    [processingIndicator stopAnimating];
 }
 
 -(void)showProcessingOverlay
 {
     [processingScreen setHidden:NO];
+    [processingIndicator startAnimating];
     
     //[noSessionOverlay setHidden:NO];
     //[noSessionLabel setHidden:YES];
@@ -1279,7 +1282,11 @@
     [delegate startSoundMaster];
     
     secondsPerBeat = 1.0/(4.0*loadedTempo/SECONDS_PER_MIN);
-    [self performSelectorInBackground:@selector(startBackgroundLoop:) withObject:[NSNumber numberWithFloat:secondsPerBeat]];
+    
+    NSThread * backgroundThread = [[NSThread alloc] initWithTarget:self selector:@selector(startBackgroundLoop:) object:[NSNumber numberWithFloat:secondsPerBeat]];
+    
+    [backgroundThread setThreadPriority:1.0];
+    [backgroundThread start];
         
 }
 

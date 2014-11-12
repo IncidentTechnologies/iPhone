@@ -15,6 +15,7 @@
 
 - (void) notifyTutorialEnded;
 @optional
+- (void) notifyTutorialSkipped;
 - (void) notifyTutorialTapToPlayScreen;
 - (void) forceToPlay;
 - (void) closeLeftNavigator;

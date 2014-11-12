@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordShareViewController">
             <connections>
+                <outlet property="processingIndicator" destination="Nip-My-dod" id="f12-Bq-hvk"/>
                 <outlet property="processingScreen" destination="8oC-Jc-7rL" id="mA3-od-6pK"/>
                 <outlet property="shareEmailButton" destination="nGk-Vj-O73" id="1VL-C4-6mz"/>
                 <outlet property="shareSMSButton" destination="DbZ-mL-NMT" id="IaS-JQ-b2f"/>
@@ -102,14 +103,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="364" height="276"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="RENDERING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfo-Yc-7fq">
-                            <rect key="frame" x="86" y="119" width="193" height="39"/>
+                            <rect key="frame" x="86" y="93" width="193" height="39"/>
                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="28"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Nip-My-dod">
+                            <rect key="frame" x="164" y="134" width="37" height="37"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.094117647060000004" green="0.1137254902" blue="0.12941176469999999" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="centerX" secondItem="Nip-My-dod" secondAttribute="centerX" id="KvS-Io-s4K"/>
                         <constraint firstAttribute="centerX" secondItem="Rfo-Yc-7fq" secondAttribute="centerX" id="g19-9u-4RJ"/>
                     </constraints>
                 </view>

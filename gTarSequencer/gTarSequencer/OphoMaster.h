@@ -95,7 +95,8 @@
     NSMutableArray * instrumentVersionSet;
     NSMutableArray * instrumentIsCustomSet;
 
-    BOOL pendingLoadTutorial;
+    BOOL tutorialSkipped;
+    BOOL loggedInAndLoaded;
     
 }
 
@@ -157,7 +158,8 @@
 - (void)deleteWithId:(NSInteger)xmpId;
 
 // Tutorial
-- (void)loadTutorialSequenceWhenReady;
+- (void)resetTutorial;
+- (void)tutorialSkipped;
 - (void)copyTutorialFile;
 
 // Acces pregenerated data
