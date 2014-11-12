@@ -236,7 +236,7 @@
 
 - (void)requestCachedLogin
 {
-    NSLog(@"Uncaching %@ %@",g_loggedInUser.m_username,g_loggedInUser.m_password);
+    DLog(@"Uncaching %@ %@",g_loggedInUser.m_username,g_loggedInUser.m_password);
     
     // get user and password from cache
     [g_ophoMaster loginWithUsername:g_loggedInUser.m_username password:g_loggedInUser.m_password];
@@ -335,12 +335,12 @@
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
-    NSLog(@"Logged in user");
+    DLog(@"Logged in user");
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
 {
-    NSLog(@"Logged out user");
+    DLog(@"Logged out user");
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error

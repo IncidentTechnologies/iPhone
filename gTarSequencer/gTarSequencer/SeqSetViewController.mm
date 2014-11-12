@@ -166,7 +166,8 @@
 
 - (void)refreshSequenceName:(NSString *)filename
 {
-    if(![filename isEqualToString:DEFAULT_STATE_NAME]){
+    
+    if([filename rangeOfString:DEFAULT_STATE_NAME].location == NSNotFound){
         
         // Refresh the name in case it's been updated
         //sequence.m_name = filename;
@@ -184,7 +185,7 @@
     DLog(@"Load state from disk");
     
     // sequenceCurrentState
-    NSString * filepath = DEFAULT_STATE_NAME;
+    NSString * filepath = [NSString stringWithFormat:@"%@_%i",DEFAULT_STATE_NAME,[g_ophoMaster getUserId]];
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
@@ -273,7 +274,7 @@
         [self clearSaveContextTimer];
         saveContextTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(clearSaveContextTimer) userInfo:nil repeats:NO];
         
-        NSString * filepath = DEFAULT_STATE_NAME;
+        NSString * filepath = [NSString stringWithFormat:@"%@_%i",DEFAULT_STATE_NAME,[g_ophoMaster getUserId]];
         
         // Any additional metadata to save for this state?
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,

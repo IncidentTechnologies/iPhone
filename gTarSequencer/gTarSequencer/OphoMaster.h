@@ -132,6 +132,8 @@
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password;
 - (void)logout;
 - (BOOL)loggedIn;
+
+- (NSInteger)getUserId;
 - (UIImage *)getUserProfileImage;
 
 // Caching

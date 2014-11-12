@@ -280,7 +280,7 @@
     }*/
     
     // First change the name
-    if(![filename isEqualToString:DEFAULT_STATE_NAME]){
+    if([filename rangeOfString:DEFAULT_STATE_NAME].location == NSNotFound){
         
         m_name = filename;
         m_xmpName = filename;

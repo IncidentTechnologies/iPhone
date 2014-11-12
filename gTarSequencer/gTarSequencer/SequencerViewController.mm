@@ -247,9 +247,9 @@
     isLoading = true;
     
     if(!isTutorialOpen){
-        [loadingOverlay setHidden:NO];
+        //[loadingOverlay setHidden:NO];
         
-        [self.view bringSubviewToFront:loadingOverlay];
+        //[self.view bringSubviewToFront:loadingOverlay];
     }
 
 }
@@ -803,6 +803,8 @@
             
             playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
             
+            [runLoop addTimer:playTimer forMode:NSRunLoopCommonModes];
+            
             [runLoop run];
         }
     }
@@ -810,81 +812,86 @@
 
 - (void)mainEventLoop
 {
-    
-    // Tell all of the sequencers to play their next fret
-    int trackCount = [seqSetViewController countTracks];
-    
-    NSTrack * currentTrack = [seqSetViewController getCurrentTrack];
-    
-    //@synchronized(self){
-    for (int i=0; i<trackCount; i++){
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        NSTrack * trackToPlay = [seqSetViewController getTrackAtIndex:i];
+        // Tell all of the sequencers to play their next fret
+        int trackCount = [seqSetViewController countTracks];
         
-        @synchronized(trackToPlay.selectedPattern){
+        NSTrack * currentTrack = [seqSetViewController getCurrentTrack];
+        
+        //@synchronized(self){
+        for (int i=0; i<trackCount; i++){
             
-            //
-            // PLAY
-            //
-            int realMeasure = [trackToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
+            NSTrack * trackToPlay = [seqSetViewController getTrackAtIndex:i];
             
-            // If we are back at the beginning of the pattern, then check the queue:
-            if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
-                [self checkQueueForPatternsFromTrack:trackToPlay];
-            }else if([patternQueue count] > 0){
+            @synchronized(trackToPlay.selectedPattern){
                 
-                BOOL resetCount = NO;
-                if(currentFret == 0){
-                    resetCount = YES;
-                }
+                //
+                // PLAY
+                //
+                int realMeasure = [trackToPlay.selectedPattern computeRealMeasureFromAbsolute:currentAbsoluteMeasure];
                 
-                // Cause queued pattern to blink
-                [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
-                
-                // update Instrument view if it's open
-                if(activeMainView == instrumentViewController.view && trackToPlay == [seqSetViewController getCurrentTrack]){
-                    [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
-                }
-            }
-            
-            // play sound and update Set view
-            [trackToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!trackToPlay.m_muted withAmplitude:playVolume];
-            
-            // update Instrument view if it's open
-            if(activeMainView == instrumentViewController.view && trackToPlay == currentTrack){
-                [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
-            }
-            
-            // RECORD XMP
-            if(isRecording){
-                
-                NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name level:trackToPlay.m_level mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
-                NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted atBeat:r_beat/4.0];
-                
-                NSString * strings = @"";
-                for(int s = 0; s < STRINGS_ON_GTAR; s++){
-                    BOOL isStringOn = [trackToPlay.selectedPattern.m_measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
+                // If we are back at the beginning of the pattern, then check the queue:
+                if (realMeasure == 0 && currentFret == 0 && [patternQueue count] > 0){
+                    [self checkQueueForPatternsFromTrack:trackToPlay];
+                }else if([patternQueue count] > 0){
                     
-                    strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
+                    BOOL resetCount = NO;
+                    if(currentFret == 0){
+                        resetCount = YES;
+                    }
                     
-                    if(isStringOn){
-                        
-                        float noteBeat = r_beat/4.0 - songClip.m_startbeat;
-                        
-                        NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:noteBeat duration:0.25];
-                        [songClip addNote:newNote];
+                    // Cause queued pattern to blink
+                    [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                    
+                    // update Instrument view if it's open
+                    if(activeMainView == instrumentViewController.view && trackToPlay == [seqSetViewController getCurrentTrack]){
+                        [instrumentViewController notifyQueuedPatternAndResetCount:resetCount];
                     }
                 }
+                
+                // play sound and update Set view
+                [trackToPlay playFret:currentFret inRealMeasure:realMeasure withSound:!trackToPlay.m_muted withAmplitude:playVolume];
+                
+                // update Instrument view if it's open
+                if(activeMainView == instrumentViewController.view && trackToPlay == currentTrack){
+                    [instrumentViewController setPlaybandForMeasure:realMeasure toPlayband:currentFret];
+                }
+                
+                // RECORD XMP
+                if(isRecording){
+                    
+                    NSTrack * songTrack = [recordingSong trackWithName:trackToPlay.m_name level:trackToPlay.m_level mute:trackToPlay.m_muted instrument:trackToPlay.m_instrument];
+                    NSClip * songClip = [songTrack lastClipComparePattern:trackToPlay.selectedPattern.m_name andMuted:trackToPlay.m_muted atBeat:r_beat/4.0];
+                    
+                    NSString * strings = @"";
+                    for(int s = 0; s < STRINGS_ON_GTAR; s++){
+                        BOOL isStringOn = [trackToPlay.selectedPattern.m_measures[realMeasure] isNoteOnAtString:s andFret:currentFret];
+                        
+                        strings = [strings stringByAppendingString:((isStringOn) ? @"1" : @"0")];
+                        
+                        if(isStringOn){
+                            
+                            float noteBeat = r_beat/4.0 - songClip.m_startbeat;
+                            
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                                NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:noteBeat duration:0.25];
+                                [songClip addNote:newNote];
+                            });
+                        }
+                    }
+                }
+                
             }
-            
         }
-    }
-    
-    [seqSetViewController updateAllVisibleCells];
-    
-    [guitarView update];
-    
-    [self increasePlayLocation];
+        
+        [seqSetViewController updateAllVisibleCells];
+        
+        [guitarView update];
+        
+        [self increasePlayLocation];
+            
+    });
 }
 
 - (void)setRecordMode:(BOOL)record andAnimate:(BOOL)animate

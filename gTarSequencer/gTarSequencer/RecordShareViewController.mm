@@ -1296,6 +1296,8 @@
             
             playTimer = [NSTimer scheduledTimerWithTimeInterval:[spb floatValue] target:self selector:@selector(mainEventLoop) userInfo:nil repeats:YES];
             
+            [runLoop addTimer:playTimer forMode:NSRunLoopCommonModes];
+            
             [runLoop run];
         }
         
@@ -1640,7 +1642,7 @@
     
     NSString * numberString = [numberFormatter stringFromNumber:number];
     
-    NSLog(@"Name to %@",[@"Song" stringByAppendingString:numberString]);
+    DLog(@"Name to %@",[@"Song" stringByAppendingString:numberString]);
     
     return [@"Song" stringByAppendingString:numberString];
 }

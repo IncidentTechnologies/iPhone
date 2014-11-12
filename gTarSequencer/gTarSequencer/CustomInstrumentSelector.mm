@@ -742,7 +742,9 @@
     
     DLog(@"Play audio for XMP ID %i",xmpId);
     
-    [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
+    });
 }
 
 - (void)playOphoAudio:(NSString *)datastring

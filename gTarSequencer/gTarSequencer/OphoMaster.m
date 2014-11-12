@@ -139,6 +139,11 @@ extern NSUser * g_loggedInUser;
     [profileDelegate profileLoaded];
 }
 
+- (NSInteger)getUserId
+{
+    return g_loggedInUser.m_userId;
+}
+
 - (UIImage *)getUserProfileImage
 {
     return g_loggedInUser.m_image;
@@ -148,7 +153,7 @@ extern NSUser * g_loggedInUser;
 
 - (void)loadUserFolderId
 {
-    [ophoCloudController requestGetXmpFolderContentList:1 andXmpType:0 andExcludeType:0 andUserId:g_loggedInUser.m_userId andCallbackObj:self andCallbackSel:@selector(loadUserRootFolderIdCallback:)];
+    [ophoCloudController requestGetXmpFolderPublicContentList:1 andXmpType:0 andExcludeType:0 andCallbackObj:self andCallbackSel:@selector(loadUserRootFolderIdCallback:)];
 }
 
 - (void)loadUserChildFoldersFromRoot
