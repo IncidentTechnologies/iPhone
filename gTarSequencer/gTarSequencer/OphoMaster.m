@@ -814,7 +814,7 @@ extern NSUser * g_loggedInUser;
         [self loadFromId:xmpId callbackObj:self selector:@selector(loadSampleCallback:)];
     }else{
         DLog(@"Loading sample from cache %li",xmpId);
-        [callbackObj performSelector:selector withObject:cachedSample];
+        [callbackObj performSelector:selector withObject:[NSDictionary dictionaryWithObjectsAndKeys:cachedSample,@"Data",[NSNumber numberWithInt:xmpId],@"Id", nil]];
     }
 }
 
@@ -829,7 +829,7 @@ extern NSUser * g_loggedInUser;
     NSString * datastring = [sampleXmp getText];
     
     if(loadingSampleObject != nil){
-        [loadingSampleObject performSelector:NSSelectorFromString(loadingSampleSelector) withObject:datastring];
+        [loadingSampleObject performSelector:NSSelectorFromString(loadingSampleSelector) withObject:[NSDictionary dictionaryWithObjectsAndKeys:datastring,@"Data",[NSNumber numberWithInt:xmpId],@"Id", nil]];
      
         loadingSampleObject = nil;
     }

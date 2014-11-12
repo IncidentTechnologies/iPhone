@@ -7,16 +7,10 @@
 //
 
 #import "CustomSoundRecorder.h"
-#import "SoundMaster_.mm"
 
 @interface CustomSoundRecorder(){
     
-    SoundMaster * soundMaster;
-    
-    SamplerBankNode * m_sampleBankNode;
-    SampleNode * m_sampNode;
-    
-    int bankCount;
+    SimpleSoundMaker * m_soundMaker;
 }
 
 @end
@@ -133,7 +127,7 @@
         
         DLog(@"Playback started");
         
-        m_sampleBankNode->TriggerSample(0);
+        [m_soundMaker playSingleSample];
     }
 }
 
@@ -141,13 +135,15 @@
 {
     DLog(@"Pause playback at %f",ms);
     timePaused = ms;
-    m_sampNode->Stop();
+    
+    [m_soundMaker pauseSingleSample];
 }
 
 -(void)unpausePlayback
 {
     DLog(@"Unpause playback from %f",timePaused);
-    m_sampNode->Resume();
+    
+    [m_soundMaker resumeSingleSample];
 }
 
 #pragma mark - File System
@@ -166,6 +162,8 @@
         
         DLog(@"Using Main Bundle Filepath %@",newPath);
         
+        [m_soundMaker saveSingleSampleToFilepath:newPath];
+        
     }else{
         
         // **** Save Recorded Sound To File
@@ -175,13 +173,7 @@
         NSString * path = [paths objectAtIndex:0];
         newPath = [path stringByAppendingPathComponent:defaultFilename];
         
-        DLog(@"Using Custom Sound Filepath %@",newPath);
-        
-        char * pathName = (char *)malloc(sizeof(char) * [newPath length]);
-        pathName = (char *) [newPath UTF8String];
-        
-        m_sampNode->SaveToFile(pathName, YES);
-        
+        [m_soundMaker saveSingleSampleToFilepath:newPath];
     }
     
     // Then get data and upload
@@ -195,7 +187,7 @@
     [self deleteRecordingFilename:defaultFilename];
     
     // Still need this?
-    [self releaseAudioBank];
+    [self releaseSounds];
 }
 
 - (void)deleteRecordingFilename:(NSString *)filename
@@ -233,27 +225,14 @@
 
 - (void)initAudioForSample
 {
-    if(!soundMaster){
-        soundMaster = [[SoundMaster alloc] init];
+    if(!m_soundMaker){
+        m_soundMaker = [[SimpleSoundMaker alloc] init];
     }else{
         // clean up recording
-        [self releaseAudioBank];
+        [self releaseSounds];
     }
     
-    m_sampleBankNode = [soundMaster generateBank];
-    
-    // Reload sound into bank after new record
-    char * filepath = (char *)malloc(sizeof(char) * 1024);
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * path = [paths objectAtIndex:0];
-    NSString * sampleFilename = [path stringByAppendingPathComponent:defaultFilename];
-    
-    filepath = (char *) [sampleFilename UTF8String];
-    
-    m_sampleBankNode->LoadSampleIntoBank(filepath, m_sampNode);
-    
-    [soundMaster reset];
+    [m_soundMaker addSingleSampleByName:defaultFilename useBundle:NO];
 }
 
 -(void)finishAudioInitAfterBufferFlush
@@ -264,47 +243,47 @@
 
 - (unsigned long int)fetchAudioBufferSize
 {
-    return m_sampNode->GetSampleBuffer()->GetByteSize();
+    return [m_soundMaker fetchAudioBufferSize];
 }
 
 - (float)fetchSampleRate
 {
-    return m_sampNode->GetSampleBuffer()->GetSampleRate();
+    return [m_soundMaker fetchSampleRate];
 }
 
 - (float *)fetchAudioBuffer
 {
-    return (float *)m_sampNode->GetSampleBuffer()->GetBufferArray();
+    return [m_soundMaker fetchAudioBuffer];
 }
 
 - (void)setSampleStart:(float)ms
 {
     sampleStart = ms;
-    m_sampNode->SetStart(ms);
+    [m_soundMaker setSampleStart:ms];
 }
 
 - (void)setSampleEnd:(float)ms
 {
     sampleEnd = ms;
-    m_sampNode->SetEnd(ms);
+    [m_soundMaker setSampleEnd:ms];
 }
 
 - (float)getSampleLength
 {
-    return m_sampNode->GetLength();
+    return [m_soundMaker getSampleLength];
 }
 
 -(void)releaseAudio
 {
-    if(soundMaster){
-        [soundMaster releaseBankAndDisconnect:m_sampleBankNode];
+    if(m_soundMaker){
+        [m_soundMaker releaseAll];
     }
 }
 
-- (void)releaseAudioBank
+- (void)releaseSounds
 {
-    if(soundMaster){
-        [soundMaster releaseBank:m_sampleBankNode];
+    if(m_soundMaker){
+        [m_soundMaker releaseSounds];
     }
 }
 

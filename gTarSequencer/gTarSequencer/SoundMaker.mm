@@ -201,6 +201,7 @@
 - (void)releaseSounds
 {
     [m_soundMaster releaseBank:m_samplerBank];
+    // also m_soundMaster releaseBankAndDisconnect
 }
 
 #pragma mark - Level Sliders

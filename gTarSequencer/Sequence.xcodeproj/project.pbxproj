@@ -125,6 +125,7 @@
 		6D813EC918DA804100D29F48 /* VolumeKnobView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D813EC818DA804100D29F48 /* VolumeKnobView.mm */; };
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6D8B35511A0C5E23005DB1E8 /* Vibraphone_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */; };
+		6D9F43431A1402DB00946387 /* SimpleSoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F43421A1402DA00946387 /* SimpleSoundMaker.mm */; };
 		6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.mm */; };
 		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
 		6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B818E4D72F00872705 /* Share_Icon.png */; };
@@ -458,6 +459,8 @@
 		6D813EC818DA804100D29F48 /* VolumeKnobView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VolumeKnobView.mm; sourceTree = "<group>"; };
 		6D85704618CAAE560068CC92 /* Pinch_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinch_Icon.png; sourceTree = "<group>"; };
 		6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Vibraphone_C.wav; path = Samples/Melodic/Percussive/Vibra/Vibraphone_C.wav; sourceTree = "<group>"; };
+		6D9F43411A1402DA00946387 /* SimpleSoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleSoundMaker.h; sourceTree = "<group>"; };
+		6D9F43421A1402DA00946387 /* SimpleSoundMaker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleSoundMaker.mm; sourceTree = "<group>"; };
 		6DA724B118E25B0700872705 /* RecordShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordShareViewController.h; sourceTree = "<group>"; };
 		6DA724B218E25B0700872705 /* RecordShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordShareViewController.mm; sourceTree = "<group>"; };
 		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
@@ -1255,6 +1258,8 @@
 			children = (
 				58B4D3CB186E1F210035D9E5 /* SoundMaker.h */,
 				58B4D3CC186E1F210035D9E5 /* SoundMaker.mm */,
+				6D9F43411A1402DA00946387 /* SimpleSoundMaker.h */,
+				6D9F43421A1402DA00946387 /* SimpleSoundMaker.mm */,
 				6DAD2B3918CF9B5500228F08 /* SoundMaster.h */,
 				6DAD2B3A18CF9B5500228F08 /* SoundMaster.mm */,
 				6DAD2B3D18CFA0CE00228F08 /* SoundMaster_.mm */,
@@ -1599,6 +1604,7 @@
 				6DC78A15199C00C3006B14F5 /* NSNote.mm in Sources */,
 				58547AEB186CD6AF003638EF /* ScrollingSelector.mm in Sources */,
 				6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */,
+				6D9F43431A1402DB00946387 /* SimpleSoundMaker.mm in Sources */,
 				6DC78A12199C00A9006B14F5 /* NSPattern.mm in Sources */,
 				6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */,
 				58B4D3CD186E1F210035D9E5 /* SoundMaker.mm in Sources */,

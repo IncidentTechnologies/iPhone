@@ -9,6 +9,7 @@
 #import "AppData.h"
 #import <AVFoundation/AVFoundation.h>
 #import "NSSample.h"
+#import "SimpleSoundMaker.h"
 
 @protocol CustomSoundDelegate <NSObject>
 

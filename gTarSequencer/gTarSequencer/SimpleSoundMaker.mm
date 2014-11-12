@@ -6,233 +6,188 @@
 //  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import "SoundMaker.h"
+#import "SimpleSoundMaker.h"
 #import "SoundMaster_.mm"
 #import "AudioController.h"
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
-#import "NSSample.h"
 
-#define GTAR_NUM_STRINGS 6
-
-@interface SoundMaker () {
+@interface SimpleSoundMaker () {
     
-    SoundMaster *m_soundMaster;
-    LevelSubscriber *m_volumeSubscriber;
-    
-    SampleNode *m_sampNode;
-    SamplerBankNode *m_samplerBank;
-    
-    char * filepath[6];
-    NSArray * audioStringSet;
-    NSArray * audioStringPaths;
-    NSArray * audioStringSamples;
-    
-    NSArray * audioSampleSet;
-    
-    double gain;
-    double bankgain;
+    SoundMaster * m_soundMaster;
+    SamplerBankNode * m_bankNode;
+    SampleNode * m_sampNode;
 }
 
 @end
 
-@implementation SoundMaker
+@implementation SimpleSoundMaker
+
+#pragma mark - Init
 
 - (id)init
 {
     self = [super init];
     if ( self )
     {
-        
+        m_soundMaster = [[SoundMaster alloc] init];
+        bankSamples = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-
-- (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster
+- (id)initWithSoundMaster:(SoundMaster *)soundMaster
 {
     self = [super init];
-    if(self){
-        
-        instIndex = instId;
-        
-        gain = DEFAULT_VOLUME;
-        bankgain = AMPLITUDE_SCALE;
-        
+    if ( self )
+    {
         m_soundMaster = soundMaster;
-        
-        DLog(@"Load instrument %i",instId);
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            
-            DLog(@"Loading files in background");
-            
-            [g_ophoMaster loadSamplesForInstrument:instId andName:instName andSamples:instSamples callbackObj:self selector:@selector(instrumentLoadedWithSamples:)];
-            
-        });
-        
+        bankSamples = [[NSMutableArray alloc] init];
     }
-    
     return self;
 }
 
-- (void)instrumentLoadedWithSamples:(NSArray *)samples
-{
-    DLog(@"Instrument loaded with %li samples",[samples count]);
-    
-    audioSampleSet = [[NSArray alloc] initWithArray:samples];
-    
-    m_samplerBank = [m_soundMaster generateBank];
-    
-    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
-        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:samples[i] options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        
-        unsigned long int length = [decodedData length];
-        
-        m_samplerBank->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
-    }
+#pragma mark - Single Sample
 
-}
-
-/*
-- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster
+- (void)addSingleSampleByName:(NSString *)filename useBundle:(BOOL)useBundle
 {
-    self = [super init];
-    if(self){
-        
-        audioStringSamples = stringSet;
-        
-        instIndex = index;
-        
-        gain = DEFAULT_VOLUME;
-        bankgain = AMPLITUDE_SCALE;
-        
-        m_soundMaster = soundMaster;
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            
-            DLog(@"Loading files in background");
-            
-            [self loadStringSamples];
-            
-        });
-        
+    if(!m_bankNode){
+        m_bankNode = [m_soundMaster generateBank];
     }
     
-    return self;
-}
-*/
-
-/*
-- (void)loadStringSamples
-{
-    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
-        filepath[i] = (char *)malloc(sizeof(char) * 1024);
+    // Reload sound into bank after new record
+    char * filepath = (char *)malloc(sizeof(char) * 1024);
+    
+    if(useBundle){
+        filepath = (char *)[[[NSBundle mainBundle] pathForResource:filename ofType:@"wav"] UTF8String];
+    }else{
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * path = [paths objectAtIndex:0];
+        NSString * sampleFilename = [path stringByAppendingPathComponent:filename];
+        
+        filepath = (char *) [sampleFilename UTF8String];
     }
     
-    m_samplerBank = [m_soundMaster generateBank];
+    m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
     
-    for(int i = 0; i < GTAR_NUM_STRINGS; i++){
-        
-        NSSample * sample = audioStringSamples[i];
-        
-        // Determine filetype
-        if(sample.m_custom){
-            
-            // local sound
-            NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString * path = [paths objectAtIndex:0];
-            NSString * filename = [path stringByAppendingPathComponent:@"Samples"];
-            filename = [filename stringByAppendingPathComponent:sample.m_name];
-            filename = [filename stringByAppendingString:@"."];
-            filename = [filename stringByAppendingString:sample.m_encoding];
-            
-            filepath[i] = (char *) [filename UTF8String];
-            
-        }else{
-            NSString * fname = [sample.m_name stringByReplacingOccurrencesOfString:@" " withString:@""];
-            
-            filepath[i] = (char *)[[[NSBundle mainBundle] pathForResource:fname ofType:sample.m_encoding] UTF8String];
-        }
-        
-        DLog(@"Loading sample %s",filepath[i]);
-        
-        if(filepath[i] != NULL){
-            m_samplerBank->LoadSampleIntoBank(filepath[i], m_sampNode);
-        }
-    }
-}
-*/
- 
-- (void)flushBuffer
-{
-    m_samplerBank->StopAllSamples();
+    // SoundMaster reset?
 }
 
-- (void)pluckString:(int)str
+- (void)saveSingleSampleToFilepath:(NSString *)filepath
 {
-    m_samplerBank->TriggerSample(str);
+    char * pathName = (char *)malloc(sizeof(char) * [filepath length]);
+    pathName = (char *) [filepath UTF8String];
+    
+    m_sampNode->SaveToFile(pathName, YES);
 }
 
-- (void)updateAmplitude:(double)amplitude
+- (void)playSingleSample
 {
-    if(bankgain != amplitude){
-        
-        bankgain = amplitude;
-        
-        DLog(@"Setting track gain to %f",bankgain);
-        
-        [m_soundMaster setGain:bankgain forSamplerBank:m_samplerBank];
-    }
+    [self playSample:0];
 }
 
-- (void)updateMasterAmplitude:(double)amplitude
+- (void)pauseSingleSample
 {
-    if(gain != amplitude){
-        
-        amplitude = MIN(amplitude,MAX_VOLUME);
-        amplitude = MAX(amplitude,MIN_VOLUME);
-        gain = amplitude;
-        
-        [m_soundMaster setChannelGain:gain];
+    m_sampNode->Stop();
+}
+
+- (void)resumeSingleSample
+{
+    m_sampNode->Resume();
+}
+
+- (void)setSampleStart:(float)ms
+{
+    m_sampNode->SetStart(ms);
+}
+
+- (void)setSampleEnd:(float)ms
+{
+    m_sampNode->SetEnd(ms);
+}
+
+- (unsigned long int)fetchAudioBufferSize
+{
+    return m_sampNode->GetSampleBuffer()->GetByteSize();
+}
+
+- (float)fetchSampleRate
+{
+    return m_sampNode->GetSampleBuffer()->GetSampleRate();
+}
+
+- (float *)fetchAudioBuffer
+{
+    return (float *)m_sampNode->GetSampleBuffer()->GetBufferArray();
+}
+
+- (float)getSampleLength
+{
+    return m_sampNode->GetLength();
+}
+
+- (void)playSample:(int)sample
+{
+    DLog(@"Play sample %i",sample);
+    
+    [m_soundMaster start];
+    
+    m_bankNode->TriggerSample(sample);
+}
+
+#pragma mark - Multiple Samples (for XMP)
+
+- (void)addBase64Sample:(NSString *)datastring forXmpId:(NSInteger)xmpId
+{
+    if(!m_bankNode){
+        m_bankNode = [m_soundMaster generateBank];
     }
+    
+    // Base 64 decode
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:datastring options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    unsigned long int length = [decodedData length];
+    
+    DLog(@"Length of decoded data is %lu",length);
+    
+    m_bankNode->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
+    
+    [bankSamples addObject:[NSNumber numberWithInt:xmpId]];
+    
+}
+
+- (void)playSampleForXmpId:(NSInteger)xmpId
+{
+    [self playSample:[bankSamples indexOfObject:[NSNumber numberWithInt:xmpId]]];
+}
+
+- (BOOL)sampleForXmpId:(NSInteger)xmpId
+{
+    return [bankSamples containsObject:[NSNumber numberWithInt:xmpId]];
+}
+
+#pragma mark - Cleanup
+
+- (void)releaseAll
+{
+    DLog(@"Release all");
+    
+    [m_soundMaster releaseBankAndDisconnect:m_bankNode];
+    m_bankNode = NULL;
+    
+    [bankSamples removeAllObjects];
 }
 
 - (void)releaseSounds
 {
-    [m_soundMaster releaseBank:m_samplerBank];
+    DLog(@"Release sounds");
+    
+    [m_soundMaster releaseBank:m_bankNode];
+    //[m_soundMaster releaseBankAndDisconnect:m_bankNode];
+    m_bankNode = NULL;
+    
+    [bankSamples removeAllObjects];
 }
 
-#pragma mark - Level Sliders
-- (void)releaseLevelSlider
-{
-    if(m_volumeSubscriber != nil){
-        m_samplerBank->UnSubscribe(m_volumeSubscriber);
-    }
-}
-
-- (void)commitLevelSlider:(UILevelSlider *)slider
-{
-    m_volumeSubscriber = m_samplerBank->SubscribeAbsoluteMean((__bridge void *)slider, cbLevel, NULL);
-    
-}
-
-static void cbLevel(float val, void *pObject, void *pContext) {
-    
-    UILevelSlider *slider = (__bridge UILevelSlider*)(pObject);
-    
-    //val = 1.0f - val;
-    
-    val *= 10.0f;
-    
-    if(val > 1.0f)
-        val = 1.0f;
-    else if(val < 0.0f)
-        val = 0.0f;
-    
-    //DLog(@"%f", val);
-    
-    [slider setDisplayValue:val*[slider GetValue]];
-}
 
 @end

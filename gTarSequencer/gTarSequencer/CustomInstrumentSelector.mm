@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import "SoundMaster_.mm"
 #import "CustomInstrumentSelector.h"
 
 #define GTAR_NUM_STRINGS 6
@@ -30,9 +29,8 @@
 
 @interface CustomInstrumentSelector(){
     
-    SoundMaster * soundMaster;
-    SamplerBankNode * m_bankNode;
-    SampleNode * m_sampNode;
+    SimpleSoundMaker * m_soundMaker;
+    
 }
 
 @end
@@ -75,7 +73,6 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    
     FrameGenerator * frameGenerator = [[FrameGenerator alloc] init];
     
     float x = [frameGenerator getFullscreenWidth];
@@ -424,6 +421,12 @@
     if(viewState == VIEW_CUSTOM_RECORD || viewState == VIEW_CUSTOM_NAME){
         [self userDidBack:sender];
     }else{
+        
+        // Clean up sound data
+        if(m_soundMaker){
+            [m_soundMaker releaseAll];
+        }
+            
         [delegate closeCustomInstrumentSelectorAndScroll:NO];
     }
 }
@@ -742,38 +745,38 @@
     
     DLog(@"Play audio for XMP ID %i",xmpId);
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
-    });
+    if(m_soundMaker && [m_soundMaker sampleForXmpId:xmpId]){
+        
+        [m_soundMaker playSampleForXmpId:xmpId];
+        
+    }else{
+    
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [g_ophoMaster loadSampleFromId:xmpId callbackObj:self selector:@selector(playOphoAudio:)];
+        });
+        
+    }
 }
 
-- (void)playOphoAudio:(NSString *)datastring
+- (void)playOphoAudio:(NSDictionary *)dataWithId
 {
+    NSString * datastring = [dataWithId objectForKey:@"Data"];
+    NSInteger xmpId = [[dataWithId objectForKey:@"Id"] intValue];
+    
     // Add to sample buffer create from base 64 string
     
-    if(!soundMaster){
-        soundMaster = [[SoundMaster alloc] init];
+    if(!m_soundMaker){
+        m_soundMaker = [[SimpleSoundMaker alloc] init];
     }
-    
-    [soundMaster start];
-    
-    m_bankNode = [soundMaster generateBank];
     
     if(datastring == nil || [datastring length] == 0){
         DLog(@"ERROR: attempting to play string with empty data");
         return;
     }
     
-    // Base 64 decode
-    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:datastring options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    
-    unsigned long int length = [decodedData length];
-    
-    DLog(@"Length of decoded data is %lu",length);
-    
-    m_bankNode->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
-    
-    m_bankNode->TriggerSample(0);
+    [m_soundMaker addBase64Sample:datastring forXmpId:xmpId];
+
+    [m_soundMaker playSampleForXmpId:xmpId];
     
 }
 

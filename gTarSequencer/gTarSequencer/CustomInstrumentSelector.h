@@ -14,6 +14,7 @@
 #import "CustomSoundRecorder.h"
 #import "TutorialViewController.h"
 #import "HorizontalAdjustor.h"
+#import "SimpleSoundMaker.h"
 
 @protocol CustomInstrumentSelectorDelegate <NSObject>
 

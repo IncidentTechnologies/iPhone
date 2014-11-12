@@ -1,43 +1,43 @@
 //
-//  SoundMaker.h
+//  SimpleSoundMaker.h
 //  gTarSequencer
 //
-//  Created by Kate Schnippering on 12/27/13.
-//  Copyright (c) 2013 Incident Technologies. All rights reserved.
+//  Created by Kate Schnippering on 11/12/14.
+//  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
 #import "AppData.h"
 #import "SoundMaster.h"
 #import "UILevelSlider.h"
-//#import "NSInstrument.h"
 
 @class AudioController;
 extern OphoMaster * g_ophoMaster;
 
-// Serves as a wrapper class for the AudioController, because
-//      whoever #imports the AC (or a file that #imports the AC)
-//      needs to be a .mm file. This prevents refactoring, which
-//      I find to be a useful tool, so i made this dummy class.
-@interface SoundMaker : NSObject
+@interface SimpleSoundMaker : NSObject
 {
-    int instIndex;
+    NSMutableArray * bankSamples;
 }
 
-- (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster;
+- (id)init;
+- (id)initWithSoundMaster:(SoundMaster *)soundMaster;
 
-//- (id)initWithStringSamples:(NSArray *)stringSet andInstrument:(int)index andSoundMaster:(SoundMaster *)soundMaster;
+- (void)addSingleSampleByName:(NSString *)filename useBundle:(BOOL)useBundle;
+- (void)playSingleSample;
+- (void)pauseSingleSample;
+- (void)resumeSingleSample;
+- (void)saveSingleSampleToFilepath:(NSString *)filepath;
+- (void)setSampleStart:(float)ms;
+- (void)setSampleEnd:(float)ms;
+- (unsigned long int)fetchAudioBufferSize;
+- (float)fetchSampleRate;
+- (float *)fetchAudioBuffer;
+- (float)getSampleLength;
 
-- (void)instrumentLoadedWithSamples:(NSArray *)samples;
+- (void)addBase64Sample:(NSString *)datastring forXmpId:(NSInteger)xmpId;
+- (void)playSampleForXmpId:(NSInteger)xmpId;
+- (BOOL)sampleForXmpId:(NSInteger)xmpId;
 
-- (void)pluckString:(int)str;
-- (void)flushBuffer;
-
-- (void)updateAmplitude:(double)amplitude;
-- (void)updateMasterAmplitude:(double)amplitude;
-
+- (void)releaseAll;
 - (void)releaseSounds;
-
-- (void)releaseLevelSlider;
-- (void)commitLevelSlider:(UILevelSlider *)slider;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <AppData.h>
 #import "UIKnob.h"
+#import "SimpleSoundMaker.h"
 
 #define NUM_SEQUENCE_NOTES 8
 

@@ -15,10 +15,8 @@
 
 @interface TutorialViewController(){
     
-    SoundMaster * soundMaster;
+    SimpleSoundMaker * m_soundMaker;
     
-    SampleNode * m_sampNode;
-    SamplerBankNode * m_bankNode;
 }
 
 @end
@@ -1416,27 +1414,21 @@
     [sequenceLoopTimer invalidate];
     sequenceLoopTimer = nil;
     
-    [soundMaster releaseBankAndDisconnect:m_bankNode];
+    [m_soundMaker releaseAll];
 }
 
 -(void)playSequenceSound
 {
-    m_bankNode->TriggerSample(0);
+    [m_soundMaker playSingleSample];
 }
 
 - (void)initAudioForSequence
 {
-    if(!soundMaster){
-        soundMaster = [[SoundMaster alloc] init];
+    if(!m_soundMaker){
+        m_soundMaker = [[SimpleSoundMaker alloc] init];
     }
     
-    m_bankNode = [soundMaster generateBank];
-    
-    // Reload sound into bank after new record
-    char * filepath = (char *)malloc(sizeof(char) * 1024);
-    filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Vibraphone_C" ofType:@"wav"] UTF8String];
-    
-    m_bankNode->LoadSampleIntoBank(filepath, m_sampNode);
+    [m_soundMaker addSingleSampleByName:@"Vibraphone_C" useBundle:YES];
     
     [self startSequenceLoop];
     
