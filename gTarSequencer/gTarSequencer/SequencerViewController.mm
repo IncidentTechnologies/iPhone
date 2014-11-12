@@ -90,6 +90,8 @@
     
     //[NSTimer scheduledTimerWithTimeInterval:3.0 target:guitarView selector:@selector(observeGtar) userInfo:nil repeats:NO];
     
+    //[NSTimer scheduledTimerWithTimeInterval:10.0 target:guitarView selector:@selector(unobserveGtar) userInfo:nil repeats:NO];
+    
     string = 0;
     fret = 0;
     

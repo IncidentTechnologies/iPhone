@@ -37,5 +37,6 @@
 - (void)update;
 - (void)clearData;
 - (void)observeGtar;
+- (void)unobserveGtar;
 - (BOOL)isGtarConnected;
 @end

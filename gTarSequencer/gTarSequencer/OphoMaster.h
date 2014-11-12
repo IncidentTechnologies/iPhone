@@ -136,6 +136,7 @@
 
 - (NSInteger)getUserId;
 - (UIImage *)getUserProfileImage;
+- (NSString *)getUsername;
 
 // Caching
 - (BOOL)cacheForSample:(long)xmpId;

@@ -34,6 +34,11 @@
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:guitar selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
 }
 
+- (void)unobserveGtar
+{
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:guitar selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
+}
+
 
 - (void)update
 {

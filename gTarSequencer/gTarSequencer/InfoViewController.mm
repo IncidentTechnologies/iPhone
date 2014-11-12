@@ -18,8 +18,10 @@
 @implementation InfoViewController
 
 @synthesize delegate;
-@synthesize infoButton;
-@synthesize infoArrow;
+@synthesize gtarArrow;
+@synthesize gtarButton;
+@synthesize ophoArrow;
+@synthesize ophoButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,15 +37,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    infoButton.layer.cornerRadius = 8.0;
+    gtarButton.layer.cornerRadius = 8.0;
+    ophoButton.layer.cornerRadius = 8.0;
     
-    NSMutableAttributedString * titleString = [[NSMutableAttributedString alloc] initWithString:@"Visit gTar.fm to Learn More"];
-    [titleString setAttributes:@{NSFontAttributeName:[UIFont fontWithName:FONT_BOLD size:17.0]} range:NSMakeRange(6,7)];
-    
-    [infoButton setAttributedTitle:titleString forState:UIControlStateNormal];
-    
-    
-    [self drawInfoArrow];
+    [self drawArrowForImageView:gtarArrow];
+    [self drawArrowForImageView:ophoArrow];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,15 +50,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)launchLearnMore:(id)sender
+- (IBAction)launchGtarLearnMore:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.gtar.fm/"]];
 }
 
-
-- (void)drawInfoArrow
+- (IBAction)launchOphoLogin:(id)sender
 {
-    CGSize size = CGSizeMake(infoArrow.frame.size.width, infoArrow.frame.size.height);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.opho.com/user/%@",[g_ophoMaster getUsername]]]];
+}
+
+- (void)drawArrowForImageView:(UIImageView *)imageView
+{
+    CGSize size = CGSizeMake(imageView.frame.size.width, imageView.frame.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0); // use this to antialias
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -68,7 +70,7 @@
     int playWidth = 10;
     int playX = 0;
     int playY = 8;
-    CGFloat playHeight = infoArrow.frame.size.height - 2*playY;
+    CGFloat playHeight = imageView.frame.size.height - 2*playY;
     
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -82,7 +84,7 @@
     CGContextStrokePath(context);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    [infoArrow setImage:newImage];
+    [imageView setImage:newImage];
     
     UIGraphicsEndImageContext();
 }

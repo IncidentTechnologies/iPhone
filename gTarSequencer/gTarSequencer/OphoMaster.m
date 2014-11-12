@@ -160,6 +160,11 @@ extern NSUser * g_loggedInUser;
     return g_loggedInUser.m_image;
 }
 
+- (NSString *)getUsername
+{
+    return g_loggedInUser.m_username;
+}
+
 #pragma mark - User Folder
 
 - (void)loadUserFolderId

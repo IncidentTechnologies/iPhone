@@ -35,7 +35,7 @@
     [super viewDidLoad];
     
     silverColor = [UIColor colorWithRed:201/255.0 green:205/255.0 blue:206/255.0 alpha:1.0];
-    redColor = [UIColor colorWithRed:203/255.0 green:81/255.0 blue:26/255.0 alpha:1.0];
+    redColor = [UIColor colorWithRed:226/255.0 green:37/255.0 blue:84/255.0 alpha:1.0];
     blueColor = [UIColor colorWithRed:23/255.0 green:163/255.0 blue:198/255.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:31/255.0 green:187/255.0 blue:40/255.0 alpha:1.0];
     backgroundColor = [UIColor colorWithRed:29/255.0 green:47/255.0 blue:51/255.0 alpha:1.0];
@@ -63,11 +63,6 @@
     float optionsImageWidth = 26.0;
     [optionsButton setImageEdgeInsets:UIEdgeInsetsMake((optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2, (optionsButton.frame.size.height-optionsImageHeight)/2, (optionsButton.frame.size.width-optionsImageWidth)/2)];
     
-    [connectedButton setImage:[UIImage imageNamed:@"G_Icon"] forState:UIControlStateNormal];
-    float gImageHeight = 26.0;
-    float gImageWidth = 20.0;
-    [connectedButton setImageEdgeInsets:UIEdgeInsetsMake((connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2, (connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2)];
-    
     // Arrow
     //[self drawConnectedLeftArrow];
     
@@ -86,10 +81,19 @@
 {
     if(isConnected){
         connectedButton.backgroundColor = greenColor;
-        //connectedButton.layer.borderColor = greenColor.CGColor;
+        
+        [connectedButton setImage:[UIImage imageNamed:@"G_Icon"] forState:UIControlStateNormal];
+        [connectedButton setTitle:@"" forState:UIControlStateNormal];
+        float gImageHeight = 26.0;
+        float gImageWidth = 20.0;
+        [connectedButton setContentEdgeInsets:UIEdgeInsetsMake((connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2, (connectedButton.frame.size.height-gImageHeight)/2, (connectedButton.frame.size.width-gImageWidth)/2)];
+    
+        
     }else{
         connectedButton.backgroundColor = redColor;
-        //connectedButton.layer.borderColor = redColor.CGColor;
+        [connectedButton setTitle:@"i" forState:UIControlStateNormal];
+        [connectedButton setTitleEdgeInsets:UIEdgeInsetsMake(3, 2, 0, 0)];
+        [connectedButton setImage:nil forState:UIControlStateNormal];
     }
 }
 
