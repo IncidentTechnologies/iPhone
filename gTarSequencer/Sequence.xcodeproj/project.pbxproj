@@ -110,6 +110,7 @@
 		6D1E5C1A19C0D5E4005956F4 /* NSClip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1919C0D5E4005956F4 /* NSClip.mm */; };
 		6D1E5C1E19C127DA005956F4 /* MainEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C1D19C127DA005956F4 /* MainEventController.m */; };
 		6D1E5C2119C12908005956F4 /* NSSongModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E5C2019C12908005956F4 /* NSSongModel.mm */; };
+		6D3197911A156F6600762EB8 /* Social_Opho_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3197901A156F6600762EB8 /* Social_Opho_Icon.png */; };
 		6D3D9DC518BC0F890048E908 /* RecordRedo_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */; };
 		6D44A45418B58A6C00992D3D /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D44A45318B58A6C00992D3D /* InfoViewController.xib */; };
 		6D44A45718B58C0000992D3D /* InfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D44A45618B58C0000992D3D /* InfoViewController.mm */; };
@@ -427,6 +428,7 @@
 		6D1E5C1D19C127DA005956F4 /* MainEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainEventController.m; sourceTree = "<group>"; };
 		6D1E5C1F19C12908005956F4 /* NSSongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSongModel.h; sourceTree = "<group>"; };
 		6D1E5C2019C12908005956F4 /* NSSongModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSSongModel.mm; sourceTree = "<group>"; };
+		6D3197901A156F6600762EB8 /* Social_Opho_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Social_Opho_Icon.png; sourceTree = "<group>"; };
 		6D3D9DC418BC0F890048E908 /* RecordRedo_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordRedo_Icon.png; sourceTree = "<group>"; };
 		6D44A45318B58A6C00992D3D /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		6D44A45518B58C0000992D3D /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				6DA724BB18E6479500872705 /* Social_Facebook_Icon.png */,
 				6DA724BC18E6479500872705 /* Social_SMS_Icon.png */,
 				6DA724BD18E6479500872705 /* Social_SoundCloud_Icon.png */,
+				6D3197901A156F6600762EB8 /* Social_Opho_Icon.png */,
 				6DA724B818E4D72F00872705 /* Share_Icon.png */,
 				6D813EC418DA268500D29F48 /* Tutorial_gTar.png */,
 				6D5FD01E18D12B5C00ED96F6 /* Tutorial_Dock.png */,
@@ -1486,6 +1489,7 @@
 				580A52051864DFF50077240B /* Icon_GUITAR.png in Resources */,
 				58D6176E1863BF5E001EB327 /* Sequence9.png in Resources */,
 				58F5449518ABFDAA009E6E43 /* Icon_Sound.png in Resources */,
+				6D3197911A156F6600762EB8 /* Social_Opho_Icon.png in Resources */,
 				58D617641863BF5E001EB327 /* Sequence1.png in Resources */,
 				6D44A45B18B5937B00992D3D /* InfogTar.png in Resources */,
 				584085881865355300BFF3C5 /* sequencerInstruments.plist in Resources */,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -109,12 +110,6 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ch-pC-VNc">
                             <rect key="frame" x="211" y="216" width="15" height="30"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="OPHO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE4-tV-CxY">
-                            <rect key="frame" x="53" y="16" width="134" height="72"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="43"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="297" translatesAutoresizingMaskIntoConstraints="NO" id="aVl-07-8ru">
                             <rect key="frame" x="18" y="94" width="204" height="114"/>
                             <constraints>
@@ -125,13 +120,20 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Social_Opho_Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yha-l2-Gxw">
+                            <rect key="frame" x="45" y="8" width="151" height="91"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="91" id="cDh-10-JSa"/>
+                                <constraint firstAttribute="width" constant="151" id="tzO-FD-fIt"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="aVl-07-8ru" secondAttribute="centerX" id="3ty-5g-0GQ"/>
-                        <constraint firstAttribute="centerX" secondItem="BE4-tV-CxY" secondAttribute="centerX" id="YpB-M0-QzV"/>
                         <constraint firstAttribute="centerX" secondItem="Eih-3u-c3I" secondAttribute="centerX" id="hbd-MT-VbX"/>
                         <constraint firstItem="5Ch-pC-VNc" firstAttribute="leading" secondItem="Eih-3u-c3I" secondAttribute="trailing" constant="-18" id="qll-Hy-Qwg"/>
+                        <constraint firstAttribute="centerX" secondItem="Yha-l2-Gxw" secondAttribute="centerX" id="uKX-XP-kK1"/>
                     </constraints>
                 </view>
             </subviews>
@@ -149,6 +151,7 @@
     </objects>
     <resources>
         <image name="InfoLogo.png" width="250" height="170"/>
+        <image name="Social_Opho_Icon.png" width="256" height="160"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
