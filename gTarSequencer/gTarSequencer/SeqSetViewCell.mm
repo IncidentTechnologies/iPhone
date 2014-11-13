@@ -392,21 +392,15 @@
     }
 }
 
-- (void)notifyQueuedPatterns:(BOOL)reset
+- (void)notifyQueuedPattern:(int)loopCount
 {
     if(queuedPatternButton != nil){
         
-        if(reset){
-            loopModCount = 0;
-        }
-        
-        if(loopModCount%8==3 || loopModCount%8==4){
+        if(loopCount%8==3 || loopCount%8==4){
             [self setStateForButton:queuedPatternButton state:3];
         }else{
             [self setStateForButton:queuedPatternButton state:1];
         }
-        
-        loopModCount++;
     }
     
 }

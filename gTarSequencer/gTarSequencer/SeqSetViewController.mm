@@ -924,7 +924,7 @@
     }
 }
 */
-- (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset
+- (void)notifyQueuedPatternsAtIndex:(int)index loopCount:(int)loopCount
 {
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     SeqSetViewCell * cell = (SeqSetViewCell *)[instrumentTable cellForRowAtIndexPath:indexPath];
@@ -938,7 +938,7 @@
         }
     }
     
-    [cell notifyQueuedPatterns:reset];
+    [cell notifyQueuedPattern:loopCount];
     
 }
 
@@ -960,6 +960,8 @@
 // Bottom to top
 - (void)dequeueAllPatternsForTrack:(id)sender
 {
+    DLog(@"Dequeue all patterns for track");
+    
     SeqSetViewCell * cell = (SeqSetViewCell *)sender;
     NSTrack * track = cell.track;
     int instIndex = track.m_instrument.m_id;
@@ -1574,7 +1576,7 @@
         [pattern setObject:[NSNumber numberWithInt:index] forKey:@"Index"];
         [pattern setObject:tempTrack forKey:@"Instrument"];
         
-        [delegate enqueuePattern:pattern];
+        [delegate enqueuePattern:pattern forTrack:tempTrack];
         
         return YES;
         
@@ -1592,24 +1594,25 @@
 - (void)commitSelectingPatternAtIndex:(int)indexToSelect forTrack:(NSTrack *)track
 {
     if (track.selectedPatternIndex == indexToSelect){
+        DLog(@"Pattern is already selected");
         return;
     }
     
     NSPattern * newSelection = [track selectPattern:indexToSelect];
     
-    NSTrack * currentTrack = [self getCurrentTrack];
+    //NSTrack * currentTrack = [self getCurrentTrack];
     
     [delegate updatePlaybandForTrack:track];
     
-    int trackIndex = 0;
+    /*int trackIndex = 0;
     for(NSTrack * sequenceTrack in sequence.m_tracks){
         if(sequenceTrack.m_instrument.m_id == track.m_instrument.m_id){
             [self selectInstrument:trackIndex];
         }
         trackIndex++;
-    }
+    }*/
     
-    currentTrack = [self getCurrentTrack];
+    //currentTrack = [self getCurrentTrack];
     
     [delegate setMeasureAndUpdate:newSelection.selectedMeasure checkNotPlaying:TRUE];
     
@@ -1617,7 +1620,7 @@
         [self updateAllVisibleCells];
     }
     
-    currentTrack = [self getCurrentTrack];
+    //currentTrack = [self getCurrentTrack];
     
     [self saveStateToDiskWithForce:NO];
 }

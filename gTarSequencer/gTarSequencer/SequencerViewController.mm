@@ -849,7 +849,7 @@
                 }
                 
                 // Cause queued pattern to blink
-                [seqSetViewController notifyQueuedPatternsAtIndex:i andResetCount:resetCount];
+                [seqSetViewController notifyQueuedPatternsAtIndex:i loopCount:currentFret];
                 
                 // update Instrument view if it's open
                 if(activeMainView == instrumentViewController.view && trackToPlay == [seqSetViewController getCurrentTrack]){
@@ -999,7 +999,7 @@
 - (void)checkQueueForPatternsFromTrack:(NSTrack *)track
 {
     
-    DLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT");
+    DLog(@"CHECK QUEUE FOR PATTERNS FROM INSTRUMENT, COUNT: %i",[patternQueue count]);
     
     NSMutableArray * objectsToRemove = [NSMutableArray array];
     
@@ -1012,7 +1012,7 @@
             NSTrack * nextPatternTrack = [patternToSelect objectForKey:@"Instrument"];
             
             if (track == nextPatternTrack){
-                DLog(@"DEQUEUEING THE NEXT PATTERN");
+                DLog(@"DEQUEUEING THE NEXT PATTERN FOR %@",track.m_instrument.m_name);
                 [objectsToRemove addObject:patternToSelect];
                 [seqSetViewController commitSelectingPatternAtIndex:nextPatternIndex forTrack:nextPatternTrack];
             
@@ -1029,11 +1029,12 @@
     }
 }
 
-- (void)enqueuePattern:(NSMutableDictionary *)pattern
+- (void)enqueuePattern:(NSMutableDictionary *)pattern forTrack:(NSTrack *)track
 {
     DLog(@"Enqueue a new pattern");
+    
     // For now, clear all the queued patterns for the active instrument
-    [self removeQueuedPatternForInstrumentAtIndex:[[seqSetViewController getCurrentTrack] m_instrument].m_id];
+    [self removeQueuedPatternForInstrumentAtIndex:track.m_instrument.m_id];
     
     @synchronized(patternQueue){
         [patternQueue addObject:pattern];
@@ -1045,25 +1046,35 @@
 -(void)dequeueAllPatternsForTrack:(NSTrack *)track
 {
     @synchronized(patternQueue){
+        
+        NSMutableArray * patternsToRemove = [[NSMutableArray alloc] init];
+        
         for(NSMutableDictionary * p in patternQueue){
             NSTrack * t = [p objectForKey:@"Instrument"];
             if(t == track){
-                [patternQueue removeObject:p];
+                [patternsToRemove addObject:p];
             }
         }
+        
+        [patternQueue removeObjectsInArray:patternsToRemove];
     }
 }
 
 -(void)removeQueuedPatternForInstrumentAtIndex:(int)instIndex
 {
     @synchronized(patternQueue){
+        
+        NSMutableArray * patternsToRemove = [[NSMutableArray alloc] init];
+        
         for(NSMutableDictionary * p in patternQueue){
             NSTrack * t = [p objectForKey:@"Instrument"];
             if(t.m_instrument.m_id == instIndex)
             {
-                [patternQueue removeObject:p];
+                [patternsToRemove addObject:p];
             }
         }
+        
+        [patternQueue removeObjectsInArray:patternsToRemove];
     }
 }
 

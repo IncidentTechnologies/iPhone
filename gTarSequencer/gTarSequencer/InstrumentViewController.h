@@ -16,7 +16,7 @@
 
 - (void) saveStateToDiskWithForce:(BOOL)force;
 - (BOOL) checkIsPlaying;
-- (void) enqueuePattern:(NSMutableDictionary *)pattern;
+- (void) enqueuePattern:(NSMutableDictionary *)pattern forTrack:(NSTrack *)track;
 - (void) dequeueAllPatternsForTrack:(NSTrack *)track;
 - (int) getQueuedPatternIndexForTrack:(NSTrack *)track;
 - (void) viewSeqSetWithAnimation:(BOOL)animate;

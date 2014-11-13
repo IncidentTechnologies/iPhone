@@ -26,7 +26,7 @@
 - (void) turnOffGuitarEffects;
 - (void) setMeasureAndUpdate:(NSMeasure *)measure checkNotPlaying:(BOOL)checkNotPlaying;
 
-- (void) enqueuePattern:(NSMutableDictionary *)pattern;
+- (void) enqueuePattern:(NSMutableDictionary *)pattern forTrack:(NSTrack *)track;
 - (int) getQueuedPatternIndexForTrack:(NSTrack *)track;
 - (void) removeQueuedPatternForInstrumentAtIndex:(int)instIndex;
 
@@ -80,6 +80,7 @@ extern OphoMaster * g_ophoMaster;
     int activeSequenceXmpId;
     
     NSTimer * saveContextTimer;
+    
 }
 
 
@@ -120,7 +121,7 @@ extern OphoMaster * g_ophoMaster;
 - (void)viewSelectedInstrument:(SeqSetViewCell *)sender;
 - (void)setSelectedCellToSelectedInstrument;
 
-- (void)notifyQueuedPatternsAtIndex:(int)index andResetCount:(BOOL)reset;
+- (void)notifyQueuedPatternsAtIndex:(int)index loopCount:(int)loopCount;
 - (void)clearQueuedPatternButtonAtIndex:(int)index;
 - (void)dequeueAllPatternsForTrack:(id)sender;
 

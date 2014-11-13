@@ -43,7 +43,7 @@
 - (IBAction)addMeasures:(id)sender;
 
 - (void)initMeasureViews;
-- (void)notifyQueuedPatterns:(BOOL)reset;
+- (void)notifyQueuedPattern:(int)loopCount;
 - (void)resetQueuedPatternButton;
 - (void)enqueuePatternButton:(int)index;
 - (BOOL)hasQueuedPatternButton;

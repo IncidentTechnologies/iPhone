@@ -1014,7 +1014,7 @@
             [pattern setObject:[NSNumber numberWithInt:tappedIndex] forKey:@"Index"];
             [pattern setObject:currentTrack forKey:@"Instrument"];
             
-            [delegate enqueuePattern:pattern];
+            [delegate enqueuePattern:pattern forTrack:currentTrack];
             
         }else if(tappedIndex == activePattern){
             
