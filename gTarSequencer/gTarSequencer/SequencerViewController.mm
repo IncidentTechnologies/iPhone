@@ -881,10 +881,10 @@
                         
                         float noteBeat = r_beat/4.0 - songClip.m_startbeat;
                         
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                             NSNote * newNote = [[NSNote alloc] initWithValue:[NSString stringWithFormat:@"%i",s] beatstart:noteBeat duration:0.25];
                             [songClip addNote:newNote];
-                        });
+                        //});
                     }
                 }
             }

@@ -14,7 +14,8 @@
 
 #define DEFAULT_SONG_NAME @"RecordedSessionPlaceholder.wav"
 
-#define RENDER_UPPER_LIMIT 2638832
+#define RENDER_MIDDLE_LIMIT 20*1024.0*1024.0
+#define RENDER_UPPER_LIMIT 50*1024.0*1024.0
 
 #define TICK_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
 
@@ -1403,14 +1404,23 @@
         // Then get data and upload
         NSData * data = [[NSData alloc] initWithContentsOfFile:songPath];
         
-        if([data length] < RENDER_UPPER_LIMIT){
+        
+        if([data length] < RENDER_MIDDLE_LIMIT){
             
             DLog(@"Save recording song %li with render",recordingSong.m_id);
             
+            recordingSong.m_savingData = data;
             [g_ophoMaster saveSong:recordingSong withFile:data];
-        }else{
+        }else if([data length] < RENDER_UPPER_LIMIT){
             
             DLog(@"Render length exceeds upper limit, save %li without render",recordingSong.m_id);
+            
+            recordingSong.m_savingData = data;
+            [self alertOptionalFileSave:[NSString stringWithFormat:@"%.2f",(float)data.length/1024.0/1024.0] withData:data];
+            
+        }else{
+            
+            [self alertFileSizeTooBig:[NSString stringWithFormat:@"%.2f",(float)data.length/1024.0/1024.0]];
             
             [g_ophoMaster saveSong:recordingSong withFile:nil];
         }
@@ -1424,6 +1434,34 @@
     }
 
 }
+
+
+-(void)alertOptionalFileSave:(NSString *)sizeString withData:(NSData *)data
+{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Large File" message:[NSString stringWithFormat:@"Continue saving %@ MB song to Opho?",sizeString] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES",nil];
+    
+    [alert show];
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        recordingSong.m_savingData = nil;
+        [g_ophoMaster saveSong:recordingSong withFile:nil];
+    }else if(buttonIndex == 1){
+        [g_ophoMaster saveSong:recordingSong withFile:recordingSong.m_savingData];
+    }
+}
+
+-(void)alertFileSizeTooBig:(NSString *)sizeString
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"File Too Large" message:[NSString stringWithFormat:@"Song of %@ MB exceeds Opho's limit.",sizeString] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
 
 #pragma mark - Song Description Field
 - (void)textViewDidEndEditing:(UITextView *)textView

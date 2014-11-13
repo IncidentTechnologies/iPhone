@@ -41,6 +41,7 @@
 @property (nonatomic, readonly) NSString * m_xmpName;
 @property (nonatomic, readonly) NSString * m_author;
 @property (nonatomic, readonly) NSString * m_description;
+@property (nonatomic, retain) NSData * m_savingData;
 @property (nonatomic) long m_tempo;
 @property (nonatomic) bool m_looping;
 @property (nonatomic) long m_loopstart;

@@ -52,7 +52,7 @@
 extern OphoMaster * g_ophoMaster;
 extern NSUser * g_loggedInUser;
 
-@interface RecordShareViewController : MainEventController <UIScrollViewDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate>
+@interface RecordShareViewController : MainEventController <UIScrollViewDelegate, UITextFieldDelegate,UITextViewDelegate,NSSongModelDelegate,RecordEditorDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 {
     NSMutableArray * instruments;
     NSMutableArray * tracks;

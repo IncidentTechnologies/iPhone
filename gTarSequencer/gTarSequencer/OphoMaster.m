@@ -452,6 +452,7 @@ extern NSUser * g_loggedInUser;
 - (void)saveSongRenderCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Save Song Render Callback");
+    
 }
 
 // Samples

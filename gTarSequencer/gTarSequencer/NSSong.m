@@ -24,6 +24,7 @@
 @synthesize m_loopend;
 @synthesize m_sequenceName;
 @synthesize m_sequenceId;
+@synthesize m_savingData;
 
 @synthesize m_song;
 

@@ -21,6 +21,8 @@ extern OphoMaster * g_ophoMaster;
 @interface SoundMaker : NSObject
 {
     int instIndex;
+    
+    NSMutableArray * notesToPlayQueue;
 }
 
 - (id)initWithInstrumentId:(NSInteger)instId andName:(NSString *)instName andSamples:(NSArray *)instSamples andSoundMaster:(SoundMaster *)soundMaster;
@@ -39,5 +41,9 @@ extern OphoMaster * g_ophoMaster;
 
 - (void)releaseLevelSlider;
 - (void)commitLevelSlider:(UILevelSlider *)slider;
+
+- (void)queueNoteToPlay:(int)note;
+- (void)playAllNotesInQueue;
+- (BOOL)isNoteQueueEmpty;
 
 @end

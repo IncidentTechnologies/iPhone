@@ -156,6 +156,10 @@
 
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight
 {
+    if(![audioSource isNoteQueueEmpty]){
+        DLog(@"ERROR: string queue is not empty");
+    }
+    
     if (instrumentIndex >= 0)
     {
         [audioSource updateAmplitude:amplitudeweight];
@@ -165,10 +169,12 @@
         {
             if (notes[startingLocation+i])
             {
-                [audioSource pluckString:i];
+                [audioSource queueNoteToPlay:i];
             }
         }
     }
+    
+    [audioSource playAllNotesInQueue];
     
     [self setPlayband:fret];
 }

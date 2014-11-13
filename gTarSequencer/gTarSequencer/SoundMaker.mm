@@ -169,6 +169,35 @@
     m_samplerBank->StopAllSamples();
 }
 
+- (void)queueNoteToPlay:(int)note
+{
+    if(notesToPlayQueue == nil){
+        notesToPlayQueue = [[NSMutableArray alloc] init];
+    }
+    
+    [notesToPlayQueue addObject:[NSNumber numberWithInt:note]];
+}
+
+- (void)playAllNotesInQueue
+{
+    
+    @synchronized(notesToPlayQueue){
+        NSMutableArray * notesToRemove = [[NSMutableArray alloc] init];
+        
+        for(NSNumber * note in notesToPlayQueue){
+            [self pluckString:[note intValue]];
+            [notesToRemove addObject:note];
+        }
+        
+        [notesToPlayQueue removeObjectsInArray:notesToRemove];
+    }
+}
+
+- (BOOL)isNoteQueueEmpty
+{
+    return ([notesToPlayQueue count] == 0);
+}
+
 - (void)pluckString:(int)str
 {
     m_samplerBank->TriggerSample(str);
