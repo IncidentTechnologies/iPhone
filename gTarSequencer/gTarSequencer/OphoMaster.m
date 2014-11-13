@@ -63,6 +63,8 @@ extern NSUser * g_loggedInUser;
         loggedInAndLoaded = false;
         
         [self resetTutorial];
+        
+        TFLog(@"Opho Master Loaded");
     }
     return self;
 }
@@ -917,8 +919,6 @@ extern NSUser * g_loggedInUser;
     
     NSLog(@"Opho loading instruments queue count is %li, d:%@",[[ophoLoadingInstrumentQueue allKeys] count],ophoLoadingInstrumentQueue);
     
-    NSMutableArray * keysToRemove = [[NSMutableArray alloc] init];
-    
     if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
         // work already done
     
@@ -937,7 +937,10 @@ extern NSUser * g_loggedInUser;
     }
     
     @synchronized(ophoLoadingInstrumentQueue){
-        for(id instId in ophoLoadingInstrumentQueue){
+        
+        NSArray * keys = [ophoLoadingInstrumentQueue allKeys];
+        
+        for(id instId in keys){
             
             // Ensure if it's already complete it's skipped
             BOOL isComplete = true;
@@ -948,7 +951,7 @@ extern NSUser * g_loggedInUser;
             }
             
             if(isComplete){
-                [keysToRemove addObject:instId];
+                [ophoLoadingInstrumentQueue removeObjectForKey:instId];
                 continue;
             }
             
@@ -975,14 +978,10 @@ extern NSUser * g_loggedInUser;
             
             if(isComplete){
                 [object performSelector:selector withObject:[ophoInstruments objectForKey:instId]];
-                [keysToRemove addObject:instId];
+                [ophoLoadingInstrumentQueue removeObjectForKey:instId];
             }
         }
         
-        [ophoLoadingInstrumentQueue removeObjectsForKeys:keysToRemove];
-        
-        //DLog(@"(queue count is now %li)",[ophoLoadingInstrumentQueue count]);
-    
         if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
             
             dispatch_async(dispatch_get_main_queue(), ^{

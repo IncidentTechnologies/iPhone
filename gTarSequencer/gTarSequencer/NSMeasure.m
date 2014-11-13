@@ -157,7 +157,7 @@
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight
 {
     if(![audioSource isNoteQueueEmpty]){
-        DLog(@"ERROR: string queue is not empty");
+        TFLog(@"ERROR: string queue is not empty for instrument %i",instrumentIndex);
     }
     
     if (instrumentIndex >= 0)

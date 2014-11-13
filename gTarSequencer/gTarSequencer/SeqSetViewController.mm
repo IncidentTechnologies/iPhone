@@ -1338,8 +1338,11 @@
 
 -(void)removeCellAtRow:(int)row andSection:(int)section
 {
+    [instrumentTable beginUpdates];
     
     [instrumentTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [instrumentTable endUpdates];
     
     DLog(@"Reload data");
     
@@ -1519,8 +1522,10 @@
     // Bubble up:
     long lastIndex = [remainingInstrumentOptions count] - 1;
     
-    [self bubbleUp:lastIndex];
-    
+    if(lastIndex >= 0 && lastIndex < [remainingInstrumentOptions count]){
+        [self bubbleUp:lastIndex];
+    }
+        
     DLog(@"Bubbled up");
     
 }

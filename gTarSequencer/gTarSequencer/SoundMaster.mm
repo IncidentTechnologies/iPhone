@@ -95,7 +95,9 @@
 
 -(void)setGain:(double)gain forSamplerBank:(SamplerBankNode *)m_samplerBank
 {
-    m_samplerBank->SetBankGain(gain);
+    if(m_samplerBank != NULL){
+        m_samplerBank->SetBankGain(gain);
+    }
 }
 
 #pragma mark - File Recording

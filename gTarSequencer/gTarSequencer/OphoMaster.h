@@ -67,6 +67,7 @@
     
     NSMutableDictionary * ophoInstruments;
     NSMutableDictionary * ophoLoadingInstrumentQueue;
+    NSMutableArray * loadedInstruments;
     
     NSMutableDictionary * ophoSampleCache;
     

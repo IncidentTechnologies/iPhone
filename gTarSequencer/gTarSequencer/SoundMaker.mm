@@ -200,7 +200,9 @@
 
 - (void)pluckString:(int)str
 {
-    m_samplerBank->TriggerSample(str);
+    if(m_samplerBank != NULL && m_samplerBank->GetSample(str) != NULL){
+        m_samplerBank->TriggerSample(str);
+    }
 }
 
 - (void)updateAmplitude:(double)amplitude
@@ -229,6 +231,7 @@
 
 - (void)releaseSounds
 {
+    //[m_soundMaster releaseBank:m_samplerBank];
     [m_soundMaster releaseBankWithoutPause:m_samplerBank];
     // also m_soundMaster releaseBankAndDisconnect
 }
