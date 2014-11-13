@@ -93,7 +93,7 @@
 {
     
     // Check for first launch
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"HasLaunchedOnce"]]){
         DLog(@"Nth time launch");
         
         [self transitionToSequencerController:FALSE];

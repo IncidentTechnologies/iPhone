@@ -64,7 +64,6 @@ extern NSUser * g_loggedInUser;
         
         [self resetTutorial];
         
-        TFLog(@"Opho Master Loaded");
     }
     return self;
 }
@@ -133,6 +132,40 @@ extern NSUser * g_loggedInUser;
 - (void)logoutCallback:(CloudResponse *)cloudResponse
 {
     DLog(@"Opho Callback | Logged Out");
+    
+    // Clear all the data
+    
+    [ophoInstruments removeAllObjects];
+    [ophoLoadingInstrumentQueue removeAllObjects];
+    [songIdSet removeAllObjects];
+    [songLoadSet removeAllObjects];
+    [songDateSet removeAllObjects];
+    [songVersionSet removeAllObjects];
+    [songIsCustomSet removeAllObjects];
+    [sequenceIdSet removeAllObjects];
+    [sequenceLoadSet removeAllObjects];
+    [sequenceDateSet removeAllObjects];
+    [sequenceVersionSet removeAllObjects];
+    [sequenceIsCustomSet removeAllObjects];
+    [sampleIdSet removeAllObjects];
+    [sampleLoadSet removeAllObjects];
+    [sampleDateSet removeAllObjects];
+    [sampleVersionSet removeAllObjects];
+    [sampleIsCustomSet removeAllObjects];
+    [instrumentIdSet removeAllObjects];
+    [instrumentLoadSet removeAllObjects];
+    [instrumentDateSet removeAllObjects];
+    [instrumentVersionSet removeAllObjects];
+    [instrumentIsCustomSet removeAllObjects];
+    
+    // Refresh instrument options
+    [loadingDelegate resetState];
+    
+    // Clear set
+    [loadingDelegate createNewSet];
+    
+    [self resetTutorial];
+ 
 }
 
 - (BOOL)loggedIn
@@ -1368,19 +1401,12 @@ extern NSUser * g_loggedInUser;
     [self buildSortedXmpList:xmpList withIds:sequenceIdSet withData:sequenceLoadSet withDates:sequenceDateSet withVersion:sequenceVersionSet withCustom:sequenceIsCustomSet];
     
     // Check that TUTORIAL has been copied over
-    BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:@"ConvertTutorialSet"];
+    BOOL convertTutorialSet = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"ConvertTutorialSet_%li",[self getUserId]]];
     
     if(![self defaultSetExists] && !convertTutorialSet){
         [self copyTutorialFile];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"ConvertTutorialSet"];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:[NSString stringWithFormat:@"ConvertTutorialSet_%li",[self getUserId]]];
     }
-    
-    /*if(pendingLoadTutorial && [sequenceLoadSet count] > 0){
-        
-        DLog(@"Pending load tutorial, sequenceLoadSet is %@",sequenceLoadSet);
-        
-        [self launchPendingTutorial];
-    }*/
     
     if([sequenceIdSet count] > 0){
         [profileDelegate profileLoaded];
@@ -1553,11 +1579,6 @@ extern NSUser * g_loggedInUser;
     tutorialSkipped = true;
 }
 
-/*- (void)loadTutorialSequenceWhenReady
-{
-    pendingLoadTutorial = YES;
-}*/
-
 - (void)copyTutorialFile
 {
     DLog(@"Copy tutorial file");
@@ -1567,23 +1588,5 @@ extern NSUser * g_loggedInUser;
     [self saveSequence:tutorialSequence];
 }
 
-/*
-- (void)launchPendingTutorial
-{
-    DLog(@"Launch pending tutorial");
-    
-    pendingLoadTutorial = NO;
-    
-    NSInteger xmpId;
-    
-    for(int i = 0; i < [sequenceLoadSet count]; i++){
-        if([sequenceLoadSet[i] isEqualToString:DEFAULT_SET_NAME]){
-            xmpId = [sequenceIdSet[i] intValue];
-        }
-    }
-    
-    //[tutorialDelegate tutorialReady:xmpId];
-}
-*/
 
 @end

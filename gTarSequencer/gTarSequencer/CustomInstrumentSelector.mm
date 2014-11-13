@@ -108,7 +108,7 @@
 - (void)checkFirstLaunch
 {
     // Check for first launch
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedCustom"]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"HasLaunchedCustom_%li",[g_ophoMaster getUserId]]]){
         isFirstLaunch = FALSE;
     }else{
         isFirstLaunch = TRUE;

@@ -9,6 +9,7 @@
                 <outlet property="processingIndicator" destination="Nip-My-dod" id="f12-Bq-hvk"/>
                 <outlet property="processingScreen" destination="8oC-Jc-7rL" id="mA3-od-6pK"/>
                 <outlet property="shareEmailButton" destination="nGk-Vj-O73" id="1VL-C4-6mz"/>
+                <outlet property="shareOphoButton" destination="VV0-8Z-0zJ" id="WfU-LW-5WO"/>
                 <outlet property="shareSMSButton" destination="DbZ-mL-NMT" id="IaS-JQ-b2f"/>
                 <outlet property="shareScreen" destination="1" id="WOt-zB-qVO"/>
                 <outlet property="shareSoundcloudButton" destination="Omu-VE-57I" id="ByX-cI-th3"/>
@@ -44,55 +45,74 @@
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MR5-8a-bz6">
                     <rect key="frame" x="0.0" y="182" width="364" height="94"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-Vj-O73">
+                            <rect key="frame" x="17" y="12" width="70" height="70"/>
+                            <color key="backgroundColor" red="0.58039215690000001" green="0.40000000000000002" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="Nwc-eP-2ee"/>
+                                <constraint firstAttribute="width" constant="70" id="yv3-Qm-FGP"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="15" minY="13" maxX="15" maxY="13"/>
+                            <state key="normal" title="Button" image="Social_Email_Icon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="zz5-F8-G00"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-mL-NMT">
+                            <rect key="frame" x="105" y="12" width="70" height="70"/>
+                            <color key="backgroundColor" red="0.41176470590000003" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="XNd-WR-i6L"/>
+                                <constraint firstAttribute="height" constant="70" id="ZWF-6k-keL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="imageEdgeInsets" minX="13" minY="13" maxX="13" maxY="13"/>
+                            <state key="normal" title="Button" image="Social_SMS_Icon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="YLs-nh-2QC"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-VE-57I">
+                            <rect key="frame" x="278" y="13" width="70" height="70"/>
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.36078431372549019" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="cQq-XR-mO4"/>
+                                <constraint firstAttribute="height" constant="70" id="kEQ-L3-tGF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" title="Button" image="Social_SoundCloud_Icon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="1hX-uB-Aex"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV0-8Z-0zJ">
+                            <rect key="frame" x="191" y="12" width="70" height="70"/>
+                            <color key="backgroundColor" red="0.8862745098" green="0.1450980392" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="0Yk-Wx-SfF"/>
+                                <constraint firstAttribute="height" constant="70" id="k6R-3Y-xdq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" title="O">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="Ler-rR-9i8"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" red="0.15686274509803921" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-Vj-O73">
-                    <rect key="frame" x="41" y="195" width="70" height="70"/>
-                    <color key="backgroundColor" red="0.58039215690000001" green="0.40000000000000002" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="70" id="Nwc-eP-2ee"/>
-                        <constraint firstAttribute="width" constant="70" id="yv3-Qm-FGP"/>
-                    </constraints>
-                    <inset key="imageEdgeInsets" minX="15" minY="13" maxX="15" maxY="13"/>
-                    <state key="normal" title="Button" image="Social_Email_Icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="zz5-F8-G00"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-mL-NMT">
-                    <rect key="frame" x="147" y="195" width="70" height="70"/>
-                    <color key="backgroundColor" red="0.41176470590000003" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="XNd-WR-i6L"/>
-                        <constraint firstAttribute="height" constant="70" id="ZWF-6k-keL"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <inset key="imageEdgeInsets" minX="13" minY="13" maxX="13" maxY="13"/>
-                    <state key="normal" title="Button" image="Social_SMS_Icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="YLs-nh-2QC"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-VE-57I">
-                    <rect key="frame" x="253" y="195" width="70" height="70"/>
-                    <color key="backgroundColor" red="0.93725490196078431" green="0.36078431372549019" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="cQq-XR-mO4"/>
-                        <constraint firstAttribute="height" constant="70" id="kEQ-L3-tGF"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                    <state key="normal" title="Button" image="Social_SoundCloud_Icon.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="1hX-uB-Aex"/>
-                    </connections>
-                </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" showsHorizontalScrollIndicator="NO" text="This song was written in Sequence, an app for Opho." translatesAutoresizingMaskIntoConstraints="NO" id="Vsp-Ox-0D9">
                     <rect key="frame" x="7" y="90" width="351" height="84"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -210,16 +210,34 @@
 }
 
 #pragma mark - Instruments
-- (void)drawInstruments
+- (void)clearInstruments
 {
+    if(sliders != nil) {
+        [sliders removeAllObjects];
+        sliders = nil;
+    }
+    
     if(tracks != nil){
-        [tracks removeAllObjects];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            for(NSTrack * track in tracks) {
+                [track.m_instrument.m_sampler.audio releaseLevelSlider];
+            }
+            [tracks removeAllObjects];
+            tracks = nil;
+        });
         
         // clear previous
         for(UIView * v in instrumentFrameContainer.subviews){
             [v removeFromSuperview];
         }
+        
     }
+}
+
+- (void)drawInstruments
+{
+    [self clearInstruments];
     
     tracks = [[NSMutableArray alloc] initWithArray:[delegate getTracks]];
     sliders = [[NSMutableDictionary alloc] init];
@@ -230,8 +248,6 @@
     // reset other frames
     if(instrumentWidth < 130){
         [sidebar setFrame:CGRectMake([tracks count]*instrumentWidth-1, -1, instrumentWidth, instrumentFrameContainer.frame.size.height)];
-        //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
-        //[sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
         
         [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
         
@@ -239,8 +255,6 @@
         instrumentWidth = (instrumentFrameContainer.frame.size.width-SIDEBAR_WIDTH) / ([tracks count]);
         
         [sidebar setFrame:CGRectMake(outline.frame.size.width - SIDEBAR_WIDTH+1, -1, SIDEBAR_WIDTH, outline.frame.size.height+2)];
-        //[slider setFrame:CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT)];
-        //[sliderCircle setFrame:CGRectMake(slider.frame.origin.x+sidebar.frame.origin.x+5,sliderCircle.frame.origin.y,sliderCircle.frame.size.width,sliderCircle.frame.size.height)];
         
         [masterSlider setFrame:CGRectMake(sidebar.frame.size.width/2 - SLIDER_WIDTH/2,10,SLIDER_WIDTH,SLIDER_HEIGHT)];
     }
@@ -301,7 +315,7 @@
         [instrumentView addSubview:volumeSlider];
         
         // Link volume sliders to instruments
-        [track.m_instrument.m_sampler.audio releaseLevelSlider];
+        //[track.m_instrument.m_sampler.audio releaseLevelSlider];
         [track.m_instrument.m_sampler.audio commitLevelSlider:volumeSlider];
         
         i++;
@@ -361,6 +375,8 @@
 
 - (void)contract
 {
+    
+    [self clearInstruments];
     
     [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0

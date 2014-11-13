@@ -1475,7 +1475,7 @@
 -(void)checkIsFirstLaunch
 {
     // Check for first launch
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedInstrumentView"]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"HasLaunchedInstrumentView_%li",[g_ophoMaster getUserId]]]){
         isFirstLaunch = FALSE;
     }else{
         isFirstLaunch = TRUE;

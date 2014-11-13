@@ -219,14 +219,14 @@
 {
     isVolumeSliderOpen = true;
     [delegate stopGestures];
-    //[delegate stopDrawing];
+    [delegate stopDrawing];
 }
 
 - (void) volumeDisplayDidClose
 {
     isVolumeSliderOpen = false;
     [delegate startGestures];
-    //[delegate startDrawing];
+    [delegate startDrawing];
     [delegate refreshVolumeSliders];
 }
 

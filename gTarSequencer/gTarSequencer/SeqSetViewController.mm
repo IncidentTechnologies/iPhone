@@ -182,7 +182,7 @@
 #pragma mark - Load Context
 - (BOOL)loadStateFromDisk
 {
-    DLog(@"Load state from disk");
+    DLog(@"Load state from disk for %li",[g_ophoMaster getUserId]);
     
     // sequenceCurrentState
     NSString * filepath = [NSString stringWithFormat:@"%@_%i",DEFAULT_STATE_NAME,[g_ophoMaster getUserId]];
@@ -198,7 +198,7 @@
     if ([fileManager fileExistsAtPath:sequenceFilepath]) {
         DLog(@"The state XML exists");
     } else {
-        DLog(@"The state XML does not exist");
+        DLog(@"The state XML does not exist, load local to avoid blank");
         return FALSE;
     }
     
@@ -1710,7 +1710,7 @@
 {
     
     // Check for first launch
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedSeqSetView"]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"HasLaunchedSeqSetView_%li",[g_ophoMaster getUserId]]]){
         isFirstLaunch = FALSE;
     }else{
         isFirstLaunch = TRUE;

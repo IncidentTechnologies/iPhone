@@ -52,6 +52,8 @@
 - (void)loadingBegan;
 - (void)loadingEnded;
 - (void)instrumentListLoaded;
+- (void)resetState;
+- (void)createNewSet;
 
 @end
 

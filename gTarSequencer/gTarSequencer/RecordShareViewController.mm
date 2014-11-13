@@ -44,6 +44,7 @@
 @synthesize shareEmailButton;
 @synthesize shareSMSButton;
 @synthesize shareSoundcloudButton;
+@synthesize shareOphoButton;
 @synthesize shareView;
 @synthesize shareScreen;
 @synthesize cancelButton;
@@ -787,6 +788,7 @@
     shareEmailButton.layer.cornerRadius = 35.0;
     shareSMSButton.layer.cornerRadius = 35.0;
     shareSoundcloudButton.layer.cornerRadius = 35.0;
+    shareOphoButton.layer.cornerRadius = 35.0;
     
     selectedShareType = @"Email";
     
@@ -858,6 +860,12 @@
         
         selectedShareType = @"SoundCloud";
         [delegate userDidLaunchSoundCloudAuthWithFile:songname xmpId:recordingSong.m_id];
+        
+    }else if(senderButton == shareOphoButton){
+       
+        selectedShareType = @"Opho";
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.opho.com/song/%li",recordingSong.m_id]]];
         
     }
 }

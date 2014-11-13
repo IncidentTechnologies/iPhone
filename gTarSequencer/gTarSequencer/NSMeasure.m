@@ -156,9 +156,9 @@
 
 - (void)playNotesAtFret:(int)fret withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitudeWeight:(double)amplitudeweight
 {
-    if(![audioSource isNoteQueueEmpty]){
-        TFLog(@"ERROR: string queue is not empty for instrument %i",instrumentIndex);
-    }
+    //if(![audioSource isNoteQueueEmpty]){
+    //    DLog(@"ERROR: string queue is not empty for instrument %i",instrumentIndex);
+    //}
     
     if (instrumentIndex >= 0)
     {
@@ -169,12 +169,19 @@
         {
             if (notes[startingLocation+i])
             {
-                [audioSource queueNoteToPlay:i];
+                [audioSource pluckString:i];
+                //[audioSource queueNoteToPlay:i];
             }
         }
+        
+        //int notesInQueue = [audioSource countNotesInQueue];
+        
+        //if(notesInQueue != 6){
+        //    DLog(@"**** MISSING NOTES IN QUEUE: %i",notesInQueue);
+        //}
     }
     
-    [audioSource playAllNotesInQueue];
+    //[audioSource playAllNotesInQueue];
     
     [self setPlayband:fret];
 }

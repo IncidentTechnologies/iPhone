@@ -45,5 +45,6 @@ extern OphoMaster * g_ophoMaster;
 - (void)queueNoteToPlay:(int)note;
 - (void)playAllNotesInQueue;
 - (BOOL)isNoteQueueEmpty;
+- (int)countNotesInQueue;
 
 @end

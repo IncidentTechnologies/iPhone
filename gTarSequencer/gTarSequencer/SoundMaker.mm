@@ -193,6 +193,11 @@
     }
 }
 
+- (int)countNotesInQueue
+{
+    return [notesToPlayQueue count];
+}
+
 - (BOOL)isNoteQueueEmpty
 {
     return ([notesToPlayQueue count] == 0);
@@ -202,6 +207,8 @@
 {
     if(m_samplerBank != NULL && m_samplerBank->GetSample(str) != NULL){
         m_samplerBank->TriggerSample(str);
+    }else{
+        DLog(@"ERROR: Bank not found");
     }
 }
 

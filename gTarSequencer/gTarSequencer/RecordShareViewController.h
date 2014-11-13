@@ -134,7 +134,7 @@ extern NSUser * g_loggedInUser;
 @property (weak, nonatomic) IBOutlet UIButton * shareEmailButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareSMSButton;
 @property (weak, nonatomic) IBOutlet UIButton * shareSoundcloudButton;
-//@property (weak, nonatomic) IBOutlet UIButton * shareFacebookButton;
+@property (weak, nonatomic) IBOutlet UIButton * shareOphoButton;
 
 @property (retain, nonatomic) UIButton * cancelButton;
 

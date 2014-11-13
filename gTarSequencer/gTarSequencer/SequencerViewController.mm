@@ -777,6 +777,11 @@
     [playControlViewController setVolume:volume];
 }
 
+- (void)resetState
+{
+    stateLoaded = false;
+}
+
 - (void)loadStateFromDisk
 {
     stateLoaded = [seqSetViewController loadStateFromDisk];
@@ -1677,9 +1682,9 @@
     [self launchFTUTutorial];
     
     // Reset other BOOLs
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedInstrumentView"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedCustom"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedSeqSetView"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedInstrumentView_%li",[g_ophoMaster getUserId]]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedCustom_%li",[g_ophoMaster getUserId]]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedSeqSetView_%li",[g_ophoMaster getUserId]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
