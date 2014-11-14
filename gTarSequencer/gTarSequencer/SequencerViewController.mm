@@ -401,9 +401,7 @@
         [playControlViewController setShareMode:YES];
     }else{
         [playControlViewController setShareMode:NO];
-        if(isRecording){
-            [recordShareController stopRecordPlayback];
-        }
+        [recordShareController stopRecordPlayback];
         [seqSetViewController startSoundMaster];
         [recordShareController userDidSaveTrack:nil];
     }

@@ -1335,10 +1335,12 @@
 
 - (void)stopRecordPlayback
 {
-    [playTimer invalidate];
-    playTimer = nil;
-    
-    [self stopRecordPlaybackAnimatePlayband:YES];
+    if(playbandTimer != nil){
+        [playTimer invalidate];
+        playTimer = nil;
+        
+        [self stopRecordPlaybackAnimatePlayband:YES];
+    }
 }
 
 -(void)stopRecordPlaybackAnimatePlayband:(BOOL)animatePlayband
