@@ -182,7 +182,7 @@
 
 - (void)drawInstruments
 {
-    [self clearInstruments];
+    //[self clearInstruments];
     
     tracks = [[NSMutableArray alloc] initWithArray:[delegate getTracks]];
     sliders = [[NSMutableDictionary alloc] init];
@@ -304,8 +304,9 @@
 #pragma mark - Expand Contract
 - (void)expand
 {
-    [self drawInstruments];
+    [self clearInstruments];
     [self createOutline];
+    [self drawInstruments];
     [self setVolume:[delegate getVolume]];
     
     [self setAlpha:VISIBLE];
@@ -313,12 +314,8 @@
 
 - (void)contract
 {
-    
     [self clearInstruments];
-    
     [self setAlpha:NOT_VISIBLE];
-    
-    
 }
 
 #pragma mark - Drag slider

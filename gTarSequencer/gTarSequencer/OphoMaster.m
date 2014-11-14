@@ -938,7 +938,7 @@ extern NSUser * g_loggedInUser;
     
     [self addData:datastring forLoadingInstrumentSample:xmpId];
     
-    if([self getSampleFromCache:xmpId] == nil){
+    if([self getSampleFromCache:xmpId] == nil && xmpId >= 0){
         long index = [sampleIdSet indexOfObject:[NSNumber numberWithLong:xmpId]];
         int version = [[sampleVersionSet objectAtIndex:index] intValue];
         

@@ -1508,16 +1508,16 @@
 
 #pragma mark - External file sharing
 
-- (void)userDidLaunchEmailWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId
+- (void)userDidLaunchEmailWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId customText:(NSString *)text songName:(NSString *)songName
 {
     MFMailComposeViewController * email = [[MFMailComposeViewController alloc] init];
     email.mailComposeDelegate = self;
     
     // Subject
-    [email setSubject:@"Check Out the Song I Made"];
+    [email setSubject:[NSString stringWithFormat:@"%@ | A Song by Sequence",songName]];
     
     // Body
-    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%i<br/><br/>Get it for free and make your own here: <a href='http://gtar.fm/seq'>http://gtar.fm/seq</a>",xmpId];
+    NSString * body = [NSString stringWithFormat:@"<a href=\"http://www.opho.com/user/%@\">@%@</a> wants to share a song with you. Listen here: <a href=\"http://www.opho.com/song/%li\">http://www.opho.com/song/%li</a><br/><br/>A message from <a href=\"http://www.opho.com/user/%@\">@%@</a>:<br/><br/>%@<br/><br/>Get <a href='http://gtar.fm/seq'>Sequence</a> for iPhone",[g_ophoMaster getUsername],[g_ophoMaster getUsername],(long)xmpId,(long)xmpId,[g_ophoMaster getUsername],[g_ophoMaster getUsername],text];
     
     [email setMessageBody:body isHTML:YES];
     
@@ -1533,7 +1533,7 @@
     
 }
 
-- (void)userDidLaunchSMSWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId
+- (void)userDidLaunchSMSWithAttachment:(NSString *)filename xmpId:(NSInteger)xmpId customText:(NSString *)text
 {
     DLog(@"Launching SMS");
     
@@ -1541,7 +1541,7 @@
     message.messageComposeDelegate = self;
     
     // Body
-    NSString * body = [NSString stringWithFormat:@"Check out the song I just made with Sequence for Opho! http://www.opho.com/song/%i",xmpId];
+    NSString * body = [NSString stringWithFormat:@"%@ http://www.opho.com/song/%i",text,xmpId];
     [message setBody:body];
     
     // Attachment
@@ -1688,9 +1688,9 @@
     [self launchFTUTutorial];
     
     // Reset other BOOLs
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedInstrumentView_%li",[g_ophoMaster getUserId]]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedCustom_%li",[g_ophoMaster getUserId]]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"HasLaunchedSeqSetView_%li",[g_ophoMaster getUserId]]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedInstrumentView"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedCustom"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HasLaunchedSeqSetView"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

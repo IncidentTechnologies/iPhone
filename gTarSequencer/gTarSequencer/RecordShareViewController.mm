@@ -802,6 +802,8 @@
     [songNameField setFont:[UIFont fontWithName:FONT_DEFAULT size:22.0]];
     
     songDescriptionField.delegate = self;
+    songDescriptionField.layer.borderWidth = 0.5f;
+    songDescriptionField.layer.borderColor = [UIColor colorWithRed:40/255.0 green:47/255.0 blue:51/255.0 alpha:1.0].CGColor;
     
     [shareView setHidden:YES];
     
@@ -849,12 +851,12 @@
     if(senderButton == shareEmailButton){
         
         selectedShareType = @"Email";
-        [delegate userDidLaunchEmailWithAttachment:songname xmpId:recordingSong.m_id];
+        [delegate userDidLaunchEmailWithAttachment:songname xmpId:recordingSong.m_id customText:songDescriptionField.text songName:songNameField.text];
         
     }else if(senderButton == shareSMSButton){
         
         selectedShareType = @"SMS";
-        [delegate userDidLaunchSMSWithAttachment:songname xmpId:recordingSong.m_id];
+        [delegate userDidLaunchSMSWithAttachment:songname xmpId:recordingSong.m_id customText:songDescriptionField.text];
         
     }else if(senderButton == shareSoundcloudButton){
         

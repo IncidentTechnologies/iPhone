@@ -82,6 +82,16 @@
     
     [panel setHidden:NO];
     
+    if(panel == _loadingTopPanel){
+        DLog(@"LOADING TOP PANEL");
+    }else if(panel == _signupTopPanel){
+        DLog(@"SIGNUP TOP PANEL");
+    }else if(panel == _signinTopPanel){
+        DLog(@"SIGNIN TOP PANEL");
+    }else{
+        DLog(@"OTHER");
+    }
+    
     _currentTopPanel = panel;
     
 }

@@ -1710,7 +1710,7 @@
 {
     
     // Check for first launch
-    if([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"HasLaunchedSeqSetView_%li",[g_ophoMaster getUserId]]]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedSeqSetView"]){
         isFirstLaunch = FALSE;
     }else{
         isFirstLaunch = TRUE;
