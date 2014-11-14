@@ -61,14 +61,6 @@
     filling.clearsContextBeforeDrawing = NO;
     [self addSubview:filling];
     
-    // Get dimensions for filling
-    //CGSize fullScreen = CGSizeMake(x, 320);
-    //UIGraphicsBeginImageContextWithOptions(fullScreen, NO, 0);
-    
-    // Prepare for touches
-    zeroPosition.x = self.frame.size.width / 2;
-    zeroPosition.y = self.frame.size.height / 4;
-    
     // Prepare for dynamic instruments
     instrumentFrameContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -1, outline.frame.size.width + 2, outline.frame.size.height+2)];
     instrumentFrameContainer.userInteractionEnabled = YES;
@@ -85,7 +77,6 @@
     
     currentValue = value;
     
-    //[self setVolumeGainTo:value];
     [self fillToPercent:[self percentFull:value]];
 }
 
@@ -102,22 +93,11 @@
 {
     double percentFull = (value-MIN_VOLUME)/(MAX_VOLUME-MIN_VOLUME);
     
-    //DLog(@" *** fill to %f percent ", percentFull);
-    
     return percentFull;
 }
 
 - (void)fillToPercent:(double)percent
 {
-    /*double y = sliderCircleMinY - (sliderCircleMinY - sliderCircleMaxY)*percent;
-     
-     //DLog(@"y is %f",y);
-     
-     CGRect newFrame = CGRectMake(sliderCircle.frame.origin.x, y, sliderCircle.frame.size.width, sliderCircle.frame.size.height);
-     
-     [UIView animateWithDuration:0.1 animations:^(void){[sliderCircle setFrame:newFrame];}];
-     */
-    
     [masterSlider setSliderValue:(1-percent)];
     
 }
@@ -127,8 +107,6 @@
 
 - (void)createOutline
 {
-    // DLog(@"outline frame is %f %f %f %f",outline.frame.origin.x,outline.frame.origin.y,outline.frame.size.width,outline.frame.size.height);
-    
     // Draw black background:
     [outline setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     
@@ -143,35 +121,6 @@
         
         [outline addSubview:sidebar];
     }
-    
-    // Draw sidebar slider
-    /*CGRect sliderFrame = CGRectMake((sidebar.frame.size.width-SLIDER_WIDTH)/2, (sidebar.frame.size.height-SLIDER_HEIGHT)/2, SLIDER_WIDTH, SLIDER_HEIGHT);
-     
-     slider = [[UIView alloc] initWithFrame:sliderFrame];
-     slider.layer.borderColor = [UIColor whiteColor].CGColor;
-     slider.layer.borderWidth = 3.0f;
-     slider.layer.cornerRadius = SLIDER_WIDTH/2;
-     
-     [slider setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
-     
-     [sidebar addSubview:slider];
-     
-     // Draw sidebar slider circle
-     float baseX = slider.frame.origin.x+sidebar.frame.origin.x;
-     float baseY = slider.frame.origin.y;
-     float indent = 5;
-     float circleWidth = SLIDER_WIDTH-2*indent;
-     sliderCircleMaxY = indent+baseY-1;
-     sliderCircleMinY = slider.frame.size.height - circleWidth - indent - 1 + baseY;
-     
-     CGRect sliderCircleFrame = CGRectMake(baseX+indent, sliderCircleMinY, circleWidth, circleWidth);
-     
-     sliderCircle = [[UIButton alloc] initWithFrame:sliderCircleFrame];
-     sliderCircle.backgroundColor = [UIColor colorWithRed:141/255.0 green:112/255.0 blue:166/255.0 alpha:1.0];
-     sliderCircle.layer.cornerRadius = SLIDER_WIDTH/2-indent;
-     
-     [self addSubview:sliderCircle];
-     */
     
     // Master volume level slider
     if(masterSlider == nil){
@@ -191,6 +140,7 @@
         masterSlider = volumeSlider;
         
         [sidebar addSubview:volumeSlider];
+        
     }
     
     // Link volume sliders to soundmaster
@@ -198,16 +148,6 @@
     
 }
 
-- (void)addGestures
-{
-    /*
-     [sliderCircle setUserInteractionEnabled:YES];
-     
-     UIPanGestureRecognizer * sliderPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panVolume:)];
-     
-     [sliderCircle addGestureRecognizer:sliderPan];
-     */
-}
 
 #pragma mark - Instruments
 - (void)clearInstruments
@@ -233,6 +173,11 @@
         }
         
     }
+    
+    [delegate releaseMasterLevelSlider];
+    
+    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:delegate selector:@selector(releaseMasterLevelSlider) userInfo:nil repeats:NO];
+
 }
 
 - (void)drawInstruments
@@ -359,18 +304,11 @@
 #pragma mark - Expand Contract
 - (void)expand
 {
-    [self createOutline];
     [self drawInstruments];
+    [self createOutline];
     [self setVolume:[delegate getVolume]];
     
-    // Animate...
-    [UIView animateWithDuration:ANIMATION_DURATION
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         self.alpha = VISIBLE;
-                     }
-                     completion:nil];
+    [self setAlpha:VISIBLE];
 }
 
 - (void)contract
@@ -378,57 +316,12 @@
     
     [self clearInstruments];
     
-    [UIView animateWithDuration:ANIMATION_DURATION
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         self.alpha = NOT_VISIBLE;
-                     }
-                     completion:nil];
+    [self setAlpha:NOT_VISIBLE];
+    
     
 }
 
 #pragma mark - Drag slider
-- (void)panVolume:(UIPanGestureRecognizer *)sender
-{
-    /*
-     CGPoint newPoint = [sender translationInView:self];
-     
-     if([sender state] == UIGestureRecognizerStateBegan){
-     volumeFirstY = sliderCircle.frame.origin.y;
-     }
-     
-     float newY = newPoint.y + volumeFirstY;
-     
-     // Wrap to boundary
-     if(newY <= sliderCircleMaxY*1.2){
-     newY = sliderCircleMaxY;
-     }else if(newY >= sliderCircleMinY*1.2){
-     newY = sliderCircleMinY;
-     }
-     
-     float height = 1-(newY - sliderCircleMaxY)/(sliderCircleMinY - sliderCircleMaxY);
-     float volume = MAX(height*MAX_VOLUME,MIN_VOLUME);
-     
-     
-     if(newY <= sliderCircleMinY && newY >= sliderCircleMaxY){
-     [self setVolume:volume];
-     }
-     
-     // Set the volume
-     BOOL save = NO;
-     if([sender state] == UIGestureRecognizerStateEnded){
-     save = YES;
-     }
-     
-     if(volumeChangeTimer == nil){
-     
-     volumeChangeTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(allowVolumeChange) userInfo:nil repeats:NO];
-     [delegate volumeButtonValueDidChange:currentValue withSave:save];
-     
-     }
-     */
-}
 
 -(void)valueDidChange:(double)newValue forSlider:(id)sender
 {
@@ -456,21 +349,6 @@
     [volumeChangeTimer invalidate];
     volumeChangeTimer = nil;
 }
-
-#pragma mark - Audio Controller
-/*
- -(void)setVolumeGainTo:(double)value
- {
- 
- DLog(@" **** Set channel gain to %f *** ",value);
- 
- AudioController * audioController = [AudioController sharedAudioController];
- AudioNode * root = [[audioController GetNodeNetwork] GetRootNode];
- 
- root->SetChannelGain(value, CONN_OUT);
- 
- }
- */
 
 
 @end

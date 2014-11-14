@@ -248,6 +248,7 @@
 {
     if(m_volumeSubscriber != nil){
         m_samplerBank->UnSubscribe(m_volumeSubscriber);
+        m_volumeSubscriber = nil;
     }
 }
 
@@ -272,7 +273,9 @@ static void cbLevel(float val, void *pObject, void *pContext) {
     
     //DLog(@"%f", val);
     
-    [slider setDisplayValue:val*[slider GetValue]];
+    if([slider respondsToSelector:@selector(GetValue)]){
+        [slider setDisplayValue:val*[slider GetValue]];
+    }
 }
 
 @end

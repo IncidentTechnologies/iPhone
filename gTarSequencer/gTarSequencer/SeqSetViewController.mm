@@ -697,9 +697,9 @@
         [stringIdSet addObject:[NSNumber numberWithInt:sample.m_xmpFileId]];
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [instrument.m_sampler initAudioWithInstrument:instrument.m_xmpid andName:instrument.m_name andSoundMaster:soundMaster stringSet:stringSet stringPaths:stringPaths stringIds:stringIdSet];
-    });
+    //});
     
     
     NSTrack * newTrack = [[NSTrack alloc] initWithName:instrument.m_name level:1.0 muted:NO];

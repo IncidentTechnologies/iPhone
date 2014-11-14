@@ -236,6 +236,11 @@
     [delegate openInstrument:instIndex];
 }
 
+- (void) releaseMasterLevelSlider
+{
+    [delegate releaseMasterLevelSlider];
+}
+
 - (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider
 {
     [delegate commitMasterLevelSlider:masterSlider];

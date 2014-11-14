@@ -264,7 +264,7 @@
     
     // Add a delay to ensure this doesn't flicker
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(delayedLoadingEnded) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(delayedLoadingEnded) userInfo:nil repeats:NO];
 
     
 }
@@ -485,6 +485,12 @@
     [self viewSelectedInstrument];
     
     [instrumentViewController setActiveTrack:track];
+}
+
+- (void)releaseMasterLevelSlider
+{
+    SoundMaster * soundMaster = [seqSetViewController getSoundMaster];
+    [soundMaster releaseMasterLevelSlider];
 }
 
 - (void)commitMasterLevelSlider:(UILevelSlider *)masterSlider

@@ -42,6 +42,7 @@
 - (void) enableInstrument:(int)instIndex;
 - (void) disableInstrument:(int)instIndex;
 
+- (void) releaseMasterLevelSlider;
 - (void) commitMasterLevelSlider:(UILevelSlider *)masterSlider;
 
 - (void)updateTempo:(int)tempo;
