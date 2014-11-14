@@ -931,19 +931,38 @@ extern NSUser * g_loggedInUser;
     
     DLog(@"attempting to add sample %i to opho instrument",xmpId);
     
-    XmlDom * xmp = cloudResponse.m_xmpDom;
-    XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
-    
-    NSString * datastring = [sampleXmp getText];
-    
-    [self addData:datastring forLoadingInstrumentSample:xmpId];
-    
-    if([self getSampleFromCache:xmpId] == nil && xmpId >= 0){
-        long index = [sampleIdSet indexOfObject:[NSNumber numberWithLong:xmpId]];
-        int version = [[sampleVersionSet objectAtIndex:index] intValue];
+    if(xmpId > 0){
         
-        [self cacheSample:datastring forSampleId:xmpId withVersion:version];
+        XmlDom * xmp = cloudResponse.m_xmpDom;
+        XmlDom * sampleXmp = [xmp getChildWithName:@"sample"];
+        
+        NSString * datastring = [sampleXmp getText];
+        
+        [self addData:datastring forLoadingInstrumentSample:xmpId];
+        
+        if([self getSampleFromCache:xmpId] == nil && xmpId >= 0){
+            long index = [sampleIdSet indexOfObject:[NSNumber numberWithLong:xmpId]];
+            int version = [[sampleVersionSet objectAtIndex:index] intValue];
+            
+            [self cacheSample:datastring forSampleId:xmpId withVersion:version];
+        }
+        
+    }else{
+        
+        NSInteger expectedXmpId = [[[cloudResponse.m_statusText componentsSeparatedByString:@" "] lastObject] intValue];
+        
+        [self alertSampleMissing];
+        
+        [self addData:MISSING_SAMPLE_DATA forLoadingInstrumentSample:expectedXmpId];
+        
     }
+}
+
+- (void)alertSampleMissing
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sample Missing" message:[NSString stringWithFormat:@"One of your samples has been removed and may not play."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (void)addData:(NSString *)datastring forLoadingInstrumentSample:(long)xmpId
@@ -964,7 +983,7 @@ extern NSUser * g_loggedInUser;
         return;
     }
     
-    if([datastring length] == 0 || datastring == nil){
+    if(datastring == nil || [datastring length] == 0){
         DLog(@"Trying to build an empty sample");
         return;
     }

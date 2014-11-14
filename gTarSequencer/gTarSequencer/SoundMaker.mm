@@ -89,7 +89,19 @@
         
         unsigned long int length = [decodedData length];
         
-        m_samplerBank->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
+        if(![samples[i] isEqualToString:MISSING_SAMPLE_DATA]){
+            
+            m_samplerBank->LoadSampleStringIntoBank([decodedData bytes], length, m_sampNode);
+            
+        }else{
+            
+            DLog(@"Loading silent sample");
+            
+            char * silenceFilepath = (char *)malloc(sizeof(char) * 1024);
+            silenceFilepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"wav"] UTF8String];
+            
+            m_samplerBank->LoadSampleIntoBank(silenceFilepath, m_sampNode);
+        }
     }
 
 }

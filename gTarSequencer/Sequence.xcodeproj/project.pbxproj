@@ -127,6 +127,7 @@
 		6D85704718CAAE560068CC92 /* Pinch_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85704618CAAE560068CC92 /* Pinch_Icon.png */; };
 		6D8B35511A0C5E23005DB1E8 /* Vibraphone_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */; };
 		6D9F43431A1402DB00946387 /* SimpleSoundMaker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F43421A1402DA00946387 /* SimpleSoundMaker.mm */; };
+		6DA56D901A159EC00063E8E9 /* Silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6DA56D8F1A159EC00063E8E9 /* Silence.wav */; };
 		6DA724B318E25B0700872705 /* RecordShareViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DA724B218E25B0700872705 /* RecordShareViewController.mm */; };
 		6DA724B718E35C8700872705 /* RecordShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B618E35C8700872705 /* RecordShareView.xib */; };
 		6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA724B818E4D72F00872705 /* Share_Icon.png */; };
@@ -463,6 +464,7 @@
 		6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Vibraphone_C.wav; path = Samples/Melodic/Percussive/Vibra/Vibraphone_C.wav; sourceTree = "<group>"; };
 		6D9F43411A1402DA00946387 /* SimpleSoundMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleSoundMaker.h; sourceTree = "<group>"; };
 		6D9F43421A1402DA00946387 /* SimpleSoundMaker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleSoundMaker.mm; sourceTree = "<group>"; };
+		6DA56D8F1A159EC00063E8E9 /* Silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Silence.wav; path = Samples/Silence.wav; sourceTree = "<group>"; };
 		6DA724B118E25B0700872705 /* RecordShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordShareViewController.h; sourceTree = "<group>"; };
 		6DA724B218E25B0700872705 /* RecordShareViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordShareViewController.mm; sourceTree = "<group>"; };
 		6DA724B618E35C8700872705 /* RecordShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordShareView.xib; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 		5811AA75187B88C700FC0BD2 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6DA56D8F1A159EC00063E8E9 /* Silence.wav */,
 				6D8B35501A0C5E23005DB1E8 /* Vibraphone_C.wav */,
 				6DF6BC7418CE5E1800D20EC7 /* tutorialSet.xml */,
 				6DE96B061A0AC68A004F70BC /* dev_tutorialSet.xml */,
@@ -1499,6 +1502,7 @@
 				588BF9E018AC4F380086E816 /* OptionsView.xib in Resources */,
 				58D617681863BF5E001EB327 /* Sequence3.png in Resources */,
 				6D1DDB4C1A04084B00A770E7 /* Icon_PLUCK.png in Resources */,
+				6DA56D901A159EC00063E8E9 /* Silence.wav in Resources */,
 				58B006DE1864CC0F00C2D08F /* gTarbyIncidentLoading.png in Resources */,
 				6DA724B918E4D72F00872705 /* Share_Icon.png in Resources */,
 				58F5449718AC0C2B009E6E43 /* Trash_Icon.png in Resources */,

@@ -46,6 +46,8 @@
 #define NUM_PATTERNS 4
 #define NUM_MEASURES 4
 
+#define MISSING_SAMPLE_DATA @"Missing Sample Data"
+
 #define DEFAULT_SET_NAME @"Tutorial"
 //#define BLANK_SET_NAME @"New Set"
 #define DEFAULT_SET_PATH @"tutorialSet"
