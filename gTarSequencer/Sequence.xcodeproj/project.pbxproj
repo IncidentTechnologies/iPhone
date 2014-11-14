@@ -1799,7 +1799,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
+				PROVISIONING_PROFILE = "84d298dd-5aa1-4a09-b2ef-620cd84e0c2f";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1840,7 +1840,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Sequence;
-				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
+				PROVISIONING_PROFILE = "84d298dd-5aa1-4a09-b2ef-620cd84e0c2f";
 				SKIP_INSTALL = NO;
 				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "";

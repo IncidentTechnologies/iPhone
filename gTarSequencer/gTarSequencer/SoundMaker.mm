@@ -266,7 +266,9 @@
 
 - (void)commitLevelSlider:(UILevelSlider *)slider
 {
-    m_volumeSubscriber = m_samplerBank->SubscribeAbsoluteMean((__bridge void *)slider, cbLevel, NULL);
+    if(m_samplerBank != NULL){
+        m_volumeSubscriber = m_samplerBank->SubscribeAbsoluteMean((__bridge void *)slider, cbLevel, NULL);
+    }
     
 }
 

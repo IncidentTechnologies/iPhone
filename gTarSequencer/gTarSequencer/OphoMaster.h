@@ -13,15 +13,12 @@
 #define OPHO_LIST_NAMES @"names"
 #define OPHO_LIST_DATES @"dates"
 
-#define OPHO_FOLDER_SEQUENCE @"sequence_master_sets"
-#define OPHO_FOLDER_SAMPLE @"sequence_master_samples"
-#define OPHO_FOLDER_SONG @"sequence_master_songs"
-#define OPHO_FOLDER_INSTRUMENT @"sequence_master_instruments"
-
-#define FOLDER_TYPE_SEQUENCE @"sets"
-#define FOLDER_TYPE_SAMPLE @"samples"
-#define FOLDER_TYPE_SONG @"songs"
-#define FOLDER_TYPE_INSTRUMENT @"instruments"
+#define OPHO_FOLDER_ROOT @"Sequence"
+#define OPHO_FOLDER_SEQUENCE @"Sets"
+#define OPHO_FOLDER_SAMPLE @"Samples"
+#define OPHO_FOLDER_SONG @"Songs"
+#define OPHO_FOLDER_INSTRUMENT @"Instruments"
+#define OPHO_FOLDER_USER @"Users"
 
 @class NSSong;
 @class NSSequence;
@@ -108,6 +105,7 @@
 @property (weak, nonatomic) id <OphoSampleDelegate> sampleDelegate;
 @property (weak, nonatomic) id <OphoLoadingDelegate> loadingDelegate;
 @property (weak, nonatomic) id <OphoProfileDelegate> profileDelegate;
+@property (assign, nonatomic) NSInteger rootFolderId;
 @property (assign, nonatomic) NSInteger userRootFolderId;
 @property (assign, nonatomic) NSInteger userSequenceFolderId;
 @property (assign, nonatomic) NSInteger userSampleFolderId;
@@ -117,6 +115,7 @@
 @property (assign, nonatomic) NSInteger ophoSampleFolderId;
 @property (assign, nonatomic) NSInteger ophoSongFolderId;
 @property (assign, nonatomic) NSInteger ophoInstrumentFolderId;
+@property (assign, nonatomic) NSInteger ophoUserFolderId;
 
 @property (strong, nonatomic) NSSong * savingSong;
 @property (strong, nonatomic) NSData * savingSongData;

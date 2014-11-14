@@ -75,10 +75,12 @@
     _songButtonLeftConstraint.constant = x/2.0;
     
     // Add swipe recognizer for deleting
-    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCell:)];
-    self.panRecognizer.delegate = self;
-    
-    [self.container addGestureRecognizer:self.panRecognizer];
+    if(!isRenamable){
+        self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCell:)];
+        self.panRecognizer.delegate = self;
+        
+        [self.container addGestureRecognizer:self.panRecognizer];
+    }
 }
 
 
@@ -644,7 +646,7 @@
 
 - (void)panCell:(UIPanGestureRecognizer *)recognizer
 {
-    if(![setButton isHidden] || [parent isLeftNavOpen]){
+    if(isRenamable || ![setButton isHidden] || [parent isLeftNavOpen]){
         return;
     }
     

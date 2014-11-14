@@ -261,6 +261,13 @@
     }
 }
 
+- (void)addNoteWithValue:(NSString *)value beatStart:(double)beatStart duration:(double)duration
+{
+    NSNote * note = [[NSNote alloc] initWithValue:value beatstart:beatStart duration:duration];
+    
+    [m_notes addObject:note];
+}
+
 - (void)addNote:(NSNote *)note
 {
     [m_notes addObject:note];

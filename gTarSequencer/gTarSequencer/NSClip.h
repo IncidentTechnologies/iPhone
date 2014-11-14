@@ -60,6 +60,7 @@
 
 -(XMPNode *)convertToSongXmp;
 
+- (void)addNoteWithValue:(NSString *)value beatStart:(double)beatStart duration:(double)duration;
 - (void)addNote:(NSNote *)note;
 
 - (void)removeNoteAtBeat:(float)beat atValue:(long)value;
