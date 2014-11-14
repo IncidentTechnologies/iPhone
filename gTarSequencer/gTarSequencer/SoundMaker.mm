@@ -251,7 +251,9 @@
 - (void)releaseSounds
 {
     //[m_soundMaster releaseBank:m_samplerBank];
-    [m_soundMaster releaseBankWithoutPause:m_samplerBank];
+    if(m_samplerBank != NULL){
+        [m_soundMaster releaseBankWithoutPause:m_samplerBank];
+    }
     // also m_soundMaster releaseBankAndDisconnect
 }
 

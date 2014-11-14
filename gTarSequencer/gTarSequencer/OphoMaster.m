@@ -994,7 +994,7 @@ extern NSUser * g_loggedInUser;
         
     }else{
         
-        NSInteger expectedXmpId = [[[cloudResponse.m_statusText componentsSeparatedByString:@" "] lastObject] intValue];
+        NSInteger expectedXmpId = cloudResponse.m_cloudRequest.m_xmpId;
         
         [self alertSampleMissing];
         
@@ -1519,7 +1519,7 @@ extern NSUser * g_loggedInUser;
         NSInteger version = [[xmp getTextFromChildWithName:@"xmp_current_version_number"] intValue];
         NSString * name = [xmp getTextFromChildWithName:@"xmp_name"];
         NSDate * date = [df dateFromString:[xmp getTextFromChildWithName:@"xmp_create_date"]];
-        NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId && [[xmp getTextFromChildWithName:@"xmp_access_level"] intValue] == 2)];
+        NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId)];
         
         //DLog(@"Date is %@",date);
         

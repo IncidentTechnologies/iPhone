@@ -1085,7 +1085,7 @@
 {
     [self closeInstrumentSelector];
     
-    if ( indexSelected >= 0 )
+    if ( indexSelected >= 0 && indexSelected < [remainingInstrumentOptions count] )
     {
         NSDictionary * dict = [remainingInstrumentOptions objectAtIndex:indexSelected];
         
