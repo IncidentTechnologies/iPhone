@@ -278,6 +278,8 @@
     [loadingOverlay setHidden:YES];
     
     [loadingIndicator stopAnimating];
+    
+    [self startDrawing];
 }
 
 #pragma mark - Left Navigator
