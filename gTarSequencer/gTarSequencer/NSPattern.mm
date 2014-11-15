@@ -189,6 +189,10 @@
         
     }
     
+    if(measureIndex < 0 || measureIndex >= [m_measures count]){
+        return;
+    }
+    
     m = [m_measures objectAtIndex:measureIndex];
     [[m_measures objectAtIndex:measureIndex] setActivated:true];
     
