@@ -1216,6 +1216,11 @@ extern UserController * g_userController;
 }
 
 #pragma mark - KeysControllerObserver
+- (void)keysRangeChange:(KeysRange)range
+{
+    DLog(@"Title Navigation Controller | Keys Range Change: %i to %i",range.keyMin,range.keyMax);
+    
+}
 
 - (void)keysConnected {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];

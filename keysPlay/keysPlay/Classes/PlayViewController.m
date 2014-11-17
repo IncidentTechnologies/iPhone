@@ -1803,12 +1803,12 @@ extern UserController * g_userController;
 
 #pragma mark - GuitarControllerObserver
 
-- (void)keyDown:(KeyPosition)position
+- (void)keysDown:(KeyPosition)position
 {
     
 }
 
-- (void)keyUp:(KeyPosition)position
+- (void)keysUp:(KeyPosition)position
 {
     
 }
@@ -1964,6 +1964,11 @@ extern UserController * g_userController;
     }
     
     
+}
+
+- (void)keysRangeChange:(KeysRange)range
+{
+    DLog(@"Play View Controller | Keys Range Change");
 }
 
 - (void)keysConnected

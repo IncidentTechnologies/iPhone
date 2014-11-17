@@ -7,7 +7,6 @@
 //
 
 #import "TestFlight.h"
-
 #import "keysPlayAppDelegate.h"
 #import "keysPlayApplication.h"
 
@@ -79,7 +78,20 @@ UserController * g_userController;
         [g_keysController addObserver:self];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
+        
+        KeysRange newRange;
+        newRange.keyMin = 40;
+        newRange.keyMax = 56;
+        
+        NSValue * rangeValue = [NSValue value:&newRange withObjCType:@encode(KeysRange)];
+        
+        KeysRange range;
+        [rangeValue getValue:&range];
+        
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        
+        [NSTimer scheduledTimerWithTimeInterval:15.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+        
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif
         

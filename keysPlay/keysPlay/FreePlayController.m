@@ -546,7 +546,7 @@ extern KeysController * g_keysController;
 
 #pragma mark - KeysObserverProtocol
 
-- (void)keyDown:(KeyPosition)position
+- (void)keysDown:(KeyPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
@@ -555,7 +555,7 @@ extern KeysController * g_keysController;
     }
 }
 
-- (void)keyUp:(KeyPosition)position
+- (void)keysUp:(KeyPosition)position
 {
     // Only act upon this message if sliding/hammering is enabled
     if (_isSlideEnabled)
@@ -574,6 +574,11 @@ extern KeysController * g_keysController;
 - (void)keysNoteOff:(KeyPosition)position
 {
     [g_soundMaster NoteOnForKey:position];
+}
+
+- (void)keysRangeChange:(KeysRange)range
+{
+    DLog(@"Free Play Controller | Keys Range Change");
 }
 
 - (void)keysConnected
@@ -677,9 +682,12 @@ extern KeysController * g_keysController;
 #ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
         
-        int key = (point.x / (_mainContentView.frame.size.width/KEYS_KEY_COUNT)) + 1;
+        int keyMin = [g_keysController range].keyMin;
+        int keyMax = [g_keysController range].keyMax;
         
-        DLog(@"Play key %f/(%f/%i)+1 = %i",point.x,_mainContentView.frame.size.width,KEYS_KEY_COUNT,key);
+        int key = (point.x / (_mainContentView.frame.size.width/(keyMax - keyMin))) + keyMin;
+        
+        DLog(@"Play key %f/(%f/%i)+1 = %i",point.x,_mainContentView.frame.size.width,(keyMax-keyMin),key);
         
         KeysPress press;
         press.velocity = KeysMaxPressVelocity;
@@ -1147,8 +1155,11 @@ extern KeysController * g_keysController;
 // key position, the colors are rotating fromt the colors array
 - (void) turnOnAllLEDRandom
 {
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
     RGBColor *color;
-    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
+    for (int key = keyMin; key <= keyMax; key++)
     {
         m_currentColorIndex = arc4random_uniform([m_colors count]);
         
@@ -1160,8 +1171,11 @@ extern KeysController * g_keysController;
 
 - (void) LEDRainbow
 {
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
     RGBColor *color;
-    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
+    for (int key = keyMin; key <= keyMax; key++)
     {
         color = [m_colors objectAtIndex:m_currentColorIndex];
         
