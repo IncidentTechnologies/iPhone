@@ -140,6 +140,8 @@ extern UserController * g_userController;
 @synthesize keyboardStandaloneHard;
 @synthesize keyboard;
 @synthesize keyboardGrid;
+@synthesize keyboardRange;
+@synthesize keyboardPosition;
 @synthesize selectedKeyboard;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
@@ -387,6 +389,9 @@ extern UserController * g_userController;
     //[self.view bringSubviewToFront:_topBar];
     
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
+    
+    // This doesn't draw until the screen loads
+    [self positionKeyboard];
     
 }
 
@@ -1508,6 +1513,7 @@ extern UserController * g_userController;
     
     [keyboard setHidden:YES];
     [keyboardGrid setHidden:YES];
+    [keyboardRange setHidden:YES];
     [keyboardStandaloneEasy setHidden:YES];
     [keyboardStandaloneMedium setHidden:YES];
     [keyboardStandaloneHard setHidden:YES];
@@ -1522,7 +1528,11 @@ extern UserController * g_userController;
         
         [keyboardGrid setAlpha:keyboardOnAlpha];
         [keyboardGrid setHidden:NO];
+        [keyboardRange setHidden:NO];
+        
         [self drawKeyboardGrid];
+        [self positionKeyboard];
+        
         //[keyboard setAlpha:keyboardOnAlpha];
         //[keyboard setHidden:NO];
         selectedKeyboard = keyboardGrid;
@@ -1576,6 +1586,23 @@ extern UserController * g_userController;
     }
     
     return YES;
+}
+
+- (void)positionKeyboard
+{
+    int keyMin = [g_keysController range].keyMin;
+    
+    double keyboardRangeWidth = keyboardRange.frame.size.width;
+    double keyboardX = ((double)keyMin / (double)KEYS_KEY_COUNT) * keyboardRangeWidth;
+    double keyboardWidth = ((double)(2*KEYS_OCTAVE_COUNT) / (double)KEYS_KEY_COUNT) * keyboardRangeWidth;
+    
+    [UIView animateWithDuration:0.3 animations:^(void){
+       [keyboardPosition setFrame:CGRectMake(keyboardX,1,keyboardWidth,keyboardPosition.frame.size.height)];
+    }completion:^(BOOL finished){
+        
+    }];
+    
+    
 }
 
 - (void)drawKeyboardGrid
@@ -2061,6 +2088,7 @@ extern UserController * g_userController;
 
 - (void)keysRangeChange:(KeysRange)range
 {
+    [self positionKeyboard];
     [self drawKeyboardGrid];
 }
 
