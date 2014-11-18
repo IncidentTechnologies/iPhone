@@ -104,6 +104,7 @@
 
 - (int)getMappedKeyFromKey:(int)key;
 - (int)getNthKeyForWhiteKey:(int)whiteKey;
+- (int)getWhiteKeyFromNthKey:(int)nthKey;
 
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;

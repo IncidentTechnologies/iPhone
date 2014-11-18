@@ -16,12 +16,6 @@
 #define GL_SCREEN_HEIGHT (m_glView.frame.size.height)
 #define GL_SCREEN_WIDTH (m_glView.frame.size.width)
 
-// empirically determined ratios defining screen layout for what looks good.
-//#define GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN ( GL_SCREEN_WIDTH / 12.0 )
-//#define GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN )
-//#define GL_SCREEN_SEEK_LINE_MARGIN ( GL_SCREEN_WIDTH / 8.0 )
-//#define GL_SCREEN_SEEK_LINE_OFFSET ( GL_SCREEN_WIDTH - GL_SCREEN_SEEK_LINE_MARGIN )
-
 #define GL_SCREEN_TOP_BUFFER 46.0
 #define GL_SEEK_LINE_Y 56.0
 #define GL_TOUCH_AREA_HEIGHT 100.0
@@ -427,7 +421,7 @@
             
         }*/
         
-        Texture2D * modelTexture = [self isKeyBlackKey:note.m_key] ? m_blackKeyTexture : m_whiteKeyTexture;
+        Texture2D * modelTexture = [self isKeyBlackKey:(note.m_key%KEYS_OCTAVE_COUNT)] ? m_blackKeyTexture : m_whiteKeyTexture;
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:modelTexture andOverlay:overlay];
         
@@ -486,7 +480,14 @@
 
 - (void)shiftViewToKey:(double)key
 {
-    m_renderer.m_horizontalOffset = -1*[self convertKeyToCoordSpace:key];
+    float numWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
+    
+    GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
+    GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
+    
+    // Offset by half a key so it starts at the beginning
+    
+    m_renderer.m_horizontalOffset = -1*[self convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
     
     //[m_renderer render];
 }
@@ -735,7 +736,9 @@
     int mappedKey = [self getMappedKeyFromKey:key];
     
     // WHITE KEYS
-    float numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
+    float numWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
+    
+    if(isStandalone && difficulty == PlayViewControllerDifficultyHard) numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
     if(isStandalone && difficulty == PlayViewControllerDifficultyMedium) numWhiteKeys = KEYS_WHITE_KEY_MED_COUNT;
     if(isStandalone && difficulty == PlayViewControllerDifficultyEasy) numWhiteKeys = KEYS_WHITE_KEY_EASY_COUNT;
     
@@ -744,24 +747,22 @@
     
     if(!isStandalone){
         
-        int mappedKeyInOctave = mappedKey % KEYS_OCTAVE_COUNT;
+        int mappedKeyInDisplay = mappedKey % KEYS_DISPLAYED_NOTES_COUNT;
         
-        int octaveOffset = floor(mappedKey / KEYS_OCTAVE_COUNT) * numWhiteKeys * widthPerWhiteKey;
+        double octaveOffset = floorf(mappedKey / KEYS_DISPLAYED_NOTES_COUNT) * numWhiteKeys * widthPerWhiteKey;
         
-        int whiteKeys[KEYS_WHITE_KEY_HARD_COUNT] = {0,2,4,5,7,9,11};
-        int blackKeys[KEYS_BLACK_KEY_HARD_COUNT] = {1,3,6,8,10};
-        int blackKeyPositions[KEYS_BLACK_KEY_HARD_COUNT] = {1,2,4,5,6};
+        int whiteKeys[KEYS_WHITE_KEY_DISPLAY_COUNT] = {0,2,4,5,7,9,11,12,14,16,17,19,21,23};
+        int blackKeys[KEYS_BLACK_KEY_DISPLAY_COUNT] = {1,3,6,8,10,13,15,18,20,22};
+        int blackKeyPositions[KEYS_BLACK_KEY_DISPLAY_COUNT] = {1,2,4,5,6,8,9,11,12,13};
         
-        for(int k = 0; k < KEYS_WHITE_KEY_HARD_COUNT; k++){
-            if(whiteKeys[k] == mappedKeyInOctave){
-                //DLog(@"Key at %f",octaveOffset + (k * widthPerWhiteKey) + widthPerWhiteKey/2.0);
+        for(int k = 0; k < KEYS_WHITE_KEY_DISPLAY_COUNT; k++){
+            if(whiteKeys[k] == mappedKeyInDisplay){
                 return octaveOffset + (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
             }
         }
         
-        for (int j = 0; j < KEYS_BLACK_KEY_HARD_COUNT; j++){
-            if(blackKeys[j] == mappedKeyInOctave){
-                //DLog(@"Key at %f",octaveOffset + blackKeyPositions[j] * widthPerWhiteKey);
+        for (int j = 0; j < KEYS_BLACK_KEY_DISPLAY_COUNT; j++){
+            if(blackKeys[j] == mappedKeyInDisplay){
                 return octaveOffset + blackKeyPositions[j] * widthPerWhiteKey;
             }
         }
@@ -872,11 +873,28 @@
         nthKey += 2*(offset-1)+1;
     }
     
-    DLog(@"white key %i maps to %i",whiteKey,nthKey);
+    //DLog(@"white key %i maps to %i",whiteKey,nthKey);
     
     return nthKey;
-    
 }
+
+-(int)getWhiteKeyFromNthKey:(int)nthKey
+{
+    int whiteKey = floor(nthKey / KEYS_OCTAVE_COUNT) * KEYS_WHITE_KEY_HARD_COUNT;
+    
+    int offset = nthKey % KEYS_OCTAVE_COUNT;
+    
+    if(offset < 5){
+        whiteKey += ceil(offset/2.0);
+    }else{
+        whiteKey += floor(offset/2.0)+1;
+    }
+    
+    //DLog(@"nth key %i maps to %i, is black? %i",nthKey,whiteKey,[self isKeyBlackKey:whiteKey]);
+    
+    return whiteKey;
+}
+
 
 -(BOOL)isKeyBlackKey:(int)key
 {

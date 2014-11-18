@@ -333,15 +333,15 @@
                             <rect key="frame" x="0.0" y="0.0" width="460" height="1"/>
                             <color key="backgroundColor" red="0.15686274510000001" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-1P-DSa" userLabel="Keyboard-Overview">
+                        <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eZq-4A-sa7" userLabel="Keyboard-Position">
+                            <rect key="frame" x="0.0" y="1" width="115" height="19"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-1P-DSa" userLabel="Keyboard-Overview">
                             <rect key="frame" x="0.0" y="0.0" width="460" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="yIg-bY-RvF"/>
                             </constraints>
-                        </view>
-                        <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eZq-4A-sa7" userLabel="Keyboard-Position">
-                            <rect key="frame" x="0.0" y="1" width="115" height="19"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
