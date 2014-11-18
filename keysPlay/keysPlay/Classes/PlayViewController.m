@@ -142,6 +142,7 @@ extern UserController * g_userController;
 @synthesize keyboardGrid;
 @synthesize keyboardRange;
 @synthesize keyboardPosition;
+@synthesize keyboardOverview;
 @synthesize selectedKeyboard;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
@@ -1668,6 +1669,26 @@ extern UserController * g_userController;
     
 }
 
+- (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
+{
+    double keyWidth = keyboardOverview.frame.size.width / KEYS_KEY_COUNT;
+    double drawKeyWidth = 2*keyWidth;
+    
+    UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(key*keyWidth-drawKeyWidth/2.0,keyboardOverview.frame.size.height/2.0-drawKeyWidth/2.0,drawKeyWidth,drawKeyWidth)];
+    
+    [keyView setBackgroundColor:[UIColor whiteColor]];
+    keyView.layer.cornerRadius = drawKeyWidth/2.0;
+    
+    [keyView setAlpha:0.9];
+    [keyboardOverview addSubview:keyView];
+    
+    [UIView animateWithDuration:0.2 animations:^(void){
+        [keyView setAlpha:0.0];
+    }completion:^(BOOL finished){
+        [keyView removeFromSuperview];
+    }];
+}
+
 - (void)updateScoreDisplayWithAccuracy:(double)accuracy
 {
     int prevScore = [[self unformatScore:_scoreLabel.text] intValue];
@@ -2706,13 +2727,13 @@ extern UserController * g_userController;
     {
         DLog(@"Play View Controller Pluck Muted String");
         [g_soundMaster playMutedKey:key];
-//        [g_soundMaster PluckMutedString:key-1];
+        [self lightKeyOnPlay:key isMuted:YES];
     }
     else
     {
         DLog(@"Play View Controller Pluck String");
         [g_soundMaster playKey:key];
-//        [g_soundMaster PluckString:key-1 atFret:0];
+        [self lightKeyOnPlay:key isMuted:NO];
     }
     
 }
