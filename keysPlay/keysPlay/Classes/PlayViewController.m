@@ -1608,8 +1608,15 @@ extern UserController * g_userController;
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
-    // Always display 2 octaves, from the first note
     int numberOfKeys = 2*KEYS_OCTAVE_COUNT;
+    
+    // Is key before black key?
+    if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
+        keyMin -= 1;
+        numberOfKeys++;
+    }
+    
+    // Always display 2 octaves, from the first note
     int numberOfWhiteKeys = [self countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
     int keyGap = 1.0;
     
@@ -3184,8 +3191,10 @@ extern UserController * g_userController;
         // Shift keyboard position bar
         [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
         
-        // Shift view to a new key
-        int newKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*KEYS_KEY_COUNT;
+        // Shift view to a new white key
+        int newWhiteKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*KEYS_WHITE_KEY_TOTAL_COUNT;
+        
+        int newKey = [_displayController getNthKeyForWhiteKey:newWhiteKey];
         
         DLog(@"New starting key is %i",newKey);
         

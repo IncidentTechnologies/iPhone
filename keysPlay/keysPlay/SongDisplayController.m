@@ -859,6 +859,25 @@
     }
 }
 
+-(int)getNthKeyForWhiteKey:(int)whiteKey
+{
+    // First determine how many octaves
+    int nthKey = floor(whiteKey / KEYS_WHITE_KEY_HARD_COUNT) * KEYS_OCTAVE_COUNT;
+    
+    int offset = whiteKey % KEYS_WHITE_KEY_HARD_COUNT;
+    
+    if(offset < 3){
+        nthKey += 2*offset;
+    }else{
+        nthKey += 2*(offset-1)+1;
+    }
+    
+    DLog(@"white key %i maps to %i",whiteKey,nthKey);
+    
+    return nthKey;
+    
+}
+
 -(BOOL)isKeyBlackKey:(int)key
 {
     int mappedKey = [self getMappedKeyFromKey:key];

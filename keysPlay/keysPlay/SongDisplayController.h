@@ -102,6 +102,9 @@
 - (double)convertKeyToCoordSpace:(NSInteger)key;
 - (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
 
+- (int)getMappedKeyFromKey:(int)key;
+- (int)getNthKeyForWhiteKey:(int)whiteKey;
+
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;
 - (void)missNote:(NSNote*)note;
@@ -109,7 +112,6 @@
 - (void)setNoteHit:(NSNote*)note toValue:(double)hit;
 
 // Standalone
-- (int)getMappedKeyFromKey:(int)key;
 - (NSMutableDictionary*)getKeyPressFromTap:(NSMutableArray *)touchPoints;
 
 @end
