@@ -25,6 +25,7 @@ extern KeysController * g_keysController;
 @property (strong, nonatomic) VolumeViewController *volumeVC;
 
 @property (strong, nonatomic) IBOutlet UIView *mainContentView;
+@property (strong, nonatomic) IBOutlet UIView *generalTouchSurface;
 @property (weak, nonatomic) UIViewController *currentMainContentVC;
 
 @property (strong, nonatomic) IBOutlet UIButton *menuButton;
@@ -579,6 +580,9 @@ extern KeysController * g_keysController;
 - (void)keysRangeChange:(KeysRange)range
 {
     DLog(@"Free Play Controller | Keys Range Change");
+    
+    // Redraw the grid
+    [_lightsVC drawGeneralSurface];
 }
 
 - (void)keysConnected
@@ -685,9 +689,14 @@ extern KeysController * g_keysController;
         int keyMin = [g_keysController range].keyMin;
         int keyMax = [g_keysController range].keyMax;
         
-        int key = (point.x / (_mainContentView.frame.size.width/(keyMax - keyMin))) + keyMin;
+        if(point.x < _generalTouchSurface.frame.origin.x || point.x > _generalTouchSurface.frame.origin.x+_generalTouchSurface.frame.size.width){
+            DLog(@"Touch out of range");
+            return;
+        }
         
-        DLog(@"Play key %f/(%f/%i)+1 = %i",point.x,_mainContentView.frame.size.width,(keyMax-keyMin),key);
+        int key = ((point.x-_generalTouchSurface.frame.origin.x) / (_generalTouchSurface.frame.size.width/(keyMax - keyMin))) + keyMin;
+        
+        DLog(@"Play key %f/(%f/%i)+1 = %i",point.x-_generalTouchSurface.frame.origin.x,_generalTouchSurface.frame.size.width,(keyMax-keyMin),key);
         
         KeysPress press;
         press.velocity = KeysMaxPressVelocity;

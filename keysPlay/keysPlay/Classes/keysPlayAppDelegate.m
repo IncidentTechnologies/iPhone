@@ -90,7 +90,7 @@ UserController * g_userController;
         
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         
-        [NSTimer scheduledTimerWithTimeInterval:15.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:10.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif

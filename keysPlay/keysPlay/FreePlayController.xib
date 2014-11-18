@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,6 +11,7 @@
                 <outlet property="arrowLights" destination="X7E-0N-uM0" id="NhJ-04-uAI"/>
                 <outlet property="arrowMenu" destination="bM7-Sb-UBK" id="7iy-Xf-eS7"/>
                 <outlet property="effectsButton" destination="294" id="2241"/>
+                <outlet property="generalTouchSurface" destination="Y3E-OG-wLr" id="suG-cK-ZrP"/>
                 <outlet property="instrumentsButton" destination="398" id="2242"/>
                 <outlet property="lightsButton" destination="447" id="2240"/>
                 <outlet property="m_jamPad" destination="27" id="58"/>
@@ -55,6 +55,12 @@
                     <color key="backgroundColor" red="0.70520177790000005" green="1" blue="0.8646246689" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="273" id="2539"/>
+                    </constraints>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3E-OG-wLr">
+                    <rect key="frame" x="15" y="62" width="450" height="141"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="141" id="lxf-bQ-Eb5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2788" userLabel="Drop Shadow View">
@@ -192,10 +198,14 @@
                 <constraint firstItem="2788" firstAttribute="top" secondItem="2" secondAttribute="top" id="2795"/>
                 <constraint firstItem="2788" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="2797"/>
                 <constraint firstItem="2788" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="2802"/>
+                <constraint firstItem="Y3E-OG-wLr" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="15" id="0Ql-Vr-n6r"/>
+                <constraint firstAttribute="trailing" secondItem="Y3E-OG-wLr" secondAttribute="trailing" constant="15" id="4yH-gm-5ww"/>
+                <constraint firstItem="Y3E-OG-wLr" firstAttribute="top" secondItem="2" secondAttribute="top" constant="62" id="dva-2M-U4f"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="290" y="152"/>
         </view>
         <view contentMode="scaleToFill" id="27" customClass="JamPad">
             <rect key="frame" x="0.0" y="0.0" width="273" height="262"/>

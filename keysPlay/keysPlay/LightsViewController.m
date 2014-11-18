@@ -75,6 +75,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self drawGeneralSurface];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -318,6 +320,10 @@
 // corresponding to this point based on the active LEDTouchArea.
 - (int) getKeyPositionFromTouch:(UITouch *)touch
 {
+    
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
     int key = -1;
     CGPoint point;
     switch (_LEDTouchArea)
@@ -325,14 +331,14 @@
         case LEDTouchGeneral:
             point = [touch locationInView:_generalSurface];
             
-            key = (point.x / (_generalSurface.frame.size.width/KEYS_KEY_COUNT)) + 1;
+            key = (point.x / (_generalSurface.frame.size.width/(keyMax-keyMin))) + keyMin;
             if (key < 1)
             {
                 key = 1;
             }
-            else if ( key > KEYS_KEY_COUNT )
+            else if ( key > keyMax )
             {
-                key = (KEYS_KEY_COUNT);
+                key = keyMax;
             }
             
             break;
@@ -340,14 +346,14 @@
         case LEDTouchKey:
             point = [touch locationInView:_keySurface];
             
-            key = (point.x / (_keySurface.frame.size.width/KEYS_KEY_COUNT)) + 1;
+            key = (point.x / (_keySurface.frame.size.width/(keyMax-keyMin))) + keyMin;
             if ( key < 1 )
             {
                 key = 1;
             }
-            else if ( key > KEYS_KEY_COUNT )
+            else if ( key > keyMax )
             {
-                key = (KEYS_KEY_COUNT);
+                key = keyMax;
             }
             
             // Light up this fret across all strings
@@ -663,8 +669,11 @@
 {
     DLog(@"TURN ON ALL LEDs RANDOM");
     
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
     RGBColor *color;
-    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
+    for (int key = keyMin; key <= keyMax; key++)
     {
         _currentColorIndex = arc4random_uniform([_colors count]);
         
@@ -676,8 +685,11 @@
 
 - (void) LEDRainbow
 {
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
     RGBColor *color;
-    for (int key = 1; key <= KEYS_KEY_COUNT; key++)
+    for (int key = keyMin; key <= keyMax; key++)
     {
         color = [_colors objectAtIndex:_currentColorIndex];
         
@@ -847,6 +859,43 @@
 - (void)keysDisconnected
 {
     [self stopLoop];
+}
+
+#pragma mark - Drawing General Surface
+- (void)drawGeneralSurface
+{
+    int keyMin = [g_keysController range].keyMin;
+    int keyMax = [g_keysController range].keyMax;
+    
+    int numberOfKeys = keyMax - keyMin;
+    int keyGap = 2.0;
+    
+    CGSize size = CGSizeMake(_generalSurface.frame.size.width, _generalSurface.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    double lineWidth = 0.2;
+    
+    CGFloat keyFrameHeight = size.height;
+    CGFloat keyFrameWidth = (size.width - (keyGap * (numberOfKeys - 1))) / numberOfKeys;
+    //CGRect keyFrame = CGRectMake(0, 0, keyFrameWidth, keyFrameHeight);
+    
+    // Set line width:
+    CGContextSetLineWidth(context, lineWidth);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:76/255.0 green:90/255.0 blue:99/255.0 alpha:1.0].CGColor);
+    
+    // Update all the notes:
+    for (int k = 0; k < numberOfKeys; k++)
+    {
+        CGContextFillRect(context, CGRectMake(k*keyFrameWidth+k*keyGap,0,keyFrameWidth,keyFrameHeight));
+    }
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    _generalSurface.image = newImage;
+    UIGraphicsEndImageContext();
+    
+
 }
 
 @end

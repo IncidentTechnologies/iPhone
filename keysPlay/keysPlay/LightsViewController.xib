@@ -100,7 +100,7 @@
                         <constraint firstItem="819" firstAttribute="centerY" secondItem="117" secondAttribute="centerY" id="2610"/>
                     </constraints>
                 </view>
-                <imageView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" image="LightsGrid.png" translatesAutoresizingMaskIntoConstraints="NO" id="2463">
+                <imageView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2463">
                     <rect key="frame" x="15" y="15" width="450" height="141"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="141" id="2538"/>
@@ -629,7 +629,6 @@
         <image name="Color_yellow.png" width="114" height="114"/>
         <image name="Color_yellow_Select.png" width="114" height="114"/>
         <image name="LightsArrow.png" width="34" height="48"/>
-        <image name="LightsGrid.png" width="784" height="280"/>
         <image name="LightsImage.png" width="960" height="546"/>
         <image name="Shape_2x2ButtonOFF.png" width="114" height="114"/>
         <image name="Shape_2x2ButtonON.png" width="114" height="114"/>

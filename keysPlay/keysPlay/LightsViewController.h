@@ -75,7 +75,7 @@ typedef enum
 @property (weak, nonatomic) id <LightsViewDelegate> delegate;
 
 
-@property (strong, nonatomic) IBOutlet UIView *generalSurface;
+@property (strong, nonatomic) IBOutlet UIImageView *generalSurface;
 @property (strong, nonatomic) IBOutlet UIView *keySurface;
 //@property (strong, nonatomic) IBOutlet UIView *stringSurface;
 @property (strong, nonatomic) IBOutlet UIView *allSurface;
@@ -113,5 +113,6 @@ typedef enum
 @property (strong, nonatomic) NSTimer *LEDTimer;
 
 - (void)localizeViews;
+- (void)drawGeneralSurface;
 
 @end
