@@ -139,6 +139,7 @@ extern UserController * g_userController;
 @synthesize keyboardStandaloneMedium;
 @synthesize keyboardStandaloneHard;
 @synthesize keyboard;
+@synthesize keyboardGrid;
 @synthesize selectedKeyboard;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
@@ -1506,6 +1507,7 @@ extern UserController * g_userController;
 {
     
     [keyboard setHidden:YES];
+    [keyboardGrid setHidden:YES];
     [keyboardStandaloneEasy setHidden:YES];
     [keyboardStandaloneMedium setHidden:YES];
     [keyboardStandaloneHard setHidden:YES];
@@ -1518,9 +1520,12 @@ extern UserController * g_userController;
     
     if(!isStandalone){
         
-        [keyboard setAlpha:keyboardOnAlpha];
-        [keyboard setHidden:NO];
-        selectedKeyboard = keyboard;
+        [keyboardGrid setAlpha:keyboardOnAlpha];
+        [keyboardGrid setHidden:NO];
+        [self drawKeyboardGrid];
+        //[keyboard setAlpha:keyboardOnAlpha];
+        //[keyboard setHidden:NO];
+        selectedKeyboard = keyboardGrid;
         
     }else{
         
@@ -1545,6 +1550,94 @@ extern UserController * g_userController;
         }
         
     }
+    
+}
+
+- (int)countWhiteKeysFromMin:(int)keyMin toMax:(int)keyMax
+{
+    int whiteKeys = 0;
+    
+    for(int k = keyMin; k < keyMax; k++){
+        if(![self isKeyBlackKey:k]){
+            whiteKeys++;
+        }
+    }
+    
+    return whiteKeys;
+}
+
+
+-(BOOL)isKeyBlackKey:(int)key
+{
+    int mappedKey = key%KEYS_OCTAVE_COUNT;
+    
+    if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)drawKeyboardGrid
+{
+    int keyMin = [g_keysController range].keyMin;
+
+    // Always display 2 octaves, from the first note
+    int numberOfKeys = 2*KEYS_OCTAVE_COUNT;
+    int numberOfWhiteKeys = [self countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
+    int keyGap = 1.0;
+    
+    CGSize size = CGSizeMake(keyboardGrid.frame.size.width, keyboardGrid.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGLayerRef whiteKeyLayer = CGLayerCreateWithContext(context, size, NULL);
+    CGLayerRef blackKeyLayer = CGLayerCreateWithContext(context, size, NULL);
+    
+    CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
+    CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
+    
+    CGFloat whiteKeyFrameHeight = size.height;
+    CGFloat blackKeyFrameHeight = 0.6 * whiteKeyFrameHeight;
+    CGFloat whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
+    CGFloat blackKeyFrameWidth = 0.6 * whiteKeyFrameWidth;
+    
+    // W tracks the number of white notes being draw
+    for (int k = 0, w = 0; k < numberOfKeys; k++)
+    {
+        // Determine which note is being drawn
+        int key = keyMin+k;
+        
+        if(![self isKeyBlackKey:key]){
+            
+            // White key, draw and increment white keys
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameWidth+w*keyGap,0,whiteKeyFrameWidth,whiteKeyFrameHeight);
+            CGContextSetFillColorWithColor(whiteKeyContext, [UIColor whiteColor].CGColor);
+            
+            CGContextFillRect(whiteKeyContext, keyFrame);
+            
+            w++;
+            
+        }else{
+            // Black key, draw between white keys
+            
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameWidth+w*keyGap-blackKeyFrameWidth/2.0,0,blackKeyFrameWidth,blackKeyFrameHeight);
+            CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
+            CGContextFillRect(blackKeyContext, keyFrame);
+        }
+        
+    }
+    
+    CGContextDrawLayerAtPoint(context, CGPointZero, whiteKeyLayer);
+    CGContextDrawLayerAtPoint(context, CGPointZero, blackKeyLayer);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    keyboardGrid.image = newImage;
+    
+    CGLayerRelease(whiteKeyLayer);
+    CGLayerRelease(blackKeyLayer);
+    UIGraphicsEndImageContext();
     
 }
 
@@ -1968,7 +2061,7 @@ extern UserController * g_userController;
 
 - (void)keysRangeChange:(KeysRange)range
 {
-    DLog(@"Play View Controller | Keys Range Change");
+    [self drawKeyboardGrid];
 }
 
 - (void)keysConnected

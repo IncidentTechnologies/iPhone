@@ -81,7 +81,7 @@ UserController * g_userController;
         
         KeysRange newRange;
         newRange.keyMin = 40;
-        newRange.keyMax = 56;
+        newRange.keyMax = 63;
         
         NSValue * rangeValue = [NSValue value:&newRange withObjCType:@encode(KeysRange)];
         
