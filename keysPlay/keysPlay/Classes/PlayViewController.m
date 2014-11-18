@@ -83,12 +83,12 @@ extern UserController * g_userController;
     NSTimer *_delayedChordTimer;
     NSTimer *_metronomeTimer;
     
-    KeyPosition _previousChordPluckKey;
-    KeysPressVelocity _previousChordPluckVelocity;
-    NSInteger _previousChordPluckDirection;
+    KeyPosition _previousChordPlayKey;
+    KeysPressVelocity _previousChordPlayVelocity;
+    NSInteger _previousChordPlayDirection;
     
-    NSInteger _delayedChordsCount;
-    //KeysFret _delayedChords[KEYS_GUITAR_STRING_COUNT];
+    KeyPosition _delayedChordMax;
+    NSMutableArray * _delayedChords;
     
     NSMutableArray *_deferredNotesQueue;
     
@@ -1892,6 +1892,33 @@ extern UserController * g_userController;
     }
 #endif
     
+    // Play notes out of range
+    
+    if(g_keysController.connected && !_autocomplete && _difficulty != PlayViewControllerDifficultyEasy) {
+        
+        BOOL allNotesOutOfRange = [self allNotesOutOfRangeForFrame:_songModel.m_currentFrame];
+        
+        if ( ([_songModel.m_currentFrame.m_notesPending count] > 0) && (allNotesOutOfRange || [_songModel.m_currentFrame.m_notesHit count] > 0)) {
+         
+            for(NSNote * note in _songModel.m_currentFrame.m_notesPending){
+                
+                if([self noteOutOfRange:note]){
+                    //DLog(@"Note out of range value is %i",note.m_key);
+                    
+                    KeysPress press;
+                    press.velocity = KeysMaxPressVelocity;
+                    press.position = note.m_key;
+                    
+                    [self keysNoteOn:press forFrame:nil];
+                    
+                    _refreshDisplay = YES;
+                    
+                }
+                
+            }
+        }
+        
+    }
     
     // Advance song model and recorder
     
@@ -1919,6 +1946,31 @@ extern UserController * g_userController;
         [self updateProgressDisplay];
     }
     
+}
+
+- (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame
+{
+    KeyPosition noteMin = [g_keysController range].keyMin;
+    KeyPosition noteMax = [g_keysController range].keyMax;
+    
+    for(NSNote * note in noteFrame.m_notes){
+        if(note.m_key >= noteMin && note.m_key <= noteMax){
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)noteOutOfRange:(NSNote *)note
+{
+    KeyPosition noteMin = [g_keysController range].keyMin;
+    KeyPosition noteMax = [g_keysController range].keyMax;
+    
+    if(note.m_key < noteMin || note.m_key > noteMax){
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - GuitarControllerObserver
@@ -2425,8 +2477,7 @@ extern UserController * g_userController;
         }
         
     }else if (_autocomplete || _difficulty == PlayViewControllerDifficultyEasy){
-        /*
-        
+
         //
         // Autocomplete chords
         //
@@ -2434,45 +2485,39 @@ extern UserController * g_userController;
         // If there is already a timer pending, we don't need to create another one
         if ( _interFrameDelayTimer == nil )
         {
-            
-            for ( NSInteger index = 0; index < KEYS_GUITAR_STRING_COUNT; index++ )
-            {
-                _delayedChords[index] = KEYS_GUITAR_NOTE_OFF;
+            if(_delayedChords == nil){
+                _delayedChords = [[NSMutableArray alloc] init];
             }
             
-            _delayedChordsCount = 0;
-            
-            // Figure out what notes we will be playing for each string.
-            // Also figure out what the max string we will be starting with.
+            // Figure out what notes we will be playing
             for ( NSNote * note in _currentFrame.m_notesPending )
             {
-                _delayedChords[note.m_string-1] = note.m_fret;
+                [_delayedChords addObject:[NSNumber numberWithInt:note.m_key]];
                 
-                _delayedChordsCount = MAX(_delayedChordsCount, note.m_string);
             }
             
             // We don't want to play notes that are already queues up.
             @synchronized ( _deferredNotesQueue )
             {
-                for ( NSDictionary * pluck in _deferredNotesQueue )
+                for ( NSDictionary * hit in _deferredNotesQueue )
                 {
                     
-                    NSNumber * keyNumber = [pluck objectForKey:@"Key"];
+                    NSNumber * keyNumber = [hit objectForKey:@"Key"];
                     
                     KeyPosition key = [keyNumber charValue];
                     
                     // This one is queues up, so don't play it
-                    if ( _delayedChords[str-1] == fret )
+                    if ( [_delayedChords containsObject:[NSNumber numberWithInt:key]] )
                     {
                         DLog(@"Aborted delayed");
-                        _delayedChords[str-1] = KEYS_GUITAR_NOTE_OFF;
+                        [_delayedChords removeObject:[NSNumber numberWithInt:key]];
                     }
                 }
             }
             
-            _previousChordPluckString = str;
-            _previousChordPluckVelocity = velocity;
-            _previousChordPluckDirection = 0;
+            _previousChordPlayKey = key;
+            _previousChordPlayVelocity = velocity;
+            _previousChordPlayDirection = 0;
             
             // Schedule an event to play the chords over time
             // m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
@@ -2483,17 +2528,8 @@ extern UserController * g_userController;
             // Schedule an event to push us to the next frame after a moment
             // if another chord doesn't come in.
             _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
-            
         
-         
         }
-        else
-        {
-            // See if we are changing the direction
-            [self handleDirectionChange:str];
-            
-        }*/
-        
     }
 }
 
@@ -2577,43 +2613,45 @@ extern UserController * g_userController;
 
 - (void)handleDelayedChord
 {
-    /*
+
     [_delayedChordTimer invalidate];
     _delayedChordTimer = nil;
     
-    if ( _delayedChordsCount <= 0 )
+    if ( [_delayedChords count] <= 0 )
     {
         return;
     }
     
-    KeysString str = _delayedChordsCount;
+    //KeyPosition maxKey = _delayedChordMax;
     
-    _delayedChordsCount--;
+    //_delayedChordsCount--;
     
-    KeysFret fret = _delayedChords[str-1];
+    KeyPosition key = [[_delayedChords firstObject] intValue];
     
-    if ( _delayedChordsCount > 0 )
+    [_delayedChords removeObject:[_delayedChords firstObject]];
+    
+    if ( [_delayedChords count] > 0 )
     {
         _delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
     }
     
-    if ( fret != KEYS_GUITAR_NOTE_OFF )
+    if ( key >= 0 && key < KEYS_KEY_COUNT )
     {
         
         // Play the note
         if ( _difficulty == PlayViewControllerDifficultyHard )
         {
-            [self pluckString:str andFret:fret andVelocity:_previousChordPluckVelocity];
+            [self pressKey:key andVelocity:_previousChordPlayVelocity];
         }
         else
         {
-            [self pluckString:str andFret:fret andVelocity:KeysMaxPressVelocity];
+            [self pressKey:key andVelocity:KeysMaxPressVelocity];
         }
         
         // Record the note
-        [_songRecorder playString:str andFret:fret];
+        //[_songRecorder playString:str andFret:fret];
     }
-    */
+    
 }
 
 - (void)turnOnFrame:(NSNoteFrame*)frame

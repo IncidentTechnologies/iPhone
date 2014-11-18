@@ -33,7 +33,6 @@
 #define SONG_BEATS_PER_SCREEN 1.5
 #define SONG_BEAT_OFFSET 0.5
 
-
 @implementation SongDisplayController
 
 - (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
