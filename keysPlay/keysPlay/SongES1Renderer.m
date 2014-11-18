@@ -27,6 +27,7 @@
 @synthesize m_seekLineStandaloneModel;
 @synthesize m_backgroundTexture;
 @synthesize m_offset;
+@synthesize m_horizontalOffset;
 @synthesize m_viewShift;
 
 - (id)init
@@ -169,6 +170,8 @@
 
 - (void)startRender
 {
+    double horizontalOffset = m_horizontalOffset;
+    
 	// init stuff
 	[EAGLContext setCurrentContext:m_context];
     
@@ -225,7 +228,7 @@
     //
     
      /*glTranslatef( 0.0f, -m_viewShift, 0.0f);*/
-	glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
+	glTranslatef( horizontalOffset, m_offset - m_currentPosition, 0.0f);
     
 	// draw measure lines
     for ( LineModel * lineModel in m_lineModels )
@@ -233,7 +236,7 @@
 		[lineModel draw];
 	}
     
-    glTranslatef( 0.0f, -(m_offset - m_currentPosition), 0.0f);
+    glTranslatef( horizontalOffset, -(m_offset - m_currentPosition), 0.0f);
     
     // draw the seek line(s)
 	/*[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
@@ -266,17 +269,17 @@
     //
     // Draw loops
     //
-    for (LineModel * loopModel in m_loopModels)
+    /*for (LineModel * loopModel in m_loopModels)
     {
         CGPoint center = [loopModel getCenter];
         
         [loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
-    }
+    }*/
     
     //
     // Now we translate forward for the notes
     //
-    glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
+    glTranslatef( -horizontalOffset, m_offset - m_currentPosition, 0.0f);
     /*
 	// draw notes
     for ( Animation * animation in m_noteAnimations )

@@ -91,6 +91,7 @@
 - (void)preloadFrames:(NSInteger)count;
 - (void)displayFrame:(NSNoteFrame*)frame;
 - (void)activateNoteAnimation:(NSNote*)note;
+- (void)shiftViewToKey:(double)key;
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 

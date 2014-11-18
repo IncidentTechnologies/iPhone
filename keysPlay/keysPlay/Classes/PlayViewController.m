@@ -1531,7 +1531,7 @@ extern UserController * g_userController;
         [keyboardGrid setHidden:NO];
         [keyboardRange setHidden:NO];
         
-        [self drawKeyboardGrid];
+        [self drawKeyboardGridFromMin:[g_keysController range].keyMin];
         [self positionKeyboard];
         
         //[keyboard setAlpha:keyboardOnAlpha];
@@ -1606,10 +1606,8 @@ extern UserController * g_userController;
     
 }
 
-- (void)drawKeyboardGrid
+- (void)drawKeyboardGridFromMin:(int)keyMin
 {
-    int keyMin = [g_keysController range].keyMin;
-
     // Always display 2 octaves, from the first note
     int numberOfKeys = 2*KEYS_OCTAVE_COUNT;
     int numberOfWhiteKeys = [self countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
@@ -2162,7 +2160,10 @@ extern UserController * g_userController;
 - (void)keysRangeChange:(KeysRange)range
 {
     [self positionKeyboard];
-    [self drawKeyboardGrid];
+    [self drawKeyboardGridFromMin:range.keyMin];
+    [_displayController shiftViewToKey:range.keyMin];
+    
+    _refreshDisplay = YES;
 }
 
 - (void)keysConnected
@@ -3142,8 +3143,63 @@ extern UserController * g_userController;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(isStandalone && !_songIsPaused){
+        if(activeTouchPoints == nil){
+            activeTouchPoints = [[NSMutableArray alloc] init];
+            
+            [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
+            
+        }
+        
+        // Gather all the touches to send with a timer
+        for(UITouch * touch in [event allTouches]){
+            CGPoint touchPoint = [touch locationInView:self.glView];
+        
+            [activeTouchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
+        }
+    }
     
-    if(!isStandalone || _songIsPaused){
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch * touch = [[touches allObjects] objectAtIndex:0];
+    CGPoint currentPoint = [touch locationInView:self.view];
+    CGPoint previousPoint = [touch previousLocationInView:self.view];
+    CGPoint positionPoint = [touch locationInView:keyboardPosition];
+    
+    DLog(@"Position point is %f, %f",positionPoint.x,positionPoint.y);
+    
+    // Detect moving the Keyboard Position Bar
+    if(positionPoint.x >= 0 && positionPoint.x <= keyboardPosition.frame.size.width && positionPoint.y >= -10.0){
+        
+        CGFloat deltaX = currentPoint.x - previousPoint.x;
+        
+        if(keyboardPosition.frame.origin.x+deltaX < 0){
+            deltaX = -keyboardPosition.frame.origin.x;
+        }else if(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width+deltaX > keyboardRange.frame.size.width){
+            deltaX = keyboardRange.frame.size.width-(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width);
+        }
+        
+        // Shift keyboard position bar
+        [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
+        
+        // Shift view to a new key
+        int newKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*KEYS_KEY_COUNT;
+        
+        DLog(@"New starting key is %i",newKey);
+        
+        [self drawKeyboardGridFromMin:newKey];
+        [_displayController shiftViewToKey:newKey];
+        
+        _refreshDisplay = YES;
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    if(!isStandalone){
         
         // Debug
 #ifdef Debug_BUILD
@@ -3151,74 +3207,8 @@ extern UserController * g_userController;
             _skipNotes = YES;
         }
 #endif
-        
-        return;
+    
     }
-    
-    if(activeTouchPoints == nil){
-        activeTouchPoints = [[NSMutableArray alloc] init];
-        
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
-        
-    }
-    
-    // Gather all the touches to send with a timer
-    for(UITouch * touch in [event allTouches]){
-        CGPoint touchPoint = [touch locationInView:self.glView];
-    
-        [activeTouchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
-    }
-        
-        //UITouch * touch = [[touches allObjects] objectAtIndex:0];
-        
-        //CGPoint touchPoint = [touch locationInView:self.glView];
-        
-        
-        //initPoint = touchPoint;
-        
-        // If double-tap reset the shift to zero
-        /*if ( [touch tapCount] == 2 )
-        {
-            [_displayController shiftView:0];
-            _refreshDisplay = YES;
-        }*/
-        
-        //DLog(@"Touch is %f %f",touchPoint.x,touchPoint.y);
-        //DLog(@"Current frame is %@",_currentFrame);
-        
-        // Determine whether to play the tapped string
-        //if(isStandalone && !_songIsPaused){
-            //[self performSelectorInBackground:@selector(tapNoteFromTouchPoint:) withObject:touchPoints];
-            
-            //[self tapNoteFromTouchPoint:touchPoints];
-        //}
-    
-        
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    /*
-    UITouch * touch = [[touches allObjects] objectAtIndex:0];
-    CGPoint currentPoint = [touch locationInView:self.view];
-    CGPoint previousPoint = [touch previousLocationInView:self.view];
-    
-    CGFloat deltaY = currentPoint.y - previousPoint.y;
-    
-    // Only shift render view if delta x is large enough
-    if(!isScrolling){
-        if(abs(initPoint.y - currentPoint.y) > 50){
-            [_displayController shiftViewDelta:-deltaY];
-        }
-    }
-    
-    _refreshDisplay = YES;
-     */
-    
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
     
 }
 

@@ -79,6 +79,7 @@
             
             m_glView.m_renderer = m_renderer;
             
+            [self shiftViewToKey:DEFAULT_KEY_MIN];
             m_renderer.m_offset = GL_SEEK_LINE_Y; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
@@ -172,7 +173,6 @@
     }
     
     [m_renderer updatePositionAndRender:position];
-    
     
     float hitCorrect = TOUCH_HIT_EASY_CORRECT;
     float hitNear = TOUCH_HIT_EASY_NEAR;
@@ -484,47 +484,58 @@
 #endif
 }
 
+- (void)shiftViewToKey:(double)key
+{
+    m_renderer.m_horizontalOffset = -1*[self convertKeyToCoordSpace:key];
+    
+    //[m_renderer render];
+}
+
 - (void)shiftView:(double)shift
 {
-    
-    m_viewShift = shift;
-    
-    // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace];
-    
-    /*if ( m_viewShift < 0.0 )
+     m_viewShift = shift;
+     
+     // Let us shift through the entire song .. but nothing more.
+     double end = [self calculateMaxShiftCoordSpace];
+     
+     //if ( m_viewShift < 0.0 )
+     //{
+     //m_viewShift = 0.0;
+     //}
+     //else if ( end < m_viewShift )
+     //{
+     //m_viewShift = end;
+     //}
+     
+     if( m_viewShift > 0.0)
      {
      m_viewShift = 0.0;
      }
-     else if ( end < m_viewShift )
+     else if (end > m_viewShift)
      {
      m_viewShift = end;
-     }*/
-    
-    if( m_viewShift > 0.0)
-    {
-        m_viewShift = 0.0;
-    }
-    else if (end > m_viewShift)
-    {
-        m_viewShift = end;
-    }
-    
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
-    
-    //    if ( viewShiftBeats > m_beatsToPreload )
-    {
-        m_beatsToPreloadSync = MAX(m_beatsToPreloadSync, viewShiftBeats);
-        m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
-    }
-    
-    m_renderer.m_viewShift = m_viewShift;
-    
+     }
+     
+     double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
+     
+     //    if ( viewShiftBeats > m_beatsToPreload )
+     {
+     m_beatsToPreloadSync = MAX(m_beatsToPreloadSync, viewShiftBeats);
+     m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
+     }
+     
+     m_renderer.m_viewShift = m_viewShift;
+     
 }
 
 - (void)shiftViewDelta:(double)shift
 {
     
+    m_renderer.m_horizontalOffset = m_renderer.m_horizontalOffset+shift;
+    
+    [m_renderer render];
+    
+    /*
     m_viewShift += shift;
     
     // Let us shift through the entire song .. but nothing more.
@@ -548,7 +559,7 @@
     }
     
     m_renderer.m_viewShift = m_viewShift;
-    
+    */
 }
 
 
@@ -721,7 +732,7 @@
 
 - (double)convertKeyToCoordSpace:(NSInteger)key
 {
-    double mappedKey = [self getMappedKeyFromKey:key];
+    int mappedKey = [self getMappedKeyFromKey:key];
     
     // WHITE KEYS
     float numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
@@ -731,7 +742,31 @@
     GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
     GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
     
-    if(!isStandalone || difficulty == PlayViewControllerDifficultyHard){
+    if(!isStandalone){
+        
+        int mappedKeyInOctave = mappedKey % KEYS_OCTAVE_COUNT;
+        
+        int octaveOffset = floor(mappedKey / KEYS_OCTAVE_COUNT) * numWhiteKeys * widthPerWhiteKey;
+        
+        int whiteKeys[KEYS_WHITE_KEY_HARD_COUNT] = {0,2,4,5,7,9,11};
+        int blackKeys[KEYS_BLACK_KEY_HARD_COUNT] = {1,3,6,8,10};
+        int blackKeyPositions[KEYS_BLACK_KEY_HARD_COUNT] = {1,2,4,5,6};
+        
+        for(int k = 0; k < KEYS_WHITE_KEY_HARD_COUNT; k++){
+            if(whiteKeys[k] == mappedKeyInOctave){
+                //DLog(@"Key at %f",octaveOffset + (k * widthPerWhiteKey) + widthPerWhiteKey/2.0);
+                return octaveOffset + (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
+            }
+        }
+        
+        for (int j = 0; j < KEYS_BLACK_KEY_HARD_COUNT; j++){
+            if(blackKeys[j] == mappedKeyInOctave){
+                //DLog(@"Key at %f",octaveOffset + blackKeyPositions[j] * widthPerWhiteKey);
+                return octaveOffset + blackKeyPositions[j] * widthPerWhiteKey;
+            }
+        }
+        
+    }else if(difficulty == PlayViewControllerDifficultyHard){
         
         int whiteKeys[KEYS_WHITE_KEY_HARD_COUNT] = {0,2,4,5,7,9,11};
         int blackKeys[KEYS_BLACK_KEY_HARD_COUNT] = {1,3,6,8,10};
@@ -813,7 +848,9 @@
 
 -(int)getMappedKeyFromKey:(int)key
 {
-    if(!isStandalone || difficulty == PlayViewControllerDifficultyHard){
+    if(!isStandalone){
+        return key;
+    }else if(!isStandalone){
         return key % KEYS_OCTAVE_COUNT;
     }else if(difficulty == PlayViewControllerDifficultyMedium){
         return key % 8;
@@ -854,11 +891,6 @@
     if(firstTouchPoint.x > xmax || firstTouchPoint.x < xmin || firstTouchPoint.y > ymax || firstTouchPoint.y < ymin){
         return nil;
     }
-    
-    // Get the frame from the touchpoint so we know note they tried to play
-        // Since it's in our touchzone we'll score it
-        // (If it's in our special touchzone we'll score it 100%)
-    
     
     // Determine which frame was played by Y intersection
     NSNoteFrame * activeFrame = nil;

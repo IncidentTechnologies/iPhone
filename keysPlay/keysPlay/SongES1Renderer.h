@@ -43,6 +43,7 @@
 @property (nonatomic, strong) LineModel * m_seekLineStandaloneModel;
 @property (nonatomic, strong) Model * m_backgroundTexture;
 @property (nonatomic, assign) GLfloat m_offset;
+@property (nonatomic, assign) GLfloat m_horizontalOffset;
 @property (nonatomic, assign) GLfloat m_viewShift;
 
 - (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;
