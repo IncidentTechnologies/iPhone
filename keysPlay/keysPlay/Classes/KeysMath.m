@@ -13,7 +13,10 @@
 
 @synthesize isStandalone;
 @synthesize difficulty;
-
+@synthesize songRangeKeyMin;
+@synthesize songRangeKeyMax;
+@synthesize songRangeKeySize;
+@synthesize songRangeNumberOfWhiteKeys;
 
 - (id)init
 {
@@ -27,9 +30,22 @@
         glScreenHeight = [fg getFullscreenHeight] - GL_SCREEN_TOP_BUFFER;
         glScreenWidth = [fg getFullscreenWidth] - GL_SCREEN_RIGHT_BUFFER;
         
+        [self setSongRangeFromMin:0 andMax:KEYS_KEY_COUNT];
+        
     }
     
     return self;
+    
+}
+
+- (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
+{
+    DLog(@"Setting song range from %i to %i",keyMin,keyMax);
+    
+    songRangeKeyMin = keyMin;
+    songRangeKeyMax = keyMax;
+    songRangeKeySize = songRangeKeyMax-songRangeKeyMin+1;
+    songRangeNumberOfWhiteKeys = [self countWhiteKeysFromMin:songRangeKeyMin toMax:songRangeKeyMax];
     
 }
 
@@ -82,15 +98,26 @@
         whiteKey += floor(offset/2.0)+1;
     }
     
-    //DLog(@"nth key %i maps to %i, is black? %i",nthKey,whiteKey,[self isKeyBlackKey:whiteKey]);
-    
     return whiteKey;
+}
+
+- (int)countWhiteKeysFromMin:(int)keyMin toMax:(int)keyMax
+{
+    int whiteKeys = 0;
+    
+    for(int k = keyMin; k < keyMax; k++){
+        if(![self isKeyBlackKey:k]){
+            whiteKeys++;
+        }
+    }
+    
+    return whiteKeys;
 }
 
 
 -(BOOL)isKeyBlackKey:(int)key
 {
-    int mappedKey = [self getMappedKeyFromKey:key];
+    int mappedKey = (isStandalone) ? [self getMappedKeyFromKey:key] : key%KEYS_OCTAVE_COUNT;
     
     if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
         return NO;

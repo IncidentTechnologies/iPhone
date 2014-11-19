@@ -83,6 +83,8 @@
         
         //[self createLoopModels];
         
+        [self setNoteRangeForSong];
+        
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
     }
@@ -120,6 +122,24 @@
         }
         
     }
+}
+
+- (void)setNoteRangeForSong
+{
+    KeyPosition minKey = KEYS_KEY_COUNT;
+    KeyPosition maxKey = 0;
+    
+    for(NSNoteFrame * noteFrame in m_songModel.m_noteFrames){
+        for(NSNote * note in noteFrame.m_notes){
+            minKey = MIN(minKey,note.m_key);
+            maxKey = MAX(maxKey,note.m_key);
+        }
+    }
+    
+    minKey = MAX(0,minKey-3); // TODO: ensure it's a white key?
+    maxKey = MIN(KEYS_KEY_COUNT,MAX(maxKey,minKey+KEYS_DISPLAYED_NOTES_COUNT));
+    
+    [g_keysMath setSongRangeFromMin:minKey andMax:maxKey];
 }
 
 - (void)cancelPreloading
@@ -410,7 +430,7 @@
             
         }*/
         
-        Texture2D * modelTexture = [g_keysMath isKeyBlackKey:(note.m_key%KEYS_OCTAVE_COUNT)] ? m_blackKeyTexture : m_whiteKeyTexture;
+        Texture2D * modelTexture = [g_keysMath isKeyBlackKey:note.m_key] ? m_blackKeyTexture : m_whiteKeyTexture;
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:modelTexture andOverlay:overlay];
         
@@ -562,15 +582,10 @@
     m_renderer.m_seekLineStandaloneModel = nil;
     
     
-    
-    //
-    // Create the strings
-    //
-    
-    
-    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
+    // Create paths for black keys
+    for ( unsigned int i = g_keysMath.songRangeKeyMin; i <= g_keysMath.songRangeKeyMax; i++ )
     {
-        if(![g_keysMath isKeyBlackKey:(i%KEYS_OCTAVE_COUNT)]){
+        if(![g_keysMath isKeyBlackKey:i]){
             continue;
         }
         

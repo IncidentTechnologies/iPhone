@@ -19,7 +19,7 @@
 #define GL_NOTE_HEIGHT 38.0 //( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
 
-#define KEYS_WHITE_KEY_TOTAL_COUNT 74
+#define KEYS_TOTAL_WHITE_KEY_COUNT 74
 
 #define KEYS_OCTAVE_COUNT 12
 #define KEYS_DISPLAYED_NOTES_COUNT 24
@@ -48,7 +48,14 @@ enum PlayViewControllerDifficulty
 }
 
 @property (nonatomic, assign) BOOL isStandalone;
-@property (nonatomic, assign) BOOL difficulty;
+@property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
+
+@property (nonatomic, assign) KeyPosition songRangeKeyMin;
+@property (nonatomic, assign) KeyPosition songRangeKeyMax;
+@property (nonatomic, assign) int songRangeKeySize;
+@property (nonatomic, assign) int songRangeNumberOfWhiteKeys;
+
+- (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 
 - (int)getStandaloneKeyFromKey:(int)key;
 //- (double)convertTimeToCoordSpace:(double)delta;
@@ -60,6 +67,7 @@ enum PlayViewControllerDifficulty
 - (BOOL)isKeyBlackKey:(int)key;
 - (int)getMappedKeyFromKey:(int)key;
 - (int)getNthKeyForWhiteKey:(int)whiteKey;
+- (int)countWhiteKeysFromMin:(int)keyMin toMax:(int)keyMax;
 - (int)getWhiteKeyFromNthKey:(int)nthKey;
 - (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;

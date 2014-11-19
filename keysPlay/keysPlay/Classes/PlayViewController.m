@@ -1570,38 +1570,13 @@ extern UserController * g_userController;
     
 }
 
-- (int)countWhiteKeysFromMin:(int)keyMin toMax:(int)keyMax
-{
-    int whiteKeys = 0;
-    
-    for(int k = keyMin; k < keyMax; k++){
-        if(![self isKeyBlackKey:k]){
-            whiteKeys++;
-        }
-    }
-    
-    return whiteKeys;
-}
-
-
--(BOOL)isKeyBlackKey:(int)key
-{
-    int mappedKey = key%KEYS_OCTAVE_COUNT;
-    
-    if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (void)positionKeyboard
 {
     int keyMin = [g_keysController range].keyMin;
     
     double keyboardRangeWidth = keyboardRange.frame.size.width;
-    double keyboardX = ((double)keyMin / (double)KEYS_KEY_COUNT) * keyboardRangeWidth;
-    double keyboardWidth = ((double)(KEYS_DISPLAYED_NOTES_COUNT) / (double)KEYS_KEY_COUNT) * keyboardRangeWidth;
+    double keyboardX = ((double)(keyMin - g_keysMath.songRangeKeyMin) / (double)g_keysMath.songRangeKeySize) * keyboardRangeWidth;
+    double keyboardWidth = ((double)(KEYS_DISPLAYED_NOTES_COUNT) / (double)g_keysMath.songRangeKeySize) * keyboardRangeWidth;
     
     [UIView animateWithDuration:0.3 animations:^(void){
        [keyboardPosition setFrame:CGRectMake(keyboardX,1,keyboardWidth,keyboardPosition.frame.size.height)];
@@ -1612,33 +1587,18 @@ extern UserController * g_userController;
     
 }
 
-- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
-{
-    float keyGap = 1.0f;
-    float whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
-    
-    return CGSizeMake(whiteKeyFrameWidth,size.height);
-}
-
-- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
-{
-    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
-    
-    return CGSizeMake(DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.width, DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.height);
-}
-
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
     int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
     // Is key before black key?
-    if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
+    if([g_keysMath isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
         keyMin -= 1;
         numberOfKeys++;
     }
     
     // Always display 2 octaves, from the first note
-    int numberOfWhiteKeys = [self countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
+    int numberOfWhiteKeys = [g_keysMath countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
     int keyGap = 1.0;
     
     CGSize size = CGSizeMake(keyboardGrid.frame.size.width, keyboardGrid.frame.size.height);
@@ -1652,8 +1612,8 @@ extern UserController * g_userController;
     CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
     CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
     
-    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
-    CGSize blackKeyFrameSize = [self getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
+    CGSize whiteKeyFrameSize = [g_keysMath getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    CGSize blackKeyFrameSize = [g_keysMath getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
     
     // W tracks the number of white notes being draw
     for (int k = 0, w = 0; k < numberOfKeys; k++)
@@ -1661,7 +1621,7 @@ extern UserController * g_userController;
         // Determine which note is being drawn
         int key = keyMin+k;
         
-        if(![self isKeyBlackKey:key]){
+        if(![g_keysMath isKeyBlackKey:key]){
             
             // White key, draw and increment white keys
             CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap,0,whiteKeyFrameSize.width,whiteKeyFrameSize.height);
@@ -1695,18 +1655,19 @@ extern UserController * g_userController;
 
 - (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
 {
-    double keyWidth = keyboardOverview.frame.size.width / KEYS_WHITE_KEY_TOTAL_COUNT;
-    double overlayWidth = 1.5*keyWidth;
-    BOOL isBlackKey = [self isKeyBlackKey:key];
-    double drawKeyOffset = (isBlackKey) ? keyWidth / 2.0 : 0.0;
+    double keyWidth = keyboardOverview.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
+    double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
+    double overlayWidth = 1.5*drawKeyWidth;
+    BOOL isBlackKey = [g_keysMath isKeyBlackKey:key];
+    double drawKeyOffset = (isBlackKey) ? drawKeyWidth / 2.0 : 0.0;
     
-    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key];
+    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath countWhiteKeysFromMin:0 toMax:g_keysMath.songRangeKeyMin];
     
     DLog(@"White Key is %i for %i",whiteKey,key);
     
-    UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(whiteKey*keyWidth-drawKeyOffset,keyboardOverview.frame.size.height/2.0-keyWidth/2.0,keyWidth,keyWidth)];
+    UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(whiteKey*keyWidth-drawKeyOffset,keyboardOverview.frame.size.height/2.0-drawKeyWidth/2.0,drawKeyWidth,drawKeyWidth)];
     
-    UIView * keyOverlay = [[UIView alloc] initWithFrame:CGRectMake(keyView.frame.origin.x-(overlayWidth-keyWidth)/2.0,keyView.frame.origin.y-(overlayWidth-keyWidth)/2.0,overlayWidth,overlayWidth)];
+    UIView * keyOverlay = [[UIView alloc] initWithFrame:CGRectMake(keyView.frame.origin.x-(overlayWidth-drawKeyWidth)/2.0,keyView.frame.origin.y-(overlayWidth-drawKeyWidth)/2.0,overlayWidth,overlayWidth)];
     
     if(!isBlackKey){
         [keyView setBackgroundColor:[UIColor whiteColor]];
@@ -1716,7 +1677,7 @@ extern UserController * g_userController;
         [keyOverlay setBackgroundColor:[UIColor blackColor]];
     }
     
-    keyView.layer.cornerRadius = keyWidth/2.0;
+    keyView.layer.cornerRadius = drawKeyWidth/2.0;
     keyOverlay.layer.cornerRadius = overlayWidth/2.0;
     
     [keyView setAlpha:0.9];
@@ -2350,6 +2311,12 @@ extern UserController * g_userController;
     //
     _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty andLoops:loops];
     
+    // MIN and MAX have been set, refresh
+    // TODO: move this
+    [self positionKeyboard];
+    [self drawKeyboardGridFromMin:[g_keysController range].keyMin];
+    [_displayController shiftViewToKey:[g_keysController range].keyMin];
+    
     // An initial display render
     [_displayController renderImage];
     
@@ -2703,7 +2670,7 @@ extern UserController * g_userController;
         _delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
     }
     
-    if ( key >= 0 && key < KEYS_KEY_COUNT )
+    if ( key >= g_keysMath.songRangeKeyMin && key <= g_keysMath.songRangeKeyMax )
     {
         
         // Play the note
@@ -2770,8 +2737,7 @@ extern UserController * g_userController;
 
 - (void)pressKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
 {
-    DLog(@"Press key %i, is black ? %i",key,[self isKeyBlackKey:key]);
-    
+
     if ( key == KEYS_KEY_MUTED )
     {
         DLog(@"Play View Controller Pluck Muted String");
@@ -3216,8 +3182,6 @@ extern UserController * g_userController;
     CGPoint previousPoint = [touch previousLocationInView:self.view];
     CGPoint positionPoint = [touch locationInView:keyboardPosition];
     
-    DLog(@"Position point is %f, %f",positionPoint.x,positionPoint.y);
-    
     // Detect moving the Keyboard Position Bar
     if(positionPoint.x >= 0 && positionPoint.x <= keyboardPosition.frame.size.width && positionPoint.y >= -10.0){
         
@@ -3233,9 +3197,11 @@ extern UserController * g_userController;
         [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
         
         // Shift view to a new white key
-        int newWhiteKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*KEYS_WHITE_KEY_TOTAL_COUNT;
+        int newWhiteKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*g_keysMath.songRangeNumberOfWhiteKeys + [g_keysMath countWhiteKeysFromMin:0 toMax:g_keysMath.songRangeKeyMin];
         
         int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
+        
+        DLog(@"New white key is %i , Nth key is %i",newWhiteKey,newKey);
         
         //DLog(@"New starting key is %i",newKey);
         
