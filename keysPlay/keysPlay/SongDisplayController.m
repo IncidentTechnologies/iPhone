@@ -88,7 +88,7 @@
         
         //[self createNumberModels];
         
-        //[self createLineModels];
+        [self createLineModels];
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
@@ -604,17 +604,22 @@
     //
     
     
-    for ( unsigned int i = 0; i < KEYS_OCTAVE_COUNT; i++ )
+    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
     {
+        if(![self isKeyBlackKey:(i%KEYS_OCTAVE_COUNT)]){
+            continue;
+        }
+        
         // strings number and size are inversely proportional -- get slightly bigger
         center.x = [self convertKeyToCoordSpace:i];
         
-        center.y = GL_SCREEN_HEIGHT / 2.0;
+        center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
         
-        size.width = GL_STRING_WIDTH;
-        size.height = GL_SCREEN_HEIGHT;
+        size.width = [self getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
+        //size.width = 5.0;
+        size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
         
-        GLubyte * stringColor = g_standaloneKeyColors[0]; // all white
+        GLubyte * stringColor = g_whiteColorTransparentLight; // all white
         
         KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
         
@@ -622,7 +627,6 @@
         
         
     }
-    
     
 }
 
@@ -905,6 +909,21 @@
     }
     
     return YES;
+}
+
+- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
+{
+    float keyGap = 1.0f;
+    float whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
+    
+    return CGSizeMake(whiteKeyFrameWidth,size.height);
+}
+
+- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
+{
+    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    
+    return CGSizeMake(DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.width, DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.height);
 }
 
 - (NSMutableDictionary *)getKeyPressFromTap:(NSMutableArray *)touchPoints

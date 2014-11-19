@@ -389,7 +389,7 @@
             // Fill so samples always starts at 0
             for(int i = 0; i < firstNote; i++){
                 
-                DLog(@"Load note %i",i);
+                //DLog(@"Load note %i",i);
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
@@ -401,7 +401,7 @@
             
             for(int j = firstNote; j < numNotes; j++){
                 
-                DLog(@"Load note %i",j);
+                //DLog(@"Load note %i",j);
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){
@@ -413,7 +413,7 @@
             
             for(int i = numNotes; i < KEYS_KEY_COUNT; i++){
                 
-                DLog(@"Load note %i",i);
+                //DLog(@"Load note %i",i);
                 
                 // make sure instrument hasn't been released off thread
                 if(currentInstrumentIndex == index){

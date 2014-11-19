@@ -1607,6 +1607,21 @@ extern UserController * g_userController;
     
 }
 
+- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
+{
+    float keyGap = 1.0f;
+    float whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
+    
+    return CGSizeMake(whiteKeyFrameWidth,size.height);
+}
+
+- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
+{
+    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    
+    return CGSizeMake(DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.width, DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.height);
+}
+
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
     int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
@@ -1632,10 +1647,8 @@ extern UserController * g_userController;
     CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
     CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
     
-    CGFloat whiteKeyFrameHeight = size.height;
-    CGFloat blackKeyFrameHeight = DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameHeight;
-    CGFloat whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
-    CGFloat blackKeyFrameWidth = DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameWidth;
+    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    CGSize blackKeyFrameSize = [self getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
     
     // W tracks the number of white notes being draw
     for (int k = 0, w = 0; k < numberOfKeys; k++)
@@ -1646,7 +1659,7 @@ extern UserController * g_userController;
         if(![self isKeyBlackKey:key]){
             
             // White key, draw and increment white keys
-            CGRect keyFrame = CGRectMake(w*whiteKeyFrameWidth+w*keyGap,0,whiteKeyFrameWidth,whiteKeyFrameHeight);
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap,0,whiteKeyFrameSize.width,whiteKeyFrameSize.height);
             CGContextSetFillColorWithColor(whiteKeyContext, [UIColor whiteColor].CGColor);
             
             CGContextFillRect(whiteKeyContext, keyFrame);
@@ -1656,7 +1669,7 @@ extern UserController * g_userController;
         }else{
             // Black key, draw between white keys
             
-            CGRect keyFrame = CGRectMake(w*whiteKeyFrameWidth+w*keyGap-blackKeyFrameWidth/2.0,0,blackKeyFrameWidth,blackKeyFrameHeight);
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap-blackKeyFrameSize.width/2.0,0,blackKeyFrameSize.width,blackKeyFrameSize.height);
             CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
             CGContextFillRect(blackKeyContext, keyFrame);
         }

@@ -13,32 +13,11 @@ static unsigned char g_whiteColorTransparent[4] =
 { 154, 184, 195, 100 };
 
 static unsigned char g_whiteColorTransparentLight[4] =
-{ 154, 184, 195, 50 };
+{ 154, 184, 195, 30 };
 
 static unsigned char g_lightGrayColor[4] =
 { 192, 192, 192, 255 };
 
-/*
- static unsigned char g_whiteColorQuads[16] =
- { 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255 };
-
-static unsigned char g_grayColor[4] =
-{ 127, 127, 127, 255 };
-
-static unsigned char g_grayColorQuads[16] =
-{ 127, 127, 127, 255, 127, 127, 127, 255, 127, 127, 127, 255, 127, 127, 127, 255 };
-
-
-static unsigned char g_stringColorsOriginal[6][4] =
-{
-	{ 255, 0, 0, 255 }, // R
-	{ 255, 128, 0, 255 }, // O
-	{ 255, 255, 0, 255 }, // Y
-	{ 0, 255, 0, 255 }, // G
-	{ 0, 0, 255, 255 }, // B
-	{ 128, 0, 128, 255 } // P
-};
-*/
 static unsigned char g_keyColors[12][4] =
 {
     { 218, 87, 51, 255 }, // R

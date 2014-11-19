@@ -107,6 +107,8 @@ extern KeysController * g_keysController;
 - (int)getMappedKeyFromKey:(int)key;
 - (int)getNthKeyForWhiteKey:(int)whiteKey;
 - (int)getWhiteKeyFromNthKey:(int)nthKey;
+- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
+- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;

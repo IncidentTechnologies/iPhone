@@ -247,7 +247,7 @@
      */
         
     // The strings are fixed, so undo any translattion
-      /*glTranslatef( 0.0f, +m_viewShift, 0.0f);*/
+      glTranslatef(-horizontalOffset, 0.0f, 0.0f);
     
     //
 	// Draw key paths -- these do not move
@@ -257,6 +257,7 @@
 		[keyPathModel draw];
 	}
     
+    
     //    //
     //    // Translate the view to draw the seek line
     //    //
@@ -264,7 +265,6 @@
     //
     //	// draw the seek line
     //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
-    
     
     //
     // Draw loops
@@ -279,7 +279,7 @@
     //
     // Now we translate forward for the notes
     //
-    glTranslatef( -horizontalOffset, m_offset - m_currentPosition, 0.0f);
+    glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
     /*
 	// draw notes
     for ( Animation * animation in m_noteAnimations )
