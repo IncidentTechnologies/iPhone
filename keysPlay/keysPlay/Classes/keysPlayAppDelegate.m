@@ -86,17 +86,18 @@ KeysMath * g_keysMath;
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
         
         KeysRange newRange;
-        newRange.keyMin = 40;
-        newRange.keyMax = 63;
+        newRange.keyMin = 20;
+        newRange.keyMax = 100;
         
-        NSValue * rangeValue = [NSValue value:&newRange withObjCType:@encode(KeysRange)];
-        
-        KeysRange range;
-        [rangeValue getValue:&range];
+        KeysRange secondRange;
+        secondRange.keyMin = 50;
+        secondRange.keyMax = 55;
         
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         
-        //[NSTimer scheduledTimerWithTimeInterval:13.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:13.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+        
+        [NSTimer scheduledTimerWithTimeInterval:23.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&secondRange withObjCType:@encode(KeysRange)] repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
 #endif

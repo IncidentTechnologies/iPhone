@@ -17,6 +17,7 @@
 @synthesize songRangeKeyMax;
 @synthesize songRangeKeySize;
 @synthesize songRangeNumberOfWhiteKeys;
+@synthesize delegate;
 
 - (id)init
 {
@@ -47,6 +48,8 @@
     songRangeNumberOfWhiteKeys = [self countWhiteKeysFromMin:songRangeKeyMin toMax:songRangeKeyMax];
     
     DLog(@"Setting actual to %i, %i",songRangeKeyMin,songRangeKeyMax);
+    
+    [delegate displayKeyboardRangeChanged];
     
 }
 
@@ -267,6 +270,81 @@
     }else{
         return end+glScreenHeight;
     }
+}
+
+#pragma mark - Drawing
+
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors
+{
+    //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
+    
+    // Is key before black key?
+    if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
+        keyMin -= 1;
+        numberOfKeys++;
+    }
+    
+    // Always display 2 octaves, from the first note
+    //int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
+    
+    int keyGap = 1.0;
+    
+    CGSize size = CGSizeMake(frameView.frame.size.width, frameView.frame.size.height);
+    UIGraphicsBeginImageContextWithOptions(size,NO,0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGLayerRef whiteKeyLayer = CGLayerCreateWithContext(context, size, NULL);
+    CGLayerRef blackKeyLayer = CGLayerCreateWithContext(context, size, NULL);
+    
+    CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
+    CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
+    
+    if(invertColors){
+        CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:33/255.0 green:45/255.0 blue:49/255.0 alpha:1.0].CGColor);
+        CGContextSetFillColorWithColor(whiteKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
+    }else{
+        CGContextSetFillColorWithColor(whiteKeyContext, [UIColor whiteColor].CGColor);
+        CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
+    }
+    
+    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    CGSize blackKeyFrameSize = [self getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
+    
+    // W tracks the number of white notes being draw
+    for (int k = 0, w = 0; k < numberOfKeys; k++)
+    {
+        // Determine which note is being drawn
+        int key = keyMin+k;
+        
+        if(![self isKeyBlackKey:key]){
+            
+            // White key, draw and increment white keys
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap,0,whiteKeyFrameSize.width,whiteKeyFrameSize.height);
+            
+            CGContextFillRect(whiteKeyContext, keyFrame);
+            
+            w++;
+            
+        }else{
+            // Black key, draw between white keys
+            
+            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap-blackKeyFrameSize.width/2.0,0,blackKeyFrameSize.width,blackKeyFrameSize.height);
+            CGContextFillRect(blackKeyContext, keyFrame);
+        }
+        
+    }
+    
+    CGContextDrawLayerAtPoint(context, CGPointZero, whiteKeyLayer);
+    CGContextDrawLayerAtPoint(context, CGPointZero, blackKeyLayer);
+    
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    frameView.image = newImage;
+    
+    CGLayerRelease(whiteKeyLayer);
+    CGLayerRelease(blackKeyLayer);
+    UIGraphicsEndImageContext();
+    
 }
 
 

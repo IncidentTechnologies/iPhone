@@ -27,7 +27,6 @@
     
     if ( self )
     {
-        
         m_noteModelDictionary = [[NSMutableDictionary alloc] init];
         m_noteModelUniversalDictionary = [[NSMutableDictionary alloc] init];
         
@@ -124,7 +123,7 @@
     }
 }
 
-- (void)setNoteRangeForSong
+- (NSDictionary *)getNoteRangeForSong
 {
     KeyPosition minKey = KEYS_KEY_COUNT;
     KeyPosition maxKey = 0;
@@ -135,6 +134,16 @@
             maxKey = MAX(maxKey,note.m_key);
         }
     }
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:minKey],@"Min",[NSNumber numberWithInt:maxKey],@"Max", nil];
+}
+
+- (void)setNoteRangeForSong
+{
+    NSDictionary * songRange = [self getNoteRangeForSong];
+    
+    int minKey = [[songRange objectForKey:@"Min"] intValue];
+    int maxKey = [[songRange objectForKey:@"Max"] intValue];
     
     DLog(@"Min in song is %i, max is %i",minKey,maxKey);
     
@@ -582,7 +591,7 @@
     
     
     // Create paths for black keys
-    for ( unsigned int i = MAX(0,g_keysMath.songRangeKeyMin-1); i <= g_keysMath.songRangeKeyMax; i++ )
+    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
     {
         if(![g_keysMath isKeyBlackKey:i]){
             continue;

@@ -153,6 +153,8 @@ extern UserController * g_userController;
         g_soundMaster = soundMaster;
         [g_soundMaster start];
         
+        g_keysMath.delegate = self;
+        
         // Custom initialization
         _playTimeAdjustment = 0;
         
@@ -1584,8 +1586,6 @@ extern UserController * g_userController;
     }completion:^(BOOL finished){
         
     }];
-    
-    
 }
 
 - (void)refreshKeyboardToKeyMin
@@ -1595,71 +1595,14 @@ extern UserController * g_userController;
     [_displayController shiftViewToKey:[g_keysController range].keyMin];
 }
 
+- (void)displayKeyboardRangeChanged
+{
+    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE];
+}
+
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
-    int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
-    
-    // Is key before black key?
-    if([g_keysMath isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
-        keyMin -= 1;
-        numberOfKeys++;
-    }
-    
-    // Always display 2 octaves, from the first note
-    int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
-    
-    int keyGap = 1.0;
-    
-    CGSize size = CGSizeMake(keyboardGrid.frame.size.width, keyboardGrid.frame.size.height);
-    UIGraphicsBeginImageContextWithOptions(size,NO,0);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGLayerRef whiteKeyLayer = CGLayerCreateWithContext(context, size, NULL);
-    CGLayerRef blackKeyLayer = CGLayerCreateWithContext(context, size, NULL);
-    
-    CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
-    CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
-    
-    CGSize whiteKeyFrameSize = [g_keysMath getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
-    CGSize blackKeyFrameSize = [g_keysMath getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
-    
-    // W tracks the number of white notes being draw
-    for (int k = 0, w = 0; k < numberOfKeys; k++)
-    {
-        // Determine which note is being drawn
-        int key = keyMin+k;
-        
-        if(![g_keysMath isKeyBlackKey:key]){
-            
-            // White key, draw and increment white keys
-            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap,0,whiteKeyFrameSize.width,whiteKeyFrameSize.height);
-            CGContextSetFillColorWithColor(whiteKeyContext, [UIColor whiteColor].CGColor);
-            
-            CGContextFillRect(whiteKeyContext, keyFrame);
-            
-            w++;
-            
-        }else{
-            // Black key, draw between white keys
-            
-            CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap-blackKeyFrameSize.width/2.0,0,blackKeyFrameSize.width,blackKeyFrameSize.height);
-            CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
-            CGContextFillRect(blackKeyContext, keyFrame);
-        }
-        
-    }
-    
-    CGContextDrawLayerAtPoint(context, CGPointZero, whiteKeyLayer);
-    CGContextDrawLayerAtPoint(context, CGPointZero, blackKeyLayer);
-    
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    keyboardGrid.image = newImage;
-    
-    CGLayerRelease(whiteKeyLayer);
-    CGLayerRelease(blackKeyLayer);
-    UIGraphicsEndImageContext();
-    
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:KEYS_DISPLAYED_NOTES_COUNT andNumberOfWhiteKeys:KEYS_WHITE_KEY_DISPLAY_COUNT invertColors:FALSE];
 }
 
 - (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
@@ -2173,6 +2116,15 @@ extern UserController * g_userController;
 
 - (void)keysRangeChange:(KeysRange)range
 {
+    NSDictionary * songRange = [_displayController getNoteRangeForSong];
+    
+    int songMinKey = [[songRange objectForKey:@"Min"] intValue];
+    int songMaxKey = [[songRange objectForKey:@"Max"] intValue];
+    
+    DLog(@"Keys range change to %i, %i, with songMin=%i, songMax=%i",range.keyMin,range.keyMax,songMinKey,songMaxKey);
+    
+    [g_keysMath setSongRangeFromMin:MIN(songMinKey,range.keyMin) andMax:MAX(songMaxKey,range.keyMax)];
+    
     [self refreshKeyboardToKeyMin];
     
     _refreshDisplay = YES;

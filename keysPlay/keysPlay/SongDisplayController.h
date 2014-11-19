@@ -99,6 +99,7 @@ extern KeysMath * g_keysMath;
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
 
+- (NSDictionary *)getNoteRangeForSong;
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;
 - (void)missNote:(NSNote*)note;

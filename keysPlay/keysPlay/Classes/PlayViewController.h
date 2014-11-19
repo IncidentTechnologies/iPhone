@@ -24,7 +24,7 @@
 @class EAGLView;
 @class UserSong;
 
-@interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate>
+@interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate, KeysMathDelegate>
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
 
@@ -133,7 +133,7 @@
 @property (strong, nonatomic) IBOutlet UIView * keyboardStandaloneHard;
 @property (strong, nonatomic) IBOutlet UIView * keyboard;
 @property (strong, nonatomic) IBOutlet UIImageView * keyboardGrid;
-@property (strong, nonatomic) IBOutlet UIView * keyboardRange;
+@property (strong, nonatomic) IBOutlet UIImageView * keyboardRange;
 @property (strong, nonatomic) IBOutlet UIView * keyboardPosition;
 @property (strong, nonatomic) IBOutlet UIView * keyboardOverview;
 @property (strong, nonatomic) UIView * selectedKeyboard;

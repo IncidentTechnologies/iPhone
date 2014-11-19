@@ -40,14 +40,22 @@ enum PlayViewControllerDifficulty
     PlayViewControllerDifficultyHard
 };
 
-
 extern KeysController * g_keysController;
+
+
+@protocol KeysMathDelegate <NSObject>
+
+- (void)displayKeyboardRangeChanged;
+
+@end
 
 @interface KeysMath : NSObject
 {
     float glScreenHeight;
     float glScreenWidth;
 }
+
+@property (weak, nonatomic) id<KeysMathDelegate>delegate;
 
 @property (nonatomic, assign) BOOL isStandalone;
 @property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
@@ -73,5 +81,7 @@ extern KeysController * g_keysController;
 - (int)getWhiteKeyFromNthKey:(int)nthKey;
 - (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
+
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors;
 
 @end
