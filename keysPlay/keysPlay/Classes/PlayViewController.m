@@ -1531,8 +1531,9 @@ extern UserController * g_userController;
         [keyboardGrid setHidden:NO];
         [keyboardRange setHidden:NO];
         
-        [self drawKeyboardGridFromMin:[g_keysController range].keyMin];
         [self positionKeyboard];
+        [self drawKeyboardGridFromMin:[g_keysController range].keyMin];
+        [_displayController shiftViewToKey:[g_keysController range].keyMin];
         
         //[keyboard setAlpha:keyboardOnAlpha];
         //[keyboard setHidden:NO];
@@ -1677,6 +1678,7 @@ extern UserController * g_userController;
 - (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
 {
     double keyWidth = keyboardOverview.frame.size.width / KEYS_WHITE_KEY_TOTAL_COUNT;
+    double overlayWidth = 1.5*keyWidth;
     BOOL isBlackKey = [self isKeyBlackKey:key];
     double drawKeyOffset = (isBlackKey) ? keyWidth / 2.0 : 0.0;
     
@@ -1686,21 +1688,30 @@ extern UserController * g_userController;
     
     UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(whiteKey*keyWidth-drawKeyOffset,keyboardOverview.frame.size.height/2.0-keyWidth/2.0,keyWidth,keyWidth)];
     
+    UIView * keyOverlay = [[UIView alloc] initWithFrame:CGRectMake(keyView.frame.origin.x-(overlayWidth-keyWidth)/2.0,keyView.frame.origin.y-(overlayWidth-keyWidth)/2.0,overlayWidth,overlayWidth)];
+    
     if(!isBlackKey){
         [keyView setBackgroundColor:[UIColor whiteColor]];
+        [keyOverlay setBackgroundColor:[UIColor whiteColor]];
     }else{
         [keyView setBackgroundColor:[UIColor blackColor]];
+        [keyOverlay setBackgroundColor:[UIColor blackColor]];
     }
     
     keyView.layer.cornerRadius = keyWidth/2.0;
+    keyOverlay.layer.cornerRadius = overlayWidth/2.0;
     
     [keyView setAlpha:0.9];
+    [keyOverlay setAlpha:0.4];
     [keyboardOverview addSubview:keyView];
+    [keyboardOverview addSubview:keyOverlay];
     
     [UIView animateWithDuration:0.2 animations:^(void){
         [keyView setAlpha:0.0];
+        [keyOverlay setAlpha:0.0];
     }completion:^(BOOL finished){
         [keyView removeFromSuperview];
+        [keyOverlay removeFromSuperview];
     }];
 }
 

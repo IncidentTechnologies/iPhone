@@ -73,7 +73,7 @@
             
             m_glView.m_renderer = m_renderer;
             
-            [self shiftViewToKey:DEFAULT_KEY_MIN];
+            [self shiftViewToKey:[g_keysController range].keyMin];
             m_renderer.m_offset = GL_SEEK_LINE_Y; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
             
             [m_glView layoutSubviews];
@@ -489,7 +489,7 @@
     
     m_renderer.m_horizontalOffset = -1*[self convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
     
-    //[m_renderer render];
+    [m_renderer render];
 }
 
 - (void)shiftView:(double)shift

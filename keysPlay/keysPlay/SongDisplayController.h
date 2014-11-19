@@ -39,6 +39,8 @@
 @class Texture2D;
 @class NumberModel;
 
+extern KeysController * g_keysController;
+
 @interface SongDisplayController : DisplayController
 {
     
