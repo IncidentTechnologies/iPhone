@@ -136,8 +136,7 @@
         }
     }
     
-    minKey = MAX(0,minKey-3); // TODO: ensure it's a white key?
-    maxKey = MIN(KEYS_KEY_COUNT,MAX(maxKey,minKey+KEYS_DISPLAYED_NOTES_COUNT));
+    DLog(@"Min in song is %i, max is %i",minKey,maxKey);
     
     [g_keysMath setSongRangeFromMin:minKey andMax:maxKey];
 }

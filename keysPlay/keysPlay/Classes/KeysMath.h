@@ -41,6 +41,8 @@ enum PlayViewControllerDifficulty
 };
 
 
+extern KeysController * g_keysController;
+
 @interface KeysMath : NSObject
 {
     float glScreenHeight;
