@@ -1606,7 +1606,7 @@ extern UserController * g_userController;
     }
     
     // Always display 2 octaves, from the first note
-    int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT; //[g_keysMath countWhiteKeysFromMin:keyMin toMax:(keyMin+numberOfKeys)];
+    int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
     
     int keyGap = 1.0;
     
@@ -1670,9 +1670,7 @@ extern UserController * g_userController;
     BOOL isBlackKey = [g_keysMath isKeyBlackKey:key];
     double drawKeyOffset = (isBlackKey) ? drawKeyWidth / 2.0 : 0.0;
     
-    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath countWhiteKeysFromMin:0 toMax:g_keysMath.songRangeKeyMin];
-    
-    DLog(@"White Key is %i for %i",whiteKey,key);
+    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
     
     UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(whiteKey*keyWidth-drawKeyOffset,keyboardOverview.frame.size.height/2.0-drawKeyWidth/2.0,drawKeyWidth,drawKeyWidth)];
     
@@ -3202,12 +3200,6 @@ extern UserController * g_userController;
         
         // Shift view to a new white key
         int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
-        
-        // TODO: either min or max gets cut off by 1
-        int minWhiteKey = [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
-        int maxWhiteKey = ((keyboardRange.frame.size.width-keyboardPosition.frame.size.width) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath countWhiteKeysFromMin:0 toMax:g_keysMath.songRangeKeyMin];
-        
-        DLog(@"Song range number of white keys is %i = %i to %i",g_keysMath.songRangeNumberOfWhiteKeys,minWhiteKey,maxWhiteKey);
         
         int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
         

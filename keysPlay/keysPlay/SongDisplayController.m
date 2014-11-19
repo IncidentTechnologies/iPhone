@@ -77,13 +77,13 @@
         
         //[self createNumberModels];
         
-        [self createLineModels];
-        
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
         //[self createLoopModels];
         
         [self setNoteRangeForSong];
+        
+        [self createLineModels];
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
@@ -582,7 +582,7 @@
     
     
     // Create paths for black keys
-    for ( unsigned int i = g_keysMath.songRangeKeyMin; i <= g_keysMath.songRangeKeyMax; i++ )
+    for ( unsigned int i = MAX(0,g_keysMath.songRangeKeyMin-1); i <= g_keysMath.songRangeKeyMax; i++ )
     {
         if(![g_keysMath isKeyBlackKey:i]){
             continue;
