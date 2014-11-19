@@ -30,6 +30,9 @@ CloudController * g_cloudController;
 FileController * g_fileController;
 KeysController * g_keysController;
 UserController * g_userController;
+
+KeysMath * g_keysMath;
+
 //TelemetryController * g_telemetryController;
 
 @implementation keysPlayAppDelegate
@@ -76,6 +79,9 @@ UserController * g_userController;
         // By default it just outputs 'LevelError'
         g_keysController.logLevel = KeysControllerLogLevelAll;
         [g_keysController addObserver:self];
+        
+        // Add global keys math object
+        g_keysMath = [[KeysMath alloc] init];
         
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
         

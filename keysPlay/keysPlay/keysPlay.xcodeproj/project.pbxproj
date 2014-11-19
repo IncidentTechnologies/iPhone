@@ -19,6 +19,7 @@
 		6D0BDE971A01CE0600593F2C /* Electric Guitar 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */; };
 		6D0BDE981A01CE0600593F2C /* Electric Guitar 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE961A01CE0600593F2C /* Electric Guitar 1.mp3 */; };
 		6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D20EF5E191AA68600E78A9D /* PreviewIcon.png */; };
+		6D226D091A1C27200088D52C /* KeysMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D226D081A1C27200088D52C /* KeysMath.m */; };
 		6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81618F3794300887E40 /* libc++.dylib */; };
 		6D26A81918F3794900887E40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81818F3794900887E40 /* libz.dylib */; };
 		6D26A81B18F3797200887E40 /* libIncidentPlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81A18F3797200887E40 /* libIncidentPlatform.a */; };
@@ -1514,6 +1515,8 @@
 		6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 0.mp3"; sourceTree = "<group>"; };
 		6D0BDE961A01CE0600593F2C /* Electric Guitar 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 1.mp3"; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
+		6D226D071A1C27200088D52C /* KeysMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeysMath.h; sourceTree = "<group>"; };
+		6D226D081A1C27200088D52C /* KeysMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeysMath.m; sourceTree = "<group>"; };
 		6D26A81618F3794300887E40 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D26A81818F3794900887E40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D26A81A18F3797200887E40 /* libIncidentPlatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIncidentPlatform.a; path = "../../../IncidentPlatform/iOS/IncidentPlatform/build/Debug-iphoneos/libIncidentPlatform.a"; sourceTree = "<group>"; };
@@ -3829,6 +3832,8 @@
 		ECCC0319170A2B9E0021DB00 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6D226D071A1C27200088D52C /* KeysMath.h */,
+				6D226D081A1C27200088D52C /* KeysMath.m */,
 				ECCC0304170A2B8C0021DB00 /* NoteModel.h */,
 				ECCC0305170A2B8C0021DB00 /* NoteModel.m */,
 				ECCC0306170A2B8C0021DB00 /* KeyPathModel.h */,
@@ -5456,6 +5461,7 @@
 				EC24DC4A161A897100016B78 /* Harmonizer.m in Sources */,
 				EC24DC53161A897A00016B78 /* SongDisplayController.m in Sources */,
 				EC24DC54161A897A00016B78 /* SongES1Renderer.m in Sources */,
+				6D226D091A1C27200088D52C /* KeysMath.m in Sources */,
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
 				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
 				6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */,

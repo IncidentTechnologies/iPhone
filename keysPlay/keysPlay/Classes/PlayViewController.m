@@ -162,6 +162,8 @@ extern UserController * g_userController;
         
         isScrolling = standalone;
         isStandalone = standalone;
+        g_keysMath.isStandalone = standalone;
+        
         isPracticeMode = practiceMode;
         
         // disable idle sleeping
@@ -295,6 +297,7 @@ extern UserController * g_userController;
         DLog(@"KEYS DISCONNECTED USE STANDALONE");
         
         isStandalone = YES;
+        g_keysMath.isStandalone = isStandalone;
         [self standaloneReady];
         
         [_tempoButton setTitle:@"100%" forState:UIControlStateNormal];
@@ -306,6 +309,7 @@ extern UserController * g_userController;
         DLog(@"KEYS IS CONNECTED USE NORMAL");
         
         isStandalone = NO;
+        g_keysMath.isStandalone = isStandalone;
         
         [_tempoButton setTitle:NSLocalizedString(@"NONE", NULL) forState:UIControlStateNormal];
         
@@ -1470,6 +1474,7 @@ extern UserController * g_userController;
     [self showKeyboard:_difficulty];
     
     [_displayController updateDifficulty:_difficulty];
+    [g_keysMath setDifficulty:_difficulty];
     
     switch ( _difficulty )
     {
@@ -1695,7 +1700,7 @@ extern UserController * g_userController;
     BOOL isBlackKey = [self isKeyBlackKey:key];
     double drawKeyOffset = (isBlackKey) ? keyWidth / 2.0 : 0.0;
     
-    int whiteKey = [_displayController getWhiteKeyFromNthKey:key];
+    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key];
     
     DLog(@"White Key is %i for %i",whiteKey,key);
     
@@ -3230,7 +3235,7 @@ extern UserController * g_userController;
         // Shift view to a new white key
         int newWhiteKey = (keyboardPosition.frame.origin.x / keyboardRange.frame.size.width)*KEYS_WHITE_KEY_TOTAL_COUNT;
         
-        int newKey = [_displayController getNthKeyForWhiteKey:newWhiteKey];
+        int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
         
         //DLog(@"New starting key is %i",newKey);
         

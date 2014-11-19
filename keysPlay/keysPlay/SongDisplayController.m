@@ -16,17 +16,6 @@
 #define GL_SCREEN_HEIGHT (m_glView.frame.size.height)
 #define GL_SCREEN_WIDTH (m_glView.frame.size.width)
 
-#define GL_SCREEN_TOP_BUFFER 46.0
-#define GL_SEEK_LINE_Y 56.0
-#define GL_TOUCH_AREA_HEIGHT 100.0
-
-#define GL_NOTE_HEIGHT 38.0 //( GL_SCREEN_HEIGHT / 7.0 )
-#define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
-//#define GL_STRING_HEIGHT_INCREMENT ( GL_SCREEN_HEIGHT / 320.0 )
-
-#define SONG_BEATS_PER_SCREEN 1.5
-#define SONG_BEAT_OFFSET 0.5
-
 @implementation SongDisplayController
 
 - (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
@@ -151,10 +140,10 @@
     
     [self updateDisplayedFrames];
     
-    double position = [self convertBeatToCoordSpace:m_songModel.m_currentBeat];
+    double position = [g_keysMath convertBeatToCoordSpace:m_songModel.m_currentBeat];
     
     // pull down the shift as time goes by
-    double end = [self calculateMaxShiftCoordSpace];
+    double end = [g_keysMath calculateMaxShiftCoordSpace:m_songModel.m_currentBeat lengthBeats:m_songModel.m_lengthBeats];
     
     // Don't pass the end
     if(m_renderer.m_viewShift < end){
@@ -349,8 +338,8 @@
         note.m_standaloneActive = NO;
         
         CGPoint center;
-        center.y = [self convertBeatToCoordSpace:note.m_absoluteBeatStart];
-        center.x = [self convertKeyToCoordSpace:note.m_key];
+        center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
+        center.x = [g_keysMath convertKeyToCoordSpace:note.m_key];
         
         
         // These notes will still be sounded, but do not draw multiple notes in the same place for standalone in order to preserve highlight transparency
@@ -389,7 +378,7 @@
             
         }else{
             
-            noteColor = [m_renderer getHighlightColorForMappedKey:[self getMappedKeyFromKey:note.m_key]];
+            noteColor = [m_renderer getHighlightColorForMappedKey:[g_keysMath getMappedKeyFromKey:note.m_key]];
             
         }
         
@@ -421,12 +410,12 @@
             
         }*/
         
-        Texture2D * modelTexture = [self isKeyBlackKey:(note.m_key%KEYS_OCTAVE_COUNT)] ? m_blackKeyTexture : m_whiteKeyTexture;
+        Texture2D * modelTexture = [g_keysMath isKeyBlackKey:(note.m_key%KEYS_OCTAVE_COUNT)] ? m_blackKeyTexture : m_whiteKeyTexture;
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:modelTexture andOverlay:overlay];
         
         model.m_key = note.m_key;
-        model.m_standalonekey = (isStandalone) ? [self getMappedKeyFromKey:note.m_key] : KEYS_OCTAVE_COUNT;
+        model.m_standalonekey = (isStandalone) ? [g_keysMath getMappedKeyFromKey:note.m_key] : KEYS_OCTAVE_COUNT;
         
         
         NSValue * key = [NSValue valueWithNonretainedObject:note];
@@ -487,7 +476,7 @@
     
     // Offset by half a key so it starts at the beginning
     
-    m_renderer.m_horizontalOffset = -1*[self convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
+    m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
     
     [m_renderer render];
 }
@@ -497,7 +486,7 @@
      m_viewShift = shift;
      
      // Let us shift through the entire song .. but nothing more.
-     double end = [self calculateMaxShiftCoordSpace];
+    double end = [g_keysMath calculateMaxShiftCoordSpace:m_songModel.m_currentBeat lengthBeats:m_songModel.m_lengthBeats];
      
      //if ( m_viewShift < 0.0 )
      //{
@@ -517,7 +506,7 @@
      m_viewShift = end;
      }
      
-     double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
+     double viewShiftBeats = [g_keysMath convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
      
      //    if ( viewShiftBeats > m_beatsToPreload )
      {
@@ -536,31 +525,6 @@
     
     [m_renderer render];
     
-    /*
-    m_viewShift += shift;
-    
-    // Let us shift through the entire song .. but nothing more.
-    double end = [self calculateMaxShiftCoordSpace];
-    
-    if(m_viewShift > 0.0)
-    {
-        m_viewShift = 0.0;
-    }
-    else if (end > m_viewShift)
-    {
-        m_viewShift = end;
-    }
-    
-    double viewShiftBeats = [self convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
-    
-    //    if ( viewShiftBeats > m_beatsToPreload )
-    {
-        m_beatsToPreloadSync = MAX(m_beatsToPreloadSync, viewShiftBeats);
-        m_beatsToPreloadAsync = MAX(m_beatsToPreloadSync, m_beatsToPreloadAsync);
-    }
-    
-    m_renderer.m_viewShift = m_viewShift;
-    */
 }
 
 
@@ -606,16 +570,16 @@
     
     for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
     {
-        if(![self isKeyBlackKey:(i%KEYS_OCTAVE_COUNT)]){
+        if(![g_keysMath isKeyBlackKey:(i%KEYS_OCTAVE_COUNT)]){
             continue;
         }
         
         // strings number and size are inversely proportional -- get slightly bigger
-        center.x = [self convertKeyToCoordSpace:i];
+        center.x = [g_keysMath convertKeyToCoordSpace:i];
         
         center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
         
-        size.width = [self getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
+        size.width = [g_keysMath getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
         //size.width = 5.0;
         size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
         
@@ -716,216 +680,7 @@
     
 }
 
-#pragma mark - Helpers
-
-- (double)convertTimeToCoordSpace:(double)delta
-{
-    return [self convertBeatToCoordSpace:(m_songModel.m_beatsPerSecond * delta)];
-}
-
-- (double)convertBeatToCoordSpace:(double)beat
-{
-    double beatsPerScreen = SONG_BEATS_PER_SCREEN;
-    
-    return -(GL_SCREEN_HEIGHT - (beat/(GLfloat)beatsPerScreen) * GL_SCREEN_HEIGHT);
-}
-
-- (double)convertCoordSpaceToBeat:(double)coord
-{
-    return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / GL_SCREEN_HEIGHT;
-}
-
-- (double)convertKeyToCoordSpace:(NSInteger)key
-{
-    int mappedKey = [self getMappedKeyFromKey:key];
-    
-    // WHITE KEYS
-    float numWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
-    
-    if(isStandalone && difficulty == PlayViewControllerDifficultyHard) numWhiteKeys = KEYS_WHITE_KEY_HARD_COUNT;
-    if(isStandalone && difficulty == PlayViewControllerDifficultyMedium) numWhiteKeys = KEYS_WHITE_KEY_MED_COUNT;
-    if(isStandalone && difficulty == PlayViewControllerDifficultyEasy) numWhiteKeys = KEYS_WHITE_KEY_EASY_COUNT;
-    
-    GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
-    GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
-    
-    if(!isStandalone){
-        
-        int mappedKeyInDisplay = mappedKey % KEYS_DISPLAYED_NOTES_COUNT;
-        
-        double octaveOffset = floorf(mappedKey / KEYS_DISPLAYED_NOTES_COUNT) * numWhiteKeys * widthPerWhiteKey;
-        
-        int whiteKeys[KEYS_WHITE_KEY_DISPLAY_COUNT] = {0,2,4,5,7,9,11,12,14,16,17,19,21,23};
-        int blackKeys[KEYS_BLACK_KEY_DISPLAY_COUNT] = {1,3,6,8,10,13,15,18,20,22};
-        int blackKeyPositions[KEYS_BLACK_KEY_DISPLAY_COUNT] = {1,2,4,5,6,8,9,11,12,13};
-        
-        for(int k = 0; k < KEYS_WHITE_KEY_DISPLAY_COUNT; k++){
-            if(whiteKeys[k] == mappedKeyInDisplay){
-                return octaveOffset + (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
-            }
-        }
-        
-        for (int j = 0; j < KEYS_BLACK_KEY_DISPLAY_COUNT; j++){
-            if(blackKeys[j] == mappedKeyInDisplay){
-                return octaveOffset + blackKeyPositions[j] * widthPerWhiteKey;
-            }
-        }
-        
-    }else if(difficulty == PlayViewControllerDifficultyHard){
-        
-        int whiteKeys[KEYS_WHITE_KEY_HARD_COUNT] = {0,2,4,5,7,9,11};
-        int blackKeys[KEYS_BLACK_KEY_HARD_COUNT] = {1,3,6,8,10};
-        int blackKeyPositions[KEYS_BLACK_KEY_HARD_COUNT] = {1,2,4,5,6};
-        
-        for(int k = 0; k < KEYS_WHITE_KEY_HARD_COUNT; k++){
-            if(whiteKeys[k] == mappedKey){
-                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
-            }
-        }
-        
-        for (int j = 0; j < KEYS_BLACK_KEY_HARD_COUNT; j++){
-            if(blackKeys[j] == mappedKey){
-                return blackKeyPositions[j] * widthPerWhiteKey;
-            }
-        }
-        
-    }else if(difficulty == PlayViewControllerDifficultyMedium){
-        
-        int whiteKeys[KEYS_WHITE_KEY_MED_COUNT] = {0,2,4,5,7};
-        int blackKeys[KEYS_BLACK_KEY_MED_COUNT] = {1,3,6};
-        int blackKeyPositions[KEYS_BLACK_KEY_MED_COUNT] = {1,2,4};
-        
-        for(int k = 0; k < KEYS_WHITE_KEY_MED_COUNT; k++){
-            if(whiteKeys[k] == mappedKey){
-                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
-            }
-        }
-        
-        for (int j = 0; j < KEYS_BLACK_KEY_MED_COUNT; j++){
-            if(blackKeys[j] == mappedKey){
-                return blackKeyPositions[j] * widthPerWhiteKey;
-            }
-        }
-        
-    }else{
-        
-        int whiteKeys[KEYS_WHITE_KEY_EASY_COUNT] = {0,2,4};
-        int blackKeys[KEYS_BLACK_KEY_EASY_COUNT] = {1,3};
-        int blackKeyPositions[KEYS_BLACK_KEY_EASY_COUNT] = {1,2};
-        
-        for(int k = 0; k < KEYS_WHITE_KEY_EASY_COUNT; k++){
-            if(whiteKeys[k] == mappedKey){
-                return (k * widthPerWhiteKey) + widthPerWhiteKey/2.0;
-            }
-        }
-        
-        for (int j = 0; j < KEYS_BLACK_KEY_EASY_COUNT; j++){
-            if(blackKeys[j] == mappedKey){
-                return blackKeyPositions[j] * widthPerWhiteKey;
-            }
-        }
-        
-    }
-    
-    // Error!
-    return 0;
-}
-
-- (double)calculateMaxShiftCoordSpace
-{
-    double beatsToShift = ceil(m_songModel.m_lengthBeats) - m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN;
-    
-    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
-    
-    if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat <= SONG_BEATS_PER_SCREEN){
-        return end;
-    }else{
-        return end+GL_SCREEN_HEIGHT;
-    }
-}
-
 #pragma mark - Standalone helper functions
-// To adjust key coloring, refer to this mapping function and g_standaloneKeyColors
-- (int)getStandaloneKeyFromKey:(int)key
-{
-    return [self getMappedKeyFromKey:key];
-}
-
--(int)getMappedKeyFromKey:(int)key
-{
-    if(!isStandalone){
-        return key;
-    }else if(!isStandalone){
-        return key % KEYS_OCTAVE_COUNT;
-    }else if(difficulty == PlayViewControllerDifficultyMedium){
-        return key % 8;
-    }else{
-        return key % 5;
-    }
-}
-
--(int)getNthKeyForWhiteKey:(int)whiteKey
-{
-    // First determine how many octaves
-    int nthKey = floor(whiteKey / KEYS_WHITE_KEY_HARD_COUNT) * KEYS_OCTAVE_COUNT;
-    
-    int offset = whiteKey % KEYS_WHITE_KEY_HARD_COUNT;
-    
-    if(offset < 3){
-        nthKey += 2*offset;
-    }else{
-        nthKey += 2*(offset-1)+1;
-    }
-    
-    //DLog(@"white key %i maps to %i",whiteKey,nthKey);
-    
-    return nthKey;
-}
-
--(int)getWhiteKeyFromNthKey:(int)nthKey
-{
-    int whiteKey = floor(nthKey / KEYS_OCTAVE_COUNT) * KEYS_WHITE_KEY_HARD_COUNT;
-    
-    int offset = nthKey % KEYS_OCTAVE_COUNT;
-    
-    if(offset < 5){
-        whiteKey += ceil(offset/2.0);
-    }else{
-        whiteKey += floor(offset/2.0)+1;
-    }
-    
-    //DLog(@"nth key %i maps to %i, is black? %i",nthKey,whiteKey,[self isKeyBlackKey:whiteKey]);
-    
-    return whiteKey;
-}
-
-
--(BOOL)isKeyBlackKey:(int)key
-{
-    int mappedKey = [self getMappedKeyFromKey:key];
-    
-    if((mappedKey < 5 && mappedKey%2==0) || (mappedKey >= 5 && mappedKey%2==1)){
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
-{
-    float keyGap = 1.0f;
-    float whiteKeyFrameWidth = (size.width - (keyGap * (numberOfWhiteKeys - 1))) / numberOfWhiteKeys;
-    
-    return CGSizeMake(whiteKeyFrameWidth,size.height);
-}
-
-- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size
-{
-    CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
-    
-    return CGSizeMake(DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.width, DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.height);
-}
-
 - (NSMutableDictionary *)getKeyPressFromTap:(NSMutableArray *)touchPoints
 {
     if(!isStandalone){
@@ -963,7 +718,7 @@
             
             // Check everything upcoming
             
-            float yForBeat = -1*[self convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+0.5]; // how to reach further up the screen?
+            float yForBeat = -1*[g_keysMath convertBeatToCoordSpace:frame.m_absoluteBeatStart-m_songModel.m_currentBeat+0.5]; // how to reach further up the screen?
             
             DLog(@"Checking frame at %f on screen of %f",yForBeat,GL_SCREEN_HEIGHT);
             
@@ -1027,7 +782,7 @@
     for(NSValue * touchPointValue in touchPoints){
         CGPoint touchPoint = [touchPointValue CGPointValue];
         
-        double noteX = [self convertKeyToCoordSpace:note.m_key];
+        double noteX = [g_keysMath convertKeyToCoordSpace:note.m_key];
         double accuracy = 1.0 - fabs(touchPoint.x - noteX) / GL_SCREEN_WIDTH;
         
         if(accuracy > maxAccuracy){

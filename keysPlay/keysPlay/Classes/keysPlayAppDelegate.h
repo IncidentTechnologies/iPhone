@@ -9,6 +9,7 @@
 #import "AppCore.h"
 #import "KeysController.h"
 #import "keysNavigationController.h"
+#import "KeysMath.h"
 
 //#import <gTarAppCore/Facebbok/FBConnect.h>
 

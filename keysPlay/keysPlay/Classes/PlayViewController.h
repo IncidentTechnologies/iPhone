@@ -15,6 +15,7 @@
 #import "AppCore.h"
 #import <gTarAppCore/MainEventController.h>
 #import "NSSongModel.h"
+#import "KeysMath.h"
 
 #define MARKER_SIZE 10.0
 #define MARKER_HEIGHT 18.0
@@ -22,26 +23,6 @@
 
 @class EAGLView;
 @class UserSong;
-
-//@class GuitarController;
-//
-//@class XmlDom;
-//@class NSSong;
-//@class SongRecorder;
-//@class NSScoreTracker;
-//@class NSNoteFrame;
-//@class SongDisplayController;
-//@class CloudCache;
-//@class SongProgressViewController;
-//@class UserSongSession;
-//@class UserResponse;
-
-enum PlayViewControllerDifficulty
-{
-    PlayViewControllerDifficultyEasy,
-    PlayViewControllerDifficultyMedium,
-    PlayViewControllerDifficultyHard
-};
 
 @interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate>
 
@@ -52,6 +33,7 @@ enum PlayViewControllerDifficulty
 - (void) localizeViews;
 
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
+@property (strong, nonatomic) KeysMath *g_keysMath;
 
 
 @property (strong, nonatomic) IBOutlet EAGLView *glView;

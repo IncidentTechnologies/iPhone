@@ -10,6 +10,7 @@
 
 #import <gTarAppCore/ES1Renderer.h>
 #import "AppCore.h"
+#import "KeysMath.h"
 
 @class LineModel;
 @class KeyPathModel;

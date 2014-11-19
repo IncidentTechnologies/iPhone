@@ -27,6 +27,7 @@
 #import "NSNoteFrame.h"
 
 #import "keysColors.h"
+#import "KeysMath.h"
 
 #import "PlayViewController.h"
 
@@ -40,6 +41,7 @@
 @class NumberModel;
 
 extern KeysController * g_keysController;
+extern KeysMath * g_keysMath;
 
 @interface SongDisplayController : DisplayController
 {
@@ -96,19 +98,6 @@ extern KeysController * g_keysController;
 - (void)shiftViewToKey:(double)key;
 - (void)shiftView:(double)shift;
 - (void)shiftViewDelta:(double)shift;
-
-- (int)getStandaloneKeyFromKey:(int)key;
-- (double)convertTimeToCoordSpace:(double)delta;
-- (double)convertBeatToCoordSpace:(double)beat;
-- (double)convertCoordSpaceToBeat:(double)coord;
-- (double)convertKeyToCoordSpace:(NSInteger)key;
-- (double)calculateMaxShiftCoordSpace:(BOOL)standalone;
-
-- (int)getMappedKeyFromKey:(int)key;
-- (int)getNthKeyForWhiteKey:(int)whiteKey;
-- (int)getWhiteKeyFromNthKey:(int)nthKey;
-- (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
-- (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 
 - (double)getNoteHit:(NSNote*)note;
 - (void)hitNote:(NSNote *)note withAccuracy:(double)accuracy;
