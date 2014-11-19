@@ -1611,11 +1611,15 @@ extern UserController * g_userController;
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
     double overlayWidth = 1.5*drawKeyWidth;
     BOOL isBlackKey = [g_keysMath isKeyBlackKey:key];
-    double drawKeyOffset = (isBlackKey) ? drawKeyWidth / 2.0 : 0.0;
     
     int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
     
-    UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(whiteKey*keyWidth-drawKeyOffset,keyboardOverview.frame.size.height/2.0-drawKeyWidth/2.0,drawKeyWidth,drawKeyWidth)];
+    double whiteKeyX = whiteKey*keyWidth;
+    double nextWhiteKeyX = (whiteKey+1)*keyWidth;
+    
+    double keyCenter = (isBlackKey) ? (whiteKeyX - drawKeyWidth/2.0) : (whiteKeyX+nextWhiteKeyX)/2.0 - drawKeyWidth/2.0;
+    
+    UIView * keyView = [[UIView alloc] initWithFrame:CGRectMake(keyCenter,keyboardOverview.frame.size.height/2.0-drawKeyWidth/2.0,drawKeyWidth,drawKeyWidth)];
     
     UIView * keyOverlay = [[UIView alloc] initWithFrame:CGRectMake(keyView.frame.origin.x-(overlayWidth-drawKeyWidth)/2.0,keyView.frame.origin.y-(overlayWidth-drawKeyWidth)/2.0,overlayWidth,overlayWidth)];
     
@@ -1635,7 +1639,7 @@ extern UserController * g_userController;
     [keyboardOverview addSubview:keyView];
     [keyboardOverview addSubview:keyOverlay];
     
-    [UIView animateWithDuration:0.2 animations:^(void){
+    [UIView animateWithDuration:0.5 animations:^(void){
         [keyView setAlpha:0.0];
         [keyOverlay setAlpha:0.0];
     }completion:^(BOOL finished){
@@ -3168,6 +3172,15 @@ extern UserController * g_userController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+    
+    // Snap to key
+    float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
+    
+    DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]));
+    
+    [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
+    
     
     if(!isStandalone){
         
