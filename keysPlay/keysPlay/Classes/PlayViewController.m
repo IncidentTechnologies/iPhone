@@ -398,7 +398,7 @@ extern UserController * g_userController;
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
     
     // This doesn't draw until the screen loads
-    [self positionKeyboard];
+    [self positionKeyboard:[g_keysMath songRangeKeyMin]];
     
 }
 
@@ -1605,10 +1605,8 @@ extern UserController * g_userController;
     }
 }
 
-- (void)positionKeyboard
+- (void)positionKeyboard:(int)keyboardKey
 {
-    int keyboardKey = [g_keysController range].keyMin;
-    
     double keyboardRangeWidth = keyboardRange.frame.size.width;
     int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:keyboardKey];
     int keyboardMin = [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]; // Count through the white key prior
@@ -1626,10 +1624,14 @@ extern UserController * g_userController;
 }
 
 - (void)refreshKeyboardToKeyMin
-{    
-    [self positionKeyboard];
-    [self drawKeyboardGridFromMin:[g_keysController range].keyMin];
-    [_displayController shiftViewToKey:[g_keysController range].keyMin];
+{
+    NSDictionary * songRange = [_displayController getNoteRangeForSong];
+    
+    int keyboardKey = [[songRange objectForKey:@"Min"] intValue];
+    
+    [self positionKeyboard:keyboardKey];
+    [self drawKeyboardGridFromMin:keyboardKey];
+    [_displayController shiftViewToKey:keyboardKey];
 }
 
 - (void)displayKeyboardRangeChanged
@@ -2151,8 +2153,6 @@ extern UserController * g_userController;
         [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(revealPlayView) userInfo:nil repeats:NO];
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLoadingView) userInfo:nil repeats:NO];
     }
-    
-    
 }
 
 - (void)keysRangeChange:(KeysRange)range

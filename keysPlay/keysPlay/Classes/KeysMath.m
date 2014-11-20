@@ -43,9 +43,20 @@
 
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
 {
+    // Ensure keyMin is a white key
+    if([self isKeyBlackKey:keyMin]){
+        keyMin--;
+    }
     
-    songRangeKeyMin = MIN(keyMin,[g_keysController range].keyMin);
-    songRangeKeyMax = MAX(MAX(keyMin+KEYS_DISPLAYED_NOTES_COUNT,keyMax),[g_keysController range].keyMax);
+    // Ensure key range bottom key is a white key
+    KeyPosition keyRangeMax = [g_keysController range].keyMax;
+    KeyPosition keyRangeMin = [g_keysController range].keyMin;
+    if([self isKeyBlackKey:keyRangeMin]){
+        keyRangeMin--;
+    }
+    
+    songRangeKeyMin = MIN(keyMin,keyRangeMin);
+    songRangeKeyMax = MAX(MAX(keyMin+KEYS_DISPLAYED_NOTES_COUNT,keyMax),keyRangeMax);
     songRangeKeySize = songRangeKeyMax-songRangeKeyMin+1;
     songRangeNumberOfWhiteKeys = [self countWhiteKeysFromMin:songRangeKeyMin toMax:songRangeKeyMax];
     
