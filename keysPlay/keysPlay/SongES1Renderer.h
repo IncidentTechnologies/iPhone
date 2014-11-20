@@ -18,6 +18,8 @@
 @class NoteModel;
 @class Model;
 
+extern KeysMath * g_keysMath;
+
 @interface SongES1Renderer : ES1Renderer
 {
 

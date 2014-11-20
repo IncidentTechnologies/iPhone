@@ -7,6 +7,10 @@
 //
 
 #import "AppCore.h"
+#import "NSNoteFrame.h"
+#import "NSNote.h"
+
+#define DEFAULT_CAMERA_SCALE 1.0
 
 #define SONG_BEATS_PER_SCREEN 1.5
 #define SONG_BEAT_OFFSET 0.5
@@ -48,6 +52,7 @@ extern KeysController * g_keysController;
 @protocol KeysMathDelegate <NSObject>
 
 - (void)displayKeyboardRangeChanged;
+- (void)refreshKeyboardToKey:(KeyPosition)key;
 
 @end
 
@@ -58,11 +63,14 @@ extern KeysController * g_keysController;
 
 @property (weak, nonatomic) id<KeysMathDelegate>delegate;
 
+@property (nonatomic, assign) double cameraScale;
+
 @property (nonatomic, assign) BOOL isStandalone;
 @property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
 
 @property (nonatomic, assign) KeyPosition songRangeKeyMin;
 @property (nonatomic, assign) KeyPosition songRangeKeyMax;
+@property (nonatomic, assign) KeyPosition keyboardPositionKey;
 @property (nonatomic, assign) int songRangeKeySize;
 @property (nonatomic, assign) int songRangeNumberOfWhiteKeys;
 
@@ -87,5 +95,11 @@ extern KeysController * g_keysController;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 
 - (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors;
+
+- (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame;
+- (BOOL)noteOutOfRange:(KeyPosition)key;
+- (BOOL)noteOutOfDisplayRange:(KeyPosition)key;
+
+- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 
 @end

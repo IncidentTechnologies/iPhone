@@ -11,12 +11,14 @@
 
 @implementation KeysMath
 
+@synthesize cameraScale;
 @synthesize isStandalone;
 @synthesize difficulty;
 @synthesize songRangeKeyMin;
 @synthesize songRangeKeyMax;
 @synthesize songRangeKeySize;
 @synthesize songRangeNumberOfWhiteKeys;
+@synthesize keyboardPositionKey;
 @synthesize delegate;
 @synthesize glScreenWidth;
 @synthesize glScreenHeight;
@@ -34,6 +36,8 @@
         glScreenWidth = [fg getFullscreenWidth] - GL_SCREEN_RIGHT_BUFFER;
         
         [self setSongRangeFromMin:0 andMax:KEYS_KEY_COUNT];
+        
+        cameraScale = DEFAULT_CAMERA_SCALE;
         
     }
     
@@ -360,5 +364,75 @@
     
 }
 
+
+- (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame
+{
+    KeyPosition noteMin = [g_keysController range].keyMin;
+    KeyPosition noteMax = [g_keysController range].keyMax;
+    
+    for(NSNote * note in noteFrame.m_notes){
+        if(note.m_key >= noteMin && note.m_key <= noteMax){
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)noteOutOfRange:(KeyPosition)key
+{
+    KeyPosition noteMin = [g_keysController range].keyMin;
+    KeyPosition noteMax = [g_keysController range].keyMax;
+    
+    if(key < noteMin || key > noteMax){
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)noteOutOfDisplayRange:(KeyPosition)key
+{
+    /*KeyPosition keyMin = [g_keysController range].keyMin;
+    KeyPosition keyMax = [g_keysController range].keyMax;
+    KeyPosition cameraMin = keyboardPositionKey;
+    KeyPosition cameraMax = keyboardPositionKey + cameraScale*(KEYS_DISPLAYED_NOTES_COUNT); // get the white note before
+    
+    //DLog(@"Key %i, note min %i, note max %i",key,cameraMin,cameraMax);
+    
+    if((key < cameraMin || key > cameraMax) && (key >= keyMin && key <= keyMax)){
+        return YES;
+    }*/
+    return NO;
+}
+
+- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
+{
+    KeyPosition cameraMin = keyboardPositionKey;
+    KeyPosition cameraMax = [self getNthKeyForWhiteKey:[self getWhiteKeyFromNthKey:keyboardPositionKey]+cameraScale*(KEYS_WHITE_KEY_DISPLAY_COUNT)];
+    
+    if(keyMax != cameraMax || keyMin != cameraMin){
+        
+        double diff = [self getWhiteKeyFromNthKey:keyMax]-[self getWhiteKeyFromNthKey:cameraMax]+[self getWhiteKeyFromNthKey:cameraMin]-[self getWhiteKeyFromNthKey:keyMin];
+        
+        double newCameraScale = MAX(DEFAULT_CAMERA_SCALE,(diff/(double)KEYS_WHITE_KEY_DISPLAY_COUNT)+1);
+        
+        if(newCameraScale != cameraScale){
+            
+            DLog(@"Key: %i to %i, camera: %i to %i",keyMin,keyMax,cameraMin,cameraMax);
+            
+            DLog(@"New camera scale is %f vs %f",newCameraScale,cameraScale);
+            
+            cameraScale = newCameraScale;
+            
+            DLog(@"Updating camera scale to %f = %i-%i/14",cameraScale,[self getWhiteKeyFromNthKey:keyMax],[self getWhiteKeyFromNthKey:cameraMax]);
+            
+        }
+        
+        // TODO: animate?
+        [delegate refreshKeyboardToKey:keyMin];
+        
+        
+    }
+}
 
 @end

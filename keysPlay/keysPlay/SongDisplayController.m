@@ -62,7 +62,7 @@
             m_glView.m_renderer = m_renderer;
             
             [self shiftViewToKey:[g_keysController range].keyMin];
-            m_renderer.m_offset = GL_SEEK_LINE_Y; // (isStandalone) ? GL_SCREEN_SEEK_LINE_STANDALONE_OFFSET : GL_SCREEN_SEEK_LINE_OFFSET;
+            m_renderer.m_offset = GL_SEEK_LINE_Y;
             
             [m_glView layoutSubviews];
             

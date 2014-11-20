@@ -167,8 +167,8 @@
 	// Set up the projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrthof( GL_ORTHO_LEFT, CAMERA_SCALE*GL_ORTHO_RIGHT,
-             GL_ORTHO_BOTTOM, CAMERA_SCALE*GL_ORTHO_TOP,
+    glOrthof( GL_ORTHO_LEFT, [g_keysMath cameraScale]*GL_ORTHO_RIGHT,
+             GL_ORTHO_BOTTOM, [g_keysMath cameraScale]*GL_ORTHO_TOP,
              GL_ORTHO_NEAR, GL_ORTHO_FAR );
 	
 	//
@@ -206,7 +206,7 @@
     //
     // Now we translate forward for the notes
     //
-    glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
+    glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
 
 }
 

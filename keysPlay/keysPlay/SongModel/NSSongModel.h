@@ -6,7 +6,8 @@
 //  Copyright 2011 IncidentTech. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AppCore.h"
+#import "KeysMath.h"
 
 @class NSScoreTracker;
 @class NSSong;
@@ -22,6 +23,8 @@
 
 @end
 
+extern KeysMath *g_keysMath;
+
 @interface NSSongModel : NSObject
 {
     
@@ -31,6 +34,7 @@
     
     NSMutableArray * m_noteFrames;
     NSMutableArray * m_noteFramesRemaining;
+    NSMutableArray * m_noteFramesPlayed;
     
     NSNoteFrame * __weak m_currentFrame;
     NSNoteFrame * __weak m_nextFrame;
@@ -95,5 +99,7 @@
 - (void)setEndBeat:(double)end;
 - (int)getCurrentLoop;
 - (int)getLoopForBeat:(double)beat;
+
+- (NSDictionary *)getMinAndMaxNotesForUpcomingFrames:(int)numFrames;
 
 @end

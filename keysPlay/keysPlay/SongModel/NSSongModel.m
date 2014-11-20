@@ -99,6 +99,7 @@
     // clear remnants from last song
     m_currentFrame = nil;
     m_noteFrames = [[NSMutableArray alloc] init];
+    m_noteFramesPlayed = [[NSMutableArray alloc] init];
     m_delegate = delegate;
     NSArray * notesArray = [m_song getSortedNotes];
     NSNoteFrame * noteFrame = nil;
@@ -391,6 +392,8 @@
     
     [m_delegate songModelExitFrame:m_currentFrame];
 
+    [m_noteFramesPlayed addObject:m_currentFrame];
+    
     m_currentFrame = nil;
 
 }
@@ -477,6 +480,79 @@
 - (void)setSongLoops:(int)loops
 {
     m_loops = loops;
+}
+
+
+- (NSDictionary *)getMinAndMaxNotesForUpcomingFrames:(int)numFrames
+{
+    KeyPosition maxNote = 0;
+    KeyPosition minNote = KEYS_KEY_COUNT;
+    
+    // Check upcoming frames
+    for(int i = 0; i < numFrames; i++){
+        
+        if([m_noteFramesRemaining count] <= i){
+            break;
+        }
+        
+        NSNoteFrame * nf = [m_noteFramesRemaining objectAtIndex:i];
+        
+        for(NSNote * note in nf.m_notes){
+            
+            //if([g_keysMath noteOutOfDisplayRange:note.m_key]){
+            if(![g_keysMath noteOutOfRange:note.m_key]){
+            
+                maxNote = MAX(maxNote,note.m_key);
+                minNote = MIN(minNote,note.m_key);
+            }
+            
+        }
+        
+    }
+   
+    // Check played frames
+    
+    for(int i = 0; i < numFrames; i++){
+        
+        if([m_noteFramesPlayed count] <= i){
+            continue;
+        }
+        
+        NSNoteFrame * nf = [m_noteFramesPlayed objectAtIndex:([m_noteFramesPlayed count]-i-1)];
+        
+        for(NSNote * note in nf.m_notes){
+            
+            if(![g_keysMath noteOutOfRange:note.m_key]){
+                
+                maxNote = MAX(maxNote,note.m_key);
+                minNote = MIN(minNote,note.m_key);
+            }
+            
+        }
+        
+    }
+    
+    
+    // Also check current frame and next frame
+    for(NSNote * note in m_currentFrame.m_notes){
+        
+        if(![g_keysMath noteOutOfRange:note.m_key]){
+            
+            maxNote = MAX(maxNote,note.m_key);
+            minNote = MIN(minNote,note.m_key);
+        }
+    }
+    
+    for(NSNote * note in m_nextFrame.m_notes){
+        
+        if(![g_keysMath noteOutOfRange:note.m_key]){
+            
+            maxNote = MAX(maxNote,note.m_key);
+            minNote = MIN(minNote,note.m_key);
+        }
+    }
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:minNote],@"Min",[NSNumber numberWithInt:maxNote],@"Max", nil];
 }
 
 @end

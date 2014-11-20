@@ -24,6 +24,8 @@
 @class EAGLView;
 @class UserSong;
 
+extern KeysMath *g_keysMath;
+
 @interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate, KeysMathDelegate>
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
@@ -33,8 +35,6 @@
 - (void) localizeViews;
 
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
-@property (strong, nonatomic) KeysMath *g_keysMath;
-
 
 @property (strong, nonatomic) IBOutlet EAGLView *glView;
 @property (strong, nonatomic) IBOutlet UIView *menuView;
