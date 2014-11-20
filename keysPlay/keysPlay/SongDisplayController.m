@@ -504,7 +504,9 @@
     
     // Offset by half a key so it starts at the beginning
     
-    m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
+    if(!isStandalone){
+        m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
+    }
     
     [m_renderer render];
 }
@@ -548,9 +550,10 @@
 
 - (void)shiftViewDelta:(double)shift
 {
-    
-    m_renderer.m_horizontalOffset = m_renderer.m_horizontalOffset+shift;
-    
+    if(!isStandalone){
+        m_renderer.m_horizontalOffset = m_renderer.m_horizontalOffset+shift;
+    }
+        
     [m_renderer render];
     
 }
@@ -566,53 +569,74 @@
     //
     
     CGSize size;
-    //if(isStandalone){
-    //    size.width = GL_NOTE_HEIGHT;
-    //    size.height = GL_SCREEN_HEIGHT;
-    //}else{
     size.width = GL_NOTE_HEIGHT / 3.0;
     size.height = GL_SCREEN_HEIGHT;
-    //}
     
     // The center will automatically be offset in the rendering
     CGPoint center;
-    /*if(isStandalone){
-        center.y = GL_SCREEN_HEIGHT / 2.0;
-        center.x = - (GL_SCREEN_SEEK_LINE_MARGIN - GL_SCREEN_SEEK_LINE_STANDALONE_MARGIN);
-    }else{
-        center.y = GL_SCREEN_HEIGHT / 2.0;
-        center.x = 0;
-    }*/
-    
-    //m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     
     m_renderer.m_seekLineModel = nil;
     m_renderer.m_seekLineStandaloneModel = nil;
     
+    GLubyte * stringColor = g_whiteColorTransparentLight; // all white
     
     // Create paths for black keys
-    for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
-    {
-        if(![g_keysMath isKeyBlackKey:i]){
-            continue;
+    if(!isStandalone){
+    
+        for ( unsigned int i = 0; i < KEYS_KEY_COUNT; i++ )
+        {
+            if(![g_keysMath isKeyBlackKey:i]){
+                continue;
+            }
+            
+            // Get the position of the black note as the center
+            center.x = [g_keysMath convertKeyToCoordSpace:i];
+            
+            center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
+            
+            size.width = [g_keysMath getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
+            size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
+            
+            KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
+            
+            [m_renderer addKeyPath:stringModel];
+            
+        }
+            
+    }else{
+        
+        int blackKeyCount = KEYS_BLACK_KEY_EASY_COUNT;
+        int whiteKeyCount = KEYS_WHITE_KEY_EASY_COUNT;
+        
+        if(difficulty == PlayViewControllerDifficultyMedium){
+            blackKeyCount = KEYS_BLACK_KEY_MED_COUNT;
+            whiteKeyCount = KEYS_WHITE_KEY_MED_COUNT;
+        }else if(difficulty == PlayViewControllerDifficultyHard){
+            blackKeyCount = KEYS_BLACK_KEY_HARD_COUNT;
+            whiteKeyCount = KEYS_WHITE_KEY_HARD_COUNT;
         }
         
-        // strings number and size are inversely proportional -- get slightly bigger
-        center.x = [g_keysMath convertKeyToCoordSpace:i];
+        int noteCount = whiteKeyCount + blackKeyCount;
         
-        center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
-        
-        size.width = [g_keysMath getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
-        //size.width = 5.0;
-        size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
-        
-        GLubyte * stringColor = g_whiteColorTransparentLight; // all white
-        
-        KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
-        
-        [m_renderer addKeyPath:stringModel];
-        
-        
+        for (unsigned int i = 0; i < noteCount; i++){
+            
+            if(![g_keysMath isKeyBlackKey:i]){
+                continue;
+            }
+            
+            // Get the position of the black note as the center
+            center.x = [g_keysMath convertKeyToCoordSpace:i];
+            center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
+            
+            size.width = [g_keysMath getBlackKeyFrameSize:whiteKeyCount inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
+            size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
+            
+            KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
+            
+            [m_renderer addKeyPath:stringModel];
+
+            
+        }
     }
     
 }

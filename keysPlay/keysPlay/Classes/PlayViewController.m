@@ -1564,8 +1564,46 @@ extern UserController * g_userController;
                 break;
         }
         
+        [self setStandaloneKeysToExactSize];
     }
     
+}
+
+- (void)setStandaloneKeysToExactSize
+{
+    
+    int whiteKeyCount = KEYS_WHITE_KEY_EASY_COUNT;
+    if(_difficulty == PlayViewControllerDifficultyMedium) whiteKeyCount = KEYS_WHITE_KEY_MED_COUNT;
+    if(_difficulty == PlayViewControllerDifficultyHard) whiteKeyCount = KEYS_WHITE_KEY_HARD_COUNT;
+    
+    float keyWidth = [g_keysMath getBlackKeyFrameSize:whiteKeyCount inSize:CGSizeMake(g_keysMath.glScreenWidth,g_keysMath.glScreenHeight)].width;
+    
+    for(UIView * keyView in selectedKeyboard.subviews){
+        if(keyView.tag == 1){
+            // Ensure centers stay the same
+            float keyCenter = keyView.frame.origin.x+keyView.frame.size.width/2.0;
+            float keyX = keyCenter-keyWidth/2.0;
+            float keyDiff = keyView.frame.origin.x-keyX;
+            
+            // Set width
+            for(NSLayoutConstraint * constraint in keyView.constraints){
+                
+                // Adjust width constraint
+                if(constraint.firstAttribute == NSLayoutAttributeWidth){
+                    constraint.constant = keyWidth;
+                }
+            }
+            
+            // Set horizontal
+            for(NSLayoutConstraint * constraint in selectedKeyboard.constraints){
+                
+                // Adjust width constraint
+                if(constraint.firstAttribute == NSLayoutAttributeLeading && constraint.firstItem == keyView){
+                    constraint.constant -= keyDiff;
+                }
+            }
+        }
+    }
 }
 
 - (void)positionKeyboard

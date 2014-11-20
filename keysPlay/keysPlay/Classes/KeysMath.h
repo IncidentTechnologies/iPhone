@@ -25,12 +25,14 @@
 #define KEYS_DISPLAYED_NOTES_COUNT 24
 #define KEYS_WHITE_KEY_DISPLAY_COUNT 14
 #define KEYS_BLACK_KEY_DISPLAY_COUNT 10
+
 #define KEYS_WHITE_KEY_HARD_COUNT 7
 #define KEYS_BLACK_KEY_HARD_COUNT 5
 #define KEYS_WHITE_KEY_MED_COUNT 5
 #define KEYS_BLACK_KEY_MED_COUNT 3
 #define KEYS_WHITE_KEY_EASY_COUNT 3
 #define KEYS_BLACK_KEY_EASY_COUNT 2
+
 #define DEFAULT_BLACK_KEY_PROPORTION 0.6
 
 enum PlayViewControllerDifficulty
@@ -51,8 +53,7 @@ extern KeysController * g_keysController;
 
 @interface KeysMath : NSObject
 {
-    float glScreenHeight;
-    float glScreenWidth;
+    
 }
 
 @property (weak, nonatomic) id<KeysMathDelegate>delegate;
@@ -64,6 +65,9 @@ extern KeysController * g_keysController;
 @property (nonatomic, assign) KeyPosition songRangeKeyMax;
 @property (nonatomic, assign) int songRangeKeySize;
 @property (nonatomic, assign) int songRangeNumberOfWhiteKeys;
+
+@property (nonatomic, readonly) float glScreenWidth;
+@property (nonatomic, readonly) float glScreenHeight;
 
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 

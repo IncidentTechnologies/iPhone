@@ -18,6 +18,8 @@
 @synthesize songRangeKeySize;
 @synthesize songRangeNumberOfWhiteKeys;
 @synthesize delegate;
+@synthesize glScreenWidth;
+@synthesize glScreenHeight;
 
 - (id)init
 {
@@ -63,7 +65,7 @@
 {
     if(!isStandalone){
         return key;
-    }else if(!isStandalone){
+    }else if(difficulty == PlayViewControllerDifficultyHard){
         return key % KEYS_OCTAVE_COUNT;
     }else if(difficulty == PlayViewControllerDifficultyMedium){
         return key % 8;
