@@ -96,10 +96,10 @@ unsigned char g_sensitivity[6];
     // Post To Feed?
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     BOOL disablePostToFeed = [settings boolForKey:@"DisablePostToFeed"];
-    BOOL completeChords = [settings boolForKey:@"DisableCompleteChords"];
+    BOOL completeChords = [settings boolForKey:@"CompleteChords"];
     
     [_feedSwitch setOn:!disablePostToFeed];
-    [_chordSwitch setOn:!completeChords];
+    [_chordSwitch setOn:completeChords];
 }
 
 - (IBAction)backButtonClicked:(id)sender
@@ -260,7 +260,7 @@ unsigned char g_sensitivity[6];
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
-    [settings setBool:!_chordSwitch.isOn forKey:@"DisableCompleteChords"];
+    [settings setBool:_chordSwitch.isOn forKey:@"CompleteChords"];
     
     [settings synchronize];
 }

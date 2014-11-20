@@ -36,7 +36,7 @@
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also NSSongModel
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.4f)
 
-#define CHORD_DELAY_TIMER 0.010f
+#define CHORD_DELAY_TIMER 0.000f
 #define CHORD_GRACE_PERIOD 0.100f
 
 #define AUDIO_CONTROLLER_ATTENUATION 0.99f
@@ -1266,7 +1266,7 @@ extern UserController * g_userController;
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     _postToFeed = ![settings boolForKey:@"DisablePostToFeed"];
-    _autocomplete = ![settings boolForKey:@"DisableCompleteChords"];
+    _autocomplete = [settings boolForKey:@"CompleteChords"];
 }
 
 - (void)handleResignActive
@@ -1571,7 +1571,6 @@ extern UserController * g_userController;
 
 - (void)setStandaloneKeysToExactSize
 {
-    
     int whiteKeyCount = KEYS_WHITE_KEY_EASY_COUNT;
     if(_difficulty == PlayViewControllerDifficultyMedium) whiteKeyCount = KEYS_WHITE_KEY_MED_COUNT;
     if(_difficulty == PlayViewControllerDifficultyHard) whiteKeyCount = KEYS_WHITE_KEY_HARD_COUNT;
@@ -3210,7 +3209,9 @@ extern UserController * g_userController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+    float margin = 2.0;
+    
+    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
     
     // Snap to key
     float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
