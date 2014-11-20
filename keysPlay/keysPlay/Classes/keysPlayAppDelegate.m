@@ -95,7 +95,7 @@ KeysMath * g_keysMath;
         
         [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         
-       //[NSTimer scheduledTimerWithTimeInterval:13.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+       [NSTimer scheduledTimerWithTimeInterval:4.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:23.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&secondRange withObjCType:@encode(KeysRange)] repeats:NO];
         

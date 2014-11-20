@@ -1616,7 +1616,7 @@ extern UserController * g_userController;
     DLog(@"Key white key is r%iw%i rel %i (song range key min is r%iw%i)",keyboardKey,keyboardWhiteKey,keyboardWhiteKey-keyboardMin,g_keysMath.songRangeKeyMin,[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]);
 
     double keyboardX = ((double)(keyboardWhiteKey - keyboardMin) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
-    double keyboardWidth = ((double)(KEYS_WHITE_KEY_DISPLAY_COUNT) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
+    double keyboardWidth = ((double)(CAMERA_SCALE*KEYS_WHITE_KEY_DISPLAY_COUNT) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
     
     [UIView animateWithDuration:0.3 animations:^(void){
        [keyboardPosition setFrame:CGRectMake(keyboardX,1,keyboardWidth,keyboardPosition.frame.size.height)];
@@ -1639,7 +1639,7 @@ extern UserController * g_userController;
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
-    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:KEYS_DISPLAYED_NOTES_COUNT andNumberOfWhiteKeys:KEYS_WHITE_KEY_DISPLAY_COUNT invertColors:FALSE];
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:CAMERA_SCALE*KEYS_DISPLAYED_NOTES_COUNT andNumberOfWhiteKeys:CAMERA_SCALE*KEYS_WHITE_KEY_DISPLAY_COUNT invertColors:FALSE];
 }
 
 - (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
@@ -3192,7 +3192,7 @@ extern UserController * g_userController;
         [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
         
         // Shift view to a new white key
-        int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+        int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-CAMERA_SCALE*KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
         
         int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
         
@@ -3209,9 +3209,9 @@ extern UserController * g_userController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    float margin = 2.0;
+    float margin = 1.0;
     
-    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-CAMERA_SCALE*KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
     
     // Snap to key
     float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;

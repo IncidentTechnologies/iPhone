@@ -135,21 +135,7 @@
 
 - (void)updatePositionAndRender:(double)position
 {
-    
     m_currentPosition = position;
-    
-    //DLog(@"Current position is %f",m_currentPosition);
-    
-    //
-    // This is for the initial offset, which is currently negative.
-    // 
-    /*if ( position < 0 && position < -m_backgroundOffset )
-    {
-        m_backgroundOffset = -position;
-    }*/
-    
-//    [self render];
-    
 }
 
 - (void)render
@@ -178,12 +164,11 @@
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, m_defaultFramebuffer);
     glViewport(0, 0, m_backingWidth, m_backingHeight);
     
-	
 	// Set up the projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrthof( GL_ORTHO_LEFT, GL_ORTHO_RIGHT,
-             GL_ORTHO_BOTTOM, GL_ORTHO_TOP,
+    glOrthof( GL_ORTHO_LEFT, CAMERA_SCALE*GL_ORTHO_RIGHT,
+             GL_ORTHO_BOTTOM, CAMERA_SCALE*GL_ORTHO_TOP,
              GL_ORTHO_NEAR, GL_ORTHO_FAR );
 	
 	//
@@ -194,7 +179,6 @@
 	
     // Set background color
     glClearColor(38/255.0, 45/255.0, 51/255.0, 1.0f);
-    //glClearColor(210/255.0, 210/255.0, 210/255.0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
 	//
@@ -210,82 +194,20 @@
 	// Blend function for textures
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	
-    //
-    // Draw the background that doesn't move
-    //
-    //[m_backgroundTexture drawAt:CGPointMake(m_backingWidth/2.0, m_backingHeight/2.0)];
     
-    //
-    // These backgrounds move
-    //
-    //    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0,
-    //                                            m_backingHeight/2.0)];
-    //    [m_backgroundTexture drawAt:CGPointMake(-fmod(m_backgroundOffset+m_currentPosition+m_viewShift, m_backingWidth) + m_backingWidth/2.0 + m_backingWidth,
-    //                                            m_backingHeight/2.0)];
+    // Translate and draw note path areas
+      glTranslatef(horizontalOffset, 0.0f, 0.0f);
     
-    //
-    // First translate for the measure lines -- view shift + position
-    //
-    
-     /*glTranslatef( 0.0f, -m_viewShift, 0.0f);*/
-	glTranslatef( horizontalOffset, m_offset - m_currentPosition, 0.0f);
-    
-	// draw measure lines
-    for ( LineModel * lineModel in m_lineModels )
-    {
-		[lineModel draw];
-	}
-    
-    glTranslatef( horizontalOffset, -(m_offset - m_currentPosition), 0.0f);
-    
-    // draw the seek line(s)
-	/*[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
-    
-    if(m_seekLineStandaloneModel != nil){
-        [m_seekLineStandaloneModel drawWithOffset:CGPointMake(m_offset, 0)];
-    }
-     */
-        
-    // The strings are fixed, so undo any translattion
-      glTranslatef(-horizontalOffset, 0.0f, 0.0f);
-    
-    //
-	// Draw key paths -- these do not move
-    //
     for ( LineModel * keyPathModel in m_keyPathModels )
     {
 		[keyPathModel draw];
 	}
     
-    
-    //    //
-    //    // Translate the view to draw the seek line
-    //    //
-      /*glTranslatef( 0.0f, -m_viewShift, 0.0f);*/
-    //
-    //	// draw the seek line
-    //	[m_seekLineModel drawWithOffset:CGPointMake(m_offset, 0)];
-    
-    //
-    // Draw loops
-    //
-    /*for (LineModel * loopModel in m_loopModels)
-    {
-        CGPoint center = [loopModel getCenter];
-        
-        [loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
-    }*/
-    
     //
     // Now we translate forward for the notes
     //
     glTranslatef( 0.0f, m_offset - m_currentPosition, 0.0f);
-    /*
-	// draw notes
-    for ( Animation * animation in m_noteAnimations )
-    {
-		[animation drawCurrentFrameAndAdvanceFrame];
-	}*/
+
 }
 
 - (void)endRender

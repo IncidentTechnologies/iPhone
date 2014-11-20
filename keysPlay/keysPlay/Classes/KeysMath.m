@@ -183,7 +183,7 @@
         
         int mappedKeyInDisplay = mappedKey % KEYS_DISPLAYED_NOTES_COUNT;
         
-        double octaveOffset = floorf(mappedKey / KEYS_DISPLAYED_NOTES_COUNT) * numWhiteKeys * widthPerWhiteKey;
+        double octaveOffset = floorf(mappedKey / (KEYS_DISPLAYED_NOTES_COUNT)) * numWhiteKeys * widthPerWhiteKey;
         
         int whiteKeys[KEYS_WHITE_KEY_DISPLAY_COUNT] = {0,2,4,5,7,9,11,12,14,16,17,19,21,23};
         int blackKeys[KEYS_BLACK_KEY_DISPLAY_COUNT] = {1,3,6,8,10,13,15,18,20,22};

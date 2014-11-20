@@ -592,10 +592,10 @@
             // Get the position of the black note as the center
             center.x = [g_keysMath convertKeyToCoordSpace:i];
             
-            center.y = (GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y) / 2.0 + GL_SEEK_LINE_Y;
+            center.y = GL_SCREEN_HEIGHT;
             
             size.width = [g_keysMath getBlackKeyFrameSize:KEYS_WHITE_KEY_DISPLAY_COUNT inSize:CGSizeMake(GL_SCREEN_WIDTH,GL_SCREEN_HEIGHT)].width;
-            size.height = GL_SCREEN_HEIGHT-GL_SEEK_LINE_Y;
+            size.height = 2*GL_SCREEN_HEIGHT;
             
             KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
             
