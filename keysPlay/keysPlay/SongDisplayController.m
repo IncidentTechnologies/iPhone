@@ -505,7 +505,11 @@
     // Offset by half a key so it starts at the beginning
     
     if(!isStandalone){
-        m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:key] + widthPerWhiteKey/2.0;
+        int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:key];
+        
+        DLog(@"SHIFT VIEW TO KEY %i",keyboardWhiteKey);
+        
+        m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:[g_keysMath getNthKeyForWhiteKey:[g_keysMath getWhiteKeyFromNthKey:key]]] + widthPerWhiteKey/2.0;
     }
     
     [m_renderer render];

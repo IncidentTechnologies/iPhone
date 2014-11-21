@@ -589,10 +589,7 @@ extern UserController * g_userController;
         }];
         
         
-        _songIsPaused = NO;
-        [g_soundMaster start];
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        [self drawPauseButton:_pauseButton];
+        [self startEventLoop];
         
     }
 }
@@ -733,10 +730,7 @@ extern UserController * g_userController;
     }else{
         
         if(!_practiceViewOpen){
-            [g_soundMaster start];
-            [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-            [self drawPauseButton:_pauseButton];
-            _songIsPaused = NO;
+            [self startEventLoop];
         }
         
         [UIView beginAnimations:nil context:NULL];
@@ -763,11 +757,7 @@ extern UserController * g_userController;
             [self drawPlayButton:_pauseButton];
             
         }else{
-            
-            [g_soundMaster start];
-            [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-            
-            [self drawPauseButton:_pauseButton];
+            [self startEventLoop];
         }
     }
 }
@@ -1296,9 +1286,7 @@ extern UserController * g_userController;
     [UIView commitAnimations];
     
     if(!_practiceViewOpen){
-        [g_soundMaster start];
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        [self drawPauseButton:_pauseButton];
+        [self startEventLoop];
     }
 }
 
@@ -1611,10 +1599,12 @@ extern UserController * g_userController;
     int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:keyboardKey];
     int keyboardMin = [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]; // Count through the white key prior
     
+    DLog(@"POSITION KEYBOARD TO %i",keyboardWhiteKey);
+    
     DLog(@"Key white key is r%iw%i rel %i (song range key min is r%iw%i)",keyboardKey,keyboardWhiteKey,keyboardWhiteKey-keyboardMin,g_keysMath.songRangeKeyMin,[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]);
 
     double keyboardX = ((double)(keyboardWhiteKey - keyboardMin) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
-    double keyboardWidth = ((double)([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
+    double keyboardWidth = ((double)(ceilf([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
     
     g_keysMath.keyboardPositionKey = keyboardKey;
     
@@ -1634,9 +1624,12 @@ extern UserController * g_userController;
     
     int keyboardKey = [[songRange objectForKey:@"Min"] intValue];
     
+    [g_keysMath resetCameraScale];
+    
     [self positionKeyboard:keyboardKey];
     [self drawKeyboardGridFromMin:keyboardKey];
     [_displayController shiftViewToKey:keyboardKey];
+    
 }
 
 - (void)refreshKeyboardToKey:(KeyPosition)key
@@ -1653,7 +1646,9 @@ extern UserController * g_userController;
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
-    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT andNumberOfWhiteKeys:[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT invertColors:FALSE];
+    // This is slightly hacked at the moment, but other methods calculate the range with different rounding and this approximates the match better than ceil or round
+    
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE];
 }
 
 - (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
@@ -1886,6 +1881,17 @@ extern UserController * g_userController;
 
 #pragma mark - Main event loop
 
+- (void)startEventLoop
+{
+    [g_soundMaster start];
+    [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
+    [self drawPauseButton:_pauseButton];
+    
+    _songIsPaused = NO;
+    
+    [self checkHorizonForCameraPosition];
+}
+
 - (void)mainEventLoop {
     
 #ifdef Debug_BUILD
@@ -1978,6 +1984,17 @@ extern UserController * g_userController;
         [self updateProgressDisplay];
     }
     
+}
+
+- (void)checkHorizonForCameraPosition
+{
+    NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForUpcomingFrames:FRAME_LOOKAHEAD];
+    KeyPosition maxNote = [[horizonMinMax objectForKey:@"Max"] intValue];
+    KeyPosition minNote = [[horizonMinMax objectForKey:@"Min"] intValue];
+    
+    if(maxNote > 0 || minNote < KEYS_KEY_COUNT){
+        [g_keysMath expandCameraToMin:minNote andMax:maxNote];
+    }
 }
 
 #pragma mark - GuitarControllerObserver
@@ -2351,9 +2368,7 @@ extern UserController * g_userController;
     [self initSongDisplayWithLoops:loops];
     
     if(!_practiceViewOpen){
-        [g_soundMaster start];
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        [self drawPauseButton:_pauseButton];
+        [self startEventLoop];
     }
     
     [self updateScoreDisplayWithAccuracy:-1];
@@ -2385,9 +2400,7 @@ extern UserController * g_userController;
     [self initSongDisplayWithLoops:0];
     
     if(!_practiceViewOpen){
-        [g_soundMaster start];
-        [self startMainEventLoop:SECONDS_PER_EVENT_LOOP];
-        [self drawPauseButton:_pauseButton];
+        [self startEventLoop];
     }
     
     [self updateScoreDisplayWithAccuracy:-1];
@@ -2763,15 +2776,8 @@ extern UserController * g_userController;
     }
     
     // Check for keyboard range change to update camera and position
-    
-    NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForUpcomingFrames:5];
-    
-    KeyPosition maxNote = [[horizonMinMax objectForKey:@"Max"] intValue];
-    KeyPosition minNote = [[horizonMinMax objectForKey:@"Min"] intValue];
-    
-    if(maxNote > 0 || minNote < KEYS_KEY_COUNT){
-        [g_keysMath expandCameraToMin:minNote andMax:maxNote];
-    }
+    [self checkHorizonForCameraPosition];
+
 }
 
 - (void)songModelExitFrame:(NSNoteFrame*)frame
@@ -3191,7 +3197,7 @@ extern UserController * g_userController;
         [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
         
         // Shift view to a new white key
-        int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+        int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
         
         int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
         
@@ -3211,7 +3217,7 @@ extern UserController * g_userController;
 {
     float margin = 1.0;
     
-    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
     
     // Snap to key
     float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;

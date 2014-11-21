@@ -11,6 +11,8 @@
 #import "NSNote.h"
 
 #define DEFAULT_CAMERA_SCALE 1.0
+#define MAX_CAMERA_SCALE 2.0
+#define FRAME_LOOKAHEAD 5
 
 #define SONG_BEATS_PER_SCREEN 1.5
 #define SONG_BEAT_OFFSET 0.5
@@ -77,15 +79,18 @@ extern KeysController * g_keysController;
 @property (nonatomic, readonly) float glScreenWidth;
 @property (nonatomic, readonly) float glScreenHeight;
 
+// Song control
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 
-- (int)getStandaloneKeyFromKey:(int)key;
+// Song math
 //- (double)convertTimeToCoordSpace:(double)delta;
 - (double)convertBeatToCoordSpace:(double)beat;
 - (double)convertCoordSpaceToBeat:(double)coord;
 - (double)convertKeyToCoordSpace:(NSInteger)key;
 - (double)calculateMaxShiftCoordSpace:(double)currentBeat lengthBeats:(double)lengthBeats;
 
+// Key mapping math
+- (int)getStandaloneKeyFromKey:(int)key;
 - (BOOL)isKeyBlackKey:(int)key;
 - (int)getMappedKeyFromKey:(int)key;
 - (int)getNthKeyForWhiteKey:(int)whiteKey;
@@ -94,12 +99,13 @@ extern KeysController * g_keysController;
 - (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 
+// Drawing
 - (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors;
 
+// Zoom and position keyboard, note range checks
 - (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame;
 - (BOOL)noteOutOfRange:(KeyPosition)key;
-- (BOOL)noteOutOfDisplayRange:(KeyPosition)key;
-
 - (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
+- (void)resetCameraScale;
 
 @end

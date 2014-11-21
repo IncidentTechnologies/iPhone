@@ -196,7 +196,7 @@
 	
     
     // Translate and draw note path areas
-      glTranslatef(horizontalOffset, 0.0f, 0.0f);
+    glTranslatef(horizontalOffset, 0.0f, 0.0f);
     
     for ( LineModel * keyPathModel in m_keyPathModels )
     {

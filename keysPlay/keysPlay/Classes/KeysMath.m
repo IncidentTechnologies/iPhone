@@ -37,13 +37,14 @@
         
         [self setSongRangeFromMin:0 andMax:KEYS_KEY_COUNT];
         
-        cameraScale = DEFAULT_CAMERA_SCALE;
+        [self resetCameraScale];
         
     }
     
     return self;
     
 }
+
 
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
 {
@@ -296,10 +297,13 @@
     //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
     // Is key before black key?
-    if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
-        keyMin -= 1;
-        numberOfKeys++;
-    }
+    /*if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
+        int adjustedKeyMin = [self getNthKeyForWhiteKey:[self getWhiteKeyFromNthKey:keyMin]];
+        numberOfKeys = numberOfKeys + (keyMin - adjustedKeyMin);
+        keyMin = adjustedKeyMin;
+    }*/
+    
+    DLog(@"Number of keys is %i, number of white keys is %i",numberOfKeys,numberOfWhiteKeys);
     
     // Always display 2 octaves, from the first note
     //int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
@@ -364,9 +368,12 @@
     
 }
 
+#pragma mark - Note range and keyboard adjustments
 
 - (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame
 {
+    // TODO: maybe this should go in song model?
+    
     KeyPosition noteMin = [g_keysController range].keyMin;
     KeyPosition noteMax = [g_keysController range].keyMax;
     
@@ -390,21 +397,6 @@
     return NO;
 }
 
-- (BOOL)noteOutOfDisplayRange:(KeyPosition)key
-{
-    /*KeyPosition keyMin = [g_keysController range].keyMin;
-    KeyPosition keyMax = [g_keysController range].keyMax;
-    KeyPosition cameraMin = keyboardPositionKey;
-    KeyPosition cameraMax = keyboardPositionKey + cameraScale*(KEYS_DISPLAYED_NOTES_COUNT); // get the white note before
-    
-    //DLog(@"Key %i, note min %i, note max %i",key,cameraMin,cameraMax);
-    
-    if((key < cameraMin || key > cameraMax) && (key >= keyMin && key <= keyMax)){
-        return YES;
-    }*/
-    return NO;
-}
-
 - (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
 {
     KeyPosition cameraMin = keyboardPositionKey;
@@ -414,7 +406,7 @@
         
         double diff = [self getWhiteKeyFromNthKey:keyMax]-[self getWhiteKeyFromNthKey:cameraMax]+[self getWhiteKeyFromNthKey:cameraMin]-[self getWhiteKeyFromNthKey:keyMin];
         
-        double newCameraScale = MAX(DEFAULT_CAMERA_SCALE,(diff/(double)KEYS_WHITE_KEY_DISPLAY_COUNT)+1);
+        double newCameraScale = MIN(MAX_CAMERA_SCALE,MAX(DEFAULT_CAMERA_SCALE,(diff/(double)KEYS_WHITE_KEY_DISPLAY_COUNT)+1));
         
         if(newCameraScale != cameraScale){
             
@@ -422,17 +414,57 @@
             
             DLog(@"New camera scale is %f vs %f",newCameraScale,cameraScale);
             
-            cameraScale = newCameraScale;
-            
             DLog(@"Updating camera scale to %f = %i-%i/14",cameraScale,[self getWhiteKeyFromNthKey:keyMax],[self getWhiteKeyFromNthKey:cameraMax]);
             
         }
         
-        // TODO: animate?
-        [delegate refreshKeyboardToKey:keyMin];
-        
-        
+        [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
     }
+}
+
+- (void)animateRefreshKeyboardToKey:(int)newKey updateCameraScale:(double)newCameraScale
+{
+    //cameraScale = newCameraScale;
+    
+    //[delegate refreshKeyboardToKey:newKey];
+    
+    int diff = newKey - keyboardPositionKey;
+    
+    for(int i = 0; i < abs(diff); i++){
+        [NSTimer scheduledTimerWithTimeInterval:(i*0.01) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
+    }
+    
+}
+
+- (void)refreshKeyboardAndCamera:(NSTimer *)timer
+{
+    if(timer == nil || [timer userInfo] == nil){
+        return;
+    }
+    
+    NSDictionary * userInfo = (NSDictionary *)[timer userInfo];
+    
+    DLog(@"Userinfo is %@",userInfo);
+    
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        DLog(@"Refresh keyboard to key");
+        
+        int keyIncrement = [[userInfo objectForKey:@"KeyboardIncrement"] intValue];
+        double cameraScaleIncrement = [[userInfo objectForKey:@"CameraIncrement"] doubleValue];
+        
+        cameraScale += cameraScaleIncrement;
+        
+        [delegate refreshKeyboardToKey:(keyboardPositionKey+keyIncrement)];
+    });
+}
+
+
+- (void)resetCameraScale
+{
+    cameraScale = DEFAULT_CAMERA_SCALE;
 }
 
 @end
