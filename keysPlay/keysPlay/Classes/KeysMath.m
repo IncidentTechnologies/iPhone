@@ -422,6 +422,14 @@
             
         }
         
+        // Ensure range doesn't move off screen or shrink too much
+        DLog(@"SRKMax %i vs KeyMax %i - KeyMin %i = %i",songRangeKeyMax,keyMax,keyMin,keyMax-keyMin);
+        if(keyMin+KEYS_DISPLAYED_NOTES_COUNT >= songRangeKeyMax){
+            keyMax = songRangeKeyMax;
+            keyMin = keyMax-KEYS_DISPLAYED_NOTES_COUNT+1;
+            newCameraScale = DEFAULT_CAMERA_SCALE;
+        }
+        
         [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
     }
 }
