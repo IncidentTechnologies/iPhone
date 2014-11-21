@@ -292,7 +292,7 @@
 
 #pragma mark - Drawing
 
-- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive
 {
     //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
@@ -320,9 +320,11 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGLayerRef whiteKeyLayer = CGLayerCreateWithContext(context, size, NULL);
+    CGLayerRef activeKeyLayer = CGLayerCreateWithContext(context, size, NULL);
     CGLayerRef blackKeyLayer = CGLayerCreateWithContext(context, size, NULL);
     
     CGContextRef whiteKeyContext = CGLayerGetContext(whiteKeyLayer);
+    CGContextRef activeKeyContext = CGLayerGetContext(activeKeyLayer);
     CGContextRef blackKeyContext = CGLayerGetContext(blackKeyLayer);
     
     if(invertColors){
@@ -333,7 +335,10 @@
         CGContextSetFillColorWithColor(blackKeyContext, [UIColor colorWithRed:70/255.0 green:98/255.0 blue:158/255.0 alpha:1.0].CGColor);
     }
     
+    CGContextSetFillColorWithColor(activeKeyContext, [UIColor colorWithRed:1/255.0 green:120/255.0 blue:165/255.0 alpha:1.0].CGColor);
+    
     CGSize whiteKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
+    CGSize activeKeyFrameSize = [self getWhiteKeyFrameSize:numberOfWhiteKeys inSize:size];
     CGSize blackKeyFrameSize = [self getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
     
     // W tracks the number of white notes being draw
@@ -347,7 +352,15 @@
             // White key, draw and increment white keys
             CGRect keyFrame = CGRectMake(w*whiteKeyFrameSize.width+w*keyGap,0,whiteKeyFrameSize.width,whiteKeyFrameSize.height);
             
-            CGContextFillRect(whiteKeyContext, keyFrame);
+            if(colorActive && key >= [g_keysController range].keyMin && key <= [g_keysController range].keyMax){
+                
+                CGContextFillRect(activeKeyContext, keyFrame);
+                
+            }else{
+                
+                CGContextFillRect(whiteKeyContext, keyFrame);
+                    
+            }
             
             w++;
             
@@ -361,12 +374,14 @@
     }
     
     CGContextDrawLayerAtPoint(context, CGPointZero, whiteKeyLayer);
+    CGContextDrawLayerAtPoint(context, CGPointZero, activeKeyLayer);
     CGContextDrawLayerAtPoint(context, CGPointZero, blackKeyLayer);
     
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     frameView.image = newImage;
     
     CGLayerRelease(whiteKeyLayer);
+    CGLayerRelease(activeKeyLayer);
     CGLayerRelease(blackKeyLayer);
     UIGraphicsEndImageContext();
     

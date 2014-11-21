@@ -86,8 +86,8 @@ KeysMath * g_keysMath;
 #if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
         
         KeysRange newRange;
-        newRange.keyMin = 20;
-        newRange.keyMax = 100;
+        newRange.keyMin = 24;
+        newRange.keyMax = 95;
         
         KeysRange secondRange;
         secondRange.keyMin = 50;
