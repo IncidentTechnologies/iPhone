@@ -342,7 +342,8 @@
     CGSize blackKeyFrameSize = [self getBlackKeyFrameSize:numberOfWhiteKeys inSize:size];
     
     // W tracks the number of white notes being draw
-    for (int k = 0, w = 0; k < numberOfKeys; k++)
+    // Draw an additional one (usually offscreen) to avoid rounding errors
+    for (int k = 0, w = 0; k <= numberOfKeys; k++)
     {
         // Determine which note is being drawn
         int key = keyMin+k;

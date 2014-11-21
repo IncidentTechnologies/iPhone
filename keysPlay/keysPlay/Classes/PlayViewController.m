@@ -1997,6 +1997,13 @@ extern UserController * g_userController;
     minNote = MAX(minNote-margin,0);
     maxNote = MIN(maxNote+margin,KEYS_KEY_COUNT-1);
     
+    // If minNote+displayCount is out of range
+    // use rangeMax-displayCount as min (because all the notes to highlight
+    // are within range)
+    if(minNote+KEYS_DISPLAYED_NOTES_COUNT > [g_keysController range].keyMax){
+        minNote = [g_keysController range].keyMax-KEYS_DISPLAYED_NOTES_COUNT+1;
+    }
+    
     if(maxNote > 0 || minNote < KEYS_KEY_COUNT){
         [g_keysMath expandCameraToMin:minNote andMax:maxNote];
     }
