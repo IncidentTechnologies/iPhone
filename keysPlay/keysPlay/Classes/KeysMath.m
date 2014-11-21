@@ -297,11 +297,15 @@
     //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
     // Is key before black key?
-    /*if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
-        int adjustedKeyMin = [self getNthKeyForWhiteKey:[self getWhiteKeyFromNthKey:keyMin]];
-        numberOfKeys = numberOfKeys + (keyMin - adjustedKeyMin);
-        keyMin = adjustedKeyMin;
-    }*/
+    if([self isKeyBlackKey:(keyMin+KEYS_OCTAVE_COUNT-1)]){
+        keyMin = keyMin-1;
+        numberOfKeys++;
+    }
+    
+    // Is next key black key?
+    if([self isKeyBlackKey:keyMin+numberOfKeys]){
+        numberOfKeys++;
+    }
     
     DLog(@"Number of keys is %i, number of white keys is %i",numberOfKeys,numberOfWhiteKeys);
     
@@ -444,13 +448,7 @@
     
     NSDictionary * userInfo = (NSDictionary *)[timer userInfo];
     
-    DLog(@"Userinfo is %@",userInfo);
-    
-    
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        DLog(@"Refresh keyboard to key");
         
         int keyIncrement = [[userInfo objectForKey:@"KeyboardIncrement"] intValue];
         double cameraScaleIncrement = [[userInfo objectForKey:@"CameraIncrement"] doubleValue];
