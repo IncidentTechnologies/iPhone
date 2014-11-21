@@ -27,7 +27,7 @@
     {
         m_overlayModel = overlay;
         
-        m_highlightModel = [[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(25, 25) andColor:g_standaloneClearColor andShape:@"Round"];
+        m_highlightModel = [[HighlightModel alloc] initWithCenter:m_center andSize:CGSizeMake(20, 22) andColor:g_standaloneClearColor andShape:@"Rounded"];
         
         m_hit = -1;
         

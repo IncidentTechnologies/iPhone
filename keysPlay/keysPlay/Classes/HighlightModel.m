@@ -28,8 +28,9 @@
     
     CGContextSetFillColorWithColor(context, [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5].CGColor);
     
-    if([shape isEqualToString:@"Round"]){
-        CGContextFillEllipseInRect(context, CGRectMake(0, 0, size.width, size.height));
+    if([shape isEqualToString:@"Rounded"]){
+        UIBezierPath * bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0,0,size.width,size.height) cornerRadius:5.0];
+        [bezierPath fill];
     }else{
         CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
     }
