@@ -75,6 +75,7 @@ extern KeysMath *g_keysMath;
 
 //- (id)initWithSongXmp:(NSString*)xmpBlob;
 - (id)initWithSong:(NSSong*)song;
+- (void)clearData;
 
 - (void)startWithDelegate:(id)delegate;
 //- (void)startWithDelegate:(id)delegate andBeatOffset:(double)beats fastForward:(BOOL)ffwd isStandalone:(BOOL)standalone;

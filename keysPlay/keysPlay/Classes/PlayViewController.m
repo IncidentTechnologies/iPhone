@@ -462,7 +462,6 @@ extern UserController * g_userController;
     [_metronomeTimer invalidate];
     _metronomeTimer = nil;
     
-    
 }
 
 #pragma mark - Button click handlers
@@ -821,6 +820,8 @@ extern UserController * g_userController;
     [mixpanel.people increment:@"PlayTime" by:[NSNumber numberWithInteger:delta]];
     
     [g_soundMaster start];
+    
+    [_songModel clearData];
     
     [self startWithSongXmlDom];
     
@@ -1506,7 +1507,6 @@ extern UserController * g_userController;
 
 - (void)hideAllKeyboards
 {
-    
     [keyboard setHidden:YES];
     [keyboardGrid setHidden:YES];
     [keyboardRange setHidden:YES];
@@ -1526,7 +1526,7 @@ extern UserController * g_userController;
         [keyboardGrid setHidden:NO];
         [keyboardRange setHidden:NO];
         
-        [self refreshKeyboardToKeyMin];
+        //[self refreshKeyboardToKeyMin];
         
         selectedKeyboard = keyboardGrid;
         
@@ -1620,15 +1620,19 @@ extern UserController * g_userController;
 
 - (void)refreshKeyboardToKeyMin
 {
-    NSDictionary * songRange = [_displayController getNoteRangeForSong];
+    //NSDictionary * songRange = [_displayController getNoteRangeForSong];
     
-    int keyboardKey = [[songRange objectForKey:@"Min"] intValue];
+    //int keyboardKey = [[songRangse objectForKey:@"Min"] intValue];
     
-    [g_keysMath resetCameraScale];
+    if(!isStandalone){
+        [g_keysMath resetCameraScale];
+        
+        [self checkHorizonForCameraPosition];
+    }
     
-    [self positionKeyboard:keyboardKey];
-    [self drawKeyboardGridFromMin:keyboardKey];
-    [_displayController shiftViewToKey:keyboardKey];
+    //[self positionKeyboard:keyboardKey];
+    //[self drawKeyboardGridFromMin:keyboardKey];
+    //[_displayController shiftViewToKey:keyboardKey];
     
 }
 
@@ -1889,7 +1893,6 @@ extern UserController * g_userController;
     
     _songIsPaused = NO;
     
-    [self checkHorizonForCameraPosition];
 }
 
 - (void)mainEventLoop {
@@ -2788,7 +2791,9 @@ extern UserController * g_userController;
     }
     
     // Check for keyboard range change to update camera and position
-    [self checkHorizonForCameraPosition];
+    if(!isStandalone){
+        [self checkHorizonForCameraPosition];
+    }
 
 }
 

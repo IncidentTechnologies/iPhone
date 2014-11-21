@@ -452,11 +452,9 @@
 
 - (void)animateRefreshKeyboardToKey:(int)newKey updateCameraScale:(double)newCameraScale
 {
-    //cameraScale = newCameraScale;
-    
-    //[delegate refreshKeyboardToKey:newKey];
-    
     int diff = newKey - keyboardPositionKey;
+    
+    DLog(@"Diff is %i = %i - %i",diff,newKey,keyboardPositionKey);
     
     for(int i = 0; i < abs(diff); i++){
         [NSTimer scheduledTimerWithTimeInterval:(i*0.01) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];

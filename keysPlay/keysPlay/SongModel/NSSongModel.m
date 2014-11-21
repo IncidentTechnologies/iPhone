@@ -81,6 +81,18 @@
     m_frameTimer = nil;
 }
 
+- (void)clearData
+{
+    [m_frameTimer invalidate];
+    m_frameTimer = nil;
+    
+    [m_noteFramesPlayed removeAllObjects];
+    m_noteFramesPlayed = nil;
+    
+    [m_noteFramesRemaining removeAllObjects];
+    m_noteFramesRemaining = nil;
+}
+
 - (void)startWithDelegate:(id)delegate
 {
     [self startWithDelegate:delegate andBeatOffset:0 fastForward:NO isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
