@@ -1677,8 +1677,8 @@ extern UserController * g_userController;
         [keyOverlay setBackgroundColor:[UIColor blackColor]];
     }
     
-    keyView.layer.cornerRadius = drawKeyWidth/2.0;
-    keyOverlay.layer.cornerRadius = overlayWidth/2.0;
+    keyView.layer.cornerRadius = 2.0f;
+    keyOverlay.layer.cornerRadius = 2.0f;
     
     [keyView setAlpha:0.9];
     [keyOverlay setAlpha:0.4];
@@ -1991,6 +1991,11 @@ extern UserController * g_userController;
     NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForUpcomingFrames:FRAME_LOOKAHEAD];
     KeyPosition maxNote = [[horizonMinMax objectForKey:@"Max"] intValue];
     KeyPosition minNote = [[horizonMinMax objectForKey:@"Min"] intValue];
+    
+    int margin = 0; // Note padding
+    
+    minNote = MAX(minNote-margin,0);
+    maxNote = MIN(maxNote+margin,KEYS_KEY_COUNT-1);
     
     if(maxNote > 0 || minNote < KEYS_KEY_COUNT){
         [g_keysMath expandCameraToMin:minNote andMax:maxNote];

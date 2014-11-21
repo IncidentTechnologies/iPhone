@@ -502,8 +502,9 @@
             //if([g_keysMath noteOutOfDisplayRange:note.m_key]){
             if(![g_keysMath noteOutOfRange:note.m_key]){
             
-                maxNote = MAX(maxNote,note.m_key);
-                minNote = MIN(minNote,note.m_key);
+                // Offset by i to make difference less significant if further away
+                maxNote = MAX(maxNote,note.m_key-i);
+                minNote = MIN(minNote,note.m_key+i);
             }
             
         }
@@ -524,14 +525,13 @@
             
             if(![g_keysMath noteOutOfRange:note.m_key]){
                 
-                maxNote = MAX(maxNote,note.m_key);
-                minNote = MIN(minNote,note.m_key);
+                maxNote = MAX(maxNote,note.m_key-i);
+                minNote = MIN(minNote,note.m_key+i);
             }
             
         }
         
     }
-    
     
     // Also check current frame and next frame
     for(NSNote * note in m_currentFrame.m_notes){
