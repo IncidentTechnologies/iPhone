@@ -1992,7 +1992,7 @@ extern UserController * g_userController;
 
 - (void)checkHorizonForCameraPosition
 {
-    NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForUpcomingFrames:FRAME_LOOKAHEAD];
+    NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForSurroundingFrames];
     KeyPosition maxNote = [[horizonMinMax objectForKey:@"Max"] intValue];
     KeyPosition minNote = [[horizonMinMax objectForKey:@"Min"] intValue];
     

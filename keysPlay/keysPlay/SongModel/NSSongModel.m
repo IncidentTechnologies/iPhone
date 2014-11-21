@@ -495,13 +495,13 @@
 }
 
 
-- (NSDictionary *)getMinAndMaxNotesForUpcomingFrames:(int)numFrames
+- (NSDictionary *)getMinAndMaxNotesForSurroundingFrames
 {
     KeyPosition maxNote = 0;
     KeyPosition minNote = KEYS_KEY_COUNT;
     
     // Check upcoming frames
-    for(int i = 0; i < numFrames; i++){
+    for(int i = 0; i < FRAME_LOOKAHEAD; i++){
         
         if([m_noteFramesRemaining count] <= i){
             break;
@@ -525,7 +525,7 @@
    
     // Check played frames
     
-    for(int i = 0; i < numFrames; i++){
+    for(int i = 0; i < FRAME_LOOKBACK; i++){
         
         if([m_noteFramesPlayed count] <= i){
             continue;

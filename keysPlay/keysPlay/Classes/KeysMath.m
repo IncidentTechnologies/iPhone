@@ -446,7 +446,17 @@
             newCameraScale = DEFAULT_CAMERA_SCALE;
         }
         
-        [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
+        // Start further middle if upper range is empty
+        if(keyMax < keyMin+KEYS_DISPLAYED_NOTES_COUNT*0.75 && keyMin-KEYS_DISPLAYED_NOTES_COUNT*0.25 > 0){
+            keyMin -= KEYS_DISPLAYED_NOTES_COUNT*0.25;
+        }
+        
+        // Don't make trivial changes
+        if(keyMin < keyboardPositionKey || keyMax > keyboardPositionKey+cameraScale*KEYS_DISPLAYED_NOTES_COUNT || newCameraScale < cameraScale*0.7){
+        
+            [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
+            
+        }
     }
 }
 
@@ -457,7 +467,14 @@
     DLog(@"Diff is %i = %i - %i",diff,newKey,keyboardPositionKey);
     
     for(int i = 0; i < abs(diff); i++){
-        [NSTimer scheduledTimerWithTimeInterval:(i*0.01) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
+        
+        float speed = 0.02;
+        
+        if(i > 0.25*fabs(diff) && i < 0.75*fabs(diff)){
+            //speed = 0.01;
+        }
+        
+        [NSTimer scheduledTimerWithTimeInterval:(i*speed) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
     }
     
 }

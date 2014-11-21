@@ -101,6 +101,6 @@ extern KeysMath *g_keysMath;
 - (int)getCurrentLoop;
 - (int)getLoopForBeat:(double)beat;
 
-- (NSDictionary *)getMinAndMaxNotesForUpcomingFrames:(int)numFrames;
+- (NSDictionary *)getMinAndMaxNotesForSurroundingFrames;
 
 @end
