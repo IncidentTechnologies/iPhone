@@ -1526,6 +1526,7 @@ extern UserController * g_userController;
         [keyboardGrid setHidden:NO];
         [keyboardRange setHidden:NO];
         
+        // Refresh keyboard is done when the data is set for song
         //[self refreshKeyboardToKeyMin];
         
         selectedKeyboard = keyboardGrid;
