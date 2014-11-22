@@ -453,6 +453,8 @@
         
         // Don't make trivial changes
         if(keyMin < keyboardPositionKey || keyMax > keyboardPositionKey+cameraScale*KEYS_DISPLAYED_NOTES_COUNT || newCameraScale < cameraScale*0.7){
+            
+            DLog(@"After modifications use keyMin %i",keyMin);
         
             [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
             
@@ -468,13 +470,7 @@
     
     for(int i = 0; i < abs(diff); i++){
         
-        float speed = 0.02;
-        
-        if(i > 0.25*fabs(diff) && i < 0.75*fabs(diff)){
-            //speed = 0.01;
-        }
-        
-        [NSTimer scheduledTimerWithTimeInterval:(i*speed) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(i*0.02) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
     }
     
 }

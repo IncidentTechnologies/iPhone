@@ -515,8 +515,8 @@
             if(![g_keysMath noteOutOfRange:note.m_key]){
             
                 // Offset by i to make difference less significant if further away
-                maxNote = MAX(maxNote,note.m_key-i);
-                minNote = MIN(minNote,note.m_key+i);
+                maxNote = MAX(maxNote,note.m_key-fabs(note.m_key-maxNote)*0.25*i);
+                minNote = MIN(minNote,note.m_key+fabs(minNote-note.m_key)*0.25*i);
             }
             
         }
@@ -537,8 +537,8 @@
             
             if(![g_keysMath noteOutOfRange:note.m_key]){
                 
-                maxNote = MAX(maxNote,note.m_key-i);
-                minNote = MIN(minNote,note.m_key+i);
+                maxNote = MAX(maxNote,note.m_key-fabs(note.m_key-maxNote)*0.25*i);
+                minNote = MIN(minNote,note.m_key+fabs(minNote-note.m_key)*0.25*i);
             }
             
         }

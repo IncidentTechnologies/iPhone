@@ -3195,6 +3195,8 @@ extern UserController * g_userController;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
+    /*
     UITouch * touch = [[touches allObjects] objectAtIndex:0];
     CGPoint currentPoint = [touch locationInView:self.view];
     CGPoint previousPoint = [touch previousLocationInView:self.view];
@@ -3229,10 +3231,13 @@ extern UserController * g_userController;
         
         _refreshDisplay = YES;
     }
+     
+     */
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /*
     float margin = 1.0;
     
     int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
@@ -3243,7 +3248,7 @@ extern UserController * g_userController;
     DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]));
     
     [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
-    
+    */
     
     if(!isStandalone){
         
