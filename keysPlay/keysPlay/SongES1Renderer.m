@@ -214,11 +214,6 @@
         [loopModel draw];
     }
     
-    
-    //CGPoint center = [loopModel getCenter];
-    
-    //[loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
-
 }
 
 - (void)endRender

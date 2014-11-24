@@ -1522,6 +1522,7 @@ extern UserController * g_userController;
     
     if(!isStandalone){
         
+        DLog(@"Show standard keyboard");
         [keyboardGrid setAlpha:keyboardOnAlpha];
         [keyboardGrid setHidden:NO];
         [keyboardRange setHidden:NO];
@@ -1535,18 +1536,21 @@ extern UserController * g_userController;
         
         switch (_difficulty) {
             case PlayViewControllerDifficultyEasy:
+                DLog(@"Show easy keyboard");
                 [keyboardStandaloneEasy setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneEasy setHidden:NO];
                 selectedKeyboard = keyboardStandaloneEasy;
                 break;
             
             case PlayViewControllerDifficultyMedium:
+                DLog(@"Show medium keyboard");
                 [keyboardStandaloneMedium setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneMedium setHidden:NO];
                 selectedKeyboard = keyboardStandaloneMedium;
                 break;
                 
             case PlayViewControllerDifficultyHard:
+                DLog(@"Show hard keyboard");
                 [keyboardStandaloneHard setAlpha:keyboardOnAlpha];
                 [keyboardStandaloneHard setHidden:NO];
                 selectedKeyboard = keyboardStandaloneHard;
@@ -1619,7 +1623,7 @@ extern UserController * g_userController;
     }];
 }
 
-- (void)refreshKeyboardToKeyMin
+- (void)refreshKeyboardToKeyMin:(BOOL)forceRefresh
 {
     //NSDictionary * songRange = [_displayController getNoteRangeForSong];
     
@@ -1628,7 +1632,7 @@ extern UserController * g_userController;
     if(!isStandalone){
         [g_keysMath resetCameraScale];
         
-        [self checkHorizonForCameraPosition];
+        [self checkHorizonForCameraPosition:forceRefresh];
     }
     
     //[self positionKeyboard:keyboardKey];
@@ -1988,7 +1992,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)checkHorizonForCameraPosition
+- (void)checkHorizonForCameraPosition:(BOOL)forceRefresh
 {
     NSDictionary * horizonMinMax = [_songModel getMinAndMaxNotesForSurroundingFrames];
     KeyPosition maxNote = [[horizonMinMax objectForKey:@"Max"] intValue];
@@ -2007,7 +2011,7 @@ extern UserController * g_userController;
     }
     
     if(maxNote > 0 || minNote < KEYS_KEY_COUNT){
-        [g_keysMath expandCameraToMin:minNote andMax:maxNote];
+        [g_keysMath expandCameraToMin:minNote andMax:maxNote forceRefresh:forceRefresh];
     }
 }
 
@@ -2185,7 +2189,7 @@ extern UserController * g_userController;
     
     [g_keysMath setSongRangeFromMin:MIN(songMinKey,range.keyMin) andMax:MAX(songMaxKey,range.keyMax)];
     
-    [self refreshKeyboardToKeyMin];
+    [self refreshKeyboardToKeyMin:NO];
     
     _refreshDisplay = YES;
 }
@@ -2329,7 +2333,7 @@ extern UserController * g_userController;
     _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty andLoops:loops];
     
     // MIN and MAX have been set, refresh
-    [self refreshKeyboardToKeyMin];
+    [self refreshKeyboardToKeyMin:YES];
     
     // An initial display render
     [_displayController renderImage];
@@ -2792,9 +2796,8 @@ extern UserController * g_userController;
     // Check for keyboard range change to update camera and position
     DLog(@"Range diff is %i vs %i",[g_keysController range].keyMax-[g_keysController range].keyMin,KEYS_DISPLAYED_NOTES_COUNT);
     
-    
     if(!isStandalone && ([g_keysController range].keyMax-[g_keysController range].keyMin) > KEYS_DISPLAYED_NOTES_COUNT){
-        [self checkHorizonForCameraPosition];
+        [self checkHorizonForCameraPosition:NO];
     }
 
 }

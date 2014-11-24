@@ -106,7 +106,7 @@ extern KeysController * g_keysController;
 // Zoom and position keyboard, note range checks
 - (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame;
 - (BOOL)noteOutOfRange:(KeyPosition)key;
-- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
+- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax forceRefresh:(BOOL)forceRefresh;
 - (void)resetCameraScale;
 
 @end

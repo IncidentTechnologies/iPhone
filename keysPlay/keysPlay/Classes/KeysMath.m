@@ -309,6 +309,8 @@
     
     DLog(@"Number of keys is %i, number of white keys is %i",numberOfKeys,numberOfWhiteKeys);
     
+    DLog(@"Frame view is %f %f %f %f",frameView.frame.origin.x,frameView.frame.origin.y,frameView.frame.size.width,frameView.frame.size.height);
+    
     // Always display 2 octaves, from the first note
     //int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
     
@@ -417,7 +419,7 @@
     return NO;
 }
 
-- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
+- (void)expandCameraToMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax forceRefresh:(BOOL)forceRefresh
 {
     KeyPosition cameraMin = keyboardPositionKey;
     KeyPosition cameraMax = [self getNthKeyForWhiteKey:[self getWhiteKeyFromNthKey:keyboardPositionKey]+cameraScale*(KEYS_WHITE_KEY_DISPLAY_COUNT)];
@@ -452,13 +454,21 @@
         }
         
         // Don't make trivial changes
-        if(keyMin < keyboardPositionKey || keyMax > keyboardPositionKey+cameraScale*KEYS_DISPLAYED_NOTES_COUNT || newCameraScale < cameraScale*0.7){
+        if(forceRefresh || keyMin < keyboardPositionKey || keyMax > keyboardPositionKey+cameraScale*KEYS_DISPLAYED_NOTES_COUNT || newCameraScale < cameraScale*0.7){
             
             DLog(@"After modifications use keyMin %i",keyMin);
         
             [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
             
+        }else{
+            
+            DLog(@"BAIL CONDITION 1");
+            
         }
+    }else{
+        
+        DLog(@"BAIL CONDITION 2");
+        
     }
 }
 
@@ -471,6 +481,13 @@
     for(int i = 0; i < abs(diff); i++){
         
         [NSTimer scheduledTimerWithTimeInterval:(i*0.02) target:self selector:@selector(refreshKeyboardAndCamera:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(diff/abs(diff))],@"KeyboardIncrement",[NSNumber numberWithDouble:(newCameraScale-cameraScale)/fabs(diff)],@"CameraIncrement", nil] repeats:NO];
+    }
+    
+    if(diff == 0){
+        
+        DLog(@"BAIL CONDITION 3");
+        
+        [delegate refreshKeyboardToKey:keyboardPositionKey];
     }
     
 }
