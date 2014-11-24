@@ -194,7 +194,6 @@
 	// Blend function for textures
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	
-    
     // Translate and draw note path areas
     glTranslatef(horizontalOffset, 0.0f, 0.0f);
     
@@ -207,6 +206,18 @@
     // Now we translate forward for the notes
     //
     glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
+    
+    // And draw the moving loop lines
+    
+    for (LineModel * loopModel in m_loopModels )
+    {
+        [loopModel draw];
+    }
+    
+    
+    //CGPoint center = [loopModel getCenter];
+    
+    //[loopModel drawAt:CGPointMake(center.x +m_offset - m_currentPosition,center.y)];
 
 }
 

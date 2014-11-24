@@ -78,7 +78,7 @@
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
-        //[self createLoopModels];
+        [self createLoopModels];
         
         [self setNoteRangeForSong];
         
@@ -647,7 +647,6 @@
 
 - (void)createLoopModels
 {
-    /*
     CGSize size;
     CGPoint center;
     
@@ -663,18 +662,17 @@
         NSNoteFrame * noteFrame = [m_allFrames objectAtIndex:frameindex];
         NSNote * note = [noteFrame.m_notes firstObject];
         
-        center.x = [self convertBeatToCoordSpace:note.m_absoluteBeatStart isStandalone:isStandalone]; // get X from note positions
-        center.y = GL_SCREEN_HEIGHT / 2;
+        center.x = GL_SCREEN_WIDTH / 2.0;
+        center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]; // get Y from note positions
         
-        size.width = 5.0;
-        size.height = GL_SCREEN_HEIGHT;
+        size.width = GL_SCREEN_WIDTH;
+        size.height = 5.0;
         
         LineModel * loopModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColor];
         
         [m_renderer addLoop:loopModel];
         
     }
-    */
 }
 
 - (void)createNumberModels
