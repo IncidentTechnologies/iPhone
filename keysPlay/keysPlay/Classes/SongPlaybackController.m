@@ -60,16 +60,6 @@
     
     [m_keysController removeObserver:self];
     
-    
-    /*if([g_soundMaster respondsToSelector:@selector(disconnectAndRelease)]){
-     [g_soundMaster disconnectAndRelease];
-     [g_soundMaster release];
-     g_soundMaster = nil;
-     }*/
-    
-    //[g_soundMaster releaseAfterUse];
-    
-    
     [m_eventLoopTimer invalidate];
     m_eventLoopTimer = nil;
     
@@ -100,26 +90,7 @@
     [self startMainEventLoop];
     
 }
-/*
- - (void)startWithUserSong:(UserSong*)userSong
- {
- // TODO This function doesn't work right now because the m_xmlDom doesn't have the XMP in it
- if ( userSong == nil )
- return;
- 
- [g_soundMaster reset];
- 
- // release the old song
- 
- NSSong * song = [[NSSong alloc] initWithXmlDom:userSong.m_xmlDom];
- 
- m_songModel = [[NSSongModel alloc] initWithSong:song];
- 
- [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
- 
- [self startMainEventLoop];
- }
- */
+
 - (void)playSong {
     
     DLog(@"Song Playback Controller: play song");
@@ -240,9 +211,9 @@
             
         }
         else {
-            DLog(@"pluck string %i",note.m_key-1);
+            DLog(@"play key %i",note.m_key);
             
-            [g_soundMaster playKey:note.m_key-1];
+            [g_soundMaster playKey:note.m_key];
             
             //[m_keysController turnOnLedAtPosition:KeysPositionMake(note.m_fret, note.m_string) withColor:KeysLedColorMake(KeysMaxLedIntensity, KeysMaxLedIntensity, KeysMaxLedIntensity)];
             

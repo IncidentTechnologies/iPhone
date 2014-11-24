@@ -83,7 +83,7 @@ KeysMath * g_keysMath;
         // Add global keys math object
         g_keysMath = [[KeysMath alloc] init];
         
-#if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
+//#if TARGET_IPHONE_SIMULATOR// | Debug_BUILD
         
         KeysRange newRange;
         newRange.keyMin = 24;
@@ -93,14 +93,14 @@ KeysMath * g_keysMath;
         secondRange.keyMin = 50;
         secondRange.keyMax = 55;
         
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         
-        [NSTimer scheduledTimerWithTimeInterval:4.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:4.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:23.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&secondRange withObjCType:@encode(KeysRange)] repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:7.0 target:g_keysController selector:@selector(debugSpoofDisconnected) userInfo:nil repeats:NO];
-#endif
+//#endif
         
 #if Debug_BUILD
         DLog(@"This is a debug build");

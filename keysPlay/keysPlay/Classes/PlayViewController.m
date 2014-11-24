@@ -16,7 +16,7 @@
 #import <gTarAppCore/UserResponse.h>
 #import "UserSongSession.h"
 #import "UserSong.h"
-#import <gTarAppCore/SongRecorder.h>
+#import "KeysSongRecorder.h"
 #import "NSSongCreator.h"
 #import "NSSongModel.h"
 #import "NSNote.h"
@@ -67,7 +67,7 @@ extern UserController * g_userController;
     
     NSSongModel *_songModel;
     
-    SongRecorder *_songRecorder;
+    KeysSongRecorder *_songRecorder;
     
     NSNoteFrame *_currentFrame;
     NSNoteFrame *_nextFrame;
@@ -1851,7 +1851,7 @@ extern UserController * g_userController;
     _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
     
     DLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
-    // _songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
+    //_songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
     
     // Create the xmp
     session.m_xmpBlob = [NSSongCreator xmpBlobWithSong:_songRecorder.m_song];
@@ -1958,8 +1958,6 @@ extern UserController * g_userController;
                 
             }
         }
-        
-        
     }
     
     // Advance song model and recorder
@@ -2080,7 +2078,7 @@ extern UserController * g_userController;
         // Standalone Song Recorder
         //
         
-        //[_songRecorder playString:str andFret:fret];
+        [_songRecorder pressKey:key];
         
     }else{
         
@@ -2293,7 +2291,7 @@ extern UserController * g_userController;
     // Init recorder
     //
     
-    _songRecorder = [[SongRecorder alloc] initWithTempo:_song.m_tempo];
+    _songRecorder = [[KeysSongRecorder alloc] initWithTempo:_song.m_tempo];
     
     [_songRecorder beginSong];
 }
@@ -2499,7 +2497,7 @@ extern UserController * g_userController;
     if ( _interFrameDelayTimer == nil )
     {
         // Record the note
-        //[_songRecorder playString:str andFret:fret];
+        [_songRecorder pressKey:key];
     }
     
     [self turnOffKey:key];
@@ -2596,7 +2594,7 @@ extern UserController * g_userController;
         [g_soundMaster NoteOnForKey:key];
         
         // Record the note
-        //[_songRecorder playString:str andFret:fret];
+        [_songRecorder pressKey:key];
     }
     
 }
@@ -2696,7 +2694,7 @@ extern UserController * g_userController;
         }
         
         // Record the note
-        //[_songRecorder playString:str andFret:fret];
+        [_songRecorder pressKey:key];
     }
     
 }
@@ -2792,7 +2790,10 @@ extern UserController * g_userController;
     }
     
     // Check for keyboard range change to update camera and position
-    if(!isStandalone){
+    DLog(@"Range diff is %i vs %i",[g_keysController range].keyMax-[g_keysController range].keyMin,KEYS_DISPLAYED_NOTES_COUNT);
+    
+    
+    if(!isStandalone && ([g_keysController range].keyMax-[g_keysController range].keyMin) > KEYS_DISPLAYED_NOTES_COUNT){
         [self checkHorizonForCameraPosition];
     }
 
@@ -3195,60 +3196,64 @@ extern UserController * g_userController;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    /*
-    UITouch * touch = [[touches allObjects] objectAtIndex:0];
-    CGPoint currentPoint = [touch locationInView:self.view];
-    CGPoint previousPoint = [touch previousLocationInView:self.view];
-    CGPoint positionPoint = [touch locationInView:keyboardPosition];
-    
-    // Detect moving the Keyboard Position Bar
-    if(positionPoint.x >= 0 && positionPoint.x <= keyboardPosition.frame.size.width && positionPoint.y >= -10.0){
+    // Only allow the bar to move if the range isn't auto-changing
+    if(!isStandalone && ([g_keysController range].keyMax-[g_keysController range].keyMin) <= KEYS_DISPLAYED_NOTES_COUNT){
         
-        CGFloat deltaX = currentPoint.x - previousPoint.x;
+        UITouch * touch = [[touches allObjects] objectAtIndex:0];
+        CGPoint currentPoint = [touch locationInView:self.view];
+        CGPoint previousPoint = [touch previousLocationInView:self.view];
+        CGPoint positionPoint = [touch locationInView:keyboardPosition];
         
-        if(keyboardPosition.frame.origin.x+deltaX < 0){
-            deltaX = -keyboardPosition.frame.origin.x;
-        }else if(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width+deltaX > keyboardRange.frame.size.width){
-            deltaX = keyboardRange.frame.size.width-(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width);
+        // Detect moving the Keyboard Position Bar
+        if(positionPoint.x >= 0 && positionPoint.x <= keyboardPosition.frame.size.width && positionPoint.y >= -10.0){
+            
+            CGFloat deltaX = currentPoint.x - previousPoint.x;
+            
+            if(keyboardPosition.frame.origin.x+deltaX < 0){
+                deltaX = -keyboardPosition.frame.origin.x;
+            }else if(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width+deltaX > keyboardRange.frame.size.width){
+                deltaX = keyboardRange.frame.size.width-(keyboardPosition.frame.origin.x+keyboardPosition.frame.size.width);
+            }
+            
+            // Shift keyboard position bar
+            [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
+            
+            // Shift view to a new white key
+            int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+            
+            int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
+            
+            DLog(@"New white key is %i , Nth key is %i",newWhiteKey,newKey);
+            
+            //DLog(@"New starting key is %i",newKey);
+            
+            [self drawKeyboardGridFromMin:newKey];
+            [_displayController shiftViewToKey:newKey];
+            g_keysMath.keyboardPositionKey = newKey;
+            
+            _refreshDisplay = YES;
         }
-        
-        // Shift keyboard position bar
-        [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
-        
-        // Shift view to a new white key
-        int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
-        
-        int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
-        
-        DLog(@"New white key is %i , Nth key is %i",newWhiteKey,newKey);
-        
-        //DLog(@"New starting key is %i",newKey);
-        
-        [self drawKeyboardGridFromMin:newKey];
-        [_displayController shiftViewToKey:newKey];
-        g_keysMath.keyboardPositionKey = newKey;
-        
-        _refreshDisplay = YES;
-    }
      
-     */
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    /*
-    float margin = 1.0;
-    
-    int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
-    
-    // Snap to key
-    float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
-    
-    DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]));
-    
-    [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
-    */
+    // Only allow the bar to move if the range isn't auto-changing
+    if(([g_keysController range].keyMax-[g_keysController range].keyMin) <= KEYS_DISPLAYED_NOTES_COUNT){
+        
+        float margin = 1.0;
+        
+        int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+        
+        // Snap to key
+        float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
+        
+        DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]));
+        
+        [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
+        
+    }
     
     if(!isStandalone){
         

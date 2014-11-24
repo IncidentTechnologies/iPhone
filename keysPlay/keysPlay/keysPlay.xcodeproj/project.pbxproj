@@ -199,6 +199,7 @@
 		6DB2860E1921915600B3D14C /* Electric Guitar 97.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */; };
 		6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */; };
 		6DB286101921915600B3D14C /* Electric Guitar 99.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */; };
+		6DB6156C1A23C5CE009E2920 /* KeysSongRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6156B1A23C5CE009E2920 /* KeysSongRecorder.m */; };
 		6DD135E21A02DEB300996073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E11A02DEB300996073 /* Images.xcassets */; };
 		6DD135E91A02DEFA00996073 /* keys_AppIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E31A02DEFA00996073 /* keys_AppIcon_57.png */; };
 		6DD135EA1A02DEFA00996073 /* keys_AppIcon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E41A02DEFA00996073 /* keys_AppIcon_58.png */; };
@@ -1723,6 +1724,8 @@
 		6DB285A81921915600B3D14C /* Electric Guitar 97.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 97.mp3"; sourceTree = "<group>"; };
 		6DB285A91921915600B3D14C /* Electric Guitar 98.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 98.mp3"; sourceTree = "<group>"; };
 		6DB285AA1921915600B3D14C /* Electric Guitar 99.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 99.mp3"; sourceTree = "<group>"; };
+		6DB6156A1A23C5CE009E2920 /* KeysSongRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeysSongRecorder.h; sourceTree = "<group>"; };
+		6DB6156B1A23C5CE009E2920 /* KeysSongRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeysSongRecorder.m; sourceTree = "<group>"; };
 		6DC3D837190ED80E003AAD4E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D838190ED83A003AAD4E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC3D839190ED847003AAD4E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2602,6 +2605,8 @@
 		6D61D1C919FB07B3008CFA5A /* Song Model */ = {
 			isa = PBXGroup;
 			children = (
+				6DB6156A1A23C5CE009E2920 /* KeysSongRecorder.h */,
+				6DB6156B1A23C5CE009E2920 /* KeysSongRecorder.m */,
 				6D61D1CA19FB07C5008CFA5A /* NSMarker.h */,
 				6D61D1CB19FB07C5008CFA5A /* NSMarker.m */,
 				6D61D1CC19FB07C5008CFA5A /* NSMeasure.h */,
@@ -5457,6 +5462,7 @@
 				EC24DC46161A896E00016B78 /* XYInputView.m in Sources */,
 				EC24DC47161A897100016B78 /* TransparentAreaView.m in Sources */,
 				EC24DC48161A897100016B78 /* FreePlayController.m in Sources */,
+				6DB6156C1A23C5CE009E2920 /* KeysSongRecorder.m in Sources */,
 				EC24DC49161A897100016B78 /* RGBColor.m in Sources */,
 				EC24DC4A161A897100016B78 /* Harmonizer.m in Sources */,
 				EC24DC53161A897A00016B78 /* SongDisplayController.m in Sources */,
@@ -5775,7 +5781,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51de0006-db7d-4108-9a29-e38301d96729";
+				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5807,7 +5813,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51de0006-db7d-4108-9a29-e38301d96729";
+				PROVISIONING_PROFILE = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4f4d735d-ed6e-43a8-88cd-1f25df0773fe";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
