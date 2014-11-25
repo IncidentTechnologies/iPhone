@@ -68,6 +68,7 @@
 
 - (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone forLoop:(int)loop;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
+- (int)getStarsForRatio:(double)ratio;
 - (void)starRateScore;
 - (void)scoreEndOfFrame:(NSNoteFrame*)frame;
 

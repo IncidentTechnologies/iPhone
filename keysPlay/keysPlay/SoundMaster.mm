@@ -29,7 +29,6 @@
 #define EFFECT_NAME_DELAY @"Echo"
 #define EFFECT_NAME_CHORUS @"Chorus"
 #define EFFECT_NAME_DISTORT @"Distortion"
-#define EFFECT_NAME_SLIDING @"Sliding"
 
 #define DEFAULT_INSTRUMENT @"Piano"
 
@@ -896,7 +895,6 @@
     isSlideEnabled = YES;
     
     effectNames = [[NSArray alloc] initWithObjects:
-                   [NSString stringWithString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_CHORUS, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_DELAY, NULL)],
                    [NSString stringWithString:NSLocalizedString(EFFECT_NAME_REVERB, NULL)],
@@ -997,10 +995,6 @@
             
             m_distortionNode->SetPassThru(YES);
             
-        }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
-            
-            [self disableSliding];
-            
         }
         
     }else{
@@ -1022,10 +1016,6 @@
         }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_DISTORT, NULL)]){
             
             m_distortionNode->SetPassThru(NO);
-            
-        }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
-            
-            [self enableSliding];
             
         }
         
@@ -1106,11 +1096,6 @@
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
         
-    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
-        
-        primary = m_keysSamplerNode->getPrimaryParam();
-        secondary = m_keysSamplerNode->getSecondaryParam();
-        
     }else{
         
         return CGPointMake(x,y);
@@ -1166,11 +1151,6 @@
         primary = m_distortionNode->getPrimaryParam();
         secondary = m_distortionNode->getSecondaryParam();
         
-    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
-        
-        primary = m_keysSamplerNode->getPrimaryParam();
-        secondary = m_keysSamplerNode->getSecondaryParam();
-        
     }else{
         
         return;
@@ -1205,11 +1185,6 @@
         
         m_distortionNode->setPrimaryParam(pnew);
         m_distortionNode->setSecondaryParam(snew);
-        
-    }else if([effectNode isEqualToString:NSLocalizedString(EFFECT_NAME_SLIDING, NULL)]){
-        
-        m_keysSamplerNode->setPrimaryParam(pnew);
-        m_keysSamplerNode->setSecondaryParam(snew);
         
     }
     

@@ -54,7 +54,7 @@
         m_frameHits = [[NSMutableArray alloc] init];
         m_frameTimings = [[NSMutableArray alloc] init];
         
-        m_stars = 0;
+        m_stars = 5;
         
         isPracticeMode = practiceMode;
         m_loops = loops;
@@ -187,6 +187,12 @@
         }else{
         
             int loopScore = [[m_loopScores objectAtIndex:loop] intValue];
+            
+            if(loopScore == 0){
+                // Song has just looped, reset perfect score
+                m_scorePerfect = 0;
+            }
+            
             int newScore = loopScore + subscore;
             
             [m_loopScores setObject:[NSNumber numberWithInt:newScore] atIndexedSubscript:loop];
@@ -223,10 +229,9 @@
     
     [m_frameHits addObject:hitDict];
     
-    
     [self scoreFramePerfectly:frame];
     
-    //[self starRateScore];
+    [self starRateScore];
 }
 
 - (NSDictionary *)aggregateScoreEndOfSong
@@ -275,8 +280,10 @@
     NSDictionary * data = [[NSDictionary alloc] initWithObjectsAndKeys:
                            [NSNumber numberWithDouble:m_score],@"Score",
                            [NSNumber numberWithDouble:bestscore],@"BestScore",
+                           [NSNumber numberWithDouble:m_scorePerfect],@"PerfectScore",
                            [NSNumber numberWithDouble:m_totalScore],@"TotalScore",
                            [NSNumber numberWithDouble:percentNotesHit],@"PercentNotesHit",
+                           [NSNumber numberWithLong:[m_loopScores count]],@"NumSessions",
                            [NSNumber numberWithDouble:avgTiming],@"AverageTiming",
                            [NSNumber numberWithDouble:m_streakMax],@"MaxStreak",nil];
     
@@ -307,30 +314,35 @@
 //    double score = m_score;
 //    double scorePerfect = m_scorePerfect;
     
-    //double ratio = score / scorePerfect;
-    double ratio = (double)m_hitsCorrect / (double)m_hitsAttempted;
+    double ratio = (double)m_score / (double)m_scorePerfect;
+    //double ratioHits = (double)m_hitsCorrect / (double)(m_hitsAttempted+m_hitsMissed);
+    
+    //DLog(@"Ratio is %f/%f=%f",(double)m_score,(double)m_scorePerfect,ratio);
 
-    if ( ratio < 0.20 )
-    {
-        m_stars = 1;
-    }
-    else if ( ratio < 0.40 )
-    {
-        m_stars = 2;
-    }
-    else if ( ratio < 0.60 )
-    {
-        m_stars = 3;
-    }
-    else if ( ratio < 0.90 )
-    {
-        m_stars = 4;
-    }
-    else
-    {
-        m_stars = 5;
+    // Ensure it resets to full not empty on loops
+    if(m_scorePerfect == 0){
+        ratio = 1.0;
     }
     
+    m_stars = [self getStarsForRatio:ratio];
+    
+}
+
+- (int)getStarsForRatio:(double)ratio
+{
+    if(ratio < 0.1){
+        return 0;
+    }else if ( ratio < 0.20 ){
+        return 1;
+    }else if ( ratio < 0.40 ){
+        return 2;
+    }else if ( ratio < 0.60 ){
+        return 3;
+    }else if ( ratio < 0.80 ){
+        return 4;
+    }else{
+        return 5;
+    }
 }
 
 @end

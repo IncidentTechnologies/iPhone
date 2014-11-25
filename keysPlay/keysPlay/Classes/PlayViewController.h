@@ -66,10 +66,15 @@ extern KeysMath *g_keysMath;
 @property (strong, nonatomic) IBOutlet UILabel *loadingSongArtist;
 @property (strong, nonatomic) IBOutlet UILabel * loadingSongTitle;
 
-@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (strong, nonatomic) IBOutlet UILabel *scoreTextLabel;
-@property (strong, nonatomic) IBOutlet UILabel *multiplierTextLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *scoreTextLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *multiplierTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subscoreLabel;
+@property (strong, nonatomic) IBOutlet UIButton *scoreStarOne;
+@property (strong, nonatomic) IBOutlet UIButton *scoreStarTwo;
+@property (strong, nonatomic) IBOutlet UIButton *scoreStarThree;
+@property (strong, nonatomic) IBOutlet UIButton *scoreStarFour;
+@property (strong, nonatomic) IBOutlet UIButton *scoreStarFive;
 
 @property (strong, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *songArtistLabel;
@@ -79,17 +84,23 @@ extern KeysMath *g_keysMath;
 @property (strong, nonatomic) IBOutlet UILabel *practiceSongArtistLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *scoreBestSessionLabel;
-@property (strong, nonatomic) IBOutlet UILabel *scoreTotalLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreTotalLabel; // Plays
 @property (strong, nonatomic) IBOutlet UILabel *scoreScoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARowLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreAccuracyLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreBestSession;
 @property (strong, nonatomic) IBOutlet UILabel *scoreTotal;
-@property (strong, nonatomic) IBOutlet UILabel *scoreScore;
+//@property (strong, nonatomic) IBOutlet UILabel *scoreScore;
 @property (strong, nonatomic) IBOutlet UILabel *scoreNotesHit;
 @property (strong, nonatomic) IBOutlet UILabel *scoreInARow;
 @property (strong, nonatomic) IBOutlet UILabel *scoreAccuracy;
+@property (strong, nonatomic) IBOutlet UIButton *scoreBestSessionStar;
+@property (strong, nonatomic) IBOutlet UIButton *scoreSumStarOne;
+@property (strong, nonatomic) IBOutlet UIButton *scoreSumStarTwo;
+@property (strong, nonatomic) IBOutlet UIButton *scoreSumStarThree;
+@property (strong, nonatomic) IBOutlet UIButton *scoreSumStarFour;
+@property (strong, nonatomic) IBOutlet UIButton *scoreSumStarFive;
 
 @property (strong, nonatomic) IBOutlet UIView *heatMapView;
 @property (strong, nonatomic) IBOutlet UIView *practiceHeatMapView;

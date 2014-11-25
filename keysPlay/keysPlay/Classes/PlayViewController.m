@@ -345,7 +345,7 @@ extern UserController * g_userController;
     
     _scoreScoreLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SCORE", NULL)];
     _scoreBestSessionLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"BEST SESSION", NULL)];
-    _scoreTotalLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"TOTAL", NULL)];
+    _scoreTotalLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"SESSIONS", NULL)];
     _scoreNotesHitLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"NOTES HIT", NULL)];
     _scoreInARowLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"IN A ROW", NULL)];
     _scoreAccuracyLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"ACCURACY", NULL)];
@@ -368,7 +368,7 @@ extern UserController * g_userController;
     _restartLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Restart", NULL)];
     _menuMetronomeLabel.text = [[NSString alloc] initWithString:NSLocalizedString(@"Metronome", NULL)];
     
-    _multiplierTextLabel.layer.cornerRadius = _multiplierTextLabel.frame.size.width/2.0;
+    //_multiplierTextLabel.layer.cornerRadius = _multiplierTextLabel.frame.size.width/2.0;
 }
 
 - (void)viewDidLayoutSubviews
@@ -1705,14 +1705,15 @@ extern UserController * g_userController;
 
 - (void)updateScoreDisplayWithAccuracy:(double)accuracy
 {
-    int prevScore = [[self unformatScore:_scoreLabel.text] intValue];
+    //int prevScore = [[self unformatScore:_scoreLabel.text] intValue];
     int newScore = _scoreTracker.m_score;
-    int scoreDiff = newScore - prevScore;
+    //int scoreDiff = newScore - prevScore;
     
     // Determine accuracy color
     UIColor * accuracyColor;
     
     if(accuracy < 0){
+        // Starting accuracy
         accuracyColor = [UIColor whiteColor];
     }
     if(accuracy < 0.5){
@@ -1724,19 +1725,22 @@ extern UserController * g_userController;
     //[_scoreLabel setTextColor:accuracyColor];
     
     // Animate subscore
-    if(scoreDiff > 0){
-        [self animateSubscoreWithText:[NSString stringWithFormat:@"+%i",scoreDiff] andColor:accuracyColor];
-    }
+    //if(scoreDiff > 0){
+    //    [self animateSubscoreWithText:[NSString stringWithFormat:@"+%i",scoreDiff] andColor:accuracyColor];
+    //}
     
     // Update score label
-    [_scoreLabel setText:[self formatScore:_scoreTracker.m_score]];
-    [self setScoreMultiplier:_scoreTracker.m_multiplier];
+    //[_scoreLabel setText:[self formatScore:_scoreTracker.m_score]];
+    //[self setScoreMultiplier:_scoreTracker.m_multiplier];
     
+    // Update stars
+    [self displayStars:_scoreTracker.m_stars isFinal:NO];
     
 }
 
 - (void)animateSubscoreWithText:(NSString*)subscore andColor:(UIColor *)textColor
 {
+    /*
     _subscoreLabel.text = subscore;
     [_subscoreLabel setTextColor:textColor];
     [_subscoreLabel setAlpha:0.8];
@@ -1754,10 +1758,12 @@ extern UserController * g_userController;
         //[_subscoreLabel setHidden:YES];
         //[_subscoreLabel setFrame:CGRectMake(_subscoreLabel.frame.origin.x,252,_subscoreLabel.frame.size.width,_subscoreLabel.frame.size.height)];
     }];
+    */
 }
 
 - (void)setScoreMultiplier:(int)multiplier
 {
+    /*
     _multiplierTextLabel.text = [NSString stringWithFormat:@"%iX",multiplier];
     
     // Determine color
@@ -1771,6 +1777,46 @@ extern UserController * g_userController;
         [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:85/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
     }else{
         [_multiplierTextLabel setBackgroundColor:[UIColor colorWithRed:0/255.0 green:180/255.0 blue:50/255.0 alpha:1.0]];
+    }
+     */
+}
+
+- (void)displayStars:(int)numStars isFinal:(BOOL)final
+{
+    UIButton * starFive = (final) ? _scoreSumStarFive : _scoreStarFive;
+    UIButton * starFour = (final) ? _scoreSumStarFour : _scoreStarFour;
+    UIButton * starThree = (final) ? _scoreSumStarThree : _scoreStarThree;
+    UIButton * starTwo = (final) ? _scoreSumStarTwo : _scoreStarTwo;
+    UIButton * starOne = (final) ? _scoreSumStarOne : _scoreStarOne;
+    
+    if(numStars >= 5){
+        [starFive setAlpha:1.0];
+    }else{
+        [starFive setAlpha:0.3];
+    }
+    
+    if(numStars >= 4){
+        [starFour setAlpha:1.0];
+    }else{
+        [starFour setAlpha:0.3];
+    }
+    
+    if(numStars >= 3){
+        [starThree setAlpha:1.0];
+    }else{
+        [starThree setAlpha:0.3];
+    }
+    
+    if(numStars >= 2){
+        [starTwo setAlpha:1.0];
+    }else{
+        [starTwo setAlpha:0.3];
+    }
+    
+    if(numStars >= 1){
+        [starOne setAlpha:1.0];
+    }else{
+        [starOne setAlpha:0.3];
     }
 }
 
@@ -3096,29 +3142,29 @@ extern UserController * g_userController;
     
     NSDictionary * scoreData = [_scoreTracker aggregateScoreEndOfSong];
     
-    double totalscore = [[scoreData objectForKey:@"TotalScore"] doubleValue];
+    long numsessions = [[scoreData objectForKey:@"NumSessions"] longValue];
+    //double totalscore = [[scoreData objectForKey:@"TotalScore"] doubleValue];
     double bestscore = [[scoreData objectForKey:@"BestScore"] doubleValue];
+    double perfectscore = [[scoreData objectForKey:@"PerfectScore"] doubleValue];
     double score = [[scoreData objectForKey:@"Score"] doubleValue];
     double percentNotesHit = 100*[[scoreData objectForKey:@"PercentNotesHit"] doubleValue];
     double maxStreak = [[scoreData objectForKey:@"MaxStreak"] doubleValue];
     double accuracy = 100*[[scoreData objectForKey:@"AverageTiming"] doubleValue];
     
-    
     [_scoreBestSession setHidden:!isPracticeMode];
+    [_scoreBestSessionStar setHidden:!isPracticeMode];
     [_scoreBestSessionLabel setHidden:!isPracticeMode];
     [_scoreTotal setHidden:!isPracticeMode];
     [_scoreTotalLabel setHidden:!isPracticeMode];
     
     if(isPracticeMode){
         
-        _scoreBestSession.text = [self formatScore:(int)bestscore];
-        _scoreScore.text = [self formatScore:(int)score];
-        _scoreTotal.text = [self formatScore:(int)totalscore];
+        _scoreBestSession.text = [NSString stringWithFormat:@"%i",[_scoreTracker getStarsForRatio:(bestscore/perfectscore)]]; //[self formatScore:(int)bestscore];
+        _scoreTotal.text = [NSString stringWithFormat:@"%li",numsessions];//[self formatScore:(int)totalscore];
         
-    }else{
-        
-        _scoreScore.text = [self formatScore:(int)score];
     }
+    
+    [self displayStars:[_scoreTracker getStarsForRatio:(score/perfectscore)] isFinal:YES];
     
     _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
     _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];

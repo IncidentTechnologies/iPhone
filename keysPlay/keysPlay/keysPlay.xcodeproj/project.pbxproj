@@ -209,6 +209,7 @@
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
 		6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556D19789A9B00E8B360 /* AuxIcon.png */; };
 		6DE1557019789A9B00E8B360 /* SpeakerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */; };
+		6DFBBC601A250EE300565857 /* ScoreStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBBC5F1A250EE300565857 /* ScoreStar.png */; };
 		9D054CAE174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CAF174C68E000FA3239 /* Bowed Strings 40.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */; };
 		9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */; };
@@ -1743,6 +1744,7 @@
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
 		6DE1556D19789A9B00E8B360 /* AuxIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxIcon.png; path = Resources/Images/Play/AuxIcon.png; sourceTree = SOURCE_ROOT; };
 		6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SpeakerIcon.png; path = Resources/Images/Play/SpeakerIcon.png; sourceTree = SOURCE_ROOT; };
+		6DFBBC5F1A250EE300565857 /* ScoreStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScoreStar.png; path = Resources/Images/Play/ScoreStar.png; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* keysPlay-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "keysPlay-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9D054C85174C68E000FA3239 /* Bowed Strings 40.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 40.mp3"; sourceTree = "<group>"; };
 		9D054C86174C68E000FA3239 /* Bowed Strings 41.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bowed Strings 41.mp3"; sourceTree = "<group>"; };
@@ -3984,6 +3986,7 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DFBBC5F1A250EE300565857 /* ScoreStar.png */,
 				6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */,
 				ECE832251718A767006E2391 /* BlueMenu.png */,
 				ECCC039A170F716F0021DB00 /* MenuPauseBGSubsection.jpg */,
@@ -4381,6 +4384,7 @@
 				EC24DDAD161A89D200016B78 /* Droplet 70.mp3 in Resources */,
 				EC24DDAE161A89D200016B78 /* Droplet 71.mp3 in Resources */,
 				6DB285F11921915600B3D14C /* Electric Guitar 70.mp3 in Resources */,
+				6DFBBC601A250EE300565857 /* ScoreStar.png in Resources */,
 				EC24DDAF161A89D200016B78 /* Droplet 72.mp3 in Resources */,
 				EC24DDB0161A89D200016B78 /* Droplet 73.mp3 in Resources */,
 				EC24DDB1161A89D200016B78 /* Droplet 74.mp3 in Resources */,
