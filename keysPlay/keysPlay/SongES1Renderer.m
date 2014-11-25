@@ -211,9 +211,12 @@
     
     for (LineModel * loopModel in m_loopModels )
     {
-        [loopModel draw];
+        CGPoint center = [loopModel getCenter];
+        
+        [loopModel drawAt:CGPointMake(center.x,center.y)];
     }
     
+
 }
 
 - (void)endRender

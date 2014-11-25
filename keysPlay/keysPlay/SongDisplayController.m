@@ -662,11 +662,33 @@
         NSNoteFrame * noteFrame = [m_allFrames objectAtIndex:frameindex];
         NSNote * note = [noteFrame.m_notes firstObject];
         
-        center.x = GL_SCREEN_WIDTH / 2.0;
+        KeyPosition minKeyInFrame = KEYS_KEY_COUNT;
+        KeyPosition maxKeyInFrame = 0;
+        
+        for(NSNote * frameNote in noteFrame.m_notes){
+            minKeyInFrame = MIN(minKeyInFrame,frameNote.m_key);
+            maxKeyInFrame = MAX(maxKeyInFrame,frameNote.m_key);
+        }
+        
         center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]; // get Y from note positions
         
-        size.width = GL_SCREEN_WIDTH;
-        size.height = 5.0;
+        if(!isStandalone){
+            if(maxKeyInFrame == minKeyInFrame){
+                size.width = GL_SCREEN_WIDTH/4.0;
+                center.x = [g_keysMath convertKeyToCoordSpace:note.m_key];
+            }else{
+                size.width = [g_keysMath convertKeyToCoordSpace:maxKeyInFrame]-[g_keysMath convertKeyToCoordSpace:minKeyInFrame]+GL_SCREEN_WIDTH/4.0;
+                center.x = ([g_keysMath convertKeyToCoordSpace:maxKeyInFrame]+[g_keysMath convertKeyToCoordSpace:minKeyInFrame])/2.0;
+            }
+            size.height = 3.0;
+        }else{
+            center.x = GL_SCREEN_WIDTH/2.0;
+            size.width = GL_SCREEN_WIDTH;
+            size.height = 5.0;
+        }
+        
+        
+        DLog(@"Creating loop line with frame %f %f, %f %f",center.x,center.y,size.width,size.height);
         
         LineModel * loopModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColor];
         

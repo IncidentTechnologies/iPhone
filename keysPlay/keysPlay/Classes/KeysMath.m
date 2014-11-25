@@ -450,7 +450,10 @@
         
         // Start further middle if upper range is empty
         if(keyMax < keyMin+KEYS_DISPLAYED_NOTES_COUNT*0.75 && keyMin-KEYS_DISPLAYED_NOTES_COUNT*0.25 > 0){
-            keyMin -= KEYS_DISPLAYED_NOTES_COUNT*0.25;
+            keyMin = keyMin-KEYS_DISPLAYED_NOTES_COUNT*0.25;
+            
+            // Ensure it doesn't go below the beginning of the song
+            keyMin = MAX(keyMin,songRangeKeyMin);
         }
         
         // Don't make trivial changes
@@ -460,15 +463,7 @@
         
             [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
             
-        }else{
-            
-            DLog(@"BAIL CONDITION 1");
-            
         }
-    }else{
-        
-        DLog(@"BAIL CONDITION 2");
-        
     }
 }
 
@@ -484,9 +479,6 @@
     }
     
     if(diff == 0){
-        
-        DLog(@"BAIL CONDITION 3");
-        
         [delegate refreshKeyboardToKey:keyboardPositionKey];
     }
     
