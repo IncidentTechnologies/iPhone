@@ -57,6 +57,7 @@
     _songScore.alpha = 1.0f;
     
     [_songScore setHidden:NO];
+    [_songStar setHidden:NO];
     
     if ( _userSong.m_title != nil )
     {
@@ -89,7 +90,15 @@
         _songSkill.image = [UIImage imageNamed:@"Skill_RED.png"];
     }
 
-    [_songScore setText:[NSString stringWithFormat:@"%d", _playScore]];
+    [_songScore setText:[NSString stringWithFormat:@"%li", _playStars]];
+    
+    if(_playStars == 0){
+        [_songScore setAlpha:0.3];
+        [_songStar setAlpha:0.3];
+    }else{
+        [_songScore setAlpha:1.0];
+        [_songStar setAlpha:1.0];
+    }
     
     self.selectedBackgroundView = _selectedBgView;
     
@@ -111,6 +120,7 @@
     _songScore.alpha = gray;
     
     [_songScore setHidden:YES];
+    [_songStar setHidden:YES];
     
     _songSkill.image = [UIImage imageNamed:@"Skill_GREY.png"];
 

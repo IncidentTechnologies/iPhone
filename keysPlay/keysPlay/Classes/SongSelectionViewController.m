@@ -595,6 +595,7 @@ extern KeysController *g_keysController;
     
     tempCell.userSong = userSong;
     tempCell.playScore = [g_userController getMaxScoreForSong:userSong.m_songId];
+    tempCell.playStars = [g_userController getMaxStarsForSong:userSong.m_songId];
 
     if ( [g_fileController fileExists:userSong.m_xmpFileId] == YES )
     {
