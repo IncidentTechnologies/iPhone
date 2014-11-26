@@ -85,6 +85,7 @@
         numEffects = 0;
         numInstruments = 0;
         currentInstrumentIndex = -1;
+        m_metronome = -1;
         
 #ifdef EFFECTS_AVAILABLE
         m_reverbNode = nil;
@@ -129,7 +130,9 @@
     }
     
     
-    [self initMetronome];
+    if(m_metronome < 0){
+        [self initMetronome];
+    }
     
     [self initTimers];
     
@@ -179,8 +182,6 @@
 
 - (void)releaseBank:(int)bank
 {
-    DLog(@"Release bank");
-    
     m_keysSamplerNode->ReleaseBank(bank);
 }
 
@@ -361,6 +362,8 @@
     
     // Generate a bank
     m_activeBankNode = [self generateBank:0 numSamples:KEYS_KEY_COUNT];
+    
+    DLog(@"Active bank node is %i",m_activeBankNode);
     
     DLog(@"Load samples for instrument %i",index);
     
@@ -869,12 +872,16 @@
     
     char * filepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Metronome" ofType:@"mp3"] UTF8String];
     
+    DLog(@"Filepath is %s",filepath);
+    
     m_keysSamplerNode->LoadSampleIntoBank(m_metronome, filepath);
     
 }
 
 - (void)releaseMetronome
 {
+    DLog(@"Release metronome");
+    
     [self releaseBank:m_metronome];
 }
 

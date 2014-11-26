@@ -1427,8 +1427,9 @@ extern UserController * g_userController;
 
 - (void)startMetronomeIfOn
 {
+    // Metronome is being called in main loop instead of a separate timer
     
-    if(_playMetronome && isPracticeMode){
+    if(_playMetronome && isPracticeMode && _metronomeTimer == nil){
         
         [_metronomeTimer invalidate];
         _metronomeTimer = nil;
@@ -1442,6 +1443,7 @@ extern UserController * g_userController;
 - (void)stopMetronomeIfOff
 {
     if(!_playMetronome && isPracticeMode){
+        
         [_metronomeTimer invalidate];
         _metronomeTimer = nil;
     }
