@@ -29,6 +29,7 @@
 @synthesize m_offset;
 @synthesize m_horizontalOffset;
 @synthesize m_viewShift;
+@synthesize m_isVertical;
 
 - (id)init
 {
@@ -45,6 +46,8 @@
         m_keyPathModels = [[NSMutableArray alloc] init];
         m_lineModels = [[NSMutableArray alloc] init];
         m_loopModels = [[NSMutableArray alloc] init];
+        
+        m_isVertical = YES;
         
     }
     
@@ -205,7 +208,11 @@
     //
     // Now we translate forward for the notes
     //
-    glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
+    if(m_isVertical){
+        glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
+    }else{
+        glTranslatef( [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f, 0.0f);
+    }
     
     // And draw the moving loop lines
     

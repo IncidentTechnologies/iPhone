@@ -76,6 +76,7 @@
                 <outlet property="scoreSumStarTwo" destination="yy9-0H-vRY" id="TY5-SC-EPw"/>
                 <outlet property="scoreTotal" destination="zvs-JC-56S" id="JFa-5X-vpS"/>
                 <outlet property="scoreTotalLabel" destination="KLk-kk-Ydn" id="H4g-Ui-2RX"/>
+                <outlet property="sheetMusicSwitch" destination="Or6-pO-7RI" id="25Z-eb-7ST"/>
                 <outlet property="songArtistLabel" destination="352" id="355"/>
                 <outlet property="songScoreView" destination="PY8-Wk-KmY" id="TMz-X3-9t5"/>
                 <outlet property="songTitleLabel" destination="351" id="354"/>
@@ -896,7 +897,7 @@
                             <rect key="frame" x="10" y="86" width="428" height="116"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="342">
-                                    <rect key="frame" x="92" y="44" width="43" height="44"/>
+                                    <rect key="frame" x="34" y="44" width="43" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="43" id="487"/>
                                         <constraint firstAttribute="height" constant="44" id="Q4i-xw-UXT"/>
@@ -914,23 +915,23 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Finish" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="691">
-                                    <rect key="frame" x="53" y="95" width="120" height="21"/>
+                                    <rect key="frame" x="-5" y="95" width="120" height="21"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Metronome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPC-j7-nFB">
-                                    <rect key="frame" x="154" y="95" width="120" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Sheet Music" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-aT-DCy">
+                                    <rect key="frame" x="99" y="95" width="120" height="21"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Wq-0b-VJa">
-                                    <rect key="frame" x="190" y="57" width="51" height="31"/>
+                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Or6-pO-7RI">
+                                    <rect key="frame" x="134" y="57" width="51" height="31"/>
                                     <color key="onTintColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </switch>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="345">
-                                    <rect key="frame" x="293" y="44" width="43" height="44"/>
+                                    <rect key="frame" x="344" y="44" width="43" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="43" id="781"/>
                                         <constraint firstAttribute="height" constant="44" id="qJA-4M-0t5"/>
@@ -948,20 +949,34 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Restart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="681">
-                                    <rect key="frame" x="274" y="95" width="80" height="21"/>
+                                    <rect key="frame" x="325" y="95" width="80" height="21"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Metronome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPC-j7-nFB">
+                                    <rect key="frame" x="207" y="95" width="120" height="21"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Wq-0b-VJa">
+                                    <rect key="frame" x="242" y="57" width="51" height="31"/>
+                                    <color key="onTintColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </switch>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="345" secondAttribute="trailing" constant="92" id="H7y-DW-xpv"/>
-                                <constraint firstItem="1Wq-0b-VJa" firstAttribute="leading" secondItem="342" secondAttribute="trailing" constant="55" id="KpJ-qF-L2b"/>
-                                <constraint firstItem="345" firstAttribute="leading" secondItem="1Wq-0b-VJa" secondAttribute="trailing" constant="54" id="Osn-iC-rWB"/>
-                                <constraint firstItem="691" firstAttribute="centerX" secondItem="342" secondAttribute="centerX" id="lTH-Xl-27z"/>
-                                <constraint firstItem="681" firstAttribute="centerX" secondItem="345" secondAttribute="centerX" id="m0i-S1-B2P"/>
-                                <constraint firstItem="342" firstAttribute="leading" secondItem="jnY-TK-lCZ" secondAttribute="leading" constant="92" id="rLu-N3-dcQ"/>
-                                <constraint firstAttribute="centerX" secondItem="1Wq-0b-VJa" secondAttribute="centerX" id="yyT-RW-T2g"/>
+                                <constraint firstItem="691" firstAttribute="centerX" secondItem="342" secondAttribute="centerX" id="87V-mz-EMw"/>
+                                <constraint firstItem="345" firstAttribute="centerX" secondItem="681" secondAttribute="centerX" id="KES-Cx-KJe"/>
+                                <constraint firstAttribute="trailing" secondItem="345" secondAttribute="trailing" constant="41" id="X4A-Wu-GFt"/>
+                                <constraint firstItem="Or6-pO-7RI" firstAttribute="leading" secondItem="342" secondAttribute="trailing" constant="57" id="bcQ-Ks-mKz"/>
+                                <constraint firstItem="1Wq-0b-VJa" firstAttribute="centerX" secondItem="tPC-j7-nFB" secondAttribute="centerX" id="dbj-5u-Tex"/>
+                                <constraint firstItem="342" firstAttribute="leading" secondItem="jnY-TK-lCZ" secondAttribute="leading" constant="34" id="dl6-RN-0Xg"/>
+                                <constraint firstItem="Or6-pO-7RI" firstAttribute="centerX" secondItem="0Zh-aT-DCy" secondAttribute="centerX" id="fcy-yG-ToO"/>
+                                <constraint firstAttribute="trailing" secondItem="681" secondAttribute="trailing" constant="23" id="mSz-vv-Rob"/>
+                                <constraint firstItem="345" firstAttribute="leading" secondItem="1Wq-0b-VJa" secondAttribute="trailing" constant="53" id="nef-ZX-IHk"/>
+                                <constraint firstAttribute="width" constant="428" id="wJN-tA-As9"/>
+                                <constraint firstItem="691" firstAttribute="leading" secondItem="jnY-TK-lCZ" secondAttribute="leading" constant="-5" id="xDu-en-O5b"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="707">

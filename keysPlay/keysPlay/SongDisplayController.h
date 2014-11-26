@@ -74,6 +74,7 @@ extern KeysMath * g_keysMath;
     NumberModel * m_mutedTexture;
     
     BOOL isStandalone;
+    BOOL isSheetMusic;
     
     PlayViewControllerDifficulty difficulty;
     
@@ -81,7 +82,7 @@ extern KeysMath * g_keysMath;
     
 }
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops;
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone isSheetMusic:(BOOL)isSheetMusic setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops;
 - (void)updateDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
 - (void)createLineModels;
@@ -108,5 +109,7 @@ extern KeysMath * g_keysMath;
 
 // Standalone
 - (NSMutableDictionary*)getKeyPressFromTap:(NSMutableArray *)touchPoints;
+
+- (void)setSheetMusic:(BOOL)sheetMusic;
 
 @end

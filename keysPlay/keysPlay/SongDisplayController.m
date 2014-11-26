@@ -18,7 +18,7 @@
 
 @implementation SongDisplayController
 
-- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
+- (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone isSheetMusic:(BOOL)sheetmusic setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops
 {
     // Force linking
     [EAGLView class];
@@ -40,14 +40,22 @@
         
         m_glView = glView;
         
-        m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN;
-        m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN * 4;
+        if(isSheetMusic){
+            //Horizontal
+            m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN_HORIZONTAL;
+            m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN_HORIZONTAL * 4;
+        }else{
+            //Vertical
+            m_beatsToPreloadSync = SONG_BEATS_PER_SCREEN_VERTICAL;
+            m_beatsToPreloadAsync = SONG_BEATS_PER_SCREEN_VERTICAL * 4;
+        }
         
         m_framesDisplayed = 0;
         
         difficulty = useDifficulty;
         
         isStandalone = standalone;
+        isSheetMusic = sheetmusic;
         
         m_loops = numLoops;
         
@@ -58,6 +66,7 @@
         if ( m_glView.m_renderer == nil )
         {
             m_renderer = [[SongES1Renderer alloc] init];
+            m_renderer.m_isVertical = !isSheetMusic;
             
             m_glView.m_renderer = m_renderer;
             
@@ -78,11 +87,17 @@
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
-        [self createLoopModels];
+        if(!isSheetMusic){
+            [self createLoopModels];
+        }
         
         [self setNoteRangeForSong];
         
-        [self createLineModels];
+        if(isSheetMusic){
+            [self createSheetMusicBackground];
+        }else{
+            [self createLineModels];
+        }
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
@@ -121,6 +136,12 @@
         }
         
     }
+}
+
+- (void)setSheetMusic:(BOOL)sheetMusic
+{
+    isSheetMusic = sheetMusic;
+    m_renderer.m_isVertical = !sheetMusic;
 }
 
 - (NSDictionary *)getNoteRangeForSong
@@ -179,7 +200,8 @@
     }
     
     // Don't linger at the end if scrolled over and autoscrolling
-    if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat < SONG_BEATS_PER_SCREEN){
+    int songBeats = (isSheetMusic) ? SONG_BEATS_PER_SCREEN_HORIZONTAL : SONG_BEATS_PER_SCREEN_VERTICAL;
+    if(m_songModel.m_lengthBeats - m_songModel.m_currentBeat < songBeats){
         [self shiftView:m_songModel.m_lengthBeats - m_songModel.m_currentBeat];
     }
     
@@ -366,8 +388,16 @@
         note.m_standaloneActive = NO;
         
         CGPoint center;
-        center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
-        center.x = [g_keysMath convertKeyToCoordSpace:note.m_key];
+        
+        if(isSheetMusic){
+            //Horizontal
+            center.y = [g_keysMath convertKeyToCoordSpace:note.m_key];
+            center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
+        }else{
+            //Vertical
+            center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
+            center.x = [g_keysMath convertKeyToCoordSpace:note.m_key];
+        }
         
         
         // These notes will still be sounded, but do not draw multiple notes in the same place for standalone in order to preserve highlight transparency
@@ -497,22 +527,25 @@
 
 - (void)shiftViewToKey:(double)key
 {
-    float numWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
-    
-    GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
-    GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
-    
-    // Offset by half a key so it starts at the beginning
-    
-    if(!isStandalone){
-        int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:key];
+    if(!isSheetMusic){
         
-        DLog(@"SHIFT VIEW TO KEY %i",keyboardWhiteKey);
+        float numWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
         
-        m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:[g_keysMath getNthKeyForWhiteKey:[g_keysMath getWhiteKeyFromNthKey:key]]] + widthPerWhiteKey/2.0;
+        GLfloat effectiveScreenWidth = (GL_SCREEN_WIDTH);
+        GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
+        
+        // Offset by half a key so it starts at the beginning
+        
+        if(!isStandalone){
+            int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:key];
+            
+            DLog(@"SHIFT VIEW TO KEY %i",keyboardWhiteKey);
+            
+            m_renderer.m_horizontalOffset = -1*[g_keysMath convertKeyToCoordSpace:[g_keysMath getNthKeyForWhiteKey:[g_keysMath getWhiteKeyFromNthKey:key]]] + widthPerWhiteKey/2.0;
+        }
+        
+        [m_renderer render];
     }
-    
-    [m_renderer render];
 }
 
 - (void)shiftView:(double)shift
@@ -533,14 +566,15 @@
      
      if( m_viewShift > 0.0)
      {
-     m_viewShift = 0.0;
+         m_viewShift = 0.0;
      }
      else if (end > m_viewShift)
      {
-     m_viewShift = end;
+         m_viewShift = end;
      }
-     
-     double viewShiftBeats = [g_keysMath convertCoordSpaceToBeat:m_viewShift] + SONG_BEATS_PER_SCREEN;
+    
+    int songBeats = (isSheetMusic) ? SONG_BEATS_PER_SCREEN_HORIZONTAL : SONG_BEATS_PER_SCREEN_VERTICAL;
+     double viewShiftBeats = [g_keysMath convertCoordSpaceToBeat:m_viewShift] + songBeats;
      
      //    if ( viewShiftBeats > m_beatsToPreload )
      {
@@ -554,7 +588,7 @@
 
 - (void)shiftViewDelta:(double)shift
 {
-    if(!isStandalone){
+    if(!isStandalone && isSheetMusic){
         m_renderer.m_horizontalOffset = m_renderer.m_horizontalOffset+shift;
     }
         
@@ -564,6 +598,50 @@
 
 
 #pragma mark - Init models
+
+- (void)createSheetMusicBackground
+{
+    
+    //
+    // Create the seek line
+    //
+    
+    CGSize size;
+    size.width = GL_NOTE_HEIGHT / 3.0;
+    size.height = GL_SCREEN_HEIGHT;
+    
+    // The center will automatically be offset in the rendering
+    CGPoint center;
+    
+    m_renderer.m_seekLineModel = nil;
+    m_renderer.m_seekLineStandaloneModel = nil;
+    
+    GLubyte * stringColor = g_whiteColorTransparent; // all white
+    
+    // Bass clef lines: G, B, D, F, A
+    // Treble lines:    E, G, B, D, F
+    
+    NSArray * linesForKeys = [NSArray arrayWithObjects:[NSNumber numberWithInt:43],[NSNumber numberWithInt:47],[NSNumber numberWithInt:50], [NSNumber numberWithInt:53],[NSNumber numberWithInt:57],[NSNumber numberWithInt:64], [NSNumber numberWithInt:67],[NSNumber numberWithInt:71],[NSNumber numberWithInt:74], [NSNumber numberWithInt:77], nil];
+    
+    // Draw lines for treble and bass
+    for ( unsigned int i = 0; i < [linesForKeys count]; i++ )
+    {
+        int key = [[linesForKeys objectAtIndex:i] intValue];
+        
+        // Get the position of the black note as the center
+        center.y = [g_keysMath convertKeyToCoordSpace:key];
+        
+        center.x = GL_SCREEN_WIDTH / 2.0;
+        
+        size.width = GL_SCREEN_WIDTH;
+        size.height = 2.0;
+        
+        KeyPathModel * stringModel = [[KeyPathModel alloc] initWithCenter:center andSize:size andColor:stringColor];
+        
+        [m_renderer addKeyPath:stringModel];
+        
+    }
+}
 
 - (void)createLineModels
 {
@@ -779,10 +857,12 @@
     // Determine which frame was played by Y intersection
     NSNoteFrame * activeFrame = nil;
     
+    int songBeats = (isSheetMusic) ? SONG_BEATS_PER_SCREEN_HORIZONTAL : SONG_BEATS_PER_SCREEN_VERTICAL;
+    
     int frameIndex = 0;
     for(NSNoteFrame * frame in m_songModel.m_noteFrames){
         
-        if(frame.m_absoluteBeatStart > m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN){
+        if(frame.m_absoluteBeatStart > m_songModel.m_currentBeat + songBeats){
             
             // Too late
             continue;

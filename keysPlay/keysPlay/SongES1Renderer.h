@@ -22,7 +22,6 @@ extern KeysMath * g_keysMath;
 
 @interface SongES1Renderer : ES1Renderer
 {
-
     GLfloat m_offset;
     GLfloat m_currentPosition;
     GLfloat m_viewShift;
@@ -48,6 +47,7 @@ extern KeysMath * g_keysMath;
 @property (nonatomic, assign) GLfloat m_offset;
 @property (nonatomic, assign) GLfloat m_horizontalOffset;
 @property (nonatomic, assign) GLfloat m_viewShift;
+@property (nonatomic, assign) BOOL m_isVertical;
 
 - (void)renderWithHighlights:(BOOL)highlight fretOne:(BOOL)fretOne fretTwo:(BOOL)fretTwo fretThree:(BOOL)fretThree;
 - (void)renderWithHighlights:(BOOL)highlight hitCorrect:(float)hitCorrect hitNear:(float)hitNear hitIncorrect:(float)hitIncorrect;

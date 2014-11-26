@@ -124,9 +124,10 @@ extern KeysMath *g_keysMath;
 @property (strong, nonatomic) IBOutlet UIView *outputView;
 @property (strong, nonatomic) IBOutlet UIView *postToFeedView;
 
-@property (strong, nonatomic) IBOutlet UISwitch *outputSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *feedSwitch;
+//@property (strong, nonatomic) IBOutlet UISwitch *outputSwitch;
+//@property (strong, nonatomic) IBOutlet UISwitch *feedSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *metronomeSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *sheetMusicSwitch;
 
 @property (strong, nonatomic) IBOutlet UILabel *outputLabel;
 @property (strong, nonatomic) IBOutlet UILabel *auxLabel;
@@ -171,8 +172,8 @@ extern KeysMath *g_keysMath;
 - (IBAction)finishButtonClicked:(id)sender;
 - (IBAction)restartButtonClicked:(id)sender;
 - (IBAction)restartPlayButtonClicked:(id)sender;
-- (IBAction)outputSwitchChanged:(id)sender;
-- (IBAction)feedSwitchChanged:(id)sender;
+//- (IBAction)outputSwitchChanged:(id)sender;
+//- (IBAction)feedSwitchChanged:(id)sender;
 - (IBAction)difficultyButtonClicked:(id)sender;
 - (IBAction)instrumentButtonClicked:(id)sender;
 - (IBAction)repeatButtonClicked:(id)sender;

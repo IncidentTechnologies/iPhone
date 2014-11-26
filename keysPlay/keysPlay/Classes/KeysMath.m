@@ -13,6 +13,7 @@
 
 @synthesize cameraScale;
 @synthesize isStandalone;
+@synthesize isSheetMusic;
 @synthesize difficulty;
 @synthesize songRangeKeyMin;
 @synthesize songRangeKeyMax;
@@ -171,14 +172,38 @@
 
 - (double)convertBeatToCoordSpace:(double)beat
 {
-    double beatsPerScreen = SONG_BEATS_PER_SCREEN;
-    
-    return -(glScreenHeight - (beat/(GLfloat)beatsPerScreen) * glScreenHeight);
+    if(isSheetMusic){
+        
+        // Horizontal
+        
+        double beatsPerScreen = SONG_BEATS_PER_SCREEN_HORIZONTAL;
+        return -(glScreenWidth - (beat/(GLfloat)beatsPerScreen) * glScreenWidth);
+        
+    }else{
+        
+        // Vertical
+        
+        double beatsPerScreen = SONG_BEATS_PER_SCREEN_VERTICAL;
+        return -(glScreenHeight - (beat/(GLfloat)beatsPerScreen) * glScreenHeight);
+        
+    }
 }
 
 - (double)convertCoordSpaceToBeat:(double)coord
 {
-    return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN) / glScreenHeight;
+    if(isSheetMusic){
+        
+        // Horizontal
+        
+        return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN_HORIZONTAL) / glScreenWidth;
+        
+    }else{
+    
+        // Vertical
+        
+        return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN_VERTICAL) / glScreenHeight;
+        
+    }
 }
 
 - (double)convertKeyToCoordSpace:(NSInteger)key
@@ -192,10 +217,27 @@
     if(isStandalone && difficulty == PlayViewControllerDifficultyMedium) numWhiteKeys = KEYS_WHITE_KEY_MED_COUNT;
     if(isStandalone && difficulty == PlayViewControllerDifficultyEasy) numWhiteKeys = KEYS_WHITE_KEY_EASY_COUNT;
     
-    GLfloat effectiveScreenWidth = glScreenWidth;
-    GLfloat widthPerWhiteKey = effectiveScreenWidth / ((GLfloat)numWhiteKeys);
+    GLfloat widthPerWhiteKey = glScreenWidth / ((GLfloat)numWhiteKeys);
     
-    if(!isStandalone){
+    if(isSheetMusic){
+    
+        BOOL isKeyBlackKey = [self isKeyBlackKey:key];
+        int sheetMusicMin = 36; // Low C
+        int sheetMusicMax = 83; // High B
+        int numWhiteKeys = 28;
+        
+        double heightPerWhiteKey = glScreenHeight / ((GLfloat)numWhiteKeys);
+        int keyWhiteKey = [self getWhiteKeyFromNthKey:key];
+        int sheetMusicMinWhiteKey = [self getWhiteKeyFromNthKey:sheetMusicMin];
+        
+        if(key < sheetMusicMin || key > sheetMusicMax){
+            DLog(@"Key out of range");
+            return -heightPerWhiteKey;
+        }
+        
+        return (keyWhiteKey-sheetMusicMinWhiteKey)*heightPerWhiteKey;
+        
+    }else if(!isStandalone){
         
         int mappedKeyInDisplay = mappedKey % KEYS_DISPLAYED_NOTES_COUNT;
         
@@ -279,15 +321,34 @@
 
 - (double)calculateMaxShiftCoordSpace:(double)currentBeat lengthBeats:(double)lengthBeats
 {
-    double beatsToShift = ceil(lengthBeats) - currentBeat + SONG_BEATS_PER_SCREEN;
-    
-    double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
-    
-    if(lengthBeats - currentBeat <= SONG_BEATS_PER_SCREEN){
-        return end;
+    if(isSheetMusic){
+        
+        // Horizontal
+        
+        double beatsToShift = ceil(lengthBeats) - currentBeat + SONG_BEATS_PER_SCREEN_HORIZONTAL;
+        
+        double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
+        
+        if(lengthBeats - currentBeat <= SONG_BEATS_PER_SCREEN_HORIZONTAL){
+            return end;
+        }else{
+            return end+glScreenWidth;
+        }
     }else{
-        return end+glScreenHeight;
+        
+        // Vertical
+        
+        double beatsToShift = ceil(lengthBeats) - currentBeat + SONG_BEATS_PER_SCREEN_VERTICAL;
+        
+        double end = [self convertBeatToCoordSpace:MAX(beatsToShift,0)];
+        
+        if(lengthBeats - currentBeat <= SONG_BEATS_PER_SCREEN_VERTICAL){
+            return end;
+        }else{
+            return end+glScreenHeight;
+        }
     }
+    
 }
 
 #pragma mark - Drawing

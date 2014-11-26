@@ -114,6 +114,9 @@ extern UserController * g_userController;
     BOOL isRestrictPlayFrame;
     NSMutableArray * activeTouchPoints;
     
+    // Sheet Music View
+    BOOL isSheetMusic;
+    
     // Practice
     NSMutableArray * markerButtons;
     int m_loops;
@@ -222,21 +225,8 @@ extern UserController * g_userController;
     [_finishRestartButton setHidden:YES];
     [_progressFillView setHidden:YES];
     
-    // Fiddle with the switch images
-    _outputSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
-    _outputSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
-    _outputSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
-    
-    _feedSwitch.thumbTintColor = [UIColor colorWithRed:0 green:160.0/255.0 blue:222.0/255.0 alpha:1.0];
-    _feedSwitch.offImage = [UIImage imageNamed:@"SwitchBG.png"];
-    _feedSwitch.onImage = [UIImage imageNamed:@"SwitchBG.png"];
-    
     // Setup the volume button which will take a second to load
     [_volumeButton setImageEdgeInsets:UIEdgeInsetsMake(3, 0, 3, 0)];
-    
-    // Setup the loading screen
-    //_loadingView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    //_loadingView.layer.borderWidth = 2.0;
     
     // Fill in song info
     _loadingLicenseInfo.text = _userSong.m_licenseInfo;
@@ -675,6 +665,7 @@ extern UserController * g_userController;
     if ( _menuIsOpen == YES )
     {
         [_metronomeSwitch setOn:_playMetronome];
+        [_sheetMusicSwitch setOn:isSheetMusic];
         [self showHideMenu:_menuView isOpen:YES];
         //[_menuDownArrow setHidden:NO];
     }
@@ -685,6 +676,11 @@ extern UserController * g_userController;
             [self toggleMetronome];
             [self startMetronomeIfOn];
             [self stopMetronomeIfOff];
+        }
+        
+        // Toggle Sheet Music?
+        if(_sheetMusicSwitch.isOn != isSheetMusic){
+            [self toggleSheetMusic];
         }
         
         [self showHideMenu:_menuView isOpen:NO];
@@ -711,8 +707,17 @@ extern UserController * g_userController;
     
     if(open){
         
-        [_metronomeSwitch setHidden:!isPracticeMode];
-        [_menuMetronomeLabel setHidden:!isPracticeMode];
+        if(!isPracticeMode){
+            [_metronomeSwitch setAlpha:0.5];
+            [_metronomeSwitch setEnabled:NO];
+            
+            [_menuMetronomeLabel setAlpha:0.5];
+        }else{
+            [_metronomeSwitch setAlpha:1.0];
+            [_metronomeSwitch setEnabled:YES];
+            
+            [_menuMetronomeLabel setAlpha:1.0];
+        }
         
         [self stopMainEventLoop];
         [g_soundMaster stop];
@@ -845,7 +850,7 @@ extern UserController * g_userController;
 
 - (IBAction)feedSwitchChanged:(id)sender
 {
-    if ( [g_userController isUserSongSessionQueueFull] == YES && _feedSwitch.isOn == YES )
+    /*if ( [g_userController isUserSongSessionQueueFull] == YES && _feedSwitch.isOn == YES )
     {
         [_feedSwitch setOn:NO];
         
@@ -855,7 +860,7 @@ extern UserController * g_userController;
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-    }
+    }*/
 }
 
 - (IBAction)difficultyButtonClicked:(id)sender
@@ -1258,6 +1263,9 @@ extern UserController * g_userController;
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     _postToFeed = ![settings boolForKey:@"DisablePostToFeed"];
     _autocomplete = [settings boolForKey:@"CompleteChords"];
+    isSheetMusic = [settings boolForKey:@"SheetMusic"];
+    g_keysMath.isSheetMusic = isSheetMusic;
+    [_displayController setSheetMusic:isSheetMusic];
 }
 
 - (void)handleResignActive
@@ -1379,6 +1387,19 @@ extern UserController * g_userController;
     
     [settings synchronize];
     
+}
+
+- (void)toggleSheetMusic
+{
+    isSheetMusic = _sheetMusicSwitch.isOn;
+    g_keysMath.isSheetMusic = isSheetMusic;
+    [_displayController setSheetMusic:isSheetMusic];
+    
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setBool:isSheetMusic forKey:@"SheetMusic"];
+    
+    [settings synchronize];
 }
 
 - (void)toggleMetronome
@@ -1520,6 +1541,10 @@ extern UserController * g_userController;
 
 - (void)showKeyboard:(PlayViewControllerDifficulty)difficulty
 {
+    if(isSheetMusic){
+        return;
+    }
+    
     float keyboardOnAlpha = 0.9;
     
     if(!isStandalone){
@@ -2381,7 +2406,7 @@ extern UserController * g_userController;
     //
     // Init display
     //
-    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone setDifficulty:_difficulty andLoops:loops];
+    _displayController = [[SongDisplayController alloc] initWithSong:_songModel andView:_glView isStandalone:isStandalone isSheetMusic:isSheetMusic setDifficulty:_difficulty andLoops:loops];
     
     // MIN and MAX have been set, refresh
     [self refreshKeyboardToKeyMin:YES];
@@ -3139,10 +3164,10 @@ extern UserController * g_userController;
     [g_userController addScore:_scoreTracker.m_score forSong:_userSong.m_songId];
     
     // If our queue is full, don't let them upload more songs
-    if ( [g_userController isUserSongSessionQueueFull] == YES )
-    {
-        [_feedSwitch setOn:NO];
-    }
+    //if ( [g_userController isUserSongSessionQueueFull] == YES )
+    //{
+    //   [_feedSwitch setOn:NO];
+    //}
     
 }
 

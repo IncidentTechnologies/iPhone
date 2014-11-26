@@ -15,7 +15,8 @@
 #define FRAME_LOOKAHEAD 5
 #define FRAME_LOOKBACK 5
 
-#define SONG_BEATS_PER_SCREEN 1.5
+#define SONG_BEATS_PER_SCREEN_VERTICAL 1.5
+#define SONG_BEATS_PER_SCREEN_HORIZONTAL 4.0
 #define SONG_BEAT_OFFSET 0.5
 
 #define GL_SCREEN_TOP_BUFFER 46.0
@@ -39,6 +40,7 @@
 #define KEYS_BLACK_KEY_MED_COUNT 3
 #define KEYS_WHITE_KEY_EASY_COUNT 3
 #define KEYS_BLACK_KEY_EASY_COUNT 2
+
 
 #define DEFAULT_BLACK_KEY_PROPORTION 0.6
 
@@ -69,6 +71,7 @@ extern KeysController * g_keysController;
 @property (nonatomic, assign) double cameraScale;
 
 @property (nonatomic, assign) BOOL isStandalone;
+@property (nonatomic, assign) BOOL isSheetMusic;
 @property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
 
 @property (nonatomic, assign) KeyPosition songRangeKeyMin;
