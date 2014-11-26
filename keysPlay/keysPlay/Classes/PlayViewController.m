@@ -1662,7 +1662,7 @@ extern UserController * g_userController;
     [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO];
 }
 
-- (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted
+- (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted isMissed:(BOOL)isMissed
 {
     double keyWidth = keyboardOverview.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
@@ -1680,7 +1680,10 @@ extern UserController * g_userController;
     
     UIView * keyOverlay = [[UIView alloc] initWithFrame:CGRectMake(keyView.frame.origin.x-(overlayWidth-drawKeyWidth)/2.0,keyView.frame.origin.y-(overlayWidth-drawKeyWidth)/2.0,overlayWidth,overlayWidth)];
     
-    if(!isBlackKey){
+    if(isMissed){
+        [keyView setBackgroundColor:[UIColor colorWithRed:222/255.0 green:85/255.0 blue:49/255.0 alpha:1.0]];
+        [keyOverlay setBackgroundColor:[UIColor colorWithRed:222/255.0 green:85/255.0 blue:49/255.0 alpha:1.0]];
+    }else if(!isBlackKey){
         [keyView setBackgroundColor:[UIColor whiteColor]];
         [keyOverlay setBackgroundColor:[UIColor whiteColor]];
     }else{
@@ -2804,13 +2807,13 @@ extern UserController * g_userController;
     {
         DLog(@"Play View Controller Pluck Muted String");
         [g_soundMaster playMutedKey:key];
-        [self lightKeyOnPlay:key isMuted:YES];
+        [self lightKeyOnPlay:key isMuted:YES isMissed:NO];
     }
     else
     {
         DLog(@"Play View Controller Pluck String");
         [g_soundMaster playKey:key];
-        [self lightKeyOnPlay:key isMuted:NO];
+        [self lightKeyOnPlay:key isMuted:NO isMissed:NO];
     }
     
 }
@@ -2855,7 +2858,14 @@ extern UserController * g_userController;
     // DLog(@"Song model exit frame");
     
     // Miss all the remaining notes
+    
     for(NSNote * n in frame.m_notesPending){
+        
+        if(!isStandalone && ((_difficulty != PlayViewControllerDifficultyEasy && !_autocomplete) || [frame.m_notesHit count] == 0)){
+            [self lightKeyOnPlay:n.m_key isMuted:NO isMissed:YES];
+        }else if(isStandalone){
+            [self showMissedKey:n];
+        }
         
         [_displayController missNote:n];
         
@@ -3321,6 +3331,23 @@ extern UserController * g_userController;
 
 #pragma mark - Standalone logic
 // Standalone
+- (void)showMissedKey:(NSNote *)note
+{
+    float keyPosition = [g_keysMath convertKeyToCoordSpace:note.m_key];
+    float keyWidth = 20.0;
+ 
+    for(UIView * view in selectedKeyboard.subviews){
+        
+        if(keyPosition-keyWidth > view.frame.origin.x && keyPosition+keyWidth < view.frame.origin.x+view.frame.size.width){
+        
+            [self colorKeyOnTap:view withAccuracy:-1];
+            
+        }
+        
+    }
+    
+}
+
 - (void)tapNoteFromTouchPoint
 {
     NSMutableArray * touchPoints = [[NSMutableArray alloc] initWithArray:activeTouchPoints copyItems:YES];
@@ -3388,8 +3415,8 @@ extern UserController * g_userController;
         hitIncorrect = TOUCH_HIT_HARD_INCORRECT;
     }
     
-    UIColor * uncolored = key.backgroundColor;
-    UIColor * accuracyColor = [UIColor colorWithRed:154/255.0 green:184/255.0 blue:195/255.0 alpha:1.0];
+    UIColor * uncolored = (key.tag == 0) ? [UIColor whiteColor] : [UIColor colorWithRed:185/255.0 green:212/255.0 blue:222/255.0 alpha:1.0];
+    UIColor * accuracyColor = (key.tag == 0) ? [UIColor colorWithRed:49/255.0 green:61/255.0 blue:66/255.0 alpha:1.0] : [UIColor colorWithRed:154/255.0 green:184/255.0 blue:195/255.0 alpha:1.0];
     
     if(accuracy > hitCorrect){
         //accuracyColor = [UIColor colorWithRed:31/255.0 green:195/255.0 blue:72/266.0 alpha:1.0];
