@@ -3241,7 +3241,7 @@ extern UserController * g_userController;
         if(activeTouchPoints == nil){
             activeTouchPoints = [[NSMutableArray alloc] init];
             
-            [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
             
         }
         
@@ -3415,8 +3415,8 @@ extern UserController * g_userController;
         hitIncorrect = TOUCH_HIT_HARD_INCORRECT;
     }
     
-    UIColor * uncolored = (key.tag == 0) ? [UIColor whiteColor] : [UIColor colorWithRed:185/255.0 green:212/255.0 blue:222/255.0 alpha:1.0];
-    UIColor * accuracyColor = (key.tag == 0) ? [UIColor colorWithRed:49/255.0 green:61/255.0 blue:66/255.0 alpha:1.0] : [UIColor colorWithRed:154/255.0 green:184/255.0 blue:195/255.0 alpha:1.0];
+    UIColor * uncolored = (key.tag == 0) ? [UIColor whiteColor] : [UIColor colorWithRed:53/255.0 green:194/255.0 blue:241/255.0 alpha:1.0];
+    UIColor * accuracyColor = (key.tag == 0) ? [UIColor colorWithRed:185/255.0 green:212/255.0 blue:222/255.0 alpha:1.0] : [UIColor colorWithRed:154/255.0 green:184/255.0 blue:195/255.0 alpha:1.0];
     
     if(accuracy > hitCorrect){
         //accuracyColor = [UIColor colorWithRed:31/255.0 green:195/255.0 blue:72/266.0 alpha:1.0];

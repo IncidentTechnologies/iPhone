@@ -758,6 +758,8 @@
         return nil;
     }
     
+    DLog(@"Get key press from tap");
+    
     // Make sure touch is within the allowed area near the keyboard
     double touchBuffer = 50.0;
     
@@ -777,6 +779,7 @@
     // Determine which frame was played by Y intersection
     NSNoteFrame * activeFrame = nil;
     
+    int frameIndex = 0;
     for(NSNoteFrame * frame in m_songModel.m_noteFrames){
         
         if(frame.m_absoluteBeatStart > m_songModel.m_currentBeat + SONG_BEATS_PER_SCREEN){
@@ -785,7 +788,7 @@
             continue;
             //return nil;
             
-        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET/2.0 <= frame.m_absoluteBeatStart && [frame.m_notesPending count] > 0){
+        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET <= frame.m_absoluteBeatStart && [frame.m_notesPending count] > 0){ ///2.0
             
             // Check everything upcoming
             
@@ -809,15 +812,22 @@
                 break;
             }
         }
+        frameIndex++;
     }
     
     if(activeFrame == nil || [activeFrame.m_notesPending count] == 0){
+        
+        if(activeFrame == nil){
+            DLog(@"Active frame is nil");
+        }else{
+            DLog(@"Notes pending");
+        }
         
         return nil;
         
     }else{
         
-        DLog(@"Found frame %@ | number of touches is %i",activeFrame,[touchPoints count]);
+        DLog(@"Found frame %i = %@ | number of touches is %i",frameIndex,activeFrame,[touchPoints count]);
     }
     
 
