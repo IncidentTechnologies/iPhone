@@ -345,14 +345,10 @@
 - (void)displayFrame:(NSNoteFrame*)frame
 {
     
-    //DLog(@"Frame is %@",frame);
-    
     NSMutableDictionary * standaloneNotesForStrings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                                        [NSNull null],[NSNumber numberWithInt:1],
                                                        [NSNull null],[NSNumber numberWithInt:2],
                                                        [NSNull null],[NSNumber numberWithInt:3], nil];
-    
-    //DLog(@"Standalone notes for strings is %@",standaloneNotesForStrings);
     
     // Initialize fret count
     int countFrets[4];
@@ -374,16 +370,6 @@
         if(!firstNote){
             firstNote = note;
         }
-        
-        // Determine if active for standalone (first in a row)
-        /*int standalonestring = [self getMappedKeyFromKey:note.m_key];
-        if([standaloneNotesForStrings objectForKey:[NSNumber numberWithInt:standalonestring]] == [NSNull null]){
-            [standaloneNotesForStrings setObject:note forKey:[NSNumber numberWithInt:standalonestring]];
-            note.m_standaloneActive = YES;
-        }else{
-            note.m_standaloneActive = NO;
-        }
-         */
         
         note.m_standaloneActive = NO;
         
@@ -440,35 +426,13 @@
             
         }
         
-        /*}else if(difficulty == PlayViewControllerDifficultyEasy){ // Easy
-            
-            noteColor = g_standaloneKeyColors[0];
-            
-        }else if(difficulty == PlayViewControllerDifficultyMedium){ // Medium
-            
-            noteColor = g_standaloneKeyColors[firstNote.m_key%KEYS_OCTAVE_COUNT];
-            
-            if(note.m_standaloneActive){
-                if(firstNote.m_key > 0){
-                    countFrets[0]++;
-                    countFrets[[self getStandaloneKeyFromKey:firstNote.m_key]]++;
-                }
-            }
-            
-        }else{ // Hard
-            
-            noteColor = g_standaloneKeyColors[note.m_key%KEYS_OCTAVE_COUNT];
-            
-            if(note.m_standaloneActive){
-                if(note.m_key > 0){
-                    countFrets[0]++;
-                    countFrets[[self getStandaloneKeyFromKey:note.m_key]]++;
-                }
-            }
-            
-        }*/
+        Texture2D * modelTexture;
         
-        Texture2D * modelTexture = [g_keysMath isKeyBlackKey:note.m_key] ? m_blackKeyTexture : m_whiteKeyTexture;
+        if(!isSheetMusic){
+            modelTexture = [g_keysMath isKeyBlackKey:note.m_key] ? m_blackKeyTexture : m_whiteKeyTexture;
+        }else{
+            modelTexture = [self createNoteTextureForNote:note.m_key withDuration:note.m_duration];
+        }
         
         model = [[NoteModel alloc] initWithCenter:center andColor:noteColor andTexture:modelTexture andOverlay:overlay];
         
@@ -486,23 +450,6 @@
         
         
     }
-    
-    // Set the note counts for the model
-    /*if(isStandalone){
-        for ( NSNote * note in frame.m_notes )
-        {
-            if(note.m_standaloneActive){
-                
-                NSValue * key = [NSValue valueWithNonretainedObject:note];
-                NoteModel * model = [m_noteModelDictionary objectForKey:key];
-                
-                for(int f = 0; f < 4; f++){
-                    [model setFretNoteCount:countFrets[f] AtIndex:f];
-                }
-            }
-        }
-    }*/
-    
 }
 
 - (void)activateNoteAnimation:(NSNote*)note
@@ -618,10 +565,7 @@
     
     GLubyte * stringColor = g_whiteColorTransparent; // all white
     
-    // Bass clef lines: G, B, D, F, A
-    // Treble lines:    E, G, B, D, F
-    
-    NSArray * linesForKeys = [NSArray arrayWithObjects:[NSNumber numberWithInt:43],[NSNumber numberWithInt:47],[NSNumber numberWithInt:50], [NSNumber numberWithInt:53],[NSNumber numberWithInt:57],[NSNumber numberWithInt:64], [NSNumber numberWithInt:67],[NSNumber numberWithInt:71],[NSNumber numberWithInt:74], [NSNumber numberWithInt:77], nil];
+    NSArray * linesForKeys = [g_keysMath getLedgerLines];
     
     // Draw lines for treble and bass
     for ( unsigned int i = 0; i < [linesForKeys count]; i++ )
@@ -801,6 +745,39 @@
                                                 andColor:g_whiteColor
                                                 andValue:-1];
      */
+}
+
+- (Texture2D *)createNoteTextureForNote:(KeyPosition)key withDuration:(double)duration
+{
+    UIImage * keyScaledImage;
+    UIImage * keyImage;
+    
+    NSString * upDown = ([g_keysMath noteFacesUp:key]) ? @"Up" : @"Down";
+    
+    if(duration >= 4.0){
+        keyImage = [UIImage imageNamed:@"NoteWhole.png"];
+    }else if(duration >= 2.0){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteHalf%@.png",upDown]];
+    }else if(duration >= 1.0){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteQuarter%@.png",upDown]];
+    }else if(duration >= 0.5){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@.png",upDown]];
+    }else if(duration >= 0.25){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@.png",upDown]];
+    }
+    
+    CGSize size;
+    size.height = GL_NOTE_HEIGHT;
+    size.width = GL_NOTE_HEIGHT;
+    
+    UIGraphicsBeginImageContext(size);
+    [keyImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    keyScaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    Texture2D * texture = [[Texture2D alloc] initWithImage:keyScaledImage];
+    
+    return texture;
 }
 
 - (void)createNoteTexture

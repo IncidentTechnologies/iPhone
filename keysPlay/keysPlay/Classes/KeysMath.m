@@ -222,9 +222,9 @@
     if(isSheetMusic){
     
         BOOL isKeyBlackKey = [self isKeyBlackKey:key];
-        int sheetMusicMin = 36; // Low C
-        int sheetMusicMax = 83; // High B
-        int numWhiteKeys = 28;
+        int sheetMusicMin = KEYS_SHEET_MUSIC_MIN; // Low C
+        int sheetMusicMax = KEYS_SHEET_MUSIC_MAX; // High B
+        int numWhiteKeys = KEYS_SHEET_MUSIC_NUM_WHITE_KEYS;
         
         double heightPerWhiteKey = glScreenHeight / ((GLfloat)numWhiteKeys);
         int keyWhiteKey = [self getWhiteKeyFromNthKey:key];
@@ -349,6 +349,33 @@
         }
     }
     
+}
+
+#pragma mark - Sheet Music
+
+- (NSArray *)getLedgerLines
+{
+    // Bass clef lines: G, B, D, F, A
+    // Treble lines:    E, G, B, D, F
+    
+    return [NSArray arrayWithObjects:[NSNumber numberWithInt:43],[NSNumber numberWithInt:47],[NSNumber numberWithInt:50], [NSNumber numberWithInt:53],[NSNumber numberWithInt:57],[NSNumber numberWithInt:64], [NSNumber numberWithInt:67],[NSNumber numberWithInt:71],[NSNumber numberWithInt:74], [NSNumber numberWithInt:77], nil];;
+}
+
+- (BOOL)noteFacesUp:(KeyPosition)key
+{
+    if(key >= 71){ // B
+        return FALSE;
+    }
+    
+    if(key >= 60){ // Middle C
+        return TRUE;
+    }
+    
+    if(key >= 49){ // D
+        return FALSE;
+    }
+    
+    return TRUE;
 }
 
 #pragma mark - Drawing

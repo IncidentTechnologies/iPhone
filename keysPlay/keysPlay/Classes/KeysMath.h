@@ -41,6 +41,9 @@
 #define KEYS_WHITE_KEY_EASY_COUNT 3
 #define KEYS_BLACK_KEY_EASY_COUNT 2
 
+#define KEYS_SHEET_MUSIC_MIN 36 // Low C
+#define KEYS_SHEET_MUSIC_MAX 83 // High B
+#define KEYS_SHEET_MUSIC_NUM_WHITE_KEYS 28
 
 #define DEFAULT_BLACK_KEY_PROPORTION 0.6
 
@@ -102,6 +105,10 @@ extern KeysController * g_keysController;
 - (int)getWhiteKeyFromNthKey:(int)nthKey;
 - (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
+
+// Sheet Music
+- (NSArray *)getLedgerLines;
+- (BOOL)noteFacesUp:(KeyPosition)key;
 
 // Drawing
 - (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive;

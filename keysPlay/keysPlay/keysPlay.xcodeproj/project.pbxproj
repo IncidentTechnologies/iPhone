@@ -207,6 +207,15 @@
 		6DD135EC1A02DEFA00996073 /* keys_AppIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E61A02DEFA00996073 /* keys_AppIcon_114.png */; };
 		6DD135ED1A02DEFA00996073 /* keys_AppIcon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E71A02DEFA00996073 /* keys_AppIcon_120.png */; };
 		6DD5FB0218FCB8A40066C888 /* SongPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */; };
+		6DE131C01A26AF58009BE59C /* Note16thDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131B71A26AF58009BE59C /* Note16thDown.png */; };
+		6DE131C11A26AF58009BE59C /* Note16thUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131B81A26AF58009BE59C /* Note16thUp.png */; };
+		6DE131C21A26AF58009BE59C /* Note8thDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131B91A26AF58009BE59C /* Note8thDown.png */; };
+		6DE131C31A26AF58009BE59C /* Note8thUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BA1A26AF58009BE59C /* Note8thUp.png */; };
+		6DE131C41A26AF58009BE59C /* NoteHalfDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BB1A26AF58009BE59C /* NoteHalfDown.png */; };
+		6DE131C51A26AF58009BE59C /* NoteHalfUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BC1A26AF58009BE59C /* NoteHalfUp.png */; };
+		6DE131C61A26AF58009BE59C /* NoteQuarterDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BD1A26AF58009BE59C /* NoteQuarterDown.png */; };
+		6DE131C71A26AF58009BE59C /* NoteQuarterUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BE1A26AF58009BE59C /* NoteQuarterUp.png */; };
+		6DE131C81A26AF58009BE59C /* NoteWhole.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE131BF1A26AF58009BE59C /* NoteWhole.png */; };
 		6DE1556F19789A9B00E8B360 /* AuxIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556D19789A9B00E8B360 /* AuxIcon.png */; };
 		6DE1557019789A9B00E8B360 /* SpeakerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */; };
 		6DFBBC601A250EE300565857 /* ScoreStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBBC5F1A250EE300565857 /* ScoreStar.png */; };
@@ -1742,6 +1751,15 @@
 		6DD135E71A02DEFA00996073 /* keys_AppIcon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys_AppIcon_120.png; sourceTree = "<group>"; };
 		6DD5FB0018FCB8A40066C888 /* SongPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongPlaybackController.h; sourceTree = "<group>"; };
 		6DD5FB0118FCB8A40066C888 /* SongPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongPlaybackController.m; sourceTree = "<group>"; };
+		6DE131B71A26AF58009BE59C /* Note16thDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note16thDown.png; sourceTree = "<group>"; };
+		6DE131B81A26AF58009BE59C /* Note16thUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note16thUp.png; sourceTree = "<group>"; };
+		6DE131B91A26AF58009BE59C /* Note8thDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note8thDown.png; sourceTree = "<group>"; };
+		6DE131BA1A26AF58009BE59C /* Note8thUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note8thUp.png; sourceTree = "<group>"; };
+		6DE131BB1A26AF58009BE59C /* NoteHalfDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteHalfDown.png; sourceTree = "<group>"; };
+		6DE131BC1A26AF58009BE59C /* NoteHalfUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteHalfUp.png; sourceTree = "<group>"; };
+		6DE131BD1A26AF58009BE59C /* NoteQuarterDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteQuarterDown.png; sourceTree = "<group>"; };
+		6DE131BE1A26AF58009BE59C /* NoteQuarterUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteQuarterUp.png; sourceTree = "<group>"; };
+		6DE131BF1A26AF58009BE59C /* NoteWhole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteWhole.png; sourceTree = "<group>"; };
 		6DE1556D19789A9B00E8B360 /* AuxIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AuxIcon.png; path = Resources/Images/Play/AuxIcon.png; sourceTree = SOURCE_ROOT; };
 		6DE1556E19789A9B00E8B360 /* SpeakerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SpeakerIcon.png; path = Resources/Images/Play/SpeakerIcon.png; sourceTree = SOURCE_ROOT; };
 		6DFBBC5F1A250EE300565857 /* ScoreStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScoreStar.png; path = Resources/Images/Play/ScoreStar.png; sourceTree = SOURCE_ROOT; };
@@ -2910,6 +2928,23 @@
 			name = Audio;
 			sourceTree = "<group>";
 		};
+		6DE131B61A26AF58009BE59C /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				6DE131B71A26AF58009BE59C /* Note16thDown.png */,
+				6DE131B81A26AF58009BE59C /* Note16thUp.png */,
+				6DE131B91A26AF58009BE59C /* Note8thDown.png */,
+				6DE131BA1A26AF58009BE59C /* Note8thUp.png */,
+				6DE131BB1A26AF58009BE59C /* NoteHalfDown.png */,
+				6DE131BC1A26AF58009BE59C /* NoteHalfUp.png */,
+				6DE131BD1A26AF58009BE59C /* NoteQuarterDown.png */,
+				6DE131BE1A26AF58009BE59C /* NoteQuarterUp.png */,
+				6DE131BF1A26AF58009BE59C /* NoteWhole.png */,
+			);
+			name = Notes;
+			path = Resources/Images/Play/Notes;
+			sourceTree = SOURCE_ROOT;
+		};
 		9D054C84174C68E000FA3239 /* Bowed Strings */ = {
 			isa = PBXGroup;
 			children = (
@@ -3986,6 +4021,7 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DE131B61A26AF58009BE59C /* Notes */,
 				6DFBBC5F1A250EE300565857 /* ScoreStar.png */,
 				6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */,
 				ECE832251718A767006E2391 /* BlueMenu.png */,
@@ -4186,6 +4222,7 @@
 				EC24DD0C161A89C000016B78 /* Acoustic Guitar 73.mp3 in Resources */,
 				EC24DD0D161A89C000016B78 /* Acoustic Guitar 74.mp3 in Resources */,
 				6DAD0B2819187F1F005B3807 /* Warm Analogue 63.mp3 in Resources */,
+				6DE131C11A26AF58009BE59C /* Note16thUp.png in Resources */,
 				EC24DD0E161A89C000016B78 /* Acoustic Guitar 75.mp3 in Resources */,
 				6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */,
 				EC24DD0F161A89C000016B78 /* Acoustic Guitar 76.mp3 in Resources */,
@@ -4277,6 +4314,7 @@
 				6DAD0B3319187F1F005B3807 /* Warm Analogue 74.mp3 in Resources */,
 				EC24DD59161A89C800016B78 /* Piano 68.mp3 in Resources */,
 				EC24DD5A161A89C800016B78 /* Piano 69.mp3 in Resources */,
+				6DE131C31A26AF58009BE59C /* Note8thUp.png in Resources */,
 				6DAD0B3919187F1F005B3807 /* Warm Analogue 80.mp3 in Resources */,
 				EC24DD5B161A89C800016B78 /* Piano 70.mp3 in Resources */,
 				EC24DD5C161A89C800016B78 /* Piano 71.mp3 in Resources */,
@@ -4313,6 +4351,7 @@
 				EC24DD73161A89CD00016B78 /* Rhodes 53.mp3 in Resources */,
 				EC24DD74161A89CD00016B78 /* Rhodes 54.mp3 in Resources */,
 				6DB285BA1921915600B3D14C /* Electric Guitar 20.mp3 in Resources */,
+				6DE131C01A26AF58009BE59C /* Note16thDown.png in Resources */,
 				6DD135ED1A02DEFA00996073 /* keys_AppIcon_120.png in Resources */,
 				EC24DD75161A89CD00016B78 /* Rhodes 55.mp3 in Resources */,
 				EC24DD76161A89CD00016B78 /* Rhodes 56.mp3 in Resources */,
@@ -4544,6 +4583,7 @@
 				6DAD0B1F19187F1F005B3807 /* Warm Analogue 54.mp3 in Resources */,
 				ECE832361718D82C006E2391 /* Skill_GREY.png in Resources */,
 				ECE8323E1718EA34006E2391 /* SocialViewController.xib in Resources */,
+				6DE131C61A26AF58009BE59C /* NoteQuarterDown.png in Resources */,
 				9DF148271725EFDB0056A6D1 /* EffectsIcon.png in Resources */,
 				6DB285F51921915600B3D14C /* Electric Guitar 74.mp3 in Resources */,
 				9DF1482A1725EFE40056A6D1 /* InstrumentIcon.png in Resources */,
@@ -4614,6 +4654,7 @@
 				9D054CB0174C68E000FA3239 /* Bowed Strings 41.mp3 in Resources */,
 				9D054CB2174C68E000FA3239 /* Bowed Strings 42.mp3 in Resources */,
 				9D054CB4174C68E000FA3239 /* Bowed Strings 43.mp3 in Resources */,
+				6DE131C71A26AF58009BE59C /* NoteQuarterUp.png in Resources */,
 				9D054CB6174C68E000FA3239 /* Bowed Strings 44.mp3 in Resources */,
 				6DB2860F1921915600B3D14C /* Electric Guitar 98.mp3 in Resources */,
 				6DAD0B1919187F1F005B3807 /* Warm Analogue 48.mp3 in Resources */,
@@ -4699,6 +4740,8 @@
 				9D054D64174C68E700FA3239 /* Carl's Synth 69.mp3 in Resources */,
 				6DB285FA1921915600B3D14C /* Electric Guitar 79.mp3 in Resources */,
 				9D054D66174C68E700FA3239 /* Carl's Synth 70.mp3 in Resources */,
+				6DE131C51A26AF58009BE59C /* NoteHalfUp.png in Resources */,
+				6DE131C81A26AF58009BE59C /* NoteWhole.png in Resources */,
 				9D054D68174C68E700FA3239 /* Carl's Synth 71.mp3 in Resources */,
 				9D054D6A174C68E700FA3239 /* Carl's Synth 72.mp3 in Resources */,
 				9D054D6C174C68E700FA3239 /* Carl's Synth 73.mp3 in Resources */,
@@ -4740,6 +4783,7 @@
 				9D054DD0174C68EE00FA3239 /* Muted Clav 61.mp3 in Resources */,
 				6DB285D21921915600B3D14C /* Electric Guitar 42.mp3 in Resources */,
 				9D054DD2174C68EE00FA3239 /* Muted Clav 62.mp3 in Resources */,
+				6DE131C21A26AF58009BE59C /* Note8thDown.png in Resources */,
 				6DAD0B3719187F1F005B3807 /* Warm Analogue 78.mp3 in Resources */,
 				9D054DD4174C68EE00FA3239 /* Muted Clav 63.mp3 in Resources */,
 				9D054DD6174C68EE00FA3239 /* Muted Clav 64.mp3 in Resources */,
@@ -4766,6 +4810,7 @@
 				9D054E22174C68FB00FA3239 /* Upright Bass 40.mp3 in Resources */,
 				9D054E24174C68FB00FA3239 /* Upright Bass 41.mp3 in Resources */,
 				9D054E26174C68FB00FA3239 /* Upright Bass 42.mp3 in Resources */,
+				6DE131C41A26AF58009BE59C /* NoteHalfDown.png in Resources */,
 				9D054E28174C68FB00FA3239 /* Upright Bass 43.mp3 in Resources */,
 				9D054E2A174C68FB00FA3239 /* Upright Bass 44.mp3 in Resources */,
 				9D054E2C174C68FB00FA3239 /* Upright Bass 45.mp3 in Resources */,
