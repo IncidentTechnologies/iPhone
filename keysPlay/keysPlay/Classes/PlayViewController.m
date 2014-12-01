@@ -1978,7 +1978,7 @@ extern UserController * g_userController;
 
 - (void)mainEventLoop {
     
-#ifdef Debug_BUILD
+//#ifdef Debug_BUILD
     if(g_keysController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
@@ -2011,7 +2011,7 @@ extern UserController * g_userController;
             
         }
     }
-#endif
+//#endif
     
     if(g_keysController.connected && !isStandalone) {
         
@@ -3344,11 +3344,11 @@ extern UserController * g_userController;
     if(!isStandalone){
         
         // Debug
-#ifdef Debug_BUILD
+//#ifdef Debug_BUILD
         if(g_keysController.connected){
             _skipNotes = YES;
         }
-#endif
+//#endif
     
     }
     

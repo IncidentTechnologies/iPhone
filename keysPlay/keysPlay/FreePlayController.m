@@ -683,7 +683,7 @@ extern KeysController * g_keysController;
     else
     {
         
-#ifdef Debug_BUILD
+//#ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
         
         int keyMin = [g_keysController range].keyMin;
@@ -719,7 +719,7 @@ extern KeysController * g_keysController;
             
         }
          */
-#endif
+//#endif
         
         m_LEDTouchArea = LEDTouchNone;
         return;

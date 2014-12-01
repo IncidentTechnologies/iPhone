@@ -752,23 +752,28 @@
     UIImage * keyScaledImage;
     UIImage * keyImage;
     
-    NSString * upDown = ([g_keysMath noteFacesUp:key]) ? @"Up" : @"Down";
-    
-    if(duration >= 4.0){
-        keyImage = [UIImage imageNamed:@"NoteWhole.png"];
-    }else if(duration >= 2.0){
-        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteHalf%@.png",upDown]];
-    }else if(duration >= 1.0){
-        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteQuarter%@.png",upDown]];
-    }else if(duration >= 0.5){
-        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@.png",upDown]];
-    }else if(duration >= 0.25){
-        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@.png",upDown]];
-    }
+    NSString * sharp = ([g_keysMath isKeyBlackKey:key]) ? @"Sharp" : @"";
     
     CGSize size;
     size.height = GL_NOTE_HEIGHT;
     size.width = GL_NOTE_HEIGHT;
+    
+    if(duration >= 4.0){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteWhole%@",sharp]];
+        size.width = 16 * GL_NOTE_HEIGHT;
+    }else if(duration >= 2.0){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteHalf%@",sharp]];
+        size.width = 8 * GL_NOTE_HEIGHT;
+    }else if(duration >= 1.0){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteQuarter%@",sharp]];
+        size.width = 4 * GL_NOTE_HEIGHT;
+    }else if(duration >= 0.5){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@",sharp]];
+        size.width = 2 * GL_NOTE_HEIGHT;
+    }else if(duration >= 0.25){
+        keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@",sharp]];
+    }
+    
     
     UIGraphicsBeginImageContext(size);
     [keyImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
