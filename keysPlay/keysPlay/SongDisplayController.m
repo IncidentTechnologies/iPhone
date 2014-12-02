@@ -250,7 +250,9 @@
         
         NSNote * note = [key nonretainedObjectValue];
         
-        if ( note.m_absoluteBeatStart < ( currentBeat - SONG_BEAT_OFFSET ) )
+        double offsetBeats = (isSheetMusic) ? SONG_BEAT_OFFSET_HORIZONTAL : SONG_BEAT_OFFSET_VERTICAL;
+        
+        if ( note.m_absoluteBeatStart < ( currentBeat - offsetBeats ) )
         {
             
             NoteModel * note = [m_noteModelDictionary objectForKey:key];
@@ -887,6 +889,8 @@
     
     int songBeats = (isSheetMusic) ? SONG_BEATS_PER_SCREEN_HORIZONTAL : SONG_BEATS_PER_SCREEN_VERTICAL;
     
+    double offsetBeats = (isSheetMusic) ? SONG_BEAT_OFFSET_HORIZONTAL : SONG_BEAT_OFFSET_VERTICAL;
+    
     int frameIndex = 0;
     for(NSNoteFrame * frame in m_songModel.m_noteFrames){
         
@@ -896,7 +900,7 @@
             continue;
             //return nil;
             
-        }else if(m_songModel.m_currentBeat - SONG_BEAT_OFFSET <= frame.m_absoluteBeatStart && [frame.m_notesPending count] > 0){ ///2.0
+        }else if(m_songModel.m_currentBeat - offsetBeats <= frame.m_absoluteBeatStart && [frame.m_notesPending count] > 0){ ///2.0
             
             // Check everything upcoming
             
