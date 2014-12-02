@@ -179,5 +179,6 @@ extern KeysMath *g_keysMath;
 - (IBAction)instrumentButtonClicked:(id)sender;
 - (IBAction)repeatButtonClicked:(id)sender;
 - (IBAction)tempoButtonClicked:(id)sender;
+- (IBAction)toggleSheetMusic:(id)sender;
 
 @end

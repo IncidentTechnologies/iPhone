@@ -930,6 +930,9 @@
                                 <switch opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Or6-pO-7RI">
                                     <rect key="frame" x="134" y="57" width="51" height="31"/>
                                     <color key="onTintColor" red="0.0" green="0.62745098040000002" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="toggleSheetMusic:" destination="-1" eventType="valueChanged" id="rYw-w7-cDB"/>
+                                    </connections>
                                 </switch>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="345">
                                     <rect key="frame" x="344" y="44" width="43" height="44"/>

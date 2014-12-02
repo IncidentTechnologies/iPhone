@@ -10,7 +10,7 @@
 
 #define PRELOAD_INITIAL 128
 #define PRELOAD_MAX 256
-#define PRELOAD_INCREMENT 8
+#define PRELOAD_INCREMENT 12
 #define PRELOAD_TIMER_DURATION 2.0
 
 #define GL_SCREEN_HEIGHT (m_glView.frame.size.height)
@@ -66,25 +66,28 @@
         if ( m_glView.m_renderer == nil )
         {
             m_renderer = [[SongES1Renderer alloc] init];
-            m_renderer.m_isVertical = !isSheetMusic;
+            
+            DLog(@"Alloc renderer %i",isSheetMusic);
             
             m_glView.m_renderer = m_renderer;
-            
-            [self shiftViewToKey:[g_keysController range].keyMin];
-            
-            m_renderer.m_offset = GL_SEEK_LINE_Y;
-            
-            if(isSheetMusic){
-                m_renderer.m_horizontalOffset = GL_SEEK_LINE_X;
-            }else{
-                m_renderer.m_horizontalOffset = 0.0;
-            }
-                
-            [m_glView layoutSubviews];
             
         }else{
             m_renderer = (SongES1Renderer*)m_glView.m_renderer;
         }
+        
+        m_renderer.m_isVertical = !isSheetMusic;
+        
+        [self shiftViewToKey:[g_keysController range].keyMin];
+        
+        m_renderer.m_offset = GL_SEEK_LINE_Y;
+        
+        if(isSheetMusic){
+            m_renderer.m_horizontalOffset = GL_SEEK_LINE_X;
+        }else{
+            m_renderer.m_horizontalOffset = 0.0;
+        }
+        
+        [m_glView layoutSubviews];
         
         //[self cancelPreloading];
         

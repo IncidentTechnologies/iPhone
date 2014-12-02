@@ -238,7 +238,7 @@
         CGPoint center = [lineModel getCenter];
         CGSize size = [lineModel getSize];
         
-        if(m_horizontalOffset-m_currentPosition+center.x-size.width/4.0 > GL_SEEK_LINE_X){
+        if(m_horizontalOffset-m_currentPosition+center.x-size.width/3.5 > GL_SEEK_LINE_X){
             [lineModel drawAt:CGPointMake(center.x,center.y)];
         }
     }

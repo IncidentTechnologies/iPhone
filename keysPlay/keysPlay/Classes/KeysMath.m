@@ -252,8 +252,6 @@
         int keyWhiteKey = [self getWhiteKeyFromNthKey:key];
         int sheetMusicMinWhiteKey = [self getWhiteKeyFromNthKey:sheetMusicMin];
         
-        DLog(@"Key white key is %i for %i",keyWhiteKey,key);
-        
         if(key < sheetMusicMin || key > sheetMusicMax){
             DLog(@"Key out of range");
             return -heightPerWhiteKey;

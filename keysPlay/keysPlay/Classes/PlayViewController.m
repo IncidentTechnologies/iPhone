@@ -679,9 +679,10 @@ extern UserController * g_userController;
         }
         
         // Toggle Sheet Music?
-        if(_sheetMusicSwitch.isOn != isSheetMusic){
-            [self toggleSheetMusic];
-        }
+        // Restart song?
+        //if(_sheetMusicSwitch.isOn != isSheetMusic){
+        //    [self toggleSheetMusic];
+        //}
         
         [self showHideMenu:_menuView isOpen:NO];
     }
@@ -1404,7 +1405,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)toggleSheetMusic
+- (IBAction)toggleSheetMusic:(id)sender
 {
     isSheetMusic = _sheetMusicSwitch.isOn;
     g_keysMath.isSheetMusic = isSheetMusic;
