@@ -85,10 +85,12 @@ extern KeysMath * g_keysMath;
 - (id)initWithSong:(NSSongModel*)song andView:(EAGLView*)glView isStandalone:(BOOL)standalone isSheetMusic:(BOOL)isSheetMusic setDifficulty:(PlayViewControllerDifficulty)useDifficulty andLoops:(int)numLoops;
 - (void)updateDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
+- (void)createMeasureLineModels;
 - (void)createLineModels;
 - (void)createNumberModels;
 - (void)createNoteTexture;
 - (void)createBackgroundTexture;
+- (void)createSheetMusicBackground;
 
 - (void)renderImage;
 - (void)updateDisplayedFrames;

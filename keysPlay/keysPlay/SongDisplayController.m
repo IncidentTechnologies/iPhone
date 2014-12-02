@@ -102,6 +102,7 @@
         
         if(isSheetMusic){
             [self createSheetMusicBackground];
+            [self createMeasureLineModels];
         }else{
             [self createLineModels];
         }
@@ -634,18 +635,48 @@
     }
 }
 
+- (void)createMeasureLineModels
+{
+    // Draw scrolling measure lines for sheet music
+    
+    int numMeasures = [m_songModel.m_song.m_measures count];
+    
+    for(int i = 0; i < numMeasures; i++){
+    
+        NSMeasure * measure = [m_songModel.m_song.m_measures objectAtIndex:i];
+        
+        // Get time signature per measure
+        double measureBeat = measure.m_startBeat;
+        
+        double beatWidth = GL_SCREEN_WIDTH / SONG_BEATS_PER_SCREEN_HORIZONTAL;
+        
+        CGSize size;
+        size.width = (i+1 == numMeasures) ? 4.0 : 2.0;
+        size.height = 198.0;
+        
+        CGPoint center;
+        
+        center.x = beatWidth * (measureBeat-SONG_BEATS_PER_SCREEN_HORIZONTAL);
+        
+        // Center on middle C
+        center.y = [g_keysMath convertKeyToCoordSpace:60];
+        
+        LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+        
+        [m_renderer addLine:measureModel];
+        
+    }
+    
+    DLog(@"Create measure line model");
+    
+}
+
 - (void)createLineModels
 {
-    
-    //
-    // Create the seek line
-    //
-    
     CGSize size;
     size.width = GL_NOTE_HEIGHT / 3.0;
     size.height = GL_SCREEN_HEIGHT;
     
-    // The center will automatically be offset in the rendering
     CGPoint center;
     
     m_renderer.m_seekLineModel = nil;

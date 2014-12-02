@@ -159,9 +159,7 @@
 
 - (void)startRender
 {
-    double horizontalOffset = m_horizontalOffset;
-    
-	// init stuff
+    // init stuff
 	[EAGLContext setCurrentContext:m_context];
     
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, m_defaultFramebuffer);
@@ -207,7 +205,7 @@
     
     // Translate and draw note path areas
     if(m_isVertical){
-        glTranslatef(horizontalOffset, 0.0f, 0.0f);
+        glTranslatef(m_horizontalOffset, 0.0f, 0.0f);
     }
         
     for ( LineModel * keyPathModel in m_keyPathModels )
@@ -221,7 +219,7 @@
     if(m_isVertical){
         glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
     }else{
-        glTranslatef( [g_keysMath cameraScale]*m_horizontalOffset - m_currentPosition, 0.0f, 0.0f);
+        glTranslatef( m_horizontalOffset - m_currentPosition, 0.0f, 0.0f);
     }
     
     // And draw the moving loop lines
@@ -231,6 +229,17 @@
         CGPoint center = [loopModel getCenter];
         
         [loopModel drawAt:CGPointMake(center.x,center.y)];
+    }
+    
+    // Draw the moving measure lines
+    
+    for (LineModel * lineModel in m_lineModels )
+    {
+        CGPoint center = [lineModel getCenter];
+     
+        if(m_horizontalOffset-m_currentPosition+center.x > GL_SEEK_LINE_X){
+            [lineModel drawAt:CGPointMake(center.x,center.y)];
+        }
     }
     
 
