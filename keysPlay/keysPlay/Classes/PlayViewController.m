@@ -719,6 +719,16 @@ extern UserController * g_userController;
             [_menuMetronomeLabel setAlpha:1.0];
         }
         
+        if(isStandalone){
+            [_sheetMusicSwitch setAlpha:0.5];
+            [_sheetMusicSwitch setEnabled:NO];
+            [_sheetMusicLabel setAlpha:0.5];
+        }else{
+            [_sheetMusicSwitch setAlpha:1.0];
+            [_sheetMusicSwitch setEnabled:YES];
+            [_sheetMusicLabel setAlpha:1.0];
+        }
+        
         [self stopMainEventLoop];
         [g_soundMaster stop];
         [self drawPlayButton:_pauseButton];
@@ -1264,6 +1274,11 @@ extern UserController * g_userController;
     _postToFeed = ![settings boolForKey:@"DisablePostToFeed"];
     _autocomplete = [settings boolForKey:@"CompleteChords"];
     isSheetMusic = [settings boolForKey:@"SheetMusic"];
+    
+    if(isStandalone){
+        isSheetMusic = NO;
+    }
+    
     g_keysMath.isSheetMusic = isSheetMusic;
     [_displayController setSheetMusic:isSheetMusic];
 }

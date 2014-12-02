@@ -76,6 +76,7 @@
                 <outlet property="scoreSumStarTwo" destination="yy9-0H-vRY" id="TY5-SC-EPw"/>
                 <outlet property="scoreTotal" destination="zvs-JC-56S" id="JFa-5X-vpS"/>
                 <outlet property="scoreTotalLabel" destination="KLk-kk-Ydn" id="H4g-Ui-2RX"/>
+                <outlet property="sheetMusicLabel" destination="0Zh-aT-DCy" id="hc7-gB-7uk"/>
                 <outlet property="sheetMusicSwitch" destination="Or6-pO-7RI" id="25Z-eb-7ST"/>
                 <outlet property="songArtistLabel" destination="352" id="355"/>
                 <outlet property="songScoreView" destination="PY8-Wk-KmY" id="TMz-X3-9t5"/>

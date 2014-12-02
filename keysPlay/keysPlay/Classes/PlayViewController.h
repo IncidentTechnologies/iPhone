@@ -57,6 +57,7 @@ extern KeysMath *g_keysMath;
 @property (strong, nonatomic) IBOutlet UILabel *repeatLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tempoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *metronomeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *sheetMusicLabel;
 @property (strong, nonatomic) IBOutlet UIButton *repeatButton;
 @property (strong, nonatomic) IBOutlet UIButton *tempoButton;
 @property (strong, nonatomic) IBOutlet UIButton *startPracticeButton;
