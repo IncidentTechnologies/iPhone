@@ -100,6 +100,7 @@ extern UserController * g_userController;
     BOOL _speakerRoute;
     BOOL _skipNotes;
     BOOL _menuIsOpen;
+    BOOL _forceRestart;
     BOOL _songScoreIsOpen;
     BOOL _songIsPaused;
     BOOL _songUploadQueueFull;
@@ -657,6 +658,10 @@ extern UserController * g_userController;
 
 - (IBAction)menuButtonClicked:(id)sender
 {
+    if(!_menuIsOpen){
+        _forceRestart = NO;
+    }
+    
     _menuIsOpen = !_menuIsOpen;
     
     // Close the volume everytime we push the menu button
@@ -680,6 +685,10 @@ extern UserController * g_userController;
         
         // Toggle Sheet Music?
         // Restart song?
+        if(!_menuIsOpen && _forceRestart){
+            [self restartSong:YES];
+        }
+        
         //if(_sheetMusicSwitch.isOn != isSheetMusic){
         //    [self toggleSheetMusic];
         //}
@@ -1410,6 +1419,8 @@ extern UserController * g_userController;
     isSheetMusic = _sheetMusicSwitch.isOn;
     g_keysMath.isSheetMusic = isSheetMusic;
     [_displayController setSheetMusic:isSheetMusic];
+    
+    _forceRestart = YES;
     
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     
