@@ -656,6 +656,7 @@
         
         CGPoint center;
         
+        // TODO: determine whether to subtract beats per screen or beats per measure
         center.x = beatWidth * (measureBeat-SONG_BEATS_PER_SCREEN_HORIZONTAL);
         
         // Center on middle C
@@ -848,7 +849,7 @@
     }else if(duration >= 0.5){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@",sharp]];
         //size.width = 2 * GL_NOTE_HEIGHT;
-    }else if(duration >= 0.25){
+    }else if(duration > 0){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@",sharp]];
     }
     
