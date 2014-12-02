@@ -121,7 +121,14 @@
         whiteKey += floor(offset/2.0)+1;
     }
     
-    return whiteKey;
+    if(isSheetMusic && [self isKeyBlackKey:nthKey]){
+        // Round down
+        return whiteKey - 1;
+    }else{
+        // Round up
+        return whiteKey;
+    }
+    
 }
 
 - (int)countWhiteKeysFromMin:(int)keyMin toMax:(int)keyMax
@@ -244,6 +251,8 @@
         double heightPerWhiteKey = glScreenHeight / ((GLfloat)numWhiteKeys);
         int keyWhiteKey = [self getWhiteKeyFromNthKey:key];
         int sheetMusicMinWhiteKey = [self getWhiteKeyFromNthKey:sheetMusicMin];
+        
+        DLog(@"Key white key is %i for %i",keyWhiteKey,key);
         
         if(key < sheetMusicMin || key > sheetMusicMax){
             DLog(@"Key out of range");

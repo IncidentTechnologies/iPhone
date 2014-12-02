@@ -103,6 +103,7 @@
         if(isSheetMusic){
             [self createSheetMusicBackground];
             [self createMeasureLineModels];
+            [self createLedgerLineModels];
         }else{
             [self createLineModels];
         }
@@ -660,16 +661,62 @@
         center.x = beatWidth * (measureBeat-SONG_BEATS_PER_SCREEN_HORIZONTAL);
         
         // Center on middle C
-        center.y = [g_keysMath convertKeyToCoordSpace:60];
+        center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C];
         
         LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
         
         [m_renderer addLine:measureModel];
         
     }
+}
+
+- (void)createLedgerLineModels
+{
     
-    DLog(@"Create measure line model");
+    CGSize size;
+    size.width = 1.5 * GL_NOTE_HEIGHT;
+    size.height = 2.0;
     
+    CGPoint center;
+    
+    for(NSNoteFrame * noteFrame in m_songModel.m_noteFrames){
+        for(NSNote * note in noteFrame.m_notes){
+            
+            BOOL addLedger = false;
+            
+            center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]+GL_NOTE_HEIGHT/2.0;
+            
+            // Add a ledger line
+            if(note.m_key == KEYS_SHEET_MIDDLE_C || note.m_key == KEYS_SHEET_MIDDLE_C_SHARP){
+                
+                addLedger = true;
+                
+                center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C];
+                
+            }
+            
+            if(note.m_key >= KEYS_SHEET_MUSIC_LEDGER_MAX){
+                
+                addLedger = true;
+                
+                center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MUSIC_LEDGER_MAX];
+            }
+            
+            if(note.m_key <= KEYS_SHEET_MUSIC_LEDGER_MIN){
+                
+                addLedger = true;
+                
+                center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MUSIC_LEDGER_MIN];
+                
+            }
+            
+            if(addLedger){
+                LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+                
+                [m_renderer addLine:measureModel];
+            }
+        }
+    }
 }
 
 - (void)createLineModels

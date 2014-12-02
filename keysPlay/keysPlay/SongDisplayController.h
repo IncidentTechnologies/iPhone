@@ -86,6 +86,7 @@ extern KeysMath * g_keysMath;
 - (void)updateDifficulty:(PlayViewControllerDifficulty)useDifficulty;
 - (void)cancelPreloading;
 - (void)createMeasureLineModels;
+- (void)createLedgerLineModels;
 - (void)createLineModels;
 - (void)createNumberModels;
 - (void)createNoteTexture;
