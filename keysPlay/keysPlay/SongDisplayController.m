@@ -71,8 +71,15 @@
             m_glView.m_renderer = m_renderer;
             
             [self shiftViewToKey:[g_keysController range].keyMin];
+            
             m_renderer.m_offset = GL_SEEK_LINE_Y;
             
+            if(isSheetMusic){
+                m_renderer.m_horizontalOffset = GL_SEEK_LINE_X;
+            }else{
+                m_renderer.m_horizontalOffset = 0.0;
+            }
+                
             [m_glView layoutSubviews];
             
         }else{
@@ -98,6 +105,8 @@
         }else{
             [self createLineModels];
         }
+        
+        [self createBackgroundTexture];
         
         m_preloadTimer = [NSTimer scheduledTimerWithTimeInterval:PRELOAD_TIMER_DURATION target:self selector:@selector(preloadFramesTimer) userInfo:nil repeats:YES];
         
@@ -190,7 +199,7 @@
     [self updateDisplayedFrames];
     
     double position = [g_keysMath convertBeatToCoordSpace:m_songModel.m_currentBeat];
-    
+
     // pull down the shift as time goes by
     double end = [g_keysMath calculateMaxShiftCoordSpace:m_songModel.m_currentBeat lengthBeats:m_songModel.m_lengthBeats];
     
@@ -378,13 +387,12 @@
         if(isSheetMusic){
             //Horizontal
             center.y = [g_keysMath convertKeyToCoordSpace:note.m_key];
-            center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
+            center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]+[g_keysMath getNoteWidthForNoteDuration:note.m_duration]/2.0;
         }else{
             //Vertical
             center.y = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart];
             center.x = [g_keysMath convertKeyToCoordSpace:note.m_key];
         }
-        
         
         // These notes will still be sounded, but do not draw multiple notes in the same place for standalone in order to preserve highlight transparency
         if(isStandalone){
@@ -546,6 +554,35 @@
 
 #pragma mark - Init models
 
+- (void)createBackgroundTexture
+{
+    
+    NSString * filePath;
+    UIImage * normalImage;
+    UIImage * scaledImage;
+    
+    CGSize newSize;
+    newSize.height = m_renderer.m_backingHeight;
+    newSize.width = 49.0;
+    
+    filePath = [[NSBundle mainBundle] pathForResource:@"NoteStaff" ofType:@"png"];
+    normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
+    
+    UIGraphicsBeginImageContext(newSize);
+    [normalImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    Texture2D * backgroundTexture = [[Texture2D alloc] initWithImage:scaledImage];
+    
+    Model * model = [[Model alloc] initWithCenter:CGPointMake(m_renderer.m_backingWidth, m_renderer.m_backingHeight)
+                                         andColor:g_whiteColor
+                                       andTexture:backgroundTexture];
+    
+    m_renderer.m_backgroundTexture = model;
+    
+}
+
 - (void)createSheetMusicBackground
 {
     
@@ -554,14 +591,22 @@
     //
     
     CGSize size;
-    size.width = GL_NOTE_HEIGHT / 3.0;
-    size.height = GL_SCREEN_HEIGHT;
-    
-    // The center will automatically be offset in the rendering
     CGPoint center;
     
-    m_renderer.m_seekLineModel = nil;
+    // Seek Line
+    size.width = 4.0;
+    size.height = GL_SCREEN_HEIGHT - 76.0;
+    
+    center.y = GL_SCREEN_HEIGHT / 2.0;
+    center.x = GL_SHEET_MUSIC_LEFT_OFFSET;
+    
+    m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
     m_renderer.m_seekLineStandaloneModel = nil;
+    
+    // Horizontal ledger lines
+    
+    size.width = GL_NOTE_HEIGHT / 3.0;
+    size.height = GL_SCREEN_HEIGHT;
     
     GLubyte * stringColor = g_whiteColorTransparent; // all white
     
@@ -575,7 +620,7 @@
         // Get the position of the black note as the center
         center.y = [g_keysMath convertKeyToCoordSpace:key];
         
-        center.x = GL_SCREEN_WIDTH / 2.0;
+        center.x = GL_SCREEN_WIDTH / 2.0 + GL_EDGE_X + 2.0;
         
         size.width = GL_SCREEN_WIDTH;
         size.height = 2.0;
@@ -756,24 +801,25 @@
     
     CGSize size;
     size.height = GL_NOTE_HEIGHT;
-    size.width = GL_NOTE_HEIGHT;
+    size.width = [g_keysMath getNoteWidthForNoteDuration:duration];
     
     if(duration >= 4.0){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteWhole%@",sharp]];
-        size.width = 16 * GL_NOTE_HEIGHT;
+        //size.width = 16 * GL_NOTE_HEIGHT;
     }else if(duration >= 2.0){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteHalf%@",sharp]];
-        size.width = 8 * GL_NOTE_HEIGHT;
+        //size.width = 8 * GL_NOTE_HEIGHT;
     }else if(duration >= 1.0){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"NoteQuarter%@",sharp]];
-        size.width = 4 * GL_NOTE_HEIGHT;
+        //size.width = 4 * GL_NOTE_HEIGHT;
     }else if(duration >= 0.5){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@",sharp]];
-        size.width = 2 * GL_NOTE_HEIGHT;
+        //size.width = 2 * GL_NOTE_HEIGHT;
     }else if(duration >= 0.25){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@",sharp]];
     }
     
+    //keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@",sharp]];
     
     UIGraphicsBeginImageContext(size);
     [keyImage drawInRect:CGRectMake(0, 0, size.width, size.height)];

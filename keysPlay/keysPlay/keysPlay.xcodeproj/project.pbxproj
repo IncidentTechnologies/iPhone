@@ -25,6 +25,7 @@
 		6D0835BB1A2D1082007544D2 /* NoteQuarterSharp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835B11A2D1082007544D2 /* NoteQuarterSharp.png */; };
 		6D0835BC1A2D1082007544D2 /* NoteWhole.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835B21A2D1082007544D2 /* NoteWhole.png */; };
 		6D0835BD1A2D1082007544D2 /* NoteWholeSharp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835B31A2D1082007544D2 /* NoteWholeSharp.png */; };
+		6D0835BF1A2D2FFE007544D2 /* NoteStaff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */; };
 		6D0BDE441A01AA2F00593F2C /* NoteGreyscale2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */; };
 		6D0BDE971A01CE0600593F2C /* Electric Guitar 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */; };
 		6D0BDE981A01CE0600593F2C /* Electric Guitar 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE961A01CE0600593F2C /* Electric Guitar 1.mp3 */; };
@@ -1532,6 +1533,7 @@
 		6D0835B11A2D1082007544D2 /* NoteQuarterSharp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteQuarterSharp.png; sourceTree = "<group>"; };
 		6D0835B21A2D1082007544D2 /* NoteWhole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteWhole.png; sourceTree = "<group>"; };
 		6D0835B31A2D1082007544D2 /* NoteWholeSharp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteWholeSharp.png; sourceTree = "<group>"; };
+		6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteStaff.png; sourceTree = "<group>"; };
 		6D0BDE401A01684700593F2C /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
 		6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoteGreyscale2.png; path = Resources/Images/Play/NoteGreyscale2.png; sourceTree = SOURCE_ROOT; };
 		6D0BDE951A01CE0600593F2C /* Electric Guitar 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 0.mp3"; sourceTree = "<group>"; };
@@ -2933,6 +2935,7 @@
 		6DE131B61A26AF58009BE59C /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */,
 				6D0835AA1A2D1082007544D2 /* Note8th.png */,
 				6D0835AB1A2D1082007544D2 /* Note8thSharp.png */,
 				6D0835AC1A2D1082007544D2 /* Note16th.png */,
@@ -4581,6 +4584,7 @@
 				ECE832261718A767006E2391 /* BlueMenu.png in Resources */,
 				ECE832291718BE81006E2391 /* Default-568hRot.png in Resources */,
 				6DB285F91921915600B3D14C /* Electric Guitar 78.mp3 in Resources */,
+				6D0835BF1A2D2FFE007544D2 /* NoteStaff.png in Resources */,
 				ECE8322E1718D6C0006E2391 /* Skill_GREEN.png in Resources */,
 				ECE832301718D6C0006E2391 /* Skill_RED.png in Resources */,
 				ECE832321718D6C0006E2391 /* Skill_YELLOW.png in Resources */,

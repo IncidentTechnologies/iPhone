@@ -164,6 +164,21 @@
     return CGSizeMake(DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.width, DEFAULT_BLACK_KEY_PROPORTION * whiteKeyFrameSize.height);
 }
 
+- (double)getNoteWidthForNoteDuration:(double)duration
+{
+    if(duration >= 4.0){
+        return 16 * GL_NOTE_HEIGHT;
+    }else if(duration >= 2.0){
+        return 8 * GL_NOTE_HEIGHT;
+    }else if(duration >= 1.0){
+        return 4 * GL_NOTE_HEIGHT;
+    }else if(duration >= 0.5){
+        return 2 * GL_NOTE_HEIGHT;
+    }else if(duration >= 0.25){
+        return GL_NOTE_HEIGHT;
+    }
+}
+
 
 /*- (double)convertTimeToCoordSpace:(double)delta
 {

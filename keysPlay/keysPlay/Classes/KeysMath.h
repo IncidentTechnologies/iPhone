@@ -22,10 +22,14 @@
 #define GL_SCREEN_TOP_BUFFER 46.0
 #define GL_SCREEN_RIGHT_BUFFER 20.0
 #define GL_SEEK_LINE_Y 56.0
+#define GL_SEEK_LINE_X 88.0
+#define GL_EDGE_X 10.0
 #define GL_TOUCH_AREA_HEIGHT 100.0
 
 #define GL_NOTE_HEIGHT 38.0 //( GL_SCREEN_HEIGHT / 7.0 )
 #define GL_STRING_WIDTH ( GL_SCREEN_HEIGHT / 60.0 )
+
+#define GL_SHEET_MUSIC_LEFT_OFFSET 0.0
 
 #define KEYS_TOTAL_WHITE_KEY_COUNT 74
 
@@ -105,6 +109,7 @@ extern KeysController * g_keysController;
 - (int)getWhiteKeyFromNthKey:(int)nthKey;
 - (CGSize)getWhiteKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
 - (CGSize)getBlackKeyFrameSize:(int)numberOfWhiteKeys inSize:(CGSize)size;
+- (double)getNoteWidthForNoteDuration:(double)duration;
 
 // Sheet Music
 - (NSArray *)getLedgerLines;

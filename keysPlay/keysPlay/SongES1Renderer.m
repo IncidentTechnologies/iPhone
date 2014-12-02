@@ -196,10 +196,20 @@
 	
 	// Blend function for textures
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	
-    // Translate and draw note path areas
-    glTranslatef(horizontalOffset, 0.0f, 0.0f);
     
+    //
+    // Draw the background that doesn't move
+    //
+    if(!m_isVertical){
+        [m_seekLineModel drawWithOffset:CGPointMake(GL_EDGE_X, 0)];
+        [m_backgroundTexture drawAt:CGPointMake(4*GL_EDGE_X, m_backingHeight/2.0)];
+    }
+    
+    // Translate and draw note path areas
+    if(m_isVertical){
+        glTranslatef(horizontalOffset, 0.0f, 0.0f);
+    }
+        
     for ( LineModel * keyPathModel in m_keyPathModels )
     {
 		[keyPathModel draw];
@@ -211,7 +221,7 @@
     if(m_isVertical){
         glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
     }else{
-        glTranslatef( [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f, 0.0f);
+        glTranslatef( [g_keysMath cameraScale]*m_horizontalOffset - m_currentPosition, 0.0f, 0.0f);
     }
     
     // And draw the moving loop lines
@@ -248,6 +258,16 @@
         
         if(model == nil){
             continue;
+        }
+        
+        // Sheet music
+        if(!m_isVertical){
+            
+            if(model.m_hit >= 0){
+                // Stop rendering notes that have been hit or missed
+                continue;
+            }
+            
         }
         
         if(highlights){
