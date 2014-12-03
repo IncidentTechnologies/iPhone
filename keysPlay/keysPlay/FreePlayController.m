@@ -574,7 +574,7 @@ extern KeysController * g_keysController;
 
 - (void)keysNoteOff:(KeyPosition)position
 {
-    [g_soundMaster NoteOnForKey:position];
+    [g_soundMaster NoteOffForKey:position];
 }
 
 - (void)keysRangeChange:(KeysRange)range

@@ -64,6 +64,7 @@
 		6D7D46FA1919BA0F00EF8C75 /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F01919BA0F00EF8C75 /* StarRatingView.m */; };
 		6D7D46FB1919BA0F00EF8C75 /* TransitionRectangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */; };
 		6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */; };
+		6D7D5F511A2FA07900FBE8C9 /* NoteStaffOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7D5F501A2FA07900FBE8C9 /* NoteStaffOverlay.png */; };
 		6DA8C1F8192C2C8400182BCF /* RegisterPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */; };
 		6DA8C1F9192C2C8400182BCF /* RegisterPromptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */; };
 		6DA8C1FB192D12DF00182BCF /* SettingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA8C1FA192D12DF00182BCF /* SettingsIcon.png */; };
@@ -1600,6 +1601,7 @@
 		6D7D46F21919BA0F00EF8C75 /* TransitionRectangleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionRectangleViewController.m; path = CustomUI/TransitionRectangleViewController.m; sourceTree = SOURCE_ROOT; };
 		6D7D47031919BB8D00EF8C75 /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
 		6D7D47041919BB8D00EF8C75 /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
+		6D7D5F501A2FA07900FBE8C9 /* NoteStaffOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteStaffOverlay.png; sourceTree = "<group>"; };
 		6DA8C1F5192C2C8400182BCF /* RegisterPromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPromptViewController.h; sourceTree = "<group>"; };
 		6DA8C1F6192C2C8400182BCF /* RegisterPromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPromptViewController.m; sourceTree = "<group>"; };
 		6DA8C1F7192C2C8400182BCF /* RegisterPromptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterPromptViewController.xib; sourceTree = "<group>"; };
@@ -2935,6 +2937,7 @@
 		6DE131B61A26AF58009BE59C /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				6D7D5F501A2FA07900FBE8C9 /* NoteStaffOverlay.png */,
 				6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */,
 				6D0835AA1A2D1082007544D2 /* Note8th.png */,
 				6D0835AB1A2D1082007544D2 /* Note8thSharp.png */,
@@ -4833,6 +4836,7 @@
 				9D054E3C174C68FB00FA3239 /* Upright Bass 53.mp3 in Resources */,
 				9D054E3E174C68FB00FA3239 /* Upright Bass 54.mp3 in Resources */,
 				6DB285D61921915600B3D14C /* Electric Guitar 46.mp3 in Resources */,
+				6D7D5F511A2FA07900FBE8C9 /* NoteStaffOverlay.png in Resources */,
 				9D054E40174C68FB00FA3239 /* Upright Bass 55.mp3 in Resources */,
 				6DB285DB1921915600B3D14C /* Electric Guitar 50.mp3 in Resources */,
 				9D054E42174C68FB00FA3239 /* Upright Bass 56.mp3 in Resources */,

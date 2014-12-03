@@ -195,14 +195,6 @@
 	// Blend function for textures
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     
-    //
-    // Draw the background that doesn't move
-    //
-    if(!m_isVertical){
-        [m_seekLineModel drawWithOffset:CGPointMake(GL_EDGE_X, 0)];
-        [m_backgroundTexture drawAt:CGPointMake(4*GL_EDGE_X, m_backingHeight/2.0)];
-    }
-    
     // Translate and draw note path areas
     if(m_isVertical){
         glTranslatef(m_horizontalOffset, 0.0f, 0.0f);
@@ -238,7 +230,7 @@
         CGPoint center = [lineModel getCenter];
         CGSize size = [lineModel getSize];
         
-        if(m_horizontalOffset-m_currentPosition+center.x-size.width/3.5 > GL_SEEK_LINE_X){
+        if(m_horizontalOffset-m_currentPosition+center.x-size.width/2.8 > GL_SEEK_LINE_X){
             [lineModel drawAt:CGPointMake(center.x,center.y)];
         }
     }
@@ -252,6 +244,14 @@
     //
     // Done -- Switch the buffer
     //
+    
+    //
+    // Draw the background overlay that doesn't move
+    //
+    if(!m_isVertical){
+        glTranslatef( -(m_horizontalOffset - m_currentPosition), 0.0f, 0.0f);
+        [m_backgroundTexture drawAt:CGPointMake(75/2.0, 273/2.0)];
+    }
     
 	// finish stuff
 	glBindRenderbufferOES( GL_RENDERBUFFER_OES, m_colorRenderbuffer );
@@ -275,6 +275,7 @@
             
             if(model.m_hit >= 0){
                 // Stop rendering notes that have been hit or missed
+                [model drawWithHighlights:NO highlightColor:nil recolorNote:NO];
                 continue;
             }
             

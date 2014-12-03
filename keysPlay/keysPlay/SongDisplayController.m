@@ -569,10 +569,10 @@
     UIImage * scaledImage;
     
     CGSize newSize;
-    newSize.height = m_renderer.m_backingHeight;
-    newSize.width = 49.0;
+    newSize.height = 273.0;
+    newSize.width = 75.0;
     
-    filePath = [[NSBundle mainBundle] pathForResource:@"NoteStaff" ofType:@"png"];
+    filePath = [[NSBundle mainBundle] pathForResource:@"NoteStaffOverlay" ofType:@"png"];
     normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
     
     UIGraphicsBeginImageContext(newSize);
@@ -592,22 +592,10 @@
 
 - (void)createSheetMusicBackground
 {
-    
-    //
-    // Create the seek line
-    //
-    
     CGSize size;
     CGPoint center;
     
-    // Seek Line
-    size.width = 4.0;
-    size.height = GL_SCREEN_HEIGHT - 76.0;
-    
-    center.y = GL_SCREEN_HEIGHT / 2.0;
-    center.x = GL_SHEET_MUSIC_LEFT_OFFSET;
-    
-    m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+    m_renderer.m_seekLineModel = nil;
     m_renderer.m_seekLineStandaloneModel = nil;
     
     // Horizontal ledger lines
@@ -615,7 +603,7 @@
     size.width = GL_NOTE_HEIGHT / 3.0;
     size.height = GL_SCREEN_HEIGHT;
     
-    GLubyte * stringColor = g_whiteColorTransparent; // all white
+    GLubyte * stringColor = g_whiteGrayColor; // all white
     
     NSArray * linesForKeys = [g_keysMath getLedgerLines];
     
@@ -627,7 +615,7 @@
         // Get the position of the black note as the center
         center.y = [g_keysMath convertKeyToCoordSpace:key];
         
-        center.x = GL_SCREEN_WIDTH / 2.0 + GL_EDGE_X + 2.0;
+        center.x = GL_SCREEN_WIDTH / 2.0;
         
         size.width = GL_SCREEN_WIDTH;
         size.height = 2.0;
@@ -666,7 +654,7 @@
         // Center on middle C
         center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C];
         
-        LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+        LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteGrayColor];
         
         [m_renderer addLine:measureModel];
         
@@ -677,7 +665,7 @@
 {
     
     CGSize size;
-    size.width = 1.5 * GL_NOTE_HEIGHT;
+    size.width = 1.3 * GL_NOTE_HEIGHT;
     size.height = 2.0;
     
     CGPoint center;
@@ -714,7 +702,7 @@
             }
             
             if(addLedger){
-                LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColorTransparent];
+                LineModel * measureModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteGrayColor];
                 
                 [m_renderer addLine:measureModel];
             }
