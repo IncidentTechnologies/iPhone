@@ -199,7 +199,7 @@
         // Horizontal
         
         double beatsPerScreen = SONG_BEATS_PER_SCREEN_HORIZONTAL;
-        return -(glScreenWidth - (beat/(GLfloat)beatsPerScreen) * glScreenWidth);
+        return -(GL_MAX_SCREEN_WIDTH - (beat/(GLfloat)beatsPerScreen) * GL_MAX_SCREEN_WIDTH);
         
     }else{
         
@@ -217,7 +217,7 @@
         
         // Horizontal
         
-        return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN_HORIZONTAL) / glScreenWidth;
+        return 1 - (coord * (GLfloat)SONG_BEATS_PER_SCREEN_HORIZONTAL) / GL_MAX_SCREEN_WIDTH;
         
     }else{
     
@@ -243,6 +243,8 @@
     
     if(isSheetMusic){
     
+        widthPerWhiteKey = GL_MAX_SCREEN_WIDTH / ((GLfloat)numWhiteKeys);
+        
         BOOL isKeyBlackKey = [self isKeyBlackKey:key];
         int sheetMusicMin = KEYS_SHEET_MUSIC_MIN; // Low C
         int sheetMusicMax = KEYS_SHEET_MUSIC_MAX; // High B
@@ -354,7 +356,7 @@
         if(lengthBeats - currentBeat <= SONG_BEATS_PER_SCREEN_HORIZONTAL){
             return end;
         }else{
-            return end+glScreenWidth;
+            return end+GL_MAX_SCREEN_WIDTH;
         }
     }else{
         

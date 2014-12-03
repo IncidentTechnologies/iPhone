@@ -640,7 +640,7 @@
         // Get time signature per measure
         double measureBeat = measure.m_startBeat;
         
-        double beatWidth = GL_SCREEN_WIDTH / SONG_BEATS_PER_SCREEN_HORIZONTAL;
+        double beatWidth = GL_MAX_SCREEN_WIDTH / SONG_BEATS_PER_SCREEN_HORIZONTAL;
         
         CGSize size;
         size.width = (i+1 == numMeasures) ? 4.0 : 2.0;
