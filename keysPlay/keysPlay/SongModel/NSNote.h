@@ -41,6 +41,7 @@
   andAbsoluteBeatStart:(double)absoluteBeatStart
                 andKey:(KeyPosition)key;
 
-- (NSComparisonResult)compare:(NSNote*)note;
+- (NSComparisonResult)compareStartbeat:(NSNote*)note;
+- (NSComparisonResult)compareKey:(NSNote*)note;
 
 @end

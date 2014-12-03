@@ -175,6 +175,8 @@
         }
     }
     
+    [self sortNotesInNoteFrames];
+    
     // Control the tempo throughout Standalone
     if(isScrolling) {
         m_beatsPerSecond = MIN((m_song.m_tempo * 0.75f) / 60.0, SCROLLING_BEATS_PER_SECOND);
@@ -565,6 +567,15 @@
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:minNote],@"Min",[NSNumber numberWithInt:maxNote],@"Max", nil];
+}
+
+- (void)sortNotesInNoteFrames
+{
+    for(NSNoteFrame * noteFrame in m_noteFrames){
+        
+        [noteFrame sortNotesByKey];
+        
+    }
 }
 
 @end

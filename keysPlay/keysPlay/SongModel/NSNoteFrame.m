@@ -192,5 +192,10 @@
 
 }
 
+- (void)sortNotesByKey
+{
+    [m_notes sortUsingSelector:@selector(compareKey:)];
+}
+
 
 @end

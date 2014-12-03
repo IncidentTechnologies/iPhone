@@ -155,7 +155,7 @@
 {
 	[m_measures addObject:measure];
 	
-	[m_measures sortUsingSelector:@selector(compare:)];
+	[m_measures sortUsingSelector:@selector(compareStartbeat:)];
 }
 
 - (NSArray*)getSortedNotes
@@ -168,7 +168,7 @@
         [notesArray addObjectsFromArray:measure.m_notes];
     }
     
-    [notesArray sortUsingSelector:@selector(compare:)];
+    [notesArray sortUsingSelector:@selector(compareStartbeat:)];
     
     return notesArray;
     

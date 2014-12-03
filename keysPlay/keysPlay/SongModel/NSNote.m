@@ -110,7 +110,7 @@
     return keyValue;
 }
 
-- (NSComparisonResult)compare:(NSNote*)note
+- (NSComparisonResult)compareStartbeat:(NSNote*)note
 {
 	
 	if ( self.m_absoluteBeatStart < note.m_absoluteBeatStart )
@@ -124,6 +124,20 @@
 	
 	return NSOrderedSame;
 	
+}
+
+- (NSComparisonResult)compareKey:(NSNote *)note
+{
+    if ( self.m_key < note.m_key )
+    {
+        return NSOrderedAscending;
+    }
+    if ( self.m_key > note.m_key )
+    {
+        return NSOrderedDescending;
+    }
+    
+    return NSOrderedSame;
 }
 
 @end

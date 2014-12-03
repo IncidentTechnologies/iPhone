@@ -40,4 +40,6 @@
 - (NSNote*)hitTestAndRemoveKey:(KeyPosition)key;
 - (void)removeKey:(KeyPosition)key;
 
+- (void)sortNotesByKey;
+
 @end

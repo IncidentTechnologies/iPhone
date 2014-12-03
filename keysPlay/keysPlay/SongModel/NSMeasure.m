@@ -97,11 +97,11 @@
     
 	[m_notes addObject:note];
 	
-	[m_notes sortUsingSelector:@selector(compare:)];
+	[m_notes sortUsingSelector:@selector(compareStartbeat:)];
     
 }
 
-- (NSComparisonResult)compare:(NSMeasure*)measure
+- (NSComparisonResult)compareStartbeat:(NSMeasure*)measure
 {
 	
 	if ( self.m_startBeat < measure.m_startBeat )

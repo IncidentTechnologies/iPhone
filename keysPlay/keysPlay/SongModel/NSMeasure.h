@@ -35,6 +35,6 @@
 		   andBeatValue:(double)beatValue;
 
 - (void)addNote:(NSNote*)note;
-- (NSComparisonResult)compare:(NSMeasure*)measure;
+- (NSComparisonResult)compareStartbeat:(NSMeasure*)measure;
 
 @end
