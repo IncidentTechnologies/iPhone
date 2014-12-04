@@ -53,7 +53,7 @@
 - (float) getChannelGain;
 
 - (void) playMetronomeTick;
-- (void) playKey:(int)key;
+- (void) playKey:(int)key withDuration:(double)duration;
 - (void) playMutedKey:(int)key;
 
 
@@ -61,8 +61,8 @@
 - (void) disableSliding;
 - (BOOL) isSlideEnabled;
 
- - (bool) NoteOnForKey:(int)key;
- - (bool) NoteOffForKey:(int)key;
+- (bool) NoteOnForKey:(int)key withDuration:(double)duration;
+- (bool) NoteOffForKey:(int)key;
 
 @property (strong) NSArray *m_instruments;
 //@property (strong) NSArray *m_tuning;

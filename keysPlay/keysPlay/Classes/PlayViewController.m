@@ -2172,11 +2172,11 @@ extern UserController * g_userController;
     // Play the note.
     if ( _difficulty == PlayViewControllerDifficultyHard )
     {
-        [self pressKey:key andVelocity:velocity];
+        [self pressKey:key andVelocity:velocity andDuration:hit.m_duration];
     }
     else if ( hit != nil )
     {
-        [self pressKey:key andVelocity:KeysMaxPressVelocity];
+        [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:hit.m_duration];
     }
     
     if(isStandalone && hit != nil){
@@ -2644,7 +2644,7 @@ extern UserController * g_userController;
             // Figure out what notes we will be playing
             for ( NSNote * note in _currentFrame.m_notesPending )
             {
-                [_delayedChords addObject:[NSNumber numberWithInt:note.m_key]];
+                [_delayedChords addObject:note];
                 
             }
             
@@ -2659,10 +2659,10 @@ extern UserController * g_userController;
                     KeyPosition key = [keyNumber charValue];
                     
                     // This one is queues up, so don't play it
-                    if ( [_delayedChords containsObject:[NSNumber numberWithInt:key]] )
-                    {
-                        DLog(@"Aborted delayed");
-                        [_delayedChords removeObject:[NSNumber numberWithInt:key]];
+                    for(NSNote * note in _delayedChords){
+                        if(key == note.m_key){
+                            [_delayedChords removeObject:note];
+                        }
                     }
                 }
             }
@@ -2670,9 +2670,6 @@ extern UserController * g_userController;
             _previousChordPlayKey = key;
             _previousChordPlayVelocity = velocity;
             _previousChordPlayDirection = 0;
-            
-            // Schedule an event to play the chords over time
-            // m_delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
             
             // Play a chord right now
             [self handleDelayedChord];
@@ -2698,7 +2695,7 @@ extern UserController * g_userController;
     {
         // Play the note at normal intensity
         //        [self pluckString:str andFret:fret andVelocity:velocity];
-        [g_soundMaster NoteOnForKey:key];
+        [g_soundMaster NoteOnForKey:key withDuration:(KEYS_DEFAULT_NOTE_DURATION/4.0)];
         
         // Record the note
         [_songRecorder pressKey:key];
@@ -2778,7 +2775,8 @@ extern UserController * g_userController;
     
     //_delayedChordsCount--;
     
-    KeyPosition key = [[_delayedChords firstObject] intValue];
+    NSNote * note = [_delayedChords firstObject];
+    KeyPosition key = note.m_key;
     
     [_delayedChords removeObject:[_delayedChords firstObject]];
     
@@ -2793,11 +2791,11 @@ extern UserController * g_userController;
         // Play the note
         if ( _difficulty == PlayViewControllerDifficultyHard )
         {
-            [self pressKey:key andVelocity:_previousChordPlayVelocity];
+            [self pressKey:key andVelocity:_previousChordPlayVelocity andDuration:note.m_duration];
         }
         else
         {
-            [self pressKey:key andVelocity:KeysMaxPressVelocity];
+            [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:note.m_duration];
         }
         
         // Record the note
@@ -2852,7 +2850,7 @@ extern UserController * g_userController;
     
 }
 
-- (void)pressKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
+- (void)pressKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity andDuration:(double)duration
 {
 
     if ( key == KEYS_KEY_MUTED )
@@ -2864,7 +2862,7 @@ extern UserController * g_userController;
     else
     {
         DLog(@"Play View Controller Pluck String");
-        [g_soundMaster playKey:key];
+        [g_soundMaster playKey:key withDuration:duration];
         [self lightKeyOnPlay:key isMuted:NO isMissed:NO];
     }
     
@@ -2976,7 +2974,7 @@ extern UserController * g_userController;
         // On easy mode, we play the notes that haven't been hit yet
         for ( NSNote * note in frame.m_notesPending )
         {
-            [self pressKey:note.m_key andVelocity:KeysMaxPressVelocity];
+            [self pressKey:note.m_key andVelocity:KeysMaxPressVelocity andDuration:note.m_duration];
         }
         
         [self songModelExitFrame:_currentFrame];

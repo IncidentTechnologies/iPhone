@@ -569,7 +569,7 @@ extern KeysController * g_keysController;
 {
     KeyPosition key = press.position;
     
-    [g_soundMaster NoteOnForKey:key];
+    [g_soundMaster NoteOnForKey:key withDuration:KEYS_DEFAULT_NOTE_DURATION];
 }
 
 - (void)keysNoteOff:(KeyPosition)position

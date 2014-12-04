@@ -15,7 +15,6 @@
 
 #define KEYS_NUM_KEYS 127
 
-#define KEYS_NOTE_DURATION 1.0
 #define KEYS_FRET_DOWN_DURATION 0.005
 #define KEYS_FRET_UP_DURATION 0.005
 #define KEYS_STOP_FRET_DURATION 0.01
@@ -607,7 +606,7 @@
 
 #pragma mark - keys
 //- (void) PluckString:(int)string atFret:(int)fret
-- (void) playKey:(int)key
+- (void) playKey:(int)key withDuration:(double)duration
 {
     if(!isLoadingInstrument){
         
@@ -638,7 +637,7 @@
             m_keysSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
             
             // Set a timer to keep the note short
-            playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:KEYS_NOTE_DURATION target:self selector:@selector(EndPlayKey:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
+            playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(EndPlayKey:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
         }
     }
 }
@@ -792,11 +791,11 @@
 }
 */
 
-- (bool) NoteOnForKey:(int)key
+- (bool) NoteOnForKey:(int)key withDuration:(double)duration
 {
     if(!isLoadingInstrument){
         
-        [self playKey:key];
+        [self playKey:key withDuration:duration];
         
     }
     return YES;

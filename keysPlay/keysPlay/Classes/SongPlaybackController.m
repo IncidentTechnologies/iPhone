@@ -213,7 +213,7 @@
         else {
             DLog(@"play key %i",note.m_key);
             
-            [g_soundMaster playKey:note.m_key];
+            [g_soundMaster playKey:note.m_key withDuration:note.m_duration];
             
             //[m_keysController turnOnLedAtPosition:KeysPositionMake(note.m_fret, note.m_string) withColor:KeysLedColorMake(KeysMaxLedIntensity, KeysMaxLedIntensity, KeysMaxLedIntensity)];
             
