@@ -610,6 +610,8 @@
 {
     if(!isLoadingInstrument){
         
+        //key = 60;
+        
         // Ensure it's a valid string + fret
         if(key >= 0 && key < KEYS_NUM_KEYS){
             
@@ -628,14 +630,21 @@
             
             DLog(@"Note at index %i",noteIndex);
             
+            BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
+            
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[key] != nil){
+                
                 [self EndPlayKey:playingNotesTimers[key]];
+            
             }
             
-            // Trigger the note
-            m_keysSamplerNode->TriggerSample(m_activeBankNode,noteIndex);
-            
+            if(retrigger){
+                m_keysSamplerNode->RetriggerSample(m_activeBankNode,key);
+            }else{
+                m_keysSamplerNode->TriggerSample(m_activeBankNode, key);
+            }
+                
             // Set a timer to keep the note short
             playingNotesTimers[key] = [NSTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(EndPlayKey:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:key],@"Key", nil] repeats:NO];
         }

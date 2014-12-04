@@ -419,9 +419,9 @@
         numberOfKeys++;
     }
     
-    DLog(@"Number of keys is %i, number of white keys is %i",numberOfKeys,numberOfWhiteKeys);
+    //DLog(@"Number of keys is %i, number of white keys is %i",numberOfKeys,numberOfWhiteKeys);
     
-    DLog(@"Frame view is %f %f %f %f",frameView.frame.origin.x,frameView.frame.origin.y,frameView.frame.size.width,frameView.frame.size.height);
+    //DLog(@"Frame view is %f %f %f %f",frameView.frame.origin.x,frameView.frame.origin.y,frameView.frame.size.width,frameView.frame.size.height);
     
     // Always display 2 octaves, from the first note
     //int numberOfWhiteKeys = KEYS_WHITE_KEY_DISPLAY_COUNT;
