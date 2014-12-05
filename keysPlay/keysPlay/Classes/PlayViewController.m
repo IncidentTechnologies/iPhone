@@ -1704,17 +1704,17 @@ extern UserController * g_userController;
 
 - (void)displayKeyboardRangeChanged
 {
-    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES];
+    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES drawHighlights:NO];
 }
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
     // This is slightly hacked at the moment, but other methods calculate the range with different rounding and this approximates the match better than ceil or round
     
-    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO];
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO drawHighlights:YES];
 }
 
-- (void)lightKeyOnPlay:(KeyPosition)key isMuted:(BOOL)muted isMissed:(BOOL)isMissed
+- (void)lightKeyOnPlay:(KeyPosition)key isIncorrect:(BOOL)incorrect isMissed:(BOOL)isMissed
 {
     double keyWidth = keyboardOverview.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
@@ -1735,6 +1735,9 @@ extern UserController * g_userController;
     if(isMissed){
         [keyView setBackgroundColor:[UIColor colorWithRed:222/255.0 green:85/255.0 blue:49/255.0 alpha:1.0]];
         [keyOverlay setBackgroundColor:[UIColor colorWithRed:222/255.0 green:85/255.0 blue:49/255.0 alpha:1.0]];
+    }else if(incorrect){
+        [keyView setBackgroundColor:[UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0]];
+        [keyOverlay setBackgroundColor:[UIColor colorWithRed:238/255.0 green:188/255.0 blue:53/255.0 alpha:1.0]];
     }else if(!isBlackKey){
         [keyView setBackgroundColor:[UIColor whiteColor]];
         [keyOverlay setBackgroundColor:[UIColor whiteColor]];
@@ -2170,11 +2173,11 @@ extern UserController * g_userController;
     hit = [frameToPlay testKey:key];
     
     // Play the note.
-    if ( _difficulty == PlayViewControllerDifficultyHard )
-    {
-        [self pressKey:key andVelocity:velocity andDuration:hit.m_duration];
-    }
-    else if ( hit != nil )
+    //if ( _difficulty == PlayViewControllerDifficultyHard )
+    //{
+    //    [self pressKey:key andVelocity:velocity andDuration:hit.m_duration];
+    //}
+    if ( hit != nil )
     {
         [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:hit.m_duration];
     }
@@ -2588,7 +2591,7 @@ extern UserController * g_userController;
     {
         [self correctHitKey:key andVelocity:velocity];
     }
-    else
+    else if(![g_keysMath noteOutOfRange:key])
     {
         [self incorrectHitKey:key andVelocity:velocity];
     }
@@ -2627,6 +2630,8 @@ extern UserController * g_userController;
             [_interFrameDelayTimer invalidate];
             _interFrameDelayTimer = nil;
         }
+        
+        return;
         
     }else if (_autocomplete || _difficulty == PlayViewControllerDifficultyEasy){
 
@@ -2674,12 +2679,12 @@ extern UserController * g_userController;
             // Play a chord right now
             [self handleDelayedChord];
             
-            // Schedule an event to push us to the next frame after a moment
-            // if another chord doesn't come in.
-            _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
-        
         }
     }
+    
+    // Schedule an event to push us to the next frame after a moment
+    // if another note doesn't come in.
+    _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
 }
 
 - (void)incorrectHitKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
@@ -2699,7 +2704,10 @@ extern UserController * g_userController;
         
         // Record the note
         [_songRecorder pressKey:key];
+        
     }
+    
+    [self lightKeyOnPlay:key isIncorrect:YES isMissed:NO];
     
 }
 
@@ -2857,13 +2865,13 @@ extern UserController * g_userController;
     {
         DLog(@"Play View Controller Pluck Muted String");
         [g_soundMaster playMutedKey:key];
-        [self lightKeyOnPlay:key isMuted:YES isMissed:NO];
+        [self lightKeyOnPlay:key isIncorrect:YES isMissed:NO];
     }
     else
     {
         DLog(@"Play View Controller Pluck String");
         [g_soundMaster playKey:key withDuration:duration];
-        [self lightKeyOnPlay:key isMuted:NO isMissed:NO];
+        [self lightKeyOnPlay:key isIncorrect:NO isMissed:NO];
     }
     
 }
@@ -2912,7 +2920,7 @@ extern UserController * g_userController;
     for(NSNote * n in frame.m_notesPending){
         
         if(!isStandalone && ((_difficulty != PlayViewControllerDifficultyEasy && !_autocomplete) || [frame.m_notesHit count] == 0)){
-            [self lightKeyOnPlay:n.m_key isMuted:NO isMissed:YES];
+            [self lightKeyOnPlay:n.m_key isIncorrect:NO isMissed:YES];
         }else if(isStandalone){
             [self showMissedKey:n];
         }

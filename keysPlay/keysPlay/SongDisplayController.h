@@ -26,7 +26,6 @@
 #import "NSSongModel.h"
 #import "NSNoteFrame.h"
 
-#import "keysColors.h"
 #import "KeysMath.h"
 
 #import "PlayViewController.h"

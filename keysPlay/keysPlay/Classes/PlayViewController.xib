@@ -381,7 +381,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-1i-itT">
                                     <rect key="frame" x="0.0" y="40" width="65" height="6"/>
-                                    <color key="backgroundColor" red="0.85490196078431369" green="0.3411764705882353" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.99391555789999997" green="0.70358437299999999" blue="0.1740795523" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -395,7 +395,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-75-KDI">
                                     <rect key="frame" x="0.0" y="40" width="65" height="6"/>
-                                    <color key="backgroundColor" red="0.93333333330000001" green="0.73725490199999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="0.8666666666666667" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -409,7 +409,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-73-eaT">
                                     <rect key="frame" x="0.0" y="40" width="65" height="6"/>
-                                    <color key="backgroundColor" red="0.19215686269999999" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.57082572992700731" green="0.86613252740000002" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -451,7 +451,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x9t-uM-JLs">
                                     <rect key="frame" x="0.0" y="40" width="65" height="6"/>
-                                    <color key="backgroundColor" red="0.53333333329999999" green="0.37647058820000001" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.39186847209999998" green="0.55032122139999995" blue="0.98456496000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -465,7 +465,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tyg-Ib-va2">
                                     <rect key="frame" x="0.0" y="40" width="65" height="6"/>
-                                    <color key="backgroundColor" red="0.91580177920000005" green="0.54710310220000002" blue="0.6573905109" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.82283467054367065" green="0.43104055523872375" blue="0.86777138710021973" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -479,7 +479,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alv-a9-cQR">
                                     <rect key="frame" x="0.0" y="17" width="45" height="6"/>
-                                    <color key="backgroundColor" red="0.94901960784313721" green="0.77254901960784317" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.8877702355" green="0.34318429230000003" blue="0.23505209390000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
@@ -493,7 +493,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ue-Bz-qXK">
                                     <rect key="frame" x="0.0" y="17" width="45" height="6"/>
-                                    <color key="backgroundColor" red="0.78431372549019607" green="0.89411764705882346" blue="0.63921568627450975" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.99103504419999999" green="0.54096114640000004" blue="0.104484655" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
@@ -507,7 +507,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nVm-0k-mLc">
                                     <rect key="frame" x="0.0" y="17" width="45" height="6"/>
-                                    <color key="backgroundColor" red="0.52549019607843139" green="0.8901960784313725" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.10947267711162567" green="0.6387709379196167" blue="0.62978273630142212" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
@@ -521,7 +521,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9EM-uO-KCc">
                                     <rect key="frame" x="0.0" y="17" width="45" height="6"/>
-                                    <color key="backgroundColor" red="0.86274509803921573" green="0.73333333333333328" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.1016399711" green="0.46236988899999998" blue="0.84307152029999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>
@@ -535,7 +535,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQu-Yl-r21">
                                     <rect key="frame" x="0.0" y="17" width="45" height="6"/>
-                                    <color key="backgroundColor" red="0.96078431372549022" green="0.78823529411764703" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.58785074949264526" green="0.17028792202472687" blue="0.64463227987289429" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.27450980390000002" green="0.38431372549999998" blue="0.61960784310000006" alpha="1" colorSpace="deviceRGB"/>

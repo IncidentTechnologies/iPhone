@@ -9,6 +9,7 @@
 #import "AppCore.h"
 #import "NSNoteFrame.h"
 #import "NSNote.h"
+#import "keysColors.h"
 
 #define DEFAULT_CAMERA_SCALE 1.0
 #define MAX_CAMERA_SCALE 2.0
@@ -122,7 +123,7 @@ extern KeysController * g_keysController;
 - (BOOL)noteFacesUp:(KeyPosition)key;
 
 // Drawing
-- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive;
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive drawHighlights:(BOOL)drawHighlights;
 
 // Zoom and position keyboard, note range checks
 - (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame;

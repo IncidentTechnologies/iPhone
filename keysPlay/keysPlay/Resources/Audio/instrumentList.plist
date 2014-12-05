@@ -40,18 +40,9 @@
 			<key>Name</key>
 			<string>Electric Guitar</string>
 			<key>FirstNoteMidiNum</key>
-			<integer>0</integer>
+			<integer>40</integer>
 			<key>NumNotes</key>
-			<integer>104</integer>
-			<key>Tuning</key>
-			<array>
-				<string>0</string>
-				<string>17</string>
-				<string>34</string>
-				<string>51</string>
-				<string>68</string>
-				<string>85</string>
-			</array>
+			<integer>81</integer>
 		</dict>
 		<dict>
 			<key>Name</key>

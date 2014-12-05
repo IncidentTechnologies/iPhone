@@ -968,11 +968,11 @@
     
 #ifdef EFFECTS_AVAILABLE
     for(int i = 0; i < [effectStatus count]; i++){
-        BOOL isOn = [[effectStatus objectAtIndex:i] boolValue];
+        //BOOL isOn = [[effectStatus objectAtIndex:i] boolValue];
         
-        if(isOn){
+        //if(isOn){
             [self toggleEffect:i isOn:YES];
-        }
+        //}
     }
     
 #endif
@@ -982,13 +982,17 @@
 {
     
 #ifdef EFFECTS_AVAILABLE
-    BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
+    //BOOL isOn = [[effectStatus objectAtIndex:index] boolValue];
+    
+    if(index >= [effectNames count]){
+        return;
+    }
     
     NSString * effectNode = [effectNames objectAtIndex:index];
     
-    [effectStatus setObject:[NSNumber numberWithBool:!isOn] atIndexedSubscript:index];
+    [effectStatus setObject:[NSNumber numberWithBool:!on] atIndexedSubscript:index];
     
-    if(isOn){
+    if(on){
         
         DLog(@"Toggle effect off for %@",effectNode);
         
