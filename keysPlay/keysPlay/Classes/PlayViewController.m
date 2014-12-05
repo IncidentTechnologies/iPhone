@@ -1704,18 +1704,43 @@ extern UserController * g_userController;
 
 - (void)displayKeyboardRangeChanged
 {
-    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES];
+    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES drawKeysDown:NO];
 }
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
     // This is slightly hacked at the moment, but other methods calculate the range with different rounding and this approximates the match better than ceil or round
     
-    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO];
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO drawKeysDown:YES];
+}
+
+- (void)lightKeyOnUserPlay:(KeyPosition)key
+{
+    [g_keysMath lightKeyDown:key];
+    
+    [self drawKeyboardGridFromMin:[g_keysMath keyboardPositionKey]];
+    
+    // Timer to key up
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(lightKeyUp:) userInfo:[NSNumber numberWithInt:key] repeats:NO];
+     
+    
+}
+
+- (void)lightKeyUp:(NSTimer *)timer
+{
+    KeyPosition key = [[timer userInfo] intValue];
+    
+    [g_keysMath lightKeyUp:key];
+    
+    [self drawKeyboardGridFromMin:[g_keysMath keyboardPositionKey]];
+    
 }
 
 - (void)lightKeyOnPlay:(KeyPosition)key isIncorrect:(BOOL)incorrect isMissed:(BOOL)isMissed
 {
+    // Light key on full range keyboard
+    
     double keyWidth = keyboardOverview.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
     double overlayWidth = 1.5*drawKeyWidth;
@@ -1761,6 +1786,7 @@ extern UserController * g_userController;
         [keyView removeFromSuperview];
         [keyOverlay removeFromSuperview];
     }];
+    
 }
 
 - (void)updateScoreDisplayWithAccuracy:(double)accuracy
@@ -2180,6 +2206,7 @@ extern UserController * g_userController;
     if ( hit != nil )
     {
         [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:hit.m_duration];
+        [self lightKeyOnUserPlay:key];
     }
     
     if(isStandalone && hit != nil){
@@ -2650,26 +2677,43 @@ extern UserController * g_userController;
             for ( NSNote * note in _currentFrame.m_notesPending )
             {
                 [_delayedChords addObject:note];
+            }
+            
+            for(int i = 0; i < [_currentFrame.m_notesPending count]; i++){
+                NSNote * note = [_currentFrame.m_notesPending objectAtIndex:i];
                 
+                [_delayedChords addObject:note];
             }
             
             // We don't want to play notes that are already queues up.
             @synchronized ( _deferredNotesQueue )
             {
-                for ( NSDictionary * hit in _deferredNotesQueue )
-                {
+                //for ( NSDictionary * hit in _deferredNotesQueue )
+                //{
+                
+                for(int i = 0; i < [_deferredNotesQueue count]; i++){
+                    NSDictionary * hit = [_deferredNotesQueue objectAtIndex:i];
+                    
                     
                     NSNumber * keyNumber = [hit objectForKey:@"Key"];
                     
                     KeyPosition key = [keyNumber charValue];
                     
                     // This one is queues up, so don't play it
-                    for(NSNote * note in _delayedChords){
+                    // for(NSNote * note in _delayedChords){
+                    for(int j = 0; j < [_delayedChords count]; j++){
+                        NSNote * note = [_delayedChords objectAtIndex:j];
+                        
                         if(key == note.m_key){
                             [_delayedChords removeObject:note];
                         }
+                        
                     }
+                    // }
+                    
                 }
+                //}
+                
             }
             
             _previousChordPlayKey = key;
@@ -2682,9 +2726,13 @@ extern UserController * g_userController;
         }
     }
     
-    // Schedule an event to push us to the next frame after a moment
-    // if another note doesn't come in.
-    _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
+    if(_interFrameDelayTimer == nil){
+        
+        // Schedule an event to push us to the next frame after a moment
+        // if another note doesn't come in.
+        _interFrameDelayTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_GRACE_PERIOD target:self selector:@selector(interFrameDelayExpired) userInfo:nil repeats:NO];
+    }
+    
 }
 
 - (void)incorrectHitKey:(KeyPosition)key andVelocity:(KeysPressVelocity)velocity
@@ -2708,6 +2756,7 @@ extern UserController * g_userController;
     }
     
     [self lightKeyOnPlay:key isIncorrect:YES isMissed:NO];
+    [self lightKeyOnUserPlay:key];
     
 }
 
@@ -2800,10 +2849,12 @@ extern UserController * g_userController;
         if ( _difficulty == PlayViewControllerDifficultyHard )
         {
             [self pressKey:key andVelocity:_previousChordPlayVelocity andDuration:note.m_duration];
+            [self lightKeyOnUserPlay:key];
         }
         else
         {
             [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:note.m_duration];
+            //[self lightKeyOnUserPlay:key];
         }
         
         // Record the note

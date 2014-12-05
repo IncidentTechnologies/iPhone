@@ -77,7 +77,7 @@ extern KeysController * g_keysController;
 
 @interface KeysMath : NSObject
 {
-    
+    BOOL keysDown[KEYS_KEY_COUNT];
 }
 
 @property (weak, nonatomic) id<KeysMathDelegate>delegate;
@@ -123,7 +123,10 @@ extern KeysController * g_keysController;
 - (BOOL)noteFacesUp:(KeyPosition)key;
 
 // Drawing
-- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive;
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive drawKeysDown:(BOOL)drawKeysDown;
+- (void)lightKeyDown:(KeyPosition)keyDown;
+- (void)lightKeyUp:(KeyPosition)keyUp;
+- (BOOL)isKeyDown:(KeyPosition)key;
 
 // Zoom and position keyboard, note range checks
 - (BOOL)allNotesOutOfRangeForFrame:(NSNoteFrame *)noteFrame;

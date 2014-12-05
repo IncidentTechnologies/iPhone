@@ -40,6 +40,11 @@
         
         [self resetCameraScale];
         
+        
+        for(int i = 0; i < KEYS_KEY_COUNT; i++){
+            keysDown[i] = NO;
+        }
+        
     }
     
     return self;
@@ -404,7 +409,7 @@
 
 #pragma mark - Drawing
 
-- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive drawKeysDown:(BOOL)drawKeysDown
 {
     //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
@@ -474,17 +479,20 @@
                     
             }
             
-            /*if(drawHighlights){
+            if(drawKeysDown && [self isKeyDown:key]){
+                
                 GLubyte * noteColor = g_keyColors[key%KEYS_OCTAVE_COUNT];
                 
                 double colorFrameWidth = 12.0;
                 
-                CGRect colorFrame = CGRectMake(keyFrame.origin.x+keyFrame.size.width/2.0-colorFrameWidth,keyFrame.origin.y+whiteKeyFrameSize.height-35.0,2*colorFrameWidth,3*colorFrameWidth);
+                //CGRect colorFrame = CGRectMake(keyFrame.origin.x+keyFrame.size.width/2.0-colorFrameWidth,keyFrame.origin.y+whiteKeyFrameSize.height-35.0,2*colorFrameWidth,3*colorFrameWidth);
                 
-                CGContextSetFillColorWithColor(colorWhiteKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:70/255.0].CGColor);
+                //CGContextSetFillColorWithColor(colorWhiteKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:70/255.0].CGColor);
                 
-                CGContextFillRect(colorWhiteKeyContext, colorFrame);
-            }*/
+                CGContextSetFillColorWithColor(colorWhiteKeyContext, [UIColor colorWithRed:185/255.0 green:212/255.0 blue:222/255.0 alpha:0.9].CGColor);
+                
+                CGContextFillRect(colorWhiteKeyContext, keyFrame);
+            }
             
             w++;
             
@@ -495,17 +503,20 @@
             
             CGContextFillRect(blackKeyContext, keyFrame);
             
-            /*if(drawHighlights){
+            if(drawKeysDown && [self isKeyDown:key]){
+                
                 GLubyte * noteColor = g_keyColors[key%KEYS_OCTAVE_COUNT];
                 
                 double colorFrameWidth = 10.0;
                 
-                CGRect colorFrame = CGRectMake(keyFrame.origin.x+keyFrame.size.width/2.0-colorFrameWidth/2.0,keyFrame.origin.y,colorFrameWidth,2*colorFrameWidth);
+                //CGRect colorFrame = CGRectMake(keyFrame.origin.x+keyFrame.size.width/2.0-colorFrameWidth/2.0,keyFrame.origin.y,colorFrameWidth,2*colorFrameWidth);
                 
-                CGContextSetFillColorWithColor(colorBlackKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:200/255.0].CGColor);
+                //CGContextSetFillColorWithColor(colorBlackKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:200/255.0].CGColor);
                 
-                CGContextFillRect(colorBlackKeyContext, colorFrame);
-            }*/
+                CGContextSetFillColorWithColor(colorBlackKeyContext, [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5].CGColor);
+                
+                CGContextFillRect(colorBlackKeyContext, keyFrame);
+            }
             
         }
         
@@ -527,6 +538,21 @@
     CGLayerRelease(colorBlackKeyLayer);
     UIGraphicsEndImageContext();
     
+}
+
+- (void)lightKeyDown:(KeyPosition)keyDown
+{
+    keysDown[keyDown] = YES;
+}
+
+- (void)lightKeyUp:(KeyPosition)keyUp
+{
+    keysDown[keyUp] = NO;
+}
+
+- (BOOL)isKeyDown:(KeyPosition)key
+{
+    return keysDown[key];
 }
 
 #pragma mark - Note range and keyboard adjustments
