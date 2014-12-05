@@ -190,7 +190,7 @@ unsigned char g_sensitivity[6];
 - (void)updateFirmwareVersion
 {
     // Update in settings
-    if(g_keysController.connected){
+    if(g_keysController.connected && g_keysController.isKeysDeviceConnected){
         
         NSString * currentVersion = [NSLocalizedString(@"version", NULL) stringByAppendingFormat:@" %u.%u", g_keysController.m_firmwareMajorVersion, g_keysController.m_firmwareMinorVersion];
         
@@ -335,7 +335,7 @@ unsigned char g_sensitivity[6];
 
 - (void)updateCalibrate
 {
-    if(g_keysController.connected){
+    if(g_keysController.connected && g_keysController.isKeysDeviceConnected){
         
         [_incButton setEnabled:YES];
         [_decButton setEnabled:YES];

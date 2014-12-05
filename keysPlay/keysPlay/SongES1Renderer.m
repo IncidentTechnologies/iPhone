@@ -228,9 +228,8 @@
     for (LineModel * lineModel in m_lineModels )
     {
         CGPoint center = [lineModel getCenter];
-        CGSize size = [lineModel getSize];
         
-        if(m_horizontalOffset-m_currentPosition+center.x-size.width/2.8 > GL_SEEK_LINE_X){
+        if(m_horizontalOffset-m_currentPosition+center.x > GL_SEEK_LINE_X){
             [lineModel drawAt:CGPointMake(center.x,center.y)];
         }
     }
@@ -249,8 +248,12 @@
     // Draw the background overlay that doesn't move
     //
     if(!m_isVertical){
+        
         glTranslatef( -(m_horizontalOffset - m_currentPosition), 0.0f, 0.0f);
-        [m_backgroundTexture drawAt:CGPointMake(75/2.0, 273/2.0)];
+        
+        [m_backgroundTexture drawAt:CGPointMake((GL_SEEK_LINE_X-1)/2.0, 273/2.0)];
+        
+        [m_seekLineModel draw];
     }
     
 	// finish stuff

@@ -498,7 +498,7 @@ extern UserController * g_userController;
         [g_fileController getFileOrDownloadAsync:loggedInEntry.m_userProfile.m_imgFileId callbackObject:self callbackSelector:@selector(profilePicDownloaded:)];
     }
     
-    if(g_keysController.connected){
+    if(g_keysController.connected && g_keysController.isKeysDeviceConnected){
         [self promptKeysRegistration];
     }
     

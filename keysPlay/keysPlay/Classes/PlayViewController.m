@@ -1704,14 +1704,14 @@ extern UserController * g_userController;
 
 - (void)displayKeyboardRangeChanged
 {
-    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES drawHighlights:NO];
+    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES];
 }
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
 {
     // This is slightly hacked at the moment, but other methods calculate the range with different rounding and this approximates the match better than ceil or round
     
-    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO drawHighlights:YES];
+    [g_keysMath drawKeyboardInFrame:keyboardGrid fromKeyMin:keyMin withNumberOfKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_DISPLAYED_NOTES_COUNT) andNumberOfWhiteKeys:ceil(0.99*[g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT) invertColors:FALSE colorActive:NO];
 }
 
 - (void)lightKeyOnPlay:(KeyPosition)key isIncorrect:(BOOL)incorrect isMissed:(BOOL)isMissed

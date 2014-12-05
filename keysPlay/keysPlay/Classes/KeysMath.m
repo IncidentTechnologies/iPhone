@@ -404,7 +404,7 @@
 
 #pragma mark - Drawing
 
-- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive drawHighlights:(BOOL)drawHighlights
+- (void)drawKeyboardInFrame:(UIImageView *)frameView fromKeyMin:(int)keyMin withNumberOfKeys:(int)numberOfKeys andNumberOfWhiteKeys:(int)numberOfWhiteKeys invertColors:(BOOL)invertColors colorActive:(BOOL)colorActive
 {
     //int numberOfKeys = KEYS_DISPLAYED_NOTES_COUNT;
     
@@ -474,7 +474,7 @@
                     
             }
             
-            if(drawHighlights){
+            /*if(drawHighlights){
                 GLubyte * noteColor = g_keyColors[key%KEYS_OCTAVE_COUNT];
                 
                 double colorFrameWidth = 12.0;
@@ -484,7 +484,7 @@
                 CGContextSetFillColorWithColor(colorWhiteKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:70/255.0].CGColor);
                 
                 CGContextFillRect(colorWhiteKeyContext, colorFrame);
-            }
+            }*/
             
             w++;
             
@@ -495,7 +495,7 @@
             
             CGContextFillRect(blackKeyContext, keyFrame);
             
-            if(drawHighlights){
+            /*if(drawHighlights){
                 GLubyte * noteColor = g_keyColors[key%KEYS_OCTAVE_COUNT];
                 
                 double colorFrameWidth = 10.0;
@@ -505,7 +505,7 @@
                 CGContextSetFillColorWithColor(colorBlackKeyContext, [UIColor colorWithRed:noteColor[0]/255.0 green:noteColor[1]/255.0 blue:noteColor[2]/255.0 alpha:200/255.0].CGColor);
                 
                 CGContextFillRect(colorBlackKeyContext, colorFrame);
-            }
+            }*/
             
         }
         

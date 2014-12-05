@@ -570,7 +570,7 @@
     
     CGSize newSize;
     newSize.height = 273.0;
-    newSize.width = 75.0;
+    newSize.width = GL_SEEK_LINE_X-1;
     
     filePath = [[NSBundle mainBundle] pathForResource:@"NoteStaffOverlay" ofType:@"png"];
     normalImage = [[UIImage alloc] initWithContentsOfFile:filePath];
@@ -595,7 +595,17 @@
     CGSize size;
     CGPoint center;
     
-    m_renderer.m_seekLineModel = nil;
+    // Draw seek line
+    
+    size.width = 1.0;
+    size.height = GL_SCREEN_HEIGHT;
+
+    // Get the position of the black note as the center
+    center.x = GL_SEEK_LINE_X;
+    center.y = GL_SCREEN_HEIGHT/2.0;
+
+    m_renderer.m_seekLineModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteGrayColor];
+    
     m_renderer.m_seekLineStandaloneModel = nil;
     
     // Horizontal ledger lines
