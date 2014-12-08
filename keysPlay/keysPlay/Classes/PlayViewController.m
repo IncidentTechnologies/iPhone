@@ -2034,7 +2034,7 @@ extern UserController * g_userController;
 
 - (void)mainEventLoop {
     
-//#ifdef Debug_BUILD
+/*#ifdef Debug_BUILD
     if(g_keysController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
@@ -2067,7 +2067,7 @@ extern UserController * g_userController;
             
         }
     }
-//#endif
+#endif*/
     
     if(g_keysController.connected && !isStandalone) {
         
@@ -2081,6 +2081,13 @@ extern UserController * g_userController;
                 
                 if([g_keysMath noteOutOfRange:note.m_key]){
                     //DLog(@"Note out of range value is %i",note.m_key);
+                    
+                    UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Note out of range"
+                     message:[NSString stringWithFormat:@"n=%i min=%i, max=%i",note.m_key,g_keysController.range.keyMin,g_keysController.range.keyMax]
+                     delegate:self
+                     cancelButtonTitle:@"OK"
+                     otherButtonTitles:nil];
+                     [_alertView show];
                     
                     KeysPress press;
                     press.velocity = KeysMaxPressVelocity;
@@ -2319,6 +2326,14 @@ extern UserController * g_userController;
     int songMaxKey = [[songRange objectForKey:@"Max"] intValue];
     
     DLog(@"Keys range change to %i, %i, with songMin=%i, songMax=%i",range.keyMin,range.keyMax,songMinKey,songMaxKey);
+    
+    UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Keys Range Change"
+                                                          message:[NSString stringWithFormat:@"min=%i | max=%i",songMinKey,songMaxKey]
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    [_alertView show];
+    
     
     [g_keysMath setSongRangeFromMin:MIN(songMinKey,range.keyMin) andMax:MAX(songMaxKey,range.keyMax)];
     
@@ -3429,9 +3444,9 @@ extern UserController * g_userController;
         
         // Debug
 //#ifdef Debug_BUILD
-        if(g_keysController.connected){
-            _skipNotes = YES;
-        }
+        //if(g_keysController.connected){
+        //    _skipNotes = YES;
+        //}
 //#endif
     
     }

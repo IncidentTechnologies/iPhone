@@ -682,8 +682,9 @@ extern KeysController * g_keysController;
     }
     else
     {
-        
-//#ifdef Debug_BUILD
+   
+        /*
+#ifdef Debug_BUILD
         CGPoint point = [touch locationInView:self.view];
         
         int keyMin = [g_keysController range].keyMin;
@@ -704,22 +705,23 @@ extern KeysController * g_keysController;
         
         [self keysNoteOn:press];
         
-        /*
-        if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
+        
+       // if(point.y > 60 && point.y < 202 && point.x > 15 && point.x < 410){
+       //
+       //     int str = KEYS_GUITAR_STRING_COUNT - ceil((point.y-60) / (143//KEYS_GUITAR_STRING_COUNT));
+      // if (str >= KEYS_GUITAR_STRING_COUNT){
+      //          str = (KEYS_GUITAR_STRING_COUNT-1);
+      //      }
             
-            int str = KEYS_GUITAR_STRING_COUNT - ceil((point.y-60) / (143/KEYS_GUITAR_STRING_COUNT));
-            if (str >= KEYS_GUITAR_STRING_COUNT){
-                str = (KEYS_GUITAR_STRING_COUNT-1);
-            }
+       //     int fret = KEYS_GUITAR_FRET_COUNT - (point.x-15)/(395/KEYS_GUITAR_FRET_COUNT);
+       //     if(fret >= KEYS_GUITAR_FRET_COUNT){
+       //         fret = (KEYS_GUITAR_FRET_COUNT-1);
+       //     }
             
-            int fret = KEYS_GUITAR_FRET_COUNT - (point.x-15)/(395/KEYS_GUITAR_FRET_COUNT);
-            if(fret >= KEYS_GUITAR_FRET_COUNT){
-                fret = (KEYS_GUITAR_FRET_COUNT-1);
-            }
-            
-        }
-         */
-//#endif
+       // }
+         
+#endif
+        */
         
         m_LEDTouchArea = LEDTouchNone;
         return;

@@ -1239,7 +1239,7 @@ extern UserController * g_userController;
     if ( g_cloudController.m_loggedIn == YES ) {
         [self loggedinScreen];
         
-        if(!keysConnectedBefore){
+        if(!keysConnectedBefore && g_keysController.isKeysDeviceConnected){
             [self promptKeysRegistration];
         }
     }
