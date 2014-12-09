@@ -2082,12 +2082,12 @@ extern UserController * g_userController;
                 if([g_keysMath noteOutOfRange:note.m_key]){
                     //DLog(@"Note out of range value is %i",note.m_key);
                     
-                    UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Note out of range"
+                    /*UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Note out of range"
                      message:[NSString stringWithFormat:@"n=%i min=%i, max=%i",note.m_key,g_keysController.range.keyMin,g_keysController.range.keyMax]
                      delegate:self
                      cancelButtonTitle:@"OK"
                      otherButtonTitles:nil];
-                     [_alertView show];
+                     [_alertView show];*/
                     
                     KeysPress press;
                     press.velocity = KeysMaxPressVelocity;
@@ -2328,7 +2328,7 @@ extern UserController * g_userController;
     DLog(@"Keys range change to %i, %i, with songMin=%i, songMax=%i",range.keyMin,range.keyMax,songMinKey,songMaxKey);
     
     UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Keys Range Change"
-                                                          message:[NSString stringWithFormat:@"min=%i | max=%i",songMinKey,songMaxKey]
+                                                          message:[NSString stringWithFormat:@"min=%i | max=%i",range.keyMin,range.keyMax]
                                                          delegate:self
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
