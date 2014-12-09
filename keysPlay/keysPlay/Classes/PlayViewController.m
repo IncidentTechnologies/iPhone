@@ -2327,12 +2327,12 @@ extern UserController * g_userController;
     
     DLog(@"Keys range change to %i, %i, with songMin=%i, songMax=%i",range.keyMin,range.keyMax,songMinKey,songMaxKey);
     
-    UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Keys Range Change"
+    /*UIAlertView * _alertView = [[UIAlertView alloc] initWithTitle:@"Keys Range Change"
                                                           message:[NSString stringWithFormat:@"min=%i | max=%i",range.keyMin,range.keyMax]
                                                          delegate:self
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
-    [_alertView show];
+    [_alertView show];*/
     
     
     [g_keysMath setSongRangeFromMin:MIN(songMinKey,range.keyMin) andMax:MAX(songMaxKey,range.keyMax)];

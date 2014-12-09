@@ -159,6 +159,8 @@
 
 - (void)startRender
 {
+    double cameraScale = (m_isVertical) ? [g_keysMath cameraScale] : DEFAULT_CAMERA_SCALE;
+    
     // init stuff
 	[EAGLContext setCurrentContext:m_context];
     
@@ -168,8 +170,8 @@
 	// Set up the projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrthof( GL_ORTHO_LEFT, [g_keysMath cameraScale]*GL_ORTHO_RIGHT,
-             GL_ORTHO_BOTTOM, [g_keysMath cameraScale]*GL_ORTHO_TOP,
+    glOrthof( GL_ORTHO_LEFT, cameraScale*GL_ORTHO_RIGHT,
+             GL_ORTHO_BOTTOM, cameraScale*GL_ORTHO_TOP,
              GL_ORTHO_NEAR, GL_ORTHO_FAR );
 	
 	//
@@ -209,7 +211,7 @@
     // Now we translate forward for the notes
     //
     if(m_isVertical){
-        glTranslatef( 0.0f, [g_keysMath cameraScale]*m_offset - m_currentPosition, 0.0f);
+        glTranslatef( 0.0f, cameraScale*m_offset - m_currentPosition, 0.0f);
     }else{
         glTranslatef( m_horizontalOffset - m_currentPosition, 0.0f, 0.0f);
     }
