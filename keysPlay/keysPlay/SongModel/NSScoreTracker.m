@@ -335,7 +335,7 @@
     
 }
 
-- (int)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete
+- (double)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete
 {
     double starRatio = ratio * percentageComplete;
     

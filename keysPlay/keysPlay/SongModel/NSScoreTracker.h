@@ -39,7 +39,7 @@
     NSMutableArray * m_frameTimings;
     
     // stars
-    UInt32 m_stars;
+    double m_stars;
 
     // frame
 //    UInt32 m_currentFrameStringsCorrect;
@@ -62,13 +62,13 @@
 @property (nonatomic, readonly) UInt32 m_hitsIncorrect;
 @property (nonatomic, readonly) UInt32 m_multiplier;
 @property (nonatomic, readonly) UInt32 m_streak;
-@property (nonatomic, readonly) UInt32 m_stars;
+@property (nonatomic, readonly) double m_stars;
 
 - (id)initWithBaseScore:(UInt32)baseScore isPracticeMode:(BOOL)practiceMode numLoops:(int)loops;
 
 - (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone forLoop:(int)loop;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
-- (int)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete;
+- (double)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete;
 - (void)starRateScorePercentageComplete:(double)percentageComplete;
 - (void)scoreEndOfFrame:(NSNoteFrame*)frame percentageComplete:(double)percentageComplete;
 

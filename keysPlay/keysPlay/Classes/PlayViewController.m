@@ -1867,7 +1867,7 @@ extern UserController * g_userController;
      */
 }
 
-- (void)displayStars:(int)numStars isFinal:(BOOL)final
+- (void)displayStars:(double)numStars isFinal:(BOOL)final
 {
     UIButton * starFive = (final) ? _scoreSumStarFive : _scoreStarFive;
     UIButton * starFour = (final) ? _scoreSumStarFour : _scoreStarFour;
@@ -1878,7 +1878,7 @@ extern UserController * g_userController;
     if(numStars >= 5){
         [starFive setAlpha:1.0];
     }else if(numStars > 4){
-        [starFive setAlpha:0.7];
+        [starFive setAlpha:0.6];
     }else{
         [starFive setAlpha:0.3];
     }
@@ -1886,7 +1886,7 @@ extern UserController * g_userController;
     if(numStars >= 4){
         [starFour setAlpha:1.0];
     }else if(numStars > 3){
-        [starFour setAlpha:0.7];
+        [starFour setAlpha:0.6];
     }else{
         [starFour setAlpha:0.3];
     }
@@ -1894,7 +1894,7 @@ extern UserController * g_userController;
     if(numStars >= 3){
         [starThree setAlpha:1.0];
     }else if(numStars > 2){
-        [starThree setAlpha:0.7];
+        [starThree setAlpha:0.6];
     }else{
         [starThree setAlpha:0.3];
     }
@@ -1902,7 +1902,7 @@ extern UserController * g_userController;
     if(numStars >= 2){
         [starTwo setAlpha:1.0];
     }else if(numStars > 1){
-        [starTwo setAlpha:0.7];
+        [starTwo setAlpha:0.6];
     }else{
         [starTwo setAlpha:0.3];
     }
@@ -1910,7 +1910,7 @@ extern UserController * g_userController;
     if(numStars >= 1){
         [starOne setAlpha:1.0];
     }else if(numStars > 0){
-        [starOne setAlpha:0.7];
+        [starOne setAlpha:0.6];
     }else{
         [starOne setAlpha:0.3];
     }
@@ -3305,7 +3305,7 @@ extern UserController * g_userController;
     
     if(isPracticeMode){
         
-        _scoreBestSession.text = [NSString stringWithFormat:@"%i",[_scoreTracker getStarsForRatio:(bestscore/perfectscore) percentageComplete:_songModel.m_percentageComplete]]; //[self formatScore:(int)bestscore];
+        _scoreBestSession.text = [NSString stringWithFormat:@"%i",(int)[_scoreTracker getStarsForRatio:(bestscore/perfectscore) percentageComplete:_songModel.m_percentageComplete]]; //[self formatScore:(int)bestscore];
         _scoreTotal.text = [NSString stringWithFormat:@"%li",numsessions];//[self formatScore:(int)totalscore];
         
     }
