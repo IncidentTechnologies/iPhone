@@ -9,8 +9,10 @@
 #import "AppCore.h"
 #import "KeysMath.h"
 
+
 @class NSScoreTracker;
 @class NSSong;
+@class NSMeasure;
 @class NSNoteFrame;
 
 @protocol NSSongModelDelegate <NSObject>

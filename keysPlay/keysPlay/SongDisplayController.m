@@ -97,7 +97,9 @@
         
         [self preloadFrames:PRELOAD_INCREMENT*4];
         
-        if(!isSheetMusic){
+        if(isSheetMusic){
+            [self createSheetMusicLoopModels];
+        }else{
             [self createLoopModels];
         }
         
@@ -842,6 +844,58 @@
         LineModel * loopModel = [[LineModel alloc] initWithCenter:center andSize:size andColor:g_whiteColor];
         
         [m_renderer addLoop:loopModel];
+        
+    }
+}
+
+- (void)createSheetMusicLoopModels
+{
+    CGSize size;
+    CGPoint center;
+    
+    //
+    // Create the loop indicators
+    //
+    
+    for(int i = 0; i <= m_loops; i++){
+        
+        long numFrames = [m_allFrames count];
+        int frameindex = (double)numFrames/(double)(m_loops+1) * (i+1) - 1;
+        
+        NSNoteFrame * noteFrame = [m_allFrames objectAtIndex:frameindex];
+        NSNote * note = [noteFrame.m_notes firstObject];
+        
+        // Center on Middle C
+        center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart+note.m_duration]+25.0;
+        
+        center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C]; //[g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]; // get Y from note positions
+        
+        DLog(@"Creating loop line with frame %f %f, %f %f",center.x,center.y,size.width,size.height);
+        
+        double gap = 7.0;
+        
+        LineModel * loopRightBar = [[LineModel alloc] initWithCenter:center andSize:CGSizeMake(5.0, 198.0) andColor:g_whiteGrayColor];
+        
+        LineModel * loopLeftBar = [[LineModel alloc] initWithCenter:CGPointMake(center.x-gap, center.y) andSize:CGSizeMake(2.0, 198.0) andColor:g_whiteGrayColor];
+        
+        double topCenterY = [g_keysMath convertKeyToCoordSpace:71];
+        
+        double bottomCenterY = [g_keysMath convertKeyToCoordSpace:50];
+        
+        LineModel * loopTopTopDot = [[LineModel alloc] initWithCenter:CGPointMake(center.x-2*gap, topCenterY-gap) andSize:CGSizeMake(4.0, 4.0) andColor:g_whiteGrayColor];
+        
+        LineModel * loopTopBottomDot = [[LineModel alloc] initWithCenter:CGPointMake(center.x-2*gap, topCenterY+gap) andSize:CGSizeMake(4.0, 4.0) andColor:g_whiteGrayColor];
+        
+        LineModel * loopBottomTopDot = [[LineModel alloc] initWithCenter:CGPointMake(center.x-2*gap, bottomCenterY-gap) andSize:CGSizeMake(4.0, 4.0) andColor:g_whiteGrayColor];
+        
+        LineModel * loopBottomBottomDot = [[LineModel alloc] initWithCenter:CGPointMake(center.x-2*gap, bottomCenterY+gap) andSize:CGSizeMake(4.0, 4.0) andColor:g_whiteGrayColor];
+        
+        [m_renderer addLoop:loopLeftBar];
+        [m_renderer addLoop:loopRightBar];
+        [m_renderer addLoop:loopTopTopDot];
+        [m_renderer addLoop:loopTopBottomDot];
+        [m_renderer addLoop:loopBottomTopDot];
+        [m_renderer addLoop:loopBottomBottomDot];
         
     }
 }

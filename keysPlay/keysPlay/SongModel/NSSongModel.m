@@ -11,6 +11,7 @@
 #import "NSNoteFrame.h"
 #import "NSNote.h"
 #import "NSSong.h"
+#import "NSMeasure.h"
 
 @implementation NSSongModel
 
@@ -31,7 +32,7 @@
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
 
 #define SCROLLING_BEATS_PER_SECOND 1.0
-#define LOOP_GAP 2.0
+#define LOOP_GAP 0.0
 
 #define RESTRICTFRAME_PREVIEW_BEATS 0.5
 
@@ -125,11 +126,19 @@
     //}
     
     // Then set start and end
-    [self setStartBeat:start*m_lengthBeats];
+    double beatsPerMeasure = [[m_song.m_measures firstObject] m_beatCount];
+    
+    double startbeat = floorf(start*m_lengthBeats / beatsPerMeasure) * beatsPerMeasure;
+    
+    [self setStartBeat:startbeat];
     
     end = (end < start) ? 1.0 : end;
     
-    [self setEndBeat:end * m_lengthBeats];
+    double endbeat = ceilf(end*m_lengthBeats / beatsPerMeasure) * beatsPerMeasure;
+    
+    [self setEndBeat:endbeat];
+    
+    NSLog(@"Beats per measure is %f | startbeat is %f | endbeat is %f",beatsPerMeasure,startbeat,endbeat);
     
     // Detect first audible beat
     double firstAudibleBeat = [self getFirstAudibleBeat:notesArray];
@@ -146,7 +155,6 @@
     
     widthGap = (m_endBeat - m_startBeat) - floor(m_endBeat - m_startBeat);
     firstNoteGap = ceil(firstNote.m_absoluteBeatStart) - firstNote.m_absoluteBeatStart;
-    
     
     for( int l = 0; l <= loops; l++ ){
         for ( NSNote * note in notesArray )
