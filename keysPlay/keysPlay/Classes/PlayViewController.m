@@ -3373,7 +3373,7 @@ extern UserController * g_userController;
 {
     if(isStandalone && !_songIsPaused){
         if(activeTouchPoints == nil){
-            activeTouchPoints = [[NSMutableArray alloc] init];
+           activeTouchPoints = [[NSMutableArray alloc] init];
             
             [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(tapNoteFromTouchPoint) userInfo:nil repeats:NO];
             
@@ -3385,12 +3385,15 @@ extern UserController * g_userController;
         
             [activeTouchPoints addObject:[NSValue valueWithCGPoint:touchPoint]];
         }
+        
+        //[self tapNoteFromTouchPoint:touchPoints];
     }
     
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     // Only allow the bar to move if the range isn't auto-changing
     if(!isStandalone && ([g_keysController range].keyMax-[g_keysController range].keyMin) <= KEYS_DISPLAYED_NOTES_COUNT){
         
@@ -3434,6 +3437,15 @@ extern UserController * g_userController;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
+    // Release key touches
+    for(UITouch * touch in touches){
+        CGPoint touchPoint = [touch locationInView:self.glView];
+        
+        [self releaseKeyFromTap:touchPoint];
+    }
+    
+    
     // Only allow the bar to move if the range isn't auto-changing
     if(([g_keysController range].keyMax-[g_keysController range].keyMin) <= KEYS_DISPLAYED_NOTES_COUNT){
         
@@ -3480,6 +3492,20 @@ extern UserController * g_userController;
         
     }
     
+}
+
+- (void)releaseKeyFromTap:(CGPoint)tap
+{
+    
+    for(UIView * view in selectedKeyboard.subviews){
+        
+        if(tap.x > view.frame.origin.x && tap.x < view.frame.origin.x+view.frame.size.width){
+            
+            [self uncolorKey:view];
+            
+        }
+        
+    }
 }
 
 - (void)tapNoteFromTouchPoint
@@ -3563,14 +3589,28 @@ extern UserController * g_userController;
         accuracyColor = [UIColor colorWithRed:255/255.0 green:113/255.0 blue:66/255.0 alpha:1.0];
     }
     
-    [UIView animateWithDuration:0.0 animations:^(void){
-        [key setBackgroundColor:accuracyColor];
-    } completion:^(BOOL finished){
-        [UIView animateWithDuration:0.2 delay:0.1 options:nil animations:^(void){
-            [key setBackgroundColor:uncolored];
-        }completion:nil];
-    }];
+    [key setBackgroundColor:accuracyColor];
     
+    if(accuracy <= hitIncorrect){
+        [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(uncolorKeyTimeout:) userInfo:key repeats:NO];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(uncolorKeyTimeout:) userInfo:key repeats:NO];
+    }
+    
+}
+
+- (void)uncolorKeyTimeout:(NSTimer*)timer
+{
+    UIView * key = (UIView *)[timer userInfo];
+    
+    [self uncolorKey:key];
+}
+
+- (void)uncolorKey:(UIView *)key
+{
+    UIColor * uncolored = (key.tag == 0) ? [UIColor whiteColor] : [UIColor colorWithRed:53/255.0 green:194/255.0 blue:241/255.0 alpha:1.0];
+    
+    [key setBackgroundColor:uncolored];
 }
 
 // Standalone
