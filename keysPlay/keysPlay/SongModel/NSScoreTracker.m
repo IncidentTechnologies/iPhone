@@ -10,14 +10,12 @@
 #import "NSNoteFrame.h"
 #import "NSNote.h"
 
-#define SCORE_TRACKER_HITS_PER_MULTIPLIER 4
-#define SCORE_TRACKER_MULTIPLIER_MAX 4
 #define SONG_BEATS_PER_SCREEN 1.5
 #define NOTE_MAX_POINTS 100.0
 
 @implementation NSScoreTracker
 
-@synthesize m_baseScore;
+//@synthesize m_baseScore;
 @synthesize m_score;
 @synthesize m_totalScore;
 @synthesize m_hitsAttempted;
@@ -34,7 +32,7 @@
     if ( self ) 
     {
 
-        m_baseScore = baseScore;
+        //m_baseScore = baseScore;
         
         // scoring
         m_score = 0;
@@ -54,7 +52,7 @@
         m_frameHits = [[NSMutableArray alloc] init];
         m_frameTimings = [[NSMutableArray alloc] init];
         
-        m_stars = 5;
+        m_stars = 0;
         
         isPracticeMode = practiceMode;
         m_loops = loops;
@@ -83,7 +81,7 @@
     int frameIncorrectHits = (int)frame.m_notesWrong;
     
     double percentAccuracy = 0;
-    double complexMultiplier = 1;
+    //double complexMultiplier = 1;
     double noteScore = 0;
     m_multiplier = 1;
     
@@ -121,14 +119,14 @@
         // Complexity
         //
         // Count the # of different frets down
-        int fretson[KeysMaxKeyPosition];
+        /*int fretson[KeysMaxKeyPosition];
         complexity = 0;
         
         for(int i = 0; i < KeysMaxKeyPosition; i++) fretson[i] = 0;
         for(NSNote * nn in frame.m_notesHit) fretson[nn.m_key] = 1;
         for(int i = 0; i < KeysMaxKeyPosition; i++) complexity += fretson[i];
         
-        complexity -= 1;
+        complexity -= 1;*/
     }
     
     //
@@ -146,13 +144,13 @@
     m_streak++;
     
     if(m_streak >= 4 && m_streak < 8){
-        m_multiplier = 2;
+        m_multiplier = 1.3;
     }else if(m_streak >= 8 && m_streak < 16){
-        m_multiplier = 4;
+        m_multiplier = 1.5;
     }else if(m_streak >= 16 && m_streak < 32){
-        m_multiplier = 6;
+        m_multiplier = 1.7;
     }else if(m_streak >= 32){
-        m_multiplier = 8;
+        m_multiplier = 2.0;
     }
     
     // Calculate ** max streak **
@@ -161,17 +159,17 @@
     //
     // Complexity
     //
-    // Counts the # of frets down
-    complexMultiplier += 0.1*complexity + 0.1*(frameCorrectHits - 1);
+    // Counts the # of keys down
+    //complexMultiplier += 0.1*complexity + 0.1*(frameCorrectHits - 1);
     
     //
     // Score
     //
     
-    DLog(@"Score is %f * %i * %f",noteScore,(int)m_multiplier,complexMultiplier);
+    DLog(@"Score is %f * %i",noteScore,(int)m_multiplier);
     DLog(@"Current loops is %i",loop);
     
-    int subscore = noteScore * m_multiplier * complexMultiplier;
+    int subscore = noteScore * m_multiplier; // * complexMultiplier;
     
     // Add to loop score for practice
     
@@ -209,7 +207,7 @@
 
 // Aggregate data for final display
 // Called only on exit frame
-- (void)scoreEndOfFrame:(NSNoteFrame*)frame
+- (void)scoreEndOfFrame:(NSNoteFrame*)frame percentageComplete:(double)percentageComplete
 {
     int frameMissedHits = (int)[frame.m_notesPending count];
     int frameCorrectHits = (int)[frame.m_notesHit count];
@@ -231,7 +229,7 @@
     
     [self scoreFramePerfectly:frame];
     
-    [self starRateScore];
+    [self starRateScorePercentageComplete:percentageComplete];
 }
 
 - (NSDictionary *)aggregateScoreEndOfSong
@@ -296,23 +294,32 @@
 {
 
     // Assume the player hit everything perfectly
-    UInt32 frameCorrectHits = [frame.m_notes count];
+    //UInt32 frameCorrectHits = [frame.m_notes count];
 
-    m_streakPerfect += frameCorrectHits;
+    m_streakPerfect += [frame.m_notes count];
     
     // At least 1, no more than MAX
-    m_multiplierPerfect = MIN( SCORE_TRACKER_MULTIPLIER_MAX, MAX( m_streakPerfect / SCORE_TRACKER_HITS_PER_MULTIPLIER, 1) );
+    if(m_streakPerfect >= 4 && m_streakPerfect < 8){
+        m_multiplierPerfect = 1.3;
+    }else if(m_streakPerfect >= 8 && m_streakPerfect < 16){
+        m_multiplierPerfect = 1.5;
+    }else if(m_streakPerfect >= 16 && m_streakPerfect < 32){
+        m_multiplierPerfect = 1.7;
+    }else if(m_streakPerfect >= 32){
+        m_multiplierPerfect = 2.0;
+    }
     
     // Multiply the base score and add it in
-    m_scorePerfect += ((frameCorrectHits * m_baseScore) * m_multiplierPerfect);
+    m_scorePerfect += NOTE_MAX_POINTS * m_multiplierPerfect;
 
 }
 
-- (void)starRateScore
+- (void)starRateScorePercentageComplete:(double)percentageComplete
 {
     
 //    double score = m_score;
 //    double scorePerfect = m_scorePerfect;
+    
     
     double ratio = (double)m_score / (double)m_scorePerfect;
     //double ratioHits = (double)m_hitsCorrect / (double)(m_hitsAttempted+m_hitsMissed);
@@ -324,24 +331,38 @@
         ratio = 1.0;
     }
     
-    m_stars = [self getStarsForRatio:ratio];
+    m_stars = [self getStarsForRatio:ratio percentageComplete:percentageComplete];
     
 }
 
-- (int)getStarsForRatio:(double)ratio
+- (int)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete
 {
-    if(ratio < 0.1){
+    double starRatio = ratio * percentageComplete;
+    
+    DLog(@"Star ratio is %f",starRatio);
+    
+    if(starRatio < 0.05){
         return 0;
-    }else if ( ratio < 0.20 ){
+    }else if(starRatio < 0.1){
+        return 0.5;
+    }else if ( starRatio < 0.20 ){
         return 1;
-    }else if ( ratio < 0.40 ){
+    }else if ( starRatio < 0.25 ){
+        return 1.5;
+    }else if ( starRatio < 0.35 ){
         return 2;
-    }else if ( ratio < 0.60 ){
+    }else if ( starRatio < 0.40 ){
+        return 2.5;
+    }else if ( starRatio < 0.50 ){
         return 3;
-    }else if ( ratio < 0.80 ){
+    }else if ( starRatio < 0.55 ){
+        return 3.5;
+    }else if ( starRatio < 0.65 ){
         return 4;
+    }else if (starRatio < 0.7 ){
+        return 4.5;
     }else{
-        return 5;
+        return 5.0;
     }
 }
 

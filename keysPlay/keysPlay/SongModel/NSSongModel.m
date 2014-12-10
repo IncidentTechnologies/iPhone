@@ -31,7 +31,7 @@
 #define SONG_MODEL_NOTE_FRAME_WIDTH (0.2f) // beats, see also PlayViewController
 #define SONG_MODEL_NOTE_FRAME_WIDTH_MAX (0.2f)
 
-#define SCROLLING_BEATS_PER_SECOND 1.0
+#define SCROLLING_BEATS_REDUCTION 0.75
 #define LOOP_GAP 0.0
 
 #define RESTRICTFRAME_PREVIEW_BEATS 0.5
@@ -187,9 +187,7 @@
     
     // Control the tempo throughout Standalone
     if(isScrolling) {
-        m_beatsPerSecond = MIN((m_song.m_tempo * 0.75f) / 60.0, SCROLLING_BEATS_PER_SECOND);
-        m_beatsPerSecond *= tempoPercent;
-        //m_beatsPerSecond = SCROLLING_BEATS_PER_SECOND * tempoPercent;
+        m_beatsPerSecond = (tempoPercent*m_song.m_tempo*SCROLLING_BEATS_REDUCTION) / 60.0;
     }
     else {
         m_beatsPerSecond = m_song.m_tempo / 60.0;

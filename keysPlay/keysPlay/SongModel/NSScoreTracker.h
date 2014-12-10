@@ -14,7 +14,7 @@
 {
 
     // base score
-    UInt32 m_baseScore;
+    //UInt32 m_baseScore;
     
     // scoring
 	UInt32 m_score;
@@ -54,7 +54,7 @@
     BOOL isPracticeMode;
 }
 
-@property (nonatomic, assign) UInt32 m_baseScore;
+//@property (nonatomic, assign) UInt32 m_baseScore;
 @property (nonatomic, readonly) UInt32 m_score;
 @property (nonatomic, readonly) UInt32 m_totalScore;
 @property (nonatomic, readonly) UInt32 m_hitsAttempted;
@@ -68,9 +68,9 @@
 
 - (double)scoreFrame:(NSNoteFrame*)frame onBeat:(double)beat withComplexity:(int)complexity endStreak:(BOOL)endStreak isStandalone:(BOOL)isStandalone forLoop:(int)loop;
 - (void)scoreFramePerfectly:(NSNoteFrame*)frame;
-- (int)getStarsForRatio:(double)ratio;
-- (void)starRateScore;
-- (void)scoreEndOfFrame:(NSNoteFrame*)frame;
+- (int)getStarsForRatio:(double)ratio percentageComplete:(double)percentageComplete;
+- (void)starRateScorePercentageComplete:(double)percentageComplete;
+- (void)scoreEndOfFrame:(NSNoteFrame*)frame percentageComplete:(double)percentageComplete;
 
 - (NSDictionary *)aggregateScoreEndOfSong;
 

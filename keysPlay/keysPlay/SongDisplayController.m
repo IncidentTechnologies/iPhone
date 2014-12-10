@@ -857,6 +857,8 @@
     // Create the loop indicators
     //
     
+    double beatsPerMeasure = [[m_songModel.m_song.m_measures firstObject] m_beatCount];
+    
     for(int i = 0; i <= m_loops; i++){
         
         long numFrames = [m_allFrames count];
@@ -866,9 +868,9 @@
         NSNote * note = [noteFrame.m_notes firstObject];
         
         // Center on Middle C
-        center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart+note.m_duration]+25.0;
+        center.x = [g_keysMath convertBeatToCoordSpace:beatsPerMeasure*ceilf((note.m_absoluteBeatStart+note.m_duration)/beatsPerMeasure)] - 2.0;
         
-        center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C]; //[g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]; // get Y from note positions
+        center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MIDDLE_C];
         
         DLog(@"Creating loop line with frame %f %f, %f %f",center.x,center.y,size.width,size.height);
         
@@ -892,10 +894,13 @@
         
         [m_renderer addLoop:loopLeftBar];
         [m_renderer addLoop:loopRightBar];
-        [m_renderer addLoop:loopTopTopDot];
-        [m_renderer addLoop:loopTopBottomDot];
-        [m_renderer addLoop:loopBottomTopDot];
-        [m_renderer addLoop:loopBottomBottomDot];
+        
+        if(i < m_loops){
+            [m_renderer addLoop:loopTopTopDot];
+            [m_renderer addLoop:loopTopBottomDot];
+            [m_renderer addLoop:loopBottomTopDot];
+            [m_renderer addLoop:loopBottomBottomDot];
+        }
         
     }
 }

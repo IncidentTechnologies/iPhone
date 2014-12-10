@@ -892,19 +892,19 @@ extern UserController * g_userController;
         case PlayViewControllerDifficultyEasy:
         {
             _difficulty = PlayViewControllerDifficultyMedium;
-            _scoreTracker.m_baseScore = 20;
+            //_scoreTracker.m_baseScore = 20;
         } break;
             
         case PlayViewControllerDifficultyMedium:
         {
             _difficulty = PlayViewControllerDifficultyHard;
-            _scoreTracker.m_baseScore = 40;
+            //_scoreTracker.m_baseScore = 40;
         } break;
             
         case PlayViewControllerDifficultyHard:
         {
             _difficulty = PlayViewControllerDifficultyEasy;
-            _scoreTracker.m_baseScore = 10;
+            //_scoreTracker.m_baseScore = 10;
         } break;
     }
     
@@ -1877,30 +1877,40 @@ extern UserController * g_userController;
     
     if(numStars >= 5){
         [starFive setAlpha:1.0];
+    }else if(numStars > 4){
+        [starFive setAlpha:0.7];
     }else{
         [starFive setAlpha:0.3];
     }
     
     if(numStars >= 4){
         [starFour setAlpha:1.0];
+    }else if(numStars > 3){
+        [starFour setAlpha:0.7];
     }else{
         [starFour setAlpha:0.3];
     }
     
     if(numStars >= 3){
         [starThree setAlpha:1.0];
+    }else if(numStars > 2){
+        [starThree setAlpha:0.7];
     }else{
         [starThree setAlpha:0.3];
     }
     
     if(numStars >= 2){
         [starTwo setAlpha:1.0];
+    }else if(numStars > 1){
+        [starTwo setAlpha:0.7];
     }else{
         [starTwo setAlpha:0.3];
     }
     
     if(numStars >= 1){
         [starOne setAlpha:1.0];
+    }else if(numStars > 0){
+        [starOne setAlpha:0.7];
     }else{
         [starOne setAlpha:0.3];
     }
@@ -2034,7 +2044,7 @@ extern UserController * g_userController;
 
 - (void)mainEventLoop {
     
-#ifdef Debug_BUILD
+/*#ifdef Debug_BUILD
     if(g_keysController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
@@ -2067,7 +2077,7 @@ extern UserController * g_userController;
             
         }
     }
-#endif
+#endif*/
     
     if(g_keysController.connected && !isStandalone) {
         
@@ -3009,7 +3019,7 @@ extern UserController * g_userController;
     
     // Score checking on frame release
     if(frame != nil){
-        [_scoreTracker scoreEndOfFrame:frame];
+        [_scoreTracker scoreEndOfFrame:frame percentageComplete:_songModel.m_percentageComplete];
     }
     
     // turn off any lights that might have been skipped
@@ -3295,12 +3305,12 @@ extern UserController * g_userController;
     
     if(isPracticeMode){
         
-        _scoreBestSession.text = [NSString stringWithFormat:@"%i",[_scoreTracker getStarsForRatio:(bestscore/perfectscore)]]; //[self formatScore:(int)bestscore];
+        _scoreBestSession.text = [NSString stringWithFormat:@"%i",[_scoreTracker getStarsForRatio:(bestscore/perfectscore) percentageComplete:_songModel.m_percentageComplete]]; //[self formatScore:(int)bestscore];
         _scoreTotal.text = [NSString stringWithFormat:@"%li",numsessions];//[self formatScore:(int)totalscore];
         
     }
     
-    [self displayStars:[_scoreTracker getStarsForRatio:(score/perfectscore)] isFinal:YES];
+    [self displayStars:[_scoreTracker getStarsForRatio:(score/perfectscore) percentageComplete:_songModel.m_percentageComplete] isFinal:YES];
     
     _scoreNotesHit.text = [NSString stringWithFormat:@"%i%%",(int)percentNotesHit];
     _scoreInARow.text = [NSString stringWithFormat:@"%i",(int)maxStreak];
@@ -3444,9 +3454,9 @@ extern UserController * g_userController;
         
         // Debug
 //#ifdef Debug_BUILD
-        if(g_keysController.connected){
-            _skipNotes = YES;
-        }
+        //if(g_keysController.connected){
+        //    _skipNotes = YES;
+        //}
 //#endif
     
     }
