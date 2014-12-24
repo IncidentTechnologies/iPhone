@@ -7,6 +7,7 @@
  *
  */
 #import "KeysController.h"
+#import "OphoCloudController.h"
 #import "TestFlight.h"
 #import <UIKit/UIKit.h>
 

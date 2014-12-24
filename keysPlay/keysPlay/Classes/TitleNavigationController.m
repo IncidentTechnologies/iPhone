@@ -40,6 +40,7 @@
 #import "StoreViewController.h"
 
 extern CloudController * g_cloudController;
+extern OphoCloudController * g_ophoCloudController;
 extern FileController * g_fileController;
 extern KeysController * g_keysController;
 extern UserController * g_userController;

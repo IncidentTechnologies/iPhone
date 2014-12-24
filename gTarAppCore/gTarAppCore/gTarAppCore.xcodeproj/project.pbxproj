@@ -30,7 +30,7 @@
 		EC5DA87D161A5F500015832E /* ContentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA87B161A5F500015832E /* ContentController.h */; };
 		EC5DA87E161A5F500015832E /* ContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA87C161A5F500015832E /* ContentController.m */; };
 		EC5DA888161A5F850015832E /* UserController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA880161A5F850015832E /* UserController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC5DA889161A5F850015832E /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA881161A5F850015832E /* UserController.m */; };
+		EC5DA889161A5F850015832E /* UserController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA881161A5F850015832E /* UserController.mm */; };
 		EC5DA88A161A5F850015832E /* UserEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA882161A5F850015832E /* UserEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC5DA88B161A5F850015832E /* UserEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EC5DA883161A5F850015832E /* UserEntry.m */; };
 		EC5DA88C161A5F850015832E /* UserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5DA884161A5F850015832E /* UserRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -120,7 +120,7 @@
 		EC5DA87B161A5F500015832E /* ContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentController.h; sourceTree = "<group>"; };
 		EC5DA87C161A5F500015832E /* ContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentController.m; sourceTree = "<group>"; };
 		EC5DA880161A5F850015832E /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
-		EC5DA881161A5F850015832E /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		EC5DA881161A5F850015832E /* UserController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UserController.mm; sourceTree = "<group>"; };
 		EC5DA882161A5F850015832E /* UserEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntry.h; sourceTree = "<group>"; };
 		EC5DA883161A5F850015832E /* UserEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntry.m; sourceTree = "<group>"; };
 		EC5DA884161A5F850015832E /* UserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRequest.h; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				EC5DA880161A5F850015832E /* UserController.h */,
-				EC5DA881161A5F850015832E /* UserController.m */,
+				EC5DA881161A5F850015832E /* UserController.mm */,
 				EC5DA882161A5F850015832E /* UserEntry.h */,
 				EC5DA883161A5F850015832E /* UserEntry.m */,
 				EC5DA884161A5F850015832E /* UserRequest.h */,
@@ -477,7 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC5DA87E161A5F500015832E /* ContentController.m in Sources */,
-				EC5DA889161A5F850015832E /* UserController.m in Sources */,
+				EC5DA889161A5F850015832E /* UserController.mm in Sources */,
 				EC5DA88B161A5F850015832E /* UserEntry.m in Sources */,
 				EC5DA88D161A5F850015832E /* UserRequest.m in Sources */,
 				EC5DA88F161A5F850015832E /* UserResponse.m in Sources */,

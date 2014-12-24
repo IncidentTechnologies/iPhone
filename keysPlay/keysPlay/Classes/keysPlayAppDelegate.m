@@ -18,6 +18,7 @@
 #import "Mixpanel.h"
 
 #import "CloudController.h"
+#import "OphoCloudController.h"
 #import "FileController.h"
 #import <gTarAppCore/UserController.h>
 
@@ -26,6 +27,7 @@
 //Facebook *g_facebook;
 
 CloudController * g_cloudController;
+OphoCloudController * g_ophoCloudController;
 //AudioController * g_audioController;
 FileController * g_fileController;
 KeysController * g_keysController;
@@ -53,11 +55,14 @@ KeysMath * g_keysMath;
         // Init the cloud controller
         g_cloudController = [[CloudController alloc] initWithServer:kServerAddress];
         
+        // Init the opho cloud controller
+        g_ophoCloudController = [[OphoCloudController alloc] initWithServer:ophoServerAddress];
+        
         // Restore the file controller so we can get all the cached content
         g_fileController = [[FileController alloc] initWithCloudController:g_cloudController];
         
         // Create the user controller to manage users
-        g_userController = [[UserController alloc] initWithCloudController:g_cloudController];
+        g_userController = [[UserController alloc] initWithCloudController:g_cloudController andOphoCloudController:g_ophoCloudController];
 #if 0
         // Create the telemetry controller to upload log data
         NSString * uuidString = [self generateUUID];

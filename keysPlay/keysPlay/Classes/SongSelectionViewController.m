@@ -12,6 +12,7 @@
 
 extern FileController *g_fileController;
 extern CloudController *g_cloudController;
+extern OphoCloudController *g_ophoCloudController;
 //extern AudioController *g_audioController;
 extern UserController *g_userController;
 extern KeysController *g_keysController;

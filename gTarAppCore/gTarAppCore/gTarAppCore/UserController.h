@@ -11,6 +11,7 @@
 
 @class CloudResponse;
 @class CloudController;
+@class OphoCloudController;
 @class UserProfile;
 @class UserEntry;
 @class UserSongSession;
@@ -27,6 +28,7 @@
     NSString * m_userFilePath;
     
     CloudController * m_cloudController;
+    OphoCloudController * m_ophoCloudController;
     
     NSMutableDictionary * m_userCache;
     NSMutableDictionary * m_starCache;
@@ -42,7 +44,7 @@
 @property (nonatomic, readonly) UserProfile * m_loggedInUserProfile;
 @property (nonatomic, readonly) NSString * m_loggedInFacebookToken;
 
-- (id)initWithCloudController:(CloudController*)cloudController;
+- (id)initWithCloudController:(CloudController*)cloudController andOphoCloudController:(OphoCloudController *)ophoCloudController;
 + (UserController *)sharedSingleton;
 
 - (void)clearCache;

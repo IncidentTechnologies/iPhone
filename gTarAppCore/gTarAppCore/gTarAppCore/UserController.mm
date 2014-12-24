@@ -10,6 +10,7 @@
 #import "UserController.h"
 
 #import "CloudController.h"
+#import "OphoCloudController.h"
 #import "CloudResponse.h"
 #import "CloudRequest.h"
 #import "UserSongSessions.h"
@@ -27,7 +28,7 @@
 @synthesize m_loggedInUserProfile;
 @synthesize m_loggedInFacebookToken;
 
-- (id)initWithCloudController:(CloudController*)cloudController
+- (id)initWithCloudController:(CloudController*)cloudController andOphoCloudController:(OphoCloudController *)ophoCloudController
 {
     
     self = [super init];
@@ -36,6 +37,7 @@
     {
         
         m_cloudController = cloudController;
+        m_ophoCloudController = ophoCloudController;
         
         m_cloudToUserRequest = [[NSMutableDictionary alloc] init];
         
@@ -91,7 +93,7 @@
     {
         if (!sharedSingleton)
         {
-            sharedSingleton = [[UserController alloc] initWithCloudController:[CloudController sharedSingleton]];
+            sharedSingleton = [[UserController alloc] initWithCloudController:[CloudController sharedSingleton] andOphoCloudController:[OphoCloudController sharedSingleton]];
         }
         
         return sharedSingleton;
@@ -370,6 +372,8 @@
     
     [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
     
+    [self requestOphoLoginUser:m_loggedInUsername andPassword:m_loggedInPassword];
+    
 }
 
 - (void) requestRegisterGtarCallback:(CloudResponse *)cloudResponse
@@ -431,6 +435,8 @@
     
     [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
     
+    [self requestOphoLoginUser:username andPassword:password];
+    
 }
 
 - (void)requestLoginUserCallback:(CloudResponse*)cloudResponse
@@ -482,6 +488,7 @@
     [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
     
 }
+
 
 /*
 - (void)requestLoginUserFacebookToken:(NSString*)facebookToken andCallbackObj:(id)obj andCallbackSel:(SEL)sel
@@ -638,6 +645,8 @@
     
     [m_cloudToUserRequest setObject:userRequest forKey:[NSValue valueWithNonretainedObject:cloudRequest]];
     
+    [self requestOphoLogoutUser];
+    
 }
 
 - (void)requestLogoutUserCallback:(CloudResponse*)cloudResponse
@@ -659,6 +668,36 @@
     [userRequest.m_callbackObject performSelector:userRequest.m_callbackSelector withObject:userResponse];
     
 }
+
+
+#pragma mark - Login / Logout for Opho
+
+- (void)requestOphoLoginUser:(NSString*)username
+                 andPassword:(NSString*)password
+{
+    NSLog(@"Request opho user %@ login",username);
+    
+    [m_ophoCloudController requestLoginUsername:username andPassword:password andCallbackObj:self andCallbackSel:@selector(ophoUserLoggedIn)];
+}
+
+- (void)requestOphoLogoutUser
+{
+    NSLog(@"Request opho user logout");
+    
+    [m_ophoCloudController requestLogoutCallbackObj:self andCallbackSel:@selector(ophoUserLoggedOut)];
+}
+
+- (void)ophoUserLoggedIn
+{
+    NSLog(@"Opho user logged in");
+}
+
+
+- (void)ophoUserLoggedOut
+{
+    NSLog(@"Opho user logged out");
+}
+
 
 #pragma mark - Cloud
 
