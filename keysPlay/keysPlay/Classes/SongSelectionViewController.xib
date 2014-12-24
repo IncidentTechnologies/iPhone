@@ -198,9 +198,12 @@
                                 <constraint firstAttribute="height" constant="46" id="BUP-Jm-m4x"/>
                                 <constraint firstAttribute="width" constant="100" id="is0-o0-bgE"/>
                             </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="-7" maxX="0.0" maxY="-7"/>
                             <state key="normal" title="Opho" image="Opho_Icon.png"/>
+                            <connections>
+                                <action selector="ophoButtonClicked:" destination="-1" eventType="touchUpInside" id="zQC-Vz-1fn"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.62745098039215685" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>

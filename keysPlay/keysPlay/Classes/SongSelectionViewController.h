@@ -105,6 +105,7 @@ struct SongSortOrder {
 - (IBAction)difficulyButtonClicked:(id)sender;
 - (IBAction)blackButtonClicked:(id)sender;
 - (IBAction)fullscreenButtonClicked:(id)sender;
+- (IBAction)ophoButtonClicked:(id)sender;
 
 - (void)openSongOptionsForSongId:(NSInteger)songId;
 - (void)openSongOptionsForSong:(UserSong*)userSong;

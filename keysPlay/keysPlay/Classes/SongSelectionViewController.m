@@ -32,6 +32,7 @@ extern KeysController *g_keysController;
     NSInteger _currentDifficulty;
     
     BOOL _searching;
+    BOOL _isOphoListing;
     
     NSInteger _nextUserSong;
     
@@ -365,6 +366,24 @@ extern KeysController *g_keysController;
     [_searchBar endSearch];
     [_fullscreenButton setHidden:YES];
 }
+
+- (IBAction)ophoButtonClicked:(id)sender
+{
+    _isOphoListing = !_isOphoListing;
+    
+    // Style the Opho button
+    if(_isOphoListing){
+        
+        [_ophoButton setTintColor:[UIColor whiteColor]];
+        
+    }else{
+        
+        [_ophoButton setTintColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
+        
+    }
+}
+
+
 
 /*- (IBAction)sortByArtistButtonClicked:(UIButton*)sender
 {
