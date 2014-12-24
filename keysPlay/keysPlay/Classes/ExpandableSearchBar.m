@@ -23,6 +23,7 @@
     UITextField *_textField;
     
     UIButton *_cancelButton;
+    UIButton *_searchButton;
     
     UIImageView *_contractedPadding;
     UIView *_expandedPadding;
@@ -72,7 +73,7 @@
     // set up padding views
     _expandedPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 17)];
     
-    _contractedPadding = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 17)];
+    _contractedPadding = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     _contractedPadding.image = [UIImage imageNamed:@"MagGlass.png"];
     _contractedPadding.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -84,7 +85,7 @@
     // init the text field
     UIImage *textFieldBackground = [UIImage imageNamed:@"SearchBar.png"];
     
-    textFieldBackground = [textFieldBackground aspectFitImage:_contractedFrame.size];
+    textFieldBackground = [textFieldBackground aspectFitImage:_expandedFrame.size];
     
     _textField = [[UITextField alloc] initWithFrame:_contractedFrame];
     _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -107,8 +108,19 @@
     [_cancelButton setImage:[UIImage imageNamed:@"CancelButton"] forState:UIControlStateNormal];
     [_cancelButton addTarget:self action:@selector(cancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    _searchButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_searchButton setFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
+    _searchButton.alpha = 1.0;
+    [_searchButton setUserInteractionEnabled:YES];
+    [_searchButton setEnabled:YES];
+    [_searchButton setTintColor:[UIColor whiteColor]];
+    [_searchButton setContentEdgeInsets:UIEdgeInsetsMake(4.0, 6.0, 4.0, 6.0)];
+    [_searchButton setImage:[UIImage imageNamed:@"MagGlass"] forState:UIControlStateNormal];
+    [_searchButton addTarget:self action:@selector(searchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:_textField];
     [self addSubview:_cancelButton];
+    [self addSubview:_searchButton];
 }
 
 - (void)layoutSubviews
@@ -121,26 +133,7 @@
         
         [_textField setFrame:_contractedFrame];
         [_cancelButton setFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
-    }
-}
-
-
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-//{
-//    BOOL hit = [_textField hitTest:point withEvent:event];
-//    
-//    return hit;
-//}
-
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{
-    if ( _expanded == NO )
-    {
-        return CGRectContainsPoint( _contractedFrame, point );
-    }
-    else
-    {
-        return [super pointInside:point withEvent:event];
+        [_searchButton setFrame:CGRectMake(self.bounds.size.width - CANCEL_BUTTON_HEIGHT, 0, CANCEL_BUTTON_HEIGHT, CANCEL_BUTTON_HEIGHT)];
     }
 }
 
@@ -173,6 +166,16 @@
 
 #pragma mark - Misc
 
+- (void)searchButtonClicked:(id)sender
+{    
+    [self expandSearchBar];
+    
+    if ( [_delegate respondsToSelector:@selector(searchBarDidBeginEditing:)] == YES )
+    {
+        [_delegate performSelector:@selector(searchBarDidBeginEditing:) withObject:self];
+    }
+}
+
 - (void)cancelButtonClicked:(id)sender
 {
     [_textField resignFirstResponder];
@@ -189,14 +192,15 @@
 {
     // Subtract out a bit from the end for the cancel button
     _expandedFrame = self.bounds;
-    _expandedFrame.size.width -= CANCEL_BUTTON_BUFFER;
+    _expandedFrame.size.width = self.bounds.size.width - CANCEL_BUTTON_BUFFER;
     _expandedFrame.size.height = TEXT_BOX_HEIGHT;
+    _expandedFrame.origin.x = 0.0;
     _expandedFrame.origin.y = (self.bounds.size.height - TEXT_BOX_HEIGHT)/2.0;
     
     _contractedFrame = self.bounds;
-    _contractedFrame.size.width = CONTRACTED_LENGTH;
+    _contractedFrame.size.width = 0.0;
     _contractedFrame.size.height = TEXT_BOX_HEIGHT;
-    _contractedFrame.origin.x = self.bounds.size.width - CONTRACTED_LENGTH ;
+    _contractedFrame.origin.x = self.bounds.size.width + CANCEL_BUTTON_HEIGHT;
     _contractedFrame.origin.y = (self.bounds.size.height - TEXT_BOX_HEIGHT)/2.0;
 }
 
@@ -216,6 +220,7 @@
     
     _textField.leftView = _expandedPadding;
     _cancelButton.alpha = 1.0;
+    _searchButton.alpha = 0.0;
 
     [UIView commitAnimations];
 }
@@ -239,6 +244,7 @@
     
     _textField.leftView = _contractedPadding;
     _cancelButton.alpha = 0.0;
+    _searchButton.alpha = 1.0;
     
     [UIView commitAnimations];
 }
@@ -263,6 +269,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField*)textField
 {
 //    [self contractSearchBar];
+    
     [_textField resignFirstResponder];
     
     _searchString = _textField.text;
@@ -275,43 +282,5 @@
 	return NO;
 }
 
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-//{
-//    return YES;
-//}
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    
-//    NSCharacterSet * usernameSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789"] invertedSet];
-//    NSCharacterSet * passwordSet =[[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*+-/=?^_`|~.[]{}()"] invertedSet];
-//    
-//    // Backspace character
-//    if ( [string length] == 0 )
-//    {
-//        return YES;
-//    }
-//    
-//    // The username needs alpha num only
-//    if ( textField == m_usernameTextField &&
-//        [string rangeOfCharacterFromSet:usernameSet].location != NSNotFound )
-//    {
-//        [m_statusLabel setText:@"Invalid character"];
-//        [m_statusLabel setHidden:NO];
-//        return NO;
-//    }
-//    
-//    if ( textField == m_passwordTextField &&
-//        [string rangeOfCharacterFromSet:passwordSet].location != NSNotFound )
-//    {
-//        [m_statusLabel setText:@"Invalid character"];
-//        [m_statusLabel setHidden:NO];
-//        return NO;
-//    }
-//    
-//    [m_statusLabel setHidden:YES];
-//    
-//    return YES;
-//}
 
 @end

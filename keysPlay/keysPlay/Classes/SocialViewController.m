@@ -821,6 +821,7 @@ extern FileController *g_fileController;
 
 - (void)searchBarDidBeginEditing:(ExpandableSearchBar *)searchBar
 {
+    [_searchLabel setHidden:NO];
     
     // Show the table view
     [_searchTable setHidden:NO];
@@ -842,6 +843,8 @@ extern FileController *g_fileController;
 
 - (void)searchBarCancel:(ExpandableSearchBar *)searchBar
 {
+    [_searchLabel setHidden:YES];
+    
     // Remove the table view
     [_searchTable setHidden:YES];
     //[_fullscreenButton setHidden:YES];

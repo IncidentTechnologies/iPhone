@@ -78,14 +78,14 @@
     [m_noteModels removeObject:model];
 }
 
-- (void)addKeyPath:(KeyPathModel*)str
+- (void)addKeyPath:(KeyPathModel*)keypath
 {
-    [m_keyPathModels addObject:str];
+    [m_keyPathModels addObject:keypath];
 }
 
-- (void)removeKeyPath:(KeyPathModel*)str
+- (void)removeKeyPath:(KeyPathModel*)keypath
 {
-    [m_keyPathModels removeObject:str];
+    [m_keyPathModels removeObject:keypath];
 }
 
 - (void)addLoop:(LineModel *)loop
@@ -225,7 +225,7 @@
         [loopModel drawAt:CGPointMake(center.x,center.y)];
     }
     
-    // Draw the moving measure lines
+    // Draw the moving measure/ledger lines
     
     for (LineModel * lineModel in m_lineModels )
     {
@@ -241,10 +241,7 @@
 
 - (void)endRender
 {
-    
-    //
-    // Done -- Switch the buffer
-    //
+    // Done
     
     //
     // Draw the background overlay that doesn't move
@@ -258,7 +255,7 @@
         [m_seekLineModel draw];
     }
     
-	// finish stuff
+	// Switch the buffer
 	glBindRenderbufferOES( GL_RENDERBUFFER_OES, m_colorRenderbuffer );
     
     [m_context presentRenderbuffer: GL_RENDERBUFFER_OES ];

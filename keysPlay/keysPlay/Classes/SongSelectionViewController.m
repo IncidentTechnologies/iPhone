@@ -117,6 +117,7 @@ extern KeysController *g_keysController;
     [_closeModalButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_volumeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_instrumentButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_ophoButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     // Download any files we are missing
     if ( [_userSongArray count] > 0 )
@@ -744,6 +745,7 @@ extern KeysController *g_keysController;
 {
     // nothing
     [_fullscreenButton setHidden:NO];
+    [_songListLabel setHidden:YES];
 }
 
 - (void)searchBarSearch:(ExpandableSearchBar *)searchBar
@@ -756,6 +758,7 @@ extern KeysController *g_keysController;
     
     [self searchForString:searchBar.searchString];
     [self refreshDisplayedUserSongList];
+    
     [_fullscreenButton setHidden:YES];
 }
 
@@ -763,7 +766,10 @@ extern KeysController *g_keysController;
 {
     // revert the displayed contents
     _searching = NO;
+    
     [_fullscreenButton setHidden:YES];
+    [_songListLabel setHidden:NO];
+    
     [self refreshDisplayedUserSongList];
 }
 

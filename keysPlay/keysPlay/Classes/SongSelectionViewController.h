@@ -82,6 +82,8 @@ struct SongSortOrder {
 @property (strong, nonatomic) IBOutlet UIButton *titleArtistButton;
 @property (strong, nonatomic) IBOutlet UIButton *skillButton;
 @property (strong, nonatomic) IBOutlet UIButton *scoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *ophoButton;
+@property (strong, nonatomic) IBOutlet UIButton *searchButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *artistLabel;

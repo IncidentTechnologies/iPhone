@@ -34,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *profileLabel;
+@property (strong, nonatomic) IBOutlet UILabel *searchLabel;
 //@property (strong, nonatomic) IBOutlet UILabel *backLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;

@@ -18,8 +18,6 @@
 #define KEYS_FRET_DOWN_DURATION 0.005
 #define KEYS_FRET_UP_DURATION 0.005
 #define KEYS_STOP_FRET_DURATION 0.01
-#define KEYS_SLIDE_FRET_DURATION 0.015
-//#define KEYS_SLIDE_FRET_DURATION 0.1
 
 #define GRAPH_SAMPLE_RATE 44100.0f
 
@@ -668,60 +666,6 @@
     playingNotesTimers[key] = nil;
     
 }
-
-/*
-- (void) PluckContinuousString:(int)string atFret:(int)fret
-{
-    if(!blockContinuousPluckString){
-        blockContinuousPluckString = true;
-        
-        int highestFret = [self highestFretDownIndexForString:string];
-        int noteIndex = [self noteIndexForString:string andFret:fret];
-        int pendingIndex = [self noteIndexForString:string andFret:highestFret];
-        //int pendingIndex = [self noteIndexForString:string andFret:pendingFretOnString[string]];
-        
-        DLog(@"Note at index %i",noteIndex);
-        
-        if(pendingIndex > 0){
-            
-            //m_keysSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
-            
-            //activeFretOnString[string] = highestFret;
-            //pendingFretOnString[string] = -1;
-            
-            [NSTimer scheduledTimerWithTimeInterval:KEYS_SLIDE_FRET_DURATION target:self selector:@selector(EndBlockContinuousPluckString:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:string],@"String",[NSNumber numberWithInt:fret],@"Fret", nil] repeats:NO];
-            
-            //blockContinuousPluckString = false;
-            
-        }else{
-            blockContinuousPluckString = false;
-        }
-    }
-}
- */
-
-/*
-- (void)EndBlockContinuousPluckString:(NSTimer *)timer
-{
-    int string = [[[timer userInfo] objectForKey:@"String"] intValue];
-    int fret = [[[timer userInfo] objectForKey:@"Fret"] intValue];
-    
-    blockContinuousPluckString = false;
-    
-    int highestFret = [self highestFretDownIndexForString:string];
-    int noteIndex = [self noteIndexForString:string andFret:fret];
-    int pendingIndex = [self noteIndexForString:string andFret:highestFret];
-    
-    if(activeFretOnString[string] > 0){
-        
-        activeFretOnString[string] = highestFret;
-        pendingFretOnString[string] = -1;
-        
-        m_keysSamplerNode->TriggerContinuousSample(m_activeBankNode, noteIndex, pendingIndex);
-        
-    }
-}
-*/
  
 - (void) playMutedKey:(int)key
 {

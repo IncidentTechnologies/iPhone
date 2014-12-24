@@ -2164,7 +2164,7 @@ extern UserController * g_userController;
     }
 }
 
-#pragma mark - GuitarControllerObserver
+#pragma mark - KeysControllerObserver
 
 - (void)keysDown:(KeyPosition)position
 {
@@ -2724,7 +2724,7 @@ extern UserController * g_userController;
                     
                     KeyPosition key = [keyNumber charValue];
                     
-                    // This one is queues up, so don't play it
+                    // This one is queued up, so don't play it
                     // for(NSNote * note in _delayedChords){
                     for(int j = 0; j < [_delayedChords count]; j++){
                         NSNote * note = [_delayedChords objectAtIndex:j];

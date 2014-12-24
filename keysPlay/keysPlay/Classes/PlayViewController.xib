@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayViewController">
@@ -347,10 +347,10 @@
                         <constraint firstItem="eSL-8M-11l" firstAttribute="leading" secondItem="JIH-L1-YQz" secondAttribute="trailing" constant="1" id="zSC-eg-52b"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2a-5Q-wnf" userLabel="Keyboard-Range" customClass="UIImageView">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2a-5Q-wnf" userLabel="Keyboard-Range" customClass="UIImageView">
                     <rect key="frame" x="0.0" y="300" width="460" height="20"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o60-bS-M6i">
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o60-bS-M6i">
                             <rect key="frame" x="0.0" y="0.0" width="460" height="1"/>
                             <color key="backgroundColor" red="0.15686274510000001" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
@@ -358,7 +358,7 @@
                             <rect key="frame" x="0.0" y="1" width="1" height="19"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-1P-DSa" userLabel="Keyboard-Overview">
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-1P-DSa" userLabel="Keyboard-Overview">
                             <rect key="frame" x="0.0" y="0.0" width="460" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="yIg-bY-RvF"/>

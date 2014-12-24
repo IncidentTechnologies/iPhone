@@ -20,8 +20,8 @@
 
 @interface ExpandableSearchBar : UIView <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet id<ExpandableSearchBarDelegate> delegate;
-@property (weak, readonly, nonatomic) NSString *searchString;
+@property (retain, nonatomic) IBOutlet id<ExpandableSearchBarDelegate> delegate;
+@property (retain, nonatomic) NSString *searchString;
 
 - (void)endSearch;
 - (void)beginSearch;

@@ -47,6 +47,7 @@
 		6D61D1DF19FB07C5008CFA5A /* NSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D519FB07C5008CFA5A /* NSSong.m */; };
 		6D61D1E019FB07C5008CFA5A /* NSSongCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */; };
 		6D61D1E119FB07C5008CFA5A /* NSSongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61D1D919FB07C5008CFA5A /* NSSongModel.m */; };
+		6D61DAFF1A4A28B300E7EDA0 /* Opho_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D61DAFE1A4A28B300E7EDA0 /* Opho_Icon.png */; };
 		6D62271F191D84D9003D8534 /* Metronome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D62271E191D84D9003D8534 /* Metronome.mp3 */; };
 		6D6C5E2F192C0AD40039A85F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */; };
 		6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C5E31192C0B1F0039A85F /* SettingsViewController.m */; };
@@ -1508,6 +1509,7 @@
 		6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSSongCreator.m; path = SongModel/NSSongCreator.m; sourceTree = SOURCE_ROOT; };
 		6D61D1D819FB07C5008CFA5A /* NSSongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSSongModel.h; path = SongModel/NSSongModel.h; sourceTree = SOURCE_ROOT; };
 		6D61D1D919FB07C5008CFA5A /* NSSongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSSongModel.m; path = SongModel/NSSongModel.m; sourceTree = SOURCE_ROOT; };
+		6D61DAFE1A4A28B300E7EDA0 /* Opho_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Opho_Icon.png; path = Resources/Images/Play/Opho_Icon.png; sourceTree = SOURCE_ROOT; };
 		6D62271E191D84D9003D8534 /* Metronome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Metronome.mp3; sourceTree = "<group>"; };
 		6D622720191DA91E003D8534 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D6C5E2E192C0AD40039A85F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -3841,6 +3843,7 @@
 		ECE9D24C1705252100BB6C53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D61DAFE1A4A28B300E7EDA0 /* Opho_Icon.png */,
 				6DE131B61A26AF58009BE59C /* Notes */,
 				6DFBBC5F1A250EE300565857 /* ScoreStar.png */,
 				6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */,
@@ -4591,6 +4594,7 @@
 				6D7D5F511A2FA07900FBE8C9 /* NoteStaffOverlay.png in Resources */,
 				9D054E40174C68FB00FA3239 /* Upright Bass 55.mp3 in Resources */,
 				6DB285DB1921915600B3D14C /* Electric Guitar 50.mp3 in Resources */,
+				6D61DAFF1A4A28B300E7EDA0 /* Opho_Icon.png in Resources */,
 				9D054E42174C68FB00FA3239 /* Upright Bass 56.mp3 in Resources */,
 				9D054E44174C68FB00FA3239 /* Upright Bass 57.mp3 in Resources */,
 				6DAD0B2119187F1F005B3807 /* Warm Analogue 56.mp3 in Resources */,
@@ -5590,8 +5594,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51de0006-db7d-4108-9a29-e38301d96729";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "51de0006-db7d-4108-9a29-e38301d96729";
+				PROVISIONING_PROFILE = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5622,8 +5626,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "51de0006-db7d-4108-9a29-e38301d96729";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "51de0006-db7d-4108-9a29-e38301d96729";
+				PROVISIONING_PROFILE = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
