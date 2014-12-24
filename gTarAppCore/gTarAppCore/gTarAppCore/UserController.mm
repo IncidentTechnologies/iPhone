@@ -27,6 +27,7 @@
 @synthesize m_loggedInUsername;
 @synthesize m_loggedInUserProfile;
 @synthesize m_loggedInFacebookToken;
+@synthesize m_loggedInUserId;
 
 - (id)initWithCloudController:(CloudController*)cloudController andOphoCloudController:(OphoCloudController *)ophoCloudController
 {
@@ -151,7 +152,7 @@
 
 - (void)loadCache
 {
-    
+    NSString * userIdPath = [m_userFilePath stringByAppendingPathComponent:@"UserId"];
     NSString * usernamePath = [m_userFilePath stringByAppendingPathComponent:@"Username"];
     NSString * passwordPath = [m_userFilePath stringByAppendingPathComponent:@"Password"];
     NSString * userProfilePath = [m_userFilePath stringByAppendingPathComponent:@"UserProfile"];
@@ -163,6 +164,7 @@
     
     m_loggedInUsername = [NSKeyedUnarchiver unarchiveObjectWithFile:usernamePath];
     m_loggedInPassword = [NSKeyedUnarchiver unarchiveObjectWithFile:passwordPath];
+    m_loggedInUserId = [[NSKeyedUnarchiver unarchiveObjectWithFile:userIdPath] intValue];
     
     m_loggedInUserProfile = [NSKeyedUnarchiver unarchiveObjectWithFile:userProfilePath];
     
@@ -209,6 +211,7 @@
     
     NSString * usernamePath = [m_userFilePath stringByAppendingPathComponent:@"Username"];
     NSString * passwordPath = [m_userFilePath stringByAppendingPathComponent:@"Password"];
+    NSString * userIdPath = [m_userFilePath stringByAppendingPathComponent:@"UserId"];
     NSString * userProfilePath = [m_userFilePath stringByAppendingPathComponent:@"UserProfile"];
     NSString * facebookTokenPath = [m_userFilePath stringByAppendingPathComponent:@"FacebookToken"];
     NSString * pendingUploadPath = [m_userFilePath stringByAppendingPathComponent:@"PendingUploads"];
@@ -218,6 +221,7 @@
     
     [NSKeyedArchiver archiveRootObject:m_loggedInUsername toFile:usernamePath];
     [NSKeyedArchiver archiveRootObject:m_loggedInPassword toFile:passwordPath];
+    [NSKeyedArchiver archiveRootObject:[NSString stringWithFormat:@"%lu",m_loggedInUserId] toFile:userIdPath];
     
     [NSKeyedArchiver archiveRootObject:m_loggedInUserProfile toFile:userProfilePath];
     
@@ -350,7 +354,6 @@
         
         userResponse.m_status = UserResponseStatusSuccess;
         
-        
         m_loggedInUsername = cloudResponse.m_cloudRequest.m_username;
         m_loggedInPassword = cloudResponse.m_cloudRequest.m_password;
         m_loggedInUserProfile = cloudResponse.m_responseUserProfile;
@@ -454,7 +457,6 @@
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )
     {
         userResponse.m_status = UserResponseStatusSuccess;
-        
         
         m_loggedInUsername = cloudResponse.m_cloudRequest.m_username;
         m_loggedInPassword = cloudResponse.m_cloudRequest.m_password;
@@ -677,7 +679,7 @@
 {
     NSLog(@"Request opho user %@ login",username);
     
-    [m_ophoCloudController requestLoginUsername:username andPassword:password andCallbackObj:self andCallbackSel:@selector(ophoUserLoggedIn)];
+    [m_ophoCloudController requestLoginUsername:username andPassword:password andCallbackObj:self andCallbackSel:@selector(ophoUserLoggedIn:)];
 }
 
 - (void)requestOphoLogoutUser
@@ -687,9 +689,11 @@
     [m_ophoCloudController requestLogoutCallbackObj:self andCallbackSel:@selector(ophoUserLoggedOut)];
 }
 
-- (void)ophoUserLoggedIn
+- (void)ophoUserLoggedIn:(CloudResponse *)cloudResponse
 {
-    NSLog(@"Opho user logged in");
+    m_loggedInUserId = cloudResponse.m_responseUserId;
+    
+    NSLog(@"Opho user logged in %lu",m_loggedInUserId);
 }
 
 

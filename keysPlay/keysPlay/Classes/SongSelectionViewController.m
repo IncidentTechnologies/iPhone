@@ -95,12 +95,15 @@ extern KeysController *g_keysController;
     
     [self localizeViews];
     
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    _isOphoListing = [settings boolForKey:@"IsOphoSongListing"];
+    
     if ( [_userSongArray count] == 0 ) {
         [_songListTable startAnimating];
     }
     else {
         // Display cached items to avoid blank screen
-        [self refreshDisplayedUserSongList];
+        [self refreshIsOphoListing];
         [_songListTable startAnimating];
     }
     
@@ -220,14 +223,37 @@ extern KeysController *g_keysController;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
     
-    if ( [_userSongArray count] == 0 ) {
-        CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
-        [self requestSongListCallback:cloudRequest.m_cloudResponse];
+    if(_isOphoListing){
+        
+        DLog(@"Request opho song list");
+        
+        if ( [_userSongArray count] == 0 ) {
+            
+            CloudRequest * cloudRequest = [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:0 andCallbackObj:nil andCallbackSel:nil];
+            
+            [self requestSongListCallback:cloudRequest.m_cloudResponse];
+            
+        }else{
+            
+            [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:0 andCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+        }
+        
+    }else{
+        
+        DLog(@"Request regular song list");
+        
+        if ( [_userSongArray count] == 0 ) {
+            CloudRequest *cloudRequest = [g_cloudController requestSongListCallbackObj:nil andCallbackSel:nil];
+            [self requestSongListCallback:cloudRequest.m_cloudResponse];
+            
+        }else{
+            [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+        }
     }
-    else
-        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -372,6 +398,18 @@ extern KeysController *g_keysController;
 {
     _isOphoListing = !_isOphoListing;
     
+    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
+    
+    [settings setBool:_isOphoListing forKey:@"IsOphoSongListing"];
+    
+    [settings synchronize];
+    
+    [self refreshIsOphoListing];
+
+}
+
+- (void)refreshIsOphoListing
+{
     // Style the Opho button
     if(_isOphoListing){
         
@@ -380,8 +418,10 @@ extern KeysController *g_keysController;
     }else{
         
         [_ophoButton setTintColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
-        
     }
+    
+    //[self refreshDisplayedUserSongList];
+    [self refreshSongList];
 }
 
 
@@ -450,7 +490,20 @@ extern KeysController *g_keysController;
 - (void)refreshSongList
 {
     [_songListTable startAnimating];
-    [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+    
+    if(_isOphoListing){
+        
+        DLog(@"Refresh Opho song list");
+        
+        [g_ophoCloudController requestGetXmpListWithType:OphoXmpTypeSong andUserId:0 andCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+        
+    }else{
+
+        DLog(@"Refresh regular song list");
+        
+        [g_cloudController requestSongListCallbackObj:self andCallbackSel:@selector(requestSongListCallback:)];
+        
+    }
 }
 
 - (void)downloadUserSongs
@@ -508,7 +561,6 @@ extern KeysController *g_keysController;
 
 - (void)requestSongListCallback:(CloudResponse*)cloudResponse
 {
-    
     [_songListTable stopAnimating];
     
     if ( cloudResponse.m_status == CloudResponseStatusSuccess )

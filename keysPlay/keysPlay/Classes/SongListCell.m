@@ -7,8 +7,10 @@
 //
 
 #import "SongListCell.h"
-
+#import <gTarAppCore/UserController.h>
 #import "UserSong.h"
+
+extern UserController * g_userController;
 
 @implementation SongListCell
 
@@ -68,7 +70,11 @@
         [_songTitle setText:@"Unknown"];
     }
     
-    if ( _userSong.m_author != nil )
+    if(g_userController.m_loggedInUserId == _userSong.m_authorId){
+        
+        [_songArtist setText:g_userController.m_loggedInUsername];
+        
+    }else if ( _userSong.m_author != nil )
     {
         [_songArtist setText:_userSong.m_author];
     }

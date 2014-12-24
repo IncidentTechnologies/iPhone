@@ -23,6 +23,7 @@
     NSString * m_loggedInUsername;
     NSString * m_loggedInPassword;
     NSString * m_loggedInFacebookToken;
+    NSInteger m_loggedInUserId;
     UserProfile * m_loggedInUserProfile;
     
     NSString * m_userFilePath;
@@ -41,6 +42,7 @@
 }
 
 @property (nonatomic, readonly) NSString * m_loggedInUsername;
+@property (nonatomic, assign) NSInteger m_loggedInUserId;
 @property (nonatomic, readonly) UserProfile * m_loggedInUserProfile;
 @property (nonatomic, readonly) NSString * m_loggedInFacebookToken;
 
