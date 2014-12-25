@@ -94,7 +94,7 @@
         
         NSArray * trackArray = [contentDom getChildArrayWithName:@"track"];
         
-        XmlDom * trackDom = [trackArray objectAtIndex:2];
+        XmlDom * trackDom = [trackArray firstObject];
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         
