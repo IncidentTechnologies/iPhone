@@ -27,6 +27,8 @@
 		6D0835BD1A2D1082007544D2 /* NoteWholeSharp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835B31A2D1082007544D2 /* NoteWholeSharp.png */; };
 		6D0835BF1A2D2FFE007544D2 /* NoteStaff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */; };
 		6D0BDE441A01AA2F00593F2C /* NoteGreyscale2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */; };
+		6D1D201C1A4B882B003DC8DB /* NSTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1D201B1A4B882B003DC8DB /* NSTrack.m */; };
+		6D1D201F1A4B88FC003DC8DB /* NSClip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1D201E1A4B88FC003DC8DB /* NSClip.m */; };
 		6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D20EF5E191AA68600E78A9D /* PreviewIcon.png */; };
 		6D226D091A1C27200088D52C /* KeysMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D226D081A1C27200088D52C /* KeysMath.m */; };
 		6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81618F3794300887E40 /* libc++.dylib */; };
@@ -1475,6 +1477,10 @@
 		6D0835BE1A2D2FFE007544D2 /* NoteStaff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoteStaff.png; sourceTree = "<group>"; };
 		6D0BDE401A01684700593F2C /* AppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCore.h; sourceTree = "<group>"; };
 		6D0BDE431A01AA2F00593F2C /* NoteGreyscale2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NoteGreyscale2.png; path = Resources/Images/Play/NoteGreyscale2.png; sourceTree = SOURCE_ROOT; };
+		6D1D201A1A4B882B003DC8DB /* NSTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTrack.h; sourceTree = "<group>"; };
+		6D1D201B1A4B882B003DC8DB /* NSTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTrack.m; sourceTree = "<group>"; };
+		6D1D201D1A4B88FC003DC8DB /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
+		6D1D201E1A4B88FC003DC8DB /* NSClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSClip.m; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
 		6D226D071A1C27200088D52C /* KeysMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeysMath.h; sourceTree = "<group>"; };
 		6D226D081A1C27200088D52C /* KeysMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeysMath.m; sourceTree = "<group>"; };
@@ -2521,6 +2527,10 @@
 				6D61D1D319FB07C5008CFA5A /* NSScoreTracker.m */,
 				6D61D1D419FB07C5008CFA5A /* NSSong.h */,
 				6D61D1D519FB07C5008CFA5A /* NSSong.m */,
+				6D1D201A1A4B882B003DC8DB /* NSTrack.h */,
+				6D1D201B1A4B882B003DC8DB /* NSTrack.m */,
+				6D1D201D1A4B88FC003DC8DB /* NSClip.h */,
+				6D1D201E1A4B88FC003DC8DB /* NSClip.m */,
 				6D61D1D619FB07C5008CFA5A /* NSSongCreator.h */,
 				6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */,
 				6D61D1D819FB07C5008CFA5A /* NSSongModel.h */,
@@ -5284,6 +5294,7 @@
 				EC24DC5D161A898700016B78 /* PullToUpdateTableView.m in Sources */,
 				6D594C111909BCF900CF3128 /* HighlightModel.m in Sources */,
 				6D6C5E32192C0B1F0039A85F /* SettingsViewController.m in Sources */,
+				6D1D201C1A4B882B003DC8DB /* NSTrack.m in Sources */,
 				ECC11D7916264220001A231A /* keysPlayApplication.m in Sources */,
 				6D7D46F41919BA0F00EF8C75 /* FullScreenActivityView.m in Sources */,
 				EC7D887C1651CE86002E2F77 /* keysNavigationController.m in Sources */,
@@ -5331,6 +5342,7 @@
 				EC3416131739976900501AF4 /* SocialSongCell.m in Sources */,
 				EC34161B1739ADA600501AF4 /* SessionModalViewController.m in Sources */,
 				ECDF7F6E173D5A72003E51EC /* IconButton.m in Sources */,
+				6D1D201F1A4B88FC003DC8DB /* NSClip.m in Sources */,
 				ECDF7F73173DFB38003E51EC /* UIButton+Keys.m in Sources */,
 				ECFF773417440BA9002D7D40 /* FirmwareModalViewController.m in Sources */,
 				EC7CAE80174DA940004E26DE /* MPCJSONDataSerializer.m in Sources */,

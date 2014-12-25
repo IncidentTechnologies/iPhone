@@ -9,6 +9,7 @@
 #import "NSSong.h"
 
 #import "NSMeasure.h"
+#import "NSTrack.h"
 #import "NSMarker.h"
 #import "XmlDom.h"
 
@@ -18,6 +19,7 @@
 
 @synthesize m_measures;
 @synthesize m_markers;
+@synthesize m_tracks;
 @synthesize m_author;
 @synthesize m_title;
 @synthesize m_description;
@@ -40,6 +42,7 @@
         
         m_measures = [[NSMutableArray alloc] init];
         m_markers = [[NSMutableArray alloc] init];
+        m_tracks = [[NSMutableArray alloc] init];
         
         XmlDom * dom;
 
@@ -89,12 +92,16 @@
             contentDom = [xmlDom getChildWithName:@"content"];
         }
         
-        XmlDom * trackDom = [contentDom getChildWithName:@"track"];
+        NSArray * trackArray = [contentDom getChildArrayWithName:@"track"];
+        
+        XmlDom * trackDom = [trackArray objectAtIndex:2];
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         
         NSArray * markerArray = [trackDom getChildArrayWithName:@"marker"];
         
+        
+        // Measures + Markers for standard songs
         for ( XmlDom * measureDom in measureArray )
         {
             
@@ -105,7 +112,6 @@
             
             [self addMeasure:measure];
             
-            
         }
         
         for ( XmlDom * markerDom in markerArray )
@@ -115,6 +121,15 @@
             
             [m_markers addObject:marker];
             
+        }
+        
+        
+        // Clips for Opho songs to select a track
+        for ( XmlDom * nthTrackDom in trackArray )
+        {
+            NSTrack * track = [[NSTrack alloc] initWithXmlDom:nthTrackDom];
+            
+            [m_tracks addObject:track];
         }
 
         // done

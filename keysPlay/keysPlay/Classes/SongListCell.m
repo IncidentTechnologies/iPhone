@@ -72,7 +72,10 @@ extern UserController * g_userController;
     
     if(g_userController.m_loggedInUserId == _userSong.m_authorId){
         
+        // For now override the username for the logged in user
+        
         [_songArtist setText:g_userController.m_loggedInUsername];
+        _userSong.m_author = g_userController.m_loggedInUsername;
         
     }else if ( _userSong.m_author != nil )
     {

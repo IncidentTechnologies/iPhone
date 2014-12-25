@@ -413,11 +413,15 @@ extern KeysController *g_keysController;
     // Style the Opho button
     if(_isOphoListing){
         
+        [_songListLabel setText:@"Opho Songs"];
         [_ophoButton setTintColor:[UIColor whiteColor]];
+        [_ophoButton setBackgroundColor:[UIColor colorWithRed:146/255.0 green:221/255.0 blue:0/255.0 alpha:1.0]];
         
     }else{
         
+        [_songListLabel setText:@"Songs"];
         [_ophoButton setTintColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3]];
+        [_ophoButton setBackgroundColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.1]];
     }
     
     //[self refreshDisplayedUserSongList];

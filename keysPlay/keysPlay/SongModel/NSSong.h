@@ -14,7 +14,8 @@
 @interface NSSong : NSObject
 {
 	
-	NSMutableArray * m_measures;
+    NSMutableArray * m_measures;
+    NSMutableArray * m_tracks;
 	
 	NSString * m_author;
 	NSString * m_title;
@@ -27,6 +28,7 @@
 
 @property (nonatomic, readonly) NSMutableArray * m_measures;
 @property (nonatomic, readonly) NSMutableArray * m_markers;
+@property (nonatomic, readonly) NSMutableArray * m_tracks;
 
 @property (nonatomic, strong) NSString * m_author;
 @property (nonatomic, strong) NSString * m_title;

@@ -82,6 +82,8 @@
     
     NSSong * song = [[NSSong alloc] initWithXmlDom:songDom];
     
+    DLog(@"Song title is %@",song.m_title);
+    
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
     // Double tempo because for some reason it's incredibly slow in playback

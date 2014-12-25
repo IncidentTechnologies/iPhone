@@ -41,7 +41,7 @@
     
 }
 
-@property (nonatomic, readonly) NSString * m_loggedInUsername;
+@property (nonatomic, retain) NSString * m_loggedInUsername;
 @property (nonatomic, assign) NSInteger m_loggedInUserId;
 @property (nonatomic, readonly) UserProfile * m_loggedInUserProfile;
 @property (nonatomic, readonly) NSString * m_loggedInFacebookToken;
