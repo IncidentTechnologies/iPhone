@@ -148,8 +148,9 @@ extern UserController * g_userController;
 @synthesize keyboardPosition;
 @synthesize keyboardOverview;
 @synthesize selectedKeyboard;
+@synthesize selectedTrackIndex;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode selectedTrack:(int)selectedTrack
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if ( self )
@@ -171,6 +172,8 @@ extern UserController * g_userController;
         g_keysMath.isStandalone = standalone;
         
         isPracticeMode = practiceMode;
+        
+        selectedTrackIndex = selectedTrack;
         
         // disable idle sleeping
         [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -242,7 +245,7 @@ extern UserController * g_userController;
     [self updateDifficultyDisplay];
     
     // The first time we load this up, parse the song
-    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom andTrackIndex:0];
+    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom andTrackIndex:selectedTrackIndex];
     
     // Init song XML
     //[self initSongModel];

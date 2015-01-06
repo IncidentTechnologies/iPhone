@@ -28,7 +28,7 @@ extern KeysMath *g_keysMath;
 
 @interface PlayViewController : MainEventController <KeysControllerObserver, NSSongModelDelegate, KeysMathDelegate>
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster isStandalone:(BOOL)standalone practiceMode:(BOOL)practiceMode selectedTrack:(int)selectedTrack;
 
 - (void) releasePlayViewController;
 
@@ -150,6 +150,8 @@ extern KeysMath *g_keysMath;
 @property (strong, nonatomic) IBOutlet UIView * keyboardPosition;
 @property (strong, nonatomic) IBOutlet UIView * keyboardOverview;
 @property (strong, nonatomic) UIView * selectedKeyboard;
+
+@property (assign, nonatomic) int selectedTrackIndex;
 
 @property (nonatomic, weak) NSNoteFrame * lastTappedFrame;
 @property (nonatomic, assign) enum PlayViewControllerDifficulty difficulty;

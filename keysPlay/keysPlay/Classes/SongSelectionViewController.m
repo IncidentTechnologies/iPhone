@@ -283,7 +283,7 @@ extern KeysController *g_keysController;
 
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO];
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:NO selectedTrack:[_playerViewController getSelectedTrack]];
 }
 
 - (IBAction)practiceButtonClicked:(id)sender
@@ -292,7 +292,7 @@ extern KeysController *g_keysController;
     
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES];
+    [self startSong:_currentUserSong withDifficulty:_currentDifficulty practiceMode:YES selectedTrack:[_playerViewController getSelectedTrack]];
 }
 
 - (IBAction)closeModalButtonClicked:(id)sender
@@ -755,11 +755,11 @@ extern KeysController *g_keysController;
 
 #pragma mark - ViewController stuff
 
-- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode
+- (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode selectedTrack:(int)selectedTrack
 {
     _playViewController = nil;
     
-    _playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_keysController.connected practiceMode:practiceMode];
+    _playViewController = [[PlayViewController alloc] initWithNibName:nil bundle:nil soundMaster:g_soundMaster isStandalone:!g_keysController.connected practiceMode:practiceMode selectedTrack:selectedTrack];
     
     // Get the XMP, stick it in the user song, and push to the game mode.
     // This generally should already have been downloaded.

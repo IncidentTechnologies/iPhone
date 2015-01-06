@@ -345,20 +345,21 @@
     [_trackSelectorButton setHidden:YES];
 }
 
+- (int)getSelectedTrack
+{
+    return [_trackSelectorButton.titleLabel.text intValue]-1;
+}
+
 - (IBAction)trackSelectorButtonClicked:(id)sender
 {
     long numTracks = [_songPlaybackController getNumTracks];
-    int currentTrack = [_trackSelectorButton.titleLabel.text intValue];
+    int currentTrack = [_trackSelectorButton.titleLabel.text intValue]-1;
     
-    currentTrack = currentTrack + 1;
+    currentTrack = (currentTrack + 1) % numTracks;
     
-    if(currentTrack > numTracks){
-        currentTrack = 1;
-    }
+    [_trackSelectorButton setTitle:[NSString stringWithFormat:@"%i",currentTrack+1] forState:UIControlStateNormal];
     
-    [_trackSelectorButton setTitle:[NSString stringWithFormat:@"%i",currentTrack] forState:UIControlStateNormal];
-    
-    [_songPlaybackController changeTrack:currentTrack-1];
+    [_songPlaybackController changeTrack:currentTrack];
     
     [self endPlayback];
     

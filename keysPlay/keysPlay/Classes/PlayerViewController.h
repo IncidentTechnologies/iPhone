@@ -51,6 +51,7 @@
 
 - (void)showTrackSelector;
 - (void)hideTrackSelector;
+- (int)getSelectedTrack;
 
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
 - (void)stopAudioEffects;
