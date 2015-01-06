@@ -432,7 +432,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="347" userLabel="SigninRightPanelInner">
                     <rect key="frame" x="0.0" y="0.0" width="298" height="273"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2261" userLabel="ButtonView">
+                        <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2261" userLabel="ButtonView">
                             <rect key="frame" x="50" y="207" width="198" height="41"/>
                             <subviews>
                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qdg-h5-kHM">

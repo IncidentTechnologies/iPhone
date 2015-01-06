@@ -242,7 +242,7 @@ extern UserController * g_userController;
     [self updateDifficultyDisplay];
     
     // The first time we load this up, parse the song
-    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom];
+    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom andTrackIndex:0];
     
     // Init song XML
     //[self initSongModel];

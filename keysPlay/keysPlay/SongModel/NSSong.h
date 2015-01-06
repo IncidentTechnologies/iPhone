@@ -30,6 +30,8 @@
 @property (nonatomic, readonly) NSMutableArray * m_markers;
 @property (nonatomic, readonly) NSMutableArray * m_tracks;
 
+@property (nonatomic, strong) XmlDom * m_xmlDom;
+
 @property (nonatomic, strong) NSString * m_author;
 @property (nonatomic, strong) NSString * m_title;
 @property (nonatomic, strong) NSString * m_description;
@@ -37,7 +39,7 @@
 @property (nonatomic, assign) NSUInteger m_id;
 @property (nonatomic, assign) double m_tempo;
 
-- (id)initWithXmlDom:(XmlDom*)xmlDom;
+- (id)initWithXmlDom:(XmlDom*)xmlDom andTrackIndex:(int)trackIndex;
 
 - (id)initWithAuthor:(NSString*)author
 			andTitle:(NSString*)title

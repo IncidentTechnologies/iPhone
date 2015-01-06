@@ -80,7 +80,7 @@
     
     XmlDom * songDom = [[XmlDom alloc] initWithXmlString:xmpBlob];
     
-    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom];
+    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom andTrackIndex:0];
     
     DLog(@"Song title is %@",song.m_title);
     
@@ -113,6 +113,30 @@
     [g_soundMaster reset];
     
     m_songModel = nil;
+    
+}
+
+- (void)changeTrack:(int)newTrackIndex
+{
+    if(newTrackIndex >= 0 && newTrackIndex < [m_songModel.m_song.m_tracks count]){
+        
+        NSSong * song = [[NSSong alloc] initWithXmlDom:m_songModel.m_song.m_xmlDom andTrackIndex:newTrackIndex];
+        
+        m_songModel = [[NSSongModel alloc] initWithSong:song];
+        
+        // Double tempo because for some reason it's incredibly slow in playback
+        [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
+        
+        [self startMainEventLoop];
+        
+        [self pauseSong];
+        
+    }
+}
+
+- (long)getNumTracks {
+    
+    return [m_songModel.m_song.m_tracks count];
     
 }
 

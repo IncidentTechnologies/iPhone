@@ -347,7 +347,7 @@
                         <constraint firstItem="eSL-8M-11l" firstAttribute="leading" secondItem="JIH-L1-YQz" secondAttribute="trailing" constant="1" id="zSC-eg-52b"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2a-5Q-wnf" userLabel="Keyboard-Range" customClass="UIImageView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2a-5Q-wnf" userLabel="Keyboard-Range" customClass="UIImageView">
                     <rect key="frame" x="0.0" y="300" width="460" height="20"/>
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o60-bS-M6i">
@@ -368,6 +368,7 @@
                     <color key="backgroundColor" red="0.15686274510000001" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2lE-1P-DSa" secondAttribute="trailing" id="eA0-0x-AB2"/>
+                        <constraint firstAttribute="height" constant="20" id="fvK-oO-KF9"/>
                         <constraint firstAttribute="trailing" secondItem="o60-bS-M6i" secondAttribute="trailing" id="umK-1d-uGx"/>
                         <constraint firstItem="o60-bS-M6i" firstAttribute="leading" secondItem="O2a-5Q-wnf" secondAttribute="leading" id="y38-is-q52"/>
                         <constraint firstItem="2lE-1P-DSa" firstAttribute="leading" secondItem="O2a-5Q-wnf" secondAttribute="leading" id="yu9-Kv-5JJ"/>
@@ -1301,6 +1302,7 @@
                 <constraint firstItem="vNH-pR-vpE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PY8-Wk-KmY" secondAttribute="leading" constant="8" id="SxO-Jv-9Jx"/>
                 <constraint firstItem="vNH-pR-vpE" firstAttribute="top" secondItem="PY8-Wk-KmY" secondAttribute="top" id="cUp-MT-Ctc"/>
                 <constraint firstItem="vNH-pR-vpE" firstAttribute="leading" secondItem="PY8-Wk-KmY" secondAttribute="leading" constant="8" id="lqw-vA-Pbb"/>
+                <constraint firstItem="vNH-pR-vpE" firstAttribute="top" secondItem="PY8-Wk-KmY" secondAttribute="top" id="nnn-iZ-gyS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

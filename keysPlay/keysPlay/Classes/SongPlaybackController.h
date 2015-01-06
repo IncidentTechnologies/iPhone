@@ -60,6 +60,8 @@
 - (void)playSong;
 - (void)pauseSong;
 - (void)endSong;
+- (long)getNumTracks;
+- (void)changeTrack:(int)newTrackIndex;
 
 - (void)observeKeysController:(KeysController*)keysController;
 - (void)ignoreKeysController:(KeysController*)keysController;

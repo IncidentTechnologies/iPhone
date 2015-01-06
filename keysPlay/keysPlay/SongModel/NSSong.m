@@ -26,8 +26,9 @@
 @synthesize m_instrument;
 @synthesize m_id;
 @synthesize m_tempo;
+@synthesize m_xmlDom;
 
-- (id)initWithXmlDom:(XmlDom*)xmlDom
+- (id)initWithXmlDom:(XmlDom*)xmlDom andTrackIndex:(int)trackIndex
 {
     
     if ( xmlDom == nil )
@@ -40,6 +41,8 @@
     if ( self )
     {
         
+        m_xmlDom = xmlDom;
+    
         m_measures = [[NSMutableArray alloc] init];
         m_markers = [[NSMutableArray alloc] init];
         m_tracks = [[NSMutableArray alloc] init];
@@ -94,7 +97,7 @@
         
         NSArray * trackArray = [contentDom getChildArrayWithName:@"track"];
         
-        XmlDom * trackDom = [trackArray firstObject];
+        XmlDom * trackDom = [trackArray objectAtIndex:trackIndex];
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         

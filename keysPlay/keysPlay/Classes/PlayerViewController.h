@@ -23,6 +23,7 @@
 @property (strong, nonatomic) SoundMaster *g_soundMaster;
 
 @property (strong, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIButton *trackSelectorButton;
 
 @property (strong, nonatomic) IBOutlet UIView *fillView;
 @property (strong, nonatomic) IBOutlet UIView *knobView;
@@ -42,11 +43,14 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil soundMaster:(SoundMaster *)soundMaster;
 
 - (IBAction)playButtonClicked:(id)sender;
+- (IBAction)trackSelectorButtonClicked:(id)sender;
 
 - (void)attachToSuperview:(UIView *)view;
 
 - (void)endPlayback;
 
+- (void)showTrackSelector;
+- (void)hideTrackSelector;
 
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
 - (void)stopAudioEffects;

@@ -18,6 +18,8 @@
 
 #import "UIButton+Keys.h"
 
+#define MIN_TRACKS_DISPLAY 2
+
 @class KeysController;
 
 @interface PlayerViewController ()
@@ -55,6 +57,8 @@
 {
     [super viewDidLoad];
 	
+    [self hideTrackSelector];
+    
     [_songTitle addShadowWithRadius:1.0 andOpacity:0.7];
     [_songArtist addShadowWithRadius:1.0 andOpacity:0.7];
     [_knobView addShadowWithRadius:2.0];
@@ -77,6 +81,12 @@
     [_songPlaybackController startWithXmpBlob:_xmpBlob];
     [_songPlaybackController stopMainEventLoop];
     
+    if([_songPlaybackController getNumTracks] >= MIN_TRACKS_DISPLAY){
+        [self showTrackSelector];
+    }else{
+        [self hideTrackSelector];
+    }
+    
     [self waitForInstrumentToLoad];
     
     if([_songPlaybackController.m_songModel.m_song.m_instrument length] > 0){
@@ -94,6 +104,7 @@
     {
         DLog(@"Player View Controller: init Song Playback");
         _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
+    
     }
 }
 
@@ -129,6 +140,12 @@
     {
         [_songPlaybackController startWithXmpBlob:_xmpBlob];
         [_songPlaybackController stopMainEventLoop];
+        
+        if([_songPlaybackController getNumTracks] >= MIN_TRACKS_DISPLAY){
+            [self showTrackSelector];
+        }else{
+            [self hideTrackSelector];
+        }
         
         _init = YES;
         
@@ -313,6 +330,40 @@
     
 
 }
+
+#pragma mark - Track selector
+
+- (void)showTrackSelector
+{
+    [_trackSelectorButton setTitle:@"1" forState:UIControlStateNormal];
+    
+    [_trackSelectorButton setHidden:NO];
+}
+
+- (void)hideTrackSelector
+{
+    [_trackSelectorButton setHidden:YES];
+}
+
+- (IBAction)trackSelectorButtonClicked:(id)sender
+{
+    long numTracks = [_songPlaybackController getNumTracks];
+    int currentTrack = [_trackSelectorButton.titleLabel.text intValue];
+    
+    currentTrack = currentTrack + 1;
+    
+    if(currentTrack > numTracks){
+        currentTrack = 1;
+    }
+    
+    [_trackSelectorButton setTitle:[NSString stringWithFormat:@"%i",currentTrack] forState:UIControlStateNormal];
+    
+    [_songPlaybackController changeTrack:currentTrack-1];
+    
+    [self endPlayback];
+    
+}
+
 
 #pragma mark - Touch handling
 
