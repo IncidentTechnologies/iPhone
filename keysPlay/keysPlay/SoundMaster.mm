@@ -10,6 +10,10 @@
 #import "AudioController.h"
 #import "AUNodeNetwork.h"
 #import "AudioNodeCommon.h"
+#import "CloudResponse.h"
+#import "XmlDom.h"
+#import "NSSampler.h"
+#import "NSInstrument.h"
 
 #define FLATSAMPLER
 
@@ -41,6 +45,8 @@
     GtarSamplerNode * m_keysSamplerNode;
     int m_activeBankNode;
     int m_metronome;
+    
+    NSArray * audioSampleSet;
     
     float m_channelGain;
     
@@ -126,7 +132,6 @@
         return false;
     }
     
-    
     if(m_metronome < 0){
         [self initMetronome];
     }
@@ -135,8 +140,15 @@
     
     [self initEffects];
     
+    [self initOpho];
+    
     return true;
     
+}
+
+- (void)initOpho
+{
+    ophoMaster = [[OphoMaster alloc] init];
 }
 
 - (void)initTimers
@@ -319,7 +331,6 @@
 #pragma mark - Instrument
 - (void) loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
-    
     if(index == currentInstrumentIndex){
         DLog(@"Instrument already loaded");
         
@@ -549,6 +560,55 @@
     });
 }
 
+- (void) setCurrentInstrumentByXmpId:(NSInteger)xmpId withSelector:(SEL)cb andOwner:(id)sender
+{
+    DLog(@"Load instrument from ID %i",xmpId);
+    
+    [ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(loadInstrumentSamples:)];
+}
+
+- (void)loadInstrumentSamples:(CloudResponse *)cloudResponse
+{
+    DLog(@"Loaded Instrument by XMP ID");
+    
+    NSInstrument * instrument = [[NSInstrument alloc] initWithXmlDom:[cloudResponse.m_xmpDom getChildWithName:@"instrument"]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        [ophoMaster loadSamplesForInstrument:instrument.m_id andName:instrument.m_name andSamples:instrument.m_sampler.m_samples callbackObj:self selector:@selector(instrumentLoadedWithSamples:)];
+        
+    });
+}
+
+- (void)instrumentLoadedWithSamples:(NSArray *)samples
+{
+    DLog(@"Instrument loaded with %li samples",[samples count]);
+    
+    audioSampleSet = [[NSArray alloc] initWithArray:samples];
+    
+    m_activeBankNode = [self generateBank:2 numSamples:[samples count]];
+    
+    for(int i = 0; i < [samples count]; i++){
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:samples[i] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        
+        unsigned long int length = [decodedData length];
+        
+        if(![samples[i] isEqualToString:MISSING_SAMPLE_DATA]){
+            
+            m_keysSamplerNode->LoadSampleStringIntoBank(m_activeBankNode, [decodedData bytes], length);
+            
+        }else{
+            
+            DLog(@"Loading silent sample");
+            
+            char * silenceFilepath = (char *)malloc(sizeof(char) * 1024);
+            silenceFilepath = (char *)[[[NSBundle mainBundle] pathForResource:@"Silence" ofType:@"wav"] UTF8String];
+            
+            m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode, silenceFilepath);
+        }
+    }
+}
+
 - (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
     if(index < numInstruments){
@@ -628,7 +688,8 @@
             
             DLog(@"Note at index %i",noteIndex);
             
-            BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
+            //BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
+            BOOL retrigger = false;
             
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[key] != nil){
@@ -638,8 +699,10 @@
             }
             
             if(retrigger){
+                DLog(@"Retrigger");
                 m_keysSamplerNode->RetriggerSample(m_activeBankNode,key);
             }else{
+                DLog(@"Trigger");
                 m_keysSamplerNode->TriggerSample(m_activeBankNode, key);
             }
                 

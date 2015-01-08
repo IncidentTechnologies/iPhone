@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SoundMaster.h"
+#import "XmlDom.h"
 
 @class UserSong;
 
@@ -36,6 +37,7 @@
 
 @property (strong, nonatomic) UserSong *userSong;
 @property (strong, nonatomic) NSString *xmpBlob;
+@property (strong, nonatomic) XmlDom *ophoXmlDom;
 @property (assign, nonatomic) BOOL scrollable;
 
 @property (strong, nonatomic) NSInvocation *loadedInvocation;
@@ -57,5 +59,7 @@
 - (void)stopAudioEffects;
 - (NSInteger)getSelectedInstrumentIndex;
 - (NSArray *)getInstrumentList;
+
+- (void)refreshSong;
 
 @end

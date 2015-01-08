@@ -24,6 +24,7 @@
 #import "NSNoteFrame.h"
 #import "NSScoreTracker.h"
 #import "NSMarker.h"
+#import "XmlDom.h"
 
 #import "Mixpanel.h"
 #import "SongDisplayController.h"
@@ -245,7 +246,9 @@ extern UserController * g_userController;
     [self updateDifficultyDisplay];
     
     // The first time we load this up, parse the song
-    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom andTrackIndex:selectedTrackIndex];
+    _song = [[NSSong alloc] initWithXmlDom:_userSong.m_xmlDom ophoXmlDom:_userSong.m_ophoXmlDom andTrackIndex:selectedTrackIndex];
+    
+    DLog(@"Song is %i",_userSong.m_songId);
     
     // Init song XML
     //[self initSongModel];

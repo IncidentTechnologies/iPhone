@@ -21,6 +21,7 @@
 	NSString * m_title;
 	NSString * m_description;
     NSString * m_instrument;
+    NSInteger m_instrumentXmpId;
 	NSUInteger m_id;
 	double m_tempo;
 	
@@ -31,15 +32,17 @@
 @property (nonatomic, readonly) NSMutableArray * m_tracks;
 
 @property (nonatomic, strong) XmlDom * m_xmlDom;
+@property (nonatomic, strong) XmlDom * m_ophoXmlDom;
 
 @property (nonatomic, strong) NSString * m_author;
 @property (nonatomic, strong) NSString * m_title;
 @property (nonatomic, strong) NSString * m_description;
 @property (nonatomic, strong) NSString * m_instrument;
+@property (nonatomic, assign) NSInteger m_instrumentXmpId;
 @property (nonatomic, assign) NSUInteger m_id;
 @property (nonatomic, assign) double m_tempo;
 
-- (id)initWithXmlDom:(XmlDom*)xmlDom andTrackIndex:(int)trackIndex;
+- (id)initWithXmlDom:(XmlDom*)xmlDom ophoXmlDom:(XmlDom*)ophoXmlDom andTrackIndex:(int)trackIndex;
 
 - (id)initWithAuthor:(NSString*)author
 			andTitle:(NSString*)title

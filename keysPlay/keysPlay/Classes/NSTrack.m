@@ -7,13 +7,14 @@
 //
 
 #import "NSTrack.h"
+#import "NSInstrument.h"
 #import "XmlDom.h"
 
 @implementation NSTrack
 
 @synthesize m_clips;
 @synthesize m_name;
-
+@synthesize m_instrument;
 
 -(id)initWithXmlDom:(XmlDom *)dom
 {
@@ -31,7 +32,7 @@
         
         m_muted = [[dom getTextFromChildWithName:@"muted"] boolValue];
         
-        //m_instrument = [[NSInstrument alloc] initWithXmlDom:[dom getChildWithName:@"instrument"]];
+        m_instrument = [[NSInstrument alloc] initWithXmlDom:[dom getChildWithName:@"instrument"]];
         
         DLog(@"TRACK name | %@",m_name);
         DLog(@"TRACK level | %f",m_level);

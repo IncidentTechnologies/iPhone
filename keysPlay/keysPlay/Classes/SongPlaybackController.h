@@ -55,7 +55,7 @@
 - (NSInteger)getSelectedInstrumentIndex;
 - (NSArray *)getInstrumentList;
 
-- (void)startWithXmpBlob:(NSString*)xmpBlob;
+- (void)startWithXmpBlob:(NSString*)xmpBlob ophoXmlDom:(XmlDom*)ophoXmlDom;
 - (void)startWithUserSong:(UserSong*)userSong;
 - (void)playSong;
 - (void)pauseSong;

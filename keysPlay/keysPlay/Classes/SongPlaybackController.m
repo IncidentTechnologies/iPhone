@@ -69,22 +69,28 @@
     
 }
 
-- (void)startWithXmpBlob:(NSString*)xmpBlob
+- (void)startWithXmpBlob:(NSString*)xmpBlob ophoXmlDom:(XmlDom*)ophoXmlDom
 {
     if ( xmpBlob == nil )
         return;
     
     [g_soundMaster reset];
     
+    [self stopMainEventLoop];
+    
     // release the old song
     
     XmlDom * songDom = [[XmlDom alloc] initWithXmlString:xmpBlob];
     
-    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom andTrackIndex:0];
+    NSSong * song = [[NSSong alloc] initWithXmlDom:songDom ophoXmlDom:ophoXmlDom andTrackIndex:0];
     
     DLog(@"Song title is %@",song.m_title);
     
     m_songModel = [[NSSongModel alloc] initWithSong:song];
+    
+    if(m_songModel.m_song.m_instrumentXmpId > 0){
+        [g_soundMaster setCurrentInstrumentByXmpId:m_songModel.m_song.m_instrumentXmpId withSelector:nil andOwner:nil];
+    }
     
     // Double tempo because for some reason it's incredibly slow in playback
     [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
@@ -120,7 +126,7 @@
 {
     if(newTrackIndex >= 0 && newTrackIndex < [m_songModel.m_song.m_tracks count]){
         
-        NSSong * song = [[NSSong alloc] initWithXmlDom:m_songModel.m_song.m_xmlDom andTrackIndex:newTrackIndex];
+        NSSong * song = [[NSSong alloc] initWithXmlDom:m_songModel.m_song.m_xmlDom ophoXmlDom:m_songModel.m_song.m_ophoXmlDom andTrackIndex:newTrackIndex];
         
         m_songModel = [[NSSongModel alloc] initWithSong:song];
         

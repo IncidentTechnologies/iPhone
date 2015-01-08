@@ -10,6 +10,7 @@
 
 #import "NSMeasure.h"
 #import "NSTrack.h"
+#import "NSInstrument.h"
 #import "NSMarker.h"
 #import "XmlDom.h"
 
@@ -24,11 +25,13 @@
 @synthesize m_title;
 @synthesize m_description;
 @synthesize m_instrument;
+@synthesize m_instrumentXmpId;
 @synthesize m_id;
 @synthesize m_tempo;
 @synthesize m_xmlDom;
+@synthesize m_ophoXmlDom;
 
-- (id)initWithXmlDom:(XmlDom*)xmlDom andTrackIndex:(int)trackIndex
+- (id)initWithXmlDom:(XmlDom*)xmlDom ophoXmlDom:(XmlDom*)ophoXmlDom andTrackIndex:(int)trackIndex
 {
     
     if ( xmlDom == nil )
@@ -42,6 +45,7 @@
     {
         
         m_xmlDom = xmlDom;
+        m_ophoXmlDom = ophoXmlDom;
     
         m_measures = [[NSMutableArray alloc] init];
         m_markers = [[NSMutableArray alloc] init];
@@ -89,7 +93,12 @@
         // Get Content
         //
         XmlDom * contentDom = [songDom getChildWithName:@"content"];
-
+        XmlDom * ophoContentDom = nil;
+        
+        if(ophoXmlDom != nil){
+            ophoContentDom = [[ophoXmlDom getChildWithName:@"song"] getChildWithName:@"content"];
+        }
+        
         if ( contentDom == nil )
         {
             contentDom = [xmlDom getChildWithName:@"content"];
@@ -97,12 +106,26 @@
         
         NSArray * trackArray = [contentDom getChildArrayWithName:@"track"];
         
+        NSArray * ophoTrackArray = nil;
+        NSTrack * ophoTrack = nil;
+        
+        
+        if(ophoContentDom != nil){
+            
+            ophoTrackArray = [ophoContentDom getChildArrayWithName:@"track"];
+            ophoTrack = [[NSTrack alloc] initWithXmlDom:[ophoTrackArray objectAtIndex:trackIndex]];
+            
+            self.m_instrumentXmpId = ophoTrack.m_instrument.m_id;
+            
+            DLog(@"Opho instrument ID is %lu",self.m_instrumentXmpId);
+            
+        }
+        
         XmlDom * trackDom = [trackArray objectAtIndex:trackIndex];
         
         NSArray * measureArray = [trackDom getChildArrayWithName:@"measure"];
         
         NSArray * markerArray = [trackDom getChildArrayWithName:@"marker"];
-        
         
         // Measures + Markers for standard songs
         for ( XmlDom * measureDom in measureArray )
@@ -126,14 +149,13 @@
             
         }
         
-        
         // Clips for Opho songs to select a track
-        for ( XmlDom * nthTrackDom in trackArray )
+        /*for ( XmlDom * nthTrackDom in trackArray )
         {
             NSTrack * track = [[NSTrack alloc] initWithXmlDom:nthTrackDom];
             
             [m_tracks addObject:track];
-        }
+        }*/
 
         // done
         

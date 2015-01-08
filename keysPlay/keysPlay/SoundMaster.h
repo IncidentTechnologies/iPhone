@@ -7,6 +7,7 @@
 //
 
 #import "AppCore.h"
+#import "OphoMaster.h"
 
 @class AudioController;
 
@@ -22,6 +23,8 @@
     BOOL isLoadingInstrument;
     
     NSTimer * releaseTimer;
+    
+    OphoMaster * ophoMaster;
     
 }
 
@@ -40,6 +43,7 @@
 - (void)adjustEffectAtIndex:(NSInteger)index toPoint:(CGPoint)position;
 
 - (void) didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender;
+- (void) setCurrentInstrumentByXmpId:(NSInteger)xmpId withSelector:(SEL)cb andOwner:(id)sender;
 - (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender;
 - (NSInteger) getCurrentInstrument;
 - (NSArray *) getInstrumentList;

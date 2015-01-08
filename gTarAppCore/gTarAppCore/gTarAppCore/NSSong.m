@@ -56,6 +56,7 @@
         }
         
         dom = [headerDom getChildWithName:@"id"];
+        
         self.m_id = [[dom getNumberFromChildWithName:@"value"] integerValue];
         
         self.m_title = [headerDom getTextFromChildWithName:@"title"];

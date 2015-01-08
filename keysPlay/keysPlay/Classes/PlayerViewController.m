@@ -78,7 +78,7 @@
     // Start the progress bar at zero when we open up.
     _fillView.layer.transform = CATransform3DMakeTranslation( 0, 0, 0 );
 
-    [_songPlaybackController startWithXmpBlob:_xmpBlob];
+    [_songPlaybackController startWithXmpBlob:_xmpBlob ophoXmlDom:_ophoXmlDom];
     [_songPlaybackController stopMainEventLoop];
     
     if([_songPlaybackController getNumTracks] >= MIN_TRACKS_DISPLAY){
@@ -133,8 +133,15 @@
     [_playButton startActivityIndicator];
 }
 
+- (void)refreshSong
+{
+    [_songPlaybackController startWithXmpBlob:_xmpBlob ophoXmlDom:_ophoXmlDom];
+    [_songPlaybackController stopMainEventLoop];
+    
+}
+
 // This loads the preview song in the background
-- (void)backgroundLoading
+/*- (void)backgroundLoading
 {
     @synchronized( self )
     {
@@ -151,7 +158,7 @@
         
         [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
     }
-}
+}*/
 
 - (void)finishedLoadingSamplePack:(NSNumber *)result
 {

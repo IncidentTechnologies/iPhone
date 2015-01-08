@@ -79,7 +79,7 @@
 		self.m_absoluteBeatStart = absoluteBeatStart;
         self.m_key = [self convertValueToKey:value];
 		
-        //DLog(@"NOTE VALUE IS %@ KEY IS %i",m_value,m_key);
+        DLog(@"NOTE VALUE IS %@ KEY IS %i",m_value,m_key);
         
 	}
 	
@@ -100,11 +100,19 @@
     
     keyValue += KEYS_OCTAVE_COUNT * [octaveValue intValue];
     
+    BOOL foundLetterValue = false;
+    
     for(int k = 0; k < [letterValues count]; k++){
         if([noteValue isEqualToString:letterValues[k]]){
+            foundLetterValue = true;
             keyValue += k;
             break;
         }
+    }
+    
+    // Comply with sequence notes
+    if(!foundLetterValue){
+        return [value intValue];
     }
     
     return keyValue;

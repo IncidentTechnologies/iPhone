@@ -30,6 +30,7 @@
 		6D1D201C1A4B882B003DC8DB /* NSTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1D201B1A4B882B003DC8DB /* NSTrack.m */; };
 		6D1D201F1A4B88FC003DC8DB /* NSClip.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1D201E1A4B88FC003DC8DB /* NSClip.m */; };
 		6D20EF5F191AA68600E78A9D /* PreviewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D20EF5E191AA68600E78A9D /* PreviewIcon.png */; };
+		6D2263DA1A5DE1F600D86D70 /* OphoMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2263D91A5DE1F600D86D70 /* OphoMaster.m */; };
 		6D226D091A1C27200088D52C /* KeysMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D226D081A1C27200088D52C /* KeysMath.m */; };
 		6D26A81718F3794300887E40 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81618F3794300887E40 /* libc++.dylib */; };
 		6D26A81918F3794900887E40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26A81818F3794900887E40 /* libz.dylib */; };
@@ -151,6 +152,9 @@
 		6DB285F91921915600B3D14C /* Electric Guitar 78.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285931921915600B3D14C /* Electric Guitar 78.mp3 */; };
 		6DB285FA1921915600B3D14C /* Electric Guitar 79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285941921915600B3D14C /* Electric Guitar 79.mp3 */; };
 		6DB285FC1921915600B3D14C /* Electric Guitar 80.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DB285961921915600B3D14C /* Electric Guitar 80.mp3 */; };
+		6DB60A281A5C9BA4006F5650 /* NSInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB60A271A5C9BA4006F5650 /* NSInstrument.m */; };
+		6DB60A2B1A5C9BAC006F5650 /* NSSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB60A2A1A5C9BAC006F5650 /* NSSampler.m */; };
+		6DB60A2E1A5C9BB6006F5650 /* NSSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB60A2D1A5C9BB6006F5650 /* NSSample.m */; };
 		6DB6156C1A23C5CE009E2920 /* KeysSongRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6156B1A23C5CE009E2920 /* KeysSongRecorder.m */; };
 		6DD135E21A02DEB300996073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E11A02DEB300996073 /* Images.xcassets */; };
 		6DD135E91A02DEFA00996073 /* keys_AppIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD135E31A02DEFA00996073 /* keys_AppIcon_57.png */; };
@@ -1482,6 +1486,8 @@
 		6D1D201D1A4B88FC003DC8DB /* NSClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSClip.h; sourceTree = "<group>"; };
 		6D1D201E1A4B88FC003DC8DB /* NSClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSClip.m; sourceTree = "<group>"; };
 		6D20EF5E191AA68600E78A9D /* PreviewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PreviewIcon.png; path = Resources/Images/General/Player/PreviewIcon.png; sourceTree = SOURCE_ROOT; };
+		6D2263D81A5DE1F600D86D70 /* OphoMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OphoMaster.h; sourceTree = "<group>"; };
+		6D2263D91A5DE1F600D86D70 /* OphoMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OphoMaster.m; sourceTree = "<group>"; };
 		6D226D071A1C27200088D52C /* KeysMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeysMath.h; sourceTree = "<group>"; };
 		6D226D081A1C27200088D52C /* KeysMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeysMath.m; sourceTree = "<group>"; };
 		6D26A81618F3794300887E40 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -1631,6 +1637,12 @@
 		6DB285931921915600B3D14C /* Electric Guitar 78.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 78.mp3"; sourceTree = "<group>"; };
 		6DB285941921915600B3D14C /* Electric Guitar 79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 79.mp3"; sourceTree = "<group>"; };
 		6DB285961921915600B3D14C /* Electric Guitar 80.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electric Guitar 80.mp3"; sourceTree = "<group>"; };
+		6DB60A261A5C9BA4006F5650 /* NSInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInstrument.h; sourceTree = "<group>"; };
+		6DB60A271A5C9BA4006F5650 /* NSInstrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSInstrument.m; sourceTree = "<group>"; };
+		6DB60A291A5C9BAC006F5650 /* NSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSampler.h; sourceTree = "<group>"; };
+		6DB60A2A1A5C9BAC006F5650 /* NSSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSampler.m; sourceTree = "<group>"; };
+		6DB60A2C1A5C9BB6006F5650 /* NSSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSample.h; sourceTree = "<group>"; };
+		6DB60A2D1A5C9BB6006F5650 /* NSSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSample.m; sourceTree = "<group>"; };
 		6DB6156A1A23C5CE009E2920 /* KeysSongRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeysSongRecorder.h; sourceTree = "<group>"; };
 		6DB6156B1A23C5CE009E2920 /* KeysSongRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeysSongRecorder.m; sourceTree = "<group>"; };
 		6DC3D837190ED80E003AAD4E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2497,6 +2509,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D2263D71A5DE1E700D86D70 /* Opho */ = {
+			isa = PBXGroup;
+			children = (
+				6D2263D81A5DE1F600D86D70 /* OphoMaster.h */,
+				6D2263D91A5DE1F600D86D70 /* OphoMaster.m */,
+			);
+			name = Opho;
+			sourceTree = "<group>";
+		};
 		6D3D06D718F4D2E8007683DB /* TestFlightSDK3.0.0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2535,6 +2556,12 @@
 				6D61D1D719FB07C5008CFA5A /* NSSongCreator.m */,
 				6D61D1D819FB07C5008CFA5A /* NSSongModel.h */,
 				6D61D1D919FB07C5008CFA5A /* NSSongModel.m */,
+				6DB60A261A5C9BA4006F5650 /* NSInstrument.h */,
+				6DB60A271A5C9BA4006F5650 /* NSInstrument.m */,
+				6DB60A291A5C9BAC006F5650 /* NSSampler.h */,
+				6DB60A2A1A5C9BAC006F5650 /* NSSampler.m */,
+				6DB60A2C1A5C9BB6006F5650 /* NSSample.h */,
+				6DB60A2D1A5C9BB6006F5650 /* NSSample.m */,
 			);
 			name = "Song Model";
 			sourceTree = "<group>";
@@ -3369,6 +3396,7 @@
 		EC0BAD2A16EE8DE900E567A6 /* TitleNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				6D2263D71A5DE1E700D86D70 /* Opho */,
 				6DD5FAFF18FCA3460066C888 /* Audio */,
 				EC0BAD3516EEA06600E567A6 /* Images */,
 				EC0BAD2C16EE8E3C00E567A6 /* TitleNavigationController.h */,
@@ -5312,12 +5340,14 @@
 				ECE9D23A16FBB7C900BB6C53 /* SongListCell.m in Sources */,
 				6D7159E019F885FE00138DBB /* FrameGenerator.m in Sources */,
 				ECE9D24216FBDA9200BB6C53 /* ExpandableSearchBar.m in Sources */,
+				6D2263DA1A5DE1F600D86D70 /* OphoMaster.m in Sources */,
 				9DA3137C1704DD8400CFF104 /* InstrumentsAndEffectsViewController.m in Sources */,
 				6D61D1E019FB07C5008CFA5A /* NSSongCreator.m in Sources */,
 				9DA313831704DDD900CFF104 /* LightsViewController.m in Sources */,
 				9DA313911704FA3100CFF104 /* FPMenuViewController.m in Sources */,
 				6D61D1DA19FB07C5008CFA5A /* NSMarker.m in Sources */,
 				6D7D47051919BB8D00EF8C75 /* TimeFormatter.m in Sources */,
+				6DB60A2E1A5C9BB6006F5650 /* NSSample.m in Sources */,
 				ECE9D2481705133900BB6C53 /* PlayViewController.m in Sources */,
 				ECCC030E170A2B900021DB00 /* NoteModel.m in Sources */,
 				ECCC0310170A2B900021DB00 /* KeyPathModel.m in Sources */,
@@ -5327,8 +5357,10 @@
 				6D7D46F71919BA0F00EF8C75 /* PopupViewController.m in Sources */,
 				ECCC0359170CBA570021DB00 /* VolumeViewController.m in Sources */,
 				6D7D46F61919BA0F00EF8C75 /* MarqueeExpandingRoundedRectangleView.m in Sources */,
+				6DB60A2B1A5C9BAC006F5650 /* NSSampler.m in Sources */,
 				9DE6B34B1713A69B0083B980 /* EffectsTableViewController.m in Sources */,
 				ECE831FB171764C0006E2391 /* UserCommentCell.m in Sources */,
+				6DB60A281A5C9BA4006F5650 /* NSInstrument.m in Sources */,
 				6D7D46F51919BA0F00EF8C75 /* InstrumentTableViewController.m in Sources */,
 				ECE8323C1718EA34006E2391 /* SocialViewController.m in Sources */,
 				6D61D1E119FB07C5008CFA5A /* NSSongModel.m in Sources */,

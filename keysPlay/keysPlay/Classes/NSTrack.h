@@ -10,6 +10,7 @@
 #import "NSClip.h"
 
 @class XmlDom;
+@class NSInstrument;
 
 @interface NSTrack : NSObject
 {
@@ -22,7 +23,7 @@
 }
 
 @property (retain, nonatomic) NSString * m_name;
-//@property (retain, nonatomic) NSInstrument * m_instrument;
+@property (retain, nonatomic) NSInstrument * m_instrument;
 @property (retain, nonatomic) NSMutableArray * m_clips;
 
 - (id)initWithXmlDom:(XmlDom *)dom;

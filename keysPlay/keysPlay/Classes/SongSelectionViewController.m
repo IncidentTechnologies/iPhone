@@ -709,6 +709,14 @@ extern KeysController *g_keysController;
         return;
     
     _currentUserSong = userSong;
+    
+    if(_isOphoListing){
+        
+        DLog(@"Current user song ID is %lu",_currentUserSong.m_songId);
+        
+        [g_ophoCloudController requestGetXmpWithId:_currentUserSong.m_songId isXmpOnly:NO andCallbackObj:self andCallbackSel:@selector(ophoSongDownloaded:)];
+    }
+    
     [_practiceButton startActivityIndicator];
     [_startButton startActivityIndicator];
     [_startButton setImage:nil forState:UIControlStateNormal];
@@ -733,6 +741,16 @@ extern KeysController *g_keysController;
     [self presentViewController:_songOptionsModal animated:NO completion:nil];
 }
 
+
+- (void)ophoSongDownloaded:(CloudResponse *)cloudResponse
+{
+    _playerViewController.ophoXmlDom = cloudResponse.m_xmpDom;
+    [_playerViewController refreshSong];
+    
+    [_currentUserSong setOphoXmlDom:cloudResponse.m_xmpDom];
+}
+
+
 // This function catches any selections
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -754,7 +772,6 @@ extern KeysController *g_keysController;
 }
 
 #pragma mark - ViewController stuff
-
 - (void)startSong:(UserSong *)userSong withDifficulty:(NSInteger)difficulty practiceMode:(BOOL)practiceMode selectedTrack:(int)selectedTrack
 {
     _playViewController = nil;
@@ -785,7 +802,7 @@ extern KeysController *g_keysController;
         _playViewController.difficulty = PlayViewControllerDifficultyHard;
         _playViewController.muffleWrongNotes = NO;
     }
-
+    
     [self.navigationController pushViewController:_playViewController animated:YES];
     
 }
