@@ -12,7 +12,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "SongPlaybackController.h"
 #import "UserSong.h"
 #import "NSSong.h"
 
@@ -87,6 +86,9 @@
         [self hideTrackSelector];
     }
     
+    [g_keysMath clearForceRange];
+    [delegate enableDefaultInstruments];
+    
     [self waitForInstrumentToLoad];
     
     if([_songPlaybackController.m_songModel.m_song.m_instrument length] > 0){
@@ -104,6 +106,7 @@
     {
         DLog(@"Player View Controller: init Song Playback");
         _songPlaybackController = [[SongPlaybackController alloc] initWithSoundMaster:g_soundMaster];
+        _songPlaybackController.delegate = self;
     
     }
 }
@@ -129,14 +132,38 @@
 
 - (void)waitForInstrumentToLoad
 {
-    [_playButton setImage:nil forState:UIControlStateNormal];
-    [_playButton startActivityIndicator];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [_playButton setImage:nil forState:UIControlStateNormal];
+        [_playButton startActivityIndicator];
+            
+    });
 }
 
 - (void)refreshSong
 {
     [_songPlaybackController startWithXmpBlob:_xmpBlob ophoXmlDom:_ophoXmlDom];
     [_songPlaybackController stopMainEventLoop];
+    
+}
+
+// Callback from SongPlaybackController when loading Opho instrument
+- (void)instrumentLoadingBegan
+{
+    if([delegate respondsToSelector:@selector(instrumentLoadingBegan)]){
+        [delegate instrumentLoadingBegan];
+    }
+    
+    [self waitForInstrumentToLoad];
+}
+
+- (void)instrumentLoadingEnded
+{
+    [self finishedLoadingSamplePack:nil];
+    
+    if([delegate respondsToSelector:@selector(disableDefaultInstruments)]){
+        [delegate disableDefaultInstruments];
+    }
     
 }
 
@@ -162,18 +189,22 @@
 
 - (void)finishedLoadingSamplePack:(NSNumber *)result
 {
-    _init = YES;
-    
-    [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
-    [_playButton stopActivityIndicator];
-    
-    DLog(@"Finished loading sample pack");
-    
-    [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
-    
-    if([delegate respondsToSelector:@selector(instrumentLoadingReady)]){
-        [delegate instrumentLoadingReady];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        _init = YES;
+        
+        [_playButton setImage:[UIImage imageNamed:@"PreviewIcon.png"] forState:UIControlStateNormal];
+        [_playButton stopActivityIndicator];
+        
+        DLog(@"Finished loading sample pack");
+        
+        [_loadedInvocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:NO];
+        
+        if([delegate respondsToSelector:@selector(instrumentLoadingReady)]){
+            [delegate instrumentLoadingReady];
+        }
+            
+    });
     
 }
 

@@ -395,7 +395,7 @@ extern UserController * g_userController;
     [self performSelectorOnMainThread:@selector(delayedLoaded) withObject:nil waitUntilDone:NO];
     
     // This doesn't draw until the screen loads
-    [self positionKeyboard:[g_keysMath songRangeKeyMin]];
+    [self positionKeyboard:[g_keysMath getForcedRangeKeyMin]];
     
 }
 
@@ -1662,14 +1662,14 @@ extern UserController * g_userController;
 {
     double keyboardRangeWidth = keyboardRange.frame.size.width;
     int keyboardWhiteKey = [g_keysMath getWhiteKeyFromNthKey:keyboardKey];
-    int keyboardMin = [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]; // Count through the white key prior
+    int keyboardMin = [g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]]; // Count through the white key prior
     
     DLog(@"POSITION KEYBOARD TO %i",keyboardWhiteKey);
     
-    DLog(@"Key white key is r%iw%i rel %i (song range key min is r%iw%i)",keyboardKey,keyboardWhiteKey,keyboardWhiteKey-keyboardMin,g_keysMath.songRangeKeyMin,[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]);
+    DLog(@"Key white key is r%iw%i rel %i (song range key min is r%iw%i)",keyboardKey,keyboardWhiteKey,keyboardWhiteKey-keyboardMin,[g_keysMath getForcedRangeKeyMin],[g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]]);
 
-    double keyboardX = ((double)(keyboardWhiteKey - keyboardMin) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
-    double keyboardWidth = ((double)(ceilf([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) / (double)g_keysMath.songRangeNumberOfWhiteKeys) * keyboardRangeWidth;
+    double keyboardX = ((double)(keyboardWhiteKey - keyboardMin) / (double)[g_keysMath getForcedRangeWhiteKeyCount]) * keyboardRangeWidth;
+    double keyboardWidth = ((double)(ceilf([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) / (double)[g_keysMath getForcedRangeWhiteKeyCount]) * keyboardRangeWidth;
     
     g_keysMath.keyboardPositionKey = keyboardKey;
     
@@ -1710,7 +1710,7 @@ extern UserController * g_userController;
 
 - (void)displayKeyboardRangeChanged
 {
-    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:g_keysMath.songRangeKeyMin withNumberOfKeys:g_keysMath.songRangeKeySize andNumberOfWhiteKeys:g_keysMath.songRangeNumberOfWhiteKeys invertColors:TRUE colorActive:YES drawKeysDown:NO];
+    [g_keysMath drawKeyboardInFrame:keyboardRange fromKeyMin:[g_keysMath getForcedRangeKeyMin] withNumberOfKeys:[g_keysMath getForcedRangeKeyCount] andNumberOfWhiteKeys:[g_keysMath getForcedRangeWhiteKeyCount] invertColors:TRUE colorActive:YES drawKeysDown:NO];
 }
 
 - (void)drawKeyboardGridFromMin:(int)keyMin
@@ -1747,12 +1747,12 @@ extern UserController * g_userController;
 {
     // Light key on full range keyboard
     
-    double keyWidth = keyboardOverview.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
+    double keyWidth = keyboardOverview.frame.size.width / [g_keysMath getForcedRangeWhiteKeyCount];
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
     double overlayWidth = 1.5*drawKeyWidth;
     BOOL isBlackKey = [g_keysMath isKeyBlackKey:key];
     
-    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+    int whiteKey = [g_keysMath getWhiteKeyFromNthKey:key] - [g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]];
     
     double whiteKeyX = whiteKey*keyWidth;
     double nextWhiteKeyX = (whiteKey+1)*keyWidth;
@@ -2873,7 +2873,7 @@ extern UserController * g_userController;
         _delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
     }
     
-    if ( key >= g_keysMath.songRangeKeyMin && key <= g_keysMath.songRangeKeyMax )
+    if ( key >= [g_keysMath getForcedRangeKeyMin] && key <= [g_keysMath getForcedRangeKeyMax] )
     {
         
         // Play the note
@@ -3423,7 +3423,7 @@ extern UserController * g_userController;
             [keyboardPosition setFrame:CGRectMake(keyboardPosition.frame.origin.x+deltaX, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
             
             // Shift view to a new white key
-            int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+            int newWhiteKey = (keyboardPosition.frame.origin.x / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*([g_keysMath getForcedRangeWhiteKeyCount]-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]];
             
             int newKey = [g_keysMath getNthKeyForWhiteKey:newWhiteKey];
             
@@ -3457,14 +3457,14 @@ extern UserController * g_userController;
         
         float margin = 1.0;
         
-        int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*(g_keysMath.songRangeNumberOfWhiteKeys-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin];
+        int newWhiteKey = ((keyboardPosition.frame.origin.x+margin) / (keyboardRange.frame.size.width-keyboardPosition.frame.size.width))*([g_keysMath getForcedRangeWhiteKeyCount]-ceil([g_keysMath cameraScale]*KEYS_WHITE_KEY_DISPLAY_COUNT)) + [g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]];
         
         // Snap to key
-        float whiteKeyWidth = keyboardRange.frame.size.width / g_keysMath.songRangeNumberOfWhiteKeys;
+        float whiteKeyWidth = keyboardRange.frame.size.width / [g_keysMath getForcedRangeWhiteKeyCount];
         
-        DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]));
+        DLog(@"White key width is %f * %i",whiteKeyWidth,(newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]]));
         
-        [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:g_keysMath.songRangeKeyMin]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
+        [keyboardPosition setFrame:CGRectMake((newWhiteKey-[g_keysMath getWhiteKeyFromNthKey:[g_keysMath getForcedRangeKeyMin]]) * whiteKeyWidth, keyboardPosition.frame.origin.y, keyboardPosition.frame.size.width, keyboardPosition.frame.size.height)];
         
     }
     

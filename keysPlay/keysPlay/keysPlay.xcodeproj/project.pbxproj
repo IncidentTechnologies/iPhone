@@ -3444,22 +3444,22 @@
 		EC0BAD8116F1791300E567A6 /* UI Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				6D7159DD19F885EB00138DBB /* FrameGenerator */,
-				6D7D47021919BB7F00EF8C75 /* TimeFormatter */,
 				6D7D46E01919B9A200EF8C75 /* CustomUI */,
-				9DDB4E7117A2005400499808 /* PlayerViewController */,
 				EC341610173894D100501AF4 /* Categories */,
-				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
 				EC0BAD9616F2771A00E567A6 /* CyclingTextField */,
-				EC0BAD9116F2458200E567A6 /* SelectorControl */,
-				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableView */,
-				ECEB3319175D6DEE009913F4 /* PaginatedPullToUpdateTableView */,
-				EC48665117287E4A0066194D /* SlidingViewController */,
-				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
-				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
-				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
+				ECE9D23F16FBDA6A00BB6C53 /* ExpandableSearchBar */,
+				6D7159DD19F885EB00138DBB /* FrameGenerator */,
 				ECFF773017440B5A002D7D40 /* FirmwareModalViewController */,
+				ECEB3319175D6DEE009913F4 /* PaginatedPullToUpdateTableView */,
+				9DDB4E7117A2005400499808 /* PlayerViewController */,
+				EC1E4DEB1548A44A0033F904 /* PullToUpdateTableView */,
+				EC0BAD9116F2458200E567A6 /* SelectorControl */,
 				EC34161F173ACA9E00501AF4 /* SessionModalViewController */,
+				EC48665117287E4A0066194D /* SlidingViewController */,
+				EC0BAD9B16F2A4A200E567A6 /* SlidingModalViewController */,
+				EC48664F17287E130066194D /* SlidingInstrumentViewController */,
+				6D7D47021919BB7F00EF8C75 /* TimeFormatter */,
+				ECCC0355170CB9FD0021DB00 /* VolumeViewController */,
 				ECDF7F70173D5A77003E51EC /* IconButton */,
 			);
 			name = "UI Widgets";

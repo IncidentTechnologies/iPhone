@@ -39,6 +39,8 @@ extern KeysController *g_keysController;
     
     struct SongSortOrder _sortOrder;
     int sortChange;
+    
+    BOOL disableDefaultInstruments;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *sortByTitleButtton;
@@ -489,6 +491,41 @@ extern KeysController *g_keysController;
     [self refreshDisplayedUserSongList];
 }
 
+#pragma mark - PlayerViewController delegate
+
+- (void)enableDefaultInstruments{
+    
+    disableDefaultInstruments = FALSE;
+    
+    [_instrumentButton setEnabled:YES];
+    
+}
+
+- (void)disableDefaultInstruments{
+    
+    disableDefaultInstruments = TRUE;
+    
+    [_instrumentButton setEnabled:NO];
+    
+}
+
+// Opho instruments loading
+- (void)instrumentLoadingReady{
+    
+    [self playerLoaded];
+    
+}
+
+- (void)instrumentLoadingBegan{
+    
+    [_instrumentButton setEnabled:NO];
+    
+    [_practiceButton startActivityIndicator];
+    [_startButton startActivityIndicator];
+    [_startButton setImage:nil forState:UIControlStateNormal];
+    
+}
+
 #pragma mark - UserSong management
 
 - (void)refreshSongList
@@ -723,6 +760,7 @@ extern KeysController *g_keysController;
     NSString *songString = (NSString*)[g_fileController getFileOrDownloadSync:userSong.m_xmpFileId];
     
     _playerViewController.userSong = userSong;
+    _playerViewController.ophoXmlDom = nil;
     _playerViewController.xmpBlob = songString;
     
     NSMethodSignature *signature = [SongSelectionViewController instanceMethodSignatureForSelector:@selector(playerLoaded)];
@@ -760,7 +798,9 @@ extern KeysController *g_keysController;
 
 - (void)playerLoaded
 {
-    [_instrumentButton setEnabled:YES];
+    if(!disableDefaultInstruments){
+        [_instrumentButton setEnabled:YES];
+    }
     [_startButton stopActivityIndicator];
     [_practiceButton stopActivityIndicator];
     [_startButton setImage:[UIImage imageNamed:@"PlayButtonVideo.png"] forState:UIControlStateNormal];

@@ -15,6 +15,8 @@ extern FileController *g_fileController;
     PlayerViewController *_playerViewController;
     VolumeViewController *_volumeViewController;
     SlidingInstrumentViewController *_instrumentViewController;
+    
+    BOOL disableDefaultInstruments;
 }
 @end
 
@@ -206,14 +208,34 @@ extern FileController *g_fileController;
 
 - (NSArray *)getInstrumentList
 {
-    
     return [_playerViewController getInstrumentList];
 }
 
 #pragma mark - Player View Delegate
 
+- (void) instrumentLoadingBegan
+{
+    [_shortcutButton setEnabled:NO];
+}
+
 - (void) instrumentLoadingReady
 {
+    if(!disableDefaultInstruments){
+        [_shortcutButton setEnabled:YES];
+    }
+}
+
+- (void) disableDefaultInstruments
+{
+    disableDefaultInstruments = TRUE;
+    
+    [_shortcutButton setEnabled:NO];
+}
+
+- (void) enableDefaultInstruments
+{
+    disableDefaultInstruments = FALSE;
+    
     [_shortcutButton setEnabled:YES];
 }
 

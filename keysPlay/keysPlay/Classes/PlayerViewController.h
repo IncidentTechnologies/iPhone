@@ -9,15 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "SoundMaster.h"
 #import "XmlDom.h"
+#import "SongPlaybackController.h"
 
 @class UserSong;
 
 @protocol PlayerViewDelegate <NSObject>
 @optional
+- (void)enableDefaultInstruments;
+- (void)disableDefaultInstruments;
 - (void)instrumentLoadingReady;
+- (void)instrumentLoadingBegan;
 @end
 
-@interface PlayerViewController : UIViewController
+@interface PlayerViewController : UIViewController <SongPlaybackDelegate>
 
 @property (weak, nonatomic) id <PlayerViewDelegate> delegate;
 

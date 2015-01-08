@@ -15,6 +15,8 @@
 @synthesize isStandalone;
 @synthesize isSheetMusic;
 @synthesize difficulty;
+@synthesize forceRangeKeyMin;
+@synthesize forceRangeKeyMax;
 @synthesize songRangeKeyMin;
 @synthesize songRangeKeyMax;
 @synthesize songRangeKeySize;
@@ -45,12 +47,75 @@
             keysDown[i] = NO;
         }
         
+        [self clearForceRange];
+        
     }
     
     return self;
     
 }
 
+#pragma mark - Forced Range
+
+- (BOOL)isForcedRange
+{
+    return !(forceRangeKeyMin == forceRangeKeyMax);
+}
+
+- (KeyPosition)getForcedRangeKeyMin
+{
+    if([self isForcedRange]){
+        DLog(@"FORCED RANGE %i",forceRangeKeyMin);
+        return forceRangeKeyMin;
+    }else{
+        DLog(@"USUAL RANGE %i",songRangeKeyMin);
+        return songRangeKeyMin;
+    }
+}
+
+- (KeyPosition)getForcedRangeKeyMax
+{
+    if([self isForcedRange]){
+        return forceRangeKeyMax;
+    }else{
+        return songRangeKeyMax;
+    }
+}
+
+- (KeyPosition)getForcedRangeKeyCount
+{
+    if([self isForcedRange]){
+        return forceRangeKeyMax - forceRangeKeyMin+1;
+    }else{
+        return songRangeKeySize;
+    }
+}
+
+- (KeyPosition)getForcedRangeWhiteKeyCount
+{
+    if([self isForcedRange]){
+        return [self countWhiteKeysFromMin:forceRangeKeyMin toMax:forceRangeKeyMax];
+    }else{
+        return songRangeNumberOfWhiteKeys;
+    }
+}
+
+- (void)clearForceRange
+{
+    forceRangeKeyMin = 0;
+    forceRangeKeyMax = 0;
+}
+
+- (void)setForceRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
+{
+    forceRangeKeyMin = keyMin;
+    forceRangeKeyMax = keyMax;
+    keyboardPositionKey = forceRangeKeyMin;
+    
+    [delegate displayKeyboardRangeChanged];
+}
+
+#pragma mark - Actual Range
 
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax
 {
@@ -606,9 +671,9 @@
         }
         
         // Ensure range doesn't move off screen or shrink too much
-        DLog(@"SRKMax %i vs KeyMax %i - KeyMin %i = %i",songRangeKeyMax,keyMax,keyMin,keyMax-keyMin);
-        if(keyMin+KEYS_DISPLAYED_NOTES_COUNT >= songRangeKeyMax){
-            keyMax = songRangeKeyMax;
+        DLog(@"SRKMax %i vs KeyMax %i - KeyMin %i = %i",[self getForcedRangeKeyMax],keyMax,keyMin,keyMax-keyMin);
+        if(keyMin+KEYS_DISPLAYED_NOTES_COUNT >= [self getForcedRangeKeyMax]){
+            keyMax = [self getForcedRangeKeyMax];
             keyMin = keyMax-KEYS_DISPLAYED_NOTES_COUNT+1;
             newCameraScale = DEFAULT_CAMERA_SCALE;
         }
@@ -618,13 +683,19 @@
             keyMin = keyMin-KEYS_DISPLAYED_NOTES_COUNT*0.25;
             
             // Ensure it doesn't go below the beginning of the song
-            keyMin = MAX(keyMin,songRangeKeyMin);
+            keyMin = MAX(keyMin,[self getForcedRangeKeyMin]);
         }
         
         // Don't make trivial changes
         if(forceRefresh || keyMin < keyboardPositionKey || keyMax > keyboardPositionKey+cameraScale*KEYS_DISPLAYED_NOTES_COUNT || newCameraScale < cameraScale*0.7){
             
             DLog(@"After modifications use keyMin %i",keyMin);
+            
+            // Last check to override with force
+            if([self isForcedRange]){
+                newCameraScale = DEFAULT_CAMERA_SCALE;
+                keyMin = forceRangeKeyMin;
+            }
         
             [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
             

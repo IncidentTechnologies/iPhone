@@ -31,7 +31,7 @@
 
 // ActivityFeedCell
 "Someone" = "누군가";
-"Jamed out" = "연주했다";
+"Jammed out" = "연주했다";
 "Played %@" = "연주했다 %@";
 
 // Song Selection Controller

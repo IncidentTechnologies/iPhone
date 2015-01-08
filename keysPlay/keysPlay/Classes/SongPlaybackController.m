@@ -19,6 +19,7 @@
 
 @synthesize m_songModel;
 @synthesize g_soundMaster;
+@synthesize delegate;
 
 - (id)initWithSoundMaster:(SoundMaster *)soundMaster
 {
@@ -35,8 +36,31 @@
     return self;
 }
 
+- (void)dealloc {
+    
+    [m_keysController removeObserver:self];
+    
+    [m_eventLoopTimer invalidate];
+    m_eventLoopTimer = nil;
+    
+    [m_audioTrailOffTimer invalidate];
+    m_audioTrailOffTimer = nil;
+    
+    
+}
+
+#pragma mark - Instrument Selection
+
 - (void)didSelectInstrument:(NSString *)instrumentName withSelector:(SEL)cb andOwner:(id)sender
 {
+    
+    // Ensure Sound Master is not NIL
+    if(g_soundMaster == nil){
+    
+        g_soundMaster = [[SoundMaster alloc] init];
+        
+    }
+    
     [g_soundMaster didSelectInstrument:instrumentName withSelector:cb andOwner:sender];
 }
 
@@ -56,18 +80,25 @@
     return [g_soundMaster getInstrumentList];
 }
 
-- (void)dealloc {
+- (void)loadOphoInstrumentByXmpId:(NSInteger)xmpId
+{
+    [delegate instrumentLoadingBegan];
     
-    [m_keysController removeObserver:self];
+    [g_soundMaster setCurrentInstrumentByXmpId:xmpId withSelector:@selector(ophoInstrumentLoaded:) andOwner:self];
+}
+
+- (void)ophoInstrumentLoaded:(id)sender
+{
+    [delegate instrumentLoadingEnded];
+}
+
+- (long)getNumTracks {
     
-    [m_eventLoopTimer invalidate];
-    m_eventLoopTimer = nil;
-    
-    [m_audioTrailOffTimer invalidate];
-    m_audioTrailOffTimer = nil;
-    
+    return [m_songModel.m_song.m_tracks count];
     
 }
+
+#pragma mark - Song Playing
 
 - (void)startWithXmpBlob:(NSString*)xmpBlob ophoXmlDom:(XmlDom*)ophoXmlDom
 {
@@ -89,11 +120,13 @@
     m_songModel = [[NSSongModel alloc] initWithSong:song];
     
     if(m_songModel.m_song.m_instrumentXmpId > 0){
-        [g_soundMaster setCurrentInstrumentByXmpId:m_songModel.m_song.m_instrumentXmpId withSelector:nil andOwner:nil];
+        DLog(@"Instrument Xmp Id is %i",m_songModel.m_song.m_instrumentXmpId);
+        
+        [self loadOphoInstrumentByXmpId:m_songModel.m_song.m_instrumentXmpId];
     }
     
-    // Double tempo because for some reason it's incredibly slow in playback
-    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
+    // Increase tempo because for some reason it's incredibly slow in playback
+    [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.5 fromStart:0 toEnd:-1 withLoops:0];
     
     [self startMainEventLoop];
     
@@ -122,6 +155,8 @@
     
 }
 
+#pragma mark - Track Control
+
 - (void)changeTrack:(int)newTrackIndex
 {
     if(newTrackIndex >= 0 && newTrackIndex < [m_songModel.m_song.m_tracks count]){
@@ -130,8 +165,12 @@
         
         m_songModel = [[NSSongModel alloc] initWithSong:song];
         
-        // Double tempo because for some reason it's incredibly slow in playback
-        [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:2.0 fromStart:0 toEnd:-1 withLoops:0];
+        if(m_songModel.m_song.m_instrumentXmpId > 0){
+            [self loadOphoInstrumentByXmpId:m_songModel.m_song.m_instrumentXmpId];
+        }
+        
+        // Increase tempo because for some reason it's incredibly slow in playback
+        [m_songModel startWithDelegate:self andBeatOffset:-1 fastForward:YES isScrolling:NO withTempoPercent:1.0 fromStart:0 toEnd:-1 withLoops:0];
         
         [self startMainEventLoop];
         
@@ -140,38 +179,7 @@
     }
 }
 
-- (long)getNumTracks {
-    
-    return [m_songModel.m_song.m_tracks count];
-    
-}
-
-- (void)observeKeysController:(KeysController*)keysController {
-    m_keysController = keysController;
-    
-    // Register ourself as an observer
-    [m_keysController addObserver:self];
-    
-    if(m_keysController.connected){
-        [m_keysController turnOffAllEffects];
-        [m_keysController turnOffAllLeds];
-    }
-    
-}
-
-- (void)ignoreKeysController:(KeysController*)keysController {
-    if(m_keysController.connected){
-        [m_keysController turnOffAllEffects];
-        [m_keysController turnOffAllLeds];
-    }
-    
-    // Remove ourself as an observer
-    [m_keysController removeObserver:self];
-    
-    
-    m_keysController = nil;
-    
-}
+#pragma mark - Event Loop
 
 - (void)startMainEventLoop {
     
@@ -216,7 +224,35 @@
     [m_songModel incrementTimeSerialAccess:SECONDS_PER_EVENT_LOOP isRestrictFrame:NO];
 }
 
-#pragma mark - GuitarControllerObserver
+
+#pragma mark - Keys Controller
+
+- (void)observeKeysController:(KeysController*)keysController {
+    m_keysController = keysController;
+    
+    // Register ourself as an observer
+    [m_keysController addObserver:self];
+    
+    if(m_keysController.connected){
+        [m_keysController turnOffAllEffects];
+        [m_keysController turnOffAllLeds];
+    }
+    
+}
+
+- (void)ignoreKeysController:(KeysController*)keysController {
+    if(m_keysController.connected){
+        [m_keysController turnOffAllEffects];
+        [m_keysController turnOffAllLeds];
+    }
+    
+    // Remove ourself as an observer
+    [m_keysController removeObserver:self];
+    
+    
+    m_keysController = nil;
+    
+}
 
 - (void)keysNoteOn:(KeysPress)press {
     //KeysFret fret = press.position.fret;

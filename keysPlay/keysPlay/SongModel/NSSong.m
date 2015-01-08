@@ -109,6 +109,7 @@
         NSArray * ophoTrackArray = nil;
         NSTrack * ophoTrack = nil;
         
+        self.m_instrumentXmpId = 0;
         
         if(ophoContentDom != nil){
             

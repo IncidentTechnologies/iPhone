@@ -31,7 +31,7 @@
 
 // ActivityFeedCell
 "Someone" = "誰か";
-"Jamed out" = "Jamed out";
+"Jammed out" = "Jammed out";
 "Played %@" = "完成した %@";
 
 // Song Selection Controller

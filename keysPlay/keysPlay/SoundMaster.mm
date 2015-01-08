@@ -329,7 +329,7 @@
  }*/
 
 #pragma mark - Instrument
-- (void) loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
+- (void)loadInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender
 {
     if(index == currentInstrumentIndex){
         DLog(@"Instrument already loaded");
@@ -564,6 +564,10 @@
 {
     DLog(@"Load instrument from ID %i",xmpId);
     
+    currentInstrumentIndex = xmpId;
+    instrumentLoadingOwner = sender;
+    instrumentLoadingCallback = cb;
+    
     [ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(loadInstrumentSamples:)];
 }
 
@@ -572,6 +576,8 @@
     DLog(@"Loaded Instrument by XMP ID");
     
     NSInstrument * instrument = [[NSInstrument alloc] initWithXmlDom:[cloudResponse.m_xmpDom getChildWithName:@"instrument"]];
+    
+    [g_keysMath setForceRangeFromMin:0 andMax:[instrument.m_sampler.m_samples count]];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
@@ -607,6 +613,14 @@
             m_keysSamplerNode->LoadSampleIntoBank(m_activeBankNode, silenceFilepath);
         }
     }
+    
+    if(instrumentLoadingOwner != nil){
+        [instrumentLoadingOwner performSelector:instrumentLoadingCallback withObject:nil];
+        
+        instrumentLoadingOwner = nil;
+        instrumentLoadingCallback = nil;
+    }
+    
 }
 
 - (void) setCurrentInstrument:(NSInteger)index withSelector:(SEL)cb andOwner:(id)sender

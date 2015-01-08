@@ -31,7 +31,7 @@
 
 // ActivityFeedCell
 "Someone" = "Jemand";
-"Jamed out" = "Jamed out";
+"Jammed out" = "Jammed out";
 "Played %@" = "Gespielt %@";
 
 // Song Selection Controller

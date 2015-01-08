@@ -25,6 +25,13 @@
 //@class AudioController;
 @class UserSong;
 
+@protocol SongPlaybackDelegate <NSObject>
+
+- (void)instrumentLoadingBegan;
+- (void)instrumentLoadingEnded;
+
+@end
+
 //
 // Functionally similar to the MainEventController but based on a NSObject
 // instead of a UIViewController. Both have their own uses.
@@ -45,6 +52,7 @@
     
 }
 
+@property (nonatomic, weak) id <SongPlaybackDelegate> delegate;
 @property (nonatomic, readonly) NSSongModel * m_songModel;
 @property (strong, nonatomic) SoundMaster * g_soundMaster;
 

@@ -8,8 +8,11 @@
 
 #import "AppCore.h"
 #import "OphoMaster.h"
+#import "KeysMath.h"
 
 @class AudioController;
+
+extern KeysMath * g_keysMath;
 
 @interface SoundMaster : NSObject
 {
@@ -21,6 +24,8 @@
     NSMutableArray * effectStatus;
     
     BOOL isLoadingInstrument;
+    id instrumentLoadingOwner;
+    SEL instrumentLoadingCallback;
     
     NSTimer * releaseTimer;
     

@@ -34,6 +34,7 @@
 
 #define KEYS_TOTAL_WHITE_KEY_COUNT 74
 
+#define SEQUENCE_RANGE_OFFSET 40
 #define KEYS_OCTAVE_COUNT 12
 #define KEYS_DISPLAYED_NOTES_COUNT 24
 #define KEYS_WHITE_KEY_DISPLAY_COUNT 14
@@ -86,6 +87,8 @@ extern KeysController * g_keysController;
 @property (nonatomic, assign) BOOL isSheetMusic;
 @property (nonatomic, assign) PlayViewControllerDifficulty difficulty;
 
+@property (nonatomic, assign) KeyPosition forceRangeKeyMin;
+@property (nonatomic, assign) KeyPosition forceRangeKeyMax;
 @property (nonatomic, assign) KeyPosition songRangeKeyMin;
 @property (nonatomic, assign) KeyPosition songRangeKeyMax;
 @property (nonatomic, assign) KeyPosition keyboardPositionKey;
@@ -96,7 +99,15 @@ extern KeysController * g_keysController;
 @property (nonatomic, readonly) float glScreenHeight;
 
 // Song control
+- (void)setForceRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
+
+- (BOOL)isForcedRange;
+- (void)clearForceRange;
+- (KeyPosition)getForcedRangeKeyMin;
+- (KeyPosition)getForcedRangeKeyMax;
+- (KeyPosition)getForcedRangeKeyCount;
+- (KeyPosition)getForcedRangeWhiteKeyCount;
 
 // Song math
 //- (double)convertTimeToCoordSpace:(double)delta;

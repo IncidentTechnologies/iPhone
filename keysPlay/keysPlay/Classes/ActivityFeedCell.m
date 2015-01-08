@@ -82,7 +82,7 @@ extern UserController * g_userController;
         [_name setText:_userSongSession.m_userProfile.m_firstName];
     
     if ( _userSongSession.m_userSong == nil || _userSongSession.m_userSong.m_songId == 0 )
-        [_activity setText:NSLocalizedString(@"Jamed out", NULL)];
+        [_activity setText:NSLocalizedString(@"Jammed out", NULL)];
     else
         [_activity setText:[NSString stringWithFormat:NSLocalizedString(@"Played %@", NULL), _userSongSession.m_userSong.m_title]];
 
