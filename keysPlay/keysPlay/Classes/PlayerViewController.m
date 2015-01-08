@@ -145,7 +145,7 @@
 {
     @synchronized( self )
     {
-        [_songPlaybackController startWithXmpBlob:_xmpBlob];
+        [_songPlaybackController startWithXmpBlob:_xmpBlob ophoXmlDom:_ophoXmlDom];
         [_songPlaybackController stopMainEventLoop];
         
         if([_songPlaybackController getNumTracks] >= MIN_TRACKS_DISPLAY){

@@ -688,8 +688,7 @@
             
             DLog(@"Note at index %i",noteIndex);
             
-            //BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
-            BOOL retrigger = false;
+            BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
             
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[key] != nil){

@@ -150,12 +150,12 @@
         }
         
         // Clips for Opho songs to select a track
-        /*for ( XmlDom * nthTrackDom in trackArray )
+        for ( XmlDom * nthTrackDom in trackArray )
         {
             NSTrack * track = [[NSTrack alloc] initWithXmlDom:nthTrackDom];
             
             [m_tracks addObject:track];
-        }*/
+        }
 
         // done
         
