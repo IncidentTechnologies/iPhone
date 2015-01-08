@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 
 @property (strong, nonatomic) UserSongSession *userSongSession;
+@property (assign, nonatomic) BOOL validSongSession;
 
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 

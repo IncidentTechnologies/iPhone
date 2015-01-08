@@ -1050,10 +1050,16 @@ extern UserController * g_userController;
         return;
     }
     
-    _displayingCell = YES;
-    
     // Cause the row to spin until the session has started
     ActivityFeedCell *cell = (ActivityFeedCell*)[_feedTable cellForRowAtIndexPath:indexPath];
+    
+    if(!cell.validSongSession){
+        DLog(@"Not valid song session");
+        return;
+    }
+    
+    _displayingCell = YES;
+    
     
     [cell.activityView startAnimating];
     

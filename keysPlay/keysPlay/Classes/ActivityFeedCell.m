@@ -30,6 +30,7 @@ extern UserController * g_userController;
 @implementation ActivityFeedCell
 
 @synthesize timeLabel = m_timelabel;
+@synthesize validSongSession;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -38,6 +39,7 @@ extern UserController * g_userController;
         // Initialization code
         _pictureRequestsInFlight = 0;
         _cancelPictureRequest = NO;
+        validSongSession = true;
     }
     
     return self;
@@ -81,10 +83,13 @@ extern UserController * g_userController;
     else
         [_name setText:_userSongSession.m_userProfile.m_firstName];
     
-    if ( _userSongSession.m_userSong == nil || _userSongSession.m_userSong.m_songId == 0 )
+    if ( _userSongSession.m_userSong == nil || _userSongSession.m_userSong.m_songId == 0 ){
+        validSongSession = false;
         [_activity setText:NSLocalizedString(@"Jammed out", NULL)];
-    else
+    }else{
+        validSongSession = true;
         [_activity setText:[NSString stringWithFormat:NSLocalizedString(@"Played %@", NULL), _userSongSession.m_userSong.m_title]];
+    }
 
     m_timelabel.text = [[NSString alloc] initWithString:[TimeFormatter stringFromNow:_userSongSession.m_created]];
 }

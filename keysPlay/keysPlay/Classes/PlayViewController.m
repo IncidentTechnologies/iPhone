@@ -2000,6 +2000,8 @@ extern UserController * g_userController;
     session.m_combo = _scoreTracker.m_streak;
     session.m_notes = @"Recorded in gTar Play";
     
+    DLog(@"User song title is %@",_userSong.m_title);
+    
     _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
     
     DLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
