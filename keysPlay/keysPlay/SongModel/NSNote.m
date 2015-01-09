@@ -11,6 +11,9 @@
 #import "XmlDom.h"
 
 #import "AppCore.h"
+#import "KeysMath.h"
+
+extern KeysMath *g_keysMath;
 
 @implementation NSNote
 
@@ -19,6 +22,7 @@
 @synthesize m_measureStart;
 @synthesize m_absoluteBeatStart;
 @synthesize m_key;
+
 
 - (id)initWithXmlDom:(XmlDom*)xmlDom
 {

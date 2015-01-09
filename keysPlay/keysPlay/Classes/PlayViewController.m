@@ -1722,7 +1722,7 @@ extern UserController * g_userController;
 
 - (void)lightKeyOnUserPlay:(KeyPosition)key
 {
-    [g_keysMath lightKeyDown:key];
+    [g_keysMath lightKeyDown:[g_keysMath getForcedRangeKey:key]];
     
     [self drawKeyboardGridFromMin:[g_keysMath keyboardPositionKey]];
     
@@ -1737,7 +1737,7 @@ extern UserController * g_userController;
 {
     KeyPosition key = [[timer userInfo] intValue];
     
-    [g_keysMath lightKeyUp:key];
+    [g_keysMath lightKeyUp:[g_keysMath getForcedRangeKey:key]];
     
     [self drawKeyboardGridFromMin:[g_keysMath keyboardPositionKey]];
     
@@ -1746,6 +1746,8 @@ extern UserController * g_userController;
 - (void)lightKeyOnPlay:(KeyPosition)key isIncorrect:(BOOL)incorrect isMissed:(BOOL)isMissed
 {
     // Light key on full range keyboard
+    
+    key = [g_keysMath getForcedRangeKey:key];
     
     double keyWidth = keyboardOverview.frame.size.width / [g_keysMath getForcedRangeWhiteKeyCount];
     double drawKeyWidth = keyboardOverview.frame.size.width / KEYS_TOTAL_WHITE_KEY_COUNT;
@@ -2066,7 +2068,7 @@ extern UserController * g_userController;
                 
                 KeysPress press;
                 press.velocity = KeysMaxPressVelocity;
-                press.position = note.m_key;
+                press.position = [g_keysMath getForcedRangeKey:note.m_key];
                 
                 [self keysNoteOn:press forFrame:nil];
                 
@@ -2076,7 +2078,7 @@ extern UserController * g_userController;
                 
                 KeysPress press;
                 press.velocity = KeysMaxPressVelocity;
-                press.position = note.m_key;
+                press.position = [g_keysMath getForcedRangeKey:note.m_key];
                 
                 [self keysNoteOn:press forFrame:nil];
             }
@@ -2221,7 +2223,7 @@ extern UserController * g_userController;
     // Play a pluck noise immediately
     NSNote * hit;
     
-    hit = [frameToPlay testKey:key];
+    hit = [frameToPlay testKey:[g_keysMath getForcedKeyBaseKey:key]];
     
     // Play the note.
     //if ( _difficulty == PlayViewControllerDifficultyHard )
@@ -2230,8 +2232,8 @@ extern UserController * g_userController;
     //}
     if ( hit != nil )
     {
-        [self pressKey:key andVelocity:KeysMaxPressVelocity andDuration:hit.m_duration];
-        [self lightKeyOnUserPlay:key];
+        [self pressKey:[g_keysMath getForcedKeyBaseKey:key] andVelocity:KeysMaxPressVelocity andDuration:hit.m_duration];
+        [self lightKeyOnUserPlay:[g_keysMath getForcedKeyBaseKey:key]];
     }
     
     if(isStandalone && hit != nil){
@@ -2240,7 +2242,7 @@ extern UserController * g_userController;
         // Standalone Song Recorder
         //
         
-        [_songRecorder pressKey:key];
+        [_songRecorder pressKey:[g_keysMath getForcedKeyBaseKey:key]];
         
     }else{
         
@@ -2644,16 +2646,16 @@ extern UserController * g_userController;
     
     NSNote * hit;
     
-    hit = [_currentFrame hitTestAndRemoveKey:key];
+    hit = [_currentFrame hitTestAndRemoveKey:[g_keysMath getForcedKeyBaseKey:key]];
     
     // Handle the hit
     if ( hit != nil )
     {
-        [self correctHitKey:key andVelocity:velocity];
+        [self correctHitKey:[g_keysMath getForcedKeyBaseKey:key] andVelocity:velocity];
     }
-    else if(![g_keysMath noteOutOfRange:key])
+    else if(![g_keysMath noteOutOfRange:[g_keysMath getForcedKeyBaseKey:key]])
     {
-        [self incorrectHitKey:key andVelocity:velocity];
+        [self incorrectHitKey:[g_keysMath getForcedKeyBaseKey:key] andVelocity:velocity];
     }
     
 }
@@ -2875,7 +2877,7 @@ extern UserController * g_userController;
         _delayedChordTimer = [NSTimer scheduledTimerWithTimeInterval:CHORD_DELAY_TIMER target:self selector:@selector(handleDelayedChord) userInfo:nil repeats:NO];
     }
     
-    if ( key >= [g_keysMath getForcedRangeKeyMin] && key <= [g_keysMath getForcedRangeKeyMax] )
+    if ( [g_keysMath getForcedRangeKey:key] >= [g_keysMath getForcedRangeKeyMin] && key <= [g_keysMath getForcedRangeKeyMax] )
     {
         
         // Play the note

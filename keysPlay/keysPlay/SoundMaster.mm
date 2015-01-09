@@ -495,14 +495,6 @@
 
 - (int) noteIndexForKey:(int)key
 {
-    /*if(fret < 0){
-        return -1;
-    }
-    
-    return [[m_tuning objectAtIndex:string] intValue] + fret;*/
-    
-    // TODO: samples should range 0-127
-    
     return key;
 }
 
@@ -677,14 +669,11 @@
 }
 
 #pragma mark - keys
-//- (void) PluckString:(int)string atFret:(int)fret
 - (void) playKey:(int)key withDuration:(double)duration
 {
     if(!isLoadingInstrument){
         
-        //key = 60;
-        
-        // Ensure it's a valid string + fret
+        // Ensure it's a valid key
         if(key >= 0 && key < KEYS_NUM_KEYS){
             
             // Ensure there's a valid instrument enabled
@@ -693,16 +682,12 @@
                 return;
             }
             
-            // Stop anything playing on the string
-            //[self stopString:string setFret:fret];
-            //activeFretOnString[string] = fret;
-            
             // Get note index
             int noteIndex = [self noteIndexForKey:key];
             
             DLog(@"Note at index %i",noteIndex);
             
-            BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, key);
+            BOOL retrigger = m_keysSamplerNode->IsNoteOn(m_activeBankNode, noteIndex);
             
             // First check if there's a timer on the note already (playing again before it's timed out) and stop it
             if(playingNotesTimers[key] != nil){
@@ -713,10 +698,10 @@
             
             if(retrigger){
                 DLog(@"Retrigger");
-                m_keysSamplerNode->RetriggerSample(m_activeBankNode,key);
+                m_keysSamplerNode->RetriggerSample(m_activeBankNode,noteIndex);
             }else{
                 DLog(@"Trigger");
-                m_keysSamplerNode->TriggerSample(m_activeBankNode, key);
+                m_keysSamplerNode->TriggerSample(m_activeBankNode, noteIndex);
             }
                 
             // Set a timer to keep the note short

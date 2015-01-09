@@ -420,9 +420,7 @@
     [ophoCloudController requestGetXmpFolderContentList:folderId andXmpType:OphoXmpTypeAppDefined andExcludeType:0 andUserId:userId andCallbackObj:callbackObj andCallbackSel:selector];
     
 }
- 
- */
-
+*/
 - (void)getSampleListForCallbackObj:(id)callbackObj selector:(SEL)selector isCustom:(BOOL)isCustom
 {
     NSInteger folderId = (isCustom) ? userSampleFolderId : ophoSampleFolderId;

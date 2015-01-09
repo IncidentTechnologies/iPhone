@@ -55,6 +55,9 @@
 #define KEYS_SHEET_MUSIC_MAX 83 // High B
 #define KEYS_SHEET_MUSIC_NUM_WHITE_KEYS 28
 
+#define OPHO_SEQUENCE_MAX_KEY 6
+#define OPHO_DISPLAY_NOTE_OFFSET 60
+
 #define DEFAULT_BLACK_KEY_PROPORTION 0.6
 
 enum PlayViewControllerDifficulty
@@ -102,8 +105,11 @@ extern KeysController * g_keysController;
 - (void)setForceRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 - (void)setSongRangeFromMin:(KeyPosition)keyMin andMax:(KeyPosition)keyMax;
 
+// Forced Range (Opho/Sequence songs)
 - (BOOL)isForcedRange;
 - (void)clearForceRange;
+- (KeyPosition)getForcedRangeKey:(KeyPosition)key;
+- (KeyPosition)getForcedKeyBaseKey:(KeyPosition)key;
 - (KeyPosition)getForcedRangeKeyMin;
 - (KeyPosition)getForcedRangeKeyMax;
 - (KeyPosition)getForcedRangeKeyCount;

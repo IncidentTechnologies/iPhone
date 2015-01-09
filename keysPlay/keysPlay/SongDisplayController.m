@@ -380,10 +380,7 @@
     NSMutableArray * drawnNoteCentersForFrame = [[NSMutableArray alloc] init];
     
     for ( NSNote * note in frame.m_notes )
-        //for(int k = [frame.m_notes count]-1; k >= 0; k--)
     {
-        
-        //NSNote * note = [frame.m_notes objectAtIndex:k];
         
         if(!firstNote){
             firstNote = note;
@@ -455,8 +452,7 @@
         
         model.m_key = note.m_key;
         model.m_standalonekey = (isStandalone) ? [g_keysMath getMappedKeyFromKey:note.m_key] : KEYS_OCTAVE_COUNT;
-        
-        
+                
         NSValue * key = [NSValue valueWithNonretainedObject:note];
         
         [m_noteModelDictionary setObject:model forKey:key];
@@ -690,7 +686,7 @@
             center.x = [g_keysMath convertBeatToCoordSpace:note.m_absoluteBeatStart]+GL_NOTE_HEIGHT/2.0;
             
             // Add a ledger line
-            if(note.m_key == KEYS_SHEET_MIDDLE_C || note.m_key == KEYS_SHEET_MIDDLE_C_SHARP){
+            if([g_keysMath getForcedRangeKey:note.m_key] == KEYS_SHEET_MIDDLE_C || [g_keysMath getForcedRangeKey:note.m_key] == KEYS_SHEET_MIDDLE_C_SHARP){
                 
                 addLedger = true;
                 
@@ -698,14 +694,14 @@
                 
             }
             
-            if(note.m_key >= KEYS_SHEET_MUSIC_LEDGER_MAX){
+            if([g_keysMath getForcedRangeKey:note.m_key] >= KEYS_SHEET_MUSIC_LEDGER_MAX){
                 
                 addLedger = true;
                 
                 center.y = [g_keysMath convertKeyToCoordSpace:KEYS_SHEET_MUSIC_LEDGER_MAX];
             }
             
-            if(note.m_key <= KEYS_SHEET_MUSIC_LEDGER_MIN){
+            if([g_keysMath getForcedRangeKey:note.m_key] <= KEYS_SHEET_MUSIC_LEDGER_MIN){
                 
                 addLedger = true;
                 
@@ -956,7 +952,7 @@
     }else if(duration >= 0.5){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note8th%@",sharp]];
         //size.width = 2 * GL_NOTE_HEIGHT;
-    }else if(duration > 0){
+    }else if(duration >= 0){
         keyImage = [UIImage imageNamed:[NSString stringWithFormat:@"Note16th%@",sharp]];
     }
     

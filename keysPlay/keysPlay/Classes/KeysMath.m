@@ -62,11 +62,29 @@
     return !(forceRangeKeyMin == forceRangeKeyMax);
 }
 
+- (KeyPosition)getForcedRangeKey:(KeyPosition)key
+{
+    if(key < OPHO_SEQUENCE_MAX_KEY && [self isForcedRange] && !isStandalone){
+        return key + OPHO_DISPLAY_NOTE_OFFSET;
+    }else{
+        return key;
+    }
+}
+
+- (KeyPosition)getForcedKeyBaseKey:(KeyPosition)key
+{
+    if((key-OPHO_DISPLAY_NOTE_OFFSET) < OPHO_SEQUENCE_MAX_KEY && [self isForcedRange] && !isStandalone){
+        return key - OPHO_DISPLAY_NOTE_OFFSET;
+    }else{
+        return key;
+    }
+}
+
 - (KeyPosition)getForcedRangeKeyMin
 {
     if([self isForcedRange]){
         DLog(@"FORCED RANGE %i",forceRangeKeyMin);
-        return forceRangeKeyMin;
+        return [self getForcedRangeKey:forceRangeKeyMin];
     }else{
         DLog(@"USUAL RANGE %i",songRangeKeyMin);
         return songRangeKeyMin;
@@ -76,7 +94,7 @@
 - (KeyPosition)getForcedRangeKeyMax
 {
     if([self isForcedRange]){
-        return forceRangeKeyMax;
+        return [self getForcedRangeKey:forceRangeKeyMax];
     }else{
         return songRangeKeyMax;
     }
@@ -300,6 +318,8 @@
 
 - (double)convertKeyToCoordSpace:(NSInteger)key
 {
+    key = [self getForcedRangeKey:key];
+    
     int mappedKey = [self getMappedKeyFromKey:key];
     
     // WHITE KEYS
@@ -643,9 +663,10 @@
     KeyPosition noteMin = [g_keysController range].keyMin;
     KeyPosition noteMax = [g_keysController range].keyMax;
     
-    if(key < noteMin || key > noteMax){
+    if([self getForcedRangeKey:key] < noteMin || [self getForcedRangeKey:key] > noteMax){
         return YES;
     }
+    
     return NO;
 }
 
@@ -694,7 +715,7 @@
             // Last check to override with force
             if([self isForcedRange]){
                 newCameraScale = DEFAULT_CAMERA_SCALE;
-                keyMin = forceRangeKeyMin;
+                keyMin = [self getForcedRangeKeyMin];
             }
         
             [self animateRefreshKeyboardToKey:keyMin updateCameraScale:newCameraScale];
