@@ -2004,7 +2004,9 @@ extern UserController * g_userController;
     
     DLog(@"User song title is %@",_userSong.m_title);
     
-    _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
+    if([g_soundMaster getCurrentInstrument] < [[g_soundMaster getInstrumentList] count]){
+        _songRecorder.m_song.m_instrument = [[g_soundMaster getInstrumentList] objectAtIndex:[g_soundMaster getCurrentInstrument]];
+    }
     
     DLog(@"Get current instrument is %@",_songRecorder.m_song.m_instrument);
     //_songRecorder.m_song.m_instrument = [[g_audioController getInstrumentNames] objectAtIndex:[g_audioController getCurrentSamplePackIndex]];
@@ -2054,7 +2056,7 @@ extern UserController * g_userController;
 
 - (void)mainEventLoop {
     
-#ifdef Debug_BUILD
+//#ifdef Debug_BUILD
     if(g_keysController.connected) {
         
         // DEBUG tapping screen hits the current notes (see: touchesbegan)
@@ -2087,7 +2089,7 @@ extern UserController * g_userController;
             
         }
     }
-#endif
+//#endif
     
     if(g_keysController.connected && !isStandalone) {
         
@@ -3475,11 +3477,11 @@ extern UserController * g_userController;
     if(!isStandalone){
         
         // Debug
-#ifdef Debug_BUILD
+//#ifdef Debug_BUILD
         if(g_keysController.connected){
             _skipNotes = YES;
         }
-#endif
+//#endif
     
     }
     

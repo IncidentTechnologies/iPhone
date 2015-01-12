@@ -5638,8 +5638,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
+				PROVISIONING_PROFILE = "62e17c58-b50c-4d61-a833-63a8e21ba1b2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62e17c58-b50c-4d61-a833-63a8e21ba1b2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5670,8 +5670,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = keysPlay;
-				PROVISIONING_PROFILE = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5ce8916-ec77-4e5d-9a44-6ca363bd83b6";
+				PROVISIONING_PROFILE = "62e17c58-b50c-4d61-a833-63a8e21ba1b2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "62e17c58-b50c-4d61-a833-63a8e21ba1b2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

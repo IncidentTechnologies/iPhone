@@ -98,7 +98,7 @@ KeysMath * g_keysMath;
         secondRange.keyMin = 50;
         secondRange.keyMax = 55;
         
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:3.0 target:g_keysController selector:@selector(debugSpoofConnected) userInfo:nil repeats:NO];
         
         //[NSTimer scheduledTimerWithTimeInterval:4.0 target:g_keysController selector:@selector(debugSpoofRangeChange:) userInfo:[NSValue value:&newRange withObjCType:@encode(KeysRange)] repeats:NO];
         
