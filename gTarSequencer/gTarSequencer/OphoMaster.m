@@ -52,7 +52,7 @@ extern NSUser * g_loggedInUser;
     self = [super init];
     if ( self )
     {
-        ophoCloudController = [[OphoCloudController alloc] initWithServer:kServerAddress];
+        ophoCloudController = [[OphoCloudController alloc] initWithServer:ophoServerAddress];
         //pendingLoadTutorial = NO;
         
         ophoInstruments = [[NSMutableDictionary alloc] init];
@@ -96,7 +96,7 @@ extern NSUser * g_loggedInUser;
         [self loadRootFolderId];
         
         if(!tutorialSkipped){
-            [loadingDelegate loadingBegan];
+            [loadingDelegate loadingBegan:YES];
         }
         
     }else{
@@ -108,11 +108,14 @@ extern NSUser * g_loggedInUser;
 
 - (void)loggedInAndLoaded
 {
+    samplesToLoad = 0;
+    samplesLoaded = 0;
+    
     if(!loggedInAndLoaded && !tutorialSkipped){
         loggedInAndLoaded = true;
-        [loadingDelegate loadingBegan];
+        [loadingDelegate loadingBegan:NO];
     }else{
-        [loadingDelegate loadingEnded];
+        [loadingDelegate loadingEnded:NO endLoginLoading:YES];
     }
     
     [loginDelegate loggedInCallback];
@@ -935,7 +938,7 @@ extern NSUser * g_loggedInUser;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [loadingDelegate loadingBegan];
+        [loadingDelegate loadingBegan:NO];
     });
     
     DLog(@"Load samples from instrument %li, %@",instrumentId,samples);
@@ -945,6 +948,12 @@ extern NSUser * g_loggedInUser;
     [ophoInstruments setObject:instrumentStrings forKey:[NSNumber numberWithLong:instrumentId]];
     
     [ophoLoadingInstrumentQueue setObject:[NSArray arrayWithObjects:samples,object,NSStringFromSelector(selector), nil] forKey:[NSNumber numberWithLong:instrumentId]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        samplesToLoad += STRINGS_ON_GTAR;
+        
+        [loadingDelegate setLoadingPercentage:samplesLoaded/samplesToLoad];
+    });
     
     // Then load al the samples asynchronously
     for(NSSample * sample in samples){
@@ -1022,7 +1031,9 @@ extern NSUser * g_loggedInUser;
         DLog(@"Return early");
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [loadingDelegate loadingEnded];
+            samplesToLoad = 0;
+            samplesLoaded = 0;
+            [loadingDelegate loadingEnded:YES endLoginLoading:NO];
         });
         
         return;
@@ -1041,13 +1052,25 @@ extern NSUser * g_loggedInUser;
             
             // Ensure if it's already complete it's skipped
             BOOL isComplete = true;
+            double completeCount = 0;
             for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
                 if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
+                    
                     isComplete = false;
+                }else{
+                    completeCount++;
                 }
             }
             
+            // Display % loaded
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [loadingDelegate setLoadingPercentage:(samplesLoaded+completeCount)/samplesToLoad];
+            });
+            
+            
             if(isComplete){
+                // Count all loaded
+                samplesLoaded += STRINGS_ON_GTAR;
                 [ophoLoadingInstrumentQueue removeObjectForKey:instId];
                 continue;
             }
@@ -1082,7 +1105,9 @@ extern NSUser * g_loggedInUser;
         if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [loadingDelegate loadingEnded];
+                samplesToLoad = 0;
+                samplesLoaded = 0;
+                [loadingDelegate loadingEnded:YES endLoginLoading:NO];
             });
             
         }

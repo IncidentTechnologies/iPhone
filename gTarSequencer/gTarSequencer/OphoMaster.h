@@ -46,8 +46,9 @@
 
 @protocol OphoLoadingDelegate <NSObject>
 
-- (void)loadingBegan;
-- (void)loadingEnded;
+- (void)loadingBegan:(BOOL)loginLoading;
+- (void)loadingEnded:(BOOL)delay endLoginLoading:(BOOL)endLoginLoading;
+- (void)setLoadingPercentage:(double)percent;
 - (void)instrumentListLoaded;
 - (void)resetState;
 - (void)createNewSet;
@@ -97,6 +98,8 @@
 
     BOOL tutorialSkipped;
     BOOL loggedInAndLoaded;
+    double samplesToLoad;
+    double samplesLoaded;
     
 }
 

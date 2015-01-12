@@ -16,7 +16,8 @@
 
 - (void) resetPlayLocation;
 
-- (void) loadingBegan;
+- (void)loadingBegan:(BOOL)loginLoading;
+- (void)loadingEnded:(BOOL)delay endLoginLoading:(BOOL)endLoginLoading;
 
 - (void) stopAll;
 - (void) startAll;

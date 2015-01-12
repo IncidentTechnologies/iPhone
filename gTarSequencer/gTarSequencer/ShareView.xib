@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordShareViewController">
@@ -47,7 +47,7 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MR5-8a-bz6">
                     <rect key="frame" x="0.0" y="182" width="364" height="94"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-Vj-O73">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-Vj-O73">
                             <rect key="frame" x="17" y="12" width="70" height="70"/>
                             <color key="backgroundColor" red="0.58039215690000001" green="0.40000000000000002" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -62,7 +62,7 @@
                                 <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="zz5-F8-G00"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-mL-NMT">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-mL-NMT">
                             <rect key="frame" x="105" y="12" width="70" height="70"/>
                             <color key="backgroundColor" red="0.41176470590000003" green="0.83921568629999999" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -78,7 +78,7 @@
                                 <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="YLs-nh-2QC"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-VE-57I">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-VE-57I">
                             <rect key="frame" x="278" y="13" width="70" height="70"/>
                             <color key="backgroundColor" red="0.93725490196078431" green="0.36078431372549019" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -94,7 +94,7 @@
                                 <action selector="userDidSelectShare:" destination="-1" eventType="touchUpInside" id="1hX-uB-Aex"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV0-8Z-0zJ">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV0-8Z-0zJ">
                             <rect key="frame" x="191" y="12" width="70" height="70"/>
                             <color key="backgroundColor" red="0.8862745098" green="0.1450980392" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

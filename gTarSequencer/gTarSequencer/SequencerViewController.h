@@ -36,6 +36,7 @@ extern NSUser * g_loggedInUser;
     BOOL isTutorialOpen;
     BOOL isTapToPlayScreen;
     BOOL isLoading;
+    BOOL isLoginLoading;
     
     // gTar connection
     BOOL isConnected;
@@ -98,6 +99,7 @@ extern NSUser * g_loggedInUser;
 @property (retain, nonatomic) NSSong * loadedSong;
 
 @property (strong, nonatomic) IBOutlet UIView * loadingOverlay;
+@property (strong, nonatomic) IBOutlet UILabel * loadingOverlayText;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView * loadingIndicator;
 
 // FTU Tutorial

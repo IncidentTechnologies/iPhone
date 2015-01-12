@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SequencerViewController">
             <connections>
                 <outlet property="loadingIndicator" destination="9eD-UL-RqZ" id="bNw-J5-Oje"/>
                 <outlet property="loadingOverlay" destination="USq-Xs-tAi" id="dRU-ab-jAz"/>
+                <outlet property="loadingOverlayText" destination="Grk-Qq-Dsb" id="Xdu-lb-GVh"/>
                 <outlet property="view" destination="gDd-LH-5NP" id="J3N-12-f9q"/>
             </connections>
         </placeholder>

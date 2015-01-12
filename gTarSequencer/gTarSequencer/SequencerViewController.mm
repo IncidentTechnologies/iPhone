@@ -38,6 +38,7 @@
 @synthesize leftNavigator;
 @synthesize setName;
 @synthesize loadingOverlay;
+@synthesize loadingOverlayText;
 @synthesize loadingIndicator;
 
 @synthesize loadedSong;
@@ -243,28 +244,54 @@
 
 #pragma mark - Opho Loading
 
-- (void)loadingBegan
+- (void)loadingBegan:(BOOL)loginLoading
 {
     DLog(@"Loading began");
     
-    isLoading = true;
+    if(loginLoading){
+        isLoginLoading = true;
+    }else{
+        isLoading = true;
+    }
     
     if(!isTutorialOpen){
         [loadingOverlay setHidden:NO];
         [self.view bringSubviewToFront:loadingOverlay];
         
         [loadingIndicator startAnimating];
+        [self setLoadingPercentage:0.0];
     }
-
 }
 
-- (void)loadingEnded
+- (void)setLoadingPercentage:(double)percent
+{
+    NSLog(@"set loading %f",percent*100);
+    
+    [loadingOverlayText setText:[NSString stringWithFormat:@"LOADING %i%%",(int)(percent*100)]];
+}
+
+- (void)loadingEnded:(BOOL)delay endLoginLoading:(BOOL)endLoginLoading
 {
     DLog(@"Loading ended?");
     
-    // Add a delay to ensure this doesn't flicker
-    
-    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(delayedLoadingEnded) userInfo:nil repeats:NO];
+    if((isLoading && !endLoginLoading) || (!isLoading && isLoginLoading && endLoginLoading)){
+        
+        isLoading = false;
+        
+        if(endLoginLoading){
+            isLoginLoading = false;
+        }
+        
+        [self setLoadingPercentage:1.0];
+        
+        if(delay){
+            // Add a delay to ensure this doesn't flicker
+            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(delayedLoadingEnded) userInfo:nil repeats:NO];
+        }else{
+            [self delayedLoadingEnded];
+        }
+        
+    }
 
     
 }
@@ -272,8 +299,6 @@
 - (void)delayedLoadingEnded
 {
     DLog(@"Loading ended");
-    
-    isLoading = false;
     
     [loadingOverlay setHidden:YES];
     
@@ -570,7 +595,7 @@
         
         // Ensure loading clears if there are no tracks
         if([sequence.m_tracks count] == 0){
-            [self loadingEnded];
+            [self loadingEnded:YES endLoginLoading:NO];
         }
         
     }
@@ -802,7 +827,7 @@
         [playControlViewController resetTempo];
         [playControlViewController resetVolume];
     }else if([loadedSequence.m_tracks count] == 0){
-        [self loadingEnded];
+        [self loadingEnded:YES endLoginLoading:YES];
     }
 }
 

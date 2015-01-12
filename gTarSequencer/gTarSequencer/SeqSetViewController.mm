@@ -435,9 +435,15 @@
             // Load instrument by ID
             DLog(@"Load instrument from ID: %i",inst.m_id);
             
+            [delegate loadingBegan:NO];
+            
             [g_ophoMaster loadFromId:inst.m_id callbackObj:self selector:@selector(instrumentSampleListLoaded:)];
         }
         
+    }
+    
+    if([sequence.m_tracks count] == 0){
+        [delegate loadingEnded:NO endLoginLoading:NO];
     }
     
     [instrumentTable reloadData];
