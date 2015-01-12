@@ -1397,26 +1397,27 @@ extern NSUser * g_loggedInUser;
 
 - (void)loadSampleList
 {
+
     if(sampleIdSet == nil){
+        
         sampleIdSet = [[NSMutableArray alloc] init];
         sampleLoadSet = [[NSMutableArray alloc] init];
         sampleDateSet = [[NSMutableArray alloc] init];
         sampleVersionSet = [[NSMutableArray alloc] init];
         sampleIsCustomSet = [[NSMutableArray alloc] init];
-    }else{
-        
-        [sampleIdSet removeAllObjects];
-        [sampleLoadSet removeAllObjects];
-        [sampleDateSet removeAllObjects];
-        [sampleVersionSet removeAllObjects];
-        [sampleIsCustomSet removeAllObjects];
-        
+    
     }
     
+    [sampleIdSet removeAllObjects];
+    [sampleLoadSet removeAllObjects];
+    [sampleDateSet removeAllObjects];
+    [sampleVersionSet removeAllObjects];
+    [sampleIsCustomSet removeAllObjects];
+
     // Merge samples for user and system
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:) isCustom:YES];
-    
     [self getSampleListForCallbackObj:self selector:@selector(requestGetXmpSampleListCallback:) isCustom:NO];
+
 }
 
 - (void)loadInstrumentList
@@ -1505,8 +1506,10 @@ extern NSUser * g_loggedInUser;
     
     BOOL firstCallback = ([sampleIdSet count] == 0);
     
-    [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
-    
+    //if(firstCallback){
+        [self buildSortedXmpList:xmpList withIds:sampleIdSet withData:sampleLoadSet withDates:sampleDateSet withVersion:sampleVersionSet withCustom:sampleIsCustomSet];
+    //}
+        
     if(!firstCallback){
         [self refreshCacheFromSampleList];
         [profileDelegate profileLoaded];
@@ -1539,6 +1542,11 @@ extern NSUser * g_loggedInUser;
         NSNumber * custom = [NSNumber numberWithBool:([[xmp getTextFromChildWithName:@"user_id"] intValue] == g_loggedInUser.m_userId)];
         
         //DLog(@"Date is %@",date);
+        
+        // Ensure no duplicates
+        if([fileIdSet containsObject:[NSNumber numberWithLong:xmpid]]){
+            continue;
+        }
         
         if(xmpid > 0){
             [fileIdSet addObject:[NSNumber numberWithLong:xmpid]];
@@ -1662,7 +1670,7 @@ extern NSUser * g_loggedInUser;
 
 - (void)copyTutorialFile
 {
-    DLog(@"Copy tutorial file");
+    DLog(@"Copy tutorial file | sequenceLoadSet is %@",sequenceLoadSet);
     
     NSSequence * tutorialSequence = [[NSSequence alloc] initWithXMLFilename:DEFAULT_SET_PATH fromBundle:YES];
     
