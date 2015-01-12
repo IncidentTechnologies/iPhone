@@ -159,6 +159,7 @@
 - (void)loadFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
 - (void)loadSampleFromId:(NSInteger)xmpId callbackObj:(id)callbackObj selector:(SEL)selector;
 
+- (void)prepareToLoadSamples:(int)numSamples;
 - (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector;
 
 - (void)deleteWithId:(NSInteger)xmpId;

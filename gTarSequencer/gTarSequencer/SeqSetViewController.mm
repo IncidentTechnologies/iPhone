@@ -425,6 +425,10 @@
     
     [self setRemainingInstrumentOptionsFromMasterOptions];
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [g_ophoMaster prepareToLoadSamples:[sequence.m_tracks count]*STRINGS_ON_GTAR];
+    });
+    
     for(NSTrack * track in sequence.m_tracks){
         NSInstrument * inst = track.m_instrument;
         
@@ -680,8 +684,11 @@
 
 - (void)addNewInstrumentWithXmpId:(NSInteger)xmpId
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [g_ophoMaster prepareToLoadSamples:STRINGS_ON_GTAR];
+    });
+        
     [g_ophoMaster loadFromId:xmpId callbackObj:self selector:@selector(addNewInstrumentFromServer:)];
-    
 }
 
 - (void)addNewInstrumentFromServer:(CloudResponse *)cloudResponse

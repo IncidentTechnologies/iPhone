@@ -108,9 +108,6 @@ extern NSUser * g_loggedInUser;
 
 - (void)loggedInAndLoaded
 {
-    samplesToLoad = 0;
-    samplesLoaded = 0;
-    
     if(!loggedInAndLoaded && !tutorialSkipped){
         loggedInAndLoaded = true;
         [loadingDelegate loadingBegan:NO];
@@ -926,6 +923,14 @@ extern NSUser * g_loggedInUser;
     }
 }
 
+- (void)prepareToLoadSamples:(int)numSamples
+{
+    samplesToLoad = numSamples;
+    samplesLoaded = 0;
+    
+    DLog(@"Prepare to load %f samples, %f samples loaded",samplesToLoad,samplesLoaded);
+}
+
 - (void)loadSamplesForInstrument:(NSInteger)instrumentId andName:(NSString *)instrumentName andSamples:(NSArray *)samples callbackObj:(id)object selector:(SEL)selector
 {
     // Check for an entry
@@ -948,12 +953,6 @@ extern NSUser * g_loggedInUser;
     [ophoInstruments setObject:instrumentStrings forKey:[NSNumber numberWithLong:instrumentId]];
     
     [ophoLoadingInstrumentQueue setObject:[NSArray arrayWithObjects:samples,object,NSStringFromSelector(selector), nil] forKey:[NSNumber numberWithLong:instrumentId]];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        samplesToLoad += STRINGS_ON_GTAR;
-        
-        [loadingDelegate setLoadingPercentage:samplesLoaded/samplesToLoad];
-    });
     
     // Then load al the samples asynchronously
     for(NSSample * sample in samples){
@@ -1025,15 +1024,13 @@ extern NSUser * g_loggedInUser;
     
     NSLog(@"Opho loading instruments queue count is %li, d:%@",[[ophoLoadingInstrumentQueue allKeys] count],ophoLoadingInstrumentQueue);
     
-    if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+    if([[ophoLoadingInstrumentQueue allKeys] count] == 0 && samplesLoaded >= samplesToLoad){
         // work already done
     
         DLog(@"Return early");
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            samplesToLoad = 0;
-            samplesLoaded = 0;
-            [loadingDelegate loadingEnded:YES endLoginLoading:NO];
+            [loadingDelegate loadingEnded:NO endLoginLoading:NO];
         });
         
         return;
@@ -1052,25 +1049,15 @@ extern NSUser * g_loggedInUser;
             
             // Ensure if it's already complete it's skipped
             BOOL isComplete = true;
-            double completeCount = 0;
             for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
                 if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
                     
                     isComplete = false;
-                }else{
-                    completeCount++;
                 }
             }
             
-            // Display % loaded
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [loadingDelegate setLoadingPercentage:(samplesLoaded+completeCount)/samplesToLoad];
-            });
-            
-            
             if(isComplete){
                 // Count all loaded
-                samplesLoaded += STRINGS_ON_GTAR;
                 [ophoLoadingInstrumentQueue removeObjectForKey:instId];
                 continue;
             }
@@ -1082,17 +1069,19 @@ extern NSUser * g_loggedInUser;
             for(NSSample * sample in samples){
                 
                 if((long)xmpId == sample.m_xmpFileId){
-                    
-                    // Stash the sound data
+                    samplesLoaded++;
                     [[ophoInstruments objectForKey:instId] setObject:datastring atIndexedSubscript:[sample.m_value intValue]];
                 }
             }
             
             // If done, empty queue and call delegate
             isComplete = true;
+            double completeCount = 0;
             for(int i = 0 ; i < STRINGS_ON_GTAR; i++){
                 if([[[ophoInstruments objectForKey:instId] objectAtIndex:i] isEqualToString:@""]){
                     isComplete = false;
+                }else{
+                    completeCount++;
                 }
             }
             
@@ -1102,12 +1091,15 @@ extern NSUser * g_loggedInUser;
             }
         }
         
-        if([[ophoLoadingInstrumentQueue allKeys] count] == 0){
+        // Display % loaded
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadingDelegate setLoadingPercentage:samplesLoaded/samplesToLoad];
+        });
+        
+        if([[ophoLoadingInstrumentQueue allKeys] count] == 0 && samplesLoaded >= samplesToLoad){
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                samplesToLoad = 0;
-                samplesLoaded = 0;
-                [loadingDelegate loadingEnded:YES endLoginLoading:NO];
+                [loadingDelegate loadingEnded:NO endLoginLoading:NO];
             });
             
         }
