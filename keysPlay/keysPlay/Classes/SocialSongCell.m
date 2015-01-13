@@ -10,6 +10,7 @@
 
 #import "UserSongSession.h"
 #import "UserSong.h"
+#import "UserProfile.h"
 #import "TimeFormatter.h"
 
 @implementation SocialSongCell
@@ -36,8 +37,18 @@
 {
     NSString * time = [TimeFormatter stringFromNow:_userSongSession.m_created];
     
-    [_titleLabel setText:_userSongSession.m_userSong.m_title];
-    [_artistLabel setText:_userSongSession.m_userSong.m_author];
+    if([_userSongSession.m_userSong.m_title length] == 0 || _userSongSession.m_userSong.m_title == nil){
+        [_titleLabel setText:@"Jam session"];
+    }else{
+        [_titleLabel setText:_userSongSession.m_userSong.m_title];
+    }
+    
+    if([_userSongSession.m_userSong.m_author length] == 0 || _userSongSession.m_userSong.m_author == nil){
+        [_artistLabel setText:_userSongSession.m_userProfile.m_firstName];
+    }else{
+        [_artistLabel setText:_userSongSession.m_userSong.m_author];
+    }
+    
     [_timeLabel setText:time];
 }
 
