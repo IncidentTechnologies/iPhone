@@ -5,33 +5,41 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>329D9F06-2B33-45E7-BAFD-FE458110F609</string>
+	<string>8E284ACB-6DD2-48A6-A42C-F9B654158B19</string>
 	<key>IDESourceControlProjectName</key>
 	<string>gTarCreate</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</key>
-		<string>https://github.com/IncidentTechnologies/iPhone</string>
+		<key>0852A641-76C8-475B-9E92-607F677D81A1</key>
+		<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 		<key>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</key>
 		<string>https://github.com/IncidentTechnologies/IncidentPlatform.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>gTarCreate/gTarCreate.xcodeproj/project.xcworkspace</string>
+	<string>gTarCreate/gTarCreate.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</key>
-		<string>../../..</string>
+		<key>0852A641-76C8-475B-9E92-607F677D81A1</key>
+		<string>../..</string>
 		<key>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</key>
 		<string>../../../IncidentPlatform</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/IncidentTechnologies/iPhone</string>
+	<string>https://github.com/IncidentTechnologies/iPhone.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</string>
+	<string>0852A641-76C8-475B-9E92-607F677D81A1</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0852A641-76C8-475B-9E92-607F677D81A1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Create</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -39,14 +47,6 @@
 			<string>F9307A36-2621-4FE0-81EA-BCEFEF0D230E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IncidentPlatform</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>50996AE3-5E45-4DC7-A6FC-5C2242764FBC</string>
-			<key>IDESourceControlWCCName</key>
-			<string>iPhone</string>
 		</dict>
 	</array>
 </dict>
