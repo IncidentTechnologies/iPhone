@@ -2,19 +2,18 @@
 //  GuitarView.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/26/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/23/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <GtarController/GtarController.h>
-#import "Measure.h"
+#import "AppData.h"
+#import "GtarController.h"
+#import "NSMeasure.h"
 
 @protocol GuitarViewDelegate <NSObject>
 
 - (void)notePlayedAtString:(int)str andFret:(int)fr;
-- (void)guitarConnected;
-- (void)guitarDisconnected;
+- (void)gtarConnected:(BOOL)toConnect;
 
 @end
 
@@ -31,11 +30,12 @@
 }
 
 @property (retain, nonatomic) GtarController * guitar;
-@property (weak, nonatomic) Measure * measure;
+@property (weak, nonatomic) NSMeasure * measure;
 @property (weak, nonatomic) id <GuitarViewDelegate> delegate;
 
+- (void)turnOffEffects;
 - (void)update;
 - (void)clearData;
 - (void)observeGtar;
-
+- (BOOL)isGtarConnected;
 @end

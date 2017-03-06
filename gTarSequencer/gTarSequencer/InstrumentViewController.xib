@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstrumentViewController">
+            <connections>
+                <outlet property="customIndicator" destination="IoH-0q-Ut2" id="EUv-JC-Kh7"/>
+                <outlet property="iconOverlap" destination="c7k-XE-9PN" id="qNp-Ng-ras"/>
+                <outlet property="instrumentIcon" destination="RJo-SI-EdU" id="SyM-Xz-iiP"/>
+                <outlet property="instrumentIconButton" destination="h7j-Qe-Xdr" id="JZy-d3-pR0"/>
+                <outlet property="offButton" destination="mwx-tL-nxF" id="R64-nK-Odk"/>
+                <outlet property="offMask" destination="dop-q1-gTm" id="1ft-d3-oSE"/>
+                <outlet property="pageFour" destination="ZzM-Oh-COn" id="2oY-TH-b0B"/>
+                <outlet property="pageOne" destination="812-SO-khO" id="ITG-kd-EeT"/>
+                <outlet property="pageThree" destination="vfJ-5T-RMp" id="f76-uF-0rL"/>
+                <outlet property="pageTwo" destination="E67-Tq-g7o" id="6uj-1Y-66f"/>
+                <outlet property="patternA" destination="vB6-bg-6ZM" id="e9z-if-hN3"/>
+                <outlet property="patternB" destination="7Dz-MM-5kA" id="3U3-l4-xL7"/>
+                <outlet property="patternC" destination="YYR-Nc-Clf" id="6cA-Kh-paH"/>
+                <outlet property="patternD" destination="ohI-Bd-uCN" id="Nch-vh-L7s"/>
+                <outlet property="scrollView" destination="dAi-rv-0RH" id="Wfj-e2-T1G"/>
+                <outlet property="view" destination="1" id="HJo-Oc-MpD"/>
+                <outlet property="volumeKnobView" destination="H0S-4F-ccT" id="x22-Ib-57K"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="264"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oxs-rc-itv">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="50"/>
+                    <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-rv-0RH">
+                    <rect key="frame" x="0.0" y="82" width="480" height="182"/>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohI-Bd-uCN">
+                    <rect key="frame" x="321" y="-2" width="83" height="52"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="D">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="l1y-kM-VCZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYR-Nc-Clf">
+                    <rect key="frame" x="239" y="-2" width="83" height="52"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="C">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="MFY-1P-hGT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-MM-5kA">
+                    <rect key="frame" x="157" y="-2" width="83" height="52"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="B">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="Q35-8b-BlD"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-bg-6ZM">
+                    <rect key="frame" x="75" y="-2" width="83" height="52"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="A">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="4h7-Zk-8F7"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="812-SO-khO" customClass="UIButton">
+                    <rect key="frame" x="0.0" y="51" width="119" height="31"/>
+                    <color key="backgroundColor" red="0.42352941176470588" green="0.75294117647058822" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="RfQ-QJ-QyI"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E67-Tq-g7o" customClass="UIButton">
+                    <rect key="frame" x="120" y="51" width="119" height="31"/>
+                    <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="Zl5-b8-RWJ"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-5T-RMp" customClass="UIButton">
+                    <rect key="frame" x="241" y="51" width="119" height="31"/>
+                    <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="Ieh-Hn-ERV"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzM-Oh-COn" customClass="UIButton">
+                    <rect key="frame" x="361" y="51" width="119" height="31"/>
+                    <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="userDidSelectNewMeasure:" destination="-1" eventType="touchUpInside" id="ard-OR-TYW"/>
+                    </connections>
+                </view>
+                <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dop-q1-gTm">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="82"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7k-XE-9PN">
+                    <rect key="frame" x="16" y="3" width="38" height="38"/>
+                    <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Qe-Xdr" customClass="UIButton">
+                    <rect key="frame" x="18" y="6" width="38" height="38"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJo-SI-EdU">
+                            <rect key="frame" x="5" y="5" width="28" height="28"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.11764705882352941" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="viewSeqSet:" destination="-1" eventType="touchUpInside" id="8gL-Ov-x1q"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoH-0q-Ut2">
+                    <rect key="frame" x="20" y="38" width="4" height="4"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.91764705879999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwx-tL-nxF">
+                    <rect key="frame" x="416" y="0.0" width="52" height="52"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
+                    <state key="normal">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="userDidSelectNewPattern:" destination="-1" eventType="touchUpInside" id="U6w-Vx-d1e"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0S-4F-ccT" customClass="VolumeKnobView">
+                    <rect key="frame" x="416" y="0.0" width="52" height="52"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.11372549019607843" green="0.34509803921568627" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

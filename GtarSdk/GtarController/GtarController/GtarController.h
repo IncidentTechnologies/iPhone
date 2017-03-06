@@ -10,7 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <GtarController/Gtar.h>
+//#import <GtarController/Gtar.h>
+#import "Gtar.h"
 
 /*!
  @abstract The result status code used by the GtarController.
@@ -315,5 +316,6 @@ typedef enum GtarControllerEffect GtarControllerEffect;
  @discussion Turn on special effects on the Gtar device with a given color.
  */
 - (GtarControllerStatus)turnOnEffect:(GtarControllerEffect)effect withColor:(GtarLedColor)color;
+
 
 @end

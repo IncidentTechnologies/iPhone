@@ -948,8 +948,8 @@
 - (GtarControllerStatus)turnOffAllLeds
 {
     
-    [self logMessage:@"Turning off all LEDs"
-          atLogLevel:GtarControllerLogLevelInfo];
+    //[self logMessage:@"Turning off all LEDs"
+    //      atLogLevel:GtarControllerLogLevelInfo];
     
     GtarControllerStatus status = GtarControllerStatusOk;
     
@@ -965,8 +965,8 @@
     else if ( m_connected == NO )
     {
         
-        [self logMessage:@"turnOffAllLeds: Not connected"
-              atLogLevel:GtarControllerLogLevelWarn];
+        //[self logMessage:@"turnOffAllLeds: Not connected"
+        //      atLogLevel:GtarControllerLogLevelWarn];
         
         status = GtarControllerStatusNotConnected;
         
@@ -1019,8 +1019,8 @@
     else if ( m_connected == NO )
     {
         
-        [self logMessage:@"turnOffLedAtString: Not connected"
-              atLogLevel:GtarControllerLogLevelWarn];
+        //[self logMessage:@"turnOffLedAtString: Not connected"
+        //      atLogLevel:GtarControllerLogLevelWarn];
         
         status = GtarControllerStatusNotConnected;
         
@@ -1077,8 +1077,8 @@
     else if ( m_connected == NO )
     {
         
-        [self logMessage:@"turnOnLedAtStr: Not connected"
-              atLogLevel:GtarControllerLogLevelWarn];
+        //[self logMessage:@"turnOnLedAtStr: Not connected"
+        //      atLogLevel:GtarControllerLogLevelWarn];
         
         status = GtarControllerStatusNotConnected;
         

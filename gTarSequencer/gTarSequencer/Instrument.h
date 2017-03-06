@@ -1,37 +1,32 @@
 //
-//  Sequencer.h
+//  Instrument.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/4/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <GtarController/GtarController.h>
+#import "AppData.h"
+#import "GtarController.h"
 #import "Pattern.h"
-#import "SoundMaker.h" 
+#import "SoundMaker.h"
 
 #define MAX_BEAT_SEQUENCES 4
 #define FIRST_FRET 0
 #define LAST_FRET 15
 
-extern SoundMaker * audio;
-extern GtarController * guitar;
-
 @interface Instrument : NSObject <NSCoding>
 {
     BOOL isSelected;
     
-    int selectedPatternIndex;
-    
-    NSMutableArray * patterns;
 }
 
-- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound;
+- (void)playFret:(int)fret inRealMeasure:(int)measure withSound:(BOOL)sound withAmplitude:(double)amplitude;
 
 - (Pattern *)selectPattern:(int)newSelection;
 - (Measure *)selectMeasure:(int)newSelection;
 
+- (void)initAudioWithInstrumentName:(NSString *)instName andSoundMaster:(SoundMaster *)soundMaster;
 - (void)notePlayedAtString:(int)str andFret:(int)fret;
 
 - (void)addMeasure;
@@ -43,15 +38,31 @@ extern GtarController * guitar;
 - (void)setSelected:(BOOL)yesno;
 - (BOOL)isSelected;
 
+- (void)setCustom:(BOOL)yesno;
+- (BOOL)checkIsCustom;
+
 - (int)selectedPatternIndex;
 
 - (void)turnOnAllFlags;
 
+- (void)releaseSounds;
+
+- (double)getAmplitude;
+
+@property (retain, nonatomic) SoundMaker * audio;
 @property (nonatomic) int instrument;
 @property (retain, nonatomic) NSString * instrumentName;
 @property (retain, nonatomic) NSString * iconName;
+@property (retain, nonatomic) NSArray * stringSet;
+@property (retain, nonatomic) NSArray * stringPaths;
+@property (retain, nonatomic) NSMutableArray * patterns;
+
+@property (nonatomic) int selectedPatternIndex;
 @property (retain, nonatomic) Pattern * selectedPattern;
 @property (nonatomic) BOOL selectedPatternDidChange;
 @property (nonatomic) BOOL isMuted;
+@property (nonatomic) NSNumber * isCustom;
+
+@property (nonatomic) double amplitude;
 
 @end

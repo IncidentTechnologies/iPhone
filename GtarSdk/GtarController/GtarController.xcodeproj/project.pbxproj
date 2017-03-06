@@ -7,23 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC2609D81595475800DA6FCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609D71595475800DA6FCA /* Foundation.framework */; };
-		EC260A0D1597EDCF00DA6FCA /* GtarController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A061597EDCE00DA6FCA /* GtarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC260A0E1597EDCF00DA6FCA /* GtarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC260A071597EDCF00DA6FCA /* GtarController.m */; };
-		EC260A0F1597EDCF00DA6FCA /* GtarControllerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		EC275FFE16139D870037A387 /* CoreMidiInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = EC275FFC16139D870037A387 /* CoreMidiInterface.h */; settings = {ATTRIBUTES = (); }; };
-		EC275FFF16139D870037A387 /* CoreMidiInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = EC275FFD16139D870037A387 /* CoreMidiInterface.m */; };
-		EC27600916166A8E0037A387 /* Gtar.h in Headers */ = {isa = PBXBuildFile; fileRef = EC27600816166A8E0037A387 /* Gtar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58A5951C1886167500696614 /* Gtar.h in Headers */ = {isa = PBXBuildFile; fileRef = 58A5951B1886167500696614 /* Gtar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58A5951D1886186400696614 /* Gtar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 58A5951B1886167500696614 /* Gtar.h */; };
+		58A5951F188618E600696614 /* libGtarControllerDeploy.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECC11DAC162CEB75001A231A /* libGtarControllerDeploy.a */; };
 		ECC11D9A162CEB75001A231A /* GtarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC260A071597EDCF00DA6FCA /* GtarController.m */; };
 		ECC11D9B162CEB75001A231A /* CoreMidiInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = EC275FFD16139D870037A387 /* CoreMidiInterface.m */; };
 		ECC11D9D162CEB75001A231A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC2609D71595475800DA6FCA /* Foundation.framework */; };
 		ECC11D9F162CEB75001A231A /* GtarController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A061597EDCE00DA6FCA /* GtarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECC11DA0162CEB75001A231A /* Gtar.h in Headers */ = {isa = PBXBuildFile; fileRef = EC27600816166A8E0037A387 /* Gtar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECC11DA1162CEB75001A231A /* GtarControllerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		ECC11DA1162CEB75001A231A /* GtarControllerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */; };
 		ECC11DA2162CEB75001A231A /* CoreMidiInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = EC275FFC16139D870037A387 /* CoreMidiInterface.h */; settings = {ATTRIBUTES = (); }; };
-		ECC11DA4162CEB75001A231A /* Gtar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC27600816166A8E0037A387 /* Gtar.h */; };
 		ECC11DA5162CEB75001A231A /* GtarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC260A061597EDCE00DA6FCA /* GtarController.h */; };
-		ECC11DA6162CEB75001A231A /* libGtarController.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = EC2609D41595475800DA6FCA /* libGtarController.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,17 +24,18 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(SRCROOT)/../PublicProducts/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/GtarController";
-			dstSubfolderSpec = 0;
+			dstSubfolderSpec = 16;
 			files = (
-				ECC11DA4162CEB75001A231A /* Gtar.h in CopyFiles */,
 				ECC11DA5162CEB75001A231A /* GtarController.h in CopyFiles */,
-				ECC11DA6162CEB75001A231A /* libGtarController.a in CopyFiles */,
+				58A5951D1886186400696614 /* Gtar.h in CopyFiles */,
+				58A5951F188618E600696614 /* libGtarControllerDeploy.a in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		58A5951B1886167500696614 /* Gtar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gtar.h; sourceTree = "<group>"; };
 		EC2609D41595475800DA6FCA /* libGtarController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGtarController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC2609D71595475800DA6FCA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC2609DB1595475800DA6FCA /* GtarController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GtarController-Prefix.pch"; sourceTree = "<group>"; };
@@ -50,19 +44,10 @@
 		EC260A081597EDCF00DA6FCA /* GtarControllerInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GtarControllerInternal.h; sourceTree = "<group>"; };
 		EC275FFC16139D870037A387 /* CoreMidiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMidiInterface.h; sourceTree = "<group>"; };
 		EC275FFD16139D870037A387 /* CoreMidiInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreMidiInterface.m; sourceTree = "<group>"; };
-		EC27600816166A8E0037A387 /* Gtar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gtar.h; path = ../Gtar.h; sourceTree = "<group>"; };
 		ECC11DAC162CEB75001A231A /* libGtarControllerDeploy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGtarControllerDeploy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EC2609D11595475800DA6FCA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EC2609D81595475800DA6FCA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ECC11D9C162CEB75001A231A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,7 +62,6 @@
 		EC2609C91595475800DA6FCA = {
 			isa = PBXGroup;
 			children = (
-				EC27600816166A8E0037A387 /* Gtar.h */,
 				EC2609D91595475800DA6FCA /* GtarController */,
 				EC2609D61595475800DA6FCA /* Frameworks */,
 				EC2609D51595475800DA6FCA /* Products */,
@@ -104,6 +88,7 @@
 		EC2609D91595475800DA6FCA /* GtarController */ = {
 			isa = PBXGroup;
 			children = (
+				58A5951B1886167500696614 /* Gtar.h */,
 				EC275FFC16139D870037A387 /* CoreMidiInterface.h */,
 				EC275FFD16139D870037A387 /* CoreMidiInterface.m */,
 				EC260A061597EDCE00DA6FCA /* GtarController.h */,
@@ -125,23 +110,12 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		EC2609D21595475800DA6FCA /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EC260A0D1597EDCF00DA6FCA /* GtarController.h in Headers */,
-				EC27600916166A8E0037A387 /* Gtar.h in Headers */,
-				EC260A0F1597EDCF00DA6FCA /* GtarControllerInternal.h in Headers */,
-				EC275FFE16139D870037A387 /* CoreMidiInterface.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ECC11D9E162CEB75001A231A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				ECC11D9F162CEB75001A231A /* GtarController.h in Headers */,
-				ECC11DA0162CEB75001A231A /* Gtar.h in Headers */,
+				58A5951C1886167500696614 /* Gtar.h in Headers */,
 				ECC11DA1162CEB75001A231A /* GtarControllerInternal.h in Headers */,
 				ECC11DA2162CEB75001A231A /* CoreMidiInterface.h in Headers */,
 			);
@@ -154,9 +128,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC2609E11595475800DA6FCA /* Build configuration list for PBXNativeTarget "GtarController" */;
 			buildPhases = (
-				EC2609D01595475800DA6FCA /* Sources */,
-				EC2609D11595475800DA6FCA /* Frameworks */,
-				EC2609D21595475800DA6FCA /* Headers */,
 			);
 			buildRules = (
 			);
@@ -212,15 +183,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EC2609D01595475800DA6FCA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EC260A0E1597EDCF00DA6FCA /* GtarController.m in Sources */,
-				EC275FFF16139D870037A387 /* CoreMidiInterface.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ECC11D99162CEB75001A231A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,11 +244,17 @@
 		EC2609E21595475800DA6FCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9D115CEA-675F-43E6-86F9-6707393F780C";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -294,11 +262,17 @@
 		EC2609E31595475800DA6FCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9D115CEA-675F-43E6-86F9-6707393F780C";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -306,11 +280,14 @@
 		ECC11DAA162CEB75001A231A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GtarControllerDeploy;
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -318,11 +295,14 @@
 		ECC11DAB162CEB75001A231A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/GtarController.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GtarController/GtarController-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GtarControllerDeploy;
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

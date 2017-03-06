@@ -31,7 +31,26 @@ extern GtarController *g_gtarController;
     [super viewDidLoad];
     
     //m_firmwares = [NSArray arrayWithObjects:@"one", @"two", @"three", nil];
-    m_firmwares = [[NSBundle mainBundle] pathsForResourcesOfType:@"bin" inDirectory:@""];
+    NSArray *firmwares = [[NSBundle mainBundle] pathsForResourcesOfType:@"bin" inDirectory:nil];
+    NSMutableArray *gtarFirmwares = [NSMutableArray array];
+    NSMutableArray *piezoFirmwares = [NSMutableArray array];
+    
+    for(id fwpath in firmwares) {
+        NSString *strTemp = [[fwpath lastPathComponent] stringByDeletingPathExtension];
+        strTemp = [strTemp substringToIndex:4];
+        if([[strTemp lowercaseString] isEqualToString:@"gtar"] == TRUE)
+            [gtarFirmwares addObject:fwpath];
+        else if([[strTemp lowercaseString] isEqualToString:@"piez"] == TRUE)
+            [piezoFirmwares addObject:fwpath];
+    }
+    
+    m_firmwares = [NSArray arrayWithArray:gtarFirmwares];
+    m_piezoFirmwares = [NSArray arrayWithArray:piezoFirmwares];
+    
+    /*
+    m_firmwares = [[NSBundle mainBundle] pathsForResourcesOfType:@"bin" inDirectory:nil];
+    m_piezoFirmwares = [[NSBundle mainBundle] pathsForResourcesOfType:@"bin" inDirectory:nil];
+     */
     
     m_disableView = [[UIView alloc] initWithFrame:self.view.frame];
     [m_disableView setBackgroundColor:[UIColor blackColor]];
@@ -104,6 +123,39 @@ extern GtarController *g_gtarController;
     }
 }
 
+-(IBAction)OnPiezoFWUpgradeClick:(id)sender {
+    NSIndexPath *indexPath = [_m_tableViewPiezoFirmwares indexPathForSelectedRow];
+    if(indexPath == NULL) {
+        NSLog(@"No piezo fw selected");
+        return;
+    }
+    
+    int row = indexPath.row;
+    NSLog(@"Programming Piezo FW %@", [m_piezoFirmwares objectAtIndex:row]);
+    
+    // Try to load file as data
+    NSData *fwdata = [[NSData alloc] initWithContentsOfFile:[m_piezoFirmwares objectAtIndex:row]];
+    if(fwdata == NULL) {
+        NSLog(@"Error: could not load data");
+        return;
+    }
+    
+    if(g_gtarController.m_delegate != self)
+        g_gtarController.m_delegate = self;
+    
+    if([g_gtarController sendPiezoFirmwareUpdate:fwdata] == false) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed"
+                                                        message:@"Failed to update firmware"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else {
+        [m_disableView setHidden:FALSE];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -111,20 +163,30 @@ extern GtarController *g_gtarController;
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [m_firmwares count];
+    if(tableView == [self m_tableViewFirmwares])
+        return [m_firmwares count];
+    else if(tableView == [self m_tableViewPiezoFirmwares])
+        return [m_piezoFirmwares count];
+    else
+        return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil) {
+    if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    
+    if(tableView == [self m_tableViewFirmwares]) {
+        NSString* filename = [[[m_firmwares objectAtIndex:indexPath.row] lastPathComponent] stringByDeletingPathExtension];
+        cell.textLabel.text = [[NSString alloc] initWithString:filename];
+    }
+    else if(tableView == [self m_tableViewPiezoFirmwares]) {
+        NSString* filename = [[[m_piezoFirmwares objectAtIndex:indexPath.row] lastPathComponent] stringByDeletingPathExtension];
+        cell.textLabel.text = [[NSString alloc] initWithString:filename];
     }
     
-    NSString* filename = [[[m_firmwares objectAtIndex:indexPath.row] lastPathComponent] stringByDeletingPathExtension];
-    cell.textLabel.text = [[NSString alloc] initWithString:filename];
     return cell;
 }
 

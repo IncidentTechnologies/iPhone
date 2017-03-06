@@ -1,9 +1,9 @@
 //
-//  BeatSequence.m
+//  Pattern.m
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/5/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 12/27/13.
+//  Copyright (c) 2013 Incident Technologies. All rights reserved.
 //
 
 #import "Pattern.h"
@@ -31,7 +31,7 @@
         
         selectedMeasureIndex = 0;
         selectedMeasure = [measures objectAtIndex:selectedMeasureIndex];
-
+        
         selectionChanged = YES;
         countChanged = YES;
     }
@@ -75,7 +75,7 @@
 
 #pragma mark Play/pause
 
-- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex
+- (void)playFret:(int)whichFret inRealMeasure:(int)realMeasure withInstrument:(int)instrumentIndex andAudio:(SoundMaker *)audioSource withAmplitude:(double)amplitude
 {
     // Remove old playband:
     for (Measure * m in measures)
@@ -84,9 +84,9 @@
     }
     
     // Add new one:
-    [[measures objectAtIndex:realMeasure] playNotesAtFret:whichFret withInstrument:instrumentIndex];
+    [[measures objectAtIndex:realMeasure] playNotesAtFret:whichFret withInstrument:instrumentIndex andAudio:audioSource withAmplitudeWeight:amplitude];
 }
-        
+
 - (int)computeRealMeasureFromAbsolute:(int)absoluteMeasure
 {
     if ( [measures count] == 4 )
@@ -108,7 +108,7 @@
         return 0;
     }
     else {
-        NSLog(@"GIVEN BAD ABSOLUTE MEASURE TO PLAY");
+        DLog(@"GIVEN BAD ABSOLUTE MEASURE TO PLAY");
         return -1;
     }
 }
@@ -129,7 +129,7 @@
 
 - (void)doubleMeasures
 {
-    NSLog(@"Doubling measures");
+    DLog(@"Doubling measures");
     
     countChanged = YES;
     
@@ -150,7 +150,7 @@
 
 - (void)halveMeasures
 {
-    NSLog(@"halving measures");
+    DLog(@"halving measures");
     
     countChanged = YES;
     
@@ -159,14 +159,18 @@
     
     int difference = previousCount - measureCount;
     
-    for (int i=0;i<difference;i++)
-    {
+    for (int i=0;i<difference;i++){
         [measures removeLastObject];
     }
     
-    if ( selectedMeasureIndex >= [measures count] )
-    {
+    if (selectedMeasureIndex >= [measures count]){
         [self selectMeasure:[measures count] - 1];
+    }
+    
+    // Redraw the old measures
+    for(int i=0; i<measureCount;i++){
+        Measure * oldMeasure = [measures objectAtIndex:i];
+        [oldMeasure setUpdateNotesOnMinimap:YES];
     }
 }
 
@@ -180,7 +184,7 @@
 #pragma mark Selecting Measures
 
 - (Measure *)selectMeasure:(NSUInteger)newSelection
-{    
+{
     selectedMeasureIndex = newSelection;
     selectedMeasure = [measures objectAtIndex:newSelection];
     

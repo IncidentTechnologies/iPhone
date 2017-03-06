@@ -2,11 +2,11 @@
 //  SEQNote.h
 //  gTarSequencer
 //
-//  Created by Ilan Gray on 6/4/12.
-//  Copyright (c) 2012 Congruity . All rights reserved.
+//  Created by Kate Schnippering on 1/6/14.
+//  Copyright (c) 2014 Incident Technologies. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppData.h"
 
 @interface SEQNote : NSObject
 

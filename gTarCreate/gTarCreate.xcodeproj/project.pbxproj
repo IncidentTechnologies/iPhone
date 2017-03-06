@@ -77,17 +77,18 @@
 		2652382D18C4D9B100E38BA5 /* clap.xmp in Resources */ = {isa = PBXBuildFile; fileRef = 2652382C18C4D9B100E38BA5 /* clap.xmp */; };
 		266BA233191C9B23003E8B79 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266BA231191C9B23003E8B79 /* SettingsViewController.m */; };
 		266BA234191C9B23003E8B79 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266BA232191C9B23003E8B79 /* SettingsViewController.xib */; };
-		269C304F19233D6200B1B3B4 /* gTarFW_200_20140424.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */; };
 		269C305319233E4200B1B3B4 /* GtarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C305119233E4200B1B3B4 /* GtarViewController.m */; };
 		269C305419233E4200B1B3B4 /* GtarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269C305219233E4200B1B3B4 /* GtarViewController.xib */; };
-		269C30571923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */; };
-		269C30581923563200B1B3B4 /* gTarFW_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */; };
 		269C305C192358E000B1B3B4 /* LEDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C305A192358E000B1B3B4 /* LEDViewController.m */; };
 		269C305D192358E000B1B3B4 /* LEDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269C305B192358E000B1B3B4 /* LEDViewController.xib */; };
+		26DEE63C19DB99EB0079E5F1 /* gTarFW_200_20140424.bin in Resources */ = {isa = PBXBuildFile; fileRef = 26DEE63919DB99EB0079E5F1 /* gTarFW_200_20140424.bin */; };
+		26DEE63D19DB99EB0079E5F1 /* gTarFW_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 26DEE63A19DB99EB0079E5F1 /* gTarFW_200_20140514.bin */; };
+		26DEE63E19DB99EB0079E5F1 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */ = {isa = PBXBuildFile; fileRef = 26DEE63B19DB99EB0079E5F1 /* gTarFW_NO_OPEN_200_20140514.bin */; };
 		26E64D851928050400D3C3AC /* CreateRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E64D831928050400D3C3AC /* CreateRootViewController.m */; };
 		26E64D861928050400D3C3AC /* CreateRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E64D841928050400D3C3AC /* CreateRootViewController.xib */; };
 		26EBC39B18ADBF9C0068BEC6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */; };
 		26EBC39F18ADC0690068BEC6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */; };
+		26FEC13119DDDCD100E8E8E8 /* PiezoFW__100_141002.bin in Resources */ = {isa = PBXBuildFile; fileRef = 26FEC13019DDDCD100E8E8E8 /* PiezoFW__100_141002.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,21 +185,22 @@
 		266BA230191C9B23003E8B79 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		266BA231191C9B23003E8B79 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		266BA232191C9B23003E8B79 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_200_20140424.bin; sourceTree = "<group>"; };
 		269C305019233E4200B1B3B4 /* GtarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GtarViewController.h; sourceTree = "<group>"; };
 		269C305119233E4200B1B3B4 /* GtarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GtarViewController.m; sourceTree = "<group>"; };
 		269C305219233E4200B1B3B4 /* GtarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GtarViewController.xib; sourceTree = "<group>"; };
-		269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_NO_OPEN_200_20140514.bin; sourceTree = "<group>"; };
-		269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = gTarFW_200_20140514.bin; sourceTree = "<group>"; };
 		269C3059192358E000B1B3B4 /* LEDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEDViewController.h; sourceTree = "<group>"; };
 		269C305A192358E000B1B3B4 /* LEDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEDViewController.m; sourceTree = "<group>"; };
 		269C305B192358E000B1B3B4 /* LEDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LEDViewController.xib; sourceTree = "<group>"; };
+		26DEE63919DB99EB0079E5F1 /* gTarFW_200_20140424.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_200_20140424.bin; path = GtarFirmwares/gTarFW_200_20140424.bin; sourceTree = "<group>"; };
+		26DEE63A19DB99EB0079E5F1 /* gTarFW_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_200_20140514.bin; path = GtarFirmwares/gTarFW_200_20140514.bin; sourceTree = "<group>"; };
+		26DEE63B19DB99EB0079E5F1 /* gTarFW_NO_OPEN_200_20140514.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = gTarFW_NO_OPEN_200_20140514.bin; path = GtarFirmwares/gTarFW_NO_OPEN_200_20140514.bin; sourceTree = "<group>"; };
 		26E64D821928050400D3C3AC /* CreateRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRootViewController.h; sourceTree = "<group>"; };
 		26E64D831928050400D3C3AC /* CreateRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRootViewController.m; sourceTree = "<group>"; };
 		26E64D841928050400D3C3AC /* CreateRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateRootViewController.xib; sourceTree = "<group>"; };
 		26EBC39A18ADBF9C0068BEC6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		26EBC39C18ADC0690068BEC6 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		26EBC39D18ADC0690068BEC6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		26FEC13019DDDCD100E8E8E8 /* PiezoFW__100_141002.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = PiezoFW__100_141002.bin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 		2610F08418AAB28E003F5CEB /* gTarCreate */ = {
 			isa = PBXGroup;
 			children = (
+				26DEE63419DB97340079E5F1 /* PiezoFirmwares */,
 				269C304D19233CC900B1B3B4 /* Firmwares */,
 				2630B84C18B6D0FB00687D29 /* Samples */,
 				2610F08D18AAB28E003F5CEB /* AppDelegate.h */,
@@ -400,11 +403,19 @@
 		269C304D19233CC900B1B3B4 /* Firmwares */ = {
 			isa = PBXGroup;
 			children = (
-				269C30551923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin */,
-				269C30561923563200B1B3B4 /* gTarFW_200_20140514.bin */,
-				269C304E19233D6200B1B3B4 /* gTarFW_200_20140424.bin */,
+				26DEE63919DB99EB0079E5F1 /* gTarFW_200_20140424.bin */,
+				26DEE63A19DB99EB0079E5F1 /* gTarFW_200_20140514.bin */,
+				26DEE63B19DB99EB0079E5F1 /* gTarFW_NO_OPEN_200_20140514.bin */,
 			);
 			name = Firmwares;
+			sourceTree = "<group>";
+		};
+		26DEE63419DB97340079E5F1 /* PiezoFirmwares */ = {
+			isa = PBXGroup;
+			children = (
+				26FEC13019DDDCD100E8E8E8 /* PiezoFW__100_141002.bin */,
+			);
+			name = PiezoFirmwares;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,7 +498,7 @@
 			files = (
 				2630B82F18B6D0F500687D29 /* Acoustic Guitar 54.mp3 in Resources */,
 				2610F0B418AAB7EC003F5CEB /* DefaultViewController.xib in Resources */,
-				269C30571923563200B1B3B4 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */,
+				26DEE63D19DB99EB0079E5F1 /* gTarFW_200_20140514.bin in Resources */,
 				2630B83818B6D0F500687D29 /* Acoustic Guitar 63.mp3 in Resources */,
 				2630B84B18B6D0F500687D29 /* Acoustic Guitar 82.mp3 in Resources */,
 				2630B84918B6D0F500687D29 /* Acoustic Guitar 80.mp3 in Resources */,
@@ -495,7 +506,6 @@
 				2630B84118B6D0F500687D29 /* Acoustic Guitar 72.mp3 in Resources */,
 				2630B83F18B6D0F500687D29 /* Acoustic Guitar 70.mp3 in Resources */,
 				269C305419233E4200B1B3B4 /* GtarViewController.xib in Resources */,
-				269C30581923563200B1B3B4 /* gTarFW_200_20140514.bin in Resources */,
 				2630B84318B6D0F500687D29 /* Acoustic Guitar 74.mp3 in Resources */,
 				266BA234191C9B23003E8B79 /* SettingsViewController.xib in Resources */,
 				2610F08918AAB28E003F5CEB /* InfoPlist.strings in Resources */,
@@ -506,6 +516,7 @@
 				2630B84018B6D0F500687D29 /* Acoustic Guitar 71.mp3 in Resources */,
 				2630B83018B6D0F500687D29 /* Acoustic Guitar 55.mp3 in Resources */,
 				269C305D192358E000B1B3B4 /* LEDViewController.xib in Resources */,
+				26DEE63E19DB99EB0079E5F1 /* gTarFW_NO_OPEN_200_20140514.bin in Resources */,
 				2630B85118B6F7B900687D29 /* Clapping.m4a in Resources */,
 				2630B82C18B6D0F500687D29 /* Acoustic Guitar 51.mp3 in Resources */,
 				2630B83D18B6D0F500687D29 /* Acoustic Guitar 68.mp3 in Resources */,
@@ -513,6 +524,7 @@
 				2630B82518B6D0F500687D29 /* Acoustic Guitar 44.mp3 in Resources */,
 				2630B83C18B6D0F500687D29 /* Acoustic Guitar 67.mp3 in Resources */,
 				2610F09118AAB28E003F5CEB /* Images.xcassets in Resources */,
+				26FEC13119DDDCD100E8E8E8 /* PiezoFW__100_141002.bin in Resources */,
 				261E344619204F440065C392 /* SynthSourceViewController.xib in Resources */,
 				2630B82818B6D0F500687D29 /* Acoustic Guitar 47.mp3 in Resources */,
 				2630B83218B6D0F500687D29 /* Acoustic Guitar 57.mp3 in Resources */,
@@ -522,6 +534,7 @@
 				261E344119204EF20065C392 /* SynthViewController.xib in Resources */,
 				2630B82118B6D0F500687D29 /* Acoustic Guitar 40.mp3 in Resources */,
 				26E64D861928050400D3C3AC /* CreateRootViewController.xib in Resources */,
+				26DEE63C19DB99EB0079E5F1 /* gTarFW_200_20140424.bin in Resources */,
 				2630B82218B6D0F500687D29 /* Acoustic Guitar 41.mp3 in Resources */,
 				2630B83918B6D0F500687D29 /* Acoustic Guitar 64.mp3 in Resources */,
 				2630B82318B6D0F500687D29 /* Acoustic Guitar 42.mp3 in Resources */,
@@ -542,7 +555,6 @@
 				2630B83318B6D0F500687D29 /* Acoustic Guitar 58.mp3 in Resources */,
 				2630B82918B6D0F500687D29 /* Acoustic Guitar 48.mp3 in Resources */,
 				2630B83718B6D0F500687D29 /* Acoustic Guitar 62.mp3 in Resources */,
-				269C304F19233D6200B1B3B4 /* gTarFW_200_20140424.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,7 +700,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarCreate/gTarCreate-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -701,7 +714,11 @@
 				);
 				INFOPLIST_FILE = "gTarCreate/gTarCreate-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+=======
+				PROVISIONING_PROFILE = "44a9120e-2a75-4f40-964d-5f16a72a49b6";
+>>>>>>> 493d01a6d2bfd326d47cc8e54c146cf40305ac64
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -711,7 +728,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Idan Beck (3MLD5L3ST2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gTarCreate/gTarCreate-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -724,7 +742,11 @@
 				);
 				INFOPLIST_FILE = "gTarCreate/gTarCreate-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "F914CD88-87A4-4A31-8DD5-69AC46138C7B";
+=======
+				PROVISIONING_PROFILE = "44a9120e-2a75-4f40-964d-5f16a72a49b6";
+>>>>>>> 493d01a6d2bfd326d47cc8e54c146cf40305ac64
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

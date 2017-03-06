@@ -624,7 +624,7 @@
 		EC7A0DCD161A4AD3005BF0E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/AudioController.dst;
@@ -635,7 +635,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B8BBE19-A6A3-4A92-AB56-6DF23326D380";
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -643,7 +643,7 @@
 		EC7A0DCE161A4AD3005BF0E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Incident Technologies Inc. (AE9ZEG65F3)";
 				DSTROOT = /tmp/AudioController.dst;
@@ -654,7 +654,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B8BBE19-A6A3-4A92-AB56-6DF23326D380";
+				PROVISIONING_PROFILE = "CBC3EBC0-9CEF-4A4D-BF9D-989C73884DDE";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
