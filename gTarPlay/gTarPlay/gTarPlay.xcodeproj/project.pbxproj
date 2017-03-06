@@ -5631,7 +5631,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5667,7 +5667,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51c4bb02-c885-4ee2-bd79-21729ffb6642";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"$(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
